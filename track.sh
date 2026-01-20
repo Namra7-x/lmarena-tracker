@@ -8,9 +8,12 @@ SIMPLE_LIST="models_list.txt"
 
 send_telegram() {
     local msg="$1"
+    # Use proper URL encoding
     curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
-        -H "Content-Type: application/json" \
-        -d "{\"chat_id\":\"$CHAT_ID\",\"text\":\"$msg\",\"parse_mode\":\"HTML\",\"disable_web_page_preview\":true}" \
+        -d "chat_id=$CHAT_ID" \
+        -d "parse_mode=HTML" \
+        -d "disable_web_page_preview=true" \
+        --data-urlencode "text=$msg" \
         > /dev/null
 }
 
@@ -22,7 +25,6 @@ log() {
 extract_model_data() {
     local html="$1"
     
-    # Save full JSON data of models
     echo "$html" | grep -o '{"id":"[^}]*"organization":"[^"]*"[^}]*"publicName":"[^"]*"[^}]*"rank":[0-9]*[^}]*}' | \
     python3 -c "
 import sys, json, re
@@ -30,7 +32,6 @@ import sys, json, re
 models = {}
 for line in sys.stdin:
     try:
-        # Extract model info using regex
         id_match = re.search(r'\"id\":\"([^\"]+)\"', line)
         name_match = re.search(r'\"publicName\":\"([^\"]+)\"', line)
         org_match = re.search(r'\"organization\":\"([^\"]+)\"', line)
@@ -49,7 +50,6 @@ for line in sys.stdin:
     except:
         pass
 
-# Output sorted by name
 for name in sorted(models.keys()):
     print(json.dumps(models[name]))
 " 2>/dev/null
@@ -72,7 +72,7 @@ fi
 
 log "✅ Page fetched ($(echo "$HTML" | wc -c) bytes)"
 
-# Extract simple model list (for quick comparison)
+# Extract simple model list
 log "🔍 Extracting model names..."
 echo "$HTML" | tr ',' '\n' | grep publicName | cut -d'"' -f4 | sort -u > models_new.txt
 
@@ -86,7 +86,6 @@ extract_model_data "$HTML" > models_detailed_new.json
 DETAILED_COUNT=$(wc -l < models_detailed_new.json)
 log "   Extracted $DETAILED_COUNT detailed records"
 
-# Check if extraction worked
 if [ ! -s models_new.txt ]; then
     log "❌ No models extracted"
     exit 0
@@ -102,21 +101,24 @@ if [ ! -f "$SIMPLE_LIST" ]; then
     cp models_new.txt "$SIMPLE_LIST"
     cp models_detailed_new.json "$MODELS_FILE" 2>/dev/null || touch "$MODELS_FILE"
     
-    # Show sample of models
     log "   Sample models:"
     head -5 "$SIMPLE_LIST" | while read model; do
         log "     • $model"
     done
     log "     ... and $((NEW_COUNT - 5)) more"
     
-    MSG="🤖 <b>LMArena Tracker Started!</b>%0A%0A"
-    MSG="${MSG}📊 Now tracking <b>$NEW_COUNT models</b>%0A%0A"
-    MSG="${MSG}✅ You'll be notified about:%0A"
-    MSG="${MSG}  • New models added%0A"
-    MSG="${MSG}  • Models removed%0A"
-    MSG="${MSG}  • Model names changed%0A"
-    MSG="${MSG}  • Rankings changed%0A%0A"
-    MSG="${MSG}🔗 https://lmarena.ai"
+    # Use ACTUAL line breaks, not %0A
+    MSG="🤖 <b>LMArena Tracker Started!</b>
+
+📊 Now tracking <b>$NEW_COUNT models</b>
+
+✅ You'll be notified about:
+  • New models added
+  • Models removed
+  • Model names changed
+  • Rankings changed
+
+🔗 https://lmarena.ai"
     
     send_telegram "$MSG"
     log "✅ Initialization complete"
@@ -134,7 +136,7 @@ log "   Previous: $PREV_COUNT models"
 log "   Current:  $NEW_COUNT models"
 log "   Change:   $((NEW_COUNT - PREV_COUNT))"
 
-# Find simple additions/removals
+# Find additions/removals
 ADDED=$(comm -13 "$SIMPLE_LIST" models_new.txt)
 REMOVED=$(comm -23 "$SIMPLE_LIST" models_new.txt)
 
@@ -146,29 +148,6 @@ log "   Added:    $ADDED_COUNT"
 log "   Removed:  $REMOVED_COUNT"
 
 # ============================================
-# DETAILED CHANGE DETECTION
-# ============================================
-
-# Compare detailed data if available
-if [ -s "$MODELS_FILE" ] && [ -s models_detailed_new.json ]; then
-    log ""
-    log "🔍 Checking for detailed changes..."
-    
-    # Find models that exist in both (for change detection)
-    COMMON_MODELS=$(comm -12 "$SIMPLE_LIST" models_new.txt)
-    
-    RANK_CHANGES=0
-    ORG_CHANGES=0
-    NAME_CHANGES=0
-    
-    # This is a simplified check - in practice you'd parse JSON properly
-    if ! diff -q "$MODELS_FILE" models_detailed_new.json > /dev/null 2>&1; then
-        log "   ⚠️  Detailed data has changes"
-        # You could add more sophisticated JSON diff here
-    fi
-fi
-
-# ============================================
 # REPORT NEW MODELS
 # ============================================
 
@@ -176,45 +155,53 @@ if [ ! -z "$ADDED" ] && [ "$ADDED_COUNT" -gt 0 ]; then
     log ""
     log "🆕 NEW MODELS DETECTED ($ADDED_COUNT):"
     
-    MSG="🆕 <b>NEW MODELS ADDED</b>%0A%0A"
-    MSG="${MSG}📊 <b>Count:</b> $ADDED_COUNT%0A%0A"
+    # Build message with ACTUAL line breaks
+    MSG="🆕 <b>NEW MODELS ADDED</b>
+
+📊 <b>Count:</b> $ADDED_COUNT
+
+"
     
     COUNTER=0
     echo "$ADDED" | while read model; do
         COUNTER=$((COUNTER + 1))
         log "   [$COUNTER] + $model"
         
-        # Get detailed info if available
-        DETAILS=$(grep "\"publicName\":\"$model\"" models_detailed_new.json 2>/dev/null)
+        # Get detailed info
+        DETAILS=$(grep "\"publicName\":\"$model\"" models_detailed_new.json 2>/dev/null | head -1)
         
         if [ ! -z "$DETAILS" ]; then
             ORG=$(echo "$DETAILS" | grep -o '"organization":"[^"]*"' | cut -d'"' -f4)
             RANK=$(echo "$DETAILS" | grep -o '"rank":[0-9]*' | cut -d':' -f2)
             
-            MSG="${MSG}• <code>$model</code>%0A"
-            if [ ! -z "$ORG" ]; then
-                MSG="${MSG}  └ Org: <i>$ORG</i>"
+            if [ ! -z "$ORG" ] && [ ! -z "$RANK" ]; then
+                MSG="${MSG}• <code>$model</code>
+  └ Org: <i>$ORG</i> | Rank: #$RANK
+"
+            else
+                MSG="${MSG}• <code>$model</code>
+"
             fi
-            if [ ! -z "$RANK" ]; then
-                MSG="${MSG} | Rank: #$RANK"
-            fi
-            MSG="${MSG}%0A"
         else
-            MSG="${MSG}• <code>$model</code>%0A"
+            MSG="${MSG}• <code>$model</code>
+"
         fi
         
-        # Limit to 20 models in message
+        # Limit to 20
         if [ "$COUNTER" -ge 20 ]; then
             REMAINING=$((ADDED_COUNT - 20))
             if [ "$REMAINING" -gt 0 ]; then
-                MSG="${MSG}%0A<i>...and $REMAINING more</i>%0A"
+                MSG="${MSG}
+<i>...and $REMAINING more</i>
+"
             fi
             break
         fi
     done
     
-    MSG="${MSG}%0A⏰ $(date '+%Y-%m-%d %H:%M UTC')"
-    MSG="${MSG}%0A🔗 https://lmarena.ai"
+    MSG="${MSG}
+⏰ $(date '+%Y-%m-%d %H:%M UTC')
+🔗 https://lmarena.ai"
     
     send_telegram "$MSG"
 fi
@@ -227,45 +214,53 @@ if [ ! -z "$REMOVED" ] && [ "$REMOVED_COUNT" -gt 0 ]; then
     log ""
     log "❌ MODELS REMOVED ($REMOVED_COUNT):"
     
-    MSG="❌ <b>MODELS REMOVED</b>%0A%0A"
-    MSG="${MSG}📊 <b>Count:</b> $REMOVED_COUNT%0A%0A"
-    MSG="${MSG}<i>⚠️ These were likely anonymous/stealth models that got renamed or removed from testing:</i>%0A%0A"
+    MSG="❌ <b>MODELS REMOVED</b>
+
+📊 <b>Count:</b> $REMOVED_COUNT
+
+<i>⚠️ These were likely anonymous/stealth models renamed or removed:</i>
+
+"
     
     COUNTER=0
     echo "$REMOVED" | while read model; do
         COUNTER=$((COUNTER + 1))
         log "   [$COUNTER] - $model"
         
-        # Get previous details if available
-        OLD_DETAILS=$(grep "\"publicName\":\"$model\"" "$MODELS_FILE" 2>/dev/null)
+        # Get previous details
+        OLD_DETAILS=$(grep "\"publicName\":\"$model\"" "$MODELS_FILE" 2>/dev/null | head -1)
         
         if [ ! -z "$OLD_DETAILS" ]; then
             ORG=$(echo "$OLD_DETAILS" | grep -o '"organization":"[^"]*"' | cut -d'"' -f4)
             RANK=$(echo "$OLD_DETAILS" | grep -o '"rank":[0-9]*' | cut -d':' -f2)
             
-            MSG="${MSG}• <code>$model</code>%0A"
-            if [ ! -z "$ORG" ]; then
-                MSG="${MSG}  └ Was: <i>$ORG</i>"
+            if [ ! -z "$ORG" ] && [ ! -z "$RANK" ]; then
+                MSG="${MSG}• <code>$model</code>
+  └ Was: <i>$ORG</i> | Rank: #$RANK
+"
+            else
+                MSG="${MSG}• <code>$model</code>
+"
             fi
-            if [ ! -z "$RANK" ]; then
-                MSG="${MSG} | Rank: #$RANK"
-            fi
-            MSG="${MSG}%0A"
         else
-            MSG="${MSG}• <code>$model</code>%0A"
+            MSG="${MSG}• <code>$model</code>
+"
         fi
         
         # Limit to 20
         if [ "$COUNTER" -ge 20 ]; then
             REMAINING=$((REMOVED_COUNT - 20))
             if [ "$REMAINING" -gt 0 ]; then
-                MSG="${MSG}%0A<i>...and $REMAINING more</i>%0A"
+                MSG="${MSG}
+<i>...and $REMAINING more</i>
+"
             fi
             break
         fi
     done
     
-    MSG="${MSG}%0A⏰ $(date '+%Y-%m-%d %H:%M UTC')"
+    MSG="${MSG}
+⏰ $(date '+%Y-%m-%d %H:%M UTC')"
     
     send_telegram "$MSG"
 fi
