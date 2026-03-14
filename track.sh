@@ -19,7 +19,6 @@ send_telegram() {
             --data-urlencode "text=$msg" \
             > /dev/null
     else
-        # Split message
         local part1="${msg:0:$MAX_MSG_LENGTH}"
         local part2="${msg:$MAX_MSG_LENGTH}"
         
@@ -48,91 +47,104 @@ log() {
 extract_model_data() {
     local html="$1"
     
-    echo "$html" | python3 -c '
+    echo "$html" | python3 << 'PYTHON_SCRIPT'
 import sys, json, re
 
 html = sys.stdin.read()
 
-pattern = r"\{[^}]*?\"publicName\"\s*:\s*\"([^\"]+)\"[^}]*?\}"
-matches = re.finditer(pattern, html)
+# Find all model objects
+# Look for patterns like: {"id":"...","organization":"...","publicName":"...","capabilities":{...},"rank":...}
+pattern = r'\{[^{}]*?"publicName"\s*:\s*"([^"]+)"[^{}]*?\}'
 
 models = {}
 
-for match in matches:
-    full_text = match.group(0)
+for match in re.finditer(pattern, html):
+    full_block = match.group(0)
     model_name = match.group(1)
     
+    # Skip if already processed
     if model_name in models:
         continue
     
-    model_data = {"publicName": model_name}
-    
-    fields = {
-        "id": r"\"id\"\s*:\s*\"([^\"]+)\"",
-        "organization": r"\"organization\"\s*:\s*\"([^\"]+)\"",
-        "provider": r"\"provider\"\s*:\s*\"([^\"]+)\"",
-        "displayName": r"\"displayName\"\s*:\s*\"([^\"]+)\"",
-        "rank": r"\"rank\"\s*:\s*([0-9]+)",
+    model_data = {
+        "publicName": model_name,
+        "inputCap": "text",  # default
+        "outputCap": "text"  # default
     }
     
-    for field, regex in fields.items():
-        match_field = re.search(regex, full_text)
-        if match_field:
-            value = match_field.group(1)
-            if field == "rank":
-                value = int(value)
-            model_data[field] = value
+    # Extract basic fields
+    id_m = re.search(r'"id"\s*:\s*"([^"]+)"', full_block)
+    if id_m:
+        model_data["id"] = id_m.group(1)
     
-    # Extract capabilities
-    cap_match = re.search(r"\"capabilities\"\s*:\s*\{([^}]+)\}", full_text)
-    input_cap = []
-    output_cap = []
+    org_m = re.search(r'"organization"\s*:\s*"([^"]+)"', full_block)
+    if org_m:
+        model_data["organization"] = org_m.group(1)
     
-    if cap_match:
-        cap_text = cap_match.group(1)
+    rank_m = re.search(r'"rank"\s*:\s*(\d+)', full_block)
+    if rank_m:
+        model_data["rank"] = int(rank_m.group(1))
+    
+    display_m = re.search(r'"displayName"\s*:\s*"([^"]+)"', full_block)
+    if display_m:
+        model_data["displayName"] = display_m.group(1)
+    
+    # Extract capabilities - look for broader context
+    # Search in surrounding 1000 chars before and after the model name
+    start_idx = html.find('"publicName":"' + model_name + '"')
+    if start_idx > 0:
+        context = html[max(0, start_idx-1000):start_idx+1000]
         
-        # Input capabilities
-        if "\"text\"" in cap_text and "inputCapabilities" in full_text[:full_text.find(cap_text)+len(cap_text)]:
-            input_cap.append("text")
-        if "\"image\"" in cap_text:
-            if "inputCapabilities" in full_text.split("\"image\"")[0][-200:]:
-                input_cap.append("image")
-        if "\"audio\"" in cap_text:
-            if "inputCapabilities" in full_text.split("\"audio\"")[0][-200:]:
-                input_cap.append("audio")
+        input_caps = []
+        output_caps = []
         
-        # Output capabilities
-        if "outputCapabilities" in cap_text:
-            output_section = cap_text.split("outputCapabilities")[1] if "outputCapabilities" in cap_text else cap_text
-            if "\"text\"" in output_section:
-                output_cap.append("text")
-            if "\"image\"" in output_section:
-                output_cap.append("image")
-            if "\"audio\"" in output_section:
-                output_cap.append("audio")
-            if "\"web\"" in output_section:
-                output_cap.append("web")
-    
-    if not input_cap:
-        input_cap = ["text"]
-    if not output_cap:
-        output_cap = ["text"]
-    
-    model_data["inputCap"] = ",".join(input_cap)
-    model_data["outputCap"] = ",".join(output_cap)
+        # Look for inputCapabilities section
+        if 'inputCapabilities' in context:
+            input_section = context.split('inputCapabilities')[1].split('}')[0]
+            
+            if '"text"' in input_section and 'true' in input_section:
+                input_caps.append("text")
+            if '"image"' in input_section:
+                input_caps.append("image")
+            if '"audio"' in input_section:
+                input_caps.append("audio")
+            if '"video"' in input_section:
+                input_caps.append("video")
+        
+        # Look for outputCapabilities section
+        if 'outputCapabilities' in context:
+            output_section = context.split('outputCapabilities')[1].split('}')[0]
+            
+            if '"text"' in output_section and 'true' in output_section:
+                output_caps.append("text")
+            if '"image"' in output_section:
+                output_caps.append("image")
+            if '"audio"' in output_section:
+                output_caps.append("audio")
+            if '"video"' in output_section:
+                output_caps.append("video")
+            if '"web"' in output_section:
+                output_caps.append("web")
+        
+        # Set capabilities
+        if input_caps:
+            model_data["inputCap"] = ",".join(input_caps)
+        if output_caps:
+            model_data["outputCap"] = ",".join(output_caps)
     
     models[model_name] = model_data
 
+# Output sorted
 for name in sorted(models.keys()):
     print(json.dumps(models[name]))
-' 2>/dev/null
+PYTHON_SCRIPT
 }
 
 log "================================================================"
-log "🤖 ARENA.AI TRACKER v2.0"
+log "🤖 ARENA.AI TRACKER v2.1"
 log "================================================================"
 
-# Fetch page with retry
+# Fetch with retry
 log "📥 Fetching arena.ai..."
 RETRY_COUNT=0
 MAX_RETRIES=3
@@ -179,9 +191,7 @@ if [ ! -s models_new.txt ]; then
     exit 0
 fi
 
-# ============================================
-# FIRST RUN
-# ============================================
+# First run
 if [ ! -f "$SIMPLE_LIST" ]; then
     log ""
     log "📝 FIRST RUN - Initializing"
@@ -195,19 +205,16 @@ if [ ! -f "$SIMPLE_LIST" ]; then
     done
     log "     ... and $((NEW_COUNT - 5)) more"
     
-    MSG="🤖 <b>Arena.AI Tracker v2.0 Started!</b>
+    MSG="🤖 <b>Arena.AI Tracker v2.1 Started!</b>
 
 📊 Now tracking <b>$NEW_COUNT models</b>
 
-✅ Active monitoring:
-  • Checks every 5 minutes
-  • Detects new models instantly
-  • Tracks anonymous/stealth models
-  • Shows input/output capabilities
+✅ Monitoring every 5 minutes:
+  • New models with capabilities
+  • Anonymous/stealth models
+  • Model removals/renames
 
-💬 You'll only get notifications when:
-  ✓ New models are added
-  ✓ Models are removed/renamed
+💬 Silent mode: Only alerts on changes
 
 🔗 https://arena.ai"
     
@@ -216,14 +223,11 @@ if [ ! -f "$SIMPLE_LIST" ]; then
     exit 0
 fi
 
-# ============================================
-# COMPARE CHANGES
-# ============================================
-
+# Compare
 PREV_COUNT=$(wc -l < "$SIMPLE_LIST")
 log ""
 log "📊 Comparison:"
-log "   Previous: $PREV_COUNT | Current: $NEW_COUNT | Change: $((NEW_COUNT - PREV_COUNT))"
+log "   Previous: $PREV_COUNT | Current: $NEW_COUNT"
 
 ADDED=$(comm -13 "$SIMPLE_LIST" models_new.txt)
 REMOVED=$(comm -23 "$SIMPLE_LIST" models_new.txt)
@@ -241,10 +245,7 @@ fi
 
 log "   Added: $ADDED_COUNT | Removed: $REMOVED_COUNT"
 
-# ============================================
-# REPORT NEW MODELS (ALL)
-# ============================================
-
+# Report new models
 if [ $ADDED_COUNT -gt 0 ]; then
     log ""
     log "🆕 NEW MODELS DETECTED ($ADDED_COUNT):"
@@ -262,6 +263,7 @@ if [ $ADDED_COUNT -gt 0 ]; then
         COUNTER=$((COUNTER + 1))
         log "   [$COUNTER] + $model"
         
+        # Get details
         DETAILS=$(grep "\"publicName\":\"$model\"" models_detailed_new.json 2>/dev/null | head -1)
         
         if [ ! -z "$DETAILS" ]; then
@@ -275,9 +277,10 @@ if [ $ADDED_COUNT -gt 0 ]; then
             [ -z "$INPUT_CAP" ] && INPUT_CAP="text"
             [ -z "$OUTPUT_CAP" ] && OUTPUT_CAP="text"
             
+            # Build message with capabilities
             MSG="${MSG}<b>$COUNTER.</b> <code>$model</code>
-    (In: $INPUT_CAP → Out: $OUTPUT_CAP)
-    Org: <i>$ORG</i> | Rank: #$RANK
+    📥 In: <i>$INPUT_CAP</i> → 📤 Out: <i>$OUTPUT_CAP</i>
+    🏢 Org: <b>$ORG</b> | 🏆 Rank: #$RANK
 
 "
         else
@@ -288,11 +291,10 @@ if [ $ADDED_COUNT -gt 0 ]; then
         
         # Split if too long
         if [ ${#MSG} -gt 3500 ] && [ $COUNTER -lt $ADDED_COUNT ]; then
-            MSG="${MSG}⏰ $(date '+%H:%M UTC')
-<i>Continued...</i>"
+            MSG="${MSG}⏰ $(date '+%H:%M UTC') - <i>Continued...</i>"
             send_telegram "$MSG"
             sleep 2
-            MSG="🆕 <b>NEW MODELS (Part 2)</b>
+            MSG="🆕 <b>NEW MODELS (Continued)</b>
 
 "
         fi
@@ -305,19 +307,16 @@ if [ $ADDED_COUNT -gt 0 ]; then
     send_telegram "$MSG"
 fi
 
-# ============================================
-# REPORT REMOVED MODELS (ALL)
-# ============================================
-
+# Report removed
 if [ $REMOVED_COUNT -gt 0 ]; then
     log ""
     log "❌ MODELS REMOVED ($REMOVED_COUNT):"
     
     MSG="❌ <b>MODELS REMOVED</b>
 
-📊 <b>Total:</b> $REMOVED_COUNT models removed
+📊 <b>Total:</b> $REMOVED_COUNT models
 
-<i>⚠️ Likely anonymous/stealth models renamed or removed:</i>
+<i>⚠️ Likely stealth/anonymous models renamed:</i>
 
 "
     
@@ -342,8 +341,8 @@ if [ $REMOVED_COUNT -gt 0 ]; then
             [ -z "$OUTPUT_CAP" ] && OUTPUT_CAP="text"
             
             MSG="${MSG}<b>$COUNTER.</b> <code>$model</code>
-    (In: $INPUT_CAP → Out: $OUTPUT_CAP)
-    Was: <i>$ORG</i> | Rank: #$RANK
+    📥 In: <i>$INPUT_CAP</i> → 📤 Out: <i>$OUTPUT_CAP</i>
+    🏢 Was: <b>$ORG</b> | 🏆 Rank: #$RANK
 
 "
         else
@@ -352,13 +351,11 @@ if [ $REMOVED_COUNT -gt 0 ]; then
 "
         fi
         
-        # Split if too long
         if [ ${#MSG} -gt 3500 ] && [ $COUNTER -lt $REMOVED_COUNT ]; then
-            MSG="${MSG}⏰ $(date '+%H:%M UTC')
-<i>Continued...</i>"
+            MSG="${MSG}⏰ $(date '+%H:%M UTC') - <i>Continued...</i>"
             send_telegram "$MSG"
             sleep 2
-            MSG="❌ <b>REMOVED (Part 2)</b>
+            MSG="❌ <b>REMOVED (Continued)</b>
 
 "
         fi
@@ -370,25 +367,19 @@ if [ $REMOVED_COUNT -gt 0 ]; then
     send_telegram "$MSG"
 fi
 
-# ============================================
-# NO CHANGES - SILENT
-# ============================================
-
+# No changes
 if [ $ADDED_COUNT -eq 0 ] && [ $REMOVED_COUNT -eq 0 ]; then
     log ""
-    log "✅ No changes - tracker running normally (silent)"
+    log "✅ No changes - silent mode"
 fi
 
-# ============================================
-# SAVE STATE
-# ============================================
-
+# Save
 mv models_new.txt "$SIMPLE_LIST"
 mv models_detailed_new.json "$MODELS_FILE" 2>/dev/null || true
 
 log ""
-log "💾 State saved"
+log "💾 Saved"
 log "================================================================"
-log "✅ Complete - Next check in 5 minutes"
+log "✅ Complete - Next in 5 min"
 log "   Total: $NEW_COUNT | Added: $ADDED_COUNT | Removed: $REMOVED_COUNT"
 log "================================================================"
