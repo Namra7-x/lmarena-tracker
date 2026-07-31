@@ -29,22 +29,42 @@ FIELDS = ["publicName", "displayName", "name",
 
 # ---------------- fetch & extract ----------------
 def fetch_html():
-    import cloudscraper
-    scraper = cloudscraper.create_scraper(
-        browser={"browser": "chrome", "platform": "windows", "mobile": False}
-    )
-    last_err = "unknown"
-    for url in URLS:
-        for _ in range(3):
+    # try cloudscraper first (fast)
+    try:
+        import cloudscraper
+        scraper = cloudscraper.create_scraper(
+            browser={"browser": "chrome", "platform": "windows", "mobile": False}
+        )
+        for url in URLS:
+            r = scraper.get(url, timeout=60)
+            if r.status_code == 200 and "initialModels" in r.text:
+                print("fetch OK via cloudscraper")
+                return r.text
+    except Exception as e:
+        print("cloudscraper failed:", e)
+
+    # fallback: real headless browser
+    print("falling back to Playwright...")
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as p:
+        browser = p.chromium.launch(args=["--disable-blink-features=AutomationControlled"])
+        page = browser.new_page(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+        )
+        for url in URLS:
             try:
-                r = scraper.get(url, timeout=60)
-                if r.status_code == 200 and "initialModels" in r.text:
-                    return r.text
-                last_err = f"{url} -> HTTP {r.status_code}"
+                page.goto(url, timeout=90000, wait_until="networkidle")
+                page.wait_for_timeout(5000)
+                html = page.content()
+                if "initialModels" in html:
+                    print("fetch OK via Playwright")
+                    browser.close()
+                    return html
             except Exception as e:
-                last_err = str(e)
-            time.sleep(5 + random.random() * 5)
-    raise RuntimeError(f"fetch failed: {last_err}")
+                print("playwright failed on", url, e)
+        browser.close()
+    raise RuntimeError("fetch failed: both cloudscraper and Playwright blocked")
 
 
 PUSH_RE = re.compile(r'self\.__next_f\.push\(\[1,"((?:\\.|[^"\\])*)"\]\)', re.S)
