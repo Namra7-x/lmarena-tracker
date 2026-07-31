@@ -15858,6 +15858,46 @@
   },
   "userSelectable": true
  },
+ "019fb95f-214d-79ba-bf8c-2b1749f1feca": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": false,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "deepseek-v4-flash-max-20260731",
+  "id": "019fb95f-214d-79ba-bf8c-2b1749f1feca",
+  "name": "deepseek-v4-flash-max-20260731",
+  "organization": "deepseek",
+  "provider": "deepseekMaxThinking",
+  "publicName": "deepseek-v4-flash-max-20260731",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fb96c-0bb4-7b12-8b0d-09bb43bb8045": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "pergamon",
+  "id": "019fb96c-0bb4-7b12-8b0d-09bb43bb8045",
+  "publicName": "pergamon",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
