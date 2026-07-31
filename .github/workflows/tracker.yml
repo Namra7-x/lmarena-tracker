@@ -16,20 +16,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - run: pip install cloudscraper requests
-      - name: Run tracker
+
+      - name: Run LMArena tracker
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python tracker.py
-      - name: Commit snapshot
+
+      - name: Run DesignArena tracker
+        if: always()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python design_tracker.py
+
+      - name: Commit snapshots
+        if: always()
         run: |
           git config user.name "arena-tracker-bot"
           git config user.email "actions@github.com"
-          git add snapshot.json
+          git add snapshot.json design_snapshot.json
           git diff --cached --quiet || git commit -m "snapshot update"
           git pull --rebase
           git push
