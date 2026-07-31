@@ -12,6 +12,7 @@ import json
 import time
 import random
 import datetime
+import html as _html
 import requests
 
 # ---------------- config ----------------
@@ -25,6 +26,15 @@ UNRANKED = 9007199254740991  # JS Number.MAX_SAFE_INTEGER = "no rank"
 
 FIELDS = ["publicName", "displayName", "name",
           "organization", "provider", "userSelectable"]
+
+FIELD_LABEL = {
+    "publicName": "Public name",
+    "displayName": "Display name",
+    "name": "Name",
+    "organization": "Organization",
+    "provider": "Provider",
+    "userSelectable": "User selectable",
+}
 
 
 # ---------------- fetch & extract ----------------
@@ -120,12 +130,20 @@ def flatten_caps(model):
     return out
 
 
+def esc(text):
+    """HTML-escape for Telegram HTML parse mode."""
+    if text is None:
+        return ""
+    return _html.escape(str(text), quote=False)
+
+
 def disp(model):
-    return model.get("displayName") or model.get("publicName") or model.get("id")
+    name = model.get("displayName") or model.get("publicName") or model.get("id")
+    return esc(name)
 
 
 def v(x):
-    return "null" if x is None else str(x)
+    return "—" if x is None else esc(x)
 
 
 def arrow(a, b):
@@ -134,22 +152,31 @@ def arrow(a, b):
 
 def fmt_rank(model):
     r = model.get("rank")
-    return "unranked" if r is None or r == UNRANKED else str(r)
+    return "unranked" if r is None or r == UNRANKED else esc(r)
 
 
 def caps_line(model):
     caps = sorted(flatten_caps(model))
-    return ", ".join(caps) if caps else "none"
+    return esc(", ".join(caps)) if caps else "none"
+
+
+def field_label(f):
+    return FIELD_LABEL.get(f, f)
 
 
 def details_block(model, headline=None):
     """Full detail block for added/removed models."""
-    lines = [headline or disp(model), model["id"]]
+    lines = []
+    if headline:
+        lines.append(f"🔹 <b>{esc(headline)}</b>")
+    else:
+        lines.append(f"🔹 <b>{disp(model)}</b>")
+    lines.append(f"<code>{esc(model['id'])}</code>")
     for f in FIELDS:
         if model.get(f) is not None or f in ("organization",):
-            lines.append(f"{f}: {v(model.get(f))}")
-    lines.append(f"capabilities: {caps_line(model)}")
-    lines.append(f"rank: {fmt_rank(model)}")
+            lines.append(f"• <b>{field_label(f)}</b>: {v(model.get(f))}")
+    lines.append(f"• <b>Capabilities</b>: {caps_line(model)}")
+    lines.append(f"• <b>Rank</b>: {fmt_rank(model)}")
     return "\n".join(lines)
 
 
@@ -199,16 +226,19 @@ def build_report(old, new):
             continue
         lines = []
         no, nn = disp(o), disp(n)
-        lines.append(arrow(no, nn) if no != nn else nn)
-        lines.append(i)
+        if no != nn:
+            lines.append(f"🔹 {no} ➡️ {nn}")
+        else:
+            lines.append(f"🔹 {nn}")
+        lines.append(f"<code>{esc(i)}</code>")
         for f, ov, nv in changes:
-            lines.append(f"{f}: {arrow(ov, nv)}")
+            lines.append(f"• <b>{field_label(f)}</b>: {arrow(ov, nv)}")
         if gained or lost:
-            lines.append("capabilities:")
-            lines += [f"➕ {g}" for g in sorted(gained)]
-            lines += [f"➖ {l}" for l in sorted(lost)]
+            lines.append("• <b>Capabilities</b>:")
+            lines += [f"  ➕ {esc(g)}" for g in sorted(gained)]
+            lines += [f"  ➖ {esc(l)}" for l in sorted(lost)]
         if rank_changed:
-            lines.append(f"rank: {fmt_rank(o)} ➡️ {fmt_rank(n)}")
+            lines.append(f"• <b>Rank</b>: {fmt_rank(o)} ➡️ {fmt_rank(n)}")
         block = "\n".join(lines)
         changed_fields = {f for f, _, _ in changes}
         if changed_fields & {"publicName", "displayName", "name"}:
@@ -223,33 +253,34 @@ def build_report(old, new):
     # --- assemble sections ---
     sections = []
     if new_models:
-        sections.append(("🆕 New models", [details_block(m) for m in new_models]))
+        sections.append(("🆕 <b>New models</b>", [details_block(m) for m in new_models]))
     if hidden:
-        sections.append(("🕵️ Hidden / stealth models",
+        sections.append(("🕵️ <b>Hidden / stealth models</b>",
                          [details_block(m) for m in hidden]))
     if variants:
-        sections.append(("🧬 New variants", [details_block(m) for m in variants]))
+        sections.append(("🧬 <b>New variants</b>", [details_block(m) for m in variants]))
     if name_upd:
-        sections.append(("✏️ Name updates", name_upd))
+        sections.append(("✏️ <b>Name updates</b>", name_upd))
     if org_upd:
-        sections.append(("🏢 Organization updates", org_upd))
+        sections.append(("🏢 <b>Organization updates</b>", org_upd))
     if cap_upd:
-        sections.append(("⚡ Capability updates", cap_upd))
+        sections.append(("⚡ <b>Capability updates</b>", cap_upd))
     if rotations:
-        sections.append(("🆔 ID rotations",
-                         [f"{disp(n)}\n{o['id']} ➡️ {n['id']}" for o, n in rotations]))
+        sections.append(("🆔 <b>ID rotations</b>",
+                         [f"🔹 {disp(n)}\n<code>{esc(o['id'])}</code> ➡️ <code>{esc(n['id'])}</code>"
+                          for o, n in rotations]))
     if rank_upd:
-        sections.append(("📊 Rank updates", rank_upd))
+        sections.append(("📊 <b>Rank updates</b>", rank_upd))
     if still_removed:
-        sections.append(("❌ Removed models",
+        sections.append(("❌ <b>Removed models</b>",
                          [details_block(m) for m in still_removed]))
     if not sections:
         return None
 
     ts = datetime.datetime.now(datetime.timezone.utc).strftime("%d %b %Y, %H:%M UTC")
-    parts = [f"📡 Arena Tracker — {ts}"]
+    parts = [f"📡 <b>Arena Tracker</b>\n🗓 {esc(ts)}", "━━━━━━━━━━━━━━━━━━━━"]
     for title, blocks in sections:
-        parts.append(f"{title} ({len(blocks)})\n" + "\n\n".join(blocks))
+        parts.append(f"{title} — <b>{len(blocks)}</b>\n\n" + "\n\n".join(blocks))
     return "\n\n".join(parts)
 
 
@@ -260,6 +291,7 @@ def send_telegram(text):
         return
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     r = requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": text,
+                                 "parse_mode": "HTML",
                                  "disable_web_page_preview": True}, timeout=30)
     if r.status_code != 200:
         print("Telegram error:", r.status_code, r.text[:300])
@@ -300,13 +332,13 @@ def main():
 
     # sanity guard: never alert "everything removed" on a broken fetch
     if old and len(new) < max(50, len(old) // 2):
-        send_telegram(f"⚠️ Fetch looks broken ({len(new)} models vs "
-                      f"{len(old)} before). Skipping this run.")
+        send_telegram(f"⚠️ <b>Fetch looks broken</b>\n{len(new)} models vs "
+                      f"{len(old)} before. Skipping this run.")
         return
 
     if old is None:
         save_snapshot(new)
-        send_telegram(f"✅ Arena tracker started\n{len(new)} models loaded "
+        send_telegram(f"✅ <b>Arena tracker started</b>\n{len(new)} models loaded "
                       f"as baseline. Alerts start from next change.")
         return
 
