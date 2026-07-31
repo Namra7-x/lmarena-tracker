@@ -832,6 +832,23 @@
       "router": false,
       "vision": true
     },
+    "claude-opus-5-xhigh": {
+      "active": false,
+      "arenas": {
+        "agents": [
+          "agentic_3d"
+        ]
+      },
+      "displayName": "Claude Opus 5 (XHigh)",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "anthropic",
+      "router": false,
+      "vision": true
+    },
     "claude-pptx-opus": {
       "active": true,
       "arenas": {
@@ -3737,6 +3754,24 @@
         ]
       },
       "displayName": "GPT-5.6 Sol",
+      "inputModalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": true
+    },
+    "gpt-5.6-sol-xhigh": {
+      "active": false,
+      "arenas": {
+        "agents": [
+          "agentic_3d"
+        ]
+      },
+      "displayName": "GPT-5.6 Sol (XHigh)",
       "inputModalities": [
         "file",
         "image",
@@ -8504,6 +8539,10 @@
       "text.input": 5,
       "text.output": 25
     },
+    "claude-opus-5-xhigh": {
+      "text.input": 5,
+      "text.output": 25
+    },
     "claude-pptx-sonnet": {
       "slides.perDeck": 0.5
     },
@@ -8970,6 +9009,10 @@
       "text.output": 6
     },
     "gpt-5.6-sol": {
+      "text.input": 5,
+      "text.output": 30
+    },
+    "gpt-5.6-sol-xhigh": {
       "text.input": 5,
       "text.output": 30
     },
