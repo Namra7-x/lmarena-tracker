@@ -1,1 +1,0 @@
-# lmarena-tracker
