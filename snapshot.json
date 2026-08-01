@@ -10310,29 +10310,6 @@
   },
   "userSelectable": true
  },
- "019e98ee-4306-771d-adb8-d301a88f7be6": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": true,
-    "text": true,
-    "video": true
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "displayName": "gemini-omni-flash",
-  "id": "019e98ee-4306-771d-adb8-d301a88f7be6",
-  "name": "bouncybohr",
-  "organization": "google",
-  "provider": "googleApi",
-  "publicName": "bouncybohr",
-  "rank": 1,
-  "rankByModality": {
-   "video": 1
-  },
-  "userSelectable": true
- },
  "019e98fd-7a13-732a-93d6-2584d8b11d5a": {
   "capabilities": {
    "inputCapabilities": {
@@ -10948,34 +10925,6 @@
   "organization": "luma-ai",
   "provider": "lumaImagePublic",
   "publicName": "uni-1.1-max",
-  "rankByModality": {
-   "image": 9007199254740991
-  },
-  "userSelectable": true
- },
- "019ed3b3-c4f8-7e67-b72d-385d740096d0": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": {
-     "multipleImages": true,
-     "requiresUpload": false
-    },
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "displayName": "gemini-3.1-flash-lite-image (nano-banana-2-lite)",
-  "id": "019ed3b3-c4f8-7e67-b72d-385d740096d0",
-  "name": "instant-ramen-a85d",
-  "organization": "google",
-  "provider": "google-ai",
-  "publicName": "instant-ramen",
   "rankByModality": {
    "image": 9007199254740991
   },
@@ -16031,6 +15980,23 @@
   "publicName": "gemini-3.1-flash-lite-image (nano-banana-2-lite)",
   "rankByModality": {
    "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fbbc9-b0ee-7912-83fe-a8afd9062c8f": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "displayName": "hailuo-3",
+  "id": "019fbbc9-b0ee-7912-83fe-a8afd9062c8f",
+  "publicName": "hailuo-3",
+  "rankByModality": {
+   "video": 9007199254740991
   },
   "userSelectable": true
  },
