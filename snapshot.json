@@ -833,9 +833,9 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.1-medium",
-  "rank": 62,
+  "rank": 61,
   "rankByModality": {
-   "webdev": 62
+   "webdev": 61
   },
   "userSelectable": true
  },
@@ -1996,9 +1996,9 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "devstral-2",
-  "rank": 102,
+  "rank": 103,
   "rankByModality": {
-   "webdev": 102
+   "webdev": 103
   },
   "userSelectable": true
  },
@@ -7213,7 +7213,7 @@
   "rank": 247,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 103
+   "webdev": 102
   },
   "userSelectable": true
  },
@@ -16104,6 +16104,31 @@
    "chat": 9007199254740991
   },
   "userSelectable": false
+ },
+ "019fbf7c-0161-7e2c-ba1d-fa7b8eaae594": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": false,
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "horseshoe",
+  "id": "019fbf7c-0161-7e2c-ba1d-fa7b8eaae594",
+  "publicName": "horseshoe",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
  },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
