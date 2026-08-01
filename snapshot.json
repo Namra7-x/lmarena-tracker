@@ -16040,6 +16040,71 @@
   },
   "userSelectable": true
  },
+ "019fbe65-9cbd-7cd9-8ebf-65872b864da9": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": false,
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "zen-bear-v16e",
+  "id": "019fbe65-9cbd-7cd9-8ebf-65872b864da9",
+  "publicName": "zen-bear-v16e",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fbe66-bfad-7c7e-bce2-4246dbaa74ae": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "zen-bear-v16r",
+  "id": "019fbe66-bfad-7c7e-bce2-4246dbaa74ae",
+  "publicName": "zen-bear-v16r",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fbe79-c3cb-7ccb-910a-70a2655a8e63": {
+  "capabilities": {
+   "inputCapabilities": {
+    "file": true,
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "gpt-5.6-luna-max",
+  "id": "019fbe79-c3cb-7ccb-910a-70a2655a8e63",
+  "publicName": "gpt-5.6-luna-max",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": false
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
