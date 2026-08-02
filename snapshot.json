@@ -16130,6 +16130,67 @@
   },
   "userSelectable": true
  },
+ "019fbfb4-67ca-7524-9b7a-f71de524e976": {
+  "capabilities": {
+   "inputCapabilities": {
+    "file": true,
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "gpt-5.6-terra-max",
+  "id": "019fbfb4-67ca-7524-9b7a-f71de524e976",
+  "name": "gpt-5.6-terra-max",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.6-terra-max",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": false
+ },
+ "019fbfb4-fd7b-76f8-81d5-63f3a4dc5525": {
+  "capabilities": {
+   "inputCapabilities": {
+    "file": true,
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "gpt-5.6-sol-max",
+  "id": "019fbfb4-fd7b-76f8-81d5-63f3a4dc5525",
+  "name": "gpt-5.6-sol-max",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.6-sol-max",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": false
+ },
+ "019fbfde-d013-7e0f-9c50-8774a2c99c26": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "displayName": "bulbasaur",
+  "id": "019fbfde-d013-7e0f-9c50-8774a2c99c26",
+  "publicName": "bulbasaur",
+  "rankByModality": {
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
