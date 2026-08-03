@@ -5942,6 +5942,24 @@
       "router": false,
       "vision": false
     },
+    "minimax-h3": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "multimodaltovideo",
+          "multitovideo",
+          "video",
+          "videotovideo"
+        ]
+      },
+      "displayName": "MiniMax H3",
+      "inputModalities": [],
+      "openSource": true,
+      "provider": "minimax",
+      "router": false,
+      "vision": false
+    },
     "minimax-m2-stable": {
       "active": false,
       "arenas": {
@@ -6013,11 +6031,15 @@
         ]
       },
       "displayName": "MiniMax M3",
-      "inputModalities": [],
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
       "openSource": true,
       "provider": "minimax",
       "router": false,
-      "vision": false
+      "vision": true
     },
     "minimax_speech_02_hd": {
       "active": true,
@@ -8379,7 +8401,17 @@
       "active": true,
       "arenas": {
         "agents": [
-          "agon_godot"
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
         ],
         "models": [
           "3d",
@@ -9354,6 +9386,9 @@
     "mimo-v2.5-pro": {
       "text.input": 0.435,
       "text.output": 0.87
+    },
+    "minimax-h3": {
+      "video.perSecond": 0.13
     },
     "minimax-m2-stable": {
       "text.input": 0.3,
