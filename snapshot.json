@@ -16333,6 +16333,65 @@
   },
   "userSelectable": true
  },
+ "019fca99-f166-79da-a2a6-63ac6a16eb25": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "displayName": "latent-sauce",
+  "id": "019fca99-f166-79da-a2a6-63ac6a16eb25",
+  "publicName": "latent-sauce",
+  "rankByModality": {
+   "video": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fcaa1-b52e-7d28-bddd-8a63da46f749": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "displayName": "colossus",
+  "id": "019fcaa1-b52e-7d28-bddd-8a63da46f749",
+  "publicName": "colossus",
+  "rankByModality": {
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fcacb-37a9-7835-9896-743bd32a4b52": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": false,
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "luffa-v6",
+  "id": "019fcacb-37a9-7835-9896-743bd32a4b52",
+  "publicName": "luffa-v6",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
