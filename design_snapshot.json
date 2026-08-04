@@ -1498,7 +1498,7 @@
       "vision": false
     },
     "deepseek-v4-flash": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "3d",
@@ -1511,6 +1511,28 @@
         ]
       },
       "displayName": "DeepSeek-V4-Flash",
+      "inputModalities": [
+        "text"
+      ],
+      "openSource": true,
+      "provider": "deepseek",
+      "router": false,
+      "vision": false
+    },
+    "deepseek-v4-flash-0731": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "DeepSeek-V4-Flash-0731",
       "inputModalities": [
         "text"
       ],
@@ -1937,6 +1959,21 @@
         ]
       },
       "displayName": "FLUX.2 Pro Edit",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "black_forest_labs",
+      "router": false,
+      "vision": false
+    },
+    "flux-3-video": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      },
+      "displayName": "FLUX 3 Video",
       "inputModalities": [],
       "openSource": false,
       "provider": "black_forest_labs",
@@ -7054,7 +7091,7 @@
       "inputModalities": [
         "text"
       ],
-      "openSource": false,
+      "openSource": true,
       "provider": "alibaba",
       "router": false,
       "vision": false
@@ -8726,6 +8763,10 @@
       "text.input": 0.14,
       "text.output": 0.28
     },
+    "deepseek-v4-flash-0731": {
+      "text.input": 0.09,
+      "text.output": 0.18
+    },
     "deepseek-v4-pro": {
       "text.input": 0.435,
       "text.output": 0.87
@@ -8788,6 +8829,9 @@
     },
     "flux-2-pro-edit": {
       "image.perImage": 0.03
+    },
+    "flux-3-video": {
+      "video.perSecond": 0.29
     },
     "flux-kontext-max": {
       "image.perImage": 0.08
