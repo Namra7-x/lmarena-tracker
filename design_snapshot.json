@@ -6531,6 +6531,20 @@
       "router": false,
       "vision": false
     },
+    "openai_gpt_realtime_2": {
+      "active": false,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "OpenAI GPT Realtime 2",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": false
+    },
     "openai_gpt_realtime_mini": {
       "active": true,
       "arenas": {
@@ -9848,7 +9862,7 @@
     "deepmolt": "DeepMolt",
     "deepocto": "DeepOcto",
     "deepseek": "DeepSeek",
-    "denali": "denali",
+    "denali": "Bland AI",
     "designflow": "DesignFlow",
     "dolphin": "Dolphin",
     "drift": "drift",
