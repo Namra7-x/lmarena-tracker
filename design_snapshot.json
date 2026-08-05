@@ -2235,7 +2235,7 @@
       "vision": false
     },
     "gemini-2.5-flash-image": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "graphicdesign",
@@ -2348,7 +2348,7 @@
       "vision": false
     },
     "gemini-3-flash-preview": {
-      "active": true,
+      "active": false,
       "arenas": {
         "agents": [
           "agentic_gamedev",
@@ -2371,7 +2371,7 @@
       "vision": false
     },
     "gemini-3-pro-image-gen-2k": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "graphicdesign",
@@ -2390,7 +2390,7 @@
       "vision": false
     },
     "gemini-3-pro-image-preview": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "imagetoimage"
@@ -2407,7 +2407,7 @@
       "vision": false
     },
     "gemini-3-pro-image-preview-2k": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "imagetoimage"
@@ -2441,7 +2441,7 @@
       "vision": false
     },
     "gemini-3.1-flash-image-gen-2k": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "graphicdesign",
@@ -2460,7 +2460,7 @@
       "vision": false
     },
     "gemini-3.1-flash-image-preview": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "graphicdesign",
@@ -3011,7 +3011,7 @@
       "vision": false
     },
     "google_gemini_2_5_pro_tts": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "tts"
@@ -3053,7 +3053,7 @@
       "vision": false
     },
     "google_gemini_live": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "sts"
@@ -3067,7 +3067,7 @@
       "vision": false
     },
     "google_gemini_tts": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "tts"
@@ -3816,10 +3816,20 @@
       "vision": true
     },
     "gpt-5.6-sol-xhigh": {
-      "active": false,
+      "active": true,
       "arenas": {
         "agents": [
-          "agentic_3d"
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
         ]
       },
       "displayName": "GPT-5.6 Sol (XHigh)",
@@ -4729,7 +4739,7 @@
       "vision": false
     },
     "imagen-4.0-fast-generate-001": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "graphicdesign",
@@ -4745,7 +4755,7 @@
       "vision": false
     },
     "imagen-4.0-generate-001": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "graphicdesign",
@@ -4777,7 +4787,7 @@
       "vision": false
     },
     "imagen-4.0-ultra-generate-001": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "graphicdesign",
@@ -4980,7 +4990,7 @@
       "vision": false
     },
     "kimi-k2-0905-preview": {
-      "active": true,
+      "active": false,
       "arenas": {
         "agents": [
           "agon_webapps"
@@ -5048,7 +5058,7 @@
       "vision": false
     },
     "kimi-k2.5": {
-      "active": true,
+      "active": false,
       "arenas": {
         "agents": [
           "agon_godot",
@@ -6597,7 +6607,7 @@
       "vision": false
     },
     "openai_gpt_realtime_mini": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "sts"
@@ -7538,7 +7548,7 @@
       "vision": false
     },
     "seedance-1.0-lite-ref": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "imagetovideo",
@@ -7794,7 +7804,7 @@
       "vision": false
     },
     "snowflake": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "slides"
