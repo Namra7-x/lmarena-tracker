@@ -6723,15 +6723,16 @@
       "vision": false
     },
     "qwen-image-3": {
-      "active": false,
+      "active": true,
       "arenas": {
         "models": [
           "graphicdesign",
           "image",
+          "imagetoimage",
           "logo"
         ]
       },
-      "displayName": "Qwen Image 3",
+      "displayName": "Qwen Image 3 Pro",
       "inputModalities": [],
       "openSource": false,
       "provider": "alibaba",
@@ -9592,6 +9593,9 @@
       "image.perImage": 0.04
     },
     "qwen-image-2512": {
+      "image.perImage": 0.075
+    },
+    "qwen-image-3": {
       "image.perImage": 0.075
     },
     "qwen-image-edit": {
