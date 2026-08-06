@@ -15714,6 +15714,7 @@
  "019fb6ba-031f-7e6b-ac0b-33dc6569bbc4": {
   "capabilities": {
    "inputCapabilities": {
+    "image": true,
     "text": true
    },
    "outputCapabilities": {
@@ -15721,10 +15722,9 @@
     "web": true
    }
   },
-  "displayName": "gemini-3.5-flash",
+  "displayName": "gemini-3.5-pro",
   "id": "019fb6ba-031f-7e6b-ac0b-33dc6569bbc4",
-  "organization": "google",
-  "publicName": "gemini-3.5-flash",
+  "publicName": "gemini-3.5-pro",
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
@@ -16567,6 +16567,31 @@
   "publicName": "frickin-router-2-electric-boogaloo",
   "rankByModality": {
    "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fd4cb-9c14-7ee1-9a27-893c26096638": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": false,
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "mustard",
+  "id": "019fd4cb-9c14-7ee1-9a27-893c26096638",
+  "publicName": "mustard",
+  "rankByModality": {
+   "image": 9007199254740991
   },
   "userSelectable": true
  },
