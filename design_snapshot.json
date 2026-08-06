@@ -4454,7 +4454,7 @@
       "vision": false
     },
     "hazel": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "imagetoimage"
@@ -6335,7 +6335,7 @@
           "agon_webapps"
         ]
       },
-      "displayName": "Mistral Medium",
+      "displayName": "Mistral Medium 3.5",
       "inputModalities": [
         "image",
         "text"
@@ -9135,8 +9135,8 @@
       "text.output": 30
     },
     "gpt-5.6-luna": {
-      "text.input": 1,
-      "text.output": 6
+      "text.input": 0.2,
+      "text.output": 1.2
     },
     "gpt-5.6-sol": {
       "text.input": 5,
@@ -9147,8 +9147,8 @@
       "text.output": 30
     },
     "gpt-5.6-terra": {
-      "text.input": 2.5,
-      "text.output": 15
+      "text.input": 2,
+      "text.output": 12
     },
     "gpt-image-1": {
       "image.perImage": 0.042,
@@ -9545,8 +9545,8 @@
       "text.output": 7.5
     },
     "mistral-medium-latest": {
-      "text.input": 0.4,
-      "text.output": 2
+      "text.input": 1.5,
+      "text.output": 7.5
     },
     "mistral-small-2506": {
       "text.input": 0.1,
@@ -9858,7 +9858,7 @@
       "video.perSecond": 0.100347
     },
     "yoda": {
-      "text.cachedInput": 0.5,
+      "text.cachedInput": 0.3,
       "text.input": 2,
       "text.output": 6
     },
