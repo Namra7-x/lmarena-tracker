@@ -1730,10 +1730,15 @@
       "arenas": {
         "agents": [
           "agentic_gamedev",
+          "agon_dataviz",
           "agon_godot",
           "agon_slides",
           "agon_slides_html",
-          "agon_webapps"
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
         ],
         "models": [
           "3d",
@@ -7131,7 +7136,7 @@
           "website"
         ]
       },
-      "displayName": "Qwen3.8 Max Preview",
+      "displayName": "Qwen3.8 Max",
       "inputModalities": [
         "image",
         "text"
@@ -8761,12 +8766,12 @@
       "text.output": 8
     },
     "deca-2.5-ultra": {
-      "text.input": 4,
-      "text.output": 16
+      "text.input": 2,
+      "text.output": 8
     },
     "deca-2.5-ultra-2": {
-      "text.input": 4,
-      "text.output": 16
+      "text.input": 2,
+      "text.output": 8
     },
     "deepgram_aura_v2": {
       "text.input": 30,
