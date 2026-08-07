@@ -16711,6 +16711,29 @@
   },
   "userSelectable": true
  },
+ "019fde42-61fa-7d12-9f3f-6d2fc64365f7": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "displayName": "flux-3-video",
+  "id": "019fde42-61fa-7d12-9f3f-6d2fc64365f7",
+  "name": "flux-3-video",
+  "organization": "bfl",
+  "provider": "bflVideo3",
+  "publicName": "flux-3-video",
+  "rankByModality": {
+   "video": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
