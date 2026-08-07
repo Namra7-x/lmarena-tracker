@@ -6420,6 +6420,39 @@
       "router": false,
       "vision": false
     },
+    "muse-spark-1.2": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "nativeapps"
+        ],
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Muse Spark 1.2",
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": false,
+      "provider": "meta",
+      "router": false,
+      "vision": true
+    },
     "nemotron-3-ultra-550b-a55b": {
       "active": true,
       "arenas": {
@@ -9559,6 +9592,10 @@
     "murf_gen2": {
       "text.input": 30,
       "text.output": 0
+    },
+    "muse-spark-1.2": {
+      "text.input": 1.25,
+      "text.output": 4.25
     },
     "nemotron-3-ultra-550b-a55b": {
       "text.input": 0.5,
