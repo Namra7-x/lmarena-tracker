@@ -16423,26 +16423,6 @@
   },
   "userSelectable": true
  },
- "019fceef-106c-7907-9848-24f90fd2ea34": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": false,
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "displayName": "solar-pro4",
-  "id": "019fceef-106c-7907-9848-24f90fd2ea34",
-  "publicName": "solar-pro4",
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  },
-  "userSelectable": true
- },
  "019fd401-b1c2-7e38-a201-5f9b3817adb3": {
   "capabilities": {
    "inputCapabilities": {
@@ -16612,6 +16592,40 @@
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fd7f0-b50f-75c7-a22d-1526ade8fee9": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "displayName": "openhard-2.0-search-nocot-0807",
+  "id": "019fd7f0-b50f-75c7-a22d-1526ade8fee9",
+  "publicName": "openhard-2.0-search-nocot-0807",
+  "rankByModality": {
+   "search": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fd851-acd6-7873-affd-57612842e5f5": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "tulip",
+  "id": "019fd851-acd6-7873-affd-57612842e5f5",
+  "publicName": "tulip",
+  "rankByModality": {
+   "chat": 9007199254740991
   },
   "userSelectable": true
  },
