@@ -16629,6 +16629,46 @@
   },
   "userSelectable": true
  },
+ "019fdda8-0e93-7973-b86e-05514781c608": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "gemini-3.5-flash-lite",
+  "id": "019fdda8-0e93-7973-b86e-05514781c608",
+  "organization": "google",
+  "publicName": "gemini-3.5-flash-lite",
+  "rank": 46,
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019fddb2-32d1-718f-a423-001c9f4330d4": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "fiddler",
+  "id": "019fddb2-32d1-718f-a423-001c9f4330d4",
+  "publicName": "fiddler",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
