@@ -3809,7 +3809,7 @@
           "website"
         ]
       },
-      "displayName": "GPT-5.6 Sol",
+      "displayName": "GPT-5.6 Sol (Medium)",
       "inputModalities": [
         "file",
         "image",
@@ -5785,6 +5785,35 @@
       "provider": "mistral",
       "router": false,
       "vision": false
+    },
+    "magnesium": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_html",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      },
+      "displayName": "GPT 5.6 Sol (xHigh)",
+      "inputModalities": [
+        "file",
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": true
     },
     "magnolia": {
       "active": false,
@@ -9490,6 +9519,10 @@
     "magistral-small-2509": {
       "text.input": 0.5,
       "text.output": 1.5
+    },
+    "magnesium": {
+      "text.input": 5,
+      "text.output": 30
     },
     "magnolia": {
       "image.perImage": 0.015
