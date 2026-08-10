@@ -114,10 +114,10 @@
   "organization": "anthropic",
   "provider": "anthropic",
   "publicName": "claude-haiku-4-5-20251001",
-  "rank": 121,
+  "rank": 124,
   "rankByModality": {
    "chat": 30,
-   "webdev": 85
+   "webdev": 87
   },
   "userSelectable": true
  },
@@ -221,7 +221,7 @@
   "organization": "google",
   "provider": "googleVertex",
   "publicName": "gemini-2.5-flash",
-  "rank": 125,
+  "rank": 127,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -245,10 +245,10 @@
   "organization": "google",
   "provider": "googleVertex",
   "publicName": "gemini-2.5-pro",
-  "rank": 67,
+  "rank": 68,
   "rankByModality": {
    "chat": 31,
-   "webdev": 102
+   "webdev": 104
   },
   "userSelectable": true
  },
@@ -437,10 +437,10 @@
   "organization": "minimax",
   "provider": "minimax",
   "publicName": "minimax-m2",
-  "rank": 199,
+  "rank": 201,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 89
+   "webdev": 91
   },
   "userSelectable": true
  },
@@ -461,7 +461,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-sonnet-4-5-20250929",
-  "rank": 54,
+  "rank": 56,
   "rankByModality": {
    "chat": 22,
    "webdev": 68
@@ -605,10 +605,10 @@
   "organization": "moonshot",
   "provider": "moonshot",
   "publicName": "kimi-k2-thinking-turbo",
-  "rank": 92,
+  "rank": 93,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 87
+   "webdev": 89
   },
   "userSelectable": true
  },
@@ -627,9 +627,9 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "devstral-medium-2507",
-  "rank": 109,
+  "rank": 111,
   "rankByModality": {
-   "webdev": 109
+   "webdev": 111
   },
   "userSelectable": true
  },
@@ -665,7 +665,7 @@
   "organization": "inception-ai",
   "provider": "openrouter",
   "publicName": "mercury",
-  "rank": 249,
+  "rank": 251,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -728,10 +728,10 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.1",
-  "rank": 76,
+  "rank": 77,
   "rankByModality": {
    "chat": 37,
-   "webdev": 80
+   "webdev": 82
   },
   "userSelectable": true
  },
@@ -767,9 +767,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.1-codex",
-  "rank": 83,
+  "rank": 85,
   "rankByModality": {
-   "webdev": 83
+   "webdev": 85
   },
   "userSelectable": true
  },
@@ -788,9 +788,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.1-codex-mini",
-  "rank": 97,
+  "rank": 99,
   "rankByModality": {
-   "webdev": 97
+   "webdev": 99
   },
   "userSelectable": true
  },
@@ -811,7 +811,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.1-high",
-  "rank": 55,
+  "rank": 57,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
@@ -833,9 +833,9 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.1-medium",
-  "rank": 64,
+  "rank": 65,
   "rankByModality": {
-   "webdev": 64
+   "webdev": 65
   },
   "userSelectable": true
  },
@@ -932,10 +932,10 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-5-20251101-thinking-32k",
-  "rank": 28,
+  "rank": 29,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 29
+   "webdev": 30
   },
   "userSelectable": false
  },
@@ -1047,10 +1047,10 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "mistral-large-3",
-  "rank": 116,
+  "rank": 118,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 101
+   "webdev": 103
   },
   "userSelectable": true
  },
@@ -1071,10 +1071,10 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-5-20251101",
-  "rank": 33,
+  "rank": 35,
   "rankByModality": {
    "chat": 19,
-   "webdev": 36
+   "webdev": 37
   },
   "userSelectable": false
  },
@@ -1090,7 +1090,7 @@
   "displayName": "micro-mango",
   "id": "019ade1a-a918-79dd-9ef9-ba22f97c977d",
   "publicName": "micro-mango",
-  "rank": 146,
+  "rank": 148,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1111,7 +1111,7 @@
   "organization": "amazon",
   "provider": "amazonBedrock",
   "publicName": "nova-2-lite",
-  "rank": 208,
+  "rank": 210,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1180,7 +1180,7 @@
   "organization": "prime-intellect",
   "provider": "openrouter",
   "publicName": "intellect-3",
-  "rank": 183,
+  "rank": 185,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1222,7 +1222,7 @@
   "organization": "nvidia",
   "provider": "nvidia",
   "publicName": "nvidia-nemotron-3-nano-30b-a3b-bf16",
-  "rank": 238,
+  "rank": 240,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1266,7 +1266,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.2",
-  "rank": 81,
+  "rank": 82,
   "rankByModality": {
    "chat": 38
   },
@@ -1289,7 +1289,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.2-high",
-  "rank": 79,
+  "rank": 80,
   "rankByModality": {
    "chat": 35
   },
@@ -1456,10 +1456,10 @@
   "organization": "minimax",
   "provider": "minimaxAnthropic",
   "publicName": "minimax-m2.1-preview",
-  "rank": 157,
+  "rank": 159,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 66
+   "webdev": 67
   },
   "userSelectable": true
  },
@@ -1531,10 +1531,10 @@
   "organization": "google",
   "provider": "googleVertexGlobal",
   "publicName": "gemini-3-flash",
-  "rank": 26,
+  "rank": 28,
   "rankByModality": {
    "chat": 34,
-   "webdev": 45
+   "webdev": 46
   },
   "userSelectable": true
  },
@@ -1710,7 +1710,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-max-preview",
-  "rank": 83,
+  "rank": 84,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1776,9 +1776,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.2-codex",
-  "rank": 82,
+  "rank": 84,
   "rankByModality": {
-   "webdev": 82
+   "webdev": 84
   },
   "userSelectable": true
  },
@@ -1996,9 +1996,9 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "devstral-2",
-  "rank": 104,
+  "rank": 106,
   "rankByModality": {
-   "webdev": 104
+   "webdev": 106
   },
   "userSelectable": true
  },
@@ -2085,7 +2085,7 @@
   "organization": "zai",
   "provider": "fireworks",
   "publicName": "glm-4.7",
-  "rank": 73,
+  "rank": 76,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -2171,9 +2171,9 @@
   "organization": "kwai",
   "provider": "kwai",
   "publicName": "KAT-Coder-Pro-V1",
-  "rank": 95,
+  "rank": 96,
   "rankByModality": {
-   "webdev": 95
+   "webdev": 96
   },
   "userSelectable": false
  },
@@ -2386,7 +2386,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-6",
-  "rank": 4,
+  "rank": 5,
   "rankByModality": {
    "chat": 2,
    "webdev": 16
@@ -2430,7 +2430,7 @@
   "organization": "zai",
   "provider": "siliconFlowToolCalling",
   "publicName": "glm-5",
-  "rank": 50,
+  "rank": 51,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
@@ -2607,7 +2607,7 @@
   "rank": 149,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 67
+   "webdev": 69
   },
   "userSelectable": true
  },
@@ -2653,7 +2653,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.2-chat-latest",
-  "rank": 21,
+  "rank": 22,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -2848,10 +2848,10 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-sonnet-4-6",
-  "rank": 29,
+  "rank": 30,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 22
+   "webdev": 21
   },
   "userSelectable": true
  },
@@ -2935,7 +2935,7 @@
   "organization": "arcee-ai",
   "provider": "arcee",
   "publicName": "trinity-large",
-  "rank": 162,
+  "rank": 164,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3019,7 +3019,7 @@
   "organization": "google",
   "provider": "googleVertexGlobal",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 43
@@ -3287,7 +3287,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.5-27b",
-  "rank": 128,
+  "rank": 130,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3309,9 +3309,9 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.5-27b-code",
-  "rank": 76,
+  "rank": 78,
   "rankByModality": {
-   "webdev": 76
+   "webdev": 78
   },
   "userSelectable": true
  },
@@ -3331,7 +3331,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.5-35b-a3b",
-  "rank": 142,
+  "rank": 143,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3353,9 +3353,9 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.5-35b-a3b-code",
-  "rank": 96,
+  "rank": 98,
   "rankByModality": {
-   "webdev": 96
+   "webdev": 98
   },
   "userSelectable": true
  },
@@ -3397,9 +3397,9 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.5-122b-a10b-code",
-  "rank": 75,
+  "rank": 77,
   "rankByModality": {
-   "webdev": 75
+   "webdev": 77
   },
   "userSelectable": true
  },
@@ -3473,10 +3473,10 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.5-flash",
-  "rank": 139,
+  "rank": 141,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 100
+   "webdev": 102
   },
   "userSelectable": true
  },
@@ -3529,7 +3529,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.3-chat-latest",
-  "rank": 62,
+  "rank": 63,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3643,7 +3643,7 @@
   "organization": "moonshot",
   "provider": "moonshot",
   "publicName": "kimi-k2.5-instant",
-  "rank": 88,
+  "rank": 89,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3661,7 +3661,7 @@
   "displayName": "march26-chatbot1",
   "id": "019cbb13-c727-76ef-ba21-4f3affc274c6",
   "publicName": "march26-chatbot1",
-  "rank": 178,
+  "rank": 180,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3889,7 +3889,7 @@
   "displayName": "gpt-5.2",
   "id": "019cc543-573d-7a3f-b155-ad9cc5733aa6",
   "publicName": "gpt-5.2",
-  "rank": 81,
+  "rank": 82,
   "rankByModality": {
    "chat": 38
   },
@@ -3908,7 +3908,7 @@
   "displayName": "gemini-3.1-pro",
   "id": "019cc544-4848-771d-947a-1121fad1acb4",
   "publicName": "gemini-3.1-pro",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23
   },
@@ -3931,7 +3931,7 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.4-no-system-prompt",
-  "rank": 41,
+  "rank": 39,
   "rankByModality": {
    "chat": 15
   },
@@ -3953,7 +3953,7 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.4-high-no-system-prompt",
-  "rank": 18,
+  "rank": 21,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3975,10 +3975,10 @@
   "organization": "inception-ai",
   "provider": "openrouter",
   "publicName": "mercury-2",
-  "rank": 196,
+  "rank": 198,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 106
+   "webdev": 108
   },
   "userSelectable": true
  },
@@ -4151,7 +4151,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "kiteki",
-  "rank": 40,
+  "rank": 41,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -4194,7 +4194,7 @@
   "organization": "xai",
   "provider": "xaiApi",
   "publicName": "grok-4.20-beta-0309-reasoning",
-  "rank": 30,
+  "rank": 31,
   "rankByModality": {
    "chat": 33
   },
@@ -4319,7 +4319,7 @@
   "organization": "xai",
   "provider": "xaiMultiAgent",
   "publicName": "grok-4.20-multi-agent-beta-0309",
-  "rank": 31,
+  "rank": 32,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -4431,7 +4431,7 @@
   "organization": "minimax",
   "provider": "minimaxAnthropic",
   "publicName": "deep-octo",
-  "rank": 114,
+  "rank": 116,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 61
@@ -4512,7 +4512,7 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.4-nano-high",
-  "rank": 132,
+  "rank": 134,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -4534,7 +4534,7 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.4-mini-high",
-  "rank": 63,
+  "rank": 65,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -4553,7 +4553,7 @@
   "displayName": "gpt-5.4-no-system-prompt",
   "id": "019cfd71-33d0-7fb1-96f3-16780c95966d",
   "publicName": "gpt-5.4-no-system-prompt",
-  "rank": 41,
+  "rank": 39,
   "rankByModality": {
    "chat": 15
   },
@@ -4649,9 +4649,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.4-mini-high",
-  "rank": 60,
+  "rank": 62,
   "rankByModality": {
-   "webdev": 60
+   "webdev": 62
   },
   "userSelectable": true
  },
@@ -4741,7 +4741,7 @@
   "organization": "stepfun",
   "provider": "openrouter",
   "publicName": "step-3.5-flash",
-  "rank": 144,
+  "rank": 146,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -4851,7 +4851,7 @@
   "displayName": "dola-seed-2.0-pro-text",
   "id": "019d2ac4-285d-7765-8296-d9a3aa2f2662",
   "publicName": "dola-seed-2.0-pro-text",
-  "rank": 51,
+  "rank": 55,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -5207,7 +5207,7 @@
   "organization": "zai",
   "provider": "siliconFlowToolCalling",
   "publicName": "glm-5v-turbo",
-  "rank": 86,
+  "rank": 87,
   "rankByModality": {
    "chat": 32,
    "webdev": 59
@@ -5281,9 +5281,9 @@
   "id": "019d502c-6bd3-7714-b1de-247f0e7aa9e1",
   "organization": "google",
   "publicName": "gemini-3-pro",
-  "rank": 46,
+  "rank": 48,
   "rankByModality": {
-   "webdev": 46
+   "webdev": 48
   },
   "userSelectable": true
  },
@@ -5324,10 +5324,10 @@
   "organization": "arcee-ai",
   "provider": "arceeToolCalling",
   "publicName": "trinity-large-thinking",
-  "rank": 171,
+  "rank": 172,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 99
+   "webdev": 101
   },
   "userSelectable": true
  },
@@ -6056,7 +6056,7 @@
   "displayName": "kizen-beta",
   "id": "019daede-d9ea-74fd-b121-853740b8f2a0",
   "publicName": "kizen-beta",
-  "rank": 44,
+  "rank": 45,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -6606,9 +6606,9 @@
   "id": "019dc23b-2470-7047-b336-b7f2f864dc25",
   "organization": "google",
   "publicName": "gemini-3-flash",
-  "rank": 45,
+  "rank": 46,
   "rankByModality": {
-   "webdev": 45
+   "webdev": 46
   },
   "userSelectable": true
  },
@@ -7058,9 +7058,9 @@
   "id": "019de0fb-8644-7917-96d1-1c2dd4a25d4b",
   "organization": "google",
   "publicName": "gemini-3-flash",
-  "rank": 45,
+  "rank": 46,
   "rankByModality": {
-   "webdev": 45
+   "webdev": 46
   },
   "userSelectable": true
  },
@@ -7210,10 +7210,10 @@
   "organization": "ibm",
   "provider": "openrouter",
   "publicName": "granite-4.1-8b",
-  "rank": 250,
+  "rank": 252,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 105
+   "webdev": 107
   },
   "userSelectable": true
  },
@@ -7366,10 +7366,10 @@
   "id": "019df477-1160-7548-8d04-93bb58ff0502",
   "organization": "google",
   "publicName": "gemini-3-flash",
-  "rank": 26,
+  "rank": 28,
   "rankByModality": {
    "chat": 34,
-   "webdev": 45
+   "webdev": 46
   },
   "userSelectable": true
  },
@@ -7387,10 +7387,10 @@
   "id": "019df477-3d05-7d5d-8852-b4cd85452379",
   "organization": "google",
   "publicName": "gemini-3-pro",
-  "rank": 12,
+  "rank": 14,
   "rankByModality": {
    "chat": 27,
-   "webdev": 46
+   "webdev": 48
   },
   "userSelectable": true
  },
@@ -7408,7 +7408,7 @@
   "id": "019df477-8246-789c-bbdf-054a5f712ce3",
   "organization": "google",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 43
@@ -7768,7 +7768,7 @@
   "id": "019e080d-c29d-7d9a-aa54-faed41da0763",
   "organization": "google",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 43
@@ -7905,9 +7905,9 @@
   "id": "019e132d-8508-7f1b-b937-9274fb1417b6",
   "organization": "google",
   "publicName": "gemini-3-flash",
-  "rank": 45,
+  "rank": 46,
   "rankByModality": {
-   "webdev": 45
+   "webdev": 46
   },
   "userSelectable": true
  },
@@ -8032,10 +8032,10 @@
   "id": "019e1d78-1883-7609-9b3d-2a265c1b5e8c",
   "organization": "google",
   "publicName": "gemini-3-pro",
-  "rank": 12,
+  "rank": 14,
   "rankByModality": {
    "chat": 27,
-   "webdev": 46
+   "webdev": 48
   },
   "userSelectable": true
  },
@@ -8053,7 +8053,7 @@
   "id": "019e1d78-5d58-79ea-8801-1bed09799b11",
   "organization": "google",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 43
@@ -8634,9 +8634,9 @@
   "id": "019e3e9d-ca77-77de-8e4a-a3208e849388",
   "organization": "google",
   "publicName": "gemini-3-flash",
-  "rank": 45,
+  "rank": 46,
   "rankByModality": {
-   "webdev": 45
+   "webdev": 46
   },
   "userSelectable": true
  },
@@ -9081,9 +9081,9 @@
   "id": "019e6207-491d-7098-8b30-cf2277eccf5e",
   "organization": "google",
   "publicName": "gemini-3-flash",
-  "rank": 45,
+  "rank": 46,
   "rankByModality": {
-   "webdev": 45
+   "webdev": 46
   },
   "userSelectable": true
  },
@@ -9208,9 +9208,9 @@
   "organization": "poolside",
   "provider": "poolsideProd",
   "publicName": "laguna-m.1-v2",
-  "rank": 79,
+  "rank": 81,
   "rankByModality": {
-   "webdev": 79
+   "webdev": 81
   },
   "userSelectable": true
  },
@@ -9471,7 +9471,7 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.5-instant",
-  "rank": 25,
+  "rank": 26,
   "rankByModality": {
    "chat": 36
   },
@@ -9749,10 +9749,10 @@
   "organization": "minimax",
   "provider": "minimaxAnthropic",
   "publicName": "minimax-m3",
-  "rank": 69,
+  "rank": 71,
   "rankByModality": {
    "chat": 26,
-   "webdev": 30
+   "webdev": 31
   },
   "userSelectable": true
  },
@@ -9929,7 +9929,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.7-plus",
-  "rank": 48,
+  "rank": 50,
   "rankByModality": {
    "chat": 25
   },
@@ -10684,9 +10684,9 @@
   "organization": "moonshot",
   "provider": "moonshot",
   "publicName": "kimi-k2.7-code",
-  "rank": 35,
+  "rank": 36,
   "rankByModality": {
-   "webdev": 35
+   "webdev": 36
   },
   "userSelectable": true
  },
@@ -10722,10 +10722,10 @@
   "displayName": "minimax-m3",
   "id": "019ebdef-3c78-733a-af58-c68052ee00fb",
   "publicName": "minimax-m3",
-  "rank": 69,
+  "rank": 71,
   "rankByModality": {
    "chat": 26,
-   "webdev": 30
+   "webdev": 31
   },
   "userSelectable": true
  },
@@ -10810,7 +10810,7 @@
   "publicName": "kimi-k2.7-code",
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 35
+   "webdev": 36
   },
   "userSelectable": true
  },
@@ -11273,7 +11273,7 @@
   "id": "019ef1a6-88b9-7337-9214-91c57236b706",
   "organization": "google",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23
   },
@@ -11751,7 +11751,7 @@
   "id": "019f1228-eaa6-7ee4-8b16-f3681f8db60c",
   "organization": "google",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 43
@@ -13542,9 +13542,9 @@
   "id": "019f68b8-410f-7a08-98d5-b457908f3b3f",
   "organization": "moonshot",
   "publicName": "kimi-k2.7-code",
-  "rank": 35,
+  "rank": 36,
   "rankByModality": {
-   "webdev": 35
+   "webdev": 36
   },
   "userSelectable": true
  },
@@ -13628,9 +13628,9 @@
   "id": "019f6bd1-9e3f-7ba5-b60b-9144d702580c",
   "organization": "moonshot",
   "publicName": "kimi-k2.7-code",
-  "rank": 35,
+  "rank": 36,
   "rankByModality": {
-   "webdev": 35
+   "webdev": 36
   },
   "userSelectable": true
  },
@@ -13730,7 +13730,7 @@
   "id": "019f6c0d-6d9c-7ff6-b50d-de71c1e94b56",
   "organization": "google",
   "publicName": "gemini-3-flash",
-  "rank": 26,
+  "rank": 28,
   "rankByModality": {
    "chat": 34
   },
@@ -14253,10 +14253,10 @@
   "displayName": "gemini-3.6-flash",
   "id": "019f8b06-4fa3-7bbe-9292-691f9feadc3c",
   "publicName": "gemini-3.6-flash",
-  "rank": 14,
+  "rank": 15,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 17
+   "webdev": 18
   },
   "userSelectable": true
  },
@@ -14334,10 +14334,10 @@
   "organization": "google",
   "provider": "googleVertexGlobalWithThoughtSignatures",
   "publicName": "gemini-3.6-flash",
-  "rank": 14,
+  "rank": 15,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 17
+   "webdev": 18
   },
   "userSelectable": true
  },
@@ -14358,10 +14358,10 @@
   "organization": "google",
   "provider": "googleVertexGlobalWithThoughtSignatures",
   "publicName": "gemini-3.5-flash-lite",
-  "rank": 46,
+  "rank": 48,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 41
+   "webdev": 42
   },
   "userSelectable": true
  },
@@ -14714,7 +14714,7 @@
   "id": "019f94f2-f3af-7984-9656-97e0c7515d61",
   "organization": "google",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 43
@@ -15035,7 +15035,7 @@
   "id": "019f99d9-8538-7480-91f8-f482331eb8ac",
   "organization": "google",
   "publicName": "gemini-3.1-pro-preview",
-  "rank": 11,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 43
@@ -15656,8 +15656,11 @@
     "web": true
    }
   },
-  "displayName": "onyx-v1-4",
+  "displayName": "muse-glimmer",
   "id": "019fb542-0691-7552-89b9-198fbe5da905",
+  "name": "onyx-v1-4-33s7",
+  "organization": "meta",
+  "provider": "metaAiResponses",
   "publicName": "onyx-v1-4",
   "rankByModality": {
    "chat": 9007199254740991,
@@ -16642,7 +16645,7 @@
   "id": "019fdda8-0e93-7973-b86e-05514781c608",
   "organization": "google",
   "publicName": "gemini-3.5-flash-lite",
-  "rank": 46,
+  "rank": 48,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17054,7 +17057,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-vl-235b-a22b-thinking",
-  "rank": 141,
+  "rank": 144,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17166,7 +17169,7 @@
   "organization": "ant-group",
   "provider": "antgroup",
   "publicName": "ring-flash-2.0",
-  "rank": 230,
+  "rank": 233,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17209,7 +17212,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-4.1-2025-04-14",
-  "rank": 119,
+  "rank": 121,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17230,7 +17233,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-235b-a22b-thinking-2507",
-  "rank": 137,
+  "rank": 139,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17272,7 +17275,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-235b-a22b-no-thinking",
-  "rank": 131,
+  "rank": 133,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17335,7 +17338,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-235b-a22b",
-  "rank": 164,
+  "rank": 167,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17399,7 +17402,7 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "mistral-medium-2508",
-  "rank": 127,
+  "rank": 129,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17421,7 +17424,7 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "mistral-medium-2505",
-  "rank": 155,
+  "rank": 156,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17472,7 +17475,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5-nano-high",
-  "rank": 206,
+  "rank": 208,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17518,7 +17521,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-next-80b-a3b-instruct",
-  "rank": 134,
+  "rank": 137,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17580,7 +17583,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-20250514-thinking-16k",
-  "rank": 100,
+  "rank": 101,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17601,7 +17604,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-sonnet-4-20250514-thinking-32k",
-  "rank": 136,
+  "rank": 138,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17641,7 +17644,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5-chat",
-  "rank": 94,
+  "rank": 95,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17708,7 +17711,7 @@
   "organization": "ibm",
   "provider": "ibm",
   "publicName": "ibm-granite-h-small",
-  "rank": 264,
+  "rank": 267,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17750,7 +17753,7 @@
   "displayName": "gemini-2.5-pro-grounding-exp",
   "id": "51a47cc6-5ef9-4ac7-a59c-4009230d7564",
   "publicName": "gemini-2.5-pro-grounding-exp",
-  "rank": 67,
+  "rank": 68,
   "rankByModality": {
    "chat": 31
   },
@@ -17889,7 +17892,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5-mini-high",
-  "rank": 147,
+  "rank": 151,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17929,7 +17932,7 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "mistral-small-3.1-24b-instruct-2503",
-  "rank": 255,
+  "rank": 256,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17977,7 +17980,7 @@
   "organization": "tencent",
   "provider": "tencent",
   "publicName": "hunyuan-vision-1.5-thinking",
-  "rank": 143,
+  "rank": 145,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17999,7 +18002,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-4.1-mini-2025-04-14",
-  "rank": 159,
+  "rank": 161,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18066,7 +18069,7 @@
   "organization": "openai",
   "provider": "fireworks",
   "publicName": "gpt-oss-120b",
-  "rank": 187,
+  "rank": 189,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18087,7 +18090,7 @@
   "organization": "meituan",
   "provider": "meituan",
   "publicName": "longcat-flash-chat",
-  "rank": 135,
+  "rank": 136,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18130,7 +18133,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-vl-235b-a22b-instruct",
-  "rank": 117,
+  "rank": 120,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18151,7 +18154,7 @@
   "organization": "ant-group",
   "provider": "antgroup",
   "publicName": "ling-flash-2.0",
-  "rank": 197,
+  "rank": 200,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18197,7 +18200,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-next-80b-a3b-thinking",
-  "rank": 170,
+  "rank": 173,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18219,7 +18222,7 @@
   "organization": "google",
   "provider": "google",
   "publicName": "gemma-3-27b-it",
-  "rank": 174,
+  "rank": 176,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18240,7 +18243,7 @@
   "organization": "moonshot",
   "provider": "moonshot",
   "publicName": "kimi-k2-0711-preview",
-  "rank": 109,
+  "rank": 110,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18262,7 +18265,7 @@
   "organization": "google",
   "provider": "google",
   "publicName": "gemini-2.0-flash-001",
-  "rank": 179,
+  "rank": 181,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18325,7 +18328,7 @@
   "organization": "minimax",
   "provider": "minimax",
   "publicName": "minimax-m1",
-  "rank": 175,
+  "rank": 178,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18346,7 +18349,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwq-32b",
-  "rank": 209,
+  "rank": 211,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18367,7 +18370,7 @@
   "organization": "google",
   "provider": "google",
   "publicName": "gemma-3n-e4b-it",
-  "rank": 234,
+  "rank": 236,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18389,10 +18392,10 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-1-20250805",
-  "rank": 65,
+  "rank": 66,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 65
+   "webdev": 66
   },
   "userSelectable": false
  },
@@ -18433,7 +18436,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-max-2025-09-23",
-  "rank": 101,
+  "rank": 103,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18482,7 +18485,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-30b-a3b",
-  "rank": 220,
+  "rank": 222,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18541,7 +18544,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-30b-a3b-instruct-2507",
-  "rank": 158,
+  "rank": 160,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18606,7 +18609,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-sonnet-4-20250514",
-  "rank": 150,
+  "rank": 152,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18628,10 +18631,10 @@
   "organization": "Alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-coder-480b-a35b-instruct",
-  "rank": 153,
+  "rank": 155,
   "rankByModality": {
    "chat": 9007199254740991,
-   "webdev": 91
+   "webdev": 93
   },
   "userSelectable": true
  },
@@ -18651,7 +18654,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-sonnet-4-5-20250929-thinking-32k",
-  "rank": 52,
+  "rank": 54,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 63
@@ -18719,7 +18722,7 @@
   "organization": "moonshot",
   "provider": "moonshot",
   "publicName": "kimi-k2-0905-preview",
-  "rank": 108,
+  "rank": 111,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18741,7 +18744,7 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "mistral-small-2506",
-  "rank": 181,
+  "rank": 183,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18807,7 +18810,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "o3-mini",
-  "rank": 192,
+  "rank": 194,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18847,7 +18850,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "o3-2025-04-16",
-  "rank": 90,
+  "rank": 91,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -19155,7 +19158,7 @@
   "organization": "openai",
   "provider": "fireworks",
   "publicName": "gpt-oss-20b",
-  "rank": 237,
+  "rank": 239,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -19176,7 +19179,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-20250514",
-  "rank": 120,
+  "rank": 123,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -19197,7 +19200,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-235b-a22b-instruct-2507",
-  "rank": 102,
+  "rank": 104,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -19241,7 +19244,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "o4-mini-2025-04-16",
-  "rank": 148,
+  "rank": 150,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -19262,7 +19265,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-1-20250805-thinking-16k",
-  "rank": 60,
+  "rank": 62,
   "rankByModality": {
    "chat": 9007199254740991
   },
