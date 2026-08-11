@@ -437,7 +437,7 @@
   "organization": "minimax",
   "provider": "minimax",
   "publicName": "minimax-m2",
-  "rank": 201,
+  "rank": 202,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 91
@@ -665,7 +665,7 @@
   "organization": "inception-ai",
   "provider": "openrouter",
   "publicName": "mercury",
-  "rank": 251,
+  "rank": 252,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1071,7 +1071,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-5-20251101",
-  "rank": 35,
+  "rank": 34,
   "rankByModality": {
    "chat": 19,
    "webdev": 37
@@ -1111,7 +1111,7 @@
   "organization": "amazon",
   "provider": "amazonBedrock",
   "publicName": "nova-2-lite",
-  "rank": 210,
+  "rank": 211,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1222,7 +1222,7 @@
   "organization": "nvidia",
   "provider": "nvidia",
   "publicName": "nvidia-nemotron-3-nano-30b-a3b-bf16",
-  "rank": 240,
+  "rank": 241,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -1266,7 +1266,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5.2",
-  "rank": 82,
+  "rank": 83,
   "rankByModality": {
    "chat": 38
   },
@@ -2430,7 +2430,7 @@
   "organization": "zai",
   "provider": "siliconFlowToolCalling",
   "publicName": "glm-5",
-  "rank": 51,
+  "rank": 52,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
@@ -3375,7 +3375,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.5-122b-a10b",
-  "rank": 112,
+  "rank": 113,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -3889,7 +3889,7 @@
   "displayName": "gpt-5.2",
   "id": "019cc543-573d-7a3f-b155-ad9cc5733aa6",
   "publicName": "gpt-5.2",
-  "rank": 82,
+  "rank": 83,
   "rankByModality": {
    "chat": 38
   },
@@ -4151,7 +4151,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "kiteki",
-  "rank": 41,
+  "rank": 40,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -5324,7 +5324,7 @@
   "organization": "arcee-ai",
   "provider": "arceeToolCalling",
   "publicName": "trinity-large-thinking",
-  "rank": 172,
+  "rank": 173,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 101
@@ -5874,7 +5874,7 @@
   "organization": "anthropic",
   "provider": "googleVertexAnthropic",
   "publicName": "claude-opus-4-7",
-  "rank": 6,
+  "rank": 7,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
@@ -7210,7 +7210,7 @@
   "organization": "ibm",
   "provider": "openrouter",
   "publicName": "granite-4.1-8b",
-  "rank": 252,
+  "rank": 253,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 107
@@ -9929,7 +9929,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3.7-plus",
-  "rank": 50,
+  "rank": 47,
   "rankByModality": {
    "chat": 25
   },
@@ -16749,8 +16749,11 @@
     "text": true
    }
   },
-  "displayName": "august26-chatbot1",
+  "displayName": "nvidia-nemotron-3.5-lightning-30b-a3b-nvfp4",
   "id": "019fde64-4042-75ce-955d-90f16327afe2",
+  "name": "august26-chatbot1-fmme",
+  "organization": "nvidia",
+  "provider": "nvidiaLongPoll",
   "publicName": "august26-chatbot1",
   "rankByModality": {
    "chat": 9007199254740991
@@ -17230,6 +17233,26 @@
   },
   "userSelectable": true
  },
+ "019ff2c1-f19f-78f3-a212-4d7a83e1e2ea": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "dahlia-vlm-2",
+  "id": "019ff2c1-f19f-78f3-a212-4d7a83e1e2ea",
+  "publicName": "dahlia-vlm-2",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
@@ -17565,7 +17588,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-235b-a22b",
-  "rank": 167,
+  "rank": 166,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17702,7 +17725,7 @@
   "organization": "openai",
   "provider": "openai",
   "publicName": "gpt-5-nano-high",
-  "rank": 208,
+  "rank": 209,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17938,7 +17961,7 @@
   "organization": "ibm",
   "provider": "ibm",
   "publicName": "ibm-granite-h-small",
-  "rank": 267,
+  "rank": 268,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18159,7 +18182,7 @@
   "organization": "mistral",
   "provider": "mistral",
   "publicName": "mistral-small-3.1-24b-instruct-2503",
-  "rank": 256,
+  "rank": 257,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18427,7 +18450,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-next-80b-a3b-thinking",
-  "rank": 173,
+  "rank": 172,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18576,7 +18599,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwq-32b",
-  "rank": 211,
+  "rank": 212,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18597,7 +18620,7 @@
   "organization": "google",
   "provider": "google",
   "publicName": "gemma-3n-e4b-it",
-  "rank": 236,
+  "rank": 237,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18712,7 +18735,7 @@
   "organization": "alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-30b-a3b",
-  "rank": 222,
+  "rank": 223,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -18858,7 +18881,7 @@
   "organization": "Alibaba",
   "provider": "alibaba",
   "publicName": "qwen3-coder-480b-a35b-instruct",
-  "rank": 155,
+  "rank": 154,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 93
@@ -19385,7 +19408,7 @@
   "organization": "openai",
   "provider": "fireworks",
   "publicName": "gpt-oss-20b",
-  "rank": 239,
+  "rank": 240,
   "rankByModality": {
    "chat": 9007199254740991
   },
