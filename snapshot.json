@@ -16717,6 +16717,29 @@
   },
   "userSelectable": true
  },
+ "019fde42-61fa-7d12-9f3f-6d2fc64365f7": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "displayName": "flux-3-video",
+  "id": "019fde42-61fa-7d12-9f3f-6d2fc64365f7",
+  "name": "flux-3-video",
+  "organization": "bfl",
+  "provider": "bflVideo3",
+  "publicName": "flux-3-video",
+  "rankByModality": {
+   "video": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "019fde64-4042-75ce-955d-90f16327afe2": {
   "capabilities": {
    "inputCapabilities": {
@@ -17164,6 +17187,23 @@
   "publicName": "grok-4.5",
   "rankByModality": {
    "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff26b-3a89-752d-8f3f-c87c660d2c00": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "displayName": "yotta-prime",
+  "id": "019ff26b-3a89-752d-8f3f-c87c660d2c00",
+  "publicName": "yotta-prime",
+  "rankByModality": {
+   "search": 9007199254740991
   },
   "userSelectable": true
  },
