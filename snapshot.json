@@ -16717,29 +16717,6 @@
   },
   "userSelectable": true
  },
- "019fde42-61fa-7d12-9f3f-6d2fc64365f7": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": {
-     "requiresUpload": false
-    },
-    "text": true
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "displayName": "flux-3-video",
-  "id": "019fde42-61fa-7d12-9f3f-6d2fc64365f7",
-  "name": "flux-3-video",
-  "organization": "bfl",
-  "provider": "bflVideo3",
-  "publicName": "flux-3-video",
-  "rankByModality": {
-   "video": 9007199254740991
-  },
-  "userSelectable": true
- },
  "019fde64-4042-75ce-955d-90f16327afe2": {
   "capabilities": {
    "inputCapabilities": {
@@ -17105,6 +17082,88 @@
   "publicName": "polaris",
   "rankByModality": {
    "video": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff204-74e9-7149-b5b9-dc6da735dbff": {
+  "capabilities": {
+   "inputCapabilities": {
+    "file": true,
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "grok-4.5",
+  "id": "019ff204-74e9-7149-b5b9-dc6da735dbff",
+  "organization": "xai",
+  "publicName": "grok-4.5",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff204-a902-7668-9f6c-29a7cc8e2632": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "grok-4.5",
+  "id": "019ff204-a902-7668-9f6c-29a7cc8e2632",
+  "organization": "xai",
+  "publicName": "grok-4.5",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff204-b08c-7b95-833f-25eee70ef4ca": {
+  "capabilities": {
+   "inputCapabilities": {
+    "file": true,
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "grok-4.5",
+  "id": "019ff204-b08c-7b95-833f-25eee70ef4ca",
+  "organization": "xai",
+  "publicName": "grok-4.5",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff204-c4b1-7687-bdc2-65208804d57b": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "grok-4.5",
+  "id": "019ff204-c4b1-7687-bdc2-65208804d57b",
+  "organization": "xai",
+  "publicName": "grok-4.5",
+  "rankByModality": {
+   "chat": 9007199254740991
   },
   "userSelectable": true
  },
