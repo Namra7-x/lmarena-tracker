@@ -6486,51 +6486,6 @@
   },
   "userSelectable": true
  },
- "019dc1c1-89b1-7588-a7fd-a6132ddb734c": {
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "displayName": "deepseek-v4-pro",
-  "id": "019dc1c1-89b1-7588-a7fd-a6132ddb734c",
-  "name": "deepseek-v4-pro-public",
-  "organization": "deepseek",
-  "provider": "deepseek",
-  "publicName": "deepseek-v4-pro",
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  },
-  "userSelectable": true
- },
- "019dc1c1-c62d-7b70-85a1-e0565e29fce1": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": false,
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "displayName": "deepseek-v4-pro-thinking",
-  "id": "019dc1c1-c62d-7b70-85a1-e0565e29fce1",
-  "name": "deepseek-v4-pro-thinking-public",
-  "organization": "deepseek",
-  "provider": "deepseekToolCalling",
-  "publicName": "deepseek-v4-pro-thinking",
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  },
-  "userSelectable": true
- },
  "019dc1ff-c88d-7106-bba7-b2358c26c590": {
   "capabilities": {
    "inputCapabilities": {
@@ -17447,6 +17402,97 @@
   "publicName": "grok-4.6",
   "rankByModality": {
    "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff722-292b-7b56-8f3b-b3217df5311b": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "deepseek-v4-pro",
+  "id": "019ff722-292b-7b56-8f3b-b3217df5311b",
+  "name": "deepseek-v4-pro-20260813",
+  "organization": "deepseek",
+  "provider": "deepseek",
+  "publicName": "deepseek-v4-pro",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff723-7de4-7e71-b96a-846ef6a8b4c6": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": false,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "deepseek-v4-pro-low",
+  "id": "019ff723-7de4-7e71-b96a-846ef6a8b4c6",
+  "name": "deepseek-v4-pro-low-20260813",
+  "organization": "deepseek",
+  "provider": "deepseekConfigurableThinking",
+  "publicName": "deepseek-v4-pro-low",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff724-a6da-7a59-89bb-c2a12e6d3c88": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": false,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "deepseek-v4-pro-high",
+  "id": "019ff724-a6da-7a59-89bb-c2a12e6d3c88",
+  "name": "deepseek-v4-pro-high-20260813",
+  "organization": "deepseek",
+  "provider": "deepseekConfigurableThinking",
+  "publicName": "deepseek-v4-pro-high",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "019ff726-084a-7050-8e72-484f784786e6": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": false,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "deepseek-v4-pro-max",
+  "id": "019ff726-084a-7050-8e72-484f784786e6",
+  "name": "deepseek-v4-pro-max-20260813",
+  "organization": "deepseek",
+  "provider": "deepseekConfigurableThinking",
+  "publicName": "deepseek-v4-pro-max",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
   },
   "userSelectable": true
  },
