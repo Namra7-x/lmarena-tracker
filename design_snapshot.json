@@ -7895,6 +7895,26 @@
       "router": false,
       "vision": false
     },
+    "solar-pro4": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Solar Pro 4",
+      "inputModalities": [
+        "text"
+      ],
+      "openSource": false,
+      "provider": "upstage",
+      "router": false,
+      "vision": false
+    },
     "sora": {
       "active": false,
       "arenas": {
@@ -9854,6 +9874,10 @@
     "slidesgpt": {
       "slides.perDeck": 0.5
     },
+    "solar-pro4": {
+      "text.input": 0.3,
+      "text.output": 1.2
+    },
     "sora-2": {
       "video.perSecond": 0.1
     },
@@ -10215,6 +10239,7 @@
     "tomato": "tomato",
     "torch": "Torch",
     "uibakery": "UI Bakery",
+    "upstage": "Upstage",
     "vanilla": "vanilla",
     "venus": "Venus",
     "vercel": "Vercel",
