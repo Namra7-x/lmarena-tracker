@@ -4446,6 +4446,23 @@
       "router": false,
       "vision": false
     },
+    "grok-imagine-image-2": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "Grok Imagine Image 2",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "xai",
+      "router": false,
+      "vision": false
+    },
     "grok-imagine-video": {
       "active": true,
       "arenas": {
@@ -5701,6 +5718,36 @@
         ]
       },
       "displayName": "LTX 2.3",
+      "inputModalities": [],
+      "openSource": true,
+      "provider": "ltx",
+      "router": false,
+      "vision": false
+    },
+    "ltx-2.5-fast": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      },
+      "displayName": "LTX 2.5 Fast",
+      "inputModalities": [],
+      "openSource": true,
+      "provider": "ltx",
+      "router": false,
+      "vision": false
+    },
+    "ltx-2.5-pro": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      },
+      "displayName": "LTX 2.5 Pro",
       "inputModalities": [],
       "openSource": true,
       "provider": "ltx",
@@ -7794,6 +7841,23 @@
       "router": false,
       "vision": false
     },
+    "seedance-2.5": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "multimodaltovideo",
+          "multitovideo",
+          "video"
+        ]
+      },
+      "displayName": "Seedance 2.5",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "bytedance",
+      "router": false,
+      "vision": false
+    },
     "seedream-4.0": {
       "active": true,
       "arenas": {
@@ -9410,6 +9474,9 @@
       "text.input": 0.2,
       "text.output": 1.5
     },
+    "grok-imagine-image-2": {
+      "image.perImage": 0.06
+    },
     "grok-imagine-video": {
       "video.perSecond": 0.05
     },
@@ -9616,6 +9683,12 @@
     },
     "ltx-2.3": {
       "video.perSecond": 0.08
+    },
+    "ltx-2.5-fast": {
+      "video.perSecond": 0.13
+    },
+    "ltx-2.5-pro": {
+      "video.perSecond": 0.17
     },
     "lucy-2.5": {
       "video.perSecond": 0.04
@@ -9925,6 +9998,9 @@
     },
     "seedance-2.0-mini": {
       "video.perSecond": 0.155
+    },
+    "seedance-2.5": {
+      "video.perSecond": 0.473
     },
     "seedream-4.0": {
       "image.perImage": 0.03
