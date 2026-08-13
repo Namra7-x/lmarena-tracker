@@ -2635,6 +2635,43 @@
       "router": false,
       "vision": true
     },
+    "gemini-3.7-flash": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ],
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Gemini 3.7 Flash",
+      "inputModalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": false,
+      "provider": "google",
+      "router": false,
+      "vision": true
+    },
     "gemini-omni-flash-2": {
       "active": true,
       "arenas": {
@@ -4059,6 +4096,42 @@
       "provider": "openai",
       "router": false,
       "vision": false
+    },
+    "grogu": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ],
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Grok 4.6",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "xai",
+      "router": false,
+      "vision": true
     },
     "grok-2": {
       "active": false,
@@ -9041,6 +9114,11 @@
       "text.input": 1.5,
       "text.output": 7.5
     },
+    "gemini-3.7-flash": {
+      "text.cachedInput": 0.075,
+      "text.input": 0.75,
+      "text.output": 3.75
+    },
     "gemini-omni-flash-2": {
       "video.perSecond": 0.1
     },
@@ -9275,6 +9353,11 @@
     "gpt-oss-120b": {
       "text.input": 0.15,
       "text.output": 0.6
+    },
+    "grogu": {
+      "text.cachedInput": 0.5,
+      "text.input": 2,
+      "text.output": 6
     },
     "grok-2-image": {
       "image.perImage": 0.07
