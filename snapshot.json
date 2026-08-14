@@ -17509,12 +17509,31 @@
     "web": true
    }
   },
-  "displayName": "glm-5.2 (max)",
+  "displayName": "glm-5.3 (max)",
   "id": "01a00134-44ac-7f9c-b4a7-b720acebaa97",
   "name": "glm-5.3",
   "organization": "zai",
   "provider": "siliconFlow",
   "publicName": "glm-5.3",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a00197-e3fe-7965-9978-b4e35974daf4": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "deepseek-v4-flash-internal-test-v2",
+  "id": "01a00197-e3fe-7965-9978-b4e35974daf4",
+  "publicName": "deepseek-v4-flash-internal-test-v2",
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
