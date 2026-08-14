@@ -2636,29 +2636,6 @@
   },
   "userSelectable": true
  },
- "019c5826-23b2-7ea7-be9a-b4557462fe19": {
-  "capabilities": {
-   "inputCapabilities": {
-    "file": true,
-    "image": true,
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "displayName": "gpt-5.2-chat-latest",
-  "id": "019c5826-23b2-7ea7-be9a-b4557462fe19",
-  "name": "gpt-5.2-chat-latest",
-  "organization": "openai",
-  "provider": "openai",
-  "publicName": "gpt-5.2-chat-latest",
-  "rank": 22,
-  "rankByModality": {
-   "chat": 9007199254740991
-  },
-  "userSelectable": true
- },
  "019c59c3-0e69-713f-9afe-20f5b3b1e0df": {
   "capabilities": {
    "inputCapabilities": {
@@ -3509,27 +3486,6 @@
   "displayName": "pulse",
   "id": "019ca599-24b3-7204-8b62-e7286162888f",
   "publicName": "pulse",
-  "rankByModality": {
-   "chat": 9007199254740991
-  },
-  "userSelectable": true
- },
- "019cb505-30fa-7045-b4fb-94e57a63b2fa": {
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "displayName": "gpt-5.3-chat-latest",
-  "id": "019cb505-30fa-7045-b4fb-94e57a63b2fa",
-  "name": "gpt-5.3-chat-latest",
-  "organization": "openai",
-  "provider": "openai",
-  "publicName": "gpt-5.3-chat-latest",
-  "rank": 64,
   "rankByModality": {
    "chat": 9007199254740991
   },
@@ -17581,6 +17537,24 @@
   "publicName": "silver_halide",
   "rankByModality": {
    "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a00244-b03e-79ea-884a-eba0137bc8f6": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "cpqiang",
+  "id": "01a00244-b03e-79ea-884a-eba0137bc8f6",
+  "publicName": "cpqiang",
+  "rankByModality": {
+   "chat": 9007199254740991
   },
   "userSelectable": true
  },
