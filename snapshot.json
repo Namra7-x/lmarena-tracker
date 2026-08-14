@@ -15680,8 +15680,11 @@
     "web": true
    }
   },
-  "displayName": "gemini-3.5-pro",
+  "displayName": "gemini-3.7-flash-high",
   "id": "019fb6ba-031f-7e6b-ac0b-33dc6569bbc4",
+  "name": "andwise-evfd",
+  "organization": "google",
+  "provider": "googleWithThoughtSignatures",
   "publicName": "gemini-3.5-pro",
   "rankByModality": {
    "chat": 9007199254740991,
@@ -17492,6 +17495,29 @@
   "publicName": "dahlia-vlm-3",
   "rankByModality": {
    "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a00134-44ac-7f9c-b4a7-b720acebaa97": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": false,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "glm-5.3",
+  "id": "01a00134-44ac-7f9c-b4a7-b720acebaa97",
+  "name": "glm-5.3",
+  "organization": "zai",
+  "provider": "siliconFlow",
+  "publicName": "glm-5.3",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
   },
   "userSelectable": true
  },
