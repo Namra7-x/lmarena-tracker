@@ -17559,6 +17559,31 @@
   },
   "userSelectable": true
  },
+ "01a0022c-e5a8-7caf-a1c7-1fa103b63823": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "silver_halide",
+  "id": "01a0022c-e5a8-7caf-a1c7-1fa103b63823",
+  "publicName": "silver_halide",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
