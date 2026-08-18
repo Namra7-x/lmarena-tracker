@@ -1143,6 +1143,26 @@
       "router": false,
       "vision": false
     },
+    "cortado": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "GLM-5.3",
+      "inputModalities": [],
+      "openSource": true,
+      "provider": "zhipu",
+      "router": false,
+      "vision": false
+    },
     "cosmic": {
       "active": true,
       "arenas": {
@@ -8944,6 +8964,11 @@
     },
     "cognition": {
       "agents.perGeneration": 2.25
+    },
+    "cortado": {
+      "text.cachedInput": 0.26,
+      "text.input": 1.4,
+      "text.output": 4.4
     },
     "cosmos-3-super": {
       "image.perImage": 0.04,
