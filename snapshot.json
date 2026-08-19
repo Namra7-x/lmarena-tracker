@@ -17616,6 +17616,51 @@
   },
   "userSelectable": true
  },
+ "01a01b45-2a9e-7ede-8417-17e80bad0e49": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "camellia-vlm-1",
+  "id": "01a01b45-2a9e-7ede-8417-17e80bad0e49",
+  "publicName": "camellia-vlm-1",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a01b46-ca55-712a-b52b-d08701456e80": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "luna-lisa-alpha",
+  "id": "01a01b46-ca55-712a-b52b-d08701456e80",
+  "publicName": "luna-lisa-alpha",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
