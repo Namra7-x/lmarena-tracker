@@ -7304,6 +7304,33 @@
       "router": false,
       "vision": true
     },
+    "qwen3.8-max": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      },
+      "displayName": "Qwen3.8 Max",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": true,
+      "provider": "alibaba",
+      "router": false,
+      "vision": true
+    },
     "qwen3.8-max-preview": {
       "active": true,
       "arenas": {
@@ -9942,6 +9969,10 @@
     "qwen3.7-plus": {
       "text.input": 0.5,
       "text.output": 3
+    },
+    "qwen3.8-max": {
+      "text.input": 2,
+      "text.output": 6
     },
     "qwen3.8-max-preview": {
       "text.input": 1.2,
