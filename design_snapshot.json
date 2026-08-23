@@ -1686,6 +1686,20 @@
       "router": false,
       "vision": false
     },
+    "elevenlabs_eleven_v3_conversational": {
+      "active": false,
+      "arenas": {
+        "models": [
+          "audiorealism"
+        ]
+      },
+      "displayName": "ElevenLabs Eleven v3 Conversational",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "elevenlabs",
+      "router": false,
+      "vision": false
+    },
     "elevenlabs_music_v1": {
       "active": true,
       "arenas": {
@@ -9090,6 +9104,10 @@
       "text.output": 0.3
     },
     "elevenlabs_eleven_v3": {
+      "text.input": 100,
+      "text.output": 0
+    },
+    "elevenlabs_eleven_v3_conversational": {
       "text.input": 100,
       "text.output": 0
     },
