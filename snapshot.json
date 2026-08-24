@@ -18176,6 +18176,49 @@
   },
   "userSelectable": true
  },
+ "01a03533-9cea-729b-818b-0585d4e16692": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": false,
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "displayName": "kimi-k3",
+  "id": "01a03533-9cea-729b-818b-0585d4e16692",
+  "publicName": "kimi-k3",
+  "rankByModality": {
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03537-4cb0-7842-9e06-b5af8474bf60": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "lina-f-alpha",
+  "id": "01a03537-4cb0-7842-9e06-b5af8474bf60",
+  "publicName": "lina-f-alpha",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
