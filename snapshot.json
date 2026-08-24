@@ -1007,9 +1007,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.1-search",
-  "rank": 12,
+  "rank": 14,
   "rankByModality": {
-   "search": 12
+   "search": 14
   },
   "userSelectable": true
  },
@@ -1201,9 +1201,9 @@
   "organization": "xai",
   "provider": "xaiResponsesSearch",
   "publicName": "grok-4-1-fast-search",
-  "rank": 19,
+  "rank": 21,
   "rankByModality": {
-   "search": 19
+   "search": 21
   },
   "userSelectable": true
  },
@@ -1243,9 +1243,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.2-search",
-  "rank": 9,
+  "rank": 11,
   "rankByModality": {
-   "search": 9
+   "search": 11
   },
   "userSelectable": true
  },
@@ -1797,9 +1797,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.2-search-non-reasoning",
-  "rank": 18,
+  "rank": 20,
   "rankByModality": {
-   "search": 18
+   "search": 20
   },
   "userSelectable": true
  },
@@ -1818,9 +1818,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-opus-4-5-search",
-  "rank": 17,
+  "rank": 19,
   "rankByModality": {
-   "search": 17
+   "search": 19
   },
   "userSelectable": false
  },
@@ -1839,9 +1839,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-sonnet-4-5-search",
-  "rank": 22,
+  "rank": 24,
   "rankByModality": {
-   "search": 22
+   "search": 24
   },
   "userSelectable": true
  },
@@ -1860,9 +1860,9 @@
   "organization": "google",
   "provider": "googleVertexGlobalSearch",
   "publicName": "gemini-3-flash-grounding",
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
-   "search": 13
+   "search": 15
   },
   "userSelectable": true
  },
@@ -2951,9 +2951,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-opus-4-6-search",
-  "rank": 1,
+  "rank": 2,
   "rankByModality": {
-   "search": 1
+   "search": 2
   },
   "userSelectable": false
  },
@@ -2972,9 +2972,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-sonnet-4-6-search",
-  "rank": 6,
+  "rank": 7,
   "rankByModality": {
-   "search": 6
+   "search": 7
   },
   "userSelectable": true
  },
@@ -3655,9 +3655,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.4-search",
-  "rank": 14,
+  "rank": 16,
   "rankByModality": {
-   "search": 14
+   "search": 16
   },
   "userSelectable": false
  },
@@ -4191,9 +4191,9 @@
   "organization": "google",
   "provider": "googleVertexGlobalSearch",
   "publicName": "gemini-3.1-pro-grounding",
-  "rank": 7,
+  "rank": 9,
   "rankByModality": {
-   "search": 7
+   "search": 9
   },
   "userSelectable": false
  },
@@ -4296,9 +4296,9 @@
   "organization": "xai",
   "provider": "xaiMultiAgentGrounding",
   "publicName": "grok-4.20-multi-agent-beta-0309",
-  "rank": 10,
+  "rank": 13,
   "rankByModality": {
-   "search": 10
+   "search": 13
   },
   "userSelectable": true
  },
@@ -6284,9 +6284,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.5-search",
-  "rank": 2,
+  "rank": 3,
   "rankByModality": {
-   "search": 2
+   "search": 3
   },
   "userSelectable": false
  },
@@ -9317,9 +9317,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-opus-4-8-search",
-  "rank": 11,
+  "rank": 12,
   "rankByModality": {
-   "search": 11
+   "search": 12
   },
   "userSelectable": false
  },
@@ -11712,9 +11712,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-sonnet-5-search",
-  "rank": 16,
+  "rank": 17,
   "rankByModality": {
-   "search": 16
+   "search": 17
   },
   "userSelectable": true
  },
@@ -11848,9 +11848,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-fable-5-search",
-  "rank": 3,
+  "rank": 5,
   "rankByModality": {
-   "search": 3
+   "search": 5
   },
   "userSelectable": false
  },
@@ -12817,8 +12817,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5.6-sol-search-xhigh",
+  "rank": 1,
   "rankByModality": {
-   "search": 9007199254740991
+   "search": 1
   },
   "userSelectable": false
  },
@@ -12990,8 +12991,9 @@
   "organization": "xai",
   "provider": "xaiResponsesSearch",
   "publicName": "grok-4.5-search",
+  "rank": 8,
   "rankByModality": {
-   "search": 9007199254740991
+   "search": 8
   },
   "userSelectable": true
  },
@@ -18534,9 +18536,9 @@
   "organization": "perplexity",
   "provider": "perplexity",
   "publicName": "ppl-sonar-reasoning-pro-high",
-  "rank": 27,
+  "rank": 29,
   "rankByModality": {
-   "search": 27
+   "search": 29
   },
   "userSelectable": false
  },
@@ -18576,9 +18578,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-opus-4-search",
-  "rank": 30,
+  "rank": 32,
   "rankByModality": {
-   "search": 30
+   "search": 32
   },
   "userSelectable": false
  },
@@ -19503,9 +19505,9 @@
   "organization": "xai",
   "provider": "xaiSearch",
   "publicName": "grok-4-search",
-  "rank": 26,
+  "rank": 28,
   "rankByModality": {
-   "search": 26
+   "search": 28
   },
   "userSelectable": true
  },
@@ -19893,9 +19895,9 @@
   "organization": "google",
   "provider": "googleVertex",
   "publicName": "gemini-2.5-pro-grounding",
-  "rank": 25,
+  "rank": 27,
   "rankByModality": {
-   "search": 25
+   "search": 27
   },
   "userSelectable": true
  },
@@ -20088,9 +20090,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "gpt-5-search",
-  "rank": 28,
+  "rank": 30,
   "rankByModality": {
-   "search": 28
+   "search": 30
   },
   "userSelectable": true
  },
@@ -20172,9 +20174,9 @@
   "organization": "anthropic",
   "provider": "anthropicSearch",
   "publicName": "claude-opus-4-1-search",
-  "rank": 23,
+  "rank": 25,
   "rankByModality": {
-   "search": 23
+   "search": 25
   },
   "userSelectable": false
  },
@@ -20548,9 +20550,9 @@
   "organization": "openai",
   "provider": "openaiResponses",
   "publicName": "o3-search",
-  "rank": 24,
+  "rank": 26,
   "rankByModality": {
-   "search": 24
+   "search": 26
   },
   "userSelectable": true
  },
