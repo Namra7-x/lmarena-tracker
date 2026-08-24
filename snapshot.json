@@ -18070,6 +18070,73 @@
   },
   "userSelectable": true
  },
+ "01a03125-7eb3-7289-8791-b5046097a337": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": false,
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "eren-v2",
+  "id": "01a03125-7eb3-7289-8791-b5046097a337",
+  "publicName": "eren-v2",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03125-9ed2-7ef9-9e62-6ab0b0d71ba7": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "eren-v1-multi",
+  "id": "01a03125-9ed2-7ef9-9e62-6ab0b0d71ba7",
+  "publicName": "eren-v1-multi",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03141-8ebd-777c-90d5-e07461434d57": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "magnus",
+  "id": "01a03141-8ebd-777c-90d5-e07461434d57",
+  "publicName": "magnus",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
