@@ -15585,29 +15585,6 @@
   },
   "userSelectable": true
  },
- "019fb6ba-031f-7e6b-ac0b-33dc6569bbc4": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": true,
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "displayName": "gemini-3.7-flash-high",
-  "id": "019fb6ba-031f-7e6b-ac0b-33dc6569bbc4",
-  "name": "andwise-evfd",
-  "organization": "google",
-  "provider": "googleWithThoughtSignatures",
-  "publicName": "gemini-3.5-pro",
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  },
-  "userSelectable": true
- },
  "019fb6fe-2537-75d5-97e7-0b383f3c9ce5": {
   "capabilities": {
    "inputCapabilities": {
@@ -18216,6 +18193,30 @@
   "publicName": "lina-f-alpha",
   "rankByModality": {
    "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03590-2058-7d1a-bae4-94295d7ad0ef": {
+  "capabilities": {
+   "inputCapabilities": {
+    "file": true,
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "gemini-3.7-flash",
+  "id": "01a03590-2058-7d1a-bae4-94295d7ad0ef",
+  "name": "gemini-3.7-flash",
+  "organization": "google",
+  "provider": "googleVertexGlobalWithThoughtSignatures",
+  "publicName": "gemini-3.7-flash",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
   },
   "userSelectable": true
  },
