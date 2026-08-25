@@ -18237,6 +18237,35 @@
   },
   "userSelectable": true
  },
+ "01a03a6f-d59f-76fa-bb26-764cd8ffd83b": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "flux-2-dev",
+  "id": "01a03a6f-d59f-76fa-bb26-764cd8ffd83b",
+  "name": "flux-2-dev-global",
+  "organization": "bfl",
+  "provider": "bfl",
+  "publicName": "flux-2-dev",
+  "rank": 32,
+  "rankByModality": {
+   "image": 32
+  },
+  "userSelectable": true
+ },
  "01f39601-03ed-4d66-8afb-5039c90b27ea": {
   "capabilities": {
    "inputCapabilities": {
