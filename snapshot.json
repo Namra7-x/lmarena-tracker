@@ -2764,7 +2764,7 @@
   "rankByModality": {
    "chat": 9007199254740991
   },
-  "userSelectable": true
+  "userSelectable": false
  },
  "019c6553-77c6-7363-966a-e4292cdcaabc": {
   "capabilities": {
@@ -18168,6 +18168,40 @@
   "publicName": "gemini-3.7-flash",
   "rankByModality": {
    "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a0396c-b421-7289-a75f-d369c9087dfc": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "displayName": "meriel",
+  "id": "01a0396c-b421-7289-a75f-d369c9087dfc",
+  "publicName": "meriel",
+  "rankByModality": {
+   "chat": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a0398c-20e6-76fe-93e5-2b13a24d5e5e": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "displayName": "farris",
+  "id": "01a0398c-20e6-76fe-93e5-2b13a24d5e5e",
+  "publicName": "farris",
+  "rankByModality": {
    "webdev": 9007199254740991
   },
   "userSelectable": true
