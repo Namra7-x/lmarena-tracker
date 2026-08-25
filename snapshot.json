@@ -15161,13 +15161,16 @@
     }
    }
   },
-  "displayName": "porcelain",
+  "displayName": "grok-imagine-image-2.0 (low)",
   "id": "019fac44-b246-722d-ad6c-50863aff71fb",
+  "name": "porcelain-k9cy",
+  "organization": "xai",
+  "provider": "xaiImage",
   "publicName": "porcelain",
   "rankByModality": {
    "image": 9007199254740991
   },
-  "userSelectable": true
+  "userSelectable": false
  },
  "019facb0-8685-7fbc-bdfb-2171e3ff275b": {
   "capabilities": {
@@ -15965,13 +15968,16 @@
     }
    }
   },
-  "displayName": "horseshoe",
+  "displayName": "grok-imagine-image-2.0 (low)",
   "id": "019fbf7c-0161-7e2c-ba1d-fa7b8eaae594",
+  "name": "horseshoe-zflu",
+  "organization": "xai",
+  "provider": "xaiImage",
   "publicName": "horseshoe",
   "rankByModality": {
    "image": 9007199254740991
   },
-  "userSelectable": true
+  "userSelectable": false
  },
  "019fbfb4-67ca-7524-9b7a-f71de524e976": {
   "capabilities": {
@@ -18264,6 +18270,27 @@
   "rank": 32,
   "rankByModality": {
    "image": 32
+  },
+  "userSelectable": true
+ },
+ "01a03abf-bdd8-7294-8576-359bba51ac4e": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "video": {
+     "required": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "displayName": "gemini-omni-flash",
+  "id": "01a03abf-bdd8-7294-8576-359bba51ac4e",
+  "organization": "google",
+  "publicName": "gemini-omni-flash",
+  "rankByModality": {
+   "video": 9007199254740991
   },
   "userSelectable": true
  },
