@@ -17827,56 +17827,6 @@
   },
   "userSelectable": true
  },
- "01a02284-1d67-7b58-8976-556af6a340ef": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": {
-     "multipleImages": true,
-     "requiresUpload": false
-    },
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "displayName": "silver_halide [low]",
-  "id": "01a02284-1d67-7b58-8976-556af6a340ef",
-  "publicName": "silver_halide [low]",
-  "rankByModality": {
-   "image": 9007199254740991
-  },
-  "userSelectable": true
- },
- "01a02284-7442-70bd-a78d-e62d455698b1": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": {
-     "multipleImages": true,
-     "requiresUpload": false
-    },
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "displayName": "silver_halide [high]",
-  "id": "01a02284-7442-70bd-a78d-e62d455698b1",
-  "publicName": "silver_halide [high]",
-  "rankByModality": {
-   "image": 9007199254740991
-  },
-  "userSelectable": true
- },
  "01a024c4-7d19-7f0f-b05c-bb1657ce110e": {
   "capabilities": {
    "inputCapabilities": {
@@ -18219,6 +18169,56 @@
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03664-9841-741a-ae75-b15f79975a1d": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "silver_halide [low]",
+  "id": "01a03664-9841-741a-ae75-b15f79975a1d",
+  "publicName": "silver_halide [low]",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03665-42cb-77a2-ba37-0cc545d57632": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": false
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "silver_halide [high]",
+  "id": "01a03665-42cb-77a2-ba37-0cc545d57632",
+  "publicName": "silver_halide [high]",
+  "rankByModality": {
+   "image": 9007199254740991
   },
   "userSelectable": true
  },
