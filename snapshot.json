@@ -18066,26 +18066,6 @@
   },
   "userSelectable": true
  },
- "01a034ef-5841-7951-b745-ab34e5177493": {
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "displayName": "gemini-3.7-flash",
-  "id": "01a034ef-5841-7951-b745-ab34e5177493",
-  "organization": "google",
-  "publicName": "gemini-3.7-flash",
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  },
-  "userSelectable": true
- },
  "01a03533-9cea-729b-818b-0585d4e16692": {
   "capabilities": {
    "inputCapabilities": {
@@ -18310,6 +18290,51 @@
   "displayName": "mangoice",
   "id": "01a03afd-219c-7856-bea1-7100e4856828",
   "publicName": "mangoice",
+  "rankByModality": {
+   "image": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03b40-93e9-7a96-affd-41c990639957": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "gemini-3.7-flash",
+  "id": "01a03b40-93e9-7a96-affd-41c990639957",
+  "organization": "google",
+  "publicName": "gemini-3.7-flash",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03b42-97d7-7832-960a-0b3ffbdd58e9": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": {
+     "multipleImages": true,
+     "requiresUpload": true
+    },
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "displayName": "eren-v2-multi",
+  "id": "01a03b42-97d7-7832-960a-0b3ffbdd58e9",
+  "publicName": "eren-v2-multi",
   "rankByModality": {
    "image": 9007199254740991
   },
