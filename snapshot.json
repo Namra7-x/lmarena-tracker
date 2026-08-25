@@ -1485,35 +1485,6 @@
   },
   "userSelectable": true
  },
- "019b478d-74ae-7d19-9a8f-6cfde89ab4ca": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": {
-     "multipleImages": true,
-     "requiresUpload": false
-    },
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "displayName": "flux-2-dev",
-  "id": "019b478d-74ae-7d19-9a8f-6cfde89ab4ca",
-  "name": "flux-2-dev-20251222",
-  "organization": "bfl",
-  "provider": "bfl",
-  "publicName": "flux-2-dev",
-  "rank": 32,
-  "rankByModality": {
-   "image": 32
-  },
-  "userSelectable": true
- },
  "019b47da-49b9-7295-906c-ce44ccd30d74": {
   "capabilities": {
    "inputCapabilities": {
@@ -18205,6 +18176,63 @@
   "id": "01a0398c-20e6-76fe-93e5-2b13a24d5e5e",
   "publicName": "farris",
   "rankByModality": {
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03a25-d000-7bdf-b96d-ab241c038261": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "displayName": "slatewind",
+  "id": "01a03a25-d000-7bdf-b96d-ab241c038261",
+  "publicName": "slatewind",
+  "rankByModality": {
+   "search": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03a29-a0cd-79c7-a6ee-da2af3eacd66": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "gemini-3.1-pro",
+  "id": "01a03a29-a0cd-79c7-a6ee-da2af3eacd66",
+  "publicName": "gemini-3.1-pro",
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a03a3b-64e3-790c-bdba-bd0e1c04b0f5": {
+  "capabilities": {
+   "inputCapabilities": {
+    "image": true,
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "displayName": "anonymous-0825",
+  "id": "01a03a3b-64e3-790c-bdba-bd0e1c04b0f5",
+  "publicName": "anonymous-0825",
+  "rankByModality": {
+   "chat": 9007199254740991,
    "webdev": 9007199254740991
   },
   "userSelectable": true
