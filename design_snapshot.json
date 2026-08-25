@@ -7829,7 +7829,7 @@
       "vision": false
     },
     "seedance-1.5-pro": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "multitovideo",
@@ -8728,6 +8728,20 @@
         ]
       },
       "displayName": "Wan 2.7",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "alibaba",
+      "router": false,
+      "vision": false
+    },
+    "wan-v3.0-t2v": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "video"
+        ]
+      },
+      "displayName": "Wan 3.0",
       "inputModalities": [],
       "openSource": false,
       "provider": "alibaba",
@@ -10187,6 +10201,9 @@
     "wan-v2.7-v2v": {
       "video.perSecond": 0.1
     },
+    "wan-v3.0-t2v": {
+      "video.perSecond": 0.2
+    },
     "wan-vace": {
       "video.perSecond": 0.05
     },
@@ -10383,6 +10400,7 @@
     "new.website": "new.website",
     "newport": "NewPort AI",
     "nex-agi": "Nex AGI",
+    "notebook": "notebook",
     "nova": "nova",
     "nucleusai": "Nucleus AI",
     "nvidia": "NVIDIA",
