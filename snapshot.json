@@ -8748,30 +8748,6 @@
   },
   "userSelectable": true
  },
- "019e530d-2a50-75e3-95d1-a5ef41d4c24c": {
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "displayName": "mai-image-2.5 (text-to-image)",
-  "id": "019e530d-2a50-75e3-95d1-a5ef41d4c24c",
-  "name": "baryonyx-xyv3",
-  "organization": "microsoft-ai",
-  "provider": "maiImage",
-  "publicName": "baryonyx",
-  "rankByModality": {
-   "image": 9007199254740991
-  },
-  "userSelectable": true
- },
  "019e5398-cef6-7db6-a46b-5a34051eb2c8": {
   "capabilities": {
    "inputCapabilities": {
@@ -9593,34 +9569,6 @@
   "rankByModality": {
    "chat": 26,
    "webdev": 37
-  },
-  "userSelectable": true
- },
- "019e80aa-37bf-7e89-8a28-41e4ab72ed9f": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": {
-     "multipleImages": false,
-     "requiresUpload": true
-    },
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "displayName": "mai-image-2.5 (image-edit)",
-  "id": "019e80aa-37bf-7e89-8a28-41e4ab72ed9f",
-  "name": "kakarot-v2-kecj",
-  "organization": "microsoft-ai",
-  "provider": "maiImage",
-  "publicName": "kakarot-v2",
-  "rankByModality": {
-   "image": 9007199254740991
   },
   "userSelectable": true
  },
@@ -16634,8 +16582,11 @@
     }
    }
   },
-  "displayName": "luffa-v8",
+  "displayName": "mai-image-2.6-preview (image-edit)",
   "id": "019fe38b-8059-77d4-929d-10f9d6663ead",
+  "name": "luffa-v8-0p8z",
+  "organization": "microsoft-ai",
+  "provider": "microsoftFalcon",
   "publicName": "luffa-v8",
   "rankByModality": {
    "image": 9007199254740991
@@ -18215,8 +18166,11 @@
     "web": true
    }
   },
-  "displayName": "anonymous-0825",
+  "displayName": "glm-5.3-flash",
   "id": "01a03a3b-64e3-790c-bdba-bd0e1c04b0f5",
+  "name": "glm-5.3-flash",
+  "organization": "zai",
+  "provider": "siliconFlow",
   "publicName": "anonymous-0825",
   "rankByModality": {
    "chat": 9007199254740991,
