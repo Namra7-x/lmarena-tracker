@@ -1825,6 +1825,21 @@
       "router": false,
       "vision": false
     },
+    "fig": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      },
+      "displayName": "MiniMax H3 Max",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "fal",
+      "router": false,
+      "vision": false
+    },
     "figma-make": {
       "active": true,
       "arenas": {
@@ -6605,6 +6620,26 @@
       "router": false,
       "vision": false
     },
+    "muse-image-1.0": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "Muse Image",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "meta",
+      "router": false,
+      "vision": false
+    },
     "muse-spark-1.2": {
       "active": true,
       "arenas": {
@@ -9148,6 +9183,9 @@
     "fennel": {
       "image.perImage": 0.0075
     },
+    "fig": {
+      "video.perSecond": 0.08
+    },
     "flux-2-dev": {
       "image.perImage": 0.03
     },
@@ -9919,6 +9957,9 @@
       "text.input": 30,
       "text.output": 0
     },
+    "muse-image-1.0": {
+      "image.perImage": 0.01
+    },
     "muse-spark-1.2": {
       "text.input": 1.25,
       "text.output": 4.25
@@ -10331,7 +10372,7 @@
     "emperor": "Emperor",
     "evergreen": "evergreen",
     "factory": "Factory AI",
-    "fal": "fal",
+    "fal": "Fal",
     "fennel": "fennel",
     "fig": "fig",
     "figma": "Figma",
