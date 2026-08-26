@@ -6687,6 +6687,30 @@
       "router": false,
       "vision": true
     },
+    "notebook": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "GLM-5.3-Flash",
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": true,
+      "provider": "zhipu",
+      "router": false,
+      "vision": true
+    },
     "nova-premier-v1": {
       "active": false,
       "arenas": {
@@ -9906,6 +9930,11 @@
     "nex-n2-pro": {
       "text.input": 0.5,
       "text.output": 2.5
+    },
+    "notebook": {
+      "text.cachedInput": 0.03,
+      "text.input": 0.15,
+      "text.output": 0.5
     },
     "nucleus-image": {
       "image.perImage": 0.01
