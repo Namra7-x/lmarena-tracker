@@ -4148,6 +4148,22 @@
       "router": false,
       "vision": false
     },
+    "greenleaf": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "logo"
+        ]
+      },
+      "displayName": "p-image-ideogram (very high)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "pruna",
+      "router": false,
+      "vision": false
+    },
     "grogu": {
       "active": true,
       "arenas": {
@@ -9558,6 +9574,9 @@
     "gpt-oss-120b": {
       "text.input": 0.15,
       "text.output": 0.6
+    },
+    "greenleaf": {
+      "image.perImage": 0.033
     },
     "grogu": {
       "text.cachedInput": 0.5,
