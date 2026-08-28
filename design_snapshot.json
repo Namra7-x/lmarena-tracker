@@ -3066,6 +3066,31 @@
       "router": false,
       "vision": false
     },
+    "glm-5.3": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_html",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      },
+      "displayName": "GLM-5.3",
+      "inputModalities": [],
+      "openSource": true,
+      "provider": "zhipu",
+      "router": false,
+      "vision": false
+    },
     "glm-5v-turbo": {
       "active": true,
       "arenas": {
@@ -8877,6 +8902,7 @@
       "active": true,
       "arenas": {
         "models": [
+          "imagetovideo",
           "video"
         ]
       },
@@ -9459,6 +9485,11 @@
       "text.output": 4.4
     },
     "glm-5.2": {
+      "text.input": 1.4,
+      "text.output": 4.4
+    },
+    "glm-5.3": {
+      "text.cachedInput": 0.26,
       "text.input": 1.4,
       "text.output": 4.4
     },
