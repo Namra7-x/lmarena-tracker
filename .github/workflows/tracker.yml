@@ -1,7 +1,6 @@
-name: Arena Tracker
 on:
-  schedule:
-    - cron: "*/5 * * * *"
+  repository_dispatch:
+    types: [tracker]
   workflow_dispatch:
 
 concurrency:
