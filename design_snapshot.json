@@ -1325,6 +1325,24 @@
       "router": false,
       "vision": false
     },
+    "deca-2.6-ultra": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Deca 2.6 Ultra",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "genlabs",
+      "router": false,
+      "vision": false
+    },
     "deepgram_aura_v2": {
       "active": true,
       "arenas": {
@@ -1679,7 +1697,7 @@
           "tts"
         ]
       },
-      "displayName": "ElevenLabs Eleven v3",
+      "displayName": "Eleven v3",
       "inputModalities": [],
       "openSource": false,
       "provider": "elevenlabs",
@@ -1693,7 +1711,7 @@
           "audiorealism"
         ]
       },
-      "displayName": "ElevenLabs Eleven v3 Conversational",
+      "displayName": "Eleven v3 Conversational",
       "inputModalities": [],
       "openSource": false,
       "provider": "elevenlabs",
@@ -2722,6 +2740,24 @@
       "provider": "google",
       "router": false,
       "vision": true
+    },
+    "gemini-omni-flash-1.1": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "multimodaltovideo",
+          "multitovideo",
+          "video",
+          "videotovideo"
+        ]
+      },
+      "displayName": "Gemini Omni 1.1 Flash",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "google",
+      "router": false,
+      "vision": false
     },
     "gemini-omni-flash-2": {
       "active": true,
@@ -4750,6 +4786,20 @@
       "router": false,
       "vision": false
     },
+    "human": {
+      "active": false,
+      "arenas": {
+        "models": [
+          "audiorealism"
+        ]
+      },
+      "displayName": "Humanity",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "human",
+      "router": false,
+      "vision": false
+    },
     "hume_evi": {
       "active": true,
       "arenas": {
@@ -5092,6 +5142,20 @@
       "inputModalities": [],
       "openSource": false,
       "provider": "pruna",
+      "router": false,
+      "vision": false
+    },
+    "kalpa-beta-v0.3": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Kalpa Beta v0.3",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "kalpa",
       "router": false,
       "vision": false
     },
@@ -9118,6 +9182,11 @@
       "text.input": 2,
       "text.output": 8
     },
+    "deca-2.6-ultra": {
+      "text.cachedInput": 0.8,
+      "text.input": 3.2,
+      "text.output": 16
+    },
     "deepgram_aura_v2": {
       "text.input": 30,
       "text.output": 0
@@ -9200,7 +9269,7 @@
       "image.perImage": 0.0075
     },
     "fig": {
-      "video.perSecond": 0.08
+      "video.perSecond": 0.04
     },
     "flux-2-dev": {
       "image.perImage": 0.03
@@ -9339,6 +9408,9 @@
       "text.cachedInput": 0.075,
       "text.input": 0.75,
       "text.output": 3.75
+    },
+    "gemini-omni-flash-1.1": {
+      "video.perSecond": 0.1
     },
     "gemini-omni-flash-2": {
       "video.perSecond": 0.1
@@ -10421,6 +10493,7 @@
     "hithink": "Hithink",
     "honeycomb": "Honeycomb",
     "honeydew": "Honeydew",
+    "human": "Humanity",
     "hume": "Hume AI",
     "ideogram": "Ideogram",
     "imagineart": "ImagineArt",
