@@ -16,7 +16,7 @@ import html as _html
 import requests
 
 # ---------------- config ----------------
-URLS = ["https://arena.ai/", "https://lmarena.ai/"]
+URLS = ["https://arena.ai/"]
 SNAPSHOT_FILE = "snapshot.json"
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
