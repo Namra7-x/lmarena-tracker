@@ -12,17 +12,25 @@ import json
 import time
 import random
 import datetime
+import hashlib
 import html as _html
 import requests
 
 # ---------------- config ----------------
 URLS = ["https://arena.ai/"]
 SNAPSHOT_FILE = "snapshot.json"
+ALERT_STATE_FILE = ".arena_alert_state.json"
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 TRACK_RANK = os.environ.get("TRACK_RANK", "false").lower() == "true"
 MAX_MSG = 4000          # telegram hard limit is 4096
 UNRANKED = 9007199254740991  # JS Number.MAX_SAFE_INTEGER = "no rank"
+
+# A very large add/remove jump is treated as unstable until the exact same
+# fetched state is seen twice in a row. Small real changes stay immediate.
+LARGE_CHANGE_MIN = 50
+LARGE_CHANGE_RATIO = 0.10
+LARGE_SECTION_LIMIT = 20
 
 FIELDS = ["publicName", "displayName", "name",
           "organization", "provider", "userSelectable"]
@@ -180,6 +188,13 @@ def details_block(model, headline=None):
     return "\n".join(lines)
 
 
+def compact_blocks(blocks, limit=LARGE_SECTION_LIMIT):
+    """Keep large alerts readable without hiding the fact that more exist."""
+    if len(blocks) <= limit:
+        return blocks
+    return blocks[:limit] + [f"🔹 <i>…and {len(blocks) - limit} more</i>"]
+
+
 # ---------------- diff engine ----------------
 def build_report(old, new):
     removed_ids = set(old) - set(new)
@@ -260,27 +275,26 @@ def build_report(old, new):
     if variants:
         sections.append(("🧬 <b>New variants</b>", [details_block(m) for m in variants]))
     if name_upd:
-        sections.append(("✏️ <b>Name updates</b>", name_upd))
+        sections.append(("✏️ <b>Name updates</b>", compact_blocks(name_upd)))
     if org_upd:
-        sections.append(("🏢 <b>Organization updates</b>", org_upd))
+        sections.append(("🏢 <b>Organization updates</b>", compact_blocks(org_upd)))
     if cap_upd:
-        sections.append(("⚡ <b>Capability updates</b>", cap_upd))
+        sections.append(("⚡ <b>Capability updates</b>", compact_blocks(cap_upd)))
     if rotations:
         sections.append(("🆔 <b>ID rotations</b>",
-                         [f"🔹 {disp(n)}\n<code>{esc(o['id'])}</code> ➡️ <code>{esc(n['id'])}</code>"
-                          for o, n in rotations]))
+                         compact_blocks([f"🔹 {disp(n)}\n<code>{esc(o['id'])}</code> ➡️ <code>{esc(n['id'])}</code>"
+                                         for o, n in rotations])))
     if rank_upd:
-        sections.append(("📊 <b>Rank updates</b>", rank_upd))
+        sections.append(("📊 <b>Rank updates</b>", compact_blocks(rank_upd)))
     if still_removed:
-        sections.append(("❌ <b>Removed models</b>",
-                         [details_block(m) for m in still_removed]))
+        sections.append(("❌ <b>Removed models</b>", compact_blocks([details_block(m) for m in still_removed])))
     if not sections:
         return None
 
     ts = datetime.datetime.now(datetime.timezone.utc).strftime("%d %b %Y, %H:%M UTC")
     parts = [f"📡 <b>Arena Tracker</b>\n🗓 {esc(ts)}", "━━━━━━━━━━━━━━━━━━━━"]
     for title, blocks in sections:
-        parts.append(f"{title} — <b>{len(blocks)}</b>\n\n" + "\n\n".join(blocks))
+        parts.append(f"{title} — <b>{len(blocks) if not (blocks and 'more' in blocks[-1]) else 'many'}</b>\n\n" + "\n\n".join(blocks))
     return "\n\n".join(parts)
 
 
@@ -309,6 +323,35 @@ def split_message(text):
     if cur:
         chunks.append(cur)
     return chunks
+
+
+# ---------------- alert state ----------------
+def load_alert_state():
+    if not os.path.exists(ALERT_STATE_FILE):
+        return {}
+    try:
+        with open(ALERT_STATE_FILE, encoding="utf-8") as f:
+            state = json.load(f)
+        return state if isinstance(state, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_alert_state(state):
+    with open(ALERT_STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(state, f, ensure_ascii=False, indent=1, sort_keys=True)
+
+
+def snapshot_hash(models):
+    payload = json.dumps(models, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def large_add_remove(old, new):
+    removed = len(set(old) - set(new))
+    added = len(set(new) - set(old))
+    threshold = max(LARGE_CHANGE_MIN, int(max(1, len(old)) * LARGE_CHANGE_RATIO))
+    return max(removed, added) >= threshold, removed, added, threshold
 
 
 # ---------------- snapshot ----------------
@@ -341,6 +384,36 @@ def main():
         send_telegram(f"✅ <b>Arena tracker started</b>\n{len(new)} models loaded "
                       f"as baseline. Alerts start from next change.")
         return
+
+    # Large add/remove churn needs one consecutive confirmation. This protects
+    # against a bad/partial Arena response while keeping small stealth changes
+    # and ordinary model updates immediate.
+    large, removed_count, added_count, threshold = large_add_remove(old, new)
+    state = load_alert_state()
+    if large:
+        candidate_hash = snapshot_hash(new)
+        pending_hash = state.get("pending_large_hash")
+        pending_count = int(state.get("pending_large_count", 0))
+        if pending_hash == candidate_hash:
+            pending_count += 1
+        else:
+            pending_count = 1
+        if pending_count < 2:
+            save_alert_state({
+                "pending_large_hash": candidate_hash,
+                "pending_large_count": pending_count,
+                "removed": removed_count,
+                "added": added_count,
+            })
+            print(f"large change pending confirmation: +{added_count}/-{removed_count} "
+                  f"(threshold {threshold})")
+            return
+        # The exact large state was seen twice; allow the normal detector to
+        # report it. Clear pending state so a later real change can alert again.
+        save_alert_state({})
+    elif state:
+        # A normal stable fetch cancels an unconfirmed large candidate.
+        save_alert_state({})
 
     report = build_report(old, new)
     if report:
