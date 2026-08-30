@@ -40,7 +40,8 @@ jobs:
         run: |
           git config user.name "arena-tracker-bot"
           git config user.email "actions@github.com"
-          git add snapshot.json design_snapshot.json .arena_alert_state.json
+          git add snapshot.json design_snapshot.json
+          if [ -f .arena_alert_state.json ]; then git add .arena_alert_state.json; fi
           git diff --cached --quiet || git commit -m "snapshot update"
           git pull --rebase
           git push
