@@ -548,6 +548,42 @@
       "router": false,
       "vision": true
     },
+    "claude-fable-5-1": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ],
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Claude Fable 5.1",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "anthropic",
+      "router": false,
+      "vision": true
+    },
     "claude-haiku-4-5": {
       "active": false,
       "arenas": {
@@ -9097,6 +9133,10 @@
       "text.output": 15
     },
     "claude-fable-5": {
+      "text.input": 10,
+      "text.output": 50
+    },
+    "claude-fable-5-1": {
       "text.input": 10,
       "text.output": 50
     },
