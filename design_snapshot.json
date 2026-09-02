@@ -430,6 +430,20 @@
       "router": false,
       "vision": false
     },
+    "cartesia-sonic-3-6": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Cartesia Sonic 3.6",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "cartesia",
+      "router": false,
+      "vision": false
+    },
     "chatterbox_tts": {
       "active": true,
       "arenas": {
@@ -1393,6 +1407,20 @@
       "router": false,
       "vision": false
     },
+    "deepgram_flux_tts": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Deepgram Flux TTS",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "deepgram",
+      "router": false,
+      "vision": false
+    },
     "deepmolt": {
       "active": false,
       "arenas": {
@@ -1741,10 +1769,10 @@
       "vision": false
     },
     "elevenlabs_eleven_v3_conversational": {
-      "active": false,
+      "active": true,
       "arenas": {
         "models": [
-          "audiorealism"
+          "tts"
         ]
       },
       "displayName": "Eleven v3 Conversational",
@@ -1905,6 +1933,20 @@
       "inputModalities": [],
       "openSource": false,
       "provider": "figma",
+      "router": false,
+      "vision": false
+    },
+    "fish-audio-s2.1-pro": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Fish Audio S2.1 Pro",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "fish-audio",
       "router": false,
       "vision": false
     },
@@ -4882,7 +4924,7 @@
           "tts"
         ]
       },
-      "displayName": "Hume Octave",
+      "displayName": "Hume Octave 2",
       "inputModalities": [],
       "openSource": false,
       "provider": "hume",
@@ -5184,6 +5226,20 @@
         ]
       },
       "displayName": "Inworld TTS-1.5 Max",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "inworld",
+      "router": false,
+      "vision": false
+    },
+    "inworld_tts_2": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Inworld Realtime TTS-2",
       "inputModalities": [],
       "openSource": false,
       "provider": "inworld",
@@ -6169,6 +6225,20 @@
       "router": false,
       "vision": false
     },
+    "mai-voice-2-flash": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "MAI-Voice-2-Flash",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "microsoft",
+      "router": false,
+      "vision": false
+    },
     "mantis": {
       "active": true,
       "arenas": {
@@ -6485,6 +6555,20 @@
       "router": false,
       "vision": false
     },
+    "minimax_speech_28_hd": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "MiniMax Speech 2.8 HD",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "minimax",
+      "router": false,
+      "vision": false
+    },
     "ministral-14b-2512": {
       "active": false,
       "arenas": {
@@ -6761,6 +6845,20 @@
       "router": false,
       "vision": true
     },
+    "murf_falcon_2": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Murf Falcon 2",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "murf",
+      "router": false,
+      "vision": false
+    },
     "murf_gen2": {
       "active": true,
       "arenas": {
@@ -7029,13 +7127,27 @@
       "vision": false
     },
     "openai_gpt_realtime_2": {
-      "active": false,
+      "active": true,
       "arenas": {
         "models": [
           "tts"
         ]
       },
       "displayName": "OpenAI GPT Realtime 2",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": false
+    },
+    "openai_gpt_realtime_2_1": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "OpenAI GPT Realtime 2.1",
       "inputModalities": [],
       "openSource": false,
       "provider": "openai",
@@ -7123,6 +7235,20 @@
       "inputModalities": [],
       "openSource": false,
       "provider": "quiver",
+      "router": false,
+      "vision": false
+    },
+    "qwen-audio-3.0-tts-flash": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Qwen-Audio-3.0 TTS Flash",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "alibaba",
       "router": false,
       "vision": false
     },
@@ -9115,6 +9241,10 @@
       "text.input": 50,
       "text.output": 0
     },
+    "cartesia-sonic-3-6": {
+      "text.input": 50,
+      "text.output": 0
+    },
     "chatterbox_tts": {
       "text.input": 0.025,
       "text.output": 0
@@ -9271,6 +9401,10 @@
       "text.input": 30,
       "text.output": 0
     },
+    "deepgram_flux_tts": {
+      "text.input": 30,
+      "text.output": 0
+    },
     "deepmolt": {
       "text.input": 0.3,
       "text.output": 1.2
@@ -9350,6 +9484,10 @@
     },
     "fig": {
       "video.perSecond": 0.04
+    },
+    "fish-audio-s2.1-pro": {
+      "text.input": 15,
+      "text.output": 0
     },
     "flux-2-dev": {
       "image.perImage": 0.03
@@ -9887,6 +10025,10 @@
       "text.input": 0.01,
       "text.output": 0
     },
+    "inworld_tts_2": {
+      "text.input": 21,
+      "text.output": 0
+    },
     "juniper": {
       "image.perImage": 0.01
     },
@@ -10036,6 +10178,10 @@
       "text.input": 22,
       "text.output": 0
     },
+    "mai-voice-2-flash": {
+      "text.input": 15,
+      "text.output": 0
+    },
     "mantis": {
       "image.perImage": 0.06
     },
@@ -10079,6 +10225,10 @@
     },
     "minimax_speech_25_turbo": {
       "text.input": 0.1,
+      "text.output": 0
+    },
+    "minimax_speech_28_hd": {
+      "text.input": 100,
       "text.output": 0
     },
     "ministral-14b-2512": {
@@ -10129,6 +10279,10 @@
       "text.input": 1.75,
       "text.output": 14
     },
+    "murf_falcon_2": {
+      "text.input": 10,
+      "text.output": 0
+    },
     "murf_gen2": {
       "text.input": 30,
       "text.output": 0
@@ -10174,6 +10328,10 @@
     "prism": {
       "text.input": 0,
       "text.output": 0.3
+    },
+    "qwen-audio-3.0-tts-flash": {
+      "text.input": 15,
+      "text.output": 0
     },
     "qwen-image": {
       "image.perImage": 0.04
@@ -10556,6 +10714,7 @@
     "figma": "Figma",
     "firebase": "Google",
     "firefly": "firefly",
+    "fish-audio": "Fish Audio",
     "flames-blue": "Flames.blue",
     "floot": "Floot",
     "galapagos": "Galapagos",
