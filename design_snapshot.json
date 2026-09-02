@@ -2819,6 +2819,43 @@
       "router": false,
       "vision": true
     },
+    "gemini-3.8-flash": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ],
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Gemini 3.8 Flash",
+      "inputModalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": false,
+      "provider": "google",
+      "router": false,
+      "vision": true
+    },
     "gemini-omni-flash-1.1": {
       "active": true,
       "arenas": {
@@ -9661,6 +9698,11 @@
       "text.input": 0.75,
       "text.output": 3.75
     },
+    "gemini-3.8-flash": {
+      "text.cachedInput": 0.075,
+      "text.input": 0.75,
+      "text.output": 3.75
+    },
     "gemini-omni-flash-1.1": {
       "video.perSecond": 0.1
     },
@@ -10573,6 +10615,9 @@
     "step-3.7-flash": {
       "text.input": 0.2,
       "text.output": 1.15
+    },
+    "tangerine": {
+      "video.perSecond": 0.02
     },
     "thistle": {
       "image.perImage": 0.003
