@@ -16828,26 +16828,6 @@
   },
   "userSelectable": true
  },
- "019fef13-1283-7c13-acc0-0ef525444771": {
-  "capabilities": {
-   "inputCapabilities": {
-    "image": {
-     "requiresUpload": true
-    },
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "displayName": "tamarisk-alpha",
-  "id": "019fef13-1283-7c13-acc0-0ef525444771",
-  "publicName": "tamarisk-alpha",
-  "rankByModality": {
-   "chat": 9007199254740991
-  },
-  "userSelectable": true
- },
  "019ff19e-a4b0-70c0-9379-1116ca8b4457": {
   "capabilities": {
    "inputCapabilities": {
@@ -19038,6 +19018,26 @@
   "displayName": "phelan-beta",
   "id": "01a06088-79da-7ef2-a8a7-01382fb0fb46",
   "publicName": "phelan-beta",
+  "rankByModality": {
+   "webdev": 9007199254740991
+  },
+  "userSelectable": true
+ },
+ "01a06090-6905-7ad0-9ec2-18357142ec44": {
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "displayName": "qwen3.8-max-0902",
+  "id": "01a06090-6905-7ad0-9ec2-18357142ec44",
+  "name": "qwen3.8-max-0902",
+  "organization": "alibaba",
+  "provider": "alibabaToolCall",
+  "publicName": "qwen3.8-max-0902",
   "rankByModality": {
    "webdev": 9007199254740991
   },
