@@ -4669,6 +4669,40 @@
       "router": false,
       "vision": false
     },
+    "grok-imagine-image-2-auto": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "Grok Imagine Image 2 Auto",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "xai",
+      "router": false,
+      "vision": false
+    },
+    "grok-imagine-image-2-medium": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "Grok Imagine Image 2 Medium",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "xai",
+      "router": false,
+      "vision": false
+    },
     "grok-imagine-video": {
       "active": true,
       "arenas": {
@@ -9930,6 +9964,12 @@
       "text.output": 1.5
     },
     "grok-imagine-image-2": {
+      "image.perImage": 0.06
+    },
+    "grok-imagine-image-2-auto": {
+      "image.perImage": 0.04
+    },
+    "grok-imagine-image-2-medium": {
       "image.perImage": 0.06
     },
     "grok-imagine-video": {
