@@ -1304,7 +1304,7 @@
       "vision": false
     },
     "deca-2.5-mini": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "3d",
@@ -1358,7 +1358,7 @@
       "vision": false
     },
     "deca-2.5-ultra-2": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "3d",
@@ -7001,6 +7001,43 @@
       "router": false,
       "vision": true
     },
+    "muse-spark-1.3": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_html",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ],
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Muse Spark 1.3",
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": false,
+      "provider": "meta",
+      "router": false,
+      "vision": true
+    },
     "nemotron-3-ultra-550b-a55b": {
       "active": true,
       "arenas": {
@@ -10373,6 +10410,10 @@
       "image.perImage": 0.01
     },
     "muse-spark-1.2": {
+      "text.input": 1.25,
+      "text.output": 4.25
+    },
+    "muse-spark-1.3": {
       "text.input": 1.25,
       "text.output": 4.25
     },
