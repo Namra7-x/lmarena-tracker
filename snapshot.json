@@ -20134,6 +20134,26 @@
    "video": 45
   }
  },
+ "01a06881-7bfa-779b-89a7-1c4d4eac8b51": {
+  "id": "01a06881-7bfa-779b-89a7-1c4d4eac8b51",
+  "publicName": "hidream-o1-video",
+  "displayName": "hidream-o1-video",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
  "019de0ba-9071-7116-894f-0bfef86db47c": {
   "id": "019de0ba-9071-7116-894f-0bfef86db47c",
   "publicName": "tbd",
