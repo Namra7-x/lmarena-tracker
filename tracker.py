@@ -968,18 +968,31 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
 
 
 def send_discord_payload(payload: Dict[str, Any]) -> None:
-    """Dispatches a JSON payload to the configured Discord webhook URL."""
+    """Dispatches a JSON payload to Discord with automatic 429 rate-limit backoff."""
     if not DISCORD_WEBHOOK_URL:
         print("\n[Discord Webhook Dry-Run]")
         print(json.dumps(payload, indent=2))
         return
 
-    try:
-        r = requests.post(DISCORD_WEBHOOK_URL, json=payload, timeout=30)
-        if r.status_code not in (200, 204):
+    for attempt in range(4):
+        try:
+            r = requests.post(DISCORD_WEBHOOK_URL, json=payload, timeout=30)
+            if r.status_code in (200, 204):
+                return
+            if r.status_code == 429:
+                try:
+                    data = r.json()
+                    retry_after = float(data.get("retry_after", 2.0))
+                except Exception:
+                    retry_after = 2.0
+                print(f"Discord rate limited (429). Retrying in {retry_after:.1f}s...")
+                time.sleep(retry_after + 0.5)
+                continue
             print(f"Discord webhook error: {r.status_code} {r.text[:300]}")
-    except Exception as e:
-        print(f"Discord network exception: {e}")
+            break
+        except Exception as e:
+            print(f"Discord network exception: {e}")
+            time.sleep(2)
 
 
 def notify_discord_embeds(embeds: List[Dict[str, Any]]) -> None:
