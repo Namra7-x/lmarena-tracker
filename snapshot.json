@@ -27,7 +27,7 @@
     "text": true
    }
   },
-  "displayName": "qwen3-omi-flash",
+  "displayName": "qwen3-omni-flash",
   "id": "0199c9dc-e157-7458-bd49-5942363be215",
   "name": "qwen3-omni-flash",
   "organization": "alibaba",
@@ -53,7 +53,7 @@
   "rankByModality": {
    "chat": 9007199254740991
   },
-  "userSelectable": false
+  "userSelectable": true
  },
  "0199e3d1-a308-77b9-a650-41453e8ef2fb": {
   "capabilities": {
@@ -135,7 +135,7 @@
    }
   },
   "displayName": "hunyuan-image-3.0-fal",
-  "id": "0199e980-d247-7dd3-9ca1222-77092f126f05",
+  "id": "0199e980-d247-7dd3-9ca1-77092f126f05",
   "publicName": "hunyuan-image-3.0-fal",
   "rankByModality": {
    "image": 9007199254740991
@@ -181,7 +181,7 @@
   "capabilities": {
    "inputCapabilities": {
     "image": {
-     "multipleImages": false,
+     "multipleImages": true,
      "requiresUpload": false
     },
     "text": true
