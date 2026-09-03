@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
 """
-LM Arena Model Tracker - Premium Dashboard Grid Edition
+LM Arena Model Tracker - Ultra-Sleek Discord Edition
 
-Monitors canaryarena.ai model metadata every minute and sends clean, modern
-Discord 3-column dashboard grid cards when genuine changes occur:
-- 🆕 Brand new models (Emerald Green dashboard card)
-- 🕵️ Hidden / stealth test models (Amethyst Purple card)
-- 🧬 New variants of existing models (Turquoise Teal card)
-- ✏️ Name & display updates (Sky Blue grid card)
-- 🏢 Organization updates (Sunflower Gold card)
-- 🏭 Provider updates (Carrot Orange card)
-- ⚡ Capability updates (Orange Gold card with badges)
-- 🆔 ID rotations (Pastel Blurple card)
-- 📊 Real rank updates (Dark Navy card, filters out unranked->unranked)
-- ❌ Genuine model removals (Alizarin Red card)
+Replicates the modern, spacious, high-contrast Discord UI layout:
+- ✨ NEW MODEL LIVE (Emerald Green card with badge pills & capabilities)
+- 🕵️ STEALTH MODEL DETECTED (Amethyst Purple card for unannounced models)
+- 🧬 NEW MODEL VARIANT (Turquoise Teal card for new variants)
+- 🔄 MODEL RENAME (Sky Blue before/after transition card)
+- ⚙️ CAPABILITIES UPDATED (Orange card with + / - colored badges)
+- 🆔 ID ROTATION DETECTED (Blurple card with old/new ID transition)
+- 📊 ARENA RANK SHIFT (Navy card, filtered against unranked->unranked)
+- 🏢 ORGANIZATION UPDATE (Sunflower Gold metadata card)
+- ❌ MODEL DELISTED (Alizarin Red retired card)
 
-Engineered for 1-minute execution intervals with:
-- Modality health validation (prevents false alerts on partial SSR drops)
-- In-memory auto-retry on transient backend dropouts
-- Stable identity-based batch confirmation for large churn (>20 models)
-- Anti-flapping snapshot protection
-- Discord 3-Column Inline Grid Layout with zero visual clutter
+Optimized for both Desktop and Mobile Discord with:
+- Zero cluttered columns: spacious vertical hierarchy
+- Markdown sub-headers and callout boxes
+- High-contrast code pills that look great in both Light and Dark mode
+- Full numeric & UUID model identity preservation
+- Direct clickable links to canaryarena.ai
 """
 
 from __future__ import annotations
@@ -88,20 +86,20 @@ MODALITY_NORMALIZER = {
     "search": "search",
 }
 
-# Clean Discord Colors
+# Discord Embed Color Palette (Vibrant Accent Borders)
 COLORS = {
-    "brand": 0x5865F2,     # Blurple
     "new": 0x2ECC71,       # Emerald Green
     "stealth": 0x9B59B6,   # Amethyst Purple
     "variant": 0x1ABC9C,   # Turquoise / Teal
     "rename": 0x3498DB,    # Sky Blue
+    "capability": 0xE67E22,# Orange / Amber
+    "rotation": 0x5865F2,  # Blurple
+    "rank": 0x34495E,      # Dark Navy
     "org": 0xF1C40F,       # Sunflower Yellow
     "provider": 0xE67E22,  # Carrot Orange
-    "capability": 0xF39C12,# Orange Gold
-    "rotation": 0x7289DA,  # Pastel Blurple
-    "rank": 0x34495E,      # Dark Navy
     "removed": 0xE74C3C,   # Red
-    "warning": 0xE67E22,   # Amber
+    "warning": 0xE67E22,   # Amber Warning
+    "brand": 0x5865F2,     # Bot Brand
 }
 
 AUTHOR_INFO = {
@@ -152,27 +150,27 @@ def flatten_caps(model: Dict[str, Any]) -> Set[str]:
     return result
 
 
-def format_capability_badges(model: Dict[str, Any]) -> str:
-    """Formats model capabilities into readable, clean emoji badges."""
+def format_capability_pills(model: Dict[str, Any]) -> str:
+    """Formats capabilities into clean, high-contrast badges."""
     badges = []
     c = model.get("capabilities") or {}
     inp = c.get("inputCapabilities") or {}
     out = c.get("outputCapabilities") or {}
 
-    if inp.get("text"): badges.append("💬 Text")
-    if inp.get("image"): badges.append("🖼️ Image In")
+    if inp.get("text"): badges.append("💬 Text Generation")
+    if inp.get("image"): badges.append("🖼️ Vision")
     if inp.get("video"): badges.append("🎬 Video In")
-    if inp.get("file"): badges.append("📁 File")
+    if inp.get("file"): badges.append("📁 File Upload")
 
     if out.get("search"): badges.append("🔍 Search")
-    if out.get("web"): badges.append("🌐 Web")
+    if out.get("web"): badges.append("🌐 Web Browsing")
     if out.get("image"): badges.append("🎨 Image Gen")
     if out.get("video"): badges.append("🎥 Video Gen")
 
     if not badges:
         raw = sorted(flatten_caps(model))
-        return " • ".join(f"`{r}`" for r in raw[:5]) if raw else "*None*"
-    return " • ".join(f"`{b}`" for b in badges)
+        return " ".join(f"` {r} `" for r in raw[:5]) if raw else "*Standard Text*"
+    return " ".join(f"` {b} `" for b in badges)
 
 
 def disp(model: Dict[str, Any]) -> str:
@@ -558,8 +556,7 @@ def detect_changes(
         if TRACK_RANK:
             old_rank_str = fmt_rank(o.get("rank"))
             new_rank_str = fmt_rank(n.get("rank"))
-            # Crucial fix: Only flag if there is a real visible change!
-            # Never alert unranked -> unranked!
+            # Crucial: Only alert if there is a real visible shift! Never alert unranked -> unranked!
             if old_rank_str != new_rank_str:
                 rank_changed = True
 
@@ -592,215 +589,234 @@ def detect_changes(
 
 
 # ==============================================================================
-# Discord 3-Column Dashboard Grid Cards
+# Discord Ultra-Sleek Embed Formatting (Matching Reference Mockup)
 # ==============================================================================
-def create_model_grid_embed(
-    title: str,
+def create_model_card_embed(
+    header_tag: str,
     color: int,
     model: Dict[str, Any],
-    status_label: str = "Live",
+    subtitle: str,
+    badges: List[str],
 ) -> Dict[str, Any]:
     """
-    Renders a stunning 3-column dashboard grid card for an individual model event.
-    No messy walls of text: clean 3 columns (Org | Modality | Rank) + badges.
+    Renders an individual, spacious card with generous padding,
+    subheaders, badge pills, and a dedicated copyable Model ID box.
     """
     now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    org = val_or_dash(model.get("organization"))
-    prov = val_or_dash(model.get("provider"))
-    rank = fmt_rank(model.get("rank"))
-    badges = format_capability_badges(model)
+    caps_text = format_capability_pills(model)
+    badges_text = " ".join(f"` {b} `" for b in badges if b)
 
-    fields = [
-        {"name": "🏢 Organization", "value": f"**{org}**", "inline": True},
-        {"name": "🏭 Provider", "value": f"**{prov}**", "inline": True},
-        {"name": "📊 Arena Rank", "value": f"**{rank}**", "inline": True},
-        {"name": "🛠️ Capabilities", "value": badges, "inline": False},
+    desc_parts = [
+        f"### [{disp(model)}]({ARENA_URL})",
+        f"*{subtitle}*",
+        "",
+        badges_text,
+        "",
+        f"**Capabilities:** {caps_text}",
+        "",
+        "**Model ID:**",
+        f"```{model['id']}```",
     ]
 
     return {
         "author": AUTHOR_INFO,
-        "title": title,
-        "description": f"**Model ID:** `{model['id']}`",
+        "title": header_tag,
+        "url": ARENA_URL,
+        "description": "\n".join(desc_parts),
         "color": color,
-        "fields": fields,
         "timestamp": now_iso,
-        "footer": {"text": f"Canary Arena • {status_label}"},
+        "footer": {"text": "LMSYS Arena Tracker • canaryarena.ai"},
     }
 
 
 def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
-    """Builds a refined array of Discord 3-column dashboard grid cards."""
+    """Builds an ultra-clean array of Discord embed cards matching the reference design."""
     embeds: List[Dict[str, Any]] = []
     now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    footer = {"text": "Canary Arena • canaryarena.ai"}
+    footer = {"text": "LMSYS Arena Tracker • canaryarena.ai"}
 
-    # 1. 🆕 Brand New Models (Individual Grid Cards)
+    # 1. ✨ NEW MODEL LIVE
     for m in report.new_models[:SECTION_LIMIT]:
+        org = val_or_dash(m.get("organization"))
+        prov = val_or_dash(m.get("provider"))
+        rank = fmt_rank(m.get("rank"))
+        badges = [f"🏢 {org}", f"🔺 {prov} Provider", f"🏆 {rank}"]
         embeds.append(
-            create_model_grid_embed(
-                title=f"🆕 New Model: {disp(m)}",
+            create_model_card_embed(
+                header_tag="✨ NEW MODEL LIVE",
                 color=COLORS["new"],
                 model=m,
-                status_label="New Release",
+                subtitle="A powerful new model is now live on Chat Arena.",
+                badges=badges,
             )
         )
 
-    # 2. 🕵️ Stealth / Hidden Models (Individual Grid Cards)
+    # 2. 🕵️ STEALTH MODEL DETECTED
     for m in report.hidden_models[:SECTION_LIMIT]:
-        card = create_model_grid_embed(
-            title=f"🕵️ Stealth Model: {disp(m)}",
-            color=COLORS["stealth"],
-            model=m,
-            status_label="Stealth / Anonymous",
-        )
-        # Override Org field for stealth
-        card["fields"][0] = {"name": "🏢 Organization", "value": "*Unannounced / Stealth*", "inline": True}
-        embeds.append(card)
-
-    # 3. 🧬 New Variants (Individual Grid Cards)
-    for m in report.variants[:SECTION_LIMIT]:
+        rank = fmt_rank(m.get("rank"))
+        badges = ["❓ Unannounced Org", "🧪 Experimental", f"🏆 {rank}"]
         embeds.append(
-            create_model_grid_embed(
-                title=f"🧬 New Variant: {disp(m)}",
+            create_model_card_embed(
+                header_tag="🕵️ STEALTH MODEL DETECTED",
+                color=COLORS["stealth"],
+                model=m,
+                subtitle="A new unannounced model is being tested in the arena.",
+                badges=badges,
+            )
+        )
+
+    # 3. 🧬 NEW MODEL VARIANT
+    for m in report.variants[:SECTION_LIMIT]:
+        org = val_or_dash(m.get("organization"))
+        rank = fmt_rank(m.get("rank"))
+        badges = [f"🏢 {org}", f"🧬 Base: {m.get('publicName')}", f"🏆 {rank}"]
+        embeds.append(
+            create_model_card_embed(
+                header_tag="🧬 NEW MODEL VARIANT",
                 color=COLORS["variant"],
                 model=m,
-                status_label="Variant Instance",
+                subtitle="A new instance or prompt variant has been deployed.",
+                badges=badges,
             )
         )
 
-    # 4. ✏️ Name Updates (High-Density Dashboard Grid)
-    if report.name_updates:
-        fields = []
-        for item in report.name_updates[:SECTION_LIMIT]:
-            old_name = val_or_dash(item["old"].get("displayName") or item["old"].get("publicName"))
-            new_name = val_or_dash(item["new"].get("displayName") or item["new"].get("publicName"))
-            fields.extend([
-                {"name": "Previous Name", "value": f"`{old_name}`", "inline": True},
-                {"name": "➡️", "value": "➔", "inline": True},
-                {"name": "Updated Name", "value": f"**`{new_name}`**", "inline": True},
-                {"name": "Model ID", "value": f"`{item['id']}`", "inline": False},
-            ])
+    # 4. 🔄 MODEL RENAME
+    for item in report.name_updates[:SECTION_LIMIT]:
+        old_name = val_or_dash(item["old"].get("displayName") or item["old"].get("publicName"))
+        new_name = val_or_dash(item["new"].get("displayName") or item["new"].get("publicName"))
+        desc = (
+            f"### Model Renamed\n"
+            f"*The model display or public name has been updated.*\n\n"
+            f"> ` {old_name} `  ➔  **` {new_name} `**\n\n"
+            f"**Model ID:**\n"
+            f"```{item['id']}```"
+        )
         embeds.append({
             "author": AUTHOR_INFO,
-            "title": f"✏️ Model Name Updates ({len(report.name_updates)})",
+            "title": "🔄 MODEL RENAME",
+            "url": ARENA_URL,
+            "description": desc,
             "color": COLORS["rename"],
-            "fields": fields,
             "timestamp": now_iso,
             "footer": footer,
         })
 
-    # 5. 🏢 Organization Updates
-    if report.org_updates:
-        fields = []
-        for item in report.org_updates[:SECTION_LIMIT]:
-            diffs = [f"{FIELD_LABELS.get(f, f)}: {val_or_dash(ov)} ➔ **{val_or_dash(nv)}**" for f, ov, nv in item["diffs"]]
-            fields.append({
-                "name": f"🏢 {disp(item['new'])}",
-                "value": "\n".join(diffs) + f"\n`{item['id']}`",
-                "inline": False,
-            })
-        embeds.append({
-            "author": AUTHOR_INFO,
-            "title": f"🏢 Organization Updates ({len(report.org_updates)})",
-            "color": COLORS["org"],
-            "fields": fields,
-            "timestamp": now_iso,
-            "footer": footer,
-        })
+    # 5. ⚙️ CAPABILITIES UPDATED
+    for item in report.capability_updates[:SECTION_LIMIT]:
+        m = item["new"]
+        gained = [f"` + {g} `" for g in sorted(item["gained_caps"])]
+        lost = [f"` - {l} `" for l in sorted(item["lost_caps"])]
 
-    # 6. 🏭 Provider Updates
-    if report.provider_updates:
-        fields = []
-        for item in report.provider_updates[:SECTION_LIMIT]:
-            diffs = [f"{val_or_dash(ov)} ➔ **{val_or_dash(nv)}**" for _, ov, nv in item["diffs"]]
-            fields.append({
-                "name": f"🏭 {disp(item['new'])}",
-                "value": "\n".join(diffs) + f"\n`{item['id']}`",
-                "inline": False,
-            })
-        embeds.append({
-            "author": AUTHOR_INFO,
-            "title": f"🏭 Provider Updates ({len(report.provider_updates)})",
-            "color": COLORS["provider"],
-            "fields": fields,
-            "timestamp": now_iso,
-            "footer": footer,
-        })
+        diff_lines = []
+        if gained:
+            diff_lines.append(f"**Added:** {' '.join(gained)}")
+        if lost:
+            diff_lines.append(f"**Removed:** {' '.join(lost)}")
 
-    # 7. ⚡ Capability Updates (Clean Badge Grid)
-    if report.capability_updates:
-        fields = []
-        for item in report.capability_updates[:SECTION_LIMIT]:
-            gained = [f"`+{g}`" for g in sorted(item["gained_caps"])]
-            lost = [f"`-{l}`" for l in sorted(item["lost_caps"])]
-
-            parts = []
-            if gained: parts.append(f"🟢 **Added:** {' '.join(gained)}")
-            if lost: parts.append(f"🔴 **Removed:** {' '.join(lost)}")
-
-            fields.append({
-                "name": f"⚡ {disp(item['new'])}",
-                "value": "\n".join(parts) + f"\n`{item['id']}`",
-                "inline": False,
-            })
-        embeds.append({
-            "author": AUTHOR_INFO,
-            "title": f"⚡ Capability Updates ({len(report.capability_updates)})",
-            "color": COLORS["capability"],
-            "fields": fields,
-            "timestamp": now_iso,
-            "footer": footer,
-        })
-
-    # 8. 🆔 ID Rotations (3-Column Clean Row)
-    if report.id_rotations:
-        fields = []
-        for old_m, new_m in report.id_rotations[:SECTION_LIMIT]:
-            fields.extend([
-                {"name": f"Model: {disp(new_m)}", "value": f"**Old:** `{old_m['id']}`", "inline": True},
-                {"name": "➡️", "value": "➔", "inline": True},
-                {"name": "Rotated ID", "value": f"**New:** `{new_m['id']}`", "inline": True},
-            ])
-        embeds.append({
-            "author": AUTHOR_INFO,
-            "title": f"🆔 ID Rotations ({len(report.id_rotations)})",
-            "color": COLORS["rotation"],
-            "fields": fields,
-            "timestamp": now_iso,
-            "footer": footer,
-        })
-
-    # 9. 📊 Real Rank Updates (Filters unranked->unranked)
-    if report.rank_updates:
-        fields = []
-        for item in report.rank_updates[:SECTION_LIMIT]:
-            o, n = item["old"], item["new"]
-            old_r, new_r = fmt_rank(o.get("rank")), fmt_rank(n.get("rank"))
-            fields.extend([
-                {"name": f"📊 {disp(n)}", "value": f"`{old_r}`", "inline": True},
-                {"name": "➡️", "value": "➔", "inline": True},
-                {"name": "New Rank", "value": f"**`{new_r}`**", "inline": True},
-            ])
-        if fields:
-            embeds.append({
-                "author": AUTHOR_INFO,
-                "title": f"📊 Rank Shifts ({len(report.rank_updates)})",
-                "color": COLORS["rank"],
-                "fields": fields,
-                "timestamp": now_iso,
-                "footer": footer,
-            })
-
-    # 10. ❌ Removed Models (Individual Grid Cards)
-    for m in report.removed_models[:SECTION_LIMIT]:
-        embeds.append(
-            create_model_grid_embed(
-                title=f"❌ Model Removed: {disp(m)}",
-                color=COLORS["removed"],
-                model=m,
-                status_label="Delisted / Retired",
-            )
+        desc = (
+            f"### [{disp(m)}]({ARENA_URL})\n"
+            f"*Capabilities have been updated for this model.*\n\n"
+            f"{chr(10).join(diff_lines)}\n\n"
+            f"**Model ID:**\n"
+            f"```{item['id']}```"
         )
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "⚙️ CAPABILITIES UPDATED",
+            "url": ARENA_URL,
+            "description": desc,
+            "color": COLORS["capability"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 6. 🆔 ID ROTATION DETECTED
+    for old_m, new_m in report.id_rotations[:SECTION_LIMIT]:
+        desc = (
+            f"### [{disp(new_m)}]({ARENA_URL})\n"
+            f"*Backend ID rotated while model identity remained identical.*\n\n"
+            f"**Previous ID:**\n`{old_m['id']}`\n\n"
+            f"**New ID:**\n`{new_m['id']}`"
+        )
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🆔 ID ROTATION DETECTED",
+            "url": ARENA_URL,
+            "description": desc,
+            "color": COLORS["rotation"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 7. 📊 ARENA RANK SHIFT
+    for item in report.rank_updates[:SECTION_LIMIT]:
+        o, n = item["old"], item["new"]
+        old_r = fmt_rank(o.get("rank"))
+        new_r = fmt_rank(n.get("rank"))
+        desc = (
+            f"### [{disp(n)}]({ARENA_URL})\n"
+            f"*Model leaderboard position has updated on Chat Arena.*\n\n"
+            f"> ` {old_r} `  ➔  **` {new_r} `**\n\n"
+            f"**Model ID:**\n"
+            f"```{item['id']}```"
+        )
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "📊 ARENA RANK SHIFT",
+            "url": ARENA_URL,
+            "description": desc,
+            "color": COLORS["rank"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 8. 🏢 ORGANIZATION / PROVIDER UPDATE
+    for item in report.org_updates[:SECTION_LIMIT] + report.provider_updates[:SECTION_LIMIT]:
+        m = item["new"]
+        diffs = [
+            f"• **{FIELD_LABELS.get(f, f)}:** ` {val_or_dash(ov)} ` ➔ **` {val_or_dash(nv)} `**"
+            for f, ov, nv in item["diffs"]
+            if ov != nv
+        ]
+        if not diffs:
+            continue
+        desc = (
+            f"### [{disp(m)}]({ARENA_URL})\n"
+            f"*Vendor organization or backend provider metadata has changed.*\n\n"
+            f"{chr(10).join(diffs)}\n\n"
+            f"**Model ID:**\n"
+            f"```{item['id']}```"
+        )
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🏢 METADATA UPDATED",
+            "url": ARENA_URL,
+            "description": desc,
+            "color": COLORS["org"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 9. ❌ MODEL DELISTED
+    for m in report.removed_models[:SECTION_LIMIT]:
+        org = val_or_dash(m.get("organization"))
+        rank = fmt_rank(m.get("rank"))
+        desc = (
+            f"### {disp(m)}\n"
+            f"*This model has been retired or delisted from the Arena.*\n\n"
+            f"` 🏢 {org} `  ` 🏆 Last Rank: {rank} `\n\n"
+            f"**Model ID:**\n"
+            f"```{m['id']}```"
+        )
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "❌ MODEL DELISTED",
+            "url": ARENA_URL,
+            "description": desc,
+            "color": COLORS["removed"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
     return embeds
 
@@ -845,7 +861,7 @@ def send_discord_text(text: str, color: int = COLORS["brand"]) -> None:
             "description": text,
             "color": color,
             "timestamp": now_iso,
-            "footer": {"text": "Canary Arena • canaryarena.ai"},
+            "footer": {"text": "LMSYS Arena Tracker • canaryarena.ai"},
         }]
     })
 
