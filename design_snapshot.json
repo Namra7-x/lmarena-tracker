@@ -6517,6 +6517,21 @@
       "router": false,
       "vision": false
     },
+    "minimax-h3-max-turbo": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      },
+      "displayName": "MiniMax H3 Max Turbo",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "fal",
+      "router": false,
+      "vision": false
+    },
     "minimax-m2-stable": {
       "active": false,
       "arenas": {
@@ -10325,6 +10340,9 @@
     },
     "minimax-h3": {
       "video.perSecond": 0.13
+    },
+    "minimax-h3-max-turbo": {
+      "video.perSecond": 0.01
     },
     "minimax-m2-stable": {
       "text.input": 0.3,
