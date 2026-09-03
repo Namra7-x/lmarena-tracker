@@ -2,7 +2,7 @@
 """
 Comprehensive Unit Test Suite for LM Arena Tracker (tracker.py)
 Validates all detection categories, modality collapse guards, ID rotation pairing,
-large change confirmation, and reference layout Discord Embed generation.
+large change confirmation, and spacious line-by-line Discord Embed generation.
 """
 
 import json
@@ -62,7 +62,7 @@ class TestTrackerCore(unittest.TestCase):
         self.assertEqual(tracker.build_discord_embeds(report), [])
 
     def test_scenario_b_new_model(self):
-        """Scenario B: 1 genuinely new model -> detected with reference card layout."""
+        """Scenario B: 1 genuinely new model -> detected with line-by-line card layout."""
         old = {"m1": make_dummy_model("m1", "gpt-5")}
         new = {
             "m1": make_dummy_model("m1", "gpt-5"),
@@ -75,7 +75,7 @@ class TestTrackerCore(unittest.TestCase):
         embeds = tracker.build_discord_embeds(report)
         self.assertTrue(any("NEW MODEL LIVE" in e["title"] for e in embeds))
         self.assertIn("gemini-3", embeds[0]["description"])
-        self.assertIn("Model ID:", embeds[0]["description"])
+        self.assertIn("Organization:", embeds[0]["description"])
 
     def test_scenario_c_capability_updates(self):
         """Scenario C: Model gains or loses capabilities -> detected."""

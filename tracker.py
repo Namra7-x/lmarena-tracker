@@ -1,24 +1,13 @@
 #!/usr/bin/env python3
 """
-LM Arena Model Tracker - Ultra-Sleek Discord Edition
+LM Arena Model Tracker - Spacious Line-by-Line Discord Edition
 
-Replicates the modern, spacious, high-contrast Discord UI layout:
-- ✨ NEW MODEL LIVE (Emerald Green card with badge pills & capabilities)
-- 🕵️ STEALTH MODEL DETECTED (Amethyst Purple card for unannounced models)
-- 🧬 NEW MODEL VARIANT (Turquoise Teal card for new variants)
-- 🔄 MODEL RENAME (Sky Blue before/after transition card)
-- ⚙️ CAPABILITIES UPDATED (Orange card with + / - colored badges)
-- 🆔 ID ROTATION DETECTED (Blurple card with old/new ID transition)
-- 📊 ARENA RANK SHIFT (Navy card, filtered against unranked->unranked)
-- 🏢 ORGANIZATION UPDATE (Sunflower Gold metadata card)
-- ❌ MODEL DELISTED (Alizarin Red retired card)
-
-Optimized for both Desktop and Mobile Discord with:
-- Zero cluttered columns: spacious vertical hierarchy
-- Markdown sub-headers and callout boxes
-- High-contrast code pills that look great in both Light and Dark mode
-- Full numeric & UUID model identity preservation
-- Direct clickable links to canaryarena.ai
+Clean, spacious layout with zero clutter:
+- All filler paragraphs removed
+- Every piece of information on its own dedicated line
+- Generous blank-line spacing between every property
+- Clear, readable bold labels and inline code tags
+- 100% responsive and readable on both Desktop and Mobile (Light & Dark modes)
 """
 
 from __future__ import annotations
@@ -67,12 +56,12 @@ TRACKED_FIELDS = [
 ]
 
 FIELD_LABELS = {
-    "publicName": "Public name",
-    "displayName": "Display name",
-    "name": "Name",
+    "publicName": "Public Name",
+    "displayName": "Display Name",
+    "name": "Internal Name",
     "organization": "Organization",
     "provider": "Provider",
-    "userSelectable": "User selectable",
+    "userSelectable": "User Selectable",
 }
 
 # Modality normalizer
@@ -86,20 +75,20 @@ MODALITY_NORMALIZER = {
     "search": "search",
 }
 
-# Discord Embed Color Palette (Vibrant Accent Borders)
+# Vibrant Border Accent Colors
 COLORS = {
     "new": 0x2ECC71,       # Emerald Green
     "stealth": 0x9B59B6,   # Amethyst Purple
     "variant": 0x1ABC9C,   # Turquoise / Teal
     "rename": 0x3498DB,    # Sky Blue
-    "capability": 0xE67E22,# Orange / Amber
+    "capability": 0xE67E22,# Orange
     "rotation": 0x5865F2,  # Blurple
     "rank": 0x34495E,      # Dark Navy
     "org": 0xF1C40F,       # Sunflower Yellow
     "provider": 0xE67E22,  # Carrot Orange
     "removed": 0xE74C3C,   # Red
     "warning": 0xE67E22,   # Amber Warning
-    "brand": 0x5865F2,     # Bot Brand
+    "brand": 0x5865F2,     # Brand
 }
 
 AUTHOR_INFO = {
@@ -150,27 +139,27 @@ def flatten_caps(model: Dict[str, Any]) -> Set[str]:
     return result
 
 
-def format_capability_pills(model: Dict[str, Any]) -> str:
-    """Formats capabilities into clean, high-contrast badges."""
+def format_capability_lines(model: Dict[str, Any]) -> str:
+    """Formats capabilities into clean spaced tags."""
     badges = []
     c = model.get("capabilities") or {}
     inp = c.get("inputCapabilities") or {}
     out = c.get("outputCapabilities") or {}
 
-    if inp.get("text"): badges.append("💬 Text Generation")
+    if inp.get("text"): badges.append("💬 Text")
     if inp.get("image"): badges.append("🖼️ Vision")
     if inp.get("video"): badges.append("🎬 Video In")
-    if inp.get("file"): badges.append("📁 File Upload")
+    if inp.get("file"): badges.append("📁 File")
 
     if out.get("search"): badges.append("🔍 Search")
-    if out.get("web"): badges.append("🌐 Web Browsing")
+    if out.get("web"): badges.append("🌐 Web")
     if out.get("image"): badges.append("🎨 Image Gen")
     if out.get("video"): badges.append("🎥 Video Gen")
 
     if not badges:
         raw = sorted(flatten_caps(model))
-        return " ".join(f"` {r} `" for r in raw[:5]) if raw else "*Standard Text*"
-    return " ".join(f"` {b} `" for b in badges)
+        return " • ".join(f"`{r}`" for r in raw[:6]) if raw else "*None*"
+    return " • ".join(f"`{b}`" for b in badges)
 
 
 def disp(model: Dict[str, Any]) -> str:
@@ -589,113 +578,134 @@ def detect_changes(
 
 
 # ==============================================================================
-# Discord Ultra-Sleek Embed Formatting (Matching Reference Mockup)
+# Ultra-Clean Discord Line-by-Line Cards (Zero Clutter)
 # ==============================================================================
-def create_model_card_embed(
-    header_tag: str,
-    color: int,
-    model: Dict[str, Any],
-    subtitle: str,
-    badges: List[str],
-) -> Dict[str, Any]:
-    """
-    Renders an individual, spacious card with generous padding,
-    subheaders, badge pills, and a dedicated copyable Model ID box.
-    """
-    now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    caps_text = format_capability_pills(model)
-    badges_text = " ".join(f"` {b} `" for b in badges if b)
-
-    desc_parts = [
-        f"### [{disp(model)}]({ARENA_URL})",
-        f"*{subtitle}*",
-        "",
-        badges_text,
-        "",
-        f"**Capabilities:** {caps_text}",
-        "",
-        "**Model ID:**",
-        f"```{model['id']}```",
-    ]
-
-    return {
-        "author": AUTHOR_INFO,
-        "title": header_tag,
-        "url": ARENA_URL,
-        "description": "\n".join(desc_parts),
-        "color": color,
-        "timestamp": now_iso,
-        "footer": {"text": "LMSYS Arena Tracker • canaryarena.ai"},
-    }
-
-
 def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
-    """Builds an ultra-clean array of Discord embed cards matching the reference design."""
+    """
+    Builds clean, spacious cards where every single field is on its own line
+    with generous blank-line spacing and zero filler paragraphs.
+    """
     embeds: List[Dict[str, Any]] = []
     now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    footer = {"text": "LMSYS Arena Tracker • canaryarena.ai"}
+    footer = {"text": "Canary Arena • canaryarena.ai"}
 
-    # 1. ✨ NEW MODEL LIVE
+    # 1. 🆕 NEW MODEL LIVE
     for m in report.new_models[:SECTION_LIMIT]:
         org = val_or_dash(m.get("organization"))
         prov = val_or_dash(m.get("provider"))
         rank = fmt_rank(m.get("rank"))
-        badges = [f"🏢 {org}", f"🔺 {prov} Provider", f"🏆 {rank}"]
-        embeds.append(
-            create_model_card_embed(
-                header_tag="✨ NEW MODEL LIVE",
-                color=COLORS["new"],
-                model=m,
-                subtitle="A powerful new model is now live on Chat Arena.",
-                badges=badges,
-            )
-        )
+        caps = format_capability_lines(m)
+
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+            f"🏢 **Organization:** **{org}**",
+            "",
+            f"🏭 **Provider:** **{prov}**",
+            "",
+            f"📊 **Arena Rank:** **{rank}**",
+            "",
+            "🛠️ **Capabilities:**",
+            caps,
+            "",
+            "🆔 **Model ID:**",
+            f"`{m['id']}`",
+        ]
+
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "✨ NEW MODEL LIVE",
+            "url": ARENA_URL,
+            "description": "\n".join(lines),
+            "color": COLORS["new"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
     # 2. 🕵️ STEALTH MODEL DETECTED
     for m in report.hidden_models[:SECTION_LIMIT]:
         rank = fmt_rank(m.get("rank"))
-        badges = ["❓ Unannounced Org", "🧪 Experimental", f"🏆 {rank}"]
-        embeds.append(
-            create_model_card_embed(
-                header_tag="🕵️ STEALTH MODEL DETECTED",
-                color=COLORS["stealth"],
-                model=m,
-                subtitle="A new unannounced model is being tested in the arena.",
-                badges=badges,
-            )
-        )
+        caps = format_capability_lines(m)
+
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+            "🏢 **Status:** *Unannounced / Stealth Test Model*",
+            "",
+            f"📊 **Arena Rank:** **{rank}**",
+            "",
+            "🛠️ **Capabilities:**",
+            caps,
+            "",
+            "🆔 **Model ID:**",
+            f"`{m['id']}`",
+        ]
+
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🕵️ STEALTH MODEL DETECTED",
+            "url": ARENA_URL,
+            "description": "\n".join(lines),
+            "color": COLORS["stealth"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
     # 3. 🧬 NEW MODEL VARIANT
     for m in report.variants[:SECTION_LIMIT]:
         org = val_or_dash(m.get("organization"))
         rank = fmt_rank(m.get("rank"))
-        badges = [f"🏢 {org}", f"🧬 Base: {m.get('publicName')}", f"🏆 {rank}"]
-        embeds.append(
-            create_model_card_embed(
-                header_tag="🧬 NEW MODEL VARIANT",
-                color=COLORS["variant"],
-                model=m,
-                subtitle="A new instance or prompt variant has been deployed.",
-                badges=badges,
-            )
-        )
+        caps = format_capability_lines(m)
+
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+            f"🧬 **Base Model:** `{m.get('publicName')}`",
+            "",
+            f"🏢 **Organization:** **{org}**",
+            "",
+            f"📊 **Arena Rank:** **{rank}**",
+            "",
+            "🛠️ **Capabilities:**",
+            caps,
+            "",
+            "🆔 **Model ID:**",
+            f"`{m['id']}`",
+        ]
+
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🧬 NEW MODEL VARIANT",
+            "url": ARENA_URL,
+            "description": "\n".join(lines),
+            "color": COLORS["variant"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
     # 4. 🔄 MODEL RENAME
     for item in report.name_updates[:SECTION_LIMIT]:
         old_name = val_or_dash(item["old"].get("displayName") or item["old"].get("publicName"))
         new_name = val_or_dash(item["new"].get("displayName") or item["new"].get("publicName"))
-        desc = (
-            f"### Model Renamed\n"
-            f"*The model display or public name has been updated.*\n\n"
-            f"> ` {old_name} `  ➔  **` {new_name} `**\n\n"
-            f"**Model ID:**\n"
-            f"```{item['id']}```"
-        )
+
+        lines = [
+            f"### [{new_name}]({ARENA_URL})",
+            "",
+            "⬅️ **Previous Name:**",
+            f"`{old_name}`",
+            "",
+            "➡️ **Updated Name:**",
+            f"**`{new_name}`**",
+            "",
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ]
+
         embeds.append({
             "author": AUTHOR_INFO,
             "title": "🔄 MODEL RENAME",
             "url": ARENA_URL,
-            "description": desc,
+            "description": "\n".join(lines),
             "color": COLORS["rename"],
             "timestamp": now_iso,
             "footer": footer,
@@ -704,27 +714,37 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
     # 5. ⚙️ CAPABILITIES UPDATED
     for item in report.capability_updates[:SECTION_LIMIT]:
         m = item["new"]
-        gained = [f"` + {g} `" for g in sorted(item["gained_caps"])]
-        lost = [f"` - {l} `" for l in sorted(item["lost_caps"])]
+        gained = [f"`+{g}`" for g in sorted(item["gained_caps"])]
+        lost = [f"`-{l}`" for l in sorted(item["lost_caps"])]
 
-        diff_lines = []
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+        ]
+
         if gained:
-            diff_lines.append(f"**Added:** {' '.join(gained)}")
+            lines.extend([
+                "🟢 **Added Capabilities:**",
+                " • ".join(gained),
+                "",
+            ])
         if lost:
-            diff_lines.append(f"**Removed:** {' '.join(lost)}")
+            lines.extend([
+                "🔴 **Removed Capabilities:**",
+                " • ".join(lost),
+                "",
+            ])
 
-        desc = (
-            f"### [{disp(m)}]({ARENA_URL})\n"
-            f"*Capabilities have been updated for this model.*\n\n"
-            f"{chr(10).join(diff_lines)}\n\n"
-            f"**Model ID:**\n"
-            f"```{item['id']}```"
-        )
+        lines.extend([
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ])
+
         embeds.append({
             "author": AUTHOR_INFO,
             "title": "⚙️ CAPABILITIES UPDATED",
             "url": ARENA_URL,
-            "description": desc,
+            "description": "\n".join(lines),
             "color": COLORS["capability"],
             "timestamp": now_iso,
             "footer": footer,
@@ -732,17 +752,21 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
 
     # 6. 🆔 ID ROTATION DETECTED
     for old_m, new_m in report.id_rotations[:SECTION_LIMIT]:
-        desc = (
-            f"### [{disp(new_m)}]({ARENA_URL})\n"
-            f"*Backend ID rotated while model identity remained identical.*\n\n"
-            f"**Previous ID:**\n`{old_m['id']}`\n\n"
-            f"**New ID:**\n`{new_m['id']}`"
-        )
+        lines = [
+            f"### [{disp(new_m)}]({ARENA_URL})",
+            "",
+            "⬅️ **Previous Model ID:**",
+            f"`{old_m['id']}`",
+            "",
+            "➡️ **New Model ID:**",
+            f"**`{new_m['id']}`**",
+        ]
+
         embeds.append({
             "author": AUTHOR_INFO,
             "title": "🆔 ID ROTATION DETECTED",
             "url": ARENA_URL,
-            "description": desc,
+            "description": "\n".join(lines),
             "color": COLORS["rotation"],
             "timestamp": now_iso,
             "footer": footer,
@@ -753,18 +777,25 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
         o, n = item["old"], item["new"]
         old_r = fmt_rank(o.get("rank"))
         new_r = fmt_rank(n.get("rank"))
-        desc = (
-            f"### [{disp(n)}]({ARENA_URL})\n"
-            f"*Model leaderboard position has updated on Chat Arena.*\n\n"
-            f"> ` {old_r} `  ➔  **` {new_r} `**\n\n"
-            f"**Model ID:**\n"
-            f"```{item['id']}```"
-        )
+
+        lines = [
+            f"### [{disp(n)}]({ARENA_URL})",
+            "",
+            "⬅️ **Previous Rank:**",
+            f"`{old_r}`",
+            "",
+            "➡️ **New Rank:**",
+            f"**`{new_r}`**",
+            "",
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ]
+
         embeds.append({
             "author": AUTHOR_INFO,
             "title": "📊 ARENA RANK SHIFT",
             "url": ARENA_URL,
-            "description": desc,
+            "description": "\n".join(lines),
             "color": COLORS["rank"],
             "timestamp": now_iso,
             "footer": footer,
@@ -773,25 +804,33 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
     # 8. 🏢 ORGANIZATION / PROVIDER UPDATE
     for item in report.org_updates[:SECTION_LIMIT] + report.provider_updates[:SECTION_LIMIT]:
         m = item["new"]
-        diffs = [
-            f"• **{FIELD_LABELS.get(f, f)}:** ` {val_or_dash(ov)} ` ➔ **` {val_or_dash(nv)} `**"
-            for f, ov, nv in item["diffs"]
-            if ov != nv
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
         ]
-        if not diffs:
-            continue
-        desc = (
-            f"### [{disp(m)}]({ARENA_URL})\n"
-            f"*Vendor organization or backend provider metadata has changed.*\n\n"
-            f"{chr(10).join(diffs)}\n\n"
-            f"**Model ID:**\n"
-            f"```{item['id']}```"
-        )
+
+        for f, ov, nv in item["diffs"]:
+            if ov != nv:
+                label = FIELD_LABELS.get(f, f)
+                lines.extend([
+                    f"⬅️ **Previous {label}:**",
+                    f"`{val_or_dash(ov)}`",
+                    "",
+                    f"➡️ **Updated {label}:**",
+                    f"**`{val_or_dash(nv)}`**",
+                    "",
+                ])
+
+        lines.extend([
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ])
+
         embeds.append({
             "author": AUTHOR_INFO,
             "title": "🏢 METADATA UPDATED",
             "url": ARENA_URL,
-            "description": desc,
+            "description": "\n".join(lines),
             "color": COLORS["org"],
             "timestamp": now_iso,
             "footer": footer,
@@ -801,18 +840,23 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
     for m in report.removed_models[:SECTION_LIMIT]:
         org = val_or_dash(m.get("organization"))
         rank = fmt_rank(m.get("rank"))
-        desc = (
-            f"### {disp(m)}\n"
-            f"*This model has been retired or delisted from the Arena.*\n\n"
-            f"` 🏢 {org} `  ` 🏆 Last Rank: {rank} `\n\n"
-            f"**Model ID:**\n"
-            f"```{m['id']}```"
-        )
+
+        lines = [
+            f"### {disp(m)}",
+            "",
+            f"🏢 **Organization:** **{org}**",
+            "",
+            f"📊 **Final Rank:** **{rank}**",
+            "",
+            "🆔 **Model ID:**",
+            f"`{m['id']}`",
+        ]
+
         embeds.append({
             "author": AUTHOR_INFO,
             "title": "❌ MODEL DELISTED",
             "url": ARENA_URL,
-            "description": desc,
+            "description": "\n".join(lines),
             "color": COLORS["removed"],
             "timestamp": now_iso,
             "footer": footer,
@@ -861,7 +905,7 @@ def send_discord_text(text: str, color: int = COLORS["brand"]) -> None:
             "description": text,
             "color": color,
             "timestamp": now_iso,
-            "footer": {"text": "LMSYS Arena Tracker • canaryarena.ai"},
+            "footer": {"text": "Canary Arena • canaryarena.ai"},
         }]
     })
 
@@ -881,7 +925,7 @@ def main() -> None:
         alert_state = load_alert_state()
         if not alert_state.get("broken_notified"):
             send_discord_text(
-                f"⚠️ **Arena Fetch Incomplete**\n{status_msg}\n*Skipping snapshot update to protect baseline.*",
+                f"⚠️ **Arena Fetch Incomplete**\n\n{status_msg}\n\n*Skipping snapshot update to protect baseline.*",
                 color=COLORS["warning"],
             )
             alert_state["broken_notified"] = True
@@ -898,7 +942,7 @@ def main() -> None:
     if old_snapshot is None:
         save_snapshot(new_snapshot)
         send_discord_text(
-            f"✅ **Arena Tracker Initialized**\nLoaded `{len(new_snapshot)}` models from `{ARENA_URL}` as baseline.\nAlerts will trigger starting from the next change.",
+            f"✅ **Arena Tracker Initialized**\n\nLoaded `{len(new_snapshot)}` models from `{ARENA_URL}` as baseline.\n\nAlerts will trigger starting from the next change.",
             color=COLORS["new"],
         )
         print("Initial baseline snapshot saved.")
