@@ -6,6 +6,8 @@ Clean, spacious layout with zero clutter:
 - All filler paragraphs removed
 - Every piece of information on its own dedicated line
 - Generous blank-line spacing between every property
+- Independent detection: multiple changes on the same model are all captured
+- Dedicated alerts for User Selectable (Direct Selection Enabled / Disabled)
 - Clear, readable bold labels and inline code tags
 - 100% responsive and readable on both Desktop and Mobile (Light & Dark modes)
 """
@@ -36,7 +38,7 @@ DISCORD_WEBHOOK_URL = (
     or ""
 ).strip()
 
-TRACK_RANK = os.environ.get("TRACK_RANK", "false").lower() == "true"
+TRACK_RANK = os.environ.get("TRACK_RANK", "true").lower() == "true"
 
 SECTION_LIMIT = 15            # Maximum individual cards per event type in single run
 UNRANKED = 9007199254740991   # JS Number.MAX_SAFE_INTEGER
@@ -86,6 +88,8 @@ COLORS = {
     "rank": 0x34495E,      # Dark Navy
     "org": 0xF1C40F,       # Sunflower Yellow
     "provider": 0xE67E22,  # Carrot Orange
+    "enabled": 0x2ECC71,   # Bright Green
+    "disabled": 0xE74C3C,  # Red
     "removed": 0xE74C3C,   # Red
     "warning": 0xE67E22,   # Amber Warning
     "brand": 0x5865F2,     # Brand
@@ -425,6 +429,8 @@ class ModelChangeReport:
         self.org_updates: List[Dict[str, Any]] = []
         self.provider_updates: List[Dict[str, Any]] = []
         self.capability_updates: List[Dict[str, Any]] = []
+        self.selectable_enabled: List[Dict[str, Any]] = []
+        self.selectable_disabled: List[Dict[str, Any]] = []
         self.id_rotations: List[Tuple[Dict[str, Any], Dict[str, Any]]] = []
         self.rank_updates: List[Dict[str, Any]] = []
         self.removed_models: List[Dict[str, Any]] = []
@@ -438,6 +444,8 @@ class ModelChangeReport:
             self.org_updates,
             self.provider_updates,
             self.capability_updates,
+            self.selectable_enabled,
+            self.selectable_disabled,
             self.id_rotations,
             self.rank_updates,
             self.removed_models,
@@ -452,7 +460,8 @@ def detect_changes(
     Performs deep diff between old and new model snapshots:
     - Multi-pass ID rotation pairing
     - Categorization into new, stealth, and variant models
-    - Existing model attribute updates (names, orgs, providers, capabilities, ranks)
+    - Existing model attribute updates (names, orgs, providers, capabilities, userSelectable, ranks)
+    - Non-exclusive evaluation: if a model has multiple updates, all are captured
     - Removals
     """
     report = ModelChangeReport()
@@ -526,7 +535,7 @@ def detect_changes(
             report.new_models.append(m)
 
     # --------------------------------------------------------------------------
-    # 3. Diff Existing Models
+    # 3. Diff Existing Models (Independent evaluation, no changes dropped)
     # --------------------------------------------------------------------------
     for mid in sorted(common_ids):
         o = old[mid]
@@ -545,7 +554,6 @@ def detect_changes(
         if TRACK_RANK:
             old_rank_str = fmt_rank(o.get("rank"))
             new_rank_str = fmt_rank(n.get("rank"))
-            # Crucial: Only alert if there is a real visible shift! Never alert unranked -> unranked!
             if old_rank_str != new_rank_str:
                 rank_changed = True
 
@@ -563,15 +571,34 @@ def detect_changes(
         }
 
         changed_fields = {f for f, _, _ in field_diffs}
+
+        # 3a. Name Updates
         if changed_fields & {"publicName", "displayName", "name"}:
             report.name_updates.append(item)
-        elif "organization" in changed_fields:
+
+        # 3b. Organization Updates
+        if "organization" in changed_fields:
             report.org_updates.append(item)
-        elif "provider" in changed_fields:
+
+        # 3c. Provider Updates
+        if "provider" in changed_fields:
             report.provider_updates.append(item)
-        elif gained_caps or lost_caps:
+
+        # 3d. User Selectable (Direct Selection) Toggle
+        if "userSelectable" in changed_fields:
+            old_sel = bool(o.get("userSelectable"))
+            new_sel = bool(n.get("userSelectable"))
+            if new_sel and not old_sel:
+                report.selectable_enabled.append(item)
+            elif old_sel and not new_sel:
+                report.selectable_disabled.append(item)
+
+        # 3e. Capability Updates
+        if gained_caps or lost_caps:
             report.capability_updates.append(item)
-        elif rank_changed:
+
+        # 3f. Rank Updates
+        if rank_changed:
             report.rank_updates.append(item)
 
     return report
@@ -711,7 +738,117 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
             "footer": footer,
         })
 
-    # 5. ⚙️ CAPABILITIES UPDATED
+    # 5. 🏢 ORGANIZATION UPDATE
+    for item in report.org_updates[:SECTION_LIMIT]:
+        m = item["new"]
+        old_org = val_or_dash(item["old"].get("organization"))
+        new_org = val_or_dash(item["new"].get("organization"))
+
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+            "⬅️ **Previous Organization:**",
+            f"`{old_org}`",
+            "",
+            "➡️ **Updated Organization:**",
+            f"**`{new_org}`**",
+            "",
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ]
+
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🏢 ORGANIZATION UPDATE",
+            "url": ARENA_URL,
+            "description": "\n".join(lines),
+            "color": COLORS["org"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 6. 🏭 PROVIDER UPDATE
+    for item in report.provider_updates[:SECTION_LIMIT]:
+        m = item["new"]
+        old_prov = val_or_dash(item["old"].get("provider"))
+        new_prov = val_or_dash(item["new"].get("provider"))
+
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+            "⬅️ **Previous Provider:**",
+            f"`{old_prov}`",
+            "",
+            "➡️ **Updated Provider:**",
+            f"**`{new_prov}`**",
+            "",
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ]
+
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🏭 PROVIDER UPDATE",
+            "url": ARENA_URL,
+            "description": "\n".join(lines),
+            "color": COLORS["provider"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 7. 🟢 DIRECT SELECTION ENABLED
+    for item in report.selectable_enabled[:SECTION_LIMIT]:
+        m = item["new"]
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+            "🔘 **User Selectable:**",
+            "`false` ➔ **`true`**",
+            "",
+            "ℹ️ **Status:**",
+            "Now directly selectable by users in Chat Arena.",
+            "",
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ]
+
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🟢 DIRECT SELECTION ENABLED",
+            "url": ARENA_URL,
+            "description": "\n".join(lines),
+            "color": COLORS["enabled"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 8. 🔴 DIRECT SELECTION DISABLED
+    for item in report.selectable_disabled[:SECTION_LIMIT]:
+        m = item["new"]
+        lines = [
+            f"### [{disp(m)}]({ARENA_URL})",
+            "",
+            "🔘 **User Selectable:**",
+            "`true` ➔ **`false`**",
+            "",
+            "ℹ️ **Status:**",
+            "Direct user selection has been disabled.",
+            "",
+            "🆔 **Model ID:**",
+            f"`{item['id']}`",
+        ]
+
+        embeds.append({
+            "author": AUTHOR_INFO,
+            "title": "🔴 DIRECT SELECTION DISABLED",
+            "url": ARENA_URL,
+            "description": "\n".join(lines),
+            "color": COLORS["disabled"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
+
+    # 9. ⚙️ CAPABILITIES UPDATED
     for item in report.capability_updates[:SECTION_LIMIT]:
         m = item["new"]
         gained = [f"`+{g}`" for g in sorted(item["gained_caps"])]
@@ -750,7 +887,7 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
             "footer": footer,
         })
 
-    # 6. 🆔 ID ROTATION DETECTED
+    # 10. 🆔 ID ROTATION DETECTED
     for old_m, new_m in report.id_rotations[:SECTION_LIMIT]:
         lines = [
             f"### [{disp(new_m)}]({ARENA_URL})",
@@ -772,7 +909,7 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
             "footer": footer,
         })
 
-    # 7. 📊 ARENA RANK SHIFT
+    # 11. 📊 ARENA RANK SHIFT
     for item in report.rank_updates[:SECTION_LIMIT]:
         o, n = item["old"], item["new"]
         old_r = fmt_rank(o.get("rank"))
@@ -801,42 +938,7 @@ def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
             "footer": footer,
         })
 
-    # 8. 🏢 ORGANIZATION / PROVIDER UPDATE
-    for item in report.org_updates[:SECTION_LIMIT] + report.provider_updates[:SECTION_LIMIT]:
-        m = item["new"]
-        lines = [
-            f"### [{disp(m)}]({ARENA_URL})",
-            "",
-        ]
-
-        for f, ov, nv in item["diffs"]:
-            if ov != nv:
-                label = FIELD_LABELS.get(f, f)
-                lines.extend([
-                    f"⬅️ **Previous {label}:**",
-                    f"`{val_or_dash(ov)}`",
-                    "",
-                    f"➡️ **Updated {label}:**",
-                    f"**`{val_or_dash(nv)}`**",
-                    "",
-                ])
-
-        lines.extend([
-            "🆔 **Model ID:**",
-            f"`{item['id']}`",
-        ])
-
-        embeds.append({
-            "author": AUTHOR_INFO,
-            "title": "🏢 METADATA UPDATED",
-            "url": ARENA_URL,
-            "description": "\n".join(lines),
-            "color": COLORS["org"],
-            "timestamp": now_iso,
-            "footer": footer,
-        })
-
-    # 9. ❌ MODEL DELISTED
+    # 12. ❌ MODEL DELISTED
     for m in report.removed_models[:SECTION_LIMIT]:
         org = val_or_dash(m.get("organization"))
         rank = fmt_rank(m.get("rank"))

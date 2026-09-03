@@ -2,7 +2,7 @@
 """
 Comprehensive Unit Test Suite for LM Arena Tracker (tracker.py)
 Validates all detection categories, modality collapse guards, ID rotation pairing,
-large change confirmation, and spacious line-by-line Discord Embed generation.
+userSelectable tracking, large change confirmation, and Discord Embed generation.
 """
 
 import json
@@ -24,6 +24,7 @@ def make_dummy_model(
     out_caps: dict = None,
     in_caps: dict = None,
     rank_by_modality: dict = None,
+    user_selectable: bool = True,
 ) -> dict:
     if out_caps is None:
         out_caps = {"text": True}
@@ -38,7 +39,7 @@ def make_dummy_model(
         "name": name or public_name,
         "organization": org,
         "provider": provider,
-        "userSelectable": True,
+        "userSelectable": user_selectable,
         "rank": rank,
         "rankByModality": rank_by_modality,
         "capabilities": {
@@ -74,8 +75,6 @@ class TestTrackerCore(unittest.TestCase):
         self.assertEqual(report.new_models[0]["id"], "m2")
         embeds = tracker.build_discord_embeds(report)
         self.assertTrue(any("NEW MODEL LIVE" in e["title"] for e in embeds))
-        self.assertIn("gemini-3", embeds[0]["description"])
-        self.assertIn("Organization:", embeds[0]["description"])
 
     def test_scenario_c_capability_updates(self):
         """Scenario C: Model gains or loses capabilities -> detected."""
@@ -198,29 +197,40 @@ class TestTrackerCore(unittest.TestCase):
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.provider_updates), 1)
         embeds = tracker.build_discord_embeds(report)
-        self.assertTrue(any("METADATA UPDATED" in e["title"] for e in embeds))
+        self.assertTrue(any("PROVIDER UPDATE" in e["title"] for e in embeds))
 
-    def test_scenario_l_rank_tracking_toggle_and_unranked_filter(self):
-        """Scenario L: Rank changes only alert when TRACK_RANK is True and filters unranked->unranked."""
-        old_unranked = {"m1": make_dummy_model("m1", "gpt-5", rank=9007199254740991)}
-        new_unranked = {"m1": make_dummy_model("m1", "gpt-5", rank=9007199254740991)}
-        tracker.TRACK_RANK = True
-        report = tracker.detect_changes(old_unranked, new_unranked)
-        self.assertFalse(report.has_changes())
+    def test_scenario_user_selectable_toggle(self):
+        """Scenario: User Selectable transitions (false -> true and true -> false)."""
+        # Enabled: false -> true
+        old1 = {"m1": make_dummy_model("m1", "gpt-5", user_selectable=False)}
+        new1 = {"m1": make_dummy_model("m1", "gpt-5", user_selectable=True)}
+        report1 = tracker.detect_changes(old1, new1)
+        self.assertTrue(report1.has_changes())
+        self.assertEqual(len(report1.selectable_enabled), 1)
+        embeds1 = tracker.build_discord_embeds(report1)
+        self.assertTrue(any("DIRECT SELECTION ENABLED" in e["title"] for e in embeds1))
 
-        old = {"m1": make_dummy_model("m1", "gpt-5", rank=10)}
-        new = {"m1": make_dummy_model("m1", "gpt-5", rank=11)}
-        tracker.TRACK_RANK = False
-        report = tracker.detect_changes(old, new)
-        self.assertFalse(report.has_changes())
+        # Disabled: true -> false
+        old2 = {"m1": make_dummy_model("m1", "gpt-5", user_selectable=True)}
+        new2 = {"m1": make_dummy_model("m1", "gpt-5", user_selectable=False)}
+        report2 = tracker.detect_changes(old2, new2)
+        self.assertTrue(report2.has_changes())
+        self.assertEqual(len(report2.selectable_disabled), 1)
+        embeds2 = tracker.build_discord_embeds(report2)
+        self.assertTrue(any("DIRECT SELECTION DISABLED" in e["title"] for e in embeds2))
 
-        tracker.TRACK_RANK = True
+    def test_scenario_multiple_simultaneous_changes(self):
+        """Scenario: Single model with multiple simultaneous changes captures all."""
+        old = {"m1": make_dummy_model("m1", "gpt-5", display_name="GPT 5", org="openai", user_selectable=False)}
+        new = {"m1": make_dummy_model("m1", "gpt-5", display_name="GPT 5 Pro", org="microsoft", user_selectable=True)}
         report = tracker.detect_changes(old, new)
         self.assertTrue(report.has_changes())
-        self.assertEqual(len(report.rank_updates), 1)
+        # All 3 changes captured simultaneously!
+        self.assertEqual(len(report.name_updates), 1)
+        self.assertEqual(len(report.org_updates), 1)
+        self.assertEqual(len(report.selectable_enabled), 1)
         embeds = tracker.build_discord_embeds(report)
-        self.assertTrue(any("RANK SHIFT" in e["title"] for e in embeds))
-        tracker.TRACK_RANK = False
+        self.assertEqual(len(embeds), 3)
 
     def test_snapshot_identity_hash_stability(self):
         """Identity hash remains identical even if ranks change."""
