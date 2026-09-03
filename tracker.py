@@ -1,33 +1,32 @@
 #!/usr/bin/env python3
 """
-LM Arena (arena.ai) Model Tracker - Ground-Up Rebuild
+LM Arena Model Tracker - Discord Rich UI Edition
 
-Monitors Arena model metadata every minute and sends clean, high-priority
-Telegram alerts when genuine changes occur:
-- 🆕 Brand new models
-- 🕵️ Hidden / stealth test models
-- 🧬 New variants of existing models
-- ✏️ Name / display-name / model-name updates
-- 🏢 Organization updates
-- 🏭 Provider updates
-- ⚡ Capability updates (input & output modalities)
-- 🆔 ID rotations (with smart multi-pass identity pairing)
-- 📊 Rank updates (when TRACK_RANK=true)
-- ❌ Genuine model removals
+Monitors canaryarena.ai model metadata every minute and sends clean, rich
+Discord Webhook Embed alerts when genuine changes occur:
+- 🆕 Brand new models (Green embed)
+- 🕵️ Hidden / stealth test models (Purple embed)
+- 🧬 New variants of existing models (Teal embed)
+- ✏️ Name / display-name updates (Blue embed)
+- 🏢 Organization updates (Gold embed)
+- 🏭 Provider updates (Orange embed)
+- ⚡ Capability updates (Yellow embed)
+- 🆔 ID rotations (Blurple embed)
+- 📊 Rank updates (Navy embed)
+- ❌ Genuine model removals (Red embed)
 
 Engineered for 1-minute execution intervals with:
 - Modality health validation (prevents false alerts on partial SSR drops)
 - In-memory auto-retry on transient backend dropouts
 - Stable identity-based batch confirmation for large churn (>20 models)
 - Anti-flapping snapshot protection
-- Rich, clean Telegram HTML formatting with smart chunking
+- Rich Discord Embed UI formatting with automatic batching
 """
 
 from __future__ import annotations
 
 import datetime
 import hashlib
-import html as _html
 import json
 import os
 import random
@@ -40,16 +39,19 @@ import requests
 # ==============================================================================
 # Configuration
 # ==============================================================================
-ARENA_URL = "https://arena.ai/"
+ARENA_URL = os.environ.get("ARENA_URL", "https://canaryarena.ai/").strip()
 SNAPSHOT_FILE = "snapshot.json"
 ALERT_STATE_FILE = ".arena_alert_state.json"
 
-TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "").strip()
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+DISCORD_WEBHOOK_URL = (
+    os.environ.get("DISCORD_WEBHOOK_URL")
+    or os.environ.get("DISCORD_WEBHOOK")
+    or ""
+).strip()
+
 TRACK_RANK = os.environ.get("TRACK_RANK", "false").lower() == "true"
 
-MAX_TELEGRAM_LEN = 4000       # Telegram hard limit is 4096
-SECTION_LIMIT = 20            # Limit per section in Telegram alerts
+SECTION_LIMIT = 20            # Limit per section in alerts
 UNRANKED = 9007199254740991   # JS Number.MAX_SAFE_INTEGER
 
 # Thresholds for large change confirmation & modality collapse
@@ -86,6 +88,22 @@ MODALITY_NORMALIZER = {
     "search": "search",
 }
 
+# Discord Embed Color Palette
+COLORS = {
+    "brand": 0x5865F2,     # Discord Blurple
+    "new": 0x2ECC71,       # Emerald Green
+    "stealth": 0x9B59B6,   # Amethyst Purple
+    "variant": 0x1ABC9C,   # Turquoise / Teal
+    "rename": 0x3498DB,    # Sky Blue
+    "org": 0xF1C40F,       # Sunflower Yellow
+    "provider": 0xE67E22,  # Carrot Orange
+    "capability": 0xF39C12,# Orange Gold
+    "rotation": 0x7289DA,  # Pastel Blurple
+    "rank": 0x34495E,      # Wet Asphalt Dark Blue
+    "removed": 0xE74C3C,   # Alizarin Red
+    "warning": 0xE67E22,   # Warning Amber
+}
+
 
 # ==============================================================================
 # Model Normalization & Capability Helpers
@@ -93,13 +111,11 @@ MODALITY_NORMALIZER = {
 def get_model_modalities(model: Dict[str, Any]) -> Set[str]:
     """Return set of normalized modalities for a model (chat, webdev, image, video, search)."""
     mods = set()
-    # 1. Output capabilities
     caps = (model.get("capabilities") or {}).get("outputCapabilities") or {}
     for k, v in caps.items():
         if v:
             norm = MODALITY_NORMALIZER.get(k.lower(), k.lower())
             mods.add(norm)
-    # 2. Modality ranks
     for k in (model.get("rankByModality") or {}).keys():
         norm = MODALITY_NORMALIZER.get(k.lower(), k.lower())
         mods.add(norm)
@@ -130,31 +146,23 @@ def flatten_caps(model: Dict[str, Any]) -> Set[str]:
     return result
 
 
-def esc(val: Any) -> str:
-    """Escape special characters for Telegram HTML mode."""
-    if val is None:
-        return ""
-    return _html.escape(str(val), quote=False)
-
-
 def disp(model: Dict[str, Any]) -> str:
     """Return friendly model display name."""
-    name = model.get("displayName") or model.get("publicName") or model.get("id") or "Unknown"
-    return esc(name)
+    return str(model.get("displayName") or model.get("publicName") or model.get("id") or "Unknown")
 
 
 def val_or_dash(val: Any) -> str:
-    return "—" if val is None or val == "" else esc(val)
+    return "—" if val is None or str(val).strip() == "" else str(val)
 
 
 def arrow(old_val: Any, new_val: Any) -> str:
-    return f"{val_or_dash(old_val)} ➡️ {val_or_dash(new_val)}"
+    return f"{val_or_dash(old_val)} ➔ {val_or_dash(new_val)}"
 
 
 def fmt_rank(rank_val: Any) -> str:
     if rank_val is None or rank_val == UNRANKED:
         return "unranked"
-    return esc(rank_val)
+    return f"#{rank_val}"
 
 
 # ==============================================================================
@@ -208,7 +216,7 @@ def extract_json_array(text: str, key: str = '"initialModels":') -> Optional[str
 
 
 def fetch_arena_html() -> str:
-    """Fetch arena.ai homepage HTML using cloudscraper (or requests fallback)."""
+    """Fetch canaryarena.ai homepage HTML using cloudscraper (or requests fallback)."""
     try:
         import cloudscraper
         has_cloudscraper = True
@@ -250,7 +258,7 @@ def fetch_arena_html() -> str:
         print(f"fetch attempt {attempt + 1} failed ({last_err}), retrying in {wait_sec:.1f}s")
         time.sleep(wait_sec)
 
-    raise RuntimeError(f"Failed to fetch arena.ai after 8 attempts: {last_err}")
+    raise RuntimeError(f"Failed to fetch {ARENA_URL} after 8 attempts: {last_err}")
 
 
 def parse_models_from_html(html: str) -> Dict[str, Dict[str, Any]]:
@@ -258,7 +266,7 @@ def parse_models_from_html(html: str) -> Dict[str, Dict[str, Any]]:
     decoded = decode_nextjs_payload(html)
     raw_array = extract_json_array(decoded) or extract_json_array(html)
     if not raw_array:
-        raise RuntimeError("initialModels array not found in arena.ai page")
+        raise RuntimeError("initialModels array not found in arena page")
     models = json.loads(raw_array)
     return {
         m["id"]: m
@@ -283,7 +291,6 @@ def check_modality_health(
         return False, "Empty model response (0 models)"
 
     if not old_models:
-        # First run baseline: ensure minimum expected model count
         if len(new_models) < 100:
             return False, f"Baseline model count suspiciously low ({len(new_models)} models)"
         return True, "Baseline OK"
@@ -319,7 +326,7 @@ def check_modality_health(
 
 def get_models(old_models: Optional[Dict[str, Dict[str, Any]]]) -> Tuple[Dict[str, Dict[str, Any]], bool, str]:
     """
-    Fetches models from arena.ai with instant retry if an extracted response
+    Fetches models from canaryarena.ai with instant retry if an extracted response
     fails modality health check.
     Returns: (models_dict, is_valid, status_msg)
     """
@@ -338,7 +345,6 @@ def get_models(old_models: Optional[Dict[str, Dict[str, Any]]]) -> Tuple[Dict[st
             last_err = str(e)
             time.sleep(4)
 
-    # If all retries produced an incomplete fetch, return the last parsed models with invalid flag
     try:
         models = parse_models_from_html(html)
         return models, False, last_err
@@ -403,12 +409,12 @@ class ModelChangeReport:
         self.new_models: List[Dict[str, Any]] = []
         self.hidden_models: List[Dict[str, Any]] = []
         self.variants: List[Dict[str, Any]] = []
-        self.name_updates: List[str] = []
-        self.org_updates: List[str] = []
-        self.provider_updates: List[str] = []
-        self.capability_updates: List[str] = []
+        self.name_updates: List[Dict[str, Any]] = []
+        self.org_updates: List[Dict[str, Any]] = []
+        self.provider_updates: List[Dict[str, Any]] = []
+        self.capability_updates: List[Dict[str, Any]] = []
         self.id_rotations: List[Tuple[Dict[str, Any], Dict[str, Any]]] = []
-        self.rank_updates: List[str] = []
+        self.rank_updates: List[Dict[str, Any]] = []
         self.removed_models: List[Dict[str, Any]] = []
 
     def has_changes(self) -> bool:
@@ -501,13 +507,10 @@ def detect_changes(
         pn = str(m.get("publicName") or "").strip()
 
         if not org:
-            # No organization = stealth / test / anonymous model
             report.hidden_models.append(m)
         elif pn in old_public_names:
-            # Model with known public name = new variant or instance
             report.variants.append(m)
         else:
-            # Brand new model
             report.new_models.append(m)
 
     # --------------------------------------------------------------------------
@@ -536,195 +539,312 @@ def detect_changes(
         if not field_diffs and not gained_caps and not lost_caps and not rank_changed:
             continue
 
-        # Format model block
-        lines = []
-        old_display, new_display = disp(o), disp(n)
-        if old_display != new_display:
-            lines.append(f"🔹 {old_display} ➡️ {new_display}")
-        else:
-            lines.append(f"🔹 {new_display}")
-        lines.append(f"<code>{esc(mid)}</code>")
+        item = {
+            "id": mid,
+            "old": o,
+            "new": n,
+            "diffs": field_diffs,
+            "gained_caps": gained_caps,
+            "lost_caps": lost_caps,
+            "rank_changed": rank_changed,
+        }
 
-        for field, old_val, new_val in field_diffs:
-            lines.append(f"• <b>{FIELD_LABELS.get(field, field)}</b>: {arrow(old_val, new_val)}")
-
-        if gained_caps or lost_caps:
-            lines.append("• <b>Capabilities</b>:")
-            for cap in sorted(gained_caps):
-                lines.append(f"  ➕ {esc(cap)}")
-            for cap in sorted(lost_caps):
-                lines.append(f"  ➖ {esc(cap)}")
-
-        if rank_changed:
-            lines.append(f"• <b>Rank</b>: {fmt_rank(o.get('rank'))} ➡️ {fmt_rank(n.get('rank'))}")
-            old_mod_ranks = o.get("rankByModality") or {}
-            new_mod_ranks = n.get("rankByModality") or {}
-            all_mods = sorted(set(old_mod_ranks.keys()) | set(new_mod_ranks.keys()))
-            for mod in all_mods:
-                ov = old_mod_ranks.get(mod)
-                nv = new_mod_ranks.get(mod)
-                if ov != nv:
-                    lines.append(f"  • {esc(mod)}: {fmt_rank(ov)} ➡️ {fmt_rank(nv)}")
-
-        block = "\n".join(lines)
         changed_fields = {f for f, _, _ in field_diffs}
-
-        # Categorize change into dedicated section
         if changed_fields & {"publicName", "displayName", "name"}:
-            report.name_updates.append(block)
+            report.name_updates.append(item)
         elif "organization" in changed_fields:
-            report.org_updates.append(block)
+            report.org_updates.append(item)
         elif "provider" in changed_fields:
-            report.provider_updates.append(block)
+            report.provider_updates.append(item)
         elif gained_caps or lost_caps:
-            report.capability_updates.append(block)
+            report.capability_updates.append(item)
         else:
-            report.rank_updates.append(block)
+            report.rank_updates.append(item)
 
     return report
 
 
 # ==============================================================================
-# Telegram Message Formatting & Delivery
+# Discord Rich Embed Formatting & Webhook Delivery
 # ==============================================================================
-def format_model_card(model: Dict[str, Any], headline: Optional[str] = None) -> str:
-    """Full detail card for added, stealth, variant, or removed models."""
-    lines = []
-    if headline:
-        lines.append(f"🔹 <b>{esc(headline)}</b>")
-    else:
-        lines.append(f"🔹 <b>{disp(model)}</b>")
-    lines.append(f"<code>{esc(model['id'])}</code>")
+def format_embed_model_value(m: Dict[str, Any]) -> str:
+    """Formats a concise, high-density markdown block for a model."""
+    lines = [f"**ID:** `{m['id']}`"]
+    org = m.get("organization")
+    prov = m.get("provider")
+    meta_parts = []
+    if org:
+        meta_parts.append(f"**Org:** {org}")
+    if prov and prov != org:
+        meta_parts.append(f"**Provider:** {prov}")
+    if meta_parts:
+        lines.append(" • ".join(meta_parts))
 
-    for f in TRACKED_FIELDS:
-        val = model.get(f)
-        if val is not None or f in ("organization", "provider"):
-            lines.append(f"• <b>{FIELD_LABELS.get(f, f)}</b>: {val_or_dash(val)}")
+    caps = sorted(flatten_caps(m))
+    if caps:
+        caps_str = ", ".join(f"`{c}`" for c in caps[:6])
+        if len(caps) > 6:
+            caps_str += f" +{len(caps) - 6} more"
+        lines.append(f"**Caps:** {caps_str}")
 
-    caps = sorted(flatten_caps(model))
-    lines.append(f"• <b>Capabilities</b>: {esc(', '.join(caps)) if caps else 'none'}")
-    lines.append(f"• <b>Rank</b>: {fmt_rank(model.get('rank'))}")
+    rank_str = fmt_rank(m.get("rank"))
+    if rank_str != "unranked":
+        lines.append(f"**Rank:** {rank_str}")
+
     return "\n".join(lines)
 
 
-def compact_section(blocks: List[str], limit: int = SECTION_LIMIT) -> List[str]:
-    """Truncates blocks beyond limit to keep Telegram readable while noting total count."""
-    if len(blocks) <= limit:
-        return blocks
-    return blocks[:limit] + [f"🔹 <i>…and {len(blocks) - limit} more</i>"]
+def build_discord_embeds(report: ModelChangeReport) -> List[Dict[str, Any]]:
+    """Builds a rich array of Discord embed objects from the change report."""
+    embeds: List[Dict[str, Any]] = []
+    now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    footer = {"text": "Arena Tracker • canaryarena.ai"}
 
-
-def build_telegram_report(report: ModelChangeReport) -> Optional[str]:
-    """Assembles a rich HTML message from the change report."""
-    if not report.has_changes():
-        return None
-
-    sections: List[Tuple[str, int, List[str]]] = []
-
+    # 1. 🆕 Brand New Models
     if report.new_models:
-        cards = [format_model_card(m) for m in report.new_models]
-        sections.append(("🆕 <b>New models</b>", len(report.new_models), compact_section(cards)))
+        fields = []
+        for m in report.new_models[:SECTION_LIMIT]:
+            fields.append({
+                "name": f"✨ {disp(m)}",
+                "value": format_embed_model_value(m),
+                "inline": False,
+            })
+        if len(report.new_models) > SECTION_LIMIT:
+            fields.append({
+                "name": "…and more",
+                "value": f"*{len(report.new_models) - SECTION_LIMIT} additional new models omitted*",
+                "inline": False,
+            })
+        embeds.append({
+            "title": f"🆕 Brand New Models ({len(report.new_models)})",
+            "description": "New models added to the Arena with verified organizations.",
+            "color": COLORS["new"],
+            "fields": fields,
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 2. 🕵️ Hidden / Stealth Models
     if report.hidden_models:
-        cards = [format_model_card(m) for m in report.hidden_models]
-        sections.append(("🕵️ <b>Hidden / stealth models</b>", len(report.hidden_models), compact_section(cards)))
+        fields = []
+        for m in report.hidden_models[:SECTION_LIMIT]:
+            fields.append({
+                "name": f"🕵️ {disp(m)}",
+                "value": format_embed_model_value(m),
+                "inline": False,
+            })
+        if len(report.hidden_models) > SECTION_LIMIT:
+            fields.append({
+                "name": "…and more",
+                "value": f"*{len(report.hidden_models) - SECTION_LIMIT} additional stealth models omitted*",
+                "inline": False,
+            })
+        embeds.append({
+            "title": f"🕵️ Stealth / Hidden Models ({len(report.hidden_models)})",
+            "description": "Anonymous or test models detected without public organizations.",
+            "color": COLORS["stealth"],
+            "fields": fields,
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 3. 🧬 New Variants
     if report.variants:
-        cards = [format_model_card(m) for m in report.variants]
-        sections.append(("🧬 <b>New variants</b>", len(report.variants), compact_section(cards)))
+        fields = []
+        for m in report.variants[:SECTION_LIMIT]:
+            fields.append({
+                "name": f"🧬 {disp(m)} (Variant)",
+                "value": format_embed_model_value(m),
+                "inline": False,
+            })
+        if len(report.variants) > SECTION_LIMIT:
+            fields.append({
+                "name": "…and more",
+                "value": f"*{len(report.variants) - SECTION_LIMIT} additional variants omitted*",
+                "inline": False,
+            })
+        embeds.append({
+            "title": f"🧬 New Model Variants ({len(report.variants)})",
+            "description": "New instances sharing public names of existing models.",
+            "color": COLORS["variant"],
+            "fields": fields,
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 4. ✏️ Name Updates
     if report.name_updates:
-        sections.append(("✏️ <b>Name updates</b>", len(report.name_updates), compact_section(report.name_updates)))
+        lines = []
+        for item in report.name_updates[:SECTION_LIMIT]:
+            old_d, new_d = disp(item["old"]), disp(item["new"])
+            lines.append(f"• **{old_d}** ➔ **{new_d}**\n  `{item['id']}`")
+        if len(report.name_updates) > SECTION_LIMIT:
+            lines.append(f"*…and {len(report.name_updates) - SECTION_LIMIT} more*")
+        embeds.append({
+            "title": f"✏️ Name & Display Updates ({len(report.name_updates)})",
+            "description": "\n\n".join(lines),
+            "color": COLORS["rename"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 5. 🏢 Organization Updates
     if report.org_updates:
-        sections.append(("🏢 <b>Organization updates</b>", len(report.org_updates), compact_section(report.org_updates)))
+        lines = []
+        for item in report.org_updates[:SECTION_LIMIT]:
+            diffs = [f"{FIELD_LABELS.get(f, f)}: {arrow(ov, nv)}" for f, ov, nv in item["diffs"]]
+            lines.append(f"• **{disp(item['new'])}** (`{item['id']}`)\n  " + "\n  ".join(diffs))
+        if len(report.org_updates) > SECTION_LIMIT:
+            lines.append(f"*…and {len(report.org_updates) - SECTION_LIMIT} more*")
+        embeds.append({
+            "title": f"🏢 Organization Updates ({len(report.org_updates)})",
+            "description": "\n\n".join(lines),
+            "color": COLORS["org"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 6. 🏭 Provider Updates
     if report.provider_updates:
-        sections.append(("🏭 <b>Provider updates</b>", len(report.provider_updates), compact_section(report.provider_updates)))
+        lines = []
+        for item in report.provider_updates[:SECTION_LIMIT]:
+            diffs = [f"{FIELD_LABELS.get(f, f)}: {arrow(ov, nv)}" for f, ov, nv in item["diffs"]]
+            lines.append(f"• **{disp(item['new'])}** (`{item['id']}`)\n  " + "\n  ".join(diffs))
+        if len(report.provider_updates) > SECTION_LIMIT:
+            lines.append(f"*…and {len(report.provider_updates) - SECTION_LIMIT} more*")
+        embeds.append({
+            "title": f"🏭 Provider Updates ({len(report.provider_updates)})",
+            "description": "\n\n".join(lines),
+            "color": COLORS["provider"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 7. ⚡ Capability Updates
     if report.capability_updates:
-        sections.append(("⚡ <b>Capability updates</b>", len(report.capability_updates), compact_section(report.capability_updates)))
+        lines = []
+        for item in report.capability_updates[:SECTION_LIMIT]:
+            parts = [f"• **{disp(item['new'])}** (`{item['id']}`)"]
+            for g in sorted(item["gained_caps"]):
+                parts.append(f"  🟢 **+** `{g}`")
+            for l in sorted(item["lost_caps"]):
+                parts.append(f"  🔴 **-** `{l}`")
+            lines.append("\n".join(parts))
+        if len(report.capability_updates) > SECTION_LIMIT:
+            lines.append(f"*…and {len(report.capability_updates) - SECTION_LIMIT} more*")
+        embeds.append({
+            "title": f"⚡ Capability Updates ({len(report.capability_updates)})",
+            "description": "\n\n".join(lines),
+            "color": COLORS["capability"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 8. 🆔 ID Rotations
     if report.id_rotations:
-        rot_blocks = [
-            f"🔹 {disp(n)}\n<code>{esc(o['id'])}</code> ➡️ <code>{esc(n['id'])}</code>"
-            for o, n in report.id_rotations
-        ]
-        sections.append(("🆔 <b>ID rotations</b>", len(report.id_rotations), compact_section(rot_blocks)))
+        lines = []
+        for old_m, new_m in report.id_rotations[:SECTION_LIMIT]:
+            lines.append(
+                f"• **{disp(new_m)}**\n"
+                f"  `{old_m['id']}` ➔ `{new_m['id']}`"
+            )
+        if len(report.id_rotations) > SECTION_LIMIT:
+            lines.append(f"*…and {len(report.id_rotations) - SECTION_LIMIT} more*")
+        embeds.append({
+            "title": f"🆔 ID Rotations ({len(report.id_rotations)})",
+            "description": "Model IDs rotated while public identity remained identical.",
+            "color": COLORS["rotation"],
+            "fields": [{"name": "Rotated Identifiers", "value": "\n".join(lines)}],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 9. 📊 Rank Updates
     if report.rank_updates:
-        sections.append(("📊 <b>Rank updates</b>", len(report.rank_updates), compact_section(report.rank_updates)))
+        lines = []
+        for item in report.rank_updates[:SECTION_LIMIT]:
+            o, n = item["old"], item["new"]
+            lines.append(f"• **{disp(n)}**: {fmt_rank(o.get('rank'))} ➔ {fmt_rank(n.get('rank'))}")
+        if len(report.rank_updates) > SECTION_LIMIT:
+            lines.append(f"*…and {len(report.rank_updates) - SECTION_LIMIT} more*")
+        embeds.append({
+            "title": f"📊 Rank Updates ({len(report.rank_updates)})",
+            "description": "\n".join(lines),
+            "color": COLORS["rank"],
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
+    # 10. ❌ Removed Models
     if report.removed_models:
-        cards = [format_model_card(m) for m in report.removed_models]
-        sections.append(("❌ <b>Removed models</b>", len(report.removed_models), compact_section(cards)))
+        fields = []
+        for m in report.removed_models[:SECTION_LIMIT]:
+            fields.append({
+                "name": f"❌ {disp(m)}",
+                "value": format_embed_model_value(m),
+                "inline": False,
+            })
+        if len(report.removed_models) > SECTION_LIMIT:
+            fields.append({
+                "name": "…and more",
+                "value": f"*{len(report.removed_models) - SECTION_LIMIT} additional removed models omitted*",
+                "inline": False,
+            })
+        embeds.append({
+            "title": f"❌ Removed Models ({len(report.removed_models)})",
+            "description": "Models delisted or retired from the Arena.",
+            "color": COLORS["removed"],
+            "fields": fields,
+            "timestamp": now_iso,
+            "footer": footer,
+        })
 
-    if not sections:
-        return None
-
-    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%d %b %Y, %H:%M UTC")
-    message_parts = [
-        f"📡 <b>Arena Tracker</b>\n🗓 {esc(timestamp)}",
-        "━━━━━━━━━━━━━━━━━━━━",
-    ]
-
-    for title, count, blocks in sections:
-        header = f"{title} — <b>{count}</b>"
-        message_parts.append(header + "\n\n" + "\n\n".join(blocks))
-
-    return "\n\n".join(message_parts)
-
-
-def split_telegram_message(text: str, max_len: int = MAX_TELEGRAM_LEN) -> List[str]:
-    """Splits long text across paragraph boundaries respecting Telegram limits."""
-    if len(text) <= max_len:
-        return [text]
-
-    chunks: List[str] = []
-    current_chunk = ""
-
-    for paragraph in text.split("\n\n"):
-        candidate = paragraph if not current_chunk else current_chunk + "\n\n" + paragraph
-        if len(candidate) > max_len and current_chunk:
-            chunks.append(current_chunk)
-            current_chunk = paragraph
-        else:
-            current_chunk = candidate
-
-    if current_chunk:
-        chunks.append(current_chunk)
-
-    return chunks
+    return embeds
 
 
-def send_telegram(text: str) -> None:
-    """Sends message chunk to Telegram API. Prints to stdout in dry-run mode."""
-    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
-        print("\n[Telegram Dry-Run]\n" + text + "\n")
+def send_discord_payload(payload: Dict[str, Any]) -> None:
+    """Dispatches a JSON payload to the configured Discord webhook URL."""
+    if not DISCORD_WEBHOOK_URL:
+        print("\n[Discord Webhook Dry-Run]")
+        print(json.dumps(payload, indent=2))
         return
 
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": text,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": True,
-    }
     try:
-        r = requests.post(url, json=payload, timeout=30)
-        if r.status_code != 200:
-            print(f"Telegram send error: {r.status_code} {r.text[:300]}")
+        r = requests.post(DISCORD_WEBHOOK_URL, json=payload, timeout=30)
+        if r.status_code not in (200, 204):
+            print(f"Discord webhook error: {r.status_code} {r.text[:300]}")
     except Exception as e:
-        print(f"Telegram network exception: {e}")
+        print(f"Discord network exception: {e}")
 
 
-def notify_telegram(report_text: str) -> None:
-    """Splits and sends Telegram report with 1-second delay between chunks."""
-    chunks = split_telegram_message(report_text)
-    for i, chunk in enumerate(chunks):
-        send_telegram(chunk)
-        if i < len(chunks) - 1:
+def notify_discord_embeds(embeds: List[Dict[str, Any]]) -> None:
+    """
+    Sends Discord embeds in batches of up to 4 embeds per webhook message
+    to respect Discord rate limits and maximum payload sizing.
+    """
+    if not embeds:
+        return
+
+    # Discord allows max 10 embeds per message; batch in groups of 4 for clean reading
+    batch_size = 4
+    for i in range(0, len(embeds), batch_size):
+        chunk = embeds[i : i + batch_size]
+        send_discord_payload({"embeds": chunk})
+        if i + batch_size < len(embeds):
             time.sleep(1)
+
+
+def send_discord_text(text: str, color: int = COLORS["brand"]) -> None:
+    """Helper to send a simple embedded system alert to Discord."""
+    now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    send_discord_payload({
+        "embeds": [{
+            "description": text,
+            "color": color,
+            "timestamp": now_iso,
+            "footer": {"text": "Arena Tracker • canaryarena.ai"},
+        }]
+    })
 
 
 # ==============================================================================
@@ -734,18 +854,16 @@ def main() -> None:
     old_snapshot = load_snapshot()
     new_snapshot, is_valid, status_msg = get_models(old_snapshot)
 
-    print(f"Loaded old: {len(old_snapshot) if old_snapshot else 0} models | Fetched new: {len(new_snapshot)} models")
+    print(f"Loaded old: {len(old_snapshot) if old_snapshot else 0} models | Fetched new: {len(new_snapshot)} models ({ARENA_URL})")
 
     # 1. Modality & Sanity Guard: Protect against broken / partial fetches
     if not is_valid:
         print(f"⚠️ Fetch rejected: {status_msg}")
         alert_state = load_alert_state()
-        # Notify Telegram once per broken incident to prevent spamming every minute
         if not alert_state.get("broken_notified"):
-            send_telegram(
-                f"⚠️ <b>Arena Fetch Incomplete</b>\n"
-                f"{esc(status_msg)}\n"
-                f"Skipping update to preserve baseline snapshot."
+            send_discord_text(
+                f"⚠️ **Arena Fetch Incomplete**\n{status_msg}\n*Skipping snapshot update to protect baseline.*",
+                color=COLORS["warning"],
             )
             alert_state["broken_notified"] = True
             save_alert_state(alert_state)
@@ -760,16 +878,14 @@ def main() -> None:
     # 2. First Run: Initialize baseline
     if old_snapshot is None:
         save_snapshot(new_snapshot)
-        send_telegram(
-            f"✅ <b>Arena tracker started</b>\n"
-            f"Loaded {len(new_snapshot)} models as initial baseline.\n"
-            f"Alerts will trigger starting from the next change."
+        send_discord_text(
+            f"✅ **Arena Tracker Initialized**\nLoaded `{len(new_snapshot)}` models from `{ARENA_URL}` as baseline.\nAlerts will trigger starting from the next change.",
+            color=COLORS["new"],
         )
         print("Initial baseline snapshot saved.")
         return
 
     # 3. Large Churn Confirmation Guard
-    # If 20+ models are added or removed in a single minute, require persistence across 2 runs
     added_count = len(set(new_snapshot.keys()) - set(old_snapshot.keys()))
     removed_count = len(set(old_snapshot.keys()) - set(new_snapshot.keys()))
     is_large_batch = max(added_count, removed_count) >= LARGE_BATCH_THRESHOLD
@@ -802,7 +918,6 @@ def main() -> None:
         alert_state.pop("pending_large_count", None)
         save_alert_state(alert_state)
     elif alert_state.get("pending_large_hash"):
-        # A normal, non-large state cancels any unconfirmed pending batch
         alert_state.pop("pending_large_hash", None)
         alert_state.pop("pending_large_count", None)
         save_alert_state(alert_state)
@@ -810,10 +925,10 @@ def main() -> None:
     # 4. Deep Change Detection
     report = detect_changes(old_snapshot, new_snapshot)
     if report.has_changes():
-        message = build_telegram_report(report)
-        if message:
-            notify_telegram(message)
-            print("Changes detected and Telegram notification sent.")
+        embeds = build_discord_embeds(report)
+        if embeds:
+            notify_discord_embeds(embeds)
+            print(f"Changes detected: sent {len(embeds)} Discord embed(s).")
     else:
         print("No changes detected.")
 

@@ -2,7 +2,7 @@
 """
 Comprehensive Unit Test Suite for LM Arena Tracker (tracker.py)
 Validates all detection categories, modality collapse guards, ID rotation pairing,
-large change confirmation, and edge cases.
+large change confirmation, and Discord Embed generation.
 """
 
 import json
@@ -59,7 +59,7 @@ class TestTrackerCore(unittest.TestCase):
         new = json.loads(json.dumps(old))
         report = tracker.detect_changes(old, new)
         self.assertFalse(report.has_changes())
-        self.assertIsNone(tracker.build_telegram_report(report))
+        self.assertEqual(tracker.build_discord_embeds(report), [])
 
     def test_scenario_b_new_model(self):
         """Scenario B: 1 genuinely new model -> detected as new model."""
@@ -72,9 +72,8 @@ class TestTrackerCore(unittest.TestCase):
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.new_models), 1)
         self.assertEqual(report.new_models[0]["id"], "m2")
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("🆕 <b>New models</b>", msg)
-        self.assertIn("gemini-3", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("New Models" in e["title"] for e in embeds))
 
     def test_scenario_c_capability_updates(self):
         """Scenario C: Model gains or loses capabilities -> detected."""
@@ -90,10 +89,8 @@ class TestTrackerCore(unittest.TestCase):
         report = tracker.detect_changes(old, new)
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.capability_updates), 1)
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("⚡ <b>Capability updates</b>", msg)
-        self.assertIn("➕ in:image", msg)
-        self.assertIn("➕ out:search", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("Capability Updates" in e["title"] for e in embeds))
 
     def test_scenario_d_name_updates(self):
         """Scenario D: Model changes displayName or publicName -> detected."""
@@ -102,9 +99,8 @@ class TestTrackerCore(unittest.TestCase):
         report = tracker.detect_changes(old, new)
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.name_updates), 1)
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("✏️ <b>Name updates</b>", msg)
-        self.assertIn("GPT 5 Early ➡️ GPT-5 Turbo", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("Name & Display Updates" in e["title"] for e in embeds))
 
     def test_scenario_e_id_rotation(self):
         """Scenario E: ID rotation with identical publicName -> paired as rotation."""
@@ -119,9 +115,8 @@ class TestTrackerCore(unittest.TestCase):
         old_m, new_m = report.id_rotations[0]
         self.assertEqual(old_m["id"], "old-uuid-1")
         self.assertEqual(new_m["id"], "new-uuid-2")
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("🆔 <b>ID rotations</b>", msg)
-        self.assertIn("old-uuid-1</code> ➡️ <code>new-uuid-2", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("ID Rotations" in e["title"] for e in embeds))
 
     def test_scenario_f_stealth_model(self):
         """Scenario F: Model with no organization -> detected as stealth/hidden."""
@@ -134,9 +129,8 @@ class TestTrackerCore(unittest.TestCase):
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.hidden_models), 1)
         self.assertEqual(report.hidden_models[0]["id"], "s1")
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("🕵️ <b>Hidden / stealth models</b>", msg)
-        self.assertIn("mystery-ai", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("Stealth / Hidden Models" in e["title"] for e in embeds))
 
     def test_scenario_g_genuine_removal(self):
         """Scenario G: Model genuinely delisted -> removal alert."""
@@ -149,17 +143,14 @@ class TestTrackerCore(unittest.TestCase):
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.removed_models), 1)
         self.assertEqual(report.removed_models[0]["id"], "m2")
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("❌ <b>Removed models</b>", msg)
-        self.assertIn("old-model", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("Removed Models" in e["title"] for e in embeds))
 
     def test_scenario_h_modality_collapse(self):
         """Scenario H: Search modality collapses from 44 to 1 -> detected as broken fetch."""
         old = {}
-        # 500 chat models
         for i in range(500):
             old[f"chat_{i}"] = make_dummy_model(f"chat_{i}", f"chat_{i}", out_caps={"text": True})
-        # 44 search models
         for i in range(44):
             old[f"search_{i}"] = make_dummy_model(
                 f"search_{i}",
@@ -168,7 +159,6 @@ class TestTrackerCore(unittest.TestCase):
                 rank_by_modality={"search": i + 1},
             )
 
-        # new has all 500 chat models, but only 1 search model!
         new = {}
         for i in range(500):
             new[f"chat_{i}"] = make_dummy_model(f"chat_{i}", f"chat_{i}", out_caps={"text": True})
@@ -195,8 +185,8 @@ class TestTrackerCore(unittest.TestCase):
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.variants), 1)
         self.assertEqual(report.variants[0]["id"], "m2")
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("🧬 <b>New variants</b>", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("New Model Variants" in e["title"] for e in embeds))
 
     def test_scenario_k_org_and_provider_updates(self):
         """Scenario K: Organization and Provider changes are categorized."""
@@ -205,28 +195,24 @@ class TestTrackerCore(unittest.TestCase):
         report = tracker.detect_changes(old, new)
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.provider_updates), 1)
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("🏭 <b>Provider updates</b>", msg)
-        self.assertIn("anthropic ➡️ googleVertexAnthropic", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("Provider Updates" in e["title"] for e in embeds))
 
     def test_scenario_l_rank_tracking_toggle(self):
         """Scenario L: Rank changes only alert when TRACK_RANK is True."""
         old = {"m1": make_dummy_model("m1", "gpt-5", rank=10)}
         new = {"m1": make_dummy_model("m1", "gpt-5", rank=11)}
 
-        # Default TRACK_RANK is False
         tracker.TRACK_RANK = False
         report = tracker.detect_changes(old, new)
         self.assertFalse(report.has_changes())
 
-        # When TRACK_RANK is True
         tracker.TRACK_RANK = True
         report = tracker.detect_changes(old, new)
         self.assertTrue(report.has_changes())
         self.assertEqual(len(report.rank_updates), 1)
-        msg = tracker.build_telegram_report(report)
-        self.assertIn("📊 <b>Rank updates</b>", msg)
-        self.assertIn("10 ➡️ 11", msg)
+        embeds = tracker.build_discord_embeds(report)
+        self.assertTrue(any("Rank Updates" in e["title"] for e in embeds))
         tracker.TRACK_RANK = False
 
     def test_snapshot_identity_hash_stability(self):
@@ -243,16 +229,6 @@ class TestTrackerCore(unittest.TestCase):
         h2 = tracker.snapshot_identity_hash(models_v2)
         self.assertEqual(h1, h2)
 
-    def test_split_telegram_message(self):
-        """Long messages are cleanly split on paragraph boundaries within max_len."""
-        para = "A" * 1500
-        text = f"{para}\n\n{para}\n\n{para}"
-        chunks = tracker.split_telegram_message(text, max_len=2000)
-        self.assertEqual(len(chunks), 3)
-        for c in chunks:
-            self.assertLessEqual(len(c), 2000)
-
 
 if __name__ == "__main__":
     unittest.main()
-

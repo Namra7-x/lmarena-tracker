@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DesignArena registry tracker — diffs /api/registry and alerts on Telegram."""
+"""DesignArena registry tracker — diffs /api/registry and alerts on Discord/Telegram."""
 
 import json
 import os
@@ -12,6 +12,11 @@ import requests
 URL = "https://www.designarena.ai/api/registry"
 SNAPSHOT = "design_snapshot.json"
 
+DISCORD_WEBHOOK_URL = (
+    os.environ.get("DISCORD_WEBHOOK_URL")
+    or os.environ.get("DISCORD_WEBHOOK")
+    or ""
+).strip()
 TG_TOKEN = os.environ.get("TELEGRAM_TOKEN", "").strip()
 TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
 
@@ -222,24 +227,57 @@ def build_message(d, models):
     return "\n".join(lines).strip()
 
 
-# ---------- telegram ----------
+# ---------- notifications ----------
+
+def notify_discord(msg):
+    if not DISCORD_WEBHOOK_URL:
+        return False
+    now_iso = datetime.now(timezone.utc).isoformat()
+    payload = {
+        "embeds": [{
+            "title": "🎨 DesignArena Tracker Update",
+            "description": msg[:4000],
+            "color": 0x9B59B6,
+            "timestamp": now_iso,
+            "footer": {"text": "DesignArena Tracker • designarena.ai"},
+        }]
+    }
+    try:
+        r = requests.post(DISCORD_WEBHOOK_URL, json=payload, timeout=30)
+        if r.status_code in (200, 204):
+            print("Discord webhook sent successfully")
+            return True
+        print(f"Discord error: {r.status_code} {r.text[:300]}")
+    except Exception as e:
+        print("Discord notification error:", e)
+    return False
+
 
 def send_telegram(text):
     if not TG_TOKEN or not TG_CHAT:
-        print("--- dry run (no Telegram secrets) ---")
-        print(text)
         return
     for i in range(0, len(text), 4000):
         chunk = text[i:i + 4000]
-        r = requests.post(
-            f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
-            json={"chat_id": TG_CHAT, "text": chunk, "disable_web_page_preview": True},
-            timeout=30,
-        )
-        if r.status_code != 200:
-            print("telegram error:", r.status_code, r.text[:300])
+        try:
+            r = requests.post(
+                f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+                json={"chat_id": TG_CHAT, "text": chunk, "disable_web_page_preview": True},
+                timeout=30,
+            )
+            if r.status_code != 200:
+                print("telegram error:", r.status_code, r.text[:300])
+        except Exception as e:
+            print("telegram error:", e)
         time.sleep(1)
-    print("telegram sent")
+
+
+def notify(msg):
+    sent = notify_discord(msg)
+    if not sent and TG_TOKEN and TG_CHAT:
+        send_telegram(msg)
+    elif not sent:
+        print("--- dry run (no Discord or Telegram secrets) ---")
+        print(msg)
 
 
 # ---------- main ----------
@@ -266,7 +304,7 @@ def main():
         return
 
     msg = build_message(d, new["models"])
-    send_telegram(msg)
+    notify(msg)
     save_snapshot(**new)
     print("snapshot updated")
 
