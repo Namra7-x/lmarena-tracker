@@ -152,7 +152,7 @@
     "text": true
    }
   },
-  "displayName": "ernie-exp-VL-251016",
+  "displayName": "ernie-exp-vl-251016",
   "id": "0199eb70-db25-73ea-b944-f18fe0c3c0cd",
   "publicName": "ernie-exp-vl-251016",
   "rankByModality": {
@@ -181,7 +181,7 @@
   "capabilities": {
    "inputCapabilities": {
     "image": {
-     "multipleImages": false,
+     "multipleImages": true,
      "requiresUpload": false
     },
     "text": true
@@ -218,8 +218,8 @@
   "displayName": "gemini-2.5-flash",
   "id": "0199f059-3877-7cfe-bc80-e01b1a4a83de",
   "name": "gemini-2.5-flash",
-  "organization": "googqle",
-  "provider": "googgleVertex",
+  "organization": "google",
+  "provider": "googleVertex",
   "publicName": "gemini-2.5-flash",
   "rank": 135,
   "rankByModality": {
