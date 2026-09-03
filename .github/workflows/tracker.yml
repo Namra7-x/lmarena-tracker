@@ -19,22 +19,16 @@ jobs:
           ref: main
           fetch-depth: 1
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - run: pip install cloudscraper requests
-
-      - name: Run LMArena tracker
+      - name: Run Canary Arena Tracker
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: python tracker.py
+        run: node tracker.mjs
 
-      - name: Run DesignArena tracker
+      - name: Run DesignArena Tracker
         if: always()
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: python design_tracker.py
+        run: node design_tracker.mjs
 
       - name: Commit snapshots
         if: always()
