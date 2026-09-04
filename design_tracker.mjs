@@ -142,9 +142,6 @@ function diff(oldData, newData) {
     if (o.displayName !== n.displayName) {
       d.renamed.push([mid, o.displayName, n.displayName]);
     }
-    if (o.provider !== n.provider) {
-      d.provider.push([mid, n.displayName, o.provider, n.provider]);
-    }
     if (o.active !== n.active) {
       (n.active ? d.active_on : d.active_off).push([mid, n.displayName]);
     }
@@ -303,3 +300,4 @@ main().catch((err) => {
   console.error('DesignArena error:', err);
   process.exit(1);
 });
+

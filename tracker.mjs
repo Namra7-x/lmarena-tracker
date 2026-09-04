@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * LM Arena Tracker — High-Performance Native Node.js Edition
+ * LM Arena Tracker — Blazing Fast Native Node.js Edition
  *
  * Engineered for sub-second execution on GitHub Actions & Cloudflare edge:
  * - 100% Native Node.js ES Module (Zero npm packages, Zero pip install)
  * - Concurrent HTTP/2 & Fetch API: sub-second extraction
  * - 1 message per model event: guaranteed NOTHING is collapsed or missed in Discord
- * - Shows User Selectable (Live / Internal) on every model alert
+ * - Shows User Selectable, Org, Provider, and Rank on every new model card
+ * - Standalone alerts for Org updates, Provider updates, and Rank shifts are suppressed
  * - Modality collapse validation & anti-flapping baseline guards
  * - Stable identity-based batch confirmation
  */
@@ -27,7 +28,6 @@ const DISCORD_WEBHOOK_URL = (
   ''
 ).trim();
 
-const TRACK_RANK = (process.env.TRACK_RANK || 'true').toLowerCase() === 'true';
 const UNRANKED = 9007199254740991; // Number.MAX_SAFE_INTEGER
 const LARGE_BATCH_THRESHOLD = 20;  // 20+ models added/removed require 2-run confirmation
 const MIN_MODALITY_DROP_RATIO = 0.25;
@@ -37,19 +37,8 @@ const TRACKED_FIELDS = [
   'publicName',
   'displayName',
   'name',
-  'organization',
-  'provider',
   'userSelectable',
 ];
-
-const FIELD_LABELS = {
-  publicName: 'Public Name',
-  displayName: 'Display Name',
-  name: 'Internal Name',
-  organization: 'Organization',
-  provider: 'Provider',
-  userSelectable: 'User Selectable',
-};
 
 const MODALITY_NORMALIZER = {
   text: 'chat',
@@ -69,9 +58,6 @@ const COLORS = {
   rename: 0x3498db,    // Sky Blue
   capability: 0xe67e22,// Orange
   rotation: 0x5865f2,  // Blurple
-  rank: 0x34495e,      // Dark Navy
-  org: 0xf1c40f,       // Sunflower Yellow
-  provider: 0xe67e22,  // Carrot Orange
   enabled: 0x2ecc71,   // Bright Green
   disabled: 0xe74c3c,  // Red
   removed: 0xe74c3c,   // Red
@@ -237,15 +223,14 @@ async function fetchArenaHtml() {
     Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.9',
     'Cache-Control': 'no-cache',
-    Pragma: 'no-cache',
   };
 
   let lastErr = 'unknown';
-  for (let attempt = 1; attempt <= 4; attempt++) {
+  for (let attempt = 1; attempt <= 3; attempt++) {
     try {
       const res = await fetch(ARENA_URL, {
         headers,
-        signal: AbortSignal.timeout(15000),
+        signal: AbortSignal.timeout(10000),
       });
 
       if (res.ok) {
@@ -261,13 +246,12 @@ async function fetchArenaHtml() {
       lastErr = err.message;
     }
 
-    if (attempt < 4) {
-      // Instant small retry pause (under 1s)
-      await new Promise((r) => setTimeout(r, 800));
+    if (attempt < 3) {
+      await new Promise((r) => setTimeout(r, 500));
     }
   }
 
-  throw new Error(`Failed to fetch ${ARENA_URL} after 4 attempts: ${lastErr}`);
+  throw new Error(`Failed to fetch ${ARENA_URL} after 3 attempts: ${lastErr}`);
 }
 
 function parseModelsFromHtml(html) {
@@ -347,10 +331,10 @@ async function getModels(oldModels) {
       }
       lastErr = health.reason;
       console.warn(`Extraction attempt ${attempt} incomplete: ${lastErr}. Retrying...`);
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 600));
     } catch (err) {
       lastErr = err.message;
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 600));
     }
   }
   return { models: {}, valid: false, statusMsg: lastErr };
@@ -401,7 +385,7 @@ function saveSnapshot(models) {
 
 
 // ==============================================================================
-// Deep Diff Engine
+// Deep Diff Engine (Standalone Org, Provider, Rank Alerts Removed)
 // ==============================================================================
 class ModelChangeReport {
   constructor() {
@@ -409,13 +393,10 @@ class ModelChangeReport {
     this.hidden_models = [];
     this.variants = [];
     this.name_updates = [];
-    this.org_updates = [];
-    this.provider_updates = [];
     this.capability_updates = [];
     this.selectable_enabled = [];
     this.selectable_disabled = [];
     this.id_rotations = [];
-    this.rank_updates = [];
     this.removed_models = [];
   }
 
@@ -425,13 +406,10 @@ class ModelChangeReport {
       this.hidden_models.length > 0 ||
       this.variants.length > 0 ||
       this.name_updates.length > 0 ||
-      this.org_updates.length > 0 ||
-      this.provider_updates.length > 0 ||
       this.capability_updates.length > 0 ||
       this.selectable_enabled.length > 0 ||
       this.selectable_disabled.length > 0 ||
       this.id_rotations.length > 0 ||
-      this.rank_updates.length > 0 ||
       this.removed_models.length > 0
     );
   }
@@ -517,7 +495,7 @@ function detectChanges(oldModels, newModels) {
     }
   }
 
-  // 3. Diff Existing Models (Independent evaluation, nothing dropped)
+  // 3. Diff Existing Models (Filtered: Org, Provider, Rank updates are NOT alerted)
   for (const mid of commonIds.sort()) {
     const o = oldModels[mid];
     const n = newModels[mid];
@@ -534,16 +512,7 @@ function detectChanges(oldModels, newModels) {
     const gainedCaps = [...newCaps].filter((x) => !oldCaps.has(x));
     const lostCaps = [...oldCaps].filter((x) => !newCaps.has(x));
 
-    let rankChanged = false;
-    if (TRACK_RANK) {
-      const oldRankStr = fmtRank(o.rank);
-      const newRankStr = fmtRank(n.rank);
-      if (oldRankStr !== newRankStr) {
-        rankChanged = true;
-      }
-    }
-
-    if (fieldDiffs.length === 0 && gainedCaps.length === 0 && lostCaps.length === 0 && !rankChanged) {
+    if (fieldDiffs.length === 0 && gainedCaps.length === 0 && lostCaps.length === 0) {
       continue;
     }
 
@@ -554,19 +523,12 @@ function detectChanges(oldModels, newModels) {
       diffs: fieldDiffs,
       gained_caps: gainedCaps,
       lost_caps: lostCaps,
-      rank_changed: rankChanged,
     };
 
     const changedFields = new Set(fieldDiffs.map((d) => d[0]));
 
     if (changedFields.has('publicName') || changedFields.has('displayName') || changedFields.has('name')) {
       report.name_updates.push(item);
-    }
-    if (changedFields.has('organization')) {
-      report.org_updates.push(item);
-    }
-    if (changedFields.has('provider')) {
-      report.provider_updates.push(item);
     }
     if (changedFields.has('userSelectable')) {
       const oldSel = Boolean(o.userSelectable);
@@ -579,9 +541,6 @@ function detectChanges(oldModels, newModels) {
     }
     if (gainedCaps.length > 0 || lostCaps.length > 0) {
       report.capability_updates.push(item);
-    }
-    if (rankChanged) {
-      report.rank_updates.push(item);
     }
   }
 
@@ -597,7 +556,7 @@ function buildDiscordEmbeds(report) {
   const nowIso = new Date().toISOString();
   const footer = { text: 'Canary Arena • canaryarena.ai' };
 
-  // 1. ✨ NEW MODEL LIVE
+  // 1. ✨ NEW MODEL LIVE (Includes Org, Provider, Rank, Caps, ID, Selectable)
   for (const m of report.new_models) {
     const org = valOrDash(m.organization);
     const prov = valOrDash(m.provider);
@@ -634,7 +593,7 @@ function buildDiscordEmbeds(report) {
     });
   }
 
-  // 2. 🕵️ STEALTH MODEL DETECTED
+  // 2. 🕵️ STEALTH MODEL DETECTED (Includes Org, Provider, Rank, Caps, ID, Selectable)
   for (const m of report.hidden_models) {
     const rank = fmtRank(m.rank);
     const caps = formatCapabilityLines(m);
@@ -667,7 +626,7 @@ function buildDiscordEmbeds(report) {
     });
   }
 
-  // 3. 🧬 NEW MODEL VARIANT
+  // 3. 🧬 NEW MODEL VARIANT (Includes Base, Org, Rank, Caps, ID, Selectable)
   for (const m of report.variants) {
     const org = valOrDash(m.organization);
     const rank = fmtRank(m.rank);
@@ -732,67 +691,7 @@ function buildDiscordEmbeds(report) {
     });
   }
 
-  // 5. 🏢 ORGANIZATION UPDATE
-  for (const item of report.org_updates) {
-    const m = item.new;
-    const oldOrg = valOrDash(item.old.organization);
-    const newOrg = valOrDash(item.new.organization);
-
-    const lines = [
-      `### [${disp(m)}](${ARENA_URL})`,
-      '',
-      '⬅️ **Previous Organization:**',
-      `\`${oldOrg}\``,
-      '',
-      '➡️ **Updated Organization:**',
-      `**\`${newOrg}\`**`,
-      '',
-      '🆔 **Model ID:**',
-      `\`${item.id}\``,
-    ];
-
-    embeds.push({
-      author: AUTHOR_INFO,
-      title: '🏢 ORGANIZATION UPDATE',
-      url: ARENA_URL,
-      description: lines.join('\n'),
-      color: COLORS.org,
-      timestamp: nowIso,
-      footer,
-    });
-  }
-
-  // 6. 🏭 PROVIDER UPDATE
-  for (const item of report.provider_updates) {
-    const m = item.new;
-    const oldProv = valOrDash(item.old.provider);
-    const newProv = valOrDash(item.new.provider);
-
-    const lines = [
-      `### [${disp(m)}](${ARENA_URL})`,
-      '',
-      '⬅️ **Previous Provider:**',
-      `\`${oldProv}\``,
-      '',
-      '➡️ **Updated Provider:**',
-      `**\`${newProv}\`**`,
-      '',
-      '🆔 **Model ID:**',
-      `\`${item.id}\``,
-    ];
-
-    embeds.push({
-      author: AUTHOR_INFO,
-      title: '🏭 PROVIDER UPDATE',
-      url: ARENA_URL,
-      description: lines.join('\n'),
-      color: COLORS.provider,
-      timestamp: nowIso,
-      footer,
-    });
-  }
-
-  // 7. 🟢 DIRECT SELECTION ENABLED
+  // 5. 🟢 DIRECT SELECTION ENABLED
   for (const item of report.selectable_enabled) {
     const m = item.new;
     const lines = [
@@ -819,7 +718,7 @@ function buildDiscordEmbeds(report) {
     });
   }
 
-  // 8. 🔴 DIRECT SELECTION DISABLED
+  // 6. 🔴 DIRECT SELECTION DISABLED
   for (const item of report.selectable_disabled) {
     const m = item.new;
     const lines = [
@@ -846,7 +745,7 @@ function buildDiscordEmbeds(report) {
     });
   }
 
-  // 9. ⚙️ CAPABILITIES UPDATED
+  // 7. ⚙️ CAPABILITIES UPDATED
   for (const item of report.capability_updates) {
     const m = item.new;
     const gained = item.gained_caps.sort().map((g) => `\`+${g}\``);
@@ -872,7 +771,7 @@ function buildDiscordEmbeds(report) {
     });
   }
 
-  // 10. 🆔 ID ROTATION DETECTED
+  // 8. 🆔 ID ROTATION DETECTED
   for (const [oldM, newM] of report.id_rotations) {
     const lines = [
       `### [${disp(newM)}](${ARENA_URL})`,
@@ -895,38 +794,7 @@ function buildDiscordEmbeds(report) {
     });
   }
 
-  // 11. 📊 ARENA RANK SHIFT
-  for (const item of report.rank_updates) {
-    const o = item.old;
-    const n = item.new;
-    const oldR = fmtRank(o.rank);
-    const newR = fmtRank(n.rank);
-
-    const lines = [
-      `### [${disp(n)}](${ARENA_URL})`,
-      '',
-      '⬅️ **Previous Rank:**',
-      `\`${oldR}\``,
-      '',
-      '➡️ **New Rank:**',
-      `**\`${newR}\`**`,
-      '',
-      '🆔 **Model ID:**',
-      `\`${item.id}\``,
-    ];
-
-    embeds.push({
-      author: AUTHOR_INFO,
-      title: '📊 ARENA RANK SHIFT',
-      url: ARENA_URL,
-      description: lines.join('\n'),
-      color: COLORS.rank,
-      timestamp: nowIso,
-      footer,
-    });
-  }
-
-  // 12. ❌ MODEL DELISTED
+  // 9. ❌ MODEL DELISTED
   for (const m of report.removed_models) {
     const org = valOrDash(m.organization);
     const rank = fmtRank(m.rank);
@@ -973,7 +841,7 @@ async function sendDiscordPayload(payload) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-        signal: AbortSignal.timeout(15000),
+        signal: AbortSignal.timeout(10000),
       });
 
       if (res.status === 200 || res.status === 204) {
@@ -998,7 +866,7 @@ async function sendDiscordPayload(payload) {
       break;
     } catch (err) {
       console.error(`Discord network exception: ${err.message}`);
-      await new Promise((r) => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 800));
     }
   }
 }
@@ -1128,7 +996,7 @@ async function main() {
     console.log('No changes detected.');
   }
 
-  // 5. Commit Valid Snapshot
+  // 5. Commit Valid Snapshot (Full model metadata preserved)
   saveSnapshot(newSnapshot);
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);

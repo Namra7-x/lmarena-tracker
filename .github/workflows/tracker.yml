@@ -18,17 +18,17 @@ jobs:
         with:
           ref: main
           fetch-depth: 1
+          show-progress: false
 
-      - name: Run Canary Arena Tracker
+      - name: Run Trackers in Parallel
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: node tracker.mjs
-
-      - name: Run DesignArena Tracker
-        if: always()
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: node design_tracker.mjs
+        run: |
+          node tracker.mjs &
+          PID1=$!
+          node design_tracker.mjs &
+          PID2=$!
+          wait $PID1 $PID2
 
       - name: Commit snapshots
         if: always()
@@ -37,6 +37,8 @@ jobs:
           git config user.email "actions@github.com"
           git add snapshot.json design_snapshot.json
           if [ -f .arena_alert_state.json ]; then git add .arena_alert_state.json; fi
-          git diff --cached --quiet || git commit -m "snapshot update"
-          git pull --rebase
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "snapshot update"
+            git pull --rebase
+            git push
+          fi
