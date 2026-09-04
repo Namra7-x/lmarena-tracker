@@ -9014,6 +9014,26 @@
    "chat": 9007199254740991
   }
  },
+ "01a06dfc-94a2-7abf-8d12-0878520062cb": {
+  "id": "01a06dfc-94a2-7abf-8d12-0878520062cb",
+  "organization": "google",
+  "publicName": "gemini-3.8-flash",
+  "displayName": "gemini-3.8-flash",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  }
+ },
  "019ff69c-dae8-708a-ae20-1ce80775d94d": {
   "id": "019ff69c-dae8-708a-ae20-1ce80775d94d",
   "organization": "xai",
@@ -13194,17 +13214,20 @@
  "01a06dde-bf4f-7599-ac7d-b9e555a58d9c": {
   "id": "01a06dde-bf4f-7599-ac7d-b9e555a58d9c",
   "organization": "meta",
-  "publicName": "muse-spark-1.3-(max)",
-  "displayName": "muse-spark-1.3-(max)",
+  "provider": "metaModelApi",
+  "publicName": "muse-spark-1.3-max",
+  "name": "muse-spark-1-3-max-bhma",
+  "displayName": "muse-spark-1.3-max",
   "capabilities": {
    "inputCapabilities": {
-    "text": true
+    "text": true,
+    "image": true
    },
    "outputCapabilities": {
     "web": true
    }
   },
-  "userSelectable": true,
+  "userSelectable": false,
   "rankByModality": {
    "webdev": 9007199254740991
   }
