@@ -9297,6 +9297,40 @@
           "website"
         ]
       }
+    },
+    "mai-image-2.6": {
+      "displayName": "MAI-Image-2.6",
+      "provider": "microsoft",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      }
+    },
+    "mai-image-2.6-flash": {
+      "displayName": "MAI-Image-2.6 Flash",
+      "provider": "microsoft",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      }
     }
   },
   "providers": {
@@ -11061,6 +11095,12 @@
       "text.output": 50,
       "text.cachedInput": 1,
       "text.cacheWrite": 12.5
+    },
+    "mai-image-2.6": {
+      "image.perImage": 0.039
+    },
+    "mai-image-2.6-flash": {
+      "image.perImage": 0.019
     }
   }
 }
