@@ -8718,23 +8718,6 @@
         ]
       }
     },
-    "grok-imagine-image-2": {
-      "displayName": "Grok Imagine Image 2",
-      "provider": "xai",
-      "active": true,
-      "openSource": false,
-      "router": false,
-      "vision": false,
-      "inputModalities": [],
-      "arenas": {
-        "models": [
-          "graphicdesign",
-          "image",
-          "imagetoimage",
-          "logo"
-        ]
-      }
-    },
     "ltx-2.5-fast": {
       "displayName": "LTX 2.5 Fast",
       "provider": "ltx",
@@ -9289,6 +9272,29 @@
           "fullstack_gamedev",
           "mobileapps",
           "nativeapps"
+        ]
+      }
+    },
+    "gpt-6-astra": {
+      "displayName": "GPT-6 Astra",
+      "provider": "openai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
         ]
       }
     }
@@ -10947,9 +10953,6 @@
       "text.output": 3.75,
       "text.cachedInput": 0.075
     },
-    "grok-imagine-image-2": {
-      "image.perImage": 0.06
-    },
     "ltx-2.5-fast": {
       "video.perSecond": 0.13
     },
@@ -11052,6 +11055,12 @@
     "muse-spark-1.3": {
       "text.input": 1.25,
       "text.output": 4.25
+    },
+    "gpt-6-astra": {
+      "text.input": 10,
+      "text.output": 50,
+      "text.cachedInput": 1,
+      "text.cacheWrite": 12.5
     }
   }
 }
