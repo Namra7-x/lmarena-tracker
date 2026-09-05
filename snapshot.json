@@ -17016,34 +17016,6 @@
    "image": 9007199254740991
   }
  },
- "019db344-75b0-7acd-aa20-bcc095ca0ed9": {
-  "id": "019db344-75b0-7acd-aa20-bcc095ca0ed9",
-  "organization": "openai",
-  "provider": "customOpenai",
-  "publicName": "gpt-image-2 (medium)",
-  "name": "gpt-image-2-medium",
-  "displayName": "gpt-image-2 (medium)",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false,
-     "multipleImages": true
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "01a0034d-815b-7667-ba17-ec50f311a39e": {
   "id": "01a0034d-815b-7667-ba17-ec50f311a39e",
   "publicName": "dragonfruit-multi-v2",
@@ -18214,6 +18186,34 @@
   "publicName": "gemini-3-pro-image-2k (nano-banana-pro)",
   "name": "gemini-3-pro-image-2k",
   "displayName": "gemini-3-pro-image-2k (nano-banana-pro)",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "019db344-75b0-7acd-aa20-bcc095ca0ed9": {
+  "id": "019db344-75b0-7acd-aa20-bcc095ca0ed9",
+  "organization": "openai",
+  "provider": "customOpenai",
+  "publicName": "gpt-image-2 (medium)",
+  "name": "gpt-image-2-medium",
+  "displayName": "gpt-image-2 (medium)",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
