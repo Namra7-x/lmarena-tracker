@@ -12916,26 +12916,6 @@
    "webdev": 9007199254740991
   }
  },
- "019d4ec3-b69b-724b-9c43-4e7c6125dcbb": {
-  "id": "019d4ec3-b69b-724b-9c43-4e7c6125dcbb",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.6-plus-preview",
-  "name": "qwen3.6-plus-preview",
-  "displayName": "qwen3.6-plus-preview",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "019fa6e0-ad90-762e-969d-cf1e17dea269": {
   "id": "019fa6e0-ad90-762e-969d-cf1e17dea269",
   "publicName": "gemini-3.1-pro",
@@ -12997,27 +12977,6 @@
   "id": "01a01be0-5dcb-7f47-a385-23c582057fdc",
   "publicName": "qwen3.8-27b",
   "displayName": "qwen3.8-27b",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "019d50a9-ff12-7beb-b423-0b4904415f39": {
-  "id": "019d50a9-ff12-7beb-b423-0b4904415f39",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.6-plus",
-  "name": "qwen3.6-plus",
-  "displayName": "qwen3.6-plus",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
@@ -13104,27 +13063,6 @@
    "webdev": 9007199254740991
   }
  },
- "019e37c2-46ec-735c-bf5b-63f1c00ec573": {
-  "id": "019e37c2-46ec-735c-bf5b-63f1c00ec573",
-  "organization": "google",
-  "provider": "googleWithThoughtSignatures",
-  "publicName": "gemini-3.5-flash",
-  "name": "ajax-20260517",
-  "displayName": "gemini-3.5-flash",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "019dac5a-88e0-7477-b100-336eaf25c4b6": {
   "id": "019dac5a-88e0-7477-b100-336eaf25c4b6",
   "organization": "moonshot",
@@ -13181,26 +13119,6 @@
    "webdev": 9007199254740991
   }
  },
- "019e6534-c9b7-7531-91f7-8d6ab180e67d": {
-  "id": "019e6534-c9b7-7531-91f7-8d6ab180e67d",
-  "organization": "alibaba",
-  "provider": "alibabaToolCall",
-  "publicName": "qwen3.7-max",
-  "name": "mizar-v2-jxxi",
-  "displayName": "qwen3.7-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "019f71b3-1332-7397-a8b2-5a9f6170fb0b": {
   "id": "019f71b3-1332-7397-a8b2-5a9f6170fb0b",
   "publicName": "torenia-alpha",
@@ -13215,27 +13133,6 @@
    }
   },
   "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "01a01327-1a98-7645-8595-06506a9c1f7f": {
-  "id": "01a01327-1a98-7645-8595-06506a9c1f7f",
-  "organization": "alibaba",
-  "provider": "alibabaToolCall",
-  "publicName": "qwen3.8-27b",
-  "name": "qwen3.8-27b-code",
-  "displayName": "qwen3.8-27b",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": false,
   "rankByModality": {
    "webdev": 9007199254740991
   }
@@ -13336,26 +13233,6 @@
    "webdev": 9007199254740991
   }
  },
- "019faa02-bc24-70f4-afbe-6ae1e20d685a": {
-  "id": "019faa02-bc24-70f4-afbe-6ae1e20d685a",
-  "organization": "alibaba",
-  "provider": "alibabaToolCall",
-  "publicName": "kinsley",
-  "name": "kinsley-5jmg",
-  "displayName": "qwen3.8-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "019f94ca-f684-7009-bb6b-78b1544f22c4": {
   "id": "019f94ca-f684-7009-bb6b-78b1544f22c4",
   "publicName": "tillandsia-alpha",
@@ -13410,6 +13287,27 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019f4805-3856-78ef-8574-305f05f3f8d3": {
+  "id": "019f4805-3856-78ef-8574-305f05f3f8d3",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.6-luna-xhigh",
+  "name": "gpt-5.6-luna-xhigh-code-codex-harness",
+  "displayName": "gpt-5.6-luna-xhigh",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "webdev": 9007199254740991
   }
@@ -13494,29 +13392,6 @@
    "webdev": 9007199254740991
   }
  },
- "019fc361-b52b-7cb8-b2e5-c4339840ab39": {
-  "id": "019fc361-b52b-7cb8-b2e5-c4339840ab39",
-  "organization": "alibaba",
-  "provider": "alibabaToolCall",
-  "publicName": "thunbergia-alpha",
-  "name": "thunbergia-alpha-jz4q",
-  "displayName": "qwen3.8-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "01a00aa3-a560-7865-9404-ee2df3463aaf": {
   "id": "01a00aa3-a560-7865-9404-ee2df3463aaf",
   "publicName": "oracle",
@@ -13524,6 +13399,47 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019d4ec3-b69b-724b-9c43-4e7c6125dcbb": {
+  "id": "019d4ec3-b69b-724b-9c43-4e7c6125dcbb",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.6-plus-preview",
+  "name": "qwen3.6-plus-preview",
+  "displayName": "qwen3.6-plus-preview",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019d50a9-ff12-7beb-b423-0b4904415f39": {
+  "id": "019d50a9-ff12-7beb-b423-0b4904415f39",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.6-plus",
+  "name": "qwen3.6-plus",
+  "displayName": "qwen3.6-plus",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
    },
    "outputCapabilities": {
     "web": true
@@ -13550,6 +13466,88 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019e37c2-46ec-735c-bf5b-63f1c00ec573": {
+  "id": "019e37c2-46ec-735c-bf5b-63f1c00ec573",
+  "organization": "google",
+  "provider": "googleWithThoughtSignatures",
+  "publicName": "gemini-3.5-flash",
+  "name": "ajax-20260517",
+  "displayName": "gemini-3.5-flash",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019faa02-bc24-70f4-afbe-6ae1e20d685a": {
+  "id": "019faa02-bc24-70f4-afbe-6ae1e20d685a",
+  "organization": "alibaba",
+  "provider": "alibabaToolCall",
+  "publicName": "kinsley",
+  "name": "kinsley-5jmg",
+  "displayName": "qwen3.8-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019e6534-c9b7-7531-91f7-8d6ab180e67d": {
+  "id": "019e6534-c9b7-7531-91f7-8d6ab180e67d",
+  "organization": "alibaba",
+  "provider": "alibabaToolCall",
+  "publicName": "qwen3.7-max",
+  "name": "mizar-v2-jxxi",
+  "displayName": "qwen3.7-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "01a01327-1a98-7645-8595-06506a9c1f7f": {
+  "id": "01a01327-1a98-7645-8595-06506a9c1f7f",
+  "organization": "alibaba",
+  "provider": "alibabaToolCall",
+  "publicName": "qwen3.8-27b",
+  "name": "qwen3.8-27b-code",
+  "displayName": "qwen3.8-27b",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "webdev": 9007199254740991
   }
@@ -13595,17 +13593,19 @@
    "webdev": 9007199254740991
   }
  },
- "019f4805-3856-78ef-8574-305f05f3f8d3": {
-  "id": "019f4805-3856-78ef-8574-305f05f3f8d3",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.6-luna-xhigh",
-  "name": "gpt-5.6-luna-xhigh-code-codex-harness",
-  "displayName": "gpt-5.6-luna-xhigh",
+ "019fc361-b52b-7cb8-b2e5-c4339840ab39": {
+  "id": "019fc361-b52b-7cb8-b2e5-c4339840ab39",
+  "organization": "alibaba",
+  "provider": "alibabaToolCall",
+  "publicName": "thunbergia-alpha",
+  "name": "thunbergia-alpha-jz4q",
+  "displayName": "qwen3.8-max",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
-    "image": true
+    "image": {
+     "requiresUpload": true
+    }
    },
    "outputCapabilities": {
     "web": true
@@ -20912,29 +20912,6 @@
    "video": 9007199254740991
   }
  },
- "019fde42-61fa-7d12-9f3f-6d2fc64365f7": {
-  "id": "019fde42-61fa-7d12-9f3f-6d2fc64365f7",
-  "organization": "bfl",
-  "provider": "bflVideo3",
-  "publicName": "flux-3-video",
-  "name": "flux-3-video",
-  "displayName": "flux-3-video",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019c78d9-ffe4-7a3a-913f-9570e3927788": {
   "id": "019c78d9-ffe4-7a3a-913f-9570e3927788",
   "organization": "kling",
@@ -21011,29 +20988,6 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
- "019a36dd-5d6c-7f15-8598-4755f4c34e28": {
-  "id": "019a36dd-5d6c-7f15-8598-4755f4c34e28",
-  "organization": "minimax",
-  "provider": "minimax",
-  "publicName": "hailuo-2.3-fast",
-  "name": "hailuo-2.3-fast",
-  "displayName": "hailuo-2.3-fast",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
    },
    "outputCapabilities": {
     "video": true
@@ -21127,28 +21081,6 @@
    "video": 9007199254740991
   }
  },
- "01a06df1-5f5b-7836-aa72-e17403ae8bb0": {
-  "id": "01a06df1-5f5b-7836-aa72-e17403ae8bb0",
-  "organization": "google",
-  "provider": "googleVertexApi",
-  "publicName": "gemini-omni-1.1-flash",
-  "name": "gemini-omni-1.1-flash",
-  "displayName": "gemini-omni-1.1-flash",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "video": true
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019f91b3-6ea2-744a-b698-d09fbadea9fa": {
   "id": "019f91b3-6ea2-744a-b698-d09fbadea9fa",
   "organization": "google",
@@ -21230,18 +21162,42 @@
    "video": 9007199254740991
   }
  },
- "019fbb93-f92a-751c-b418-155052fcc6f8": {
-  "id": "019fbb93-f92a-751c-b418-155052fcc6f8",
-  "organization": "google",
-  "provider": "googleVertexApi",
-  "publicName": "gemini-omni-flash",
-  "name": "gemini-omni-flash",
-  "displayName": "gemini-omni-flash",
+ "019fde42-61fa-7d12-9f3f-6d2fc64365f7": {
+  "id": "019fde42-61fa-7d12-9f3f-6d2fc64365f7",
+  "organization": "bfl",
+  "provider": "bflVideo3",
+  "publicName": "flux-3-video",
+  "name": "flux-3-video",
+  "displayName": "flux-3-video",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
-    "image": true,
+    "image": {
+     "requiresUpload": false
+    }
+   },
+   "outputCapabilities": {
     "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019a36dd-5d6c-7f15-8598-4755f4c34e28": {
+  "id": "019a36dd-5d6c-7f15-8598-4755f4c34e28",
+  "organization": "minimax",
+  "provider": "minimax",
+  "publicName": "hailuo-2.3-fast",
+  "name": "hailuo-2.3-fast",
+  "displayName": "hailuo-2.3-fast",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
    },
    "outputCapabilities": {
     "video": true
@@ -21272,16 +21228,40 @@
    "video": 9007199254740991
   }
  },
- "019c59fa-6567-7c42-97af-f51b52ce47d5": {
-  "id": "019c59fa-6567-7c42-97af-f51b52ce47d5",
-  "organization": "kling",
-  "provider": "fal",
-  "publicName": "kling-v3",
-  "name": "kling-v3-text-to-video",
-  "displayName": "kling-v3",
+ "01a06df1-5f5b-7836-aa72-e17403ae8bb0": {
+  "id": "01a06df1-5f5b-7836-aa72-e17403ae8bb0",
+  "organization": "google",
+  "provider": "googleVertexApi",
+  "publicName": "gemini-omni-1.1-flash",
+  "name": "gemini-omni-1.1-flash",
+  "displayName": "gemini-omni-1.1-flash",
   "capabilities": {
    "inputCapabilities": {
-    "text": true
+    "text": true,
+    "image": true,
+    "video": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019fbb93-f92a-751c-b418-155052fcc6f8": {
+  "id": "019fbb93-f92a-751c-b418-155052fcc6f8",
+  "organization": "google",
+  "provider": "googleVertexApi",
+  "publicName": "gemini-omni-flash",
+  "name": "gemini-omni-flash",
+  "displayName": "gemini-omni-flash",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "video": true
    },
    "outputCapabilities": {
     "video": true
@@ -21299,6 +21279,26 @@
   "publicName": "hailuo-3",
   "name": "hailuo-3-text-to-video",
   "displayName": "minimax-h3",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019c59fa-6567-7c42-97af-f51b52ce47d5": {
+  "id": "019c59fa-6567-7c42-97af-f51b52ce47d5",
+  "organization": "kling",
+  "provider": "fal",
+  "publicName": "kling-v3",
+  "name": "kling-v3-text-to-video",
+  "displayName": "kling-v3",
   "capabilities": {
    "inputCapabilities": {
     "text": true
