@@ -19172,6 +19172,26 @@
    "search": 9007199254740991
   }
  },
+ "019de22d-1445-7296-9c88-a5877bc66ef8": {
+  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
+  "organization": "xai",
+  "provider": "xaiResponsesSearchPrivate",
+  "publicName": "grok-4.3",
+  "name": "grok-4.3-search",
+  "displayName": "grok-4.3",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
  "019e0836-a13f-7e4f-ad00-3f32140afff3": {
   "id": "019e0836-a13f-7e4f-ad00-3f32140afff3",
   "publicName": "tanager-search",
@@ -19291,26 +19311,6 @@
    "search": 9007199254740991
   }
  },
- "019b2f68-97ae-75b1-9e2f-456470bd5332": {
-  "id": "019b2f68-97ae-75b1-9e2f-456470bd5332",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.1-search-sp",
-  "name": "gpt-5.1-search-new-system-prompt-20251217",
-  "displayName": "gpt-5.1-search-sp",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
  "01a05eb2-be87-7852-af01-0828c3755ef4": {
   "id": "01a05eb2-be87-7852-af01-0828c3755ef4",
   "organization": "anthropic",
@@ -19382,13 +19382,13 @@
    "search": 9007199254740991
   }
  },
- "019de22d-1445-7296-9c88-a5877bc66ef8": {
-  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
-  "organization": "xai",
-  "provider": "xaiResponsesSearchPrivate",
-  "publicName": "grok-4.3",
-  "name": "grok-4.3-search",
-  "displayName": "grok-4.3",
+ "019b2f68-97ae-75b1-9e2f-456470bd5332": {
+  "id": "019b2f68-97ae-75b1-9e2f-456470bd5332",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.1-search-sp",
+  "name": "gpt-5.1-search-new-system-prompt-20251217",
+  "displayName": "gpt-5.1-search-sp",
   "capabilities": {
    "inputCapabilities": {
     "text": true
