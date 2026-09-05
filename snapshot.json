@@ -17345,34 +17345,6 @@
    "image": 9007199254740991
   }
  },
- "019ed208-69ca-7f3f-85ee-182d5f0ea08b": {
-  "id": "019ed208-69ca-7f3f-85ee-182d5f0ea08b",
-  "organization": "luma-ai",
-  "provider": "lumaImagePublic",
-  "publicName": "uni-1.1-max",
-  "name": "uni-1.1-max",
-  "displayName": "uni-1.1-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false,
-     "multipleImages": true
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "019f145c-fd9c-7561-b646-3804d0878c6c": {
   "id": "019f145c-fd9c-7561-b646-3804d0878c6c",
   "publicName": "ember_drift",
@@ -17571,6 +17543,34 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "019ed208-69ca-7f3f-85ee-182d5f0ea08b": {
+  "id": "019ed208-69ca-7f3f-85ee-182d5f0ea08b",
+  "organization": "luma-ai",
+  "provider": "lumaImagePublic",
+  "publicName": "uni-1.1-max",
+  "name": "uni-1.1-max",
+  "displayName": "uni-1.1-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
    },
    "outputCapabilities": {
     "image": {
