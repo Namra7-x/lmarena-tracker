@@ -18106,6 +18106,31 @@
    "image": 9007199254740991
   }
  },
+ "01a0726b-798f-7ed0-8ab7-12ddd9da266a": {
+  "id": "01a0726b-798f-7ed0-8ab7-12ddd9da266a",
+  "publicName": "red_fern",
+  "displayName": "red_fern",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "01a02283-5acf-7ac2-85f6-1ecc7f9994c6": {
   "id": "01a02283-5acf-7ac2-85f6-1ecc7f9994c6",
   "organization": "meta",
