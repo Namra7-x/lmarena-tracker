@@ -12360,6 +12360,26 @@
    "webdev": 9007199254740991
   }
  },
+ "019dd7a4-f384-79f0-aa10-c91147438642": {
+  "id": "019dd7a4-f384-79f0-aa10-c91147438642",
+  "organization": "alibaba",
+  "provider": "alibabaToolCall",
+  "publicName": "qwen3.6-max-preview",
+  "name": "qwen3.6-max-preview-code",
+  "displayName": "qwen3.6-max-preview",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019f39ad-94c0-7ed9-90f6-f5fc8f9cc8c9": {
   "id": "019f39ad-94c0-7ed9-90f6-f5fc8f9cc8c9",
   "publicName": "external-agentsv4-540-0706",
@@ -12381,6 +12401,27 @@
   "id": "019ea0c9-c2f2-7bb2-b3bd-084bd27d0e77",
   "publicName": "metagross",
   "displayName": "metagross",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019dac5a-88e0-7477-b100-336eaf25c4b6": {
+  "id": "019dac5a-88e0-7477-b100-336eaf25c4b6",
+  "organization": "moonshot",
+  "provider": "moonshot",
+  "publicName": "kimi-k2.6",
+  "name": "kimi-k2.6-code",
+  "displayName": "kimi-k2.6",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
@@ -12772,6 +12813,26 @@
    "webdev": 9007199254740991
   }
  },
+ "019aeb38-cc3b-7421-a472-0bfaaeace035": {
+  "id": "019aeb38-cc3b-7421-a472-0bfaaeace035",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.1-codex-max",
+  "name": "gpt-5.1-codex-max",
+  "displayName": "gpt-5.1-codex-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019e8938-ba2b-7343-a9f2-38f736cf86fc": {
   "id": "019e8938-ba2b-7343-a9f2-38f736cf86fc",
   "publicName": "nemos_reef",
@@ -12806,6 +12867,29 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019fc361-b52b-7cb8-b2e5-c4339840ab39": {
+  "id": "019fc361-b52b-7cb8-b2e5-c4339840ab39",
+  "organization": "alibaba",
+  "provider": "alibabaToolCall",
+  "publicName": "thunbergia-alpha",
+  "name": "thunbergia-alpha-jz4q",
+  "displayName": "qwen3.8-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "webdev": 9007199254740991
   }
@@ -12920,6 +13004,27 @@
    "webdev": 9007199254740991
   }
  },
+ "019d50a9-ff12-7beb-b423-0b4904415f39": {
+  "id": "019d50a9-ff12-7beb-b423-0b4904415f39",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.6-plus",
+  "name": "qwen3.6-plus",
+  "displayName": "qwen3.6-plus",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019e90eb-d086-799e-b09c-3431a7383881": {
   "id": "019e90eb-d086-799e-b09c-3431a7383881",
   "publicName": "korin",
@@ -12962,6 +13067,27 @@
   "id": "019fa6e0-ad90-762e-969d-cf1e17dea269",
   "publicName": "gemini-3.1-pro",
   "displayName": "gemini-3.1-pro",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "01a0681c-c45d-7702-bbab-ca7c8621edc2": {
+  "id": "01a0681c-c45d-7702-bbab-ca7c8621edc2",
+  "organization": "google",
+  "provider": "googleVertexGlobalWithThoughtSignatures",
+  "publicName": "gemini-3.8-flash-medium",
+  "name": "gemini-3.8-flash-medium",
+  "displayName": "gemini-3.8-flash-medium",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
@@ -13234,26 +13360,6 @@
    "webdev": 9007199254740991
   }
  },
- "019dd7a4-f384-79f0-aa10-c91147438642": {
-  "id": "019dd7a4-f384-79f0-aa10-c91147438642",
-  "organization": "alibaba",
-  "provider": "alibabaToolCall",
-  "publicName": "qwen3.6-max-preview",
-  "name": "qwen3.6-max-preview-code",
-  "displayName": "qwen3.6-max-preview",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "019f94ca-f684-7009-bb6b-78b1544f22c4": {
   "id": "019f94ca-f684-7009-bb6b-78b1544f22c4",
   "publicName": "tillandsia-alpha",
@@ -13339,27 +13445,6 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "019dac5a-88e0-7477-b100-336eaf25c4b6": {
-  "id": "019dac5a-88e0-7477-b100-336eaf25c4b6",
-  "organization": "moonshot",
-  "provider": "moonshot",
-  "publicName": "kimi-k2.6",
-  "name": "kimi-k2.6-code",
-  "displayName": "kimi-k2.6",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
    },
    "outputCapabilities": {
     "web": true
@@ -13490,26 +13575,6 @@
    "webdev": 9007199254740991
   }
  },
- "019aeb38-cc3b-7421-a472-0bfaaeace035": {
-  "id": "019aeb38-cc3b-7421-a472-0bfaaeace035",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.1-codex-max",
-  "name": "gpt-5.1-codex-max",
-  "displayName": "gpt-5.1-codex-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "01a01327-1a98-7645-8595-06506a9c1f7f": {
   "id": "01a01327-1a98-7645-8595-06506a9c1f7f",
   "organization": "alibaba",
@@ -13521,29 +13586,6 @@
    "inputCapabilities": {
     "text": true,
     "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "019fc361-b52b-7cb8-b2e5-c4339840ab39": {
-  "id": "019fc361-b52b-7cb8-b2e5-c4339840ab39",
-  "organization": "alibaba",
-  "provider": "alibabaToolCall",
-  "publicName": "thunbergia-alpha",
-  "name": "thunbergia-alpha-jz4q",
-  "displayName": "qwen3.8-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
    },
    "outputCapabilities": {
     "web": true
@@ -13589,27 +13631,6 @@
    }
   },
   "userSelectable": false,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "019d50a9-ff12-7beb-b423-0b4904415f39": {
-  "id": "019d50a9-ff12-7beb-b423-0b4904415f39",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.6-plus",
-  "name": "qwen3.6-plus",
-  "displayName": "qwen3.6-plus",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
   "rankByModality": {
    "webdev": 9007199254740991
   }
@@ -13676,27 +13697,6 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "01a0681c-c45d-7702-bbab-ca7c8621edc2": {
-  "id": "01a0681c-c45d-7702-bbab-ca7c8621edc2",
-  "organization": "google",
-  "provider": "googleVertexGlobalWithThoughtSignatures",
-  "publicName": "gemini-3.8-flash-medium",
-  "name": "gemini-3.8-flash-medium",
-  "displayName": "gemini-3.8-flash-medium",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
    },
    "outputCapabilities": {
     "web": true
@@ -16706,6 +16706,30 @@
    "image": 9007199254740991
   }
  },
+ "019c2473-76cc-76a0-a73d-3393599366ed": {
+  "id": "019c2473-76cc-76a0-a73d-3393599366ed",
+  "organization": "wan",
+  "provider": "alibaba",
+  "publicName": "wan2.6-t2i",
+  "name": "wan2.6-t2i-v2",
+  "displayName": "wan2.6-t2i",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019fa036-6faf-7e98-9161-cb7ade6a5b07": {
   "id": "019fa036-6faf-7e98-9161-cb7ade6a5b07",
   "publicName": "zen-bear-v12",
@@ -17170,6 +17194,34 @@
     "image": {
      "requiresUpload": false,
      "multipleImages": false
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "019b8194-804a-775d-86d4-c8ded9ba3e9f": {
+  "id": "019b8194-804a-775d-86d4-c8ded9ba3e9f",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen-image-edit-2511",
+  "name": "qwen-image-edit-2511",
+  "displayName": "qwen-image-edit-2511",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true,
+     "multipleImages": true
     }
    },
    "outputCapabilities": {
@@ -18046,30 +18098,6 @@
    "image": 9007199254740991
   }
  },
- "019c2473-76cc-76a0-a73d-3393599366ed": {
-  "id": "019c2473-76cc-76a0-a73d-3393599366ed",
-  "organization": "wan",
-  "provider": "alibaba",
-  "publicName": "wan2.6-t2i",
-  "name": "wan2.6-t2i-v2",
-  "displayName": "wan2.6-t2i",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "019cc6e2-6e4a-76c1-bf57-76b12d98dbf3": {
   "id": "019cc6e2-6e4a-76c1-bf57-76b12d98dbf3",
   "organization": "xai",
@@ -18150,34 +18178,6 @@
    }
   },
   "userSelectable": false,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "019b8194-804a-775d-86d4-c8ded9ba3e9f": {
-  "id": "019b8194-804a-775d-86d4-c8ded9ba3e9f",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen-image-edit-2511",
-  "name": "qwen-image-edit-2511",
-  "displayName": "qwen-image-edit-2511",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true,
-     "multipleImages": true
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
   "rankByModality": {
    "image": 9007199254740991
   }
