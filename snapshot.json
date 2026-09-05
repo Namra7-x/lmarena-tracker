@@ -19291,26 +19291,6 @@
    "search": 9007199254740991
   }
  },
- "019de22d-1445-7296-9c88-a5877bc66ef8": {
-  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
-  "organization": "xai",
-  "provider": "xaiResponsesSearchPrivate",
-  "publicName": "grok-4.3",
-  "name": "grok-4.3-search",
-  "displayName": "grok-4.3",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
  "01a05eb2-be87-7852-af01-0828c3755ef4": {
   "id": "01a05eb2-be87-7852-af01-0828c3755ef4",
   "organization": "anthropic",
@@ -19382,6 +19362,23 @@
    "search": 9007199254740991
   }
  },
+ "01a06d03-64d6-75dd-a2e8-30ab5a980a19": {
+  "id": "01a06d03-64d6-75dd-a2e8-30ab5a980a19",
+  "publicName": "openhard-2.5-search-cot-0904",
+  "displayName": "openhard-2.5-search-cot-0904",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
  "019b2f68-97ae-75b1-9e2f-456470bd5332": {
   "id": "019b2f68-97ae-75b1-9e2f-456470bd5332",
   "organization": "openai",
@@ -19402,10 +19399,13 @@
    "search": 9007199254740991
   }
  },
- "01a06d03-64d6-75dd-a2e8-30ab5a980a19": {
-  "id": "01a06d03-64d6-75dd-a2e8-30ab5a980a19",
-  "publicName": "openhard-2.5-search-cot-0904",
-  "displayName": "openhard-2.5-search-cot-0904",
+ "019de22d-1445-7296-9c88-a5877bc66ef8": {
+  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
+  "organization": "xai",
+  "provider": "xaiResponsesSearchPrivate",
+  "publicName": "grok-4.3",
+  "name": "grok-4.3-search",
+  "displayName": "grok-4.3",
   "capabilities": {
    "inputCapabilities": {
     "text": true
