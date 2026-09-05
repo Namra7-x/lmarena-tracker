@@ -17610,6 +17610,30 @@
    "image": 9007199254740991
   }
  },
+ "019fac44-b246-722d-ad6c-50863aff71fb": {
+  "id": "019fac44-b246-722d-ad6c-50863aff71fb",
+  "organization": "xai",
+  "provider": "xaiImage",
+  "publicName": "porcelain",
+  "name": "porcelain-k9cy",
+  "displayName": "grok-imagine-image-2.0 (low)",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019fafa9-c4f3-76b6-a461-b125eeecf20e": {
   "id": "019fafa9-c4f3-76b6-a461-b125eeecf20e",
   "publicName": "luffa-v4",
@@ -17920,30 +17944,6 @@
    }
   },
   "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "019fac44-b246-722d-ad6c-50863aff71fb": {
-  "id": "019fac44-b246-722d-ad6c-50863aff71fb",
-  "organization": "xai",
-  "provider": "xaiImage",
-  "publicName": "porcelain",
-  "name": "porcelain-k9cy",
-  "displayName": "grok-imagine-image-2.0 (low)",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": false,
   "rankByModality": {
    "image": 9007199254740991
   }
