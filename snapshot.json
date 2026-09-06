@@ -20671,27 +20671,6 @@
    "video": 9007199254740991
   }
  },
- "019f91b3-6ea2-744a-b698-d09fbadea9fa": {
-  "id": "019f91b3-6ea2-744a-b698-d09fbadea9fa",
-  "organization": "google",
-  "provider": "googleVertex",
-  "publicName": "veo-3.1-audio-4k",
-  "name": "veo-3.1-audio-4k-ga-v1",
-  "displayName": "veo-3.1-audio-4k",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "01a03abf-bdd8-7294-8576-359bba51ac4e": {
   "id": "01a03abf-bdd8-7294-8576-359bba51ac4e",
   "organization": "google",
@@ -20834,29 +20813,6 @@
    "video": 9007199254740991
   }
  },
- "ea96cfc8-953a-4c3c-a229-1107c55b7479": {
-  "id": "ea96cfc8-953a-4c3c-a229-1107c55b7479",
-  "organization": "kling",
-  "provider": "fal",
-  "publicName": "kling-v2.1-standard",
-  "name": "kling-v2.1-standard",
-  "displayName": "kling-v2.1-standard",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019de98f-d58e-7524-ae2b-9d18b0d35838": {
   "id": "019de98f-d58e-7524-ae2b-9d18b0d35838",
   "publicName": "polaris",
@@ -20902,29 +20858,6 @@
    "inputCapabilities": {
     "text": true,
     "image": true
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
- "01a04423-3cd2-767a-9f26-0593ff09d518": {
-  "id": "01a04423-3cd2-767a-9f26-0593ff09d518",
-  "organization": "minimax",
-  "provider": "fal",
-  "publicName": "minimax-h3-max",
-  "name": "minimax-h3-max-image-to-video",
-  "displayName": "minimax-h3-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
    },
    "outputCapabilities": {
     "video": true
@@ -21211,29 +21144,6 @@
    "video": 9007199254740991
   }
  },
- "58060613-41dc-478b-97a0-6d9c4f0c722a": {
-  "id": "58060613-41dc-478b-97a0-6d9c4f0c722a",
-  "organization": "minimax",
-  "provider": "fal",
-  "publicName": "hailuo-02-fast",
-  "name": "hailuo-02-fast",
-  "displayName": "hailuo-02-fast",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019c59fa-8a41-7042-baf7-121d052c04b8": {
   "id": "019c59fa-8a41-7042-baf7-121d052c04b8",
   "organization": "kling",
@@ -21275,6 +21185,27 @@
    "video": 9007199254740991
   }
  },
+ "019f91b3-6ea2-744a-b698-d09fbadea9fa": {
+  "id": "019f91b3-6ea2-744a-b698-d09fbadea9fa",
+  "organization": "google",
+  "provider": "googleVertex",
+  "publicName": "veo-3.1-audio-4k",
+  "name": "veo-3.1-audio-4k-ga-v1",
+  "displayName": "veo-3.1-audio-4k",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
  "019ff19e-a4b0-70c0-9379-1116ca8b4457": {
   "id": "019ff19e-a4b0-70c0-9379-1116ca8b4457",
   "publicName": "polaris",
@@ -21292,6 +21223,29 @@
    "video": 9007199254740991
   }
  },
+ "ea96cfc8-953a-4c3c-a229-1107c55b7479": {
+  "id": "ea96cfc8-953a-4c3c-a229-1107c55b7479",
+  "organization": "kling",
+  "provider": "fal",
+  "publicName": "kling-v2.1-standard",
+  "name": "kling-v2.1-standard",
+  "displayName": "kling-v2.1-standard",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
  "019ff26e-8f7e-70c1-8aaf-5c69fea18bf3": {
   "id": "019ff26e-8f7e-70c1-8aaf-5c69fea18bf3",
   "organization": "bfl",
@@ -21299,6 +21253,29 @@
   "publicName": "flux-3-video-20260811-i2v",
   "name": "flux-3-video-20260811-i2v",
   "displayName": "flux-3-video-20260811-i2v",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "01a04423-3cd2-767a-9f26-0593ff09d518": {
+  "id": "01a04423-3cd2-767a-9f26-0593ff09d518",
+  "organization": "minimax",
+  "provider": "fal",
+  "publicName": "minimax-h3-max",
+  "name": "minimax-h3-max-image-to-video",
+  "displayName": "minimax-h3-max",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
@@ -21347,6 +21324,29 @@
     "text": true,
     "image": {
      "requiresUpload": false
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "58060613-41dc-478b-97a0-6d9c4f0c722a": {
+  "id": "58060613-41dc-478b-97a0-6d9c4f0c722a",
+  "organization": "minimax",
+  "provider": "fal",
+  "publicName": "hailuo-02-fast",
+  "name": "hailuo-02-fast",
+  "displayName": "hailuo-02-fast",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
     }
    },
    "outputCapabilities": {
