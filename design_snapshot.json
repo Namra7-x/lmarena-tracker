@@ -4764,7 +4764,7 @@
     "gen4_aleph": {
       "displayName": "Gen-4 Aleph",
       "provider": "runwayml",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9301,6 +9301,21 @@
           "logo"
         ]
       }
+    },
+    "aleph2": {
+      "displayName": "Aleph 2.0",
+      "provider": "runwayml",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "multimodaltovideo",
+          "videotovideo"
+        ]
+      }
     }
   },
   "providers": {
@@ -9658,7 +9673,7 @@
       "text.output": 0
     },
     "wan-vace": {
-      "video.perSecond": 0.05
+      "video.perSecond": 0.1
     },
     "qwen-image-edit": {
       "image.perImage": 0.03
@@ -9987,7 +10002,7 @@
       "text.output": 0
     },
     "krea-wan-14b": {
-      "video.perSecond": 0.05
+      "video.perSecond": 0.025
     },
     "aurora-edit": {
       "image.perImage": 0.02
@@ -10551,7 +10566,7 @@
       "video.perSecond": 0.1
     },
     "wan-v2.7-v2v": {
-      "video.perSecond": 0.1
+      "video.perSecond": 0.15
     },
     "wan-v2.7-ref": {
       "video.perSecond": 0.1
@@ -11067,6 +11082,9 @@
     },
     "mai-image-2.6-flash": {
       "image.perImage": 0.019
+    },
+    "aleph2": {
+      "video.perSecond": 0.28
     }
   }
 }
