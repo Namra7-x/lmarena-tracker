@@ -8868,6 +8868,28 @@
    "chat": 9007199254740991
   }
  },
+ "01a06dd9-e30f-7f42-9b39-60f91f429b23": {
+  "id": "01a06dd9-e30f-7f42-9b39-60f91f429b23",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-6-astra-max",
+  "name": "gpt-6-astra-max",
+  "displayName": "gpt-6-astra-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
  "019f9521-eef3-7e2f-957d-eb53c2aeeb8b": {
   "id": "019f9521-eef3-7e2f-957d-eb53c2aeeb8b",
   "organization": "anthropic",
@@ -9431,25 +9453,6 @@
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
-  }
- },
- "01a06dd9-e30f-7f42-9b39-60f91f429b23": {
-  "id": "01a06dd9-e30f-7f42-9b39-60f91f429b23",
-  "publicName": "gpt-6-astra-max",
-  "displayName": "gpt-6-astra-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "chat": 9007199254740991
   }
  },
  "01a01606-3957-7833-b831-1f6dbefcd98c": {
@@ -19434,7 +19437,10 @@
  },
  "01a06dd9-f8c5-77f5-90a2-335546d2d6d5": {
   "id": "01a06dd9-f8c5-77f5-90a2-335546d2d6d5",
+  "organization": "openai",
+  "provider": "openaiResponses",
   "publicName": "gpt-6-astra-search-max",
+  "name": "gpt-6-astra-search-max",
   "displayName": "gpt-6-astra-search-max",
   "capabilities": {
    "inputCapabilities": {
