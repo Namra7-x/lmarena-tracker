@@ -6645,36 +6645,6 @@
         ]
       }
     },
-    "claude-opus-4-7-thinking": {
-      "displayName": "Claude Opus 4.7",
-      "provider": "anthropic",
-      "active": true,
-      "openSource": false,
-      "router": false,
-      "vision": true,
-      "inputModalities": [
-        "image",
-        "text"
-      ],
-      "arenas": {
-        "models": [
-          "3d",
-          "ascii",
-          "dataviz",
-          "gamedev",
-          "svg",
-          "uicomponent",
-          "website"
-        ],
-        "agents": [
-          "agentic_gamedev",
-          "agon_slides",
-          "agon_slides_html",
-          "agon_webapps",
-          "nativeapps"
-        ]
-      }
-    },
     "gpt-image-2": {
       "displayName": "GPT Image 2",
       "provider": "openai",
@@ -10672,10 +10642,6 @@
     "kimi-k2.6": {
       "text.input": 0.95,
       "text.output": 4
-    },
-    "claude-opus-4-7-thinking": {
-      "text.input": 5,
-      "text.output": 25
     },
     "gpt-image-2": {
       "text.input": 5,
