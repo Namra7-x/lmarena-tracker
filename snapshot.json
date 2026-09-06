@@ -13188,6 +13188,23 @@
    "webdev": 9007199254740991
   }
  },
+ "01a074a3-05e3-79ee-9725-5b661de35158": {
+  "id": "01a074a3-05e3-79ee-9725-5b661de35158",
+  "publicName": "kestrel-beta",
+  "displayName": "kestrel-beta",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019f7758-45ea-79a4-9963-9b7c096e936e": {
   "id": "019f7758-45ea-79a4-9963-9b7c096e936e",
   "publicName": "delphi-alpha",
@@ -13575,7 +13592,10 @@
  },
  "01a06dd9-e831-7a56-b03c-9bd7b1fa1561": {
   "id": "01a06dd9-e831-7a56-b03c-9bd7b1fa1561",
+  "organization": "openai",
+  "provider": "openaiResponses",
   "publicName": "gpt-6-astra-max",
+  "name": "gpt-6-astra-max-code-codex-harness",
   "displayName": "gpt-6-astra-max",
   "capabilities": {
    "inputCapabilities": {
