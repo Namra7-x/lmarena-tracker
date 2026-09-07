@@ -216,6 +216,31 @@
    "webdev": 57
   }
  },
+ "019c7820-5480-78b6-9fef-04c0d7004054": {
+  "id": "019c7820-5480-78b6-9fef-04c0d7004054",
+  "organization": "google",
+  "provider": "googleVertexGlobal",
+  "publicName": "gemini-3.1-pro-preview",
+  "name": "gemini-3.1-pro-preview",
+  "displayName": "gemini-3.1-pro-preview",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 15,
+  "rankByModality": {
+   "chat": 23,
+   "webdev": 57
+  }
+ },
  "019e1d78-5d58-79ea-8801-1bed09799b11": {
   "id": "019e1d78-5d58-79ea-8801-1bed09799b11",
   "organization": "google",
@@ -285,31 +310,6 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 15,
-  "rankByModality": {
-   "chat": 23,
-   "webdev": 57
-  }
- },
- "019c7820-5480-78b6-9fef-04c0d7004054": {
-  "id": "019c7820-5480-78b6-9fef-04c0d7004054",
-  "organization": "google",
-  "provider": "googleVertexGlobal",
-  "publicName": "gemini-3.1-pro-preview",
-  "name": "gemini-3.1-pro-preview",
-  "displayName": "gemini-3.1-pro-preview",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
    },
    "outputCapabilities": {
     "text": true,
@@ -1524,8 +1524,7 @@
   "displayName": "minimax-m2.7",
   "capabilities": {
    "inputCapabilities": {
-    "text": true,
-    "image": false
+    "text": true
    },
    "outputCapabilities": {
     "text": true,
@@ -10344,8 +10343,7 @@
   "displayName": "glm-5.1",
   "capabilities": {
    "inputCapabilities": {
-    "text": true,
-    "image": false
+    "text": true
    },
    "outputCapabilities": {
     "text": true,
