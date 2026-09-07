@@ -7438,28 +7438,6 @@
    "chat": 9007199254740991
   }
  },
- "019f7cb6-9dc5-70ef-aadb-e1287c3384e3": {
-  "id": "019f7cb6-9dc5-70ef-aadb-e1287c3384e3",
-  "organization": "moonshot",
-  "provider": "moonshot",
-  "publicName": "kimi-k3",
-  "name": "kimi-k3-v3",
-  "displayName": "kimi-k3",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019f6bd1-7a97-7e61-ac2e-247ef73383b9": {
   "id": "019f6bd1-7a97-7e61-ac2e-247ef73383b9",
   "organization": "openai",
@@ -8844,6 +8822,28 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "019f7cb6-9dc5-70ef-aadb-e1287c3384e3": {
+  "id": "019f7cb6-9dc5-70ef-aadb-e1287c3384e3",
+  "organization": "moonshot",
+  "provider": "moonshot",
+  "publicName": "kimi-k3",
+  "name": "kimi-k3-v3",
+  "displayName": "kimi-k3",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "chat": 9007199254740991
   }
