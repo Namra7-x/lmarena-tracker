@@ -20782,27 +20782,6 @@
    "video": 9007199254740991
   }
  },
- "019f05cc-5c22-75d8-b99e-ffab36d62851": {
-  "id": "019f05cc-5c22-75d8-b99e-ffab36d62851",
-  "organization": "aorizon",
-  "provider": "alibaba",
-  "publicName": "happyhorse-1.1",
-  "name": "happyhorse-1.1-t2v",
-  "displayName": "happyhorse-1.1",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": false
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019f05cc-d477-712a-a9c8-3a3ec1c61324": {
   "id": "019f05cc-d477-712a-a9c8-3a3ec1c61324",
   "organization": "aorizon",
@@ -21120,6 +21099,27 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019f05cc-5c22-75d8-b99e-ffab36d62851": {
+  "id": "019f05cc-5c22-75d8-b99e-ffab36d62851",
+  "organization": "aorizon",
+  "provider": "alibaba",
+  "publicName": "happyhorse-1.1",
+  "name": "happyhorse-1.1-t2v",
+  "displayName": "happyhorse-1.1",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": false
    },
    "outputCapabilities": {
     "video": true
