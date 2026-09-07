@@ -9030,30 +9030,6 @@
    "webdev": 9007199254740991
   }
  },
- "01a05e32-12b8-73b3-9d7f-5b5cef1953cd": {
-  "id": "01a05e32-12b8-73b3-9d7f-5b5cef1953cd",
-  "organization": "anthropic",
-  "provider": "googleVertexAnthropicAdaptive",
-  "publicName": "claude-fable-5.1-max",
-  "name": "claude-fable-5.1-max",
-  "displayName": "claude-fable-5.1-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  }
- },
  "01a0205f-13c2-7853-9cd7-6573c5ab1e74": {
   "id": "01a0205f-13c2-7853-9cd7-6573c5ab1e74",
   "publicName": "adamant-ananke",
@@ -10080,6 +10056,30 @@
    "chat": 9007199254740991
   }
  },
+ "019f9593-b5a9-7575-aff0-5971ff479f88": {
+  "id": "019f9593-b5a9-7575-aff0-5971ff479f88",
+  "organization": "anthropic",
+  "provider": "googleVertexAnthropicAdaptive",
+  "publicName": "claude-opus-5-max",
+  "name": "claude-opus-5-max-vertex",
+  "displayName": "claude-opus-5-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  }
+ },
  "019f71b2-ff18-7818-b388-2c134f2b7963": {
   "id": "019f71b2-ff18-7818-b388-2c134f2b7963",
   "organization": "moonshot",
@@ -10091,6 +10091,30 @@
    "inputCapabilities": {
     "text": true,
     "image": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  }
+ },
+ "01a05e32-12b8-73b3-9d7f-5b5cef1953cd": {
+  "id": "01a05e32-12b8-73b3-9d7f-5b5cef1953cd",
+  "organization": "anthropic",
+  "provider": "googleVertexAnthropicAdaptive",
+  "publicName": "claude-fable-5.1-max",
+  "name": "claude-fable-5.1-max",
+  "displayName": "claude-fable-5.1-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
    },
    "outputCapabilities": {
     "text": true,
@@ -10467,30 +10491,6 @@
    }
   },
   "userSelectable": true,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  }
- },
- "019f9593-b5a9-7575-aff0-5971ff479f88": {
-  "id": "019f9593-b5a9-7575-aff0-5971ff479f88",
-  "organization": "anthropic",
-  "provider": "googleVertexAnthropicAdaptive",
-  "publicName": "claude-opus-5-max",
-  "name": "claude-opus-5-max-vertex",
-  "displayName": "claude-opus-5-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": false,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
