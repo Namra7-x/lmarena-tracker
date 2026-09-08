@@ -3351,25 +3351,6 @@
    "chat": 9007199254740991
   }
  },
- "01a07d42-938f-7267-9398-4529e857491c": {
-  "id": "01a07d42-938f-7267-9398-4529e857491c",
-  "publicName": "gpt-6-astra-medium",
-  "displayName": "gpt-6-astra-medium",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019e4b5f-7524-718e-a66e-f81324d2efea": {
   "id": "019e4b5f-7524-718e-a66e-f81324d2efea",
   "publicName": "mizar-beta",
@@ -8923,6 +8904,28 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "01a07d42-938f-7267-9398-4529e857491c": {
+  "id": "01a07d42-938f-7267-9398-4529e857491c",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-6-astra-medium",
+  "name": "gpt-6-astra-medium",
+  "displayName": "gpt-6-astra-medium",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "chat": 9007199254740991
   }
