@@ -9316,6 +9316,46 @@
           "videotovideo"
         ]
       }
+    },
+    "gpt-image-2.5-flare": {
+      "displayName": "GPT-Image-2.5 Flare",
+      "provider": "openai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      }
+    },
+    "gpt-image-2.5-sunburst": {
+      "displayName": "GPT-Image-2.5 Sunburst",
+      "provider": "openai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      }
     }
   },
   "providers": {
@@ -11086,6 +11126,16 @@
     },
     "aleph2": {
       "video.perSecond": 0.28
+    },
+    "gpt-image-2.5-flare": {
+      "text.input": 5,
+      "text.output": 30,
+      "text.cachedInput": 1.25
+    },
+    "gpt-image-2.5-sunburst": {
+      "text.input": 5,
+      "text.output": 30,
+      "text.cachedInput": 1.25
     }
   }
 }
