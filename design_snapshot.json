@@ -8413,23 +8413,6 @@
         ]
       }
     },
-    "claude-opus-5-xhigh": {
-      "displayName": "Claude Opus 5 (xhigh)",
-      "provider": "anthropic",
-      "active": false,
-      "openSource": false,
-      "router": false,
-      "vision": true,
-      "inputModalities": [
-        "image",
-        "text"
-      ],
-      "arenas": {
-        "agents": [
-          "agentic_3d"
-        ]
-      }
-    },
     "thistle": {
       "displayName": "p-image-ideogram (very_low)",
       "provider": "pruna",
@@ -10983,10 +10966,6 @@
       "image.perImage": 0.075
     },
     "claude-opus-5": {
-      "text.input": 5,
-      "text.output": 25
-    },
-    "claude-opus-5-xhigh": {
       "text.input": 5,
       "text.output": 25
     },
