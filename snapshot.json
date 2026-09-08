@@ -13315,6 +13315,27 @@
    "webdev": 9007199254740991
   }
  },
+ "01a082a9-eda1-7992-863a-5034093bc4ec": {
+  "id": "01a082a9-eda1-7992-863a-5034093bc4ec",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-6-astra-medium",
+  "name": "gpt-6-astra-medium-code-codex-harness",
+  "displayName": "gpt-6-astra-medium",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "01a074a3-05e3-79ee-9725-5b661de35158": {
   "id": "01a074a3-05e3-79ee-9725-5b661de35158",
   "publicName": "kestrel-beta",
