@@ -9029,27 +9029,6 @@
    "chat": 9007199254740991
   }
  },
- "6fe1ec40-3219-4c33-b3e7-0e65658b4194": {
-  "id": "6fe1ec40-3219-4c33-b3e7-0e65658b4194",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen-vl-max-2025-08-13",
-  "name": "qwen-vl-max-2025-08-13",
-  "displayName": "qwen-vl-max-2025-08-13",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "19ad5f04-38c6-48ae-b826-f7d5bbfd79f7": {
   "id": "19ad5f04-38c6-48ae-b826-f7d5bbfd79f7",
   "organization": "openai",
@@ -9936,6 +9915,27 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "6fe1ec40-3219-4c33-b3e7-0e65658b4194": {
+  "id": "6fe1ec40-3219-4c33-b3e7-0e65658b4194",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen-vl-max-2025-08-13",
+  "name": "qwen-vl-max-2025-08-13",
+  "displayName": "qwen-vl-max-2025-08-13",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
    },
    "outputCapabilities": {
     "text": true
