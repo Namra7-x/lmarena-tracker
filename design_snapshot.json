@@ -8611,29 +8611,6 @@
         ]
       }
     },
-    "solar-pro4": {
-      "displayName": "Solar Pro 4",
-      "provider": "upstage",
-      "active": false,
-      "openSource": false,
-      "router": false,
-      "vision": false,
-      "inputModalities": [
-        "text"
-      ],
-      "arenas": {
-        "models": [
-          "3d",
-          "dataviz",
-          "gamedev",
-          "uicomponent",
-          "website"
-        ],
-        "agents": [
-          "fullstack"
-        ]
-      }
-    },
     "gemini-3.7-flash": {
       "displayName": "Gemini 3.7 Flash",
       "provider": "google",
@@ -11023,10 +11000,6 @@
       "text.input": 2,
       "text.output": 6,
       "text.cachedInput": 0.5
-    },
-    "solar-pro4": {
-      "text.input": 0.3,
-      "text.output": 1.2
     },
     "gemini-3.7-flash": {
       "text.input": 0.75,
