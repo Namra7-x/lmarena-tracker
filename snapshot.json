@@ -8446,28 +8446,6 @@
    "chat": 9007199254740991
   }
  },
- "019fbe79-c3cb-7ccb-910a-70a2655a8e63": {
-  "id": "019fbe79-c3cb-7ccb-910a-70a2655a8e63",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.6-luna-max",
-  "name": "gpt-5.6-luna-max",
-  "displayName": "gpt-5.6-luna-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019c6e76-fbbc-7e92-b0ba-784c7ef3ad8b": {
   "id": "019c6e76-fbbc-7e92-b0ba-784c7ef3ad8b",
   "organization": "ant-group",
@@ -8882,6 +8860,28 @@
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
+  }
+ },
+ "019fbe79-c3cb-7ccb-910a-70a2655a8e63": {
+  "id": "019fbe79-c3cb-7ccb-910a-70a2655a8e63",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.6-luna-max",
+  "name": "gpt-5.6-luna-max",
+  "displayName": "gpt-5.6-luna-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991
   }
  },
  "019dfec2-612d-7c11-b54f-5236d830213d": {
