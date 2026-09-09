@@ -7786,28 +7786,6 @@
    "webdev": 9007199254740991
   }
  },
- "019f6bd2-2a38-7fec-a90c-4aedc5e112c0": {
-  "id": "019f6bd2-2a38-7fec-a90c-4aedc5e112c0",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.6-luna-low",
-  "name": "gpt-5.6-luna-low",
-  "displayName": "gpt-5.6-luna-low",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019de9ad-7752-7bbb-a5d3-dd64400fb106": {
   "id": "019de9ad-7752-7bbb-a5d3-dd64400fb106",
   "publicName": "may26-chatbot1",
@@ -8900,6 +8878,28 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "019f6bd2-2a38-7fec-a90c-4aedc5e112c0": {
+  "id": "019f6bd2-2a38-7fec-a90c-4aedc5e112c0",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.6-luna-low",
+  "name": "gpt-5.6-luna-low",
+  "displayName": "gpt-5.6-luna-low",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "chat": 9007199254740991
   }
