@@ -7496,7 +7496,7 @@
     "nex-n2-pro": {
       "displayName": "Nex N2 Pro",
       "provider": "nex-agi",
-      "active": true,
+      "active": false,
       "openSource": true,
       "router": false,
       "vision": true,
@@ -8765,6 +8765,30 @@
         ]
       }
     },
+    "solar-pro4-direct": {
+      "displayName": "Solar Pro 4",
+      "provider": "upstage",
+      "active": false,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agon_webapps",
+          "fullstack"
+        ]
+      }
+    },
     "elevenlabs_eleven_v3_conversational": {
       "displayName": "Eleven v3 Conversational",
       "provider": "elevenlabs",
@@ -9231,7 +9255,7 @@
     "gpt-6-astra": {
       "displayName": "GPT-6 Astra (xhigh)",
       "provider": "openai",
-      "active": false,
+      "active": true,
       "openSource": false,
       "router": false,
       "vision": true,
@@ -11026,6 +11050,10 @@
     "qwen3.8-max": {
       "text.input": 2,
       "text.output": 6
+    },
+    "solar-pro4-direct": {
+      "text.input": 0.3,
+      "text.output": 1.2
     },
     "elevenlabs_eleven_v3_conversational": {
       "text.input": 100,
