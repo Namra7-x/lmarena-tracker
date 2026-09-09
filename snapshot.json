@@ -12771,6 +12771,24 @@
    "webdev": 9007199254740991
   }
  },
+ "01a08423-1214-7c9a-933d-55cac44a3043": {
+  "id": "01a08423-1214-7c9a-933d-55cac44a3043",
+  "publicName": "macchiato",
+  "displayName": "macchiato",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019f924c-461c-7bcb-a62a-ebe9cc637cdb": {
   "id": "019f924c-461c-7bcb-a62a-ebe9cc637cdb",
   "publicName": "inkling-small-rc-1",
@@ -21374,26 +21392,6 @@
   "id": "019ff19e-a4b0-70c0-9379-1116ca8b4457",
   "publicName": "polaris",
   "displayName": "polaris",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
- "01a010ff-f14f-7953-bb48-27baf9105203": {
-  "id": "01a010ff-f14f-7953-bb48-27baf9105203",
-  "organization": "wan",
-  "provider": "wan",
-  "publicName": "vega",
-  "name": "vega-v9e1",
-  "displayName": "wan3.0",
   "capabilities": {
    "inputCapabilities": {
     "text": true
