@@ -19579,6 +19579,26 @@
    "search": 9007199254740991
   }
  },
+ "019de22d-1445-7296-9c88-a5877bc66ef8": {
+  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
+  "organization": "xai",
+  "provider": "xaiResponsesSearchPrivate",
+  "publicName": "grok-4.3",
+  "name": "grok-4.3-search",
+  "displayName": "grok-4.3",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
  "019e9966-8501-77e8-85c3-c49fca914a0c": {
   "id": "019e9966-8501-77e8-85c3-c49fca914a0c",
   "publicName": "tanager-search-v2",
@@ -19671,26 +19691,6 @@
   "id": "019ff26b-3a89-752d-8f3f-c87c660d2c00",
   "publicName": "yotta-prime",
   "displayName": "yotta-prime",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
- "019de22d-1445-7296-9c88-a5877bc66ef8": {
-  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
-  "organization": "xai",
-  "provider": "xaiResponsesSearchPrivate",
-  "publicName": "grok-4.3",
-  "name": "grok-4.3-search",
-  "displayName": "grok-4.3",
   "capabilities": {
    "inputCapabilities": {
     "text": true
