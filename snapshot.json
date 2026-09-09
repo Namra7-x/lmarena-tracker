@@ -18163,6 +18163,31 @@
    "image": 9007199254740991
   }
  },
+ "01a086ee-d8d3-7c1c-b77b-86699f63dfa9": {
+  "id": "01a086ee-d8d3-7c1c-b77b-86699f63dfa9",
+  "publicName": "spicy-mayo",
+  "displayName": "spicy-mayo",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019fb623-97ff-7c0e-abc4-37535b24c986": {
   "id": "019fb623-97ff-7c0e-abc4-37535b24c986",
   "publicName": "cantaloupe-multi",
