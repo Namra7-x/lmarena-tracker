@@ -17274,34 +17274,6 @@
    "image": 9007199254740991
   }
  },
- "01a0843d-e019-78b5-be43-ec2291edc2cf": {
-  "id": "01a0843d-e019-78b5-be43-ec2291edc2cf",
-  "organization": "openai",
-  "provider": "customOpenai",
-  "publicName": "gpt-image-2.5-sunburst",
-  "name": "gpt-image-2.5-sunburst",
-  "displayName": "gpt-image-2.5-sunburst",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false,
-     "multipleImages": true
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "01a0034d-815b-7667-ba17-ec50f311a39e": {
   "id": "01a0034d-815b-7667-ba17-ec50f311a39e",
   "publicName": "dragonfruit-multi-v2",
@@ -18081,6 +18053,34 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "01a0843d-e019-78b5-be43-ec2291edc2cf": {
+  "id": "01a0843d-e019-78b5-be43-ec2291edc2cf",
+  "organization": "openai",
+  "provider": "customOpenai",
+  "publicName": "gpt-image-2.5-sunburst",
+  "name": "gpt-image-2.5-sunburst",
+  "displayName": "gpt-image-2.5-sunburst",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "image": 9007199254740991
   }
