@@ -15703,6 +15703,31 @@
    "image": 9007199254740991
   }
  },
+ "01a083c6-3681-77a3-9211-f09ac0d249e3": {
+  "id": "01a083c6-3681-77a3-9211-f09ac0d249e3",
+  "publicName": "copper_lantern",
+  "displayName": "copper_lantern",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019fddb2-32d1-718f-a423-001c9f4330d4": {
   "id": "019fddb2-32d1-718f-a423-001c9f4330d4",
   "publicName": "fiddler",
