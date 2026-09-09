@@ -15404,6 +15404,31 @@
    "image": 9007199254740991
   }
  },
+ "01a08379-4098-733b-9005-522e58b0a8b4": {
+  "id": "01a08379-4098-733b-9005-522e58b0a8b4",
+  "publicName": "bromide_drift",
+  "displayName": "bromide_drift",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019e65cc-7873-78db-8e2d-5ceb655a02e9": {
   "id": "019e65cc-7873-78db-8e2d-5ceb655a02e9",
   "publicName": "itadori-sv1",
