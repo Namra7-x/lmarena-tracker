@@ -15417,6 +15417,31 @@
    "image": 9007199254740991
   }
  },
+ "01a086b9-c61d-7572-87f4-01a2761568d6": {
+  "id": "01a086b9-c61d-7572-87f4-01a2761568d6",
+  "publicName": "lychee-37",
+  "displayName": "lychee-37",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019e65cc-7873-78db-8e2d-5ceb655a02e9": {
   "id": "019e65cc-7873-78db-8e2d-5ceb655a02e9",
   "publicName": "itadori-sv1",
