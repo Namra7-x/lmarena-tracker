@@ -19544,46 +19544,6 @@
    "search": 9007199254740991
   }
  },
- "019b2f68-97ae-75b1-9e2f-456470bd5332": {
-  "id": "019b2f68-97ae-75b1-9e2f-456470bd5332",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.1-search-sp",
-  "name": "gpt-5.1-search-new-system-prompt-20251217",
-  "displayName": "gpt-5.1-search-sp",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
- "01a05eb2-be87-7852-af01-0828c3755ef4": {
-  "id": "01a05eb2-be87-7852-af01-0828c3755ef4",
-  "organization": "anthropic",
-  "provider": "anthropicSearch",
-  "publicName": "claude-fable-5.1-search",
-  "name": "claude-fable-5.1-search",
-  "displayName": "claude-fable-5.1-search",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
  "019ff26b-3a89-752d-8f3f-c87c660d2c00": {
   "id": "019ff26b-3a89-752d-8f3f-c87c660d2c00",
   "publicName": "yotta-prime",
@@ -19601,13 +19561,13 @@
    "search": 9007199254740991
   }
  },
- "01a06dd9-f8c5-77f5-90a2-335546d2d6d5": {
-  "id": "01a06dd9-f8c5-77f5-90a2-335546d2d6d5",
+ "019b2f68-97ae-75b1-9e2f-456470bd5332": {
+  "id": "019b2f68-97ae-75b1-9e2f-456470bd5332",
   "organization": "openai",
   "provider": "openaiResponses",
-  "publicName": "gpt-6-astra-search-max",
-  "name": "gpt-6-astra-search-max",
-  "displayName": "gpt-6-astra-search-max",
+  "publicName": "gpt-5.1-search-sp",
+  "name": "gpt-5.1-search-new-system-prompt-20251217",
+  "displayName": "gpt-5.1-search-sp",
   "capabilities": {
    "inputCapabilities": {
     "text": true
@@ -19616,7 +19576,7 @@
     "search": true
    }
   },
-  "userSelectable": false,
+  "userSelectable": true,
   "rankByModality": {
    "search": 9007199254740991
   }
@@ -19654,6 +19614,46 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
+ "01a05eb2-be87-7852-af01-0828c3755ef4": {
+  "id": "01a05eb2-be87-7852-af01-0828c3755ef4",
+  "organization": "anthropic",
+  "provider": "anthropicSearch",
+  "publicName": "claude-fable-5.1-search",
+  "name": "claude-fable-5.1-search",
+  "displayName": "claude-fable-5.1-search",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
+ "01a06dd9-f8c5-77f5-90a2-335546d2d6d5": {
+  "id": "01a06dd9-f8c5-77f5-90a2-335546d2d6d5",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-6-astra-search-max",
+  "name": "gpt-6-astra-search-max",
+  "displayName": "gpt-6-astra-search-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "search": 9007199254740991
   }
