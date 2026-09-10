@@ -4482,29 +4482,6 @@
    "chat": 9007199254740991
   }
  },
- "019f3a0a-bd19-7b19-9eed-a98453759b48": {
-  "id": "019f3a0a-bd19-7b19-9eed-a98453759b48",
-  "organization": "meituan",
-  "provider": "siliconFlow",
-  "publicName": "longcat-2.0",
-  "name": "longcat-2.0-siliconflow",
-  "displayName": "longcat-2.0",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": false
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  }
- },
  "019c9af7-7985-7508-8dc9-0795652c421f": {
   "id": "019c9af7-7985-7508-8dc9-0795652c421f",
   "publicName": "zephyr",
@@ -9163,6 +9140,29 @@
   "userSelectable": true,
   "rankByModality": {
    "chat": 9007199254740991
+  }
+ },
+ "019f3a0a-bd19-7b19-9eed-a98453759b48": {
+  "id": "019f3a0a-bd19-7b19-9eed-a98453759b48",
+  "organization": "meituan",
+  "provider": "siliconFlow",
+  "publicName": "longcat-2.0",
+  "name": "longcat-2.0-siliconflow",
+  "displayName": "longcat-2.0",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": false
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
   }
  },
  "0199e3d1-a308-77b9-a650-41453e8ef2fb": {
