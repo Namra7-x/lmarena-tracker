@@ -13236,6 +13236,43 @@
    "webdev": 9007199254740991
   }
  },
+ "01a08c75-11b5-798e-9254-fc706d844774": {
+  "id": "01a08c75-11b5-798e-9254-fc706d844774",
+  "publicName": "deepseek-v4-pro-max",
+  "displayName": "deepseek-v4-pro-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": false
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991,
+   "chat": 9007199254740991
+  }
+ },
+ "01a08c76-a8ce-723e-9ae6-bdbc044c4cdd": {
+  "id": "01a08c76-a8ce-723e-9ae6-bdbc044c4cdd",
+  "publicName": "kimi-k3-gateway",
+  "displayName": "kimi-k3-gateway",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019cc0bb-8758-7a5c-897d-7baf199c6c49": {
   "id": "019cc0bb-8758-7a5c-897d-7baf199c6c49",
   "organization": "openai",
