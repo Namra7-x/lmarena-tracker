@@ -8988,6 +8988,26 @@
    "webdev": 9007199254740991
   }
  },
+ "01a08c75-11b5-798e-9254-fc706d844774": {
+  "id": "01a08c75-11b5-798e-9254-fc706d844774",
+  "publicName": "deepseek-v4-pro-max",
+  "displayName": "deepseek-v4-pro-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": false
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  }
+ },
  "019efc14-6517-7d95-b59e-8f110f465a45": {
   "id": "019efc14-6517-7d95-b59e-8f110f465a45",
   "publicName": "v0-trained-policy-router-cost-saver",
@@ -13234,26 +13254,6 @@
   "userSelectable": true,
   "rankByModality": {
    "webdev": 9007199254740991
-  }
- },
- "01a08c75-11b5-798e-9254-fc706d844774": {
-  "id": "01a08c75-11b5-798e-9254-fc706d844774",
-  "publicName": "deepseek-v4-pro-max",
-  "displayName": "deepseek-v4-pro-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": false
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991,
-   "chat": 9007199254740991
   }
  },
  "01a08c76-a8ce-723e-9ae6-bdbc044c4cdd": {
