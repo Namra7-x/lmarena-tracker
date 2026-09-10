@@ -9361,6 +9361,29 @@
           "website"
         ]
       }
+    },
+    "deepseek-v4-1-flash": {
+      "displayName": "DeepSeek-V4.1-Flash",
+      "provider": "deepseek",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -11143,6 +11166,11 @@
     "muse-spark-1.3-max": {
       "text.input": 1.25,
       "text.output": 4.25
+    },
+    "deepseek-v4-1-flash": {
+      "text.input": 0.3,
+      "text.output": 1.2,
+      "text.cachedInput": 0.006
     }
   }
 }
