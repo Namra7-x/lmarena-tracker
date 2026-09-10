@@ -9384,6 +9384,20 @@
           "website"
         ]
       }
+    },
+    "flux-3-video-edit": {
+      "displayName": "FLUX 3 Video Edit",
+      "provider": "black_forest_labs",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "videotovideo"
+        ]
+      }
     }
   },
   "providers": {
@@ -11171,6 +11185,9 @@
       "text.input": 0.3,
       "text.output": 1.2,
       "text.cachedInput": 0.006
+    },
+    "flux-3-video-edit": {
+      "video.perSecond": 0.03
     }
   }
 }
