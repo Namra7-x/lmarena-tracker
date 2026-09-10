@@ -11800,6 +11800,27 @@
    "webdev": 9007199254740991
   }
  },
+ "01a082a9-eda1-7992-863a-5034093bc4ec": {
+  "id": "01a082a9-eda1-7992-863a-5034093bc4ec",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-6-astra-medium",
+  "name": "gpt-6-astra-medium-code-codex-harness",
+  "displayName": "gpt-6-astra-medium",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019d561b-9c05-7a00-a729-e606dac1c4df": {
   "id": "019d561b-9c05-7a00-a729-e606dac1c4df",
   "publicName": "vulcan",
@@ -12292,27 +12313,6 @@
   "id": "019ea0c9-c2f2-7bb2-b3bd-084bd27d0e77",
   "publicName": "metagross",
   "displayName": "metagross",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "01a082a9-eda1-7992-863a-5034093bc4ec": {
-  "id": "01a082a9-eda1-7992-863a-5034093bc4ec",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-6-astra-medium",
-  "name": "gpt-6-astra-medium-code-codex-harness",
-  "displayName": "gpt-6-astra-medium",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
