@@ -9832,6 +9832,26 @@
    "chat": 9007199254740991
   }
  },
+ "01a088f2-2e70-71e2-9d8a-bab3d370df44": {
+  "id": "01a088f2-2e70-71e2-9d8a-bab3d370df44",
+  "publicName": "deepseek-v4-flash-max",
+  "displayName": "deepseek-v4-flash-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  }
+ },
  "019ff2c1-f19f-78f3-a212-4d7a83e1e2ea": {
   "id": "019ff2c1-f19f-78f3-a212-4d7a83e1e2ea",
   "publicName": "dahlia-vlm-2",
