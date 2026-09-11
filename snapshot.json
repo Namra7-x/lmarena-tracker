@@ -7462,28 +7462,6 @@
    "chat": 9007199254740991
   }
  },
- "019f4d63-1e9e-7e79-9fa6-66dd8ecb1107": {
-  "id": "019f4d63-1e9e-7e79-9fa6-66dd8ecb1107",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.6-sol-medium",
-  "name": "gpt-5.6-sol-medium",
-  "displayName": "gpt-5.6-sol-medium",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019ee222-2bd1-7d34-b5b5-14ea1a45974f": {
   "id": "019ee222-2bd1-7d34-b5b5-14ea1a45974f",
   "publicName": "torin",
@@ -9115,6 +9093,28 @@
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
+  }
+ },
+ "019f4d63-1e9e-7e79-9fa6-66dd8ecb1107": {
+  "id": "019f4d63-1e9e-7e79-9fa6-66dd8ecb1107",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.6-sol-medium",
+  "name": "gpt-5.6-sol-medium",
+  "displayName": "gpt-5.6-sol-medium",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991
   }
  },
  "019e6f8f-853d-79fd-8776-beb4ec4752aa": {
