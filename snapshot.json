@@ -15937,30 +15937,6 @@
    "image": 9007199254740991
   }
  },
- "019e7565-e0cc-7f7e-ab49-a9352e70f2b4": {
-  "id": "019e7565-e0cc-7f7e-ab49-a9352e70f2b4",
-  "organization": "alibaba",
-  "provider": "qwenImage",
-  "publicName": "auto-bear-v2",
-  "name": "auto-bear-v2-ej1q",
-  "displayName": "qwen-image-2.0-pro-2026-06-22",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "019e4bc1-ca09-75b8-8d6a-5a2b7e627a0f": {
   "id": "019e4bc1-ca09-75b8-8d6a-5a2b7e627a0f",
   "publicName": "text-to-image-autoeval-test",
@@ -16588,30 +16564,6 @@
      "requiresUpload": true,
      "multipleImages": true
     }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "019c2473-76cc-76a0-a73d-3393599366ed": {
-  "id": "019c2473-76cc-76a0-a73d-3393599366ed",
-  "organization": "wan",
-  "provider": "alibaba",
-  "publicName": "wan2.6-t2i",
-  "name": "wan2.6-t2i-v2",
-  "displayName": "wan2.6-t2i",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
    },
    "outputCapabilities": {
     "image": {
@@ -17348,34 +17300,6 @@
    "image": 9007199254740991
   }
  },
- "019bece2-d22d-7d91-8cc6-1d4ba4a35bbb": {
-  "id": "019bece2-d22d-7d91-8cc6-1d4ba4a35bbb",
-  "organization": "wan",
-  "provider": "alibaba",
-  "publicName": "wan2.6-image",
-  "name": "wan2.6-image",
-  "displayName": "wan2.6-image",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true,
-     "multipleImages": true
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "019ef780-25ef-7878-8b91-307f8f879d42": {
   "id": "019ef780-25ef-7878-8b91-307f8f879d42",
   "organization": "meta",
@@ -17528,62 +17452,6 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "0199ef2a-583f-7088-b704-b75fd169401d": {
-  "id": "0199ef2a-583f-7088-b704-b75fd169401d",
-  "organization": "google",
-  "provider": "google-genai",
-  "publicName": "gemini-2.5-flash-image-preview (nano-banana)",
-  "name": "gemini-2.5-flash-image-preview (nano-banana)",
-  "displayName": "gemini-2.5-flash-image-preview (nano-banana)",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false,
-     "multipleImages": true
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "019f1f86-ea47-711c-87ac-e01232af7ee7": {
-  "id": "019f1f86-ea47-711c-87ac-e01232af7ee7",
-  "organization": "google",
-  "provider": "google-genai",
-  "publicName": "gemini-3.1-flash-image (nano-banana-2) [web-search]",
-  "name": "gemini-3.1-flash-image (nano-banana-2)",
-  "displayName": "gemini-3.1-flash-image (nano-banana-2) [web-search]",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false,
-     "multipleImages": true
-    }
    },
    "outputCapabilities": {
     "image": {
@@ -17917,6 +17785,30 @@
    "image": 9007199254740991
   }
  },
+ "019e7565-e0cc-7f7e-ab49-a9352e70f2b4": {
+  "id": "019e7565-e0cc-7f7e-ab49-a9352e70f2b4",
+  "organization": "alibaba",
+  "provider": "qwenImage",
+  "publicName": "auto-bear-v2",
+  "name": "auto-bear-v2-ej1q",
+  "displayName": "qwen-image-2.0-pro-2026-06-22",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "01a0843d-e019-78b5-be43-ec2291edc2cf": {
   "id": "01a0843d-e019-78b5-be43-ec2291edc2cf",
   "organization": "openai",
@@ -18066,6 +17958,30 @@
    "image": 9007199254740991
   }
  },
+ "019c2473-76cc-76a0-a73d-3393599366ed": {
+  "id": "019c2473-76cc-76a0-a73d-3393599366ed",
+  "organization": "wan",
+  "provider": "alibaba",
+  "publicName": "wan2.6-t2i",
+  "name": "wan2.6-t2i-v2",
+  "displayName": "wan2.6-t2i",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "01a02283-5143-72f0-a787-0e141cb2602b": {
   "id": "01a02283-5143-72f0-a787-0e141cb2602b",
   "publicName": "iron-bloom",
@@ -18119,6 +18035,62 @@
    "image": 9007199254740991
   }
  },
+ "0199ef2a-583f-7088-b704-b75fd169401d": {
+  "id": "0199ef2a-583f-7088-b704-b75fd169401d",
+  "organization": "google",
+  "provider": "google-genai",
+  "publicName": "gemini-2.5-flash-image-preview (nano-banana)",
+  "name": "gemini-2.5-flash-image-preview (nano-banana)",
+  "displayName": "gemini-2.5-flash-image-preview (nano-banana)",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "019bece2-d22d-7d91-8cc6-1d4ba4a35bbb": {
+  "id": "019bece2-d22d-7d91-8cc6-1d4ba4a35bbb",
+  "organization": "wan",
+  "provider": "alibaba",
+  "publicName": "wan2.6-image",
+  "name": "wan2.6-image",
+  "displayName": "wan2.6-image",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019fe39a-b4c5-7442-850f-26c39b95b3ca": {
   "id": "019fe39a-b4c5-7442-850f-26c39b95b3ca",
   "publicName": "mona-lisa-1",
@@ -18140,6 +18112,34 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "019f1f86-ea47-711c-87ac-e01232af7ee7": {
+  "id": "019f1f86-ea47-711c-87ac-e01232af7ee7",
+  "organization": "google",
+  "provider": "google-genai",
+  "publicName": "gemini-3.1-flash-image (nano-banana-2) [web-search]",
+  "name": "gemini-3.1-flash-image (nano-banana-2)",
+  "displayName": "gemini-3.1-flash-image (nano-banana-2) [web-search]",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "image": 9007199254740991
   }
@@ -18193,30 +18193,6 @@
    }
   },
   "userSelectable": false,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "a9a26426-5377-4efa-bef9-de71e29ad943": {
-  "id": "a9a26426-5377-4efa-bef9-de71e29ad943",
-  "organization": "tencent",
-  "provider": "fal",
-  "publicName": "hunyuan-image-2.1",
-  "name": "hunyuan-image-2.1",
-  "displayName": "hunyuan-image-2.1",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
   "rankByModality": {
    "image": 9007199254740991
   }
@@ -18288,6 +18264,30 @@
      "requiresUpload": true,
      "multipleImages": true
     }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "a9a26426-5377-4efa-bef9-de71e29ad943": {
+  "id": "a9a26426-5377-4efa-bef9-de71e29ad943",
+  "organization": "tencent",
+  "provider": "fal",
+  "publicName": "hunyuan-image-2.1",
+  "name": "hunyuan-image-2.1",
+  "displayName": "hunyuan-image-2.1",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
    },
    "outputCapabilities": {
     "image": {
@@ -20054,6 +20054,27 @@
    "video": 32
   }
  },
+ "55069e04-a634-4d98-8765-95113b945f5e": {
+  "id": "55069e04-a634-4d98-8765-95113b945f5e",
+  "organization": "minimax",
+  "provider": "fal",
+  "publicName": "hailuo-02-pro",
+  "name": "hailuo-02-pro-text-to-video",
+  "displayName": "hailuo-02-pro",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 33,
+  "rankByModality": {
+   "video": 33
+  }
+ },
  "527e3f88-c13f-404c-92b4-0dcf7eeb61e6": {
   "id": "527e3f88-c13f-404c-92b4-0dcf7eeb61e6",
   "organization": "minimax",
@@ -20067,27 +20088,6 @@
     "image": {
      "requiresUpload": true
     }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 33,
-  "rankByModality": {
-   "video": 33
-  }
- },
- "55069e04-a634-4d98-8765-95113b945f5e": {
-  "id": "55069e04-a634-4d98-8765-95113b945f5e",
-  "organization": "minimax",
-  "provider": "fal",
-  "publicName": "hailuo-02-pro",
-  "name": "hailuo-02-pro-text-to-video",
-  "displayName": "hailuo-02-pro",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
    },
    "outputCapabilities": {
     "video": true
@@ -20803,29 +20803,6 @@
    "video": 9007199254740991
   }
  },
- "019a36dd-5d6c-7f15-8598-4755f4c34e28": {
-  "id": "019a36dd-5d6c-7f15-8598-4755f4c34e28",
-  "organization": "minimax",
-  "provider": "minimax",
-  "publicName": "hailuo-2.3-fast",
-  "name": "hailuo-2.3-fast",
-  "displayName": "hailuo-2.3-fast",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019ee7e7-87ad-78d6-aaf2-486832e822f5": {
   "id": "019ee7e7-87ad-78d6-aaf2-486832e822f5",
   "publicName": "bubble-tea",
@@ -20876,52 +20853,6 @@
     "text": true,
     "image": {
      "requiresUpload": false
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
- "ea96cfc8-953a-4c3c-a229-1107c55b7479": {
-  "id": "ea96cfc8-953a-4c3c-a229-1107c55b7479",
-  "organization": "kling",
-  "provider": "fal",
-  "publicName": "kling-v2.1-standard",
-  "name": "kling-v2.1-standard",
-  "displayName": "kling-v2.1-standard",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
- "0754baa1-ab91-42d0-ba74-522aa8e5b8e2": {
-  "id": "0754baa1-ab91-42d0-ba74-522aa8e5b8e2",
-  "organization": "runway",
-  "provider": "replicate",
-  "publicName": "runway-gen4-turbo",
-  "name": "runway-gen4-turbo",
-  "displayName": "runway-gen4-turbo",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
     }
    },
    "outputCapabilities": {
@@ -21129,29 +21060,6 @@
    "video": 9007199254740991
   }
  },
- "019c78d9-ffe4-7a3a-913f-9570e3927788": {
-  "id": "019c78d9-ffe4-7a3a-913f-9570e3927788",
-  "organization": "kling",
-  "provider": "fal",
-  "publicName": "kling-o3-pro",
-  "name": "kling-o3-pro-video-to-video",
-  "displayName": "kling-o3-pro",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "video": {
-     "required": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019feceb-bf62-71a6-8238-aea19b7b9d9b": {
   "id": "019feceb-bf62-71a6-8238-aea19b7b9d9b",
   "organization": "wan",
@@ -21299,10 +21207,13 @@
    "video": 9007199254740991
   }
  },
- "019fc0c5-380f-7f77-9534-265919ac79d2": {
-  "id": "019fc0c5-380f-7f77-9534-265919ac79d2",
-  "publicName": "nova",
-  "displayName": "nova",
+ "019a36dd-5d6c-7f15-8598-4755f4c34e28": {
+  "id": "019a36dd-5d6c-7f15-8598-4755f4c34e28",
+  "organization": "minimax",
+  "provider": "minimax",
+  "publicName": "hailuo-2.3-fast",
+  "name": "hailuo-2.3-fast",
+  "displayName": "hailuo-2.3-fast",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
@@ -21319,13 +21230,10 @@
    "video": 9007199254740991
   }
  },
- "019ff26e-8f7e-70c1-8aaf-5c69fea18bf3": {
-  "id": "019ff26e-8f7e-70c1-8aaf-5c69fea18bf3",
-  "organization": "bfl",
-  "provider": "bflVideo3",
-  "publicName": "flux-3-video-20260811-i2v",
-  "name": "flux-3-video-20260811-i2v",
-  "displayName": "flux-3-video-20260811-i2v",
+ "019fc0c5-380f-7f77-9534-265919ac79d2": {
+  "id": "019fc0c5-380f-7f77-9534-265919ac79d2",
+  "publicName": "nova",
+  "displayName": "nova",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
@@ -21365,18 +21273,42 @@
    "video": 9007199254740991
   }
  },
- "019fbb93-f92a-751c-b418-155052fcc6f8": {
-  "id": "019fbb93-f92a-751c-b418-155052fcc6f8",
-  "organization": "google",
-  "provider": "googleVertexApi",
-  "publicName": "gemini-omni-flash",
-  "name": "gemini-omni-flash",
-  "displayName": "gemini-omni-flash",
+ "0754baa1-ab91-42d0-ba74-522aa8e5b8e2": {
+  "id": "0754baa1-ab91-42d0-ba74-522aa8e5b8e2",
+  "organization": "runway",
+  "provider": "replicate",
+  "publicName": "runway-gen4-turbo",
+  "name": "runway-gen4-turbo",
+  "displayName": "runway-gen4-turbo",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
-    "image": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
     "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "ea96cfc8-953a-4c3c-a229-1107c55b7479": {
+  "id": "ea96cfc8-953a-4c3c-a229-1107c55b7479",
+  "organization": "kling",
+  "provider": "fal",
+  "publicName": "kling-v2.1-standard",
+  "name": "kling-v2.1-standard",
+  "displayName": "kling-v2.1-standard",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
    },
    "outputCapabilities": {
     "video": true
@@ -21410,6 +21342,29 @@
    "video": 9007199254740991
   }
  },
+ "019c78d9-ffe4-7a3a-913f-9570e3927788": {
+  "id": "019c78d9-ffe4-7a3a-913f-9570e3927788",
+  "organization": "kling",
+  "provider": "fal",
+  "publicName": "kling-o3-pro",
+  "name": "kling-o3-pro-video-to-video",
+  "displayName": "kling-o3-pro",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "video": {
+     "required": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
  "019ff19e-a4b0-70c0-9379-1116ca8b4457": {
   "id": "019ff19e-a4b0-70c0-9379-1116ca8b4457",
   "publicName": "polaris",
@@ -21427,19 +21382,41 @@
    "video": 9007199254740991
   }
  },
- "01a04423-3cd2-767a-9f26-0593ff09d518": {
-  "id": "01a04423-3cd2-767a-9f26-0593ff09d518",
-  "organization": "minimax",
-  "provider": "fal",
-  "publicName": "minimax-h3-max",
-  "name": "minimax-h3-max-image-to-video",
-  "displayName": "minimax-h3-max",
+ "019ff26e-8f7e-70c1-8aaf-5c69fea18bf3": {
+  "id": "019ff26e-8f7e-70c1-8aaf-5c69fea18bf3",
+  "organization": "bfl",
+  "provider": "bflVideo3",
+  "publicName": "flux-3-video-20260811-i2v",
+  "name": "flux-3-video-20260811-i2v",
+  "displayName": "flux-3-video-20260811-i2v",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
     "image": {
      "requiresUpload": true
     }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019fbb93-f92a-751c-b418-155052fcc6f8": {
+  "id": "019fbb93-f92a-751c-b418-155052fcc6f8",
+  "organization": "google",
+  "provider": "googleVertexApi",
+  "publicName": "gemini-omni-flash",
+  "name": "gemini-omni-flash",
+  "displayName": "gemini-omni-flash",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "video": true
    },
    "outputCapabilities": {
     "video": true
@@ -21483,6 +21460,29 @@
     "text": true,
     "image": true,
     "video": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "01a04423-3cd2-767a-9f26-0593ff09d518": {
+  "id": "01a04423-3cd2-767a-9f26-0593ff09d518",
+  "organization": "minimax",
+  "provider": "fal",
+  "publicName": "minimax-h3-max",
+  "name": "minimax-h3-max-image-to-video",
+  "displayName": "minimax-h3-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
    },
    "outputCapabilities": {
     "video": true
