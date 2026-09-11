@@ -6593,30 +6593,6 @@
    "chat": 9007199254740991
   }
  },
- "019f406f-fc33-7b9d-9571-7b8443bc7ca0": {
-  "id": "019f406f-fc33-7b9d-9571-7b8443bc7ca0",
-  "organization": "google",
-  "provider": "googleVertexGlobalWithThoughtSignatures",
-  "publicName": "gemini-3.5-flash-high",
-  "name": "gemini-3.5-flash-high",
-  "displayName": "gemini-3.5-flash-high",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 9007199254740991
-  }
- },
  "019f3d8c-fbe1-729f-9eb4-3cebbea636b3": {
   "id": "019f3d8c-fbe1-729f-9eb4-3cebbea636b3",
   "publicName": "thelypteridaceae-alpha",
@@ -8973,6 +8949,30 @@
   "userSelectable": true,
   "rankByModality": {
    "chat": 9007199254740991
+  }
+ },
+ "019f406f-fc33-7b9d-9571-7b8443bc7ca0": {
+  "id": "019f406f-fc33-7b9d-9571-7b8443bc7ca0",
+  "organization": "google",
+  "provider": "googleVertexGlobalWithThoughtSignatures",
+  "publicName": "gemini-3.5-flash-high",
+  "name": "gemini-3.5-flash-high",
+  "displayName": "gemini-3.5-flash-high",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
   }
  },
  "01a06dfc-94a2-7abf-8d12-0878520062cb": {
