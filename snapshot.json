@@ -76,7 +76,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 4,
+  "rank": 3,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
@@ -148,7 +148,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -168,7 +168,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23
   }
@@ -189,7 +189,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -210,7 +210,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -231,7 +231,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -252,7 +252,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -272,7 +272,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23
   }
@@ -292,7 +292,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -317,10 +317,34 @@
    }
   },
   "userSelectable": true,
-  "rank": 15,
+  "rank": 13,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
+  }
+ },
+ "01a00134-44ac-7f9c-b4a7-b720acebaa97": {
+  "id": "01a00134-44ac-7f9c-b4a7-b720acebaa97",
+  "organization": "zai",
+  "provider": "siliconFlow",
+  "publicName": "glm-5.3",
+  "name": "glm-5.3",
+  "displayName": "glm-5.3 (max)",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": false
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rank": 15,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 15
   }
  },
  "019e1d78-1883-7609-9b3d-2a265c1b5e8c": {
@@ -365,30 +389,6 @@
    "webdev": 60
   }
  },
- "01a00134-44ac-7f9c-b4a7-b720acebaa97": {
-  "id": "01a00134-44ac-7f9c-b4a7-b720acebaa97",
-  "organization": "zai",
-  "provider": "siliconFlow",
-  "publicName": "glm-5.3",
-  "name": "glm-5.3",
-  "displayName": "glm-5.3 (max)",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": false
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rank": 20,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 15
-  }
- },
  "019f8b06-4fa3-7bbe-9292-691f9feadc3c": {
   "id": "019f8b06-4fa3-7bbe-9292-691f9feadc3c",
   "organization": "google",
@@ -404,7 +404,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 21,
+  "rank": 22,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 32
@@ -429,7 +429,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 21,
+  "rank": 22,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 32
@@ -457,6 +457,29 @@
    "chat": 9007199254740991
   }
  },
+ "019e71ea-1e1d-740f-9c2d-dab5869ff108": {
+  "id": "019e71ea-1e1d-740f-9c2d-dab5869ff108",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.5-instant",
+  "name": "gpt-5.5-instant-2026-05-28",
+  "displayName": "gpt-5.5-instant",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 31,
+  "rankByModality": {
+   "chat": 36
+  }
+ },
  "019f6c0d-6d9c-7ff6-b50d-de71c1e94b56": {
   "id": "019f6c0d-6d9c-7ff6-b50d-de71c1e94b56",
   "organization": "google",
@@ -472,7 +495,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 30,
+  "rank": 32,
   "rankByModality": {
    "chat": 34
   }
@@ -492,7 +515,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 30,
+  "rank": 32,
   "rankByModality": {
    "chat": 34,
    "webdev": 61
@@ -516,33 +539,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 30,
+  "rank": 32,
   "rankByModality": {
    "chat": 34,
    "webdev": 61
-  }
- },
- "019e71ea-1e1d-740f-9c2d-dab5869ff108": {
-  "id": "019e71ea-1e1d-740f-9c2d-dab5869ff108",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.5-instant",
-  "name": "gpt-5.5-instant-2026-05-28",
-  "displayName": "gpt-5.5-instant",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 31,
-  "rankByModality": {
-   "chat": 36
   }
  },
  "019ab8b2-9bcf-79b5-9fb5-149a7c67b7c0": {
@@ -587,7 +587,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 35,
+  "rank": 36,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 34
@@ -611,7 +611,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 36,
+  "rank": 38,
   "rankByModality": {
    "chat": 33
   }
@@ -662,27 +662,6 @@
    "webdev": 51
   }
  },
- "019cddbe-a52e-720f-9398-0f40a2914b99": {
-  "id": "019cddbe-a52e-720f-9398-0f40a2914b99",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "kiteki",
-  "name": "kiteki",
-  "displayName": "qwen3.5-max-preview",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 45,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019cfd71-33d0-7fb1-96f3-16780c95966d": {
   "id": "019cfd71-33d0-7fb1-96f3-16780c95966d",
   "publicName": "gpt-5.4-no-system-prompt",
@@ -697,7 +676,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 46,
+  "rank": 45,
   "rankByModality": {
    "chat": 15
   }
@@ -720,9 +699,30 @@
    }
   },
   "userSelectable": false,
-  "rank": 46,
+  "rank": 45,
   "rankByModality": {
    "chat": 15
+  }
+ },
+ "019cddbe-a52e-720f-9398-0f40a2914b99": {
+  "id": "019cddbe-a52e-720f-9398-0f40a2914b99",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "kiteki",
+  "name": "kiteki",
+  "displayName": "qwen3.5-max-preview",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 48,
+  "rankByModality": {
+   "chat": 9007199254740991
   }
  },
  "019daede-d9ea-74fd-b121-853740b8f2a0": {
@@ -738,7 +738,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 50,
+  "rank": 52,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -780,7 +780,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 56,
+  "rank": 57,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -803,7 +803,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 56,
+  "rank": 57,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 56
@@ -826,28 +826,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 57,
+  "rank": 58,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 78
-  }
- },
- "019d2ac4-285d-7765-8296-d9a3aa2f2662": {
-  "id": "019d2ac4-285d-7765-8296-d9a3aa2f2662",
-  "publicName": "dola-seed-2.0-pro-text",
-  "displayName": "dola-seed-2.0-pro-text",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 58,
-  "rankByModality": {
-   "chat": 9007199254740991
   }
  },
  "019e86fe-167d-77bd-94a8-df7aee4f4551": {
@@ -868,9 +850,27 @@
    }
   },
   "userSelectable": true,
-  "rank": 60,
+  "rank": 61,
   "rankByModality": {
    "chat": 25
+  }
+ },
+ "019d2ac4-285d-7765-8296-d9a3aa2f2662": {
+  "id": "019d2ac4-285d-7765-8296-d9a3aa2f2662",
+  "publicName": "dola-seed-2.0-pro-text",
+  "displayName": "dola-seed-2.0-pro-text",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 62,
+  "rankByModality": {
+   "chat": 9007199254740991
   }
  },
  "019a2d13-28a5-7205-908c-0a58de904617": {
@@ -891,7 +891,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 61,
+  "rank": 63,
   "rankByModality": {
    "chat": 22,
    "webdev": 83
@@ -915,7 +915,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 63,
+  "rank": 64,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
@@ -937,7 +937,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 67,
+  "rank": 69,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -959,7 +959,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 71,
+  "rank": 73,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -981,7 +981,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 72,
+  "rank": 74,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 80
@@ -1000,7 +1000,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 74,
+  "rank": 76,
   "rankByModality": {
    "chat": 31
   }
@@ -1024,7 +1024,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 74,
+  "rank": 76,
   "rankByModality": {
    "chat": 31,
    "webdev": 120
@@ -1045,7 +1045,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 79,
+  "rank": 82,
   "rankByModality": {
    "chat": 26,
    "webdev": 47
@@ -1069,7 +1069,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 79,
+  "rank": 82,
   "rankByModality": {
    "chat": 26,
    "webdev": 47
@@ -1091,7 +1091,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 80,
+  "rank": 83,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1115,75 +1115,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 83,
+  "rank": 85,
   "rankByModality": {
    "chat": 37,
    "webdev": 98
-  }
- },
- "019b1449-0313-7911-b836-419e2ed79b2e": {
-  "id": "019b1449-0313-7911-b836-419e2ed79b2e",
-  "organization": "openai",
-  "provider": "openai",
-  "publicName": "gpt-5.2-high",
-  "name": "gpt-5.2-high-no-system-prompt-text",
-  "displayName": "gpt-5.2-high",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 86,
-  "rankByModality": {
-   "chat": 35
-  }
- },
- "019cc543-573d-7a3f-b155-ad9cc5733aa6": {
-  "id": "019cc543-573d-7a3f-b155-ad9cc5733aa6",
-  "publicName": "gpt-5.2",
-  "displayName": "gpt-5.2",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 87,
-  "rankByModality": {
-   "chat": 38
-  }
- },
- "019b1448-ff14-7c98-a1ac-726fece799ec": {
-  "id": "019b1448-ff14-7c98-a1ac-726fece799ec",
-  "organization": "openai",
-  "provider": "openai",
-  "publicName": "gpt-5.2",
-  "name": "gpt-5.2-no-system-prompt-text",
-  "displayName": "gpt-5.2",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 87,
-  "rankByModality": {
-   "chat": 38
   }
  },
  "01a01326-1eae-7f76-b985-3ca71503db99": {
@@ -1231,6 +1166,71 @@
    "chat": 9007199254740991
   }
  },
+ "019b1449-0313-7911-b836-419e2ed79b2e": {
+  "id": "019b1449-0313-7911-b836-419e2ed79b2e",
+  "organization": "openai",
+  "provider": "openai",
+  "publicName": "gpt-5.2-high",
+  "name": "gpt-5.2-high-no-system-prompt-text",
+  "displayName": "gpt-5.2-high",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 89,
+  "rankByModality": {
+   "chat": 35
+  }
+ },
+ "019cc543-573d-7a3f-b155-ad9cc5733aa6": {
+  "id": "019cc543-573d-7a3f-b155-ad9cc5733aa6",
+  "publicName": "gpt-5.2",
+  "displayName": "gpt-5.2",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 90,
+  "rankByModality": {
+   "chat": 38
+  }
+ },
+ "019b1448-ff14-7c98-a1ac-726fece799ec": {
+  "id": "019b1448-ff14-7c98-a1ac-726fece799ec",
+  "organization": "openai",
+  "provider": "openai",
+  "publicName": "gpt-5.2",
+  "name": "gpt-5.2-no-system-prompt-text",
+  "displayName": "gpt-5.2",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 90,
+  "rankByModality": {
+   "chat": 38
+  }
+ },
  "019b9784-470e-75b9-b2fb-f005d78972e1": {
   "id": "019b9784-470e-75b9-b2fb-f005d78972e1",
   "organization": "alibaba",
@@ -1247,7 +1247,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 91,
+  "rank": 93,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1269,7 +1269,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 92,
+  "rank": 94,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1293,7 +1293,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 94,
+  "rank": 96,
   "rankByModality": {
    "chat": 32,
    "webdev": 74
@@ -1316,7 +1316,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 96,
+  "rank": 98,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1338,7 +1338,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 99,
+  "rank": 101,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 105
@@ -1361,7 +1361,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 103,
+  "rank": 104,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1403,7 +1403,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 110,
+  "rank": 112,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1424,7 +1424,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 111,
+  "rank": 113,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1445,7 +1445,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 117,
+  "rank": 119,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1466,7 +1466,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 118,
+  "rank": 120,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1488,7 +1488,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 121,
+  "rank": 123,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1511,7 +1511,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 123,
+  "rank": 126,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 76
@@ -1534,9 +1534,33 @@
    }
   },
   "userSelectable": true,
-  "rank": 126,
+  "rank": 128,
   "rankByModality": {
    "chat": 9007199254740991
+  }
+ },
+ "0199e8e9-01ed-73e0-96ba-cf43b286bf10": {
+  "id": "0199e8e9-01ed-73e0-96ba-cf43b286bf10",
+  "organization": "anthropic",
+  "provider": "anthropic",
+  "publicName": "claude-haiku-4-5-20251001",
+  "name": "claude-haiku-4-5-20251001",
+  "displayName": "claude-haiku-4-5-20251001",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 129,
+  "rankByModality": {
+   "chat": 30,
+   "webdev": 103
   }
  },
  "716aa8ca-d729-427f-93ab-9579e4a13e98": {
@@ -1556,7 +1580,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 127,
+  "rank": 130,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1577,7 +1601,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 128,
+  "rank": 131,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1600,34 +1624,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 129,
+  "rank": 132,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 119
-  }
- },
- "0199e8e9-01ed-73e0-96ba-cf43b286bf10": {
-  "id": "0199e8e9-01ed-73e0-96ba-cf43b286bf10",
-  "organization": "anthropic",
-  "provider": "anthropic",
-  "publicName": "claude-haiku-4-5-20251001",
-  "name": "claude-haiku-4-5-20251001",
-  "displayName": "claude-haiku-4-5-20251001",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 130,
-  "rankByModality": {
-   "chat": 30,
-   "webdev": 103
   }
  },
  "0199f059-3877-7cfe-bc80-e01b1a4a83de": {
@@ -1647,7 +1647,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 135,
+  "rank": 137,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1669,7 +1669,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 136,
+  "rank": 138,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1691,7 +1691,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 137,
+  "rank": 139,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1714,7 +1714,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 138,
+  "rank": 141,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 72
@@ -1736,7 +1736,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 141,
+  "rank": 143,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1758,7 +1758,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 142,
+  "rank": 144,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1779,7 +1779,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 144,
+  "rank": 146,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1800,7 +1800,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 145,
+  "rank": 147,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1821,7 +1821,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 146,
+  "rank": 148,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1842,7 +1842,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 147,
+  "rank": 149,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1865,54 +1865,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 149,
+  "rank": 151,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 117
-  }
- },
- "6a3a1e04-050e-4cb4-9052-b9ac4bec0c38": {
-  "id": "6a3a1e04-050e-4cb4-9052-b9ac4bec0c38",
-  "organization": "tencent",
-  "provider": "tencent",
-  "publicName": "hunyuan-vision-1.5-thinking",
-  "name": "hunyuan-vision-1.5-thinking",
-  "displayName": "hunyuan-vision-1.5-thinking",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 151,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
- "019c9254-5c32-70d0-8877-afdfd3590e1d": {
-  "id": "019c9254-5c32-70d0-8877-afdfd3590e1d",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.5-35b-a3b",
-  "name": "qwen3.5-35b-a3b",
-  "displayName": "qwen3.5-35b-a3b",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 152,
-  "rankByModality": {
-   "chat": 9007199254740991
   }
  },
  "03c511f5-0d35-4751-aae6-24f918b0d49e": {
@@ -1937,6 +1893,50 @@
    "chat": 9007199254740991
   }
  },
+ "6a3a1e04-050e-4cb4-9052-b9ac4bec0c38": {
+  "id": "6a3a1e04-050e-4cb4-9052-b9ac4bec0c38",
+  "organization": "tencent",
+  "provider": "tencent",
+  "publicName": "hunyuan-vision-1.5-thinking",
+  "name": "hunyuan-vision-1.5-thinking",
+  "displayName": "hunyuan-vision-1.5-thinking",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 154,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "019c9254-5c32-70d0-8877-afdfd3590e1d": {
+  "id": "019c9254-5c32-70d0-8877-afdfd3590e1d",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.5-35b-a3b",
+  "name": "qwen3.5-35b-a3b",
+  "displayName": "qwen3.5-35b-a3b",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 155,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
  "019d22bb-fcf5-7866-9c07-de74fe05c9cc": {
   "id": "019d22bb-fcf5-7866-9c07-de74fe05c9cc",
   "organization": "stepfun",
@@ -1953,7 +1953,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 155,
+  "rank": 157,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1971,7 +1971,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 156,
+  "rank": 158,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1993,7 +1993,28 @@
    }
   },
   "userSelectable": true,
-  "rank": 157,
+  "rank": 159,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "ac44dd10-0666-451c-b824-386ccfea7bcc": {
+  "id": "ac44dd10-0666-451c-b824-386ccfea7bcc",
+  "organization": "anthropic",
+  "provider": "googleVertexAnthropic",
+  "publicName": "claude-sonnet-4-20250514",
+  "name": "claude-sonnet-4-20250514",
+  "displayName": "claude-sonnet-4-20250514",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 160,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2015,31 +2036,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 158,
+  "rank": 161,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 84
-  }
- },
- "ac44dd10-0666-451c-b824-386ccfea7bcc": {
-  "id": "ac44dd10-0666-451c-b824-386ccfea7bcc",
-  "organization": "anthropic",
-  "provider": "googleVertexAnthropic",
-  "publicName": "claude-sonnet-4-20250514",
-  "name": "claude-sonnet-4-20250514",
-  "displayName": "claude-sonnet-4-20250514",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 159,
-  "rankByModality": {
-   "chat": 9007199254740991
   }
  },
  "5fd3caa8-fe4c-41a5-a22c-0025b58f4b42": {
@@ -2059,29 +2059,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 160,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
- "27b9f8c6-3ee1-464a-9479-a8b3c2a48fd4": {
-  "id": "27b9f8c6-3ee1-464a-9479-a8b3c2a48fd4",
-  "organization": "mistral",
-  "provider": "mistral",
-  "publicName": "mistral-medium-2505",
-  "name": "mistral-medium-2505",
-  "displayName": "mistral-medium-2505",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rank": 164,
+  "rank": 162,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2103,10 +2081,32 @@
    }
   },
   "userSelectable": true,
-  "rank": 165,
+  "rank": 166,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 109
+  }
+ },
+ "27b9f8c6-3ee1-464a-9479-a8b3c2a48fd4": {
+  "id": "27b9f8c6-3ee1-464a-9479-a8b3c2a48fd4",
+  "organization": "mistral",
+  "provider": "mistral",
+  "publicName": "mistral-medium-2505",
+  "name": "mistral-medium-2505",
+  "displayName": "mistral-medium-2505",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rank": 167,
+  "rankByModality": {
+   "chat": 9007199254740991
   }
  },
  "019b4231-1994-75a1-8567-8cba308fba55": {
@@ -2126,7 +2126,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 167,
+  "rank": 169,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 81
@@ -2149,7 +2149,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 169,
+  "rank": 171,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2170,7 +2170,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 170,
+  "rank": 172,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2191,7 +2191,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 172,
+  "rank": 174,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2212,7 +2212,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 175,
+  "rank": 177,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2234,7 +2234,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 181,
+  "rank": 183,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 118
@@ -2256,7 +2256,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 182,
+  "rank": 184,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2278,7 +2278,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 185,
+  "rank": 186,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2299,7 +2299,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 187,
+  "rank": 188,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2317,7 +2317,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 189,
+  "rank": 191,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2339,7 +2339,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 190,
+  "rank": 192,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2361,7 +2361,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 193,
+  "rank": 195,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2382,7 +2382,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 194,
+  "rank": 196,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2403,7 +2403,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 199,
+  "rank": 201,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2424,7 +2424,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 204,
+  "rank": 206,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2446,7 +2446,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 208,
+  "rank": 210,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 124
@@ -2469,7 +2469,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 211,
+  "rank": 213,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 107
@@ -2491,7 +2491,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 212,
+  "rank": 214,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2509,7 +2509,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 216,
+  "rank": 219,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2531,7 +2531,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 219,
+  "rank": 221,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2552,7 +2552,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 221,
+  "rank": 223,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2573,7 +2573,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 222,
+  "rank": 224,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2594,7 +2594,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 233,
+  "rank": 235,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2615,28 +2615,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 243,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
- "896a3848-ae03-4651-963b-7d8f54b61ae8": {
-  "id": "896a3848-ae03-4651-963b-7d8f54b61ae8",
-  "organization": "google",
-  "provider": "google",
-  "publicName": "gemma-3n-e4b-it",
-  "name": "gemma-3n-e4b-it",
-  "displayName": "gemma-3n-e4b-it",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 249,
+  "rank": 245,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2657,7 +2636,28 @@
    }
   },
   "userSelectable": true,
-  "rank": 250,
+  "rank": 251,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "896a3848-ae03-4651-963b-7d8f54b61ae8": {
+  "id": "896a3848-ae03-4651-963b-7d8f54b61ae8",
+  "organization": "google",
+  "provider": "google",
+  "publicName": "gemma-3n-e4b-it",
+  "name": "gemma-3n-e4b-it",
+  "displayName": "gemma-3n-e4b-it",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 252,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2678,7 +2678,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 252,
+  "rank": 254,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2699,7 +2699,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 260,
+  "rank": 261,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2721,7 +2721,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 264,
+  "rank": 266,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 123
@@ -2744,7 +2744,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 268,
+  "rank": 270,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2762,7 +2762,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 271,
+  "rank": 273,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2780,7 +2780,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 277,
+  "rank": 281,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2801,7 +2801,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 284,
+  "rank": 285,
   "rankByModality": {
    "chat": 9007199254740991
   }
