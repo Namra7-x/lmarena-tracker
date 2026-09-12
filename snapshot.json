@@ -17424,6 +17424,31 @@
    "image": 9007199254740991
   }
  },
+ "01a093a2-d388-7de2-af41-ae006402a3ad": {
+  "id": "01a093a2-d388-7de2-af41-ae006402a3ad",
+  "publicName": "amber_fern",
+  "displayName": "amber_fern",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019f145c-fd9c-7561-b646-3804d0878c6c": {
   "id": "019f145c-fd9c-7561-b646-3804d0878c6c",
   "publicName": "ember_drift",
