@@ -13721,27 +13721,6 @@
    "webdev": 9007199254740991
   }
  },
- "01a0681d-ab3a-773c-96b4-caa51ac27e1d": {
-  "id": "01a0681d-ab3a-773c-96b4-caa51ac27e1d",
-  "organization": "google",
-  "provider": "googleVertexGlobalWithThoughtSignatures",
-  "publicName": "gemini-3.8-flash-low",
-  "name": "gemini-3.8-flash-low",
-  "displayName": "gemini-3.8-flash-low",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "01a082a9-eda1-7992-863a-5034093bc4ec": {
   "id": "01a082a9-eda1-7992-863a-5034093bc4ec",
   "organization": "openai",
@@ -13778,6 +13757,27 @@
    }
   },
   "userSelectable": false,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "01a0681d-ab3a-773c-96b4-caa51ac27e1d": {
+  "id": "01a0681d-ab3a-773c-96b4-caa51ac27e1d",
+  "organization": "google",
+  "provider": "googleVertexGlobalWithThoughtSignatures",
+  "publicName": "gemini-3.8-flash-low",
+  "name": "gemini-3.8-flash-low",
+  "displayName": "gemini-3.8-flash-low",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
   "rankByModality": {
    "webdev": 9007199254740991
   }
