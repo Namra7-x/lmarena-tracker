@@ -20227,6 +20227,27 @@
    "video": 33
   }
  },
+ "e705b65f-82cd-40cb-9630-d9e6ca92d06f": {
+  "id": "e705b65f-82cd-40cb-9630-d9e6ca92d06f",
+  "organization": "bytedance",
+  "provider": "fal",
+  "publicName": "seedance-v1-pro",
+  "name": "seedance-v1-pro-text-to-video",
+  "displayName": "seedance-v1-pro",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 34,
+  "rankByModality": {
+   "video": 34
+  }
+ },
  "4ddc4e52-2867-49b6-a603-5aab24a566ca": {
   "id": "4ddc4e52-2867-49b6-a603-5aab24a566ca",
   "organization": "bytedance",
@@ -20240,27 +20261,6 @@
     "image": {
      "requiresUpload": true
     }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 34,
-  "rankByModality": {
-   "video": 34
-  }
- },
- "e705b65f-82cd-40cb-9630-d9e6ca92d06f": {
-  "id": "e705b65f-82cd-40cb-9630-d9e6ca92d06f",
-  "organization": "bytedance",
-  "provider": "fal",
-  "publicName": "seedance-v1-pro",
-  "name": "seedance-v1-pro-text-to-video",
-  "displayName": "seedance-v1-pro",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
    },
    "outputCapabilities": {
     "video": true
