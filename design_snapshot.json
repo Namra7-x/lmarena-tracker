@@ -9359,6 +9359,10 @@
           "svg",
           "uicomponent",
           "website"
+        ],
+        "agents": [
+          "agon_webapps",
+          "fullstack"
         ]
       }
     },
@@ -9410,6 +9414,54 @@
       "arenas": {
         "models": [
           "slides"
+        ]
+      }
+    },
+    "deca-2.6-pro": {
+      "displayName": "Deca 2.6 Pro",
+      "provider": "genlabs",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ]
+      }
+    },
+    "p-video-2": {
+      "displayName": "P-Video 2",
+      "provider": "pruna",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      }
+    },
+    "p-video-2-draft": {
+      "displayName": "P-Video 2 Draft",
+      "provider": "pruna",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
         ]
       }
     }
@@ -11209,6 +11261,16 @@
     },
     "flux-3-video-edit": {
       "video.perSecond": 0.03
+    },
+    "deca-2.6-pro": {
+      "text.input": 0.8,
+      "text.output": 4
+    },
+    "p-video-2": {
+      "video.perSecond": 0.025
+    },
+    "p-video-2-draft": {
+      "video.perSecond": 0.015
     }
   }
 }
