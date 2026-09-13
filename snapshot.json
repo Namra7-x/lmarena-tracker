@@ -148,7 +148,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -168,7 +168,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23
   }
@@ -189,7 +189,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -210,7 +210,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -231,7 +231,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -252,7 +252,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -272,7 +272,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23
   }
@@ -292,7 +292,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
@@ -317,34 +317,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 13,
+  "rank": 15,
   "rankByModality": {
    "chat": 23,
    "webdev": 57
-  }
- },
- "01a00134-44ac-7f9c-b4a7-b720acebaa97": {
-  "id": "01a00134-44ac-7f9c-b4a7-b720acebaa97",
-  "organization": "zai",
-  "provider": "siliconFlow",
-  "publicName": "glm-5.3",
-  "name": "glm-5.3",
-  "displayName": "glm-5.3 (max)",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": false
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rank": 15,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 15
   }
  },
  "019e1d78-1883-7609-9b3d-2a265c1b5e8c": {
@@ -389,6 +365,30 @@
    "webdev": 61
   }
  },
+ "01a00134-44ac-7f9c-b4a7-b720acebaa97": {
+  "id": "01a00134-44ac-7f9c-b4a7-b720acebaa97",
+  "organization": "zai",
+  "provider": "siliconFlow",
+  "publicName": "glm-5.3",
+  "name": "glm-5.3",
+  "displayName": "glm-5.3 (max)",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": false
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": false,
+  "rank": 19,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 15
+  }
+ },
  "019f8b06-4fa3-7bbe-9292-691f9feadc3c": {
   "id": "019f8b06-4fa3-7bbe-9292-691f9feadc3c",
   "organization": "google",
@@ -404,7 +404,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 22,
+  "rank": 23,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 32
@@ -429,7 +429,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 22,
+  "rank": 23,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 32
@@ -452,7 +452,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 25,
+  "rank": 26,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -475,7 +475,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 31,
+  "rank": 32,
   "rankByModality": {
    "chat": 36
   }
@@ -495,7 +495,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 32,
+  "rank": 33,
   "rankByModality": {
    "chat": 34
   }
@@ -515,7 +515,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 32,
+  "rank": 33,
   "rankByModality": {
    "chat": 34,
    "webdev": 62
@@ -539,7 +539,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 32,
+  "rank": 33,
   "rankByModality": {
    "chat": 34,
    "webdev": 62
@@ -562,7 +562,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 34,
+  "rank": 36,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 45
@@ -587,7 +587,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 36,
+  "rank": 37,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 36
@@ -611,7 +611,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 38,
+  "rank": 39,
   "rankByModality": {
    "chat": 33
   }
@@ -633,7 +633,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 39,
+  "rank": 40,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -656,7 +656,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 40,
+  "rank": 41,
   "rankByModality": {
    "chat": 19,
    "webdev": 52
@@ -676,7 +676,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 45,
+  "rank": 46,
   "rankByModality": {
    "chat": 15
   }
@@ -699,7 +699,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 45,
+  "rank": 46,
   "rankByModality": {
    "chat": 15
   }
@@ -720,7 +720,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 48,
+  "rank": 49,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -738,7 +738,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 52,
+  "rank": 53,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -760,53 +760,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 55,
+  "rank": 56,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 9007199254740991
-  }
- },
- "019fdda8-0e93-7973-b86e-05514781c608": {
-  "id": "019fdda8-0e93-7973-b86e-05514781c608",
-  "organization": "google",
-  "publicName": "gemini-3.5-flash-lite",
-  "displayName": "gemini-3.5-flash-lite",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 57,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
- "019f90b1-cae9-786a-91a2-f3ee4c6cbf61": {
-  "id": "019f90b1-cae9-786a-91a2-f3ee4c6cbf61",
-  "organization": "google",
-  "provider": "googleVertexGlobalWithThoughtSignatures",
-  "publicName": "gemini-3.5-flash-lite",
-  "name": "gemini-3.5-flash-lite",
-  "displayName": "gemini-3.5-flash-lite",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 57,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 58
   }
  },
  "b0ea1407-2f92-4515-b9cc-b22a6d6c14f2": {
@@ -832,6 +789,67 @@
    "webdev": 79
   }
  },
+ "019fdda8-0e93-7973-b86e-05514781c608": {
+  "id": "019fdda8-0e93-7973-b86e-05514781c608",
+  "organization": "google",
+  "publicName": "gemini-3.5-flash-lite",
+  "displayName": "gemini-3.5-flash-lite",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 59,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "019f90b1-cae9-786a-91a2-f3ee4c6cbf61": {
+  "id": "019f90b1-cae9-786a-91a2-f3ee4c6cbf61",
+  "organization": "google",
+  "provider": "googleVertexGlobalWithThoughtSignatures",
+  "publicName": "gemini-3.5-flash-lite",
+  "name": "gemini-3.5-flash-lite",
+  "displayName": "gemini-3.5-flash-lite",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 59,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 58
+  }
+ },
+ "019d2ac4-285d-7765-8296-d9a3aa2f2662": {
+  "id": "019d2ac4-285d-7765-8296-d9a3aa2f2662",
+  "publicName": "dola-seed-2.0-pro-text",
+  "displayName": "dola-seed-2.0-pro-text",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 61,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
  "019e86fe-167d-77bd-94a8-df7aee4f4551": {
   "id": "019e86fe-167d-77bd-94a8-df7aee4f4551",
   "organization": "alibaba",
@@ -850,51 +868,9 @@
    }
   },
   "userSelectable": true,
-  "rank": 61,
-  "rankByModality": {
-   "chat": 25
-  }
- },
- "019d2ac4-285d-7765-8296-d9a3aa2f2662": {
-  "id": "019d2ac4-285d-7765-8296-d9a3aa2f2662",
-  "publicName": "dola-seed-2.0-pro-text",
-  "displayName": "dola-seed-2.0-pro-text",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
   "rank": 62,
   "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
- "019a2d13-28a5-7205-908c-0a58de904617": {
-  "id": "019a2d13-28a5-7205-908c-0a58de904617",
-  "organization": "anthropic",
-  "provider": "googleVertexAnthropic",
-  "publicName": "claude-sonnet-4-5-20250929",
-  "name": "claude-sonnet-4-5-20250929",
-  "displayName": "claude-sonnet-4-5-20250929",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "file": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 63,
-  "rankByModality": {
-   "chat": 22,
-   "webdev": 84
+   "chat": 25
   }
  },
  "019a8548-a2b1-70ce-b1be-eba096d41f58": {
@@ -921,6 +897,30 @@
    "webdev": 9007199254740991
   }
  },
+ "019a2d13-28a5-7205-908c-0a58de904617": {
+  "id": "019a2d13-28a5-7205-908c-0a58de904617",
+  "organization": "anthropic",
+  "provider": "googleVertexAnthropic",
+  "publicName": "claude-sonnet-4-5-20250929",
+  "name": "claude-sonnet-4-5-20250929",
+  "displayName": "claude-sonnet-4-5-20250929",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "file": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 65,
+  "rankByModality": {
+   "chat": 22,
+   "webdev": 84
+  }
+ },
  "f1a2eb6f-fc30-4806-9e00-1efd0d73cbc4": {
   "id": "f1a2eb6f-fc30-4806-9e00-1efd0d73cbc4",
   "organization": "anthropic",
@@ -937,7 +937,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 69,
+  "rank": 70,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -959,7 +959,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 73,
+  "rank": 74,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -981,7 +981,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 74,
+  "rank": 75,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 81
@@ -1000,7 +1000,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 76,
+  "rank": 77,
   "rankByModality": {
    "chat": 31
   }
@@ -1024,55 +1024,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 76,
+  "rank": 77,
   "rankByModality": {
    "chat": 31,
    "webdev": 121
-  }
- },
- "019ebdef-3c78-733a-af58-c68052ee00fb": {
-  "id": "019ebdef-3c78-733a-af58-c68052ee00fb",
-  "publicName": "minimax-m3",
-  "displayName": "minimax-m3",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 82,
-  "rankByModality": {
-   "chat": 26,
-   "webdev": 48
-  }
- },
- "019e809d-f62d-7192-bb7f-1657e066b5f2": {
-  "id": "019e809d-f62d-7192-bb7f-1657e066b5f2",
-  "organization": "minimax",
-  "provider": "minimaxAnthropic",
-  "publicName": "minimax-m3",
-  "name": "minimax-m3",
-  "displayName": "minimax-m3",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 82,
-  "rankByModality": {
-   "chat": 26,
-   "webdev": 48
   }
  },
  "019becd0-af81-7883-a7ca-5c4a4e42ff7a": {
@@ -1096,6 +1051,51 @@
    "chat": 9007199254740991
   }
  },
+ "019ebdef-3c78-733a-af58-c68052ee00fb": {
+  "id": "019ebdef-3c78-733a-af58-c68052ee00fb",
+  "publicName": "minimax-m3",
+  "displayName": "minimax-m3",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 84,
+  "rankByModality": {
+   "chat": 26,
+   "webdev": 48
+  }
+ },
+ "019e809d-f62d-7192-bb7f-1657e066b5f2": {
+  "id": "019e809d-f62d-7192-bb7f-1657e066b5f2",
+  "organization": "minimax",
+  "provider": "minimaxAnthropic",
+  "publicName": "minimax-m3",
+  "name": "minimax-m3",
+  "displayName": "minimax-m3",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 84,
+  "rankByModality": {
+   "chat": 26,
+   "webdev": 48
+  }
+ },
  "019a7ebf-0f3f-7518-8899-fca13e32d9dc": {
   "id": "019a7ebf-0f3f-7518-8899-fca13e32d9dc",
   "organization": "openai",
@@ -1115,55 +1115,10 @@
    }
   },
   "userSelectable": true,
-  "rank": 85,
+  "rank": 86,
   "rankByModality": {
    "chat": 37,
    "webdev": 99
-  }
- },
- "01a01326-36b7-7b0d-8af1-ccba21cf001f": {
-  "id": "01a01326-36b7-7b0d-8af1-ccba21cf001f",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.8-27b",
-  "name": "qwen3.8-27b",
-  "displayName": "qwen3.8-27b",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rank": 88,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
- "01a01326-1eae-7f76-b985-3ca71503db99": {
-  "id": "01a01326-1eae-7f76-b985-3ca71503db99",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.8-27b",
-  "name": "qwen3.8-27b-vision",
-  "displayName": "qwen3.8-27b",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rank": 88,
-  "rankByModality": {
-   "chat": 9007199254740991
   }
  },
  "019b1449-0313-7911-b836-419e2ed79b2e": {
@@ -1189,6 +1144,51 @@
    "chat": 35
   }
  },
+ "01a01326-36b7-7b0d-8af1-ccba21cf001f": {
+  "id": "01a01326-36b7-7b0d-8af1-ccba21cf001f",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.8-27b",
+  "name": "qwen3.8-27b",
+  "displayName": "qwen3.8-27b",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rank": 90,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "01a01326-1eae-7f76-b985-3ca71503db99": {
+  "id": "01a01326-1eae-7f76-b985-3ca71503db99",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.8-27b",
+  "name": "qwen3.8-27b-vision",
+  "displayName": "qwen3.8-27b",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rank": 90,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
  "019cc543-573d-7a3f-b155-ad9cc5733aa6": {
   "id": "019cc543-573d-7a3f-b155-ad9cc5733aa6",
   "publicName": "gpt-5.2",
@@ -1203,7 +1203,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 90,
+  "rank": 91,
   "rankByModality": {
    "chat": 38
   }
@@ -1226,7 +1226,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 90,
+  "rank": 91,
   "rankByModality": {
    "chat": 38
   }
@@ -1247,7 +1247,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 93,
+  "rank": 94,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1269,7 +1269,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 94,
+  "rank": 95,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1293,7 +1293,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 96,
+  "rank": 97,
   "rankByModality": {
    "chat": 32,
    "webdev": 75
@@ -1316,7 +1316,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 98,
+  "rank": 99,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1338,7 +1338,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 101,
+  "rank": 102,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 106
@@ -1361,7 +1361,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 104,
+  "rank": 105,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1382,7 +1382,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 106,
+  "rank": 107,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1403,7 +1403,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 112,
+  "rank": 113,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1424,7 +1424,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 113,
+  "rank": 114,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1445,7 +1445,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 119,
+  "rank": 120,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1466,7 +1466,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 120,
+  "rank": 121,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1488,7 +1488,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 123,
+  "rank": 124,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1517,28 +1517,6 @@
    "webdev": 77
   }
  },
- "14e9311c-94d2-40c2-8c54-273947e208b0": {
-  "id": "14e9311c-94d2-40c2-8c54-273947e208b0",
-  "organization": "openai",
-  "provider": "openai",
-  "publicName": "gpt-4.1-2025-04-14",
-  "name": "gpt-4.1-2025-04-14",
-  "displayName": "gpt-4.1-2025-04-14",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 128,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "0199e8e9-01ed-73e0-96ba-cf43b286bf10": {
   "id": "0199e8e9-01ed-73e0-96ba-cf43b286bf10",
   "organization": "anthropic",
@@ -1563,6 +1541,28 @@
    "webdev": 104
   }
  },
+ "14e9311c-94d2-40c2-8c54-273947e208b0": {
+  "id": "14e9311c-94d2-40c2-8c54-273947e208b0",
+  "organization": "openai",
+  "provider": "openai",
+  "publicName": "gpt-4.1-2025-04-14",
+  "name": "gpt-4.1-2025-04-14",
+  "displayName": "gpt-4.1-2025-04-14",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 130,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
  "716aa8ca-d729-427f-93ab-9579e4a13e98": {
   "id": "716aa8ca-d729-427f-93ab-9579e4a13e98",
   "organization": "alibaba",
@@ -1580,7 +1580,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 130,
+  "rank": 131,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1601,7 +1601,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 131,
+  "rank": 132,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1624,7 +1624,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 132,
+  "rank": 133,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 120
@@ -1647,7 +1647,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 137,
+  "rank": 138,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1669,7 +1669,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 138,
+  "rank": 139,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1691,7 +1691,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 139,
+  "rank": 140,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1736,7 +1736,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 143,
+  "rank": 144,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1758,7 +1758,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 144,
+  "rank": 146,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1779,7 +1779,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 146,
+  "rank": 147,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1800,7 +1800,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 147,
+  "rank": 148,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1821,7 +1821,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 148,
+  "rank": 149,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1842,7 +1842,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 149,
+  "rank": 150,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1865,7 +1865,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 151,
+  "rank": 152,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 118
@@ -1888,7 +1888,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 153,
+  "rank": 154,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1910,7 +1910,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 154,
+  "rank": 155,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1932,7 +1932,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 155,
+  "rank": 156,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1953,7 +1953,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 157,
+  "rank": 158,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1971,7 +1971,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 158,
+  "rank": 159,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -1993,7 +1993,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 159,
+  "rank": 160,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2014,7 +2014,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 160,
+  "rank": 161,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2036,7 +2036,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 161,
+  "rank": 162,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 85
@@ -2059,7 +2059,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 162,
+  "rank": 163,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2104,7 +2104,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 167,
+  "rank": 168,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2126,7 +2126,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 169,
+  "rank": 170,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 82
@@ -2149,7 +2149,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 171,
+  "rank": 172,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2170,7 +2170,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 172,
+  "rank": 173,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2191,7 +2191,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 174,
+  "rank": 176,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2212,32 +2212,9 @@
    }
   },
   "userSelectable": true,
-  "rank": 177,
+  "rank": 178,
   "rankByModality": {
    "chat": 9007199254740991
-  }
- },
- "019d50aa-447d-74d6-8661-405b4b6de5de": {
-  "id": "019d50aa-447d-74d6-8661-405b4b6de5de",
-  "organization": "arcee-ai",
-  "provider": "arceeToolCalling",
-  "publicName": "trinity-large-thinking",
-  "name": "trinity-large-thinking",
-  "displayName": "trinity-large-thinking",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true,
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rank": 183,
-  "rankByModality": {
-   "chat": 9007199254740991,
-   "webdev": 119
   }
  },
  "73cf8705-98c8-4b75-8d04-e3746e1c1565": {
@@ -2261,6 +2238,29 @@
    "chat": 9007199254740991
   }
  },
+ "019d50aa-447d-74d6-8661-405b4b6de5de": {
+  "id": "019d50aa-447d-74d6-8661-405b4b6de5de",
+  "organization": "arcee-ai",
+  "provider": "arceeToolCalling",
+  "publicName": "trinity-large-thinking",
+  "name": "trinity-large-thinking",
+  "displayName": "trinity-large-thinking",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rank": 185,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 119
+  }
+ },
  "789e245f-eafe-4c72-b563-d135e93988fc": {
   "id": "789e245f-eafe-4c72-b563-d135e93988fc",
   "organization": "google",
@@ -2278,7 +2278,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 186,
+  "rank": 187,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2299,7 +2299,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 188,
+  "rank": 189,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2317,7 +2317,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 191,
+  "rank": 192,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2339,7 +2339,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 192,
+  "rank": 193,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2361,7 +2361,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 195,
+  "rank": 196,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2382,7 +2382,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 196,
+  "rank": 197,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2424,7 +2424,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 206,
+  "rank": 207,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2446,7 +2446,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 210,
+  "rank": 211,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 125
@@ -2469,7 +2469,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 213,
+  "rank": 214,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 108
@@ -2491,7 +2491,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 214,
+  "rank": 215,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2531,7 +2531,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 221,
+  "rank": 222,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2552,7 +2552,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 223,
+  "rank": 224,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2573,7 +2573,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 224,
+  "rank": 225,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2594,7 +2594,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 235,
+  "rank": 237,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2615,7 +2615,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 245,
+  "rank": 246,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2636,7 +2636,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 251,
+  "rank": 252,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2657,7 +2657,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 252,
+  "rank": 253,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2678,7 +2678,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 254,
+  "rank": 255,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2699,7 +2699,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 261,
+  "rank": 263,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2721,7 +2721,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 266,
+  "rank": 267,
   "rankByModality": {
    "chat": 9007199254740991,
    "webdev": 124
@@ -2744,7 +2744,7 @@
    }
   },
   "userSelectable": false,
-  "rank": 270,
+  "rank": 271,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2762,7 +2762,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 273,
+  "rank": 275,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2780,7 +2780,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 281,
+  "rank": 282,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -2801,7 +2801,7 @@
    }
   },
   "userSelectable": true,
-  "rank": 285,
+  "rank": 286,
   "rankByModality": {
    "chat": 9007199254740991
   }
