@@ -20405,17 +20405,16 @@
    "video": 38
   }
  },
- "efdb7e05-2091-4e88-af9e-4ea6168d2f85": {
-  "id": "efdb7e05-2091-4e88-af9e-4ea6168d2f85",
+ "d63b03fb-8bc8-4ed8-9a50-6ccb683ac2b1": {
+  "id": "d63b03fb-8bc8-4ed8-9a50-6ccb683ac2b1",
   "organization": "kling",
   "provider": "fal",
   "publicName": "kling-v2.1-master",
-  "name": "kling-v2.1-master-image-to-video",
+  "name": "kling-v2.1-master-text-to-video",
   "displayName": "kling-v2.1-master",
   "capabilities": {
    "inputCapabilities": {
-    "text": true,
-    "image": true
+    "text": true
    },
    "outputCapabilities": {
     "video": true
@@ -20427,16 +20426,17 @@
    "video": 39
   }
  },
- "d63b03fb-8bc8-4ed8-9a50-6ccb683ac2b1": {
-  "id": "d63b03fb-8bc8-4ed8-9a50-6ccb683ac2b1",
+ "efdb7e05-2091-4e88-af9e-4ea6168d2f85": {
+  "id": "efdb7e05-2091-4e88-af9e-4ea6168d2f85",
   "organization": "kling",
   "provider": "fal",
   "publicName": "kling-v2.1-master",
-  "name": "kling-v2.1-master-text-to-video",
+  "name": "kling-v2.1-master-image-to-video",
   "displayName": "kling-v2.1-master",
   "capabilities": {
    "inputCapabilities": {
-    "text": true
+    "text": true,
+    "image": true
    },
    "outputCapabilities": {
     "video": true
