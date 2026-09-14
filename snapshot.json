@@ -18009,34 +18009,6 @@
    "image": 9007199254740991
   }
  },
- "e2969ebb-6450-4bc4-87c9-bbdcf95840da": {
-  "id": "e2969ebb-6450-4bc4-87c9-bbdcf95840da",
-  "organization": "bytedance",
-  "provider": "fal",
-  "publicName": "seededit-3.0",
-  "name": "seededit-3.0",
-  "displayName": "seededit-3.0",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true,
-     "multipleImages": false
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "019f887c-2854-79f5-b59b-9e2f3ab5e9d9": {
   "id": "019f887c-2854-79f5-b59b-9e2f3ab5e9d9",
   "publicName": "sui-mai",
@@ -18345,6 +18317,34 @@
     "image": {
      "requiresUpload": false,
      "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "e2969ebb-6450-4bc4-87c9-bbdcf95840da": {
+  "id": "e2969ebb-6450-4bc4-87c9-bbdcf95840da",
+  "organization": "bytedance",
+  "provider": "fal",
+  "publicName": "seededit-3.0",
+  "name": "seededit-3.0",
+  "displayName": "seededit-3.0",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true,
+     "multipleImages": false
     }
    },
    "outputCapabilities": {
