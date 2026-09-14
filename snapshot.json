@@ -8670,27 +8670,6 @@
    "chat": 9007199254740991
   }
  },
- "019ff69d-0234-7d00-a218-8fefcc9b7a9d": {
-  "id": "019ff69d-0234-7d00-a218-8fefcc9b7a9d",
-  "organization": "xai",
-  "provider": "xaiResponses",
-  "publicName": "grok-4.6",
-  "name": "grok-4.6-medium-public",
-  "displayName": "grok-4.6-medium",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019dfec2-612d-7c11-b54f-5236d830213d": {
   "id": "019dfec2-612d-7c11-b54f-5236d830213d",
   "publicName": "luna-hope",
@@ -9145,6 +9124,27 @@
    }
   },
   "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "019ff69d-0234-7d00-a218-8fefcc9b7a9d": {
+  "id": "019ff69d-0234-7d00-a218-8fefcc9b7a9d",
+  "organization": "xai",
+  "provider": "xaiResponses",
+  "publicName": "grok-4.6",
+  "name": "grok-4.6-medium-public",
+  "displayName": "grok-4.6-medium",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
   "rankByModality": {
    "chat": 9007199254740991
   }
@@ -21251,29 +21251,6 @@
    "video": 9007199254740991
   }
  },
- "019fb712-f49a-7258-aee2-28709a533d41": {
-  "id": "019fb712-f49a-7258-aee2-28709a533d41",
-  "organization": "minimax",
-  "provider": "minimaxV2",
-  "publicName": "hailuo-3",
-  "name": "hailuo-3-video-edit",
-  "displayName": "minimax-h3",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "video": {
-     "required": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019f9cf8-e13c-7f9b-b0c2-804374374a24": {
   "id": "019f9cf8-e13c-7f9b-b0c2-804374374a24",
   "publicName": "sprout",
@@ -21472,6 +21449,29 @@
   "capabilities": {
    "inputCapabilities": {
     "text": true
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019fb712-f49a-7258-aee2-28709a533d41": {
+  "id": "019fb712-f49a-7258-aee2-28709a533d41",
+  "organization": "minimax",
+  "provider": "minimaxV2",
+  "publicName": "hailuo-3",
+  "name": "hailuo-3-video-edit",
+  "displayName": "minimax-h3",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "video": {
+     "required": true
+    }
    },
    "outputCapabilities": {
     "video": true
