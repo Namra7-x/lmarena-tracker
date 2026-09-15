@@ -17557,6 +17557,34 @@
    "image": 9007199254740991
   }
  },
+ "01a0a727-6fa3-7125-9279-0909d492d480": {
+  "id": "01a0a727-6fa3-7125-9279-0909d492d480",
+  "organization": "xai",
+  "provider": "xaiImage",
+  "publicName": "grok-imagine-image-2.0",
+  "name": "grok-imagine-image-2.0",
+  "displayName": "grok-imagine-image-2.0",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": false
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019ef780-25ef-7878-8b91-307f8f879d42": {
   "id": "019ef780-25ef-7878-8b91-307f8f879d42",
   "organization": "meta",
