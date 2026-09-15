@@ -1144,27 +1144,6 @@
    "chat": 41
   }
  },
- "01a01326-36b7-7b0d-8af1-ccba21cf001f": {
-  "id": "01a01326-36b7-7b0d-8af1-ccba21cf001f",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.8-27b",
-  "name": "qwen3.8-27b",
-  "displayName": "qwen3.8-27b",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
-  "rank": 90,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "01a01326-1eae-7f76-b985-3ca71503db99": {
   "id": "01a01326-1eae-7f76-b985-3ca71503db99",
   "organization": "alibaba",
@@ -1178,6 +1157,27 @@
     "image": {
      "requiresUpload": true
     }
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rank": 90,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "01a01326-36b7-7b0d-8af1-ccba21cf001f": {
+  "id": "01a01326-36b7-7b0d-8af1-ccba21cf001f",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.8-27b",
+  "name": "qwen3.8-27b",
+  "displayName": "qwen3.8-27b",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
    },
    "outputCapabilities": {
     "text": true
@@ -10546,10 +10546,12 @@
    "webdev": 51
   }
  },
- "019f68b8-410f-7a08-98d5-b457908f3b3f": {
-  "id": "019f68b8-410f-7a08-98d5-b457908f3b3f",
+ "019ebd5b-a6ed-7e66-89e9-1143d106e0e6": {
+  "id": "019ebd5b-a6ed-7e66-89e9-1143d106e0e6",
   "organization": "moonshot",
+  "provider": "moonshot",
   "publicName": "kimi-k2.7-code",
+  "name": "kimi-k2.7-code",
   "displayName": "kimi-k2.7-code",
   "capabilities": {
    "inputCapabilities": {
@@ -10566,12 +10568,10 @@
    "webdev": 51
   }
  },
- "019ebd5b-a6ed-7e66-89e9-1143d106e0e6": {
-  "id": "019ebd5b-a6ed-7e66-89e9-1143d106e0e6",
+ "019f68b8-410f-7a08-98d5-b457908f3b3f": {
+  "id": "019f68b8-410f-7a08-98d5-b457908f3b3f",
   "organization": "moonshot",
-  "provider": "moonshot",
   "publicName": "kimi-k2.7-code",
-  "name": "kimi-k2.7-code",
   "displayName": "kimi-k2.7-code",
   "capabilities": {
    "inputCapabilities": {
@@ -12408,6 +12408,27 @@
    "webdev": 9007199254740991
   }
  },
+ "019e37c2-46ec-735c-bf5b-63f1c00ec573": {
+  "id": "019e37c2-46ec-735c-bf5b-63f1c00ec573",
+  "organization": "google",
+  "provider": "googleWithThoughtSignatures",
+  "publicName": "gemini-3.5-flash",
+  "name": "ajax-20260517",
+  "displayName": "gemini-3.5-flash",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "019f2e6b-bc8b-7faf-a877-0b90b2e48679": {
   "id": "019f2e6b-bc8b-7faf-a877-0b90b2e48679",
   "organization": "tencent",
@@ -13738,27 +13759,6 @@
   "id": "01a031e9-1cad-76d4-917d-8b9895f77c3c",
   "publicName": "paloma",
   "displayName": "paloma",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
- "019e37c2-46ec-735c-bf5b-63f1c00ec573": {
-  "id": "019e37c2-46ec-735c-bf5b-63f1c00ec573",
-  "organization": "google",
-  "provider": "googleWithThoughtSignatures",
-  "publicName": "gemini-3.5-flash",
-  "name": "ajax-20260517",
-  "displayName": "gemini-3.5-flash",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
