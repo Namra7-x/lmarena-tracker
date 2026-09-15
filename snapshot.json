@@ -20968,29 +20968,6 @@
    "video": 9007199254740991
   }
  },
- "019e1cd6-1907-7b7c-837c-33a5a3b33b95": {
-  "id": "019e1cd6-1907-7b7c-837c-33a5a3b33b95",
-  "organization": "wan",
-  "provider": "alibaba",
-  "publicName": "wan2.7-i2v",
-  "name": "wan2.7-i2v-2026-04-25-v2",
-  "displayName": "wan2.7-i2v",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019de98f-d58e-7524-ae2b-9d18b0d35838": {
   "id": "019de98f-d58e-7524-ae2b-9d18b0d35838",
   "publicName": "polaris",
@@ -21331,6 +21308,29 @@
   "publicName": "hailuo-02-fast",
   "name": "hailuo-02-fast",
   "displayName": "hailuo-02-fast",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019e1cd6-1907-7b7c-837c-33a5a3b33b95": {
+  "id": "019e1cd6-1907-7b7c-837c-33a5a3b33b95",
+  "organization": "wan",
+  "provider": "alibaba",
+  "publicName": "wan2.7-i2v",
+  "name": "wan2.7-i2v-2026-04-25-v2",
+  "displayName": "wan2.7-i2v",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
