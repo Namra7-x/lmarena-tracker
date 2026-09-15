@@ -8593,26 +8593,6 @@
    "webdev": 9007199254740991
   }
  },
- "019d688c-b540-75ff-994d-338e3aec20ce": {
-  "id": "019d688c-b540-75ff-994d-338e3aec20ce",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen3.6-plus",
-  "name": "qwen3.6-plus-text",
-  "displayName": "qwen3.6-plus",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
  "019efc13-fab5-7872-9f80-c377f35af701": {
   "id": "019efc13-fab5-7872-9f80-c377f35af701",
   "publicName": "v0-category-router-quality",
@@ -9112,6 +9092,26 @@
   "publicName": "march26-chatbot1-public",
   "name": "march26-chatbot1-public",
   "displayName": "nvidia-nemotron-3-super-120b-a12b",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
+ "019d688c-b540-75ff-994d-338e3aec20ce": {
+  "id": "019d688c-b540-75ff-994d-338e3aec20ce",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen3.6-plus",
+  "name": "qwen3.6-plus-text",
+  "displayName": "qwen3.6-plus",
   "capabilities": {
    "inputCapabilities": {
     "text": true
