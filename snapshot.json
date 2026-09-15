@@ -12355,27 +12355,6 @@
    "webdev": 9007199254740991
   }
  },
- "019f4d64-388f-700b-b8c2-4d8d14c44973": {
-  "id": "019f4d64-388f-700b-b8c2-4d8d14c44973",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.6-sol-medium",
-  "name": "gpt-5.6-sol-medium-code-codex-harness",
-  "displayName": "gpt-5.6-sol-medium",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "019fb3af-6854-7202-83b2-7d7de440e7fa": {
   "id": "019fb3af-6854-7202-83b2-7d7de440e7fa",
   "publicName": "thelymitra-alpha",
@@ -13393,6 +13372,27 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019f4d64-388f-700b-b8c2-4d8d14c44973": {
+  "id": "019f4d64-388f-700b-b8c2-4d8d14c44973",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.6-sol-medium",
+  "name": "gpt-5.6-sol-medium-code-codex-harness",
+  "displayName": "gpt-5.6-sol-medium",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "webdev": 9007199254740991
   }
@@ -20931,29 +20931,6 @@
    "video": 9007199254740991
   }
  },
- "58060613-41dc-478b-97a0-6d9c4f0c722a": {
-  "id": "58060613-41dc-478b-97a0-6d9c4f0c722a",
-  "organization": "minimax",
-  "provider": "fal",
-  "publicName": "hailuo-02-fast",
-  "name": "hailuo-02-fast",
-  "displayName": "hailuo-02-fast",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "01a003a5-fdf1-7294-831f-08fcd8711db0": {
   "id": "01a003a5-fdf1-7294-831f-08fcd8711db0",
   "publicName": "lighthouse",
@@ -21331,6 +21308,29 @@
   "publicName": "hidream-o1-video",
   "name": "hidream-o1-video-vcyz",
   "displayName": "hidream-o1-video",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "58060613-41dc-478b-97a0-6d9c4f0c722a": {
+  "id": "58060613-41dc-478b-97a0-6d9c4f0c722a",
+  "organization": "minimax",
+  "provider": "fal",
+  "publicName": "hailuo-02-fast",
+  "name": "hailuo-02-fast",
+  "displayName": "hailuo-02-fast",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
