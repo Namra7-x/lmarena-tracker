@@ -9015,6 +9015,26 @@
    "chat": 9007199254740991
   }
  },
+ "01a0a61f-ff82-7bd2-b60c-76690ff23810": {
+  "id": "01a0a61f-ff82-7bd2-b60c-76690ff23810",
+  "publicName": "deepseek-v4-pro-high",
+  "displayName": "deepseek-v4-pro-high",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": false
+   },
+   "outputCapabilities": {
+    "text": true,
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "chat": 9007199254740991,
+   "webdev": 9007199254740991
+  }
+ },
  "019f406f-fc33-7b9d-9571-7b8443bc7ca0": {
   "id": "019f406f-fc33-7b9d-9571-7b8443bc7ca0",
   "organization": "google",
