@@ -18626,6 +18626,31 @@
    "image": 9007199254740991
   }
  },
+ "01a0a63c-d7c0-7347-a8ed-4ac547f35bae": {
+  "id": "01a0a63c-d7c0-7347-a8ed-4ac547f35bae",
+  "publicName": "lychee-37-fix",
+  "displayName": "lychee-37-fix",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "01a03125-7eb3-7289-8791-b5046097a337": {
   "id": "01a03125-7eb3-7289-8791-b5046097a337",
   "organization": "microsoft-ai",
