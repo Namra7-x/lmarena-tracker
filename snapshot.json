@@ -5057,6 +5057,26 @@
    "chat": 9007199254740991
   }
  },
+ "019cf983-532b-73fa-a057-7658e1e1c5ee": {
+  "id": "019cf983-532b-73fa-a057-7658e1e1c5ee",
+  "organization": "mistral",
+  "provider": "mistral",
+  "publicName": "mistral-small-2603",
+  "name": "mistral-small-2603",
+  "displayName": "mistral-small-2603",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "text": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "chat": 9007199254740991
+  }
+ },
  "019d932e-b539-7213-b395-bfd046a6db82": {
   "id": "019d932e-b539-7213-b395-bfd046a6db82",
   "publicName": "minicpm-sala",
@@ -6013,26 +6033,6 @@
    }
   },
   "userSelectable": true,
-  "rankByModality": {
-   "chat": 9007199254740991
-  }
- },
- "019cf983-532b-73fa-a057-7658e1e1c5ee": {
-  "id": "019cf983-532b-73fa-a057-7658e1e1c5ee",
-  "organization": "mistral",
-  "provider": "mistral",
-  "publicName": "mistral-small-2603",
-  "name": "mistral-small-2603",
-  "displayName": "mistral-small-2603",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "text": true
-   }
-  },
-  "userSelectable": false,
   "rankByModality": {
    "chat": 9007199254740991
   }
