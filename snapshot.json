@@ -18240,34 +18240,6 @@
    "image": 9007199254740991
   }
  },
- "019f1f85-dd80-7060-a1a8-2e0e85a60386": {
-  "id": "019f1f85-dd80-7060-a1a8-2e0e85a60386",
-  "organization": "google",
-  "provider": "google-genai",
-  "publicName": "gemini-3-pro-image-2k (nano-banana-pro)",
-  "name": "gemini-3-pro-image-2k",
-  "displayName": "gemini-3-pro-image-2k (nano-banana-pro)",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false,
-     "multipleImages": true
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
  "019fe39a-b4c5-7442-850f-26c39b95b3ca": {
   "id": "019fe39a-b4c5-7442-850f-26c39b95b3ca",
   "publicName": "mona-lisa-1",
@@ -18330,34 +18302,6 @@
     "image": {
      "requiresUpload": true,
      "multipleImages": false
-    }
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "019be242-8366-7a60-a378-160b233d1f76": {
-  "id": "019be242-8366-7a60-a378-160b233d1f76",
-  "organization": "openai",
-  "provider": "customOpenai",
-  "publicName": "chatgpt-image-latest-high-fidelity (20251216)",
-  "name": "chatgpt-image-latest-high-fidelity-20251216",
-  "displayName": "chatgpt-image-latest-high-fidelity (20251216)",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true,
-     "multipleImages": true
     }
    },
    "outputCapabilities": {
@@ -18705,6 +18649,34 @@
    "image": 9007199254740991
   }
  },
+ "019be242-8366-7a60-a378-160b233d1f76": {
+  "id": "019be242-8366-7a60-a378-160b233d1f76",
+  "organization": "openai",
+  "provider": "customOpenai",
+  "publicName": "chatgpt-image-latest-high-fidelity (20251216)",
+  "name": "chatgpt-image-latest-high-fidelity-20251216",
+  "displayName": "chatgpt-image-latest-high-fidelity (20251216)",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019bec2d-e92c-745d-ae46-c7166590237a": {
   "id": "019bec2d-e92c-745d-ae46-c7166590237a",
   "organization": "tencent",
@@ -18733,42 +18705,18 @@
    "image": 9007199254740991
   }
  },
- "019f91af-7ebe-7b8f-87c4-f3b16070a5d0": {
-  "id": "019f91af-7ebe-7b8f-87c4-f3b16070a5d0",
-  "organization": "nvidia",
-  "provider": "nvidiaNvcf",
-  "publicName": "cosmos3-super-agentic",
-  "name": "cosmos3-super-agentic-nvcf-v2",
-  "displayName": "cosmos3-super-agentic",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "019b8194-804a-775d-86d4-c8ded9ba3e9f": {
-  "id": "019b8194-804a-775d-86d4-c8ded9ba3e9f",
-  "organization": "alibaba",
-  "provider": "alibaba",
-  "publicName": "qwen-image-edit-2511",
-  "name": "qwen-image-edit-2511",
-  "displayName": "qwen-image-edit-2511",
+ "019f1f85-dd80-7060-a1a8-2e0e85a60386": {
+  "id": "019f1f85-dd80-7060-a1a8-2e0e85a60386",
+  "organization": "google",
+  "provider": "google-genai",
+  "publicName": "gemini-3-pro-image-2k (nano-banana-pro)",
+  "name": "gemini-3-pro-image-2k",
+  "displayName": "gemini-3-pro-image-2k (nano-banana-pro)",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
     "image": {
-     "requiresUpload": true,
+     "requiresUpload": false,
      "multipleImages": true
     }
    },
@@ -18780,31 +18728,7 @@
     }
    }
   },
-  "userSelectable": true,
-  "rankByModality": {
-   "image": 9007199254740991
-  }
- },
- "a9a26426-5377-4efa-bef9-de71e29ad943": {
-  "id": "a9a26426-5377-4efa-bef9-de71e29ad943",
-  "organization": "tencent",
-  "provider": "fal",
-  "publicName": "hunyuan-image-2.1",
-  "name": "hunyuan-image-2.1",
-  "displayName": "hunyuan-image-2.1",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "image": {
-     "aspectRatios": [
-      "1:1"
-     ]
-    }
-   }
-  },
-  "userSelectable": true,
+  "userSelectable": false,
   "rankByModality": {
    "image": 9007199254740991
   }
@@ -18867,6 +18791,82 @@
     "text": true,
     "image": {
      "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "019f91af-7ebe-7b8f-87c4-f3b16070a5d0": {
+  "id": "019f91af-7ebe-7b8f-87c4-f3b16070a5d0",
+  "organization": "nvidia",
+  "provider": "nvidiaNvcf",
+  "publicName": "cosmos3-super-agentic",
+  "name": "cosmos3-super-agentic-nvcf-v2",
+  "displayName": "cosmos3-super-agentic",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "a9a26426-5377-4efa-bef9-de71e29ad943": {
+  "id": "a9a26426-5377-4efa-bef9-de71e29ad943",
+  "organization": "tencent",
+  "provider": "fal",
+  "publicName": "hunyuan-image-2.1",
+  "name": "hunyuan-image-2.1",
+  "displayName": "hunyuan-image-2.1",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
+ "019b8194-804a-775d-86d4-c8ded9ba3e9f": {
+  "id": "019b8194-804a-775d-86d4-c8ded9ba3e9f",
+  "organization": "alibaba",
+  "provider": "alibaba",
+  "publicName": "qwen-image-edit-2511",
+  "name": "qwen-image-edit-2511",
+  "displayName": "qwen-image-edit-2511",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true,
      "multipleImages": true
     }
    },
@@ -19842,26 +19842,6 @@
    "search": 9007199254740991
   }
  },
- "01a06dd9-f8c5-77f5-90a2-335546d2d6d5": {
-  "id": "01a06dd9-f8c5-77f5-90a2-335546d2d6d5",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-6-astra-search-max",
-  "name": "gpt-6-astra-search-max",
-  "displayName": "gpt-6-astra-search-max",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
  "019de22d-1445-7296-9c88-a5877bc66ef8": {
   "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
   "organization": "xai",
@@ -19878,6 +19858,26 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
+ "01a06dd9-f8c5-77f5-90a2-335546d2d6d5": {
+  "id": "01a06dd9-f8c5-77f5-90a2-335546d2d6d5",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-6-astra-search-max",
+  "name": "gpt-6-astra-search-max",
+  "displayName": "gpt-6-astra-search-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "search": 9007199254740991
   }
