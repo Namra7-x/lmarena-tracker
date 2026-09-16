@@ -13507,6 +13507,23 @@
    "webdev": 9007199254740991
   }
  },
+ "01a0abb5-738f-774f-b377-0b767ea6b7a9": {
+  "id": "01a0abb5-738f-774f-b377-0b767ea6b7a9",
+  "publicName": "water18-0910-fc",
+  "displayName": "water18-0910-fc",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
  "01a08479-5fa0-73aa-8d4e-4e02d9cec691": {
   "id": "01a08479-5fa0-73aa-8d4e-4e02d9cec691",
   "publicName": "qevrix-coder-2",
@@ -21565,6 +21582,26 @@
     "image": {
      "requiresUpload": true
     }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "01a010ff-f14f-7953-bb48-27baf9105203": {
+  "id": "01a010ff-f14f-7953-bb48-27baf9105203",
+  "organization": "wan",
+  "provider": "wan",
+  "publicName": "vega",
+  "name": "vega-v9e1",
+  "displayName": "wan3.0",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
    },
    "outputCapabilities": {
     "video": true
