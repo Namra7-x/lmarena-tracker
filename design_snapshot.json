@@ -9495,6 +9495,20 @@
           "video"
         ]
       }
+    },
+    "arrow-2": {
+      "displayName": "Arrow 2",
+      "provider": "quiver",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "svg"
+        ]
+      }
     }
   },
   "providers": {
@@ -11310,6 +11324,10 @@
     },
     "p-video-2-draft": {
       "video.perSecond": 0.015
+    },
+    "arrow-2": {
+      "text.input": 4,
+      "text.output": 20
     }
   }
 }
