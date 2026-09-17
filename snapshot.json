@@ -19801,26 +19801,6 @@
    "search": 9007199254740991
   }
  },
- "019b2f68-97ae-75b1-9e2f-456470bd5332": {
-  "id": "019b2f68-97ae-75b1-9e2f-456470bd5332",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.1-search-sp",
-  "name": "gpt-5.1-search-new-system-prompt-20251217",
-  "displayName": "gpt-5.1-search-sp",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
  "019dda58-5541-705e-9db1-fce7ac5d55e5": {
   "id": "019dda58-5541-705e-9db1-fce7ac5d55e5",
   "publicName": "basalt-0422-1-v2",
@@ -19842,26 +19822,6 @@
   "id": "019ef6b1-c0f2-7d47-a366-4085324dc49a",
   "publicName": "tanager-search-v3",
   "displayName": "tanager-search-v3",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true
-   },
-   "outputCapabilities": {
-    "search": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "search": 9007199254740991
-  }
- },
- "019de22d-1445-7296-9c88-a5877bc66ef8": {
-  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
-  "organization": "xai",
-  "provider": "xaiResponsesSearchPrivate",
-  "publicName": "grok-4.3",
-  "name": "grok-4.3-search",
-  "displayName": "grok-4.3",
   "capabilities": {
    "inputCapabilities": {
     "text": true
@@ -19926,13 +19886,13 @@
    "search": 9007199254740991
   }
  },
- "01a06dd9-f8c5-77f5-90a2-335546d2d6d5": {
-  "id": "01a06dd9-f8c5-77f5-90a2-335546d2d6d5",
+ "019b2f68-97ae-75b1-9e2f-456470bd5332": {
+  "id": "019b2f68-97ae-75b1-9e2f-456470bd5332",
   "organization": "openai",
   "provider": "openaiResponses",
-  "publicName": "gpt-6-astra-search-max",
-  "name": "gpt-6-astra-search-max",
-  "displayName": "gpt-6-astra-search-max",
+  "publicName": "gpt-5.1-search-sp",
+  "name": "gpt-5.1-search-new-system-prompt-20251217",
+  "displayName": "gpt-5.1-search-sp",
   "capabilities": {
    "inputCapabilities": {
     "text": true
@@ -19941,7 +19901,7 @@
     "search": true
    }
   },
-  "userSelectable": false,
+  "userSelectable": true,
   "rankByModality": {
    "search": 9007199254740991
   }
@@ -19959,6 +19919,26 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
+ "01a06dd9-f8c5-77f5-90a2-335546d2d6d5": {
+  "id": "01a06dd9-f8c5-77f5-90a2-335546d2d6d5",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-6-astra-search-max",
+  "name": "gpt-6-astra-search-max",
+  "displayName": "gpt-6-astra-search-max",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "search": 9007199254740991
   }
@@ -19987,6 +19967,26 @@
   "id": "01a06d03-64d6-75dd-a2e8-30ab5a980a19",
   "publicName": "openhard-2.5-search-cot-0904",
   "displayName": "openhard-2.5-search-cot-0904",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
+ "019de22d-1445-7296-9c88-a5877bc66ef8": {
+  "id": "019de22d-1445-7296-9c88-a5877bc66ef8",
+  "organization": "xai",
+  "provider": "xaiResponsesSearchPrivate",
+  "publicName": "grok-4.3",
+  "name": "grok-4.3-search",
+  "displayName": "grok-4.3",
   "capabilities": {
    "inputCapabilities": {
     "text": true
