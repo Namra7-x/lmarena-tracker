@@ -18855,20 +18855,16 @@
    "image": 9007199254740991
   }
  },
- "019fbb94-0662-7830-808f-ee8dfe6098a2": {
-  "id": "019fbb94-0662-7830-808f-ee8dfe6098a2",
-  "organization": "google",
-  "provider": "google-genai",
-  "publicName": "gemini-3.1-flash-lite-image (nano-banana-2-lite)",
-  "name": "gemini-3.1-flash-lite-image",
-  "displayName": "gemini-3.1-flash-lite-image (nano-banana-2-lite)",
+ "a9a26426-5377-4efa-bef9-de71e29ad943": {
+  "id": "a9a26426-5377-4efa-bef9-de71e29ad943",
+  "organization": "tencent",
+  "provider": "fal",
+  "publicName": "hunyuan-image-2.1",
+  "name": "hunyuan-image-2.1",
+  "displayName": "hunyuan-image-2.1",
   "capabilities": {
    "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": false,
-     "multipleImages": true
-    }
+    "text": true
    },
    "outputCapabilities": {
     "image": {
@@ -18883,16 +18879,20 @@
    "image": 9007199254740991
   }
  },
- "a9a26426-5377-4efa-bef9-de71e29ad943": {
-  "id": "a9a26426-5377-4efa-bef9-de71e29ad943",
-  "organization": "tencent",
-  "provider": "fal",
-  "publicName": "hunyuan-image-2.1",
-  "name": "hunyuan-image-2.1",
-  "displayName": "hunyuan-image-2.1",
+ "019fbb94-0662-7830-808f-ee8dfe6098a2": {
+  "id": "019fbb94-0662-7830-808f-ee8dfe6098a2",
+  "organization": "google",
+  "provider": "google-genai",
+  "publicName": "gemini-3.1-flash-lite-image (nano-banana-2-lite)",
+  "name": "gemini-3.1-flash-lite-image",
+  "displayName": "gemini-3.1-flash-lite-image (nano-banana-2-lite)",
   "capabilities": {
    "inputCapabilities": {
-    "text": true
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
    },
    "outputCapabilities": {
     "image": {
