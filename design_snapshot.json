@@ -9513,6 +9513,36 @@
           "svg"
         ]
       }
+    },
+    "p-video-2-pro-speed": {
+      "displayName": "P-Video-2-Pro (Speed)",
+      "provider": "pruna",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      }
+    },
+    "p-video-2-pro-quality": {
+      "displayName": "P-Video-2-Pro (Quality)",
+      "provider": "pruna",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      }
     }
   },
   "providers": {
@@ -11334,6 +11364,12 @@
     "arrow-2": {
       "text.input": 4,
       "text.output": 20
+    },
+    "p-video-2-pro-speed": {
+      "video.perSecond": 0.035
+    },
+    "p-video-2-pro-quality": {
+      "video.perSecond": 0.075
     }
   }
 }
