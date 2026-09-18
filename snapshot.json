@@ -13396,27 +13396,6 @@
    "webdev": 9007199254740991
   }
  },
- "019dd034-9da3-772b-9589-dbcaca8b9dc5": {
-  "id": "019dd034-9da3-772b-9589-dbcaca8b9dc5",
-  "organization": "openai",
-  "provider": "openaiResponses",
-  "publicName": "gpt-5.5-xhigh",
-  "name": "gpt-5.5-xhigh-code-codex-harness",
-  "displayName": "gpt-5.5-xhigh",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": true
-   },
-   "outputCapabilities": {
-    "web": true
-   }
-  },
-  "userSelectable": false,
-  "rankByModality": {
-   "webdev": 9007199254740991
-  }
- },
  "019f7758-45ea-79a4-9963-9b7c096e936e": {
   "id": "019f7758-45ea-79a4-9963-9b7c096e936e",
   "publicName": "delphi-alpha",
@@ -13525,6 +13504,27 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "webdev": 9007199254740991
+  }
+ },
+ "019dd034-9da3-772b-9589-dbcaca8b9dc5": {
+  "id": "019dd034-9da3-772b-9589-dbcaca8b9dc5",
+  "organization": "openai",
+  "provider": "openaiResponses",
+  "publicName": "gpt-5.5-xhigh",
+  "name": "gpt-5.5-xhigh-code-codex-harness",
+  "displayName": "gpt-5.5-xhigh",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": true
+   },
+   "outputCapabilities": {
+    "web": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "webdev": 9007199254740991
   }
