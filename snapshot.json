@@ -21722,29 +21722,6 @@
    "video": 9007199254740991
   }
  },
- "019c48d2-0f86-701d-beb2-af070edd1147": {
-  "id": "019c48d2-0f86-701d-beb2-af070edd1147",
-  "organization": "wan",
-  "provider": "alibaba",
-  "publicName": "wan2.6-i2v",
-  "name": "wan2.6-i2v",
-  "displayName": "wan2.6-i2v",
-  "capabilities": {
-   "inputCapabilities": {
-    "text": true,
-    "image": {
-     "requiresUpload": true
-    }
-   },
-   "outputCapabilities": {
-    "video": true
-   }
-  },
-  "userSelectable": true,
-  "rankByModality": {
-   "video": 9007199254740991
-  }
- },
  "019f91b3-6ea2-744a-b698-d09fbadea9fa": {
   "id": "019f91b3-6ea2-744a-b698-d09fbadea9fa",
   "organization": "google",
@@ -21964,6 +21941,29 @@
   "publicName": "hailuo-2.3-fast",
   "name": "hailuo-2.3-fast",
   "displayName": "hailuo-2.3-fast",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": true
+    }
+   },
+   "outputCapabilities": {
+    "video": true
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "video": 9007199254740991
+  }
+ },
+ "019c48d2-0f86-701d-beb2-af070edd1147": {
+  "id": "019c48d2-0f86-701d-beb2-af070edd1147",
+  "organization": "wan",
+  "provider": "alibaba",
+  "publicName": "wan2.6-i2v",
+  "name": "wan2.6-i2v",
+  "displayName": "wan2.6-i2v",
   "capabilities": {
    "inputCapabilities": {
     "text": true,
