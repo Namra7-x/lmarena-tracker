@@ -119,6 +119,7 @@ function diff(oldData, newData) {
     caps: [],
     new_providers: [],
     price_new: [],
+    price_removed: [],
     price_changed: [],
   };
 
@@ -178,17 +179,32 @@ function diff(oldData, newData) {
     d.new_providers.push([pid, np[pid]]);
   }
 
-  for (const mid of Object.keys(npz).filter((x) => !opz[x])) {
+  // Pricing model added/removed and field-level changes.
+  for (const mid of Object.keys(npz).filter((x) => !opz[x]).sort()) {
     d.price_new.push([mid, npz[mid]]);
   }
-  for (const mid of Object.keys(npz).filter((x) => opz[x])) {
+
+  for (const mid of Object.keys(opz).filter((x) => !npz[x]).sort()) {
+    d.price_removed.push([mid, opz[mid]]);
+  }
+
+  for (const mid of Object.keys(npz).filter((x) => opz[x]).sort()) {
     const changes = [];
     const allK = new Set([...Object.keys(npz[mid]), ...Object.keys(opz[mid])]);
-    for (const k of allK) {
-      if (opz[mid][k] !== npz[mid][k]) {
-        changes.push(`${k}: ${opz[mid][k]} ➔ ${npz[mid][k]}`);
+
+    for (const k of [...allK].sort()) {
+      const oldValue = opz[mid][k];
+      const newValue = npz[mid][k];
+
+      if (!(k in opz[mid])) {
+        changes.push(`${k}: ➕ ${newValue}`);
+      } else if (!(k in npz[mid])) {
+        changes.push(`${k}: ❌ removed (${oldValue})`);
+      } else if (oldValue !== newValue) {
+        changes.push(`${k}: ${oldValue} ➔ ${newValue}`);
       }
     }
+
     if (changes.length > 0) d.price_changed.push([mid, changes]);
   }
 
@@ -239,6 +255,26 @@ function buildMessage(d) {
   section('⚡ Capability updates', d.caps, (it) => [
     `• ${it[1]} (\`${it[0]}\`)`,
     ...it[2].map((c) => `  ${c}`),
+  ]);
+
+  // Provider-only and pricing-only events must be visible in the Discord message.
+  section('🏭 New providers', d.new_providers, (it) => [
+    `• ${it[1]} (\`${it[0]}\`)`,
+  ]);
+
+  section('💰 Pricing added', d.price_new, (it) => [
+    `• Model: ${it[0]}`,
+    ...Object.entries(it[1]).slice(0, 12).map(([k, v]) => `  ${k}: ${v}`),
+  ]);
+
+  section('🗑️ Pricing removed', d.price_removed, (it) => [
+    `• Model: ${it[0]}`,
+    ...Object.entries(it[1]).slice(0, 12).map(([k, v]) => `  ${k}: ${v}`),
+  ]);
+
+  section('💰 Pricing updates', d.price_changed, (it) => [
+    `• Model: ${it[0]}`,
+    ...it[1].slice(0, 12).map((c) => `  ${c}`),
   ]);
 
   return lines.join('\n').trim();
