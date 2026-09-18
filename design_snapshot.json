@@ -9543,6 +9543,20 @@
           "video"
         ]
       }
+    },
+    "magpie-tts-multilingual": {
+      "displayName": "Magpie TTS Multilingual",
+      "provider": "nvidia",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      }
     }
   },
   "providers": {
