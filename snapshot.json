@@ -18511,6 +18511,31 @@
    "image": 9007199254740991
   }
  },
+ "01a0b698-f488-7e26-99fd-30ac1580e1df": {
+  "id": "01a0b698-f488-7e26-99fd-30ac1580e1df",
+  "publicName": "river-route",
+  "displayName": "river-route",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true,
+    "image": {
+     "requiresUpload": false,
+     "multipleImages": true
+    }
+   },
+   "outputCapabilities": {
+    "image": {
+     "aspectRatios": [
+      "1:1"
+     ]
+    }
+   }
+  },
+  "userSelectable": true,
+  "rankByModality": {
+   "image": 9007199254740991
+  }
+ },
  "019fe39a-b4c5-7442-850f-26c39b95b3ca": {
   "id": "019fe39a-b4c5-7442-850f-26c39b95b3ca",
   "publicName": "mona-lisa-1",
@@ -20011,6 +20036,46 @@
    }
   },
   "userSelectable": true,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
+ "01a0b697-b2a2-7961-af1d-5aef78b87287": {
+  "id": "01a0b697-b2a2-7961-af1d-5aef78b87287",
+  "organization": "anthropic",
+  "provider": "anthropicSearch",
+  "publicName": "claude-fable-5.1-search",
+  "name": "claude-fable-5.1-search-v2",
+  "displayName": "claude-fable-5.1-search",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": false,
+  "rankByModality": {
+   "search": 9007199254740991
+  }
+ },
+ "01a0b699-cbd0-78e8-97cd-91728820372a": {
+  "id": "01a0b699-cbd0-78e8-97cd-91728820372a",
+  "organization": "anthropic",
+  "provider": "anthropicSearch",
+  "publicName": "claude-opus-5-search",
+  "name": "claude-opus-5-search",
+  "displayName": "claude-opus-5-search",
+  "capabilities": {
+   "inputCapabilities": {
+    "text": true
+   },
+   "outputCapabilities": {
+    "search": true
+   }
+  },
+  "userSelectable": false,
   "rankByModality": {
    "search": 9007199254740991
   }
