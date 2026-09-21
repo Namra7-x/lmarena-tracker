@@ -556,6 +556,7 @@
       ],
       "arenas": {
         "agents": [
+          "agon_godot",
           "agon_webapps"
         ]
       }
@@ -2363,6 +2364,9 @@
           "svg",
           "uicomponent",
           "website"
+        ],
+        "agents": [
+          "agon_godot"
         ]
       }
     },
@@ -8117,6 +8121,7 @@
           "website"
         ],
         "agents": [
+          "agon_godot",
           "agon_webapps"
         ]
       }
@@ -9268,6 +9273,7 @@
           "website"
         ],
         "agents": [
+          "agon_godot",
           "agon_webapps",
           "fullstack"
         ]
@@ -9396,6 +9402,7 @@
           "website"
         ],
         "agents": [
+          "agon_godot",
           "agon_webapps",
           "fullstack"
         ]
@@ -9910,7 +9917,8 @@
     "beacon": "beacon",
     "vermont": "vermont",
     "hampshire": "hampshire",
-    "freya": "Freya"
+    "freya": "Freya",
+    "york": "york"
   },
   "pricing": {
     "qwen3-coder-480b-a35b-instruct": {
