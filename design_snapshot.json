@@ -9535,6 +9535,29 @@
         ]
       }
     },
+    "hampshire": {
+      "displayName": "MiMo-V2.6-Pro",
+      "provider": "xiaomi",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agon_webapps"
+        ]
+      }
+    },
     "p-video-2-pro-speed": {
       "displayName": "P-Video-2-Pro (Speed)",
       "provider": "pruna",
@@ -11428,6 +11451,10 @@
     "arrow-2": {
       "text.input": 4,
       "text.output": 20
+    },
+    "hampshire": {
+      "text.input": 0.435,
+      "text.output": 0.87
     },
     "p-video-2-pro-speed": {
       "video.perSecond": 0.035
