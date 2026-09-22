@@ -9628,6 +9628,85 @@
           "fullstack"
         ]
       }
+    },
+    "claude-opus-5-5": {
+      "displayName": "Claude Opus 5.5",
+      "provider": "anthropic",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
+    },
+    "gpt-6-sol": {
+      "displayName": "GPT-6 Sol",
+      "provider": "openai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agon_godot",
+          "agon_webapps",
+          "fullstack"
+        ]
+      }
+    },
+    "gpt-6-luna": {
+      "displayName": "GPT-6 Luna",
+      "provider": "openai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agon_godot",
+          "agon_webapps",
+          "fullstack"
+        ]
+      }
     }
   },
   "providers": {
@@ -9938,10 +10017,12 @@
     "kestrel": "kestrel",
     "lighthouse": "lighthouse",
     "beacon": "beacon",
+    "manitoba": "manitoba",
     "vermont": "vermont",
     "hampshire": "hampshire",
     "freya": "Freya",
-    "york": "york"
+    "york": "york",
+    "colorado": "colorado"
   },
   "pricing": {
     "qwen3-coder-480b-a35b-instruct": {
@@ -11467,6 +11548,22 @@
       "text.output": 50,
       "text.cachedInput": 1,
       "text.cacheWrite": 12.5
+    },
+    "claude-opus-5-5": {
+      "text.input": 4,
+      "text.output": 20
+    },
+    "gpt-6-sol": {
+      "text.input": 2,
+      "text.output": 10,
+      "text.cachedInput": 0.2,
+      "text.cacheWrite": 2.5
+    },
+    "gpt-6-luna": {
+      "text.input": 0.1,
+      "text.output": 0.5,
+      "text.cachedInput": 0.01,
+      "text.cacheWrite": 0.125
     }
   }
 }
