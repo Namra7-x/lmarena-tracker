@@ -9730,6 +9730,20 @@
           "website"
         ]
       }
+    },
+    "arrow-2-telos": {
+      "displayName": "Arrow 2 Telos",
+      "provider": "quiver",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "svg"
+        ]
+      }
     }
   },
   "providers": {
@@ -11592,6 +11606,10 @@
       "text.input": 2,
       "text.output": 6,
       "text.cachedInput": 0.5
+    },
+    "arrow-2-telos": {
+      "text.input": 6,
+      "text.output": 30
     }
   }
 }
