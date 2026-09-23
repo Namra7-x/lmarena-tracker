@@ -9707,6 +9707,29 @@
           "fullstack"
         ]
       }
+    },
+    "grok-4.7": {
+      "displayName": "Grok 4.7",
+      "provider": "xai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -10018,8 +10041,8 @@
     "lighthouse": "lighthouse",
     "beacon": "beacon",
     "manitoba": "manitoba",
+    "montreal": "montreal",
     "vermont": "vermont",
-    "hampshire": "hampshire",
     "freya": "Freya",
     "york": "york",
     "colorado": "colorado"
@@ -11564,6 +11587,11 @@
       "text.output": 0.5,
       "text.cachedInput": 0.01,
       "text.cacheWrite": 0.125
+    },
+    "grok-4.7": {
+      "text.input": 2,
+      "text.output": 6,
+      "text.cachedInput": 0.5
     }
   }
 }
