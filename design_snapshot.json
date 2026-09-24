@@ -9602,33 +9602,6 @@
         ]
       }
     },
-    "gpt-6-astra-max": {
-      "displayName": "GPT-6 Astra (max)",
-      "provider": "openai",
-      "active": true,
-      "openSource": false,
-      "router": false,
-      "vision": true,
-      "inputModalities": [
-        "image",
-        "text"
-      ],
-      "arenas": {
-        "models": [
-          "3d",
-          "ascii",
-          "dataviz",
-          "gamedev",
-          "svg",
-          "uicomponent",
-          "website"
-        ],
-        "agents": [
-          "agon_webapps",
-          "fullstack"
-        ]
-      }
-    },
     "claude-opus-5-5": {
       "displayName": "Claude Opus 5.5",
       "provider": "anthropic",
@@ -11579,12 +11552,6 @@
     },
     "p-video-2-pro-quality": {
       "video.perSecond": 0.075
-    },
-    "gpt-6-astra-max": {
-      "text.input": 10,
-      "text.output": 50,
-      "text.cachedInput": 1,
-      "text.cacheWrite": 12.5
     },
     "claude-opus-5-5": {
       "text.input": 4,
