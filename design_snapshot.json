@@ -9602,6 +9602,22 @@
         ]
       }
     },
+    "york": {
+      "displayName": "Recraft V4.1 Flash",
+      "provider": "recraft",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "logo"
+        ]
+      }
+    },
     "claude-opus-5-5": {
       "displayName": "Claude Opus 5.5",
       "provider": "anthropic",
@@ -10031,7 +10047,6 @@
     "montreal": "montreal",
     "vermont": "vermont",
     "freya": "Freya",
-    "york": "york",
     "colorado": "colorado"
   },
   "pricing": {
@@ -11552,6 +11567,9 @@
     },
     "p-video-2-pro-quality": {
       "video.perSecond": 0.075
+    },
+    "york": {
+      "image.perImage": 0.007
     },
     "claude-opus-5-5": {
       "text.input": 4,
