@@ -9733,6 +9733,20 @@
           "svg"
         ]
       }
+    },
+    "google_gemini_3_8_flash_tts": {
+      "displayName": "Google Gemini 3.8 Flash TTS",
+      "provider": "google",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      }
     }
   },
   "providers": {
@@ -11595,6 +11609,10 @@
     "arrow-2-telos": {
       "text.input": 6,
       "text.output": 30
+    },
+    "google_gemini_3_8_flash_tts": {
+      "text.input": 0.5,
+      "text.output": 9
     }
   }
 }
