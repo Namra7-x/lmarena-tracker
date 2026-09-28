@@ -9802,6 +9802,34 @@
           "nativeapps"
         ]
       }
+    },
+    "elevenlabs_eleven_v4": {
+      "displayName": "Eleven v4",
+      "provider": "elevenlabs",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      }
+    },
+    "elevenlabs_eleven_v4_turbo": {
+      "displayName": "Eleven v4 Turbo",
+      "provider": "elevenlabs",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      }
     }
   },
   "providers": {
@@ -11674,6 +11702,14 @@
     "claude-sonnet-5-5": {
       "text.input": 2,
       "text.output": 10
+    },
+    "elevenlabs_eleven_v4": {
+      "text.input": 100,
+      "text.output": 0
+    },
+    "elevenlabs_eleven_v4_turbo": {
+      "text.input": 50,
+      "text.output": 0
     }
   }
 }
