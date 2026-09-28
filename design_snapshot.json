@@ -9766,6 +9766,42 @@
           "tts"
         ]
       }
+    },
+    "claude-sonnet-5-5": {
+      "displayName": "Claude Sonnet 5.5",
+      "provider": "anthropic",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      }
     }
   },
   "providers": {
@@ -11634,6 +11670,10 @@
     "google_gemini_3_8_flash_tts": {
       "text.input": 0.5,
       "text.output": 9
+    },
+    "claude-sonnet-5-5": {
+      "text.input": 2,
+      "text.output": 10
     }
   }
 }
