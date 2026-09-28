@@ -4410,6 +4410,7 @@
       ],
       "arenas": {
         "agents": [
+          "agon_blender",
           "webapps"
         ]
       }
@@ -5920,6 +5921,7 @@
       ],
       "arenas": {
         "agents": [
+          "agon_blender",
           "agon_webapps",
           "fullstack",
           "mobileapps",
@@ -6736,6 +6738,7 @@
         "agents": [
           "agentic_3d",
           "agentic_gamedev",
+          "agon_blender",
           "agon_godot",
           "agon_slides",
           "agon_webapps",
@@ -9699,6 +9702,20 @@
         ]
       }
     },
+    "meshy-7.1": {
+      "displayName": "Meshy 7.1",
+      "provider": "meshy",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      }
+    },
     "grok-4.7": {
       "displayName": "Grok 4.7",
       "provider": "xai",
@@ -10064,7 +10081,8 @@
     "montreal": "montreal",
     "vermont": "vermont",
     "freya": "Freya",
-    "colorado": "colorado"
+    "colorado": "colorado",
+    "meshy": "Meshy"
   },
   "pricing": {
     "qwen3-coder-480b-a35b-instruct": {
