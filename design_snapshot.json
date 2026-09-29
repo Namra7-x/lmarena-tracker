@@ -9593,6 +9593,21 @@
         ]
       }
     },
+    "p-video-2-pro-cost": {
+      "displayName": "P-Video-2-Pro (Cost)",
+      "provider": "pruna",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "video"
+        ]
+      }
+    },
     "magpie-tts-multilingual": {
       "displayName": "Magpie TTS Multilingual",
       "provider": "nvidia",
@@ -11667,6 +11682,9 @@
     },
     "p-video-2-pro-quality": {
       "video.perSecond": 0.075
+    },
+    "p-video-2-pro-cost": {
+      "video.perSecond": 0.025
     },
     "york": {
       "image.perImage": 0.007
