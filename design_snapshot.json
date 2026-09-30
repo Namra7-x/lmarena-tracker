@@ -9845,6 +9845,34 @@
           "tts"
         ]
       }
+    },
+    "gpt-6.1-sol": {
+      "displayName": "GPT-6.1 Sol",
+      "provider": "openai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agon_godot",
+          "agon_webapps",
+          "fullstack"
+        ]
+      }
     }
   },
   "providers": {
@@ -11729,6 +11757,12 @@
     "elevenlabs_eleven_v4_turbo": {
       "text.input": 50,
       "text.output": 0
+    },
+    "gpt-6.1-sol": {
+      "text.input": 2,
+      "text.output": 10,
+      "text.cachedInput": 0.1,
+      "text.cacheWrite": 2.5
     }
   }
 }
