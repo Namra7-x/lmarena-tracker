@@ -9688,6 +9688,20 @@
         ]
       }
     },
+    "colorado": {
+      "displayName": "Ling-3.1-flash",
+      "provider": "antgroup",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "agents": [
+          "mobileapps"
+        ]
+      }
+    },
     "gpt-6-sol": {
       "displayName": "GPT-6 Sol",
       "provider": "openai",
@@ -9873,6 +9887,20 @@
         ]
       }
     },
+    "dragonfly": {
+      "displayName": "Ideogram 4.5 (High)",
+      "provider": "ideogram",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetoimage"
+        ]
+      }
+    },
     "gpt-6.1-sol": {
       "displayName": "GPT-6.1 Sol",
       "provider": "openai",
@@ -9898,6 +9926,20 @@
           "agon_godot",
           "agon_webapps",
           "fullstack"
+        ]
+      }
+    },
+    "ladybug": {
+      "displayName": "Ideogram 4.5 (Very Low)",
+      "provider": "ideogram",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetoimage"
         ]
       }
     }
@@ -10215,11 +10257,8 @@
     "montreal": "montreal",
     "vermont": "vermont",
     "freya": "Freya",
-    "colorado": "colorado",
     "meshy": "Meshy",
-    "dragonfly": "dragonfly",
-    "nevada": "nevada",
-    "ladybug": "ladybug"
+    "nevada": "nevada"
   },
   "pricing": {
     "qwen3-coder-480b-a35b-instruct": {
