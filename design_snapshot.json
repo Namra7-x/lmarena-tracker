@@ -9987,6 +9987,25 @@
           "imagetoimage"
         ]
       }
+    },
+    "nano-banana-2.1": {
+      "displayName": "Nano Banana 2.1",
+      "provider": "google",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "logo"
+        ]
+      }
     }
   },
   "providers": {
@@ -11896,6 +11915,9 @@
     },
     "flux-3-image-edit": {
       "image.perImage": 0.048
+    },
+    "nano-banana-2.1": {
+      "image.perImage": 0.08
     }
   }
 }
