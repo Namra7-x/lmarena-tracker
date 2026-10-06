@@ -9929,9 +9929,54 @@
         ]
       }
     },
+    "nevada": {
+      "displayName": "Ling-3.1-flash",
+      "provider": "antgroup",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz"
+        ]
+      }
+    },
     "ladybug": {
       "displayName": "Ideogram 4.5 (Very Low)",
       "provider": "ideogram",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetoimage"
+        ]
+      }
+    },
+    "flux-3-image": {
+      "displayName": "FLUX 3 Image",
+      "provider": "black_forest_labs",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "logo"
+        ]
+      }
+    },
+    "flux-3-image-edit": {
+      "displayName": "FLUX 3 Image Edit",
+      "provider": "black_forest_labs",
       "active": true,
       "openSource": false,
       "router": false,
@@ -10257,8 +10302,7 @@
     "montreal": "montreal",
     "vermont": "vermont",
     "freya": "Freya",
-    "meshy": "Meshy",
-    "nevada": "nevada"
+    "meshy": "Meshy"
   },
   "pricing": {
     "qwen3-coder-480b-a35b-instruct": {
@@ -11795,6 +11839,10 @@
       "text.input": 4,
       "text.output": 20
     },
+    "colorado": {
+      "text.input": 0.06,
+      "text.output": 0.18
+    },
     "gpt-6-sol": {
       "text.input": 2,
       "text.output": 10,
@@ -11837,6 +11885,16 @@
       "text.output": 10,
       "text.cachedInput": 0.1,
       "text.cacheWrite": 2.5
+    },
+    "nevada": {
+      "text.input": 0.06,
+      "text.output": 0.18
+    },
+    "flux-3-image": {
+      "image.perImage": 0.048
+    },
+    "flux-3-image-edit": {
+      "image.perImage": 0.048
     }
   }
 }
