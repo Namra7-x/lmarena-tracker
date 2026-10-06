@@ -10006,6 +10006,29 @@
           "logo"
         ]
       }
+    },
+    "mistral-large-4-0": {
+      "displayName": "Mistral Large 4",
+      "provider": "mistral",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -11919,6 +11942,10 @@
     },
     "nano-banana-2.1": {
       "image.perImage": 0.08
+    },
+    "mistral-large-4-0": {
+      "text.input": 0.68,
+      "text.output": 2.09
     }
   }
 }
