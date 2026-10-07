@@ -29,7 +29,7 @@ Primary engineering goals, in order:
 5. Keep the Git repository lightweight.
 6. Never advance a successful baseline from an incomplete or failed scan.
 7. Make every expensive operation bounded, observable and recoverable.
-8. Keep Discord compact, useful and visually easy to scan while retaining a complete downloadable report.
+8. Keep Telegram compact, useful and visually easy to scan while retaining a complete downloadable report.
 
 This is a static-analysis tracker. It must never execute downloaded vendor binaries, applications, installers or vendor scripts.
 
@@ -41,32 +41,11 @@ The tracker has two fundamentally different paths.
 
 ### Fast path — every minute
 
-Only perform cheap discovery and identity comparison.
-
-```
-Cloudflare repository_dispatch
-        |
-        +--> Arena / Design Arena remain independent
-        |
-        +--> ChatGPT job
-        +--> Gemini job
-        +--> Claude job
-```
-
 The Cloudflare Worker performs cheap version/identity checks every minute
 (npm, GitHub API, official pages). It calls repository_dispatch only when an
 identity change is detected. GitHub Actions never runs on quiet minutes.
 
-Each AI product job performs source discovery concurrently, builds identity state, and exits immediately if nothing meaningful changed.
-
-When unchanged:
-
-- no large artifact download,
-- no extraction,
-- no recursive scanning,
-- no native analysis,
-- no Discord message,
-- no unnecessary state churn.
+The Worker must not perform deep artifact downloads or static analysis.
 
 ### Deep path — only after a real change
 
@@ -79,7 +58,7 @@ identity change
     |
     +--> create scanId
     |
-    +--> immediate Discord alert when justified
+    +--> immediate Telegram alert when justified
     |
     +--> parallel artifact acquisition
     |
@@ -91,7 +70,7 @@ identity change
     |
     +--> complete/incomplete coverage decision
     |
-    +--> compact Discord completion message
+    +--> compact Telegram completion message
     |
     +--> full compressed Actions artifact
     |
@@ -207,7 +186,7 @@ identity == successful baseline
 Action:
 
 - stop,
-- no Discord,
+- no Telegram,
 - no large download,
 - no deep analysis.
 
@@ -219,7 +198,7 @@ Example:
 2.1.291 -> 2.1.292
 ```
 
-If the version/release identity is authoritative, send the immediate Discord change alert before expensive artifact analysis.
+If the version/release identity is authoritative, send the immediate Telegram change alert before expensive artifact analysis.
 
 ### C. Same-version distribution change
 
@@ -256,7 +235,7 @@ This prevents CDN URL swaps and mirror changes from creating false alarms.
 
 ---
 
-## 5. Scan identity and Discord correlation
+## 5. Scan identity and Telegram correlation
 
 Every real deep scan receives a unique `scanId`.
 
@@ -268,68 +247,155 @@ CX-20261007-004
 
 The same `scanId` appears in:
 
-- immediate Discord alert,
-- deep-analysis completion message,
+- immediate Telegram alert,
+- edited completion message,
 - report metadata,
 - raw artifact manifest,
 - state candidate,
 - logs.
 
-This is mandatory because CLI and desktop messages can interleave in one family channel.
+The preferred v1 behavior is one primary Telegram message per scan:
 
-Example:
+1. send the immediate alert,
+2. retain its `message_id`,
+3. after analysis, use `editMessageText` to turn that message into the completion/partial result,
+4. send `report.zip` separately with `sendDocument` when available.
 
-```
-🚨 CODEX CLI — NEW RELEASE
-Scan: CX-20261007-004
-        |
-        +--> 🔬 CODEX CLI — ANALYSIS COMPLETE
-             Scan: CX-20261007-004
-```
+This avoids unnecessary notification spam while preserving the scan ID.
+
+If an edit cannot represent the required result, a bounded follow-up message may be sent.
+
+CLI and desktop scans in the same family topic remain independent and are correlated by scanId.
 
 ---
 
 ## 6. Telegram presentation
 
-Notifications use Telegram sendMessage with parse_mode=HTML and an
-inline_keyboard of URL buttons.
+Notifications use Telegram `sendMessage` with `parse_mode=HTML` and an
+`inline_keyboard` of URL buttons.
 
-Limits: message text 4096 chars, document caption 1024 chars.
+Limits:
 
-Immediate alert:
+- message text: 4096 characters,
+- document caption: 1024 characters.
+
+### Immediate alert
+
+```
 🚨 CODEX CLI 0.160.1 → 0.160.2
 Scan: CX-20261007-004
 [Official Release]
+```
 
-Completion message (reply to the alert via reply_to_message_id):
+### Completion message
+
+Prefer editing the alert using `editMessageText`:
+
+```
 🔬 ANALYSIS COMPLETE · Scan CX-20261007-004
 12 commands · 7 flags · 5 config keys · 3 endpoints
 ⭐ High-confidence: codex resume, CODEX_EXPERIMENTAL_*
 Coverage: 100% ✓
 [Release] [Run logs]
-+ report.zip attached with sendDocument
+```
 
-If incomplete:
+Then attach:
+
+```
+📎 report.zip
+📎 findings.txt
+```
+
+### Many findings
+
+Never put thousands of strings into the message.
+
+Use:
+
+| Method | Use |
+|---|---|
+| Message text | Top 10–20 findings |
+| `<blockquote expandable>` | Top additional findings/excerpts; still counts toward 4096 |
+| `findings.txt` / `.md` | Complete list, potentially thousands of records |
+| `report.zip` | Complete structured/raw scan evidence |
+| Telegraph page | Optional readable browser view |
+
+Example:
+
+```
+🔬 CODEX CLI 0.160.2 · Scan CX-…-004
+12 commands · 7 flags · 5 config keys
+
+<blockquote expandable>
+NEW FLAGS
+--resume-last
+--no-telemetry
+... (30 more)
+</blockquote>
+
+📎 findings.txt (all 4,812 records)
+📎 report.zip
+```
+
+The expandable section is only an excerpt. The complete evidence remains in attachments.
+
+### Buttons
+
+Use inline URL buttons for:
+
+- Official Release
+- Release / Full Analysis destination when available
+- Run logs
+
+Do not require public report hosting for v1.
+
+### Incomplete scan
+
+```
 ⚠️ ANALYSIS PARTIAL · Coverage 87% · 3 artifacts failed
+```
 
 Never present an incomplete scan as complete.
-Message generation is deterministic and bounded.
+
+### Notification behavior
+
+- Real release/change: normal notification.
+- Low-priority source drift/diagnostic-only information: `disable_notification=true`.
+- Do not notify on unchanged minutes.
+- Optionally pin the latest release alert with `pinChatMessage` for each family topic.
+- Pinning is optional and should be rate/permission safe.
+
+### Optional v2 bot controls
+
+Because this is a personal bot, optional commands/buttons may support:
+
+- `/status`
+- `/rescan codex-cli`
+- `/mute 1h`
+
+These are explicitly out of v1's critical path.
+
+Message generation must be deterministic, HTML-escaped, length-bounded and safe from malformed user/vendor content.
+
 ---
 
 ## 7. Complete evidence vs compact presentation
 
-The tracker must preserve complete scan evidence without making Git or Discord huge.
+The tracker must preserve complete scan evidence without making Git or Telegram huge.
 
-### Discord
+### Telegram
 
 Show only:
 
 - high-value changes,
-- confidence-ranked findings,
+- confidence-ranked top findings,
 - counts,
 - coverage,
 - scan ID,
-- useful links.
+- compact expandable excerpts,
+- useful buttons.
+
+Complete findings are attachments, not message text.
 
 ### Git repository
 
@@ -351,7 +417,7 @@ Do NOT store:
 
 ### Actions artifacts
 
-Store the complete scan evidence as compressed, chunked artifacts:
+Store complete scan evidence as compressed, chunked artifacts:
 
 - raw extraction records,
 - normalized records,
@@ -394,7 +460,7 @@ Instead retain:
 - provenance,
 - confidence.
 
-No evidence is discarded merely because Discord does not display it.
+No evidence is discarded merely because Telegram does not display it.
 
 ---
 
@@ -982,7 +1048,7 @@ Cross-artifact agreement should increase confidence; one isolated string should 
 
 Raw analysis may produce millions of records.
 
-Discord must not.
+Telegram must not.
 
 Ranking should consider:
 
@@ -1007,9 +1073,11 @@ Artifacts: 6
 Confidence: HIGH
 ```
 
-not 43,221 Discord lines.
+not 43,221 Telegram lines.
 
-Discord output must be deterministic so the same scan does not produce random ordering.
+Discord/Telegram output must be deterministic so the same scan does not produce random ordering.
+
+For message output, select a bounded top-N (normally 10–20) plus a small expandable excerpt.
 
 ---
 
@@ -1025,6 +1093,7 @@ scan/
   findings.json
   coverage.json
   artifacts.json
+  findings.txt
   diff/
     new.sha256
     removed.sha256
@@ -1036,10 +1105,19 @@ scan/
 
 Use streaming/compressed files for very large record sets.
 
-Full report = report.zip, sent directly with sendDocument (limit 50 MB).
-If larger than 45 MB: split into parts or send summary.json only, and keep
-the full bundle as a GitHub Actions artifact (90 days max retention).
-No public report hosting is needed.
+Full report = `report.zip`, sent directly with Telegram `sendDocument` (limit 50 MB).
+
+If the bundle approaches the limit, target <=45 MB for safe delivery. If it exceeds 45 MB:
+
+1. split into logical parts and send multiple documents, or
+2. send `summary.json` + `findings.txt` in Telegram and retain the full bundle as a GitHub Actions artifact.
+
+GitHub Actions artifacts have a maximum retention of 90 days for the intended public-repository setup.
+
+No public report hosting is required.
+
+Optional: generate a Telegraph page for a human-readable Full Analysis view. Telegraph is supplementary only; `report.zip` remains the authoritative evidence.
+
 ---
 
 ## 31. Performance rules
@@ -1062,7 +1140,7 @@ Rules:
 12. Do not cache arbitrary vendor binaries indefinitely.
 13. Apply per-artifact timeouts.
 14. Prevent one huge artifact from blocking the entire scan.
-15. Generate Discord summary from structured results rather than rescanning raw data.
+15. Generate Telegram summary from structured results rather than rescanning raw data.
 16. Compress raw reports after analysis.
 17. Keep Git state small.
 18. Never trade correctness for a silent skip; every skip must be explicit.
@@ -1250,8 +1328,8 @@ ai-tracker/src/
     score.mjs
 
   report/
-    discord.mjs
-    markdown.mjs
+    telegram.mjs
+    telegraph.mjs
     json.mjs
     artifact-bundle.mjs
 
@@ -1322,14 +1400,22 @@ Required tests include:
 - partial scan does not advance required baseline,
 - concurrent Git update/rebase.
 
-Telegram:
+### Telegram
+
 - HTML escaping of values
 - 4096 / 1024 length limits
 - deterministic ranking
 - duplicate collapsing
-- 429 retry_after handling
-- reply threading by scanId
+- expandable-block excerpt generation
+- `editMessageText` completion update
+- `reply_to_message_id` fallback
+- 429 `retry_after` handling
+- `disable_notification` behavior
+- topic routing
+- scanId correlation
 - oversized report fallback
+- `sendDocument` handling
+- optional Telegraph generation
 
 ### Coverage
 
@@ -1348,12 +1434,12 @@ Use fixtures for integration tests. Live vendor downloads must not be required f
 
 The implementation is not considered complete unless all of the following are true:
 
-- unchanged minute runs are cheap and produce no Discord noise,
+- unchanged minutes send no Telegram message,
 - stable-channel selection is explicit,
 - source drift cannot trigger deep scans,
 - same-version distribution changes are verified before product alerts,
 - all six components have independent state,
-- all three families have independent Discord queues,
+- all three families route to the correct Telegram topic,
 - products run independently,
 - artifact analysis is bounded and parallel,
 - duplicate content is analyzed once,
@@ -1364,10 +1450,14 @@ The implementation is not considered complete unless all of the following are tr
 - stale state candidates cannot overwrite newer state,
 - Git remains compact,
 - large evidence is retained outside normal Git state,
-- Telegram alerts are compact and actionable
-- immediate and completion messages share a scan ID
-- report.zip is delivered in the chat
-- unchanged minutes send no message
+- Telegram alerts are compact and actionable,
+- immediate and completion results share a scan ID,
+- the preferred completion behavior edits the original alert,
+- top findings are visible without flooding the chat,
+- complete findings are delivered as `findings.txt` and/or `report.zip`,
+- report.zip is delivered in the chat when within limits,
+- oversized reports have an explicit fallback,
+- optional Telegraph is never required for correctness,
 - no downloaded vendor code is executed,
 - arbitrary artifact-discovered URLs are never fetched,
 - resource exhaustion cannot silently produce a "complete" scan.
