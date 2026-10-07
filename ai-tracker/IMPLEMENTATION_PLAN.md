@@ -8,13 +8,17 @@ Build a production-grade tracker for six independent components across three pro
 - Gemini / Antigravity: Antigravity CLI + Antigravity Desktop
 - Claude: Claude Code + Claude Desktop
 
-Each family has one Discord webhook:
+This tracker is for personal use only (single user).
+Notifications go through one Telegram bot.
 
-- ChatGPT/Codex -> `DISCORD_WEBHOOK_CHATGPT`
-- Gemini/Antigravity -> `DISCORD_WEBHOOK_GEMINI`
-- Claude -> `DISCORD_WEBHOOK_CLAUDE`
+Secrets:
+- TELEGRAM_BOT_TOKEN
+- TELEGRAM_CHAT_ID
+- optional topic IDs (one Telegram group with topics):
+  TG_TOPIC_CHATGPT, TG_TOPIC_GEMINI, TG_TOPIC_CLAUDE
 
-CLI and desktop remain independent component states/scans even when they share a family webhook.
+CLI and desktop remain independent component states/scans
+even when they share a family topic.
 
 Primary engineering goals, in order:
 
@@ -48,6 +52,10 @@ Cloudflare repository_dispatch
         +--> Gemini job
         +--> Claude job
 ```
+
+The Cloudflare Worker performs cheap version/identity checks every minute
+(npm, GitHub API, official pages). It calls repository_dispatch only when an
+identity change is detected. GitHub Actions never runs on quiet minutes.
 
 Each AI product job performs source discovery concurrently, builds identity state, and exits immediately if nothing meaningful changed.
 
@@ -126,8 +134,9 @@ Required behavior:
 4. Within a changed component, downloads/extraction use a bounded worker pool.
 5. One failed source, artifact or extractor does not cancel unrelated work.
 6. One slow product cannot serialize another product.
-7. A shared family webhook must not block another family webhook.
-8. If CLI and desktop in the same family change together, both scans can proceed independently and both use the same family Discord queue.
+7. Telegram sends are sequential per chat, so no extra queue is needed.
+8. If CLI and desktop change together, both scans run independently and
+   both post to the same family topic, distinguished by scanId.
 
 ---
 
@@ -280,68 +289,31 @@ Scan: CX-20261007-004
 
 ---
 
-## 6. Discord presentation
+## 6. Telegram presentation
 
-Discord must be a compact index, not the raw data store.
+Notifications use Telegram sendMessage with parse_mode=HTML and an
+inline_keyboard of URL buttons.
 
-Use a Discord Embed plus clickable buttons.
+Limits: message text 4096 chars, document caption 1024 chars.
 
-Recommended visual structure:
-
-```
-🚨 CODEX CLI — NEW RELEASE
-0.160.1 -> 0.160.2
-
-🔎 ANALYSIS
-12  New commands
-7   New flags
-5   New config keys
-3   Endpoint changes
-2   MCP changes
-1   Experimental feature
-
-⭐ HIGH-CONFIDENCE
-• codex resume
-• CODEX_EXPERIMENTAL_*
-• new MCP capability
-• session protocol change
-
-📦 ARTIFACT COVERAGE
-Windows ✓
-macOS   ✓
-Linux   ✓
-
+Immediate alert:
+🚨 CODEX CLI 0.160.1 → 0.160.2
 Scan: CX-20261007-004
+[Official Release]
 
-[📊 Full Analysis] [📥 Download Report] [🔗 Official Release]
-```
+Completion message (reply to the alert via reply_to_message_id):
+🔬 ANALYSIS COMPLETE · Scan CX-20261007-004
+12 commands · 7 flags · 5 config keys · 3 endpoints
+⭐ High-confidence: codex resume, CODEX_EXPERIMENTAL_*
+Coverage: 100% ✓
+[Release] [Run logs]
++ report.zip attached with sendDocument
 
-Use Discord buttons for:
+If incomplete:
+⚠️ ANALYSIS PARTIAL · Coverage 87% · 3 artifacts failed
 
-- Full Analysis
-- Download Report
-- Official Release
-
-The Full Analysis and Download Report buttons must point to stable accessible report destinations. Do not point at a temporary URL that is expected to expire while the Discord message remains useful.
-
-If the scan is incomplete, the message must say so clearly:
-
-```
-⚠️ ANALYSIS PARTIALLY COMPLETE
-Coverage: 87%
-3 artifacts could not be completely analyzed.
-```
-
-Never present an incomplete scan as fully analyzed.
-
-Typical Discord flow:
-
-1. immediate change alert,
-2. one compact deep-analysis summary,
-3. one continuation only if genuinely necessary.
-
-Discord message generation must be deterministic and bounded.
-
+Never present an incomplete scan as complete.
+Message generation is deterministic and bounded.
 ---
 
 ## 7. Complete evidence vs compact presentation
@@ -850,9 +822,9 @@ Do not blindly retry permanent failures such as:
 - invalid checksum,
 - unsupported format.
 
-Discord 429 handling must honor server-provided retry information and use bounded backoff/jitter.
-
-One webhook queue must never block another family.
+Telegram 429 responses include parameters.retry_after.
+Wait that long, then retry with bounded attempts and jitter.
+Do not retry permanent errors (400 bad request, 403 bot blocked).
 
 ---
 
@@ -1064,16 +1036,10 @@ scan/
 
 Use streaming/compressed files for very large record sets.
 
-The Discord message should provide:
-
-- Full Analysis link,
-- Download Report link,
-- Official Release link.
-
-The full report is the authoritative evidence source; Discord is the concise human-readable index.
-
-Use GitHub Actions artifacts for short/medium-term large reports with explicit retention and size limits. Important long-lived information is promoted into compact Git state.
-
+Full report = report.zip, sent directly with sendDocument (limit 50 MB).
+If larger than 45 MB: split into parts or send summary.json only, and keep
+the full bundle as a GitHub Actions artifact (90 days max retention).
+No public report hosting is needed.
 ---
 
 ## 31. Performance rules
@@ -1356,17 +1322,14 @@ Required tests include:
 - partial scan does not advance required baseline,
 - concurrent Git update/rebase.
 
-### Discord
-
-- embed formatting,
-- button URLs,
-- message length limits,
-- deterministic ranking,
-- duplicate collapsing,
-- chunking,
-- 429 retry,
-- per-family queue isolation,
-- same scan ID across immediate/completion messages.
+Telegram:
+- HTML escaping of values
+- 4096 / 1024 length limits
+- deterministic ranking
+- duplicate collapsing
+- 429 retry_after handling
+- reply threading by scanId
+- oversized report fallback
 
 ### Coverage
 
@@ -1401,9 +1364,10 @@ The implementation is not considered complete unless all of the following are tr
 - stale state candidates cannot overwrite newer state,
 - Git remains compact,
 - large evidence is retained outside normal Git state,
-- Discord messages are compact, visual and actionable,
-- immediate and completion messages share a scan ID,
-- full reports are downloadable,
+- Telegram alerts are compact and actionable
+- immediate and completion messages share a scan ID
+- report.zip is delivered in the chat
+- unchanged minutes send no message
 - no downloaded vendor code is executed,
 - arbitrary artifact-discovered URLs are never fetched,
 - resource exhaustion cannot silently produce a "complete" scan.
@@ -1416,25 +1380,13 @@ Do not start with deep scanners.
 
 Implement in this order:
 
-1. fingerprint/state contract,
-2. source adapters and stable-channel selection,
-3. fast no-change path,
-4. change classification,
-5. isolated candidates + transactional persist,
-6. scan IDs and Discord queue/message contract,
-7. artifact acquisition + integrity,
-8. content-addressed deduplication,
-9. resource/timeout guards,
-10. streaming extraction,
-11. exact diff engine,
-12. structured diff,
-13. signal classification/correlation/scoring,
-14. report bundle generation,
-15. deep artifact scanners,
-16. coverage/partial-scan handling,
-17. performance tuning,
-18. full fixture/integration tests.
-
-The core invariant is:
-
-> **Fast when unchanged, parallel when changed, exhaustive when resources permit, explicit when anything is skipped, and never silently advance state from incomplete evidence.**
+1. fingerprint/state contract
+2. source adapters + stable-channel selection
+3. Worker fast path (dispatch only on change)
+4. change classification
+5. Telegram alert + scanId
+6. isolated candidates + persist
+7. acquisition + integrity + dedup
+8. extraction + exact diff + scoring
+9. report.zip + completion message
+10. deep scanners (ASAR, source maps, WASM, native)
