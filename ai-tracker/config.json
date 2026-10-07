@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "products": {
+    "chatgpt": {
+      "label": "ChatGPT / Codex",
+      "webhookEnv": "DISCORD_WEBHOOK_CHATGPT",
+      "sources": [
+        {
+          "id": "codex-github",
+          "type": "github_release",
+          "repo": "openai/codex",
+          "stable": true,
+          "includeSourceArchive": true
+        },
+        {
+          "id": "codex-npm",
+          "type": "npm",
+          "package": "@openai/codex"
+        },
+        {
+          "id": "chatgpt-desktop",
+          "type": "desktop_page",
+          "url": "https://chatgpt.com/download/",
+          "labels": ["Download ChatGPT for desktop", "Codex"]
+        },
+        {
+          "id": "codex-install-sh",
+          "type": "script",
+          "url": "https://chatgpt.com/codex/install.sh"
+        },
+        {
+          "id": "codex-install-ps1",
+          "type": "script",
+          "url": "https://chatgpt.com/codex/install.ps1"
+        }
+      ]
+    },
+    "gemini": {
+      "label": "Gemini / Antigravity",
+      "webhookEnv": "DISCORD_WEBHOOK_GEMINI",
+      "sources": [
+        {
+          "id": "antigravity-download",
+          "type": "desktop_page",
+          "url": "https://www.antigravity.google/download",
+          "labels": ["Antigravity 2.0", "Antigravity CLI", "Antigravity IDE"]
+        },
+        {
+          "id": "antigravity-install-sh",
+          "type": "script",
+          "url": "https://antigravity.google/cli/install.sh"
+        },
+        {
+          "id": "antigravity-install-ps1",
+          "type": "script",
+          "url": "https://antigravity.google/cli/install.ps1"
+        },
+        {
+          "id": "antigravity-install-cmd",
+          "type": "script",
+          "url": "https://antigravity.google/cli/install.cmd"
+        },
+        {
+          "id": "antigravity-cli-github",
+          "type": "github_release",
+          "repo": "google-antigravity/antigravity-cli",
+          "stable": true,
+          "includeSourceArchive": true,
+          "optional": true
+        }
+      ]
+    },
+    "claude": {
+      "label": "Claude",
+      "webhookEnv": "DISCORD_WEBHOOK_CLAUDE",
+      "sources": [
+        {
+          "id": "claude-code-github",
+          "type": "github_release",
+          "repo": "anthropics/claude-code",
+          "stable": true,
+          "includeSourceArchive": true
+        },
+        {
+          "id": "claude-code-npm",
+          "type": "npm",
+          "package": "@anthropic-ai/claude-code"
+        },
+        {
+          "id": "claude-desktop",
+          "type": "desktop_page",
+          "url": "https://claude.com/download",
+          "labels": ["Desktop", "Claude Code"]
+        }
+      ]
+    }
+  }
+}
