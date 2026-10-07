@@ -1322,7 +1322,7 @@
     "gamma": {
       "displayName": "Gamma",
       "provider": "gamma",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -10029,6 +10029,43 @@
           "website"
         ]
       }
+    },
+    "mistral-large-4-0-high": {
+      "displayName": "Mistral Large 4 (High)",
+      "provider": "mistral",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
+    },
+    "gamma-5": {
+      "displayName": "Gamma 5",
+      "provider": "gamma",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "slides"
+        ]
+      }
     }
   },
   "providers": {
@@ -11950,6 +11987,10 @@
       "image.perImage": 0.08
     },
     "mistral-large-4-0": {
+      "text.input": 0.68,
+      "text.output": 2.09
+    },
+    "mistral-large-4-0-high": {
       "text.input": 0.68,
       "text.output": 2.09
     }
