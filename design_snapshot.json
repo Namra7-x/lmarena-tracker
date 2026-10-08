@@ -10089,6 +10089,26 @@
           "website"
         ]
       }
+    },
+    "solar-mini4": {
+      "displayName": "Solar Mini 4",
+      "provider": "upstage",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -12020,6 +12040,10 @@
     "claude-haiku-5-5": {
       "text.input": 0.1,
       "text.output": 0.5
+    },
+    "solar-mini4": {
+      "text.input": 0.1,
+      "text.output": 0.4
     }
   }
 }
