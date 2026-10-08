@@ -10066,6 +10066,29 @@
           "slides"
         ]
       }
+    },
+    "claude-haiku-5-5": {
+      "displayName": "Claude Haiku 5.5",
+      "provider": "anthropic",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -11993,6 +12016,10 @@
     "mistral-large-4-0-high": {
       "text.input": 0.68,
       "text.output": 2.09
+    },
+    "claude-haiku-5-5": {
+      "text.input": 0.1,
+      "text.output": 0.5
     }
   }
 }
