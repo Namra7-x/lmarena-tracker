@@ -25,7 +25,10 @@ export const CATEGORY_SOURCES = [
   { name: 'code_image_to_webdev', url: 'https://arena.ai/leaderboard/code/image-to-webdev', minModels: 10 },
 
   { name: 'text_to_image', url: 'https://arena.ai/leaderboard/text-to-image', minModels: 5 },
-  { name: 'image_edit', url: 'https://arena.ai/leaderboard/image-edit', minModels: 5 },
+  { name: 'image_edit', url: 'https://arena.ai/leaderboard/image-edit/single-image-edit', minModels: 5 },
+  { name: 'image_edit_multi', url: 'https://arena.ai/leaderboard/image/image-edit/multi-image', minModels: 10 },
+  { name: 'image_edit_art', url: 'https://arena.ai/leaderboard/image-edit/art', minModels: 10 },
+  { name: 'image_edit_commercial', url: 'https://arena.ai/leaderboard/image/image-edit/multi-image-commercial-design', minModels: 10 },
   { name: 'text_to_video', url: 'https://arena.ai/leaderboard/text-to-video', minModels: 5 },
   { name: 'image_to_video', url: 'https://arena.ai/leaderboard/image-to-video', minModels: 5 },
   { name: 'video_edit', url: 'https://arena.ai/leaderboard/video-edit', minModels: 5 },
@@ -258,7 +261,22 @@ async function fetchCategory(source, previousForSource = null) {
         if (!hasArenaModelPayload(html)) {
           lastError = 'no recognizable Arena model payload';
         } else {
-          const raw = parseModelsFromHtml(html);
+          let raw;
+          try {
+            raw = parseModelsFromHtml(html);
+          } catch (parseError) {
+            // Keep a compact clue in Actions logs so new Arena payload schemas can
+            // be reverse-engineered without dumping entire page HTML.
+            const markers = ['modelKey', 'modelDisplayName', 'contenders/', 'netImprovement',
+              'confirmedSuccess', 'sessions', 'initialModels', 'rankByModality'];
+            const clues = markers.map((marker) => {
+              const index = html.indexOf(marker);
+              return index < 0 ? marker + '=absent' :
+                marker + '@' + index + ':' + html.slice(Math.max(0, index - 70), index + 180).replace(/\\s+/g, ' ');
+            });
+            lastError = (parseError?.message || String(parseError)) + '; payload clues: ' + clues.join(' | ');
+            continue;
+          }
           const models = normalizeCategoryModels(raw);
           const count = Object.keys(models).length;
           const previousCount = Object.keys(previousForSource || {}).length;
