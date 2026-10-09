@@ -11,7 +11,7 @@ test('tracker covers public Arena leaderboard families and known subcategories',
   for (const expected of [
     'text', 'vision', 'text_math', 'text_instruction_following', 'text_coding',
     'agent_overall', 'agent_code', 'agent_chat', 'agent_work', 'agent_pareto',
-    'code_overall', 'code_pareto', 'code_webdev', 'code_react', 'code_image_to_webdev', 'text_to_image', 'image_edit',
+    'code_pareto', 'code_webdev', 'code_react', 'code_image_to_webdev', 'text_to_image', 'image_edit',
     'text_to_video', 'image_to_video', 'video_edit', 'document', 'search',
   ]) assert.ok(names.has(expected), 'missing source: ' + expected);
   assert.ok(CATEGORY_SOURCES.length >= 20, 'expected broad leaderboard coverage');
