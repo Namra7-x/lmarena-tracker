@@ -3,7 +3,7 @@ name: Probe Arena source coverage
 on:
   push:
     branches:
-      - investigate/arena-source-coverage-v2
+      - investigate/arena-source-coverage-v3
 
 permissions:
   contents: read
@@ -126,4 +126,35 @@ jobs:
                           "organization": m.get("organization"),
                           "userSelectable": m.get("userSelectable")
                       }, ensure_ascii=False))
+
+          for label in ("arena-text-direct", "arena-text-board", "arena-vision-board", "arena-leaderboard"):
+              path = f"/tmp/arena-source-probe/{label}.html"
+              if not os.path.exists(path): continue
+              decoded = decode(path)
+              if label == "arena-text-direct":
+                  models = extract_array(decoded) or []
+                  print("SELECTOR_SAMPLE " + json.dumps([
+                      {"publicName": m.get("publicName"), "displayName": m.get("displayName"),
+                       "organization": m.get("organization"), "userSelectable": m.get("userSelectable")}
+                      for m in models[:25] if isinstance(m, dict)
+                  ], ensure_ascii=False))
+              else:
+                  rows = re.findall(r'"modelKey"\s*:\s*"([^"]+)".{0,500}?"modelDisplayName"\s*:\s*"([^"]+)"', decoded, re.S)
+                  print(f"BOARD_NAMES {label} | rows={len(rows)} | unique_keys={len(set(k for k, _ in rows))} | sample=" +
+                        json.dumps(rows[:15], ensure_ascii=False))
+          direct_path = "/tmp/arena-source-probe/arena-text-direct.html"
+          board_path = "/tmp/arena-source-probe/arena-leaderboard.html"
+          if os.path.exists(direct_path) and os.path.exists(board_path):
+              direct = extract_array(decode(direct_path)) or []
+              board_text = decode(board_path)
+              board_rows = re.findall(r'"modelKey"\s*:\s*"([^"]+)".{0,500}?"modelDisplayName"\s*:\s*"([^"]+)"', board_text, re.S)
+              board_names = {n.strip().lower() for _, n in board_rows}
+              selector_names = []
+              for m in direct:
+                  if not isinstance(m, dict): continue
+                  name = str(m.get("displayName") or m.get("publicName") or "").strip()
+                  if name and name.lower() not in board_names:
+                      selector_names.append(name)
+              print("SELECTOR_NAME_NOT_EXACTLY_ON_OVERVIEW_BOARD count=" + str(len(set(selector_names))) +
+                    " sample=" + json.dumps(sorted(set(selector_names))[:60], ensure_ascii=False))
           PY
