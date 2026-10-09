@@ -18,7 +18,7 @@ test('normalizes category records around stable modelKey IDs', () => {
   assert.equal(result['contenders/model-agent'].rank, 4);
 });
 
-test('reports category-only new IDs while suppressing IDs already present in overview', () => {
+test('reports all new IDs on a category; cross-source context must not suppress tracking', () => {
   const previous = {
     'known-model': { modelKey: 'known-model', displayName: 'Known Model' },
   };
@@ -28,8 +28,8 @@ test('reports category-only new IDs while suppressing IDs already present in ove
     'category-only-model': { modelKey: 'category-only-model', displayName: 'Category Only Model' },
   };
 
-  const result = diffCategoryModels(previous, current, new Set(['overview-model']));
-  assert.deepEqual(result.added.map((model) => model.modelKey), ['category-only-model']);
+  const result = diffCategoryModels(previous, current);
+  assert.deepEqual(result.added.map((model) => model.modelKey), ['overview-model', 'category-only-model']);
   assert.equal(result.mappingChanged.length, 0);
 });
 
