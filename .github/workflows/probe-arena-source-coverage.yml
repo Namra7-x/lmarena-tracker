@@ -49,7 +49,7 @@ jobs:
 
             decoded="/tmp/arena-source-probe/${label}.decoded.html"
             sed 's/\\\"/"/g' "$file" > "$decoded"
-            unique_keys="$(grep -aoE '"modelKey"[[:space:]]*:[[:space:]]*"[^"]+"' "$decoded" 2>/dev/null |
+            unique_keys="$((grep -aoE '"modelKey"[[:space:]]*:[[:space:]]*"[^"]+"' "$decoded" 2>/dev/null || true) |
               sed -E 's/.*"modelKey"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/' |
               sort -u | wc -l | tr -d '[:space:]')"
 
