@@ -3,7 +3,7 @@ name: Probe Arena source coverage
 on:
   push:
     branches:
-      - investigate/arena-source-coverage
+      - investigate/arena-source-coverage-v2
 
 permissions:
   contents: read
