@@ -22,7 +22,6 @@ export const CATEGORY_SOURCES = [
   { name: 'agent_work', url: 'https://arena.ai/leaderboard/agent/work', minModels: 20 },
   { name: 'agent_pareto', url: 'https://arena.ai/leaderboard/agent/pareto', minModels: 10 },
 
-  { name: 'code_overall', url: 'https://arena.ai/leaderboard/code', minModels: 20 },
   { name: 'code_pareto', url: 'https://arena.ai/leaderboard/code/pareto', minModels: 10 },
   { name: 'code_webdev', url: 'https://arena.ai/leaderboard/code/webdev', minModels: 20 },
   { name: 'code_react', url: 'https://arena.ai/leaderboard/code/react', minModels: 20 },
