@@ -48,6 +48,7 @@ test('normalization keeps rank, score, vote counts, and public metadata', () => 
     ratingLower: null,
     votes: 901,
     rankByModality: {},
+    metrics: {},
     metadata: {
       contextLength: 131072,
       inputCapabilities: { image: true, text: true },
@@ -115,6 +116,25 @@ test('small rank and score changes do not create noisy alerts', () => {
   };
   const diff = diffCategoryModels(previous, current);
   assert.equal(diff.metricChanged.length, 0);
+});
+
+
+test('agent metrics are tracked with thresholds instead of noisy exact metadata diffs', () => {
+  const previous = {
+    agent: {
+      modelKey: 'agent', displayName: 'Agent', rank: 1, rating: 0.12, votes: 1000,
+      rankByModality: {}, metrics: { netImprovement: 0.12, costPerTaskP50: 1.00 }, metadata: {},
+    },
+  };
+  const current = {
+    agent: {
+      modelKey: 'agent', displayName: 'Agent', rank: 1, rating: 0.12, votes: 1200,
+      rankByModality: {}, metrics: { netImprovement: 0.122, costPerTaskP50: 1.20 }, metadata: {},
+    },
+  };
+  const diff = diffCategoryModels(previous, current);
+  assert.equal(diff.metricChanged.length, 1);
+  assert.deepEqual(diff.metricChanged[0].changes.map((change) => change.field), ['metrics.costPerTaskP50']);
 });
 
 test('existing snapshots migrate without a one-time metadata alert', () => {
