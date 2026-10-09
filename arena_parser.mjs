@@ -35,8 +35,12 @@ function extractJsonArray(text, key = '"initialModels":') {
   const idx = text.indexOf(key);
   if (idx === -1) return null;
 
-  const start = text.indexOf('[', idx + key.length);
-  if (start === -1) return null;
+  // Do not search ahead for a later array: Next.js can serialize
+  // initialModels as "$undefined" on pages that do not carry a model registry.
+  // Searching ahead could accidentally parse an unrelated component array.
+  let start = idx + key.length;
+  while (start < text.length && /\s/.test(text[start])) start++;
+  if (text[start] !== '[') return null;
 
   let depth = 0;
   let inString = false;
