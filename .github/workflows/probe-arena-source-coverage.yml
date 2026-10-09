@@ -1,0 +1,75 @@
+name: Probe Arena source coverage
+
+on:
+  push:
+    branches:
+      - investigate/arena-source-coverage
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Fetch public page variants and count model-data markers
+        shell: bash
+        run: |
+          set -u
+          mkdir -p /tmp/arena-source-probe
+
+          count() {
+            grep -ao "$1" "$2" 2>/dev/null | wc -l | tr -d '[:space:]'
+          }
+
+          while IFS='|' read -r label url; do
+            file="/tmp/arena-source-probe/${label}.html"
+            headers="/tmp/arena-source-probe/${label}.headers"
+
+            meta="$(curl -L --compressed -sS --max-time 35 \
+              -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131 Safari/537.36' \
+              -H 'Cache-Control: no-cache' \
+              -D "$headers" -o "$file" \
+              -w '%{http_code}|%{url_effective}|%{size_download}' \
+              "$url" 2>/tmp/arena-curl-error)" || {
+                echo "SOURCE ${label} | CURL_ERROR | $(tr '\n' ' ' </tmp/arena-curl-error)"
+                continue
+              }
+
+            bytes="$(wc -c < "$file" | tr -d '[:space:]')"
+            keys="$(count modelKey "$file")"
+            displays="$(count modelDisplayName "$file")"
+            initial="$(count initialModels "$file")"
+            initial_state="$(count initialState "$file")"
+            public_names="$(count publicName "$file")"
+            display_names="$(count displayName "$file")"
+            selectable="$(count userSelectable "$file")"
+            next_flight="$(count 'self.__next_f.push' "$file")"
+
+            decoded="/tmp/arena-source-probe/${label}.decoded.html"
+            sed 's/\\\"/"/g' "$file" > "$decoded"
+            unique_keys="$(grep -aoE '"modelKey"[[:space:]]*:[[:space:]]*"[^"]+"' "$decoded" 2>/dev/null |
+              sed -E 's/.*"modelKey"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/' |
+              sort -u | wc -l | tr -d '[:space:]')"
+
+            echo "SOURCE ${label} | meta=${meta} | bytes=${bytes} | modelKey=${keys} | unique_modelKey=${unique_keys} | modelDisplayName=${displays} | initialModels=${initial} | initialState=${initial_state} | publicName=${public_names} | displayName=${display_names} | userSelectable=${selectable} | next_flight=${next_flight}"
+
+            if [[ "$keys" != "0" || "$initial" != "0" || "$initial_state" != "0" || "$public_names" != "0" ]]; then
+              echo "SAMPLE ${label}"
+              grep -aoE '.{0,30}(modelKey|modelDisplayName|initialModels|initialState|publicName|userSelectable).{0,100}' "$file" |
+                head -3 || true
+            fi
+          done <<'URLS'
+          canary-root|https://canaryarena.ai/
+          canary-direct|https://canaryarena.ai/direct
+          arena-root|https://arena.ai/
+          arena-text-direct|https://arena.ai/text/direct
+          arena-text-sbs|https://arena.ai/text/side-by-side
+          arena-sbs|https://arena.ai/side-by-side
+          arena-leaderboard|https://arena.ai/leaderboard
+          arena-text-board|https://arena.ai/leaderboard/text
+          arena-code-board|https://arena.ai/leaderboard/code
+          arena-vision-board|https://arena.ai/leaderboard/vision
+          arena-agent-board|https://arena.ai/leaderboard/agent
+          URLS
