@@ -4653,7 +4653,7 @@
     "resemble": {
       "displayName": "Resemble AI",
       "provider": "resemble",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -8792,7 +8792,7 @@
     "greenleaf": {
       "displayName": "p-image-ideogram (very high)",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -8917,7 +8917,7 @@
     "deca-2.6-ultra": {
       "displayName": "Deca 2.6 Ultra",
       "provider": "genlabs",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9208,7 +9208,7 @@
     "caffeine": {
       "displayName": "p-video-edit",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9336,7 +9336,7 @@
     "decaf": {
       "displayName": "p-video-edit (draft)",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9499,7 +9499,7 @@
     "p-video-2": {
       "displayName": "P-Video 2",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9514,7 +9514,7 @@
     "p-video-2-draft": {
       "displayName": "P-Video 2 Draft",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9566,7 +9566,7 @@
     "p-video-2-pro-speed": {
       "displayName": "P-Video-2-Pro (Speed)",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9581,7 +9581,7 @@
     "p-video-2-pro-quality": {
       "displayName": "P-Video-2-Pro (Quality)",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9596,7 +9596,7 @@
     "p-video-2-pro-cost": {
       "displayName": "P-Video-2-Pro (Cost)",
       "provider": "pruna",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -9985,6 +9985,21 @@
       "arenas": {
         "models": [
           "imagetoimage"
+        ]
+      }
+    },
+    "new-mexico": {
+      "displayName": "Ling-3.1-flash",
+      "provider": "antgroup",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "gamedev",
+          "website"
         ]
       }
     },
@@ -10426,7 +10441,6 @@
     "freya": "Freya",
     "meshy": "Meshy",
     "salvador": "salvador",
-    "new-mexico": "new-mexico",
     "goldfish": "goldfish"
   },
   "pricing": {
@@ -12026,6 +12040,10 @@
     },
     "flux-3-image-edit": {
       "image.perImage": 0.048
+    },
+    "new-mexico": {
+      "text.input": 0.06,
+      "text.output": 0.18
     },
     "nano-banana-2.1": {
       "image.perImage": 0.08
