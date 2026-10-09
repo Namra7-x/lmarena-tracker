@@ -31,7 +31,9 @@ jobs:
           PID1=$!
           node design_tracker.mjs &
           PID2=$!
-          wait $PID1 $PID2
+          node selector_tracker.mjs &
+          PID3=$!
+          wait $PID1 $PID2 $PID3
 
       - name: Commit snapshots
         if: always()
@@ -39,6 +41,7 @@ jobs:
           git config user.name "arena-tracker-bot"
           git config user.email "actions@github.com"
           git add snapshot.json design_snapshot.json
+          if [ -f selector_snapshot.json ]; then git add selector_snapshot.json; fi
           if [ -f .arena_alert_state.json ]; then git add .arena_alert_state.json; fi
           if ! git diff --cached --quiet; then
             git commit -m "snapshot update"
