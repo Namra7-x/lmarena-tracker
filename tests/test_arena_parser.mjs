@@ -93,6 +93,27 @@ test('keeps compatibility with legacy initialModels arrays', () => {
   assert.equal(getSnapshotSchema(models), LEGACY_SCHEMA_ID);
 });
 
+
+test('does not mistake a later unrelated array for initialModels when it is undefined', () => {
+  const html = makeRscHtml({
+    initialModels: '$undefined',
+    unrelated: [{ id: 'not-a-model-registry', publicName: 'Fake component item' }],
+    agentPareto: {
+      entries: [{
+        modelKey: 'stealth-codename-example',
+        modelDisplayName: 'Stealth Candidate',
+        rank: 1,
+        votes: 12,
+      }],
+    },
+  });
+
+  const models = parseModelsFromHtml(html);
+  assert.deepEqual(Object.keys(models), ['stealth-codename-example']);
+  assert.equal(models['stealth-codename-example'].displayName, 'Stealth Candidate');
+  assert.equal(getSnapshotSchema(models), LEADERBOARD_SCHEMA_ID);
+});
+
 test('rejects HTML with no recognizable model records', () => {
   assert.throws(() => parseModelsFromHtml('<html><body>no model data</body></html>'), /No model records found/);
 });
