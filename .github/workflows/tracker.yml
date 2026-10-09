@@ -5,6 +5,7 @@ on:
       - snapshot.json
       - design_snapshot.json
       - selector_snapshot.json
+      - category_snapshot.json
       - .arena_alert_state.json
   repository_dispatch:
     types: [tracker]
