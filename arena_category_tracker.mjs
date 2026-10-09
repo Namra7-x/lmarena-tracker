@@ -49,6 +49,9 @@ const IDENTITY_FIELDS = new Set([
   'rank', 'rankUpper', 'rankLower', 'rating', 'ratingUpper', 'ratingLower',
   'votes', 'rankByModality', 'organization', 'organizationName', 'modelOrganization',
   'provider', 'providerName', '__sourceSchema', '__organizationAvailable',
+  'netImprovement', 'confirmedSuccess', 'praiseVsComplaint', 'steerability',
+  'bashRecovery', 'toolHallucination', 'sessions', 'costPerTaskP50',
+  'outputTokensPerTaskP50', 'inputPricePerMillion', 'outputPricePerMillion',
 ]);
 
 function isPlainObject(value) {
@@ -98,6 +101,14 @@ export function normalizeCategoryModels(rawModels) {
     if (!modelKey) continue;
     const displayName = String(raw.displayName || raw.modelDisplayName || raw.publicName || modelKey).trim();
     const metadata = {};
+    const metrics = {};
+    for (const field of [
+      'netImprovement', 'confirmedSuccess', 'praiseVsComplaint', 'steerability',
+      'bashRecovery', 'toolHallucination', 'costPerTaskP50',
+      'outputTokensPerTaskP50', 'inputPricePerMillion', 'outputPricePerMillion',
+    ]) {
+      if (Number.isFinite(raw[field])) metrics[field] = raw[field];
+    }
 
     for (const [field, value] of Object.entries(raw)) {
       if (IDENTITY_FIELDS.has(field) || field.startsWith('__')) continue;
@@ -117,6 +128,7 @@ export function normalizeCategoryModels(rawModels) {
       ratingLower: finiteOrNull(raw.ratingLower),
       votes: finiteOrNull(raw.votes),
       rankByModality: isPlainObject(raw.rankByModality) ? stableValue(raw.rankByModality) : {},
+      metrics,
       metadata,
     };
   }
@@ -167,6 +179,26 @@ function metricChanges(before, after) {
     const newRank = newModalities[modality];
     if (Number.isFinite(oldRank) && Number.isFinite(newRank) && Math.abs(newRank - oldRank) >= 3) {
       changes.push({ field: 'rankByModality.' + modality, before: oldRank, after: newRank });
+    }
+  }
+
+  // Agent rankings expose several dimensions besides the composite score.
+  // Ignore tiny percentage fluctuations and routine token/session growth.
+  if (isPlainObject(before.metrics) && isPlainObject(after.metrics)) {
+    const allMetrics = new Set([...Object.keys(before.metrics), ...Object.keys(after.metrics)]);
+    for (const field of allMetrics) {
+      const oldValue = before.metrics[field];
+      const newValue = after.metrics[field];
+      if (!Number.isFinite(oldValue) || !Number.isFinite(newValue)) continue;
+      let threshold = 0.005;
+      if (field === 'costPerTaskP50' || field.includes('PricePerMillion')) {
+        threshold = Math.max(0.01, Math.abs(oldValue) * 0.15);
+      } else if (field === 'outputTokensPerTaskP50') {
+        threshold = Math.max(1000, Math.abs(oldValue) * 0.15);
+      }
+      if (Math.abs(newValue - oldValue) >= threshold) {
+        changes.push({ field: 'metrics.' + field, before: oldValue, after: newValue });
+      }
     }
   }
 
