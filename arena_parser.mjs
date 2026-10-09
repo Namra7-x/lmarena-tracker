@@ -171,7 +171,7 @@ function normalizeLeaderboardRow(row) {
   if (!id) return null;
   const displayName = nonEmptyString(row.modelDisplayName) ||
     nonEmptyString(row.model) || nonEmptyString(row.displayName) || id;
-  const rawOrg = row.organization ?? row.organizationName ?? row.org;
+  const rawOrg = row.modelOrganization ?? row.organization ?? row.organizationName ?? row.org;
   const rawProvider = row.provider ?? row.providerName;
   const capabilities = isPlainObject(row.capabilities)
     ? row.capabilities
