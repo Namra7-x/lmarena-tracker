@@ -139,7 +139,10 @@ test('agent metrics are tracked with thresholds instead of noisy exact metadata 
 
 test('existing snapshots migrate without a one-time metadata alert', () => {
   const previous = {
-    model: { modelKey: 'model', displayName: 'Model', rank: 1, rating: 1500, votes: 10 },
+    model: {
+      modelKey: 'model', displayName: 'Model', rank: 1, rating: 1500, votes: 10,
+      metadata: { license: 'MIT', netImprovement: 0.12, sessions: 1000 },
+    },
   };
   const current = {
     model: {
