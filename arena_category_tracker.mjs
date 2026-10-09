@@ -311,7 +311,8 @@ async function fetchCategory(source, previousForSource = null) {
           } catch (parseError) {
             // Keep a compact clue in Actions logs so new Arena payload schemas can
             // be reverse-engineered without dumping entire page HTML.
-            const markers = ['modelKey', 'modelDisplayName', 'contenders/', 'netImprovement',
+            const markers = ['modelKey', 'modelDisplayName', 'contenderName', 'contenders/', 'modelId', 'modelName',
+              '"model"', 'displayName', 'rows', 'entries', 'rank', 'score', 'netImprovement',
               'confirmedSuccess', 'sessions', 'initialModels', 'rankByModality'];
             const clues = markers.map((marker) => {
               const index = html.indexOf(marker);
