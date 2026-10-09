@@ -38,6 +38,8 @@ const SNAPSHOT_FILE = process.env.CATEGORY_SNAPSHOT_FILE ||
   path.join(process.cwd(), 'category_snapshot.json');
 const OVERVIEW_SNAPSHOT_FILE = process.env.OVERVIEW_SNAPSHOT_FILE ||
   path.join(process.cwd(), 'snapshot.json');
+const SELECTOR_SNAPSHOT_FILE = process.env.SELECTOR_SNAPSHOT_FILE ||
+  path.join(process.cwd(), 'selector_snapshot.json');
 
 const IDENTITY_FIELDS = new Set([
   'id', 'modelKey', 'modelDisplayName', 'displayName', 'publicName', 'name',
