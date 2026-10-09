@@ -1,4 +1,11 @@
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - snapshot.json
+      - design_snapshot.json
+      - selector_snapshot.json
+      - .arena_alert_state.json
   repository_dispatch:
     types: [tracker]
   workflow_dispatch:
@@ -21,7 +28,7 @@ jobs:
           show-progress: false
 
       - name: Test Arena parser
-        run: node --test tests/test_arena_parser.mjs
+        run: node --test tests/test_arena_parser.mjs tests/test_selector_tracker.mjs
 
       - name: Run Trackers in Parallel
         env:
