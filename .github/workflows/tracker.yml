@@ -20,6 +20,9 @@ jobs:
           fetch-depth: 1
           show-progress: false
 
+      - name: Test Arena parser
+        run: node --test tests/test_arena_parser.mjs
+
       - name: Run Trackers in Parallel
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
