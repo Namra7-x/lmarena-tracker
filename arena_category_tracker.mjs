@@ -237,6 +237,10 @@ export function diffCategoryModels(previous, current) {
       const oldFields = new Set(Object.keys(old.metadata));
       const newFields = new Set(Object.keys(model.metadata));
       for (const field of new Set([...oldFields, ...newFields])) {
+        // Some fields were previously stored as metadata but are now
+        // promoted to normalized identity/metric fields. Ignore their removal
+        // during this schema migration instead of generating one alert per model.
+        if (oldFields.has(field) && !newFields.has(field) && IDENTITY_FIELDS.has(field)) continue;
         if (!oldFields.has(field) || !newFields.has(field) ||
             !sameValue(old.metadata[field], model.metadata[field])) {
           fields.push(field);
@@ -341,25 +345,40 @@ async function sendDiscord(title, description, url = 'https://arena.ai/leaderboa
     return;
   }
 
-  const response = await fetch(webhook, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      embeds: [{
-        title,
-        url,
-        description: description.slice(0, 3900),
-        color: 0xf1c40f,
-        timestamp: new Date().toISOString(),
-        footer: { text: 'Arena category leaderboards • public page data' },
-      }],
-    }),
-    signal: AbortSignal.timeout(10000),
-  });
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    const response = await fetch(webhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        embeds: [{
+          title,
+          url,
+          description: description.slice(0, 3900),
+          color: 0xf1c40f,
+          timestamp: new Date().toISOString(),
+          footer: { text: 'Arena category leaderboards • public page data' },
+        }],
+      }),
+      signal: AbortSignal.timeout(10000),
+    });
 
-  if (!response.ok) throw new Error('Discord webhook returned HTTP ' + response.status);
+    if (response.ok) return;
+    if (response.status !== 429 || attempt === 4) {
+      throw new Error('Discord webhook returned HTTP ' + response.status);
+    }
+
+    let retryAfter = Number(response.headers.get('Retry-After')) || 2;
+    try {
+      const data = await response.json();
+      retryAfter = Number(data.retry_after) || retryAfter;
+    } catch {
+      // Retry-After header is the fallback.
+    }
+    const waitMs = Math.min(Math.max(retryAfter * 1000 + 250, 1000), 10000);
+    console.warn('Discord rate limit hit; retrying in ' + waitMs + 'ms.');
+    await new Promise((resolve) => setTimeout(resolve, waitMs));
+  }
 }
-
 
 async function fetchWithConcurrency(sources, previousSnapshot, limit = 5) {
   const results = new Array(sources.length);
@@ -550,12 +569,29 @@ export async function runCategoryTracker() {
     await sendDiscord('🧭 Arena leaderboard coverage expanded', lines.join('\\n'));
   }
 
-  for (const { source, changes } of reports) {
-    await sendDiscord(
-      '🧭 Arena leaderboard changed: ' + source.name,
-      buildSourceMessage(source, changes, nextSnapshot, selectorSnapshot),
-      source.url
+  if (reports.length) {
+    // Batch changes by source into bounded Discord messages instead of firing
+    // one webhook per category. This reduces 429s when several pages update.
+    const sections = reports.map(({ source, changes }) =>
+      '**' + source.name + '**\\n' + buildSourceMessage(source, changes, nextSnapshot, selectorSnapshot)
     );
+    const chunks = [];
+    let chunk = '';
+    for (const section of sections) {
+      if (chunk && chunk.length + section.length + 10 > 3600) {
+        chunks.push(chunk);
+        chunk = '';
+      }
+      chunk += (chunk ? '\\n\\n---\\n\\n' : '') + section;
+    }
+    if (chunk) chunks.push(chunk);
+
+    for (let index = 0; index < chunks.length; index++) {
+      await sendDiscord(
+        '🧭 Arena leaderboard changes (' + (index + 1) + '/' + chunks.length + ')',
+        chunks[index]
+      );
+    }
   }
 
   saveJson(SNAPSHOT_FILE, nextSnapshot);
