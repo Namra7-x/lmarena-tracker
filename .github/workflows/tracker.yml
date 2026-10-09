@@ -28,7 +28,7 @@ jobs:
           show-progress: false
 
       - name: Test Arena parser
-        run: node --test tests/test_arena_parser.mjs tests/test_selector_tracker.mjs
+        run: node --test tests/test_arena_parser.mjs tests/test_selector_tracker.mjs tests/test_arena_category_tracker.mjs
 
       - name: Run Trackers in Parallel
         env:
