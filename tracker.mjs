@@ -14,11 +14,12 @@
 
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import { getSnapshotSchema, hasArenaModelPayload, parseModelsFromHtml } from './arena_parser.mjs';
 
 // ==============================================================================
 // Configuration
 // ==============================================================================
-const ARENA_URL = (process.env.ARENA_URL || 'https://canaryarena.ai/').trim();
+const ARENA_URL = (process.env.ARENA_URL || 'https://arena.ai/leaderboard').trim();
 const SNAPSHOT_FILE = 'snapshot.json';
 const ALERT_STATE_FILE = '.arena_alert_state.json';
 
@@ -157,6 +158,7 @@ function fmtRank(rankVal) {
 }
 
 function fmtSelectable(val) {
+  if (val === null || val === undefined) return 'ℹ️ Not exposed by leaderboard data';
   return val ? '✅ Yes (Selectable in Arena)' : '❌ No (Internal / Eval Only)';
 }
 
@@ -164,58 +166,6 @@ function fmtSelectable(val) {
 // ==============================================================================
 // Fast Fetch & Next.js Extraction
 // ==============================================================================
-const PUSH_RE = /self\.__next_f\.push\(\[1,"((?:\\.|[^"\\])*)"\]\)/gs;
-
-function decodeNextJsPayload(html) {
-  const parts = [];
-  let match;
-  while ((match = PUSH_RE.exec(html)) !== null) {
-    const raw = match[1];
-    try {
-      parts.push(JSON.parse(`"${raw}"`));
-    } catch {
-      parts.push(raw);
-    }
-  }
-  return parts.join('');
-}
-
-function extractJsonArray(text, key = '"initialModels":') {
-  const idx = text.indexOf(key);
-  if (idx === -1) return null;
-  const start = text.indexOf('[', idx);
-  if (start === -1) return null;
-
-  let depth = 0;
-  let inStr = false;
-  let escChar = false;
-
-  for (let i = start; i < text.length; i++) {
-    const c = text[i];
-    if (inStr) {
-      if (escChar) {
-        escChar = false;
-      } else if (c === '\\') {
-        escChar = true;
-      } else if (c === '"') {
-        inStr = false;
-      }
-    } else {
-      if (c === '"') {
-        inStr = true;
-      } else if (c === '[') {
-        depth++;
-      } else if (c === ']') {
-        depth--;
-        if (depth === 0) {
-          return text.slice(start, i + 1);
-        }
-      }
-    }
-  }
-  return null;
-}
-
 async function fetchArenaHtml() {
   const headers = {
     'User-Agent':
@@ -235,10 +185,10 @@ async function fetchArenaHtml() {
 
       if (res.ok) {
         const text = await res.text();
-        if (text.includes('initialModels')) {
+        if (hasArenaModelPayload(text)) {
           return text;
         }
-        lastErr = `HTTP ${res.status}, initialModels missing`;
+        lastErr = `HTTP ${res.status}, expected Arena model fields missing`;
       } else {
         lastErr = `HTTP ${res.status}`;
       }
@@ -254,27 +204,10 @@ async function fetchArenaHtml() {
   throw new Error(`Failed to fetch ${ARENA_URL} after 3 attempts: ${lastErr}`);
 }
 
-function parseModelsFromHtml(html) {
-  const decoded = decodeNextJsPayload(html);
-  const rawArray = extractJsonArray(decoded) || extractJsonArray(html);
-  if (!rawArray) {
-    throw new Error('initialModels array not found in arena page');
-  }
-  const models = JSON.parse(rawArray);
-  const map = {};
-  for (const m of models) {
-    if (m && typeof m === 'object' && typeof m.id === 'string') {
-      map[m.id] = m;
-    }
-  }
-  return map;
-}
-
-
 // ==============================================================================
 // Modality Health & Sanity Validation
 // ==============================================================================
-function checkModalityHealth(oldModels, newModels) {
+function checkModalityHealth(oldModels, newModels, schemaChanged = false) {
   if (!newModels || Object.keys(newModels).length === 0) {
     return { ok: false, reason: 'Empty model response (0 models)' };
   }
@@ -289,6 +222,16 @@ function checkModalityHealth(oldModels, newModels) {
 
   const oldCount = Object.keys(oldModels).length;
   const newCount = Object.keys(newModels).length;
+
+  // The old registry and the new leaderboard use different model identities
+  // and expose different metadata, so cross-schema count/modality comparisons
+  // are invalid. Require a reasonable extract size before migrating.
+  if (schemaChanged) {
+    if (newCount < 100) {
+      return { ok: false, reason: `Schema migration returned suspiciously few models (${newCount})` };
+    }
+    return { ok: true, reason: `Validated Arena schema migration (${newCount} unique model IDs)` };
+  }
 
   // 1. Overall count drop guard
   const minAllowed = Math.max(50, Math.floor(oldCount * 0.60));
@@ -325,9 +268,11 @@ async function getModels(oldModels) {
     try {
       const html = await fetchArenaHtml();
       const models = parseModelsFromHtml(html);
-      const health = checkModalityHealth(oldModels, models);
+      const schemaChanged = Boolean(oldModels) &&
+        getSnapshotSchema(oldModels) !== getSnapshotSchema(models);
+      const health = checkModalityHealth(oldModels, models, schemaChanged);
       if (health.ok) {
-        return { models, valid: true, statusMsg: 'OK' };
+        return { models, valid: true, statusMsg: health.reason, schemaChanged };
       }
       lastErr = health.reason;
       console.warn(`Extraction attempt ${attempt} incomplete: ${lastErr}. Retrying...`);
@@ -337,7 +282,7 @@ async function getModels(oldModels) {
       await new Promise((r) => setTimeout(r, 600));
     }
   }
-  return { models: {}, valid: false, statusMsg: lastErr };
+  return { models: {}, valid: false, statusMsg: lastErr, schemaChanged: false };
 }
 
 
@@ -486,7 +431,11 @@ function detectChanges(oldModels, newModels) {
     const org = String(m?.organization || '').trim();
     const pn = String(m?.publicName || '').trim();
 
-    if (!org) {
+    const organizationKnown = typeof m?.__organizationAvailable === 'boolean'
+      ? m.__organizationAvailable
+      : Object.prototype.hasOwnProperty.call(m || {}, 'organization');
+
+    if (!org && organizationKnown) {
       report.hidden_models.push(m);
     } else if (oldPublicNames.has(pn)) {
       report.variants.push(m);
@@ -554,7 +503,7 @@ function detectChanges(oldModels, newModels) {
 function buildDiscordEmbeds(report) {
   const embeds = [];
   const nowIso = new Date().toISOString();
-  const footer = { text: 'Canary Arena • canaryarena.ai' };
+  const footer = { text: 'Arena • arena.ai' };
 
   // 1. ✨ NEW MODEL LIVE (Includes Org, Provider, Rank, Caps, ID, Selectable)
   for (const m of report.new_models) {
@@ -892,7 +841,7 @@ async function sendDiscordText(text, color = COLORS.brand) {
         description: text,
         color,
         timestamp: nowIso,
-        footer: { text: 'Canary Arena • canaryarena.ai' },
+        footer: { text: 'Arena • arena.ai' },
       },
     ],
   });
@@ -905,7 +854,7 @@ async function sendDiscordText(text, color = COLORS.brand) {
 async function main() {
   const startTime = Date.now();
   const oldSnapshot = loadSnapshot();
-  const { models: newSnapshot, valid: isValid, statusMsg } = await getModels(oldSnapshot);
+  const { models: newSnapshot, valid: isValid, statusMsg, schemaChanged = false } = await getModels(oldSnapshot);
 
   const oldCount = oldSnapshot ? Object.keys(oldSnapshot).length : 0;
   const newCount = Object.keys(newSnapshot).length;
@@ -931,6 +880,27 @@ async function main() {
   if (alertState.broken_notified) {
     delete alertState.broken_notified;
     saveAlertState(alertState);
+  }
+
+  // The identifier format changed from registry UUIDs to public leaderboard
+  // keys. Avoid reporting unavoidable schema-wide ID churn as mass model
+  // additions/removals; establish the new baseline once instead.
+  if (oldSnapshot !== null && schemaChanged) {
+    saveSnapshot(newSnapshot);
+    for (const key of [
+      'pending_large_hash',
+      'pending_large_count',
+      'pending_added',
+      'pending_removed',
+    ]) delete alertState[key];
+    saveAlertState(alertState);
+
+    await sendDiscordText(
+      `🔄 **Arena Source Format Updated**\n\nThe tracker migrated its baseline from ${getSnapshotSchema(oldSnapshot)} to ${getSnapshotSchema(newSnapshot)} with ${newCount} model IDs.\n\nBecause the source now uses different IDs and fields, the first run is saved as a new baseline without mass addition/removal alerts. Normal change detection resumes on the next run.`,
+      COLORS.warning
+    );
+    console.log('Arena source schema migrated; baseline saved without false mass-change alerts.');
+    return;
   }
 
   // 2. Initial Run: Baseline initialization
