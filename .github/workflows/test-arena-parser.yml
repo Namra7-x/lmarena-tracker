@@ -21,6 +21,6 @@ jobs:
         with:
           node-version: 22
       - name: Check JavaScript syntax
-        run: node --check tracker.mjs && node --check arena_parser.mjs && node --check selector_tracker.mjs
+        run: node --check tracker.mjs && node --check arena_parser.mjs && node --check selector_tracker.mjs && node --check arena_category_tracker.mjs
       - name: Run regression tests
-        run: node --test tests/test_arena_parser.mjs tests/test_selector_tracker.mjs
+        run: node --test tests/test_arena_parser.mjs tests/test_selector_tracker.mjs tests/test_category_tracker.mjs
