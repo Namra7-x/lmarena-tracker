@@ -114,6 +114,50 @@ test('does not mistake a later unrelated array for initialModels when it is unde
   assert.equal(getSnapshotSchema(models), LEADERBOARD_SCHEMA_ID);
 });
 
+
+test('extracts Agent leaderboard contenderName/model rows and preserves agent metrics', () => {
+  const html = makeRscHtml({
+    agentRanking: {
+      modelCount: 2,
+      rows: [
+        {
+          rank: 1,
+          contenderName: 'contenders/claude-opus-5.5-high-vertex-agent',
+          model: 'Claude Opus 5.5 (High)',
+          modelOrganization: 'Anthropic',
+          license: 'Proprietary',
+          netImprovement: 0.1433,
+          confirmedSuccess: 0.1393,
+          sessions: 6103,
+          costPerTaskP50: 1.79,
+          outputTokensPerTaskP50: 29200,
+        },
+        {
+          rank: 2,
+          contenderName: 'contenders/gpt-6-astra-max-agent',
+          model: 'GPT 6 Astra (Max)',
+          modelOrganization: 'OpenAI',
+          netImprovement: 0.1309,
+          sessions: 12029,
+        },
+      ],
+    },
+    initialModels: '$undefined',
+  });
+
+  const models = parseModelsFromHtml(html);
+  const agent = models['contenders/claude-opus-5.5-high-vertex-agent'];
+  assert.ok(agent);
+  assert.equal(agent.displayName, 'Claude Opus 5.5 (High)');
+  assert.equal(agent.organization, 'Anthropic');
+  assert.equal(agent.rank, 1);
+  assert.equal(agent.rating, 0.1433);
+  assert.equal(agent.votes, 6103);
+  assert.equal(agent.netImprovement, 0.1433);
+  assert.equal(agent.costPerTaskP50, 1.79);
+  assert.equal(Object.keys(models).length, 2);
+});
+
 test('rejects HTML with no recognizable model records', () => {
   assert.throws(() => parseModelsFromHtml('<html><body>no model data</body></html>'), /No model records found/);
 });
