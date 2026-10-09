@@ -12,7 +12,8 @@ const LEGACY_SCHEMA = 'legacy-initialModels-v1';
 export function hasArenaModelPayload(html) {
   return typeof html === 'string' && (
     html.includes('initialModels') ||
-    (html.includes('modelKey') && html.includes('modelDisplayName'))
+    (html.includes('modelKey') && html.includes('modelDisplayName')) ||
+    (html.includes('contenderName') && html.includes('"model"'))
   );
 }
 
@@ -136,17 +137,20 @@ function extractLeaderboardRows(text) {
     if (length > 16000) continue;
 
     const candidate = text.slice(start, i + 1);
-    if (!candidate.includes('"modelKey"') ||
-        !candidate.includes('"modelDisplayName"')) continue;
+    const hasLeaderboardIdentity =
+      candidate.includes('"modelKey"') && candidate.includes('"modelDisplayName"');
+    const hasAgentIdentity =
+      candidate.includes('"contenderName"') && candidate.includes('"model"');
+    if (!hasLeaderboardIdentity && !hasAgentIdentity) continue;
 
     try {
       const row = JSON.parse(candidate);
       if (
         isPlainObject(row) &&
-        typeof row.modelKey === 'string' &&
-        row.modelKey.trim() &&
-        typeof row.modelDisplayName === 'string' &&
-        row.modelDisplayName.trim()
+        ((typeof row.modelKey === 'string' && row.modelKey.trim() &&
+          typeof row.modelDisplayName === 'string' && row.modelDisplayName.trim()) ||
+         (typeof row.contenderName === 'string' && row.contenderName.trim() &&
+          typeof row.model === 'string' && row.model.trim()))
       ) {
         rows.push(row);
       }
@@ -163,8 +167,10 @@ function nonEmptyString(value) {
 }
 
 function normalizeLeaderboardRow(row) {
-  const id = row.modelKey.trim();
-  const displayName = nonEmptyString(row.modelDisplayName) || id;
+  const id = nonEmptyString(row.modelKey) || nonEmptyString(row.contenderName) || nonEmptyString(row.id);
+  if (!id) return null;
+  const displayName = nonEmptyString(row.modelDisplayName) ||
+    nonEmptyString(row.model) || nonEmptyString(row.displayName) || id;
   const rawOrg = row.organization ?? row.organizationName ?? row.org;
   const rawProvider = row.provider ?? row.providerName;
   const capabilities = isPlainObject(row.capabilities)
@@ -189,6 +195,10 @@ function normalizeLeaderboardRow(row) {
     provider: typeof rawProvider === 'string' ? rawProvider : '',
     userSelectable: typeof row.userSelectable === 'boolean' ? row.userSelectable : null,
     rank: ranks.length ? Math.min(...ranks) : Number.MAX_SAFE_INTEGER,
+    rating: Number.isFinite(row.rating) ? row.rating :
+      (Number.isFinite(row.netImprovement) ? row.netImprovement : undefined),
+    votes: Number.isFinite(row.votes) ? row.votes :
+      (Number.isFinite(row.sessions) ? row.sessions : undefined),
     rankByModality: isPlainObject(row.rankByModality) ? { ...row.rankByModality } : {},
     capabilities,
     __sourceSchema: LEADERBOARD_SCHEMA,
@@ -261,6 +271,7 @@ export function parseModelsFromHtml(html) {
 
   for (const row of rows) {
     const normalized = normalizeLeaderboardRow(row);
+    if (!normalized) continue;
     models[normalized.id] = models[normalized.id]
       ? mergeDuplicate(models[normalized.id], normalized)
       : normalized;
