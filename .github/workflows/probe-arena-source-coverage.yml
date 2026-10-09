@@ -20,7 +20,7 @@ jobs:
           mkdir -p /tmp/arena-source-probe
 
           count() {
-            grep -ao "$1" "$2" 2>/dev/null | wc -l | tr -d '[:space:]'
+            (grep -ao "$1" "$2" 2>/dev/null || true) | wc -l | tr -d '[:space:]'
           }
 
           while IFS='|' read -r label url; do
