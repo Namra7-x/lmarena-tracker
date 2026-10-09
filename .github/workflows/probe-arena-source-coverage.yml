@@ -73,3 +73,57 @@ jobs:
           arena-vision-board|https://arena.ai/leaderboard/vision
           arena-agent-board|https://arena.ai/leaderboard/agent
           URLS
+
+          python3 - <<'PY'
+          import glob, json, os, re
+          def decode(path):
+              raw = open(path, encoding="utf-8", errors="replace").read()
+              parts = []
+              pat = re.compile(r'self\.__next_f\.push\(\[1,"((?:\\.|[^"\\])*)"\]\)', re.S)
+              for m in pat.finditer(raw):
+                  try: parts.append(json.loads('"' + m.group(1) + '"'))
+                  except Exception: pass
+              return "\n".join(parts)
+
+          def extract_array(text, key='"initialModels":'):
+              start_key = text.find(key)
+              if start_key < 0: return None
+              start = text.find("[", start_key + len(key))
+              if start < 0: return None
+              depth = 0
+              quoted = False
+              escaped = False
+              for i in range(start, len(text)):
+                  ch = text[i]
+                  if quoted:
+                      if escaped: escaped = False
+                      elif ch == "\\": escaped = True
+                      elif ch == '"': quoted = False
+                      continue
+                  if ch == '"': quoted = True
+                  elif ch == "[": depth += 1
+                  elif ch == "]":
+                      depth -= 1
+                      if depth == 0:
+                          try: return json.loads(text[start:i+1])
+                          except Exception: return None
+              return None
+
+          for path in sorted(glob.glob("/tmp/arena-source-probe/*.html")):
+              label = os.path.basename(path).replace(".html", "")
+              text = decode(path)
+              models = extract_array(text)
+              if isinstance(models, list) and models:
+                  true_count = sum(m.get("userSelectable") is True for m in models if isinstance(m, dict))
+                  false_count = sum(m.get("userSelectable") is False for m in models if isinstance(m, dict))
+                  unknown_count = sum(m.get("userSelectable") not in (True, False) for m in models if isinstance(m, dict))
+                  print(f"REGISTRY {label} | models={len(models)} | selectable_true={true_count} | selectable_false={false_count} | unknown={unknown_count}")
+                  hidden = [m for m in models if isinstance(m, dict) and m.get("userSelectable") is False]
+                  for m in hidden[:12]:
+                      print("HIDDEN_SAMPLE " + json.dumps({
+                          "id": m.get("id"), "publicName": m.get("publicName"),
+                          "displayName": m.get("displayName"),
+                          "organization": m.get("organization"),
+                          "userSelectable": m.get("userSelectable")
+                      }, ensure_ascii=False))
+          PY
