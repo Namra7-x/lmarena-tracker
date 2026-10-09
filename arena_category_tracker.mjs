@@ -20,9 +20,17 @@ export const CATEGORY_SOURCES = [
   { name: 'agent_code', url: 'https://arena.ai/leaderboard/agent/code', minModels: 20 },
   { name: 'agent_chat', url: 'https://arena.ai/leaderboard/agent/chat', minModels: 20 },
   { name: 'agent_work', url: 'https://arena.ai/leaderboard/agent/work', minModels: 20 },
+  { name: 'agent_pareto', url: 'https://arena.ai/leaderboard/agent/pareto', minModels: 10 },
 
+  { name: 'code_overall', url: 'https://arena.ai/leaderboard/code', minModels: 20 },
+  { name: 'code_pareto', url: 'https://arena.ai/leaderboard/code/pareto', minModels: 10 },
   { name: 'code_webdev', url: 'https://arena.ai/leaderboard/code/webdev', minModels: 20 },
+  { name: 'code_react', url: 'https://arena.ai/leaderboard/code/react', minModels: 20 },
+  { name: 'code_content_creation', url: 'https://arena.ai/leaderboard/code/content-creation-and-editing-tools', minModels: 20 },
+  { name: 'code_reference_design', url: 'https://arena.ai/leaderboard/code/webdev/reference-based-design', minModels: 20 },
+  { name: 'code_data_analytics', url: 'https://arena.ai/leaderboard/code/webdev/data-analytics', minModels: 20 },
   { name: 'code_image_to_webdev', url: 'https://arena.ai/leaderboard/code/image-to-webdev', minModels: 10 },
+  { name: 'image_to_code_overall', url: 'https://arena.ai/leaderboard/image-to-code/overall', minModels: 10 },
 
   { name: 'text_to_image', url: 'https://arena.ai/leaderboard/text-to-image', minModels: 5 },
   { name: 'image_edit', url: 'https://arena.ai/leaderboard/image-edit/single-image-edit', minModels: 5 },
