@@ -51,221 +51,133 @@ const OVERVIEW_SNAPSHOT_FILE = process.env.OVERVIEW_SNAPSHOT_FILE ||
 const SELECTOR_SNAPSHOT_FILE = process.env.SELECTOR_SNAPSHOT_FILE ||
   path.join(process.cwd(), 'selector_snapshot.json');
 
-const IDENTITY_FIELDS = new Set([
-  'id', 'modelKey', 'modelDisplayName', 'displayName', 'publicName', 'name',
-  'rank', 'rankUpper', 'rankLower', 'rating', 'ratingUpper', 'ratingLower',
-  'votes', 'rankByModality', 'organization', 'organizationName', 'modelOrganization',
-  'provider', 'providerName', '__sourceSchema', '__organizationAvailable',
-  'netImprovement', 'confirmedSuccess', 'praiseVsComplaint', 'steerability',
-  'bashRecovery', 'toolHallucination', 'sessions', 'costPerTaskP50',
-  'outputTokensPerTaskP50', 'inputPricePerMillion', 'outputPricePerMillion',
-]);
-
 function isPlainObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
-}
-
-function stableValue(value) {
-  if (Array.isArray(value)) {
-    const normalized = value.map(stableValue);
-    if (normalized.every((item) => item === null ||
-        ['string', 'number', 'boolean'].includes(typeof item))) {
-      return normalized.sort((a, b) => String(a).localeCompare(String(b)));
-    }
-    return normalized;
-  }
-  if (isPlainObject(value)) {
-    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableValue(value[key])]));
-  }
-  if (value === undefined || typeof value === 'function') return null;
-  return value;
-}
-
-function finiteOrNull(value) {
-  return Number.isFinite(value) && value < Number.MAX_SAFE_INTEGER ? value : null;
 }
 
 function normalizeText(value) {
   return String(value ?? '').trim().toLowerCase();
 }
 
-function isMeaningfulMetadata(value) {
-  if (value === undefined || typeof value === 'function') return false;
-  if (typeof value === 'string') return value.length <= 2000;
-  if (value === null || typeof value === 'number' || typeof value === 'boolean') return true;
-  if (Array.isArray(value)) return value.length <= 100;
-  if (isPlainObject(value)) return Object.keys(value).length <= 100;
-  return false;
-}
-
 export function normalizeCategoryModels(rawModels) {
-  const result = {};
+  const normalized = {};
 
   for (const [key, raw] of Object.entries(rawModels || {})) {
     if (!raw || typeof raw !== 'object') continue;
-
     const modelKey = String(raw.modelKey || raw.id || key || '').trim();
     if (!modelKey) continue;
-    const displayName = String(raw.displayName || raw.modelDisplayName || raw.publicName || modelKey).trim();
-    const metadata = {};
-    const metrics = {};
-    for (const field of [
-      'netImprovement', 'confirmedSuccess', 'praiseVsComplaint', 'steerability',
-      'bashRecovery', 'toolHallucination', 'costPerTaskP50',
-      'outputTokensPerTaskP50', 'inputPricePerMillion', 'outputPricePerMillion',
-    ]) {
-      if (Number.isFinite(raw[field])) metrics[field] = raw[field];
-    }
 
-    for (const [field, value] of Object.entries(raw)) {
-      if (IDENTITY_FIELDS.has(field) || field.startsWith('__')) continue;
-      if (isMeaningfulMetadata(value)) metadata[field] = stableValue(value);
-    }
-
-    result[modelKey] = {
+    normalized[modelKey] = {
       modelKey,
-      displayName,
+      displayName: String(raw.displayName || raw.modelDisplayName || raw.publicName || modelKey).trim(),
+      publicName: String(raw.publicName || '').trim(),
       organization: String(raw.modelOrganization || raw.organization || raw.organizationName || '').trim(),
       provider: String(raw.provider || raw.providerName || '').trim(),
-      rank: finiteOrNull(raw.rank),
-      rankUpper: finiteOrNull(raw.rankUpper),
-      rankLower: finiteOrNull(raw.rankLower),
-      rating: finiteOrNull(raw.rating),
-      ratingUpper: finiteOrNull(raw.ratingUpper),
-      ratingLower: finiteOrNull(raw.ratingLower),
-      votes: finiteOrNull(raw.votes),
-      rankByModality: isPlainObject(raw.rankByModality) ? stableValue(raw.rankByModality) : {},
-      metrics,
-      metadata,
+      userSelectable: typeof raw.userSelectable === 'boolean' ? raw.userSelectable : null,
     };
   }
 
-  return Object.fromEntries(Object.entries(result).sort(([a], [b]) => a.localeCompare(b)));
+  return Object.fromEntries(Object.entries(normalized).sort(([a], [b]) => a.localeCompare(b)));
 }
 
-function sameValue(left, right) {
-  return JSON.stringify(stableValue(left)) === JSON.stringify(stableValue(right));
-}
-
-function scoreThreshold(value) {
-  // Agent rankings use fraction-like scores; text rankings use Elo-like scores.
-  return Math.abs(value) < 1 ? 0.005 : 3;
-}
-
-function metricChanges(before, after) {
-  const changes = [];
-
-  for (const field of ['rank', 'rankUpper', 'rankLower']) {
-    const oldValue = before[field];
-    const newValue = after[field];
-    if (Number.isFinite(oldValue) && Number.isFinite(newValue) &&
-        Math.abs(newValue - oldValue) >= 3) {
-      changes.push({ field, before: oldValue, after: newValue });
-    }
-  }
-
-  if (Number.isFinite(before.rating) && Number.isFinite(after.rating)) {
-    const delta = after.rating - before.rating;
-    if (Math.abs(delta) >= scoreThreshold(before.rating)) {
-      changes.push({ field: 'rating', before: before.rating, after: after.rating });
-    }
-  }
-
-  // Counts usually rise on every poll; alert only on a material decrease.
-  if (Number.isFinite(before.votes) && Number.isFinite(after.votes) && after.votes < before.votes) {
-    const drop = before.votes - after.votes;
-    if (drop >= Math.max(100, before.votes * 0.15)) {
-      changes.push({ field: 'votes decreased', before: before.votes, after: after.votes });
-    }
-  }
-
-  const oldModalities = before.rankByModality || {};
-  const newModalities = after.rankByModality || {};
-  for (const modality of new Set([...Object.keys(oldModalities), ...Object.keys(newModalities)])) {
-    const oldRank = oldModalities[modality];
-    const newRank = newModalities[modality];
-    if (Number.isFinite(oldRank) && Number.isFinite(newRank) && Math.abs(newRank - oldRank) >= 3) {
-      changes.push({ field: 'rankByModality.' + modality, before: oldRank, after: newRank });
-    }
-  }
-
-  // Agent rankings expose several dimensions besides the composite score.
-  // Ignore tiny percentage fluctuations and routine token/session growth.
-  if (isPlainObject(before.metrics) && isPlainObject(after.metrics)) {
-    const allMetrics = new Set([...Object.keys(before.metrics), ...Object.keys(after.metrics)]);
-    for (const field of allMetrics) {
-      const oldValue = before.metrics[field];
-      const newValue = after.metrics[field];
-      if (!Number.isFinite(oldValue) || !Number.isFinite(newValue)) continue;
-      let threshold = 0.005;
-      if (field === 'costPerTaskP50' || field.includes('PricePerMillion')) {
-        threshold = Math.max(0.01, Math.abs(oldValue) * 0.15);
-      } else if (field === 'outputTokensPerTaskP50') {
-        threshold = Math.max(1000, Math.abs(oldValue) * 0.15);
-      }
-      if (Math.abs(newValue - oldValue) >= threshold) {
-        changes.push({ field: 'metrics.' + field, before: oldValue, after: newValue });
-      }
-    }
-  }
-
-  return changes;
-}
-
+// Only new IDs are model-discovery events. Rank/score/vote/metadata changes,
+// name-only changes and disappeared records are intentionally ignored.
 export function diffCategoryModels(previous, current) {
   const oldModels = previous || {};
   const newModels = current || {};
   const added = [];
-  const removed = [];
-  const mappingChanged = [];
-  const metadataChanged = [];
-  const metricChanged = [];
 
   for (const [modelKey, model] of Object.entries(newModels)) {
-    const old = oldModels[modelKey];
-    if (!old) {
-      added.push(model);
-      continue;
+    if (!Object.prototype.hasOwnProperty.call(oldModels, modelKey)) added.push(model);
+  }
+
+  return { added };
+}
+
+function collectKnownIds(snapshot) {
+  const ids = new Set();
+  for (const [key, value] of Object.entries(snapshot || {})) {
+    ids.add(String(key));
+    if (!isPlainObject(value)) continue;
+    for (const model of Object.values(value)) {
+      if (!isPlainObject(model)) continue;
+      if (model.modelKey) ids.add(String(model.modelKey));
+      if (model.id) ids.add(String(model.id));
     }
+  }
+  return ids;
+}
 
-    if (normalizeText(old.displayName) !== normalizeText(model.displayName)) {
-      mappingChanged.push({ before: old, after: model });
+function collectPreviousCategoryIds(previousSnapshot) {
+  const ids = new Set();
+  for (const models of Object.values(previousSnapshot || {})) {
+    if (!isPlainObject(models)) continue;
+    for (const [key, model] of Object.entries(models)) {
+      ids.add(String(key));
+      if (model?.modelKey) ids.add(String(model.modelKey));
     }
+  }
+  return ids;
+}
 
-    const fields = [];
-    // Old snapshots lack these properties. Compare only fields previously stored
-    // to avoid a one-time schema-migration alert for every existing model.
-    if (Object.prototype.hasOwnProperty.call(old, 'organization') &&
-        old.organization !== model.organization) fields.push('organization');
-    if (Object.prototype.hasOwnProperty.call(old, 'provider') &&
-        old.provider !== model.provider) fields.push('provider');
+export function findFirstSeenModels(results, previousSnapshot = {}, overviewSnapshot = {}, selectorSnapshot = {}) {
+  const knownIds = collectKnownIds(overviewSnapshot);
+  for (const id of collectPreviousCategoryIds(previousSnapshot)) knownIds.add(id);
 
-    if (isPlainObject(old.metadata) && isPlainObject(model.metadata)) {
-      const oldFields = new Set(Object.keys(old.metadata));
-      const newFields = new Set(Object.keys(model.metadata));
-      for (const field of new Set([...oldFields, ...newFields])) {
-        // Some fields were previously stored as metadata but are now
-        // promoted to normalized identity/metric fields. Ignore their removal
-        // during this schema migration instead of generating one alert per model.
-        if (oldFields.has(field) && !newFields.has(field) && IDENTITY_FIELDS.has(field)) continue;
-        if (!oldFields.has(field) || !newFields.has(field) ||
-            !sameValue(old.metadata[field], model.metadata[field])) {
-          fields.push(field);
-        }
+  // Selector entries have their own detector, so avoid duplicate alerts when
+  // the exact key/ID has already appeared in the Direct selector registry.
+  for (const [key, model] of Object.entries(selectorSnapshot || {})) {
+    knownIds.add(String(key));
+    if (model?.id) knownIds.add(String(model.id));
+    if (model?.publicName) knownIds.add(String(model.publicName));
+  }
+
+  const detections = new Map();
+
+  for (const result of results || []) {
+    if (result.error || !result.models) continue;
+
+    // A newly added route is baselined quietly instead of generating alerts for
+    // all existing records on that page.
+    const priorForSource = previousSnapshot?.[result.source.name];
+    if (!isPlainObject(priorForSource) || Object.keys(priorForSource).length === 0) continue;
+
+    for (const model of Object.values(result.models)) {
+      const modelKey = String(model?.modelKey || '').trim();
+      if (!modelKey || knownIds.has(modelKey)) continue;
+
+      let detection = detections.get(modelKey);
+      if (!detection) {
+        detection = { ...model, modelKey, sources: [] };
+        detections.set(modelKey, detection);
+      }
+
+      if (!detection.sources.some((source) => source.name === result.source.name)) {
+        detection.sources.push({ name: result.source.name, url: result.source.url });
       }
     }
-
-    if (fields.length) metadataChanged.push({ before: old, after: model, fields: [...new Set(fields)] });
-
-    const changedMetrics = metricChanges(old, model);
-    if (changedMetrics.length) metricChanged.push({ before: old, after: model, changes: changedMetrics });
   }
 
-  for (const [modelKey, model] of Object.entries(oldModels)) {
-    if (!Object.prototype.hasOwnProperty.call(newModels, modelKey)) removed.push(model);
-  }
+  return [...detections.values()]
+    .map((item) => ({
+      ...item,
+      sources: item.sources.sort((a, b) => a.name.localeCompare(b.name)),
+    }))
+    .sort((a, b) => a.modelKey.localeCompare(b.modelKey));
+}
 
-  return { added, removed, mappingChanged, metadataChanged, metricChanged };
+export function findSelectorAliasClues(displayName, selectorSnapshot = {}) {
+  const target = normalizeText(displayName);
+  if (!target) return [];
+
+  return Object.values(selectorSnapshot || {})
+    .filter((model) => model && model.aliasCandidate &&
+      normalizeText(model.displayName) === target)
+    .slice(0, 3)
+    .map((model) => ({
+      publicName: String(model.publicName || ''),
+      displayName: String(model.displayName || ''),
+    }));
 }
 
 function readJson(file, fallback = null) {
@@ -413,209 +325,190 @@ async function fetchWithConcurrency(sources, previousSnapshot, limit = 5) {
   return results;
 }
 
-function selectorAliasesForDisplay(displayName, selectorSnapshot) {
-  const target = normalizeText(displayName);
-  if (!target) return [];
-  return Object.values(selectorSnapshot || {})
-    .filter((model) => model && model.aliasCandidate && normalizeText(model.displayName) === target)
-    .slice(0, 3)
-    .map((model) => String(model.publicName) + ' -> ' + String(model.displayName));
+function humanizeSource(name) {
+  const labels = {
+    text: 'Text',
+    vision: 'Vision',
+    text_math: 'Text Math',
+    text_hard_prompts: 'Hard Prompts',
+    text_instruction_following: 'Instruction Following',
+    text_expert: 'Expert',
+    text_creative_writing: 'Creative Writing',
+    text_coding: 'Coding',
+    text_writing_literature_language: 'Writing & Literature',
+    agent_overall: 'Agent Overall',
+    agent_code: 'Agent Code',
+    agent_chat: 'Agent Chat',
+    agent_work: 'Agent Work',
+    agent_pareto: 'Agent Pareto',
+    code_pareto: 'Code Pareto',
+    code_webdev: 'WebDev',
+    code_react: 'React',
+    code_content_creation: 'Content Creation',
+    code_reference_design: 'Reference Design',
+    code_data_analytics: 'Data Analytics',
+    code_image_to_webdev: 'Image to WebDev',
+    image_to_code_overall: 'Image to Code',
+    text_to_image: 'Text to Image',
+    image_edit: 'Image Edit',
+    image_edit_multi: 'Multi-Image Edit',
+    image_edit_art: 'Art Edit',
+    image_edit_commercial: 'Commercial Design Edit',
+    text_to_video: 'Text to Video',
+    image_to_video: 'Image to Video',
+    video_edit: 'Video Edit',
+    document: 'Document',
+    search: 'Search',
+  };
+  return labels[name] || name.replace(/_/g, ' ');
 }
 
-function sourceSeenElsewhere(model, sourceName, snapshot) {
-  const key = model.modelKey;
-  const name = normalizeText(model.displayName);
-  const seenKeys = [];
-  const sameNameIds = [];
+function modelEmbed(model, selectorSnapshot) {
+  const tick = String.fromCharCode(96);
+  const primaryUrl = model.sources[0]?.url || 'https://arena.ai/leaderboard';
+  const displayName = model.displayName || model.modelKey;
+  const organization = model.organization || 'Not exposed';
+  const provider = model.provider || 'Not exposed';
+  const selectable = model.userSelectable === null ? 'Not exposed' :
+    (model.userSelectable ? 'Yes' : 'No');
+  const sourceLinks = model.sources
+    .map((source) => '[' + humanizeSource(source.name) + '](' + source.url + ')')
+    .join(', ');
+  const aliasClues = findSelectorAliasClues(displayName, selectorSnapshot);
+  const lines = [
+    '### [' + displayName + '](' + primaryUrl + ')',
+    '',
+    '🔎 **Detection:** New model ID absent from the current overall snapshot and previous tracked category IDs.',
+    '',
+    '🏢 **Organization:** ' + organization,
+    '',
+    '🏭 **Provider:** ' + provider,
+    '',
+    '🔘 **Directly selectable:** ' + selectable,
+    '',
+    '🧭 **First observed on:** ' + sourceLinks,
+    '',
+    '🆔 **Model ID:**',
+    tick + model.modelKey + tick,
+  ];
 
-  for (const [otherSource, models] of Object.entries(snapshot || {})) {
-    if (otherSource === sourceName || !isPlainObject(models)) continue;
-    for (const [otherKey, otherModel] of Object.entries(models)) {
-      if (otherKey === key) seenKeys.push(otherSource);
-      if (name && normalizeText(otherModel?.displayName) === name && otherKey !== key) {
-        sameNameIds.push({ source: otherSource, key: otherKey });
+  if (aliasClues.length) {
+    lines.push('', '🪄 **Matching selector alias clue:**');
+    lines.push(...aliasClues.map((alias) =>
+      tick + alias.publicName + tick + ' → ' + tick + alias.displayName + tick
+    ));
+  }
+
+  lines.push('', '*Public-page signal only; this does not confirm a stealth or unreleased model.*');
+
+  return {
+    author: {
+      name: 'LMSYS Arena Tracker',
+      url: primaryUrl,
+      icon_url: 'https://arena.ai/favicon.ico',
+    },
+    title: '🕵️ NEW ARENA MODEL SIGNAL',
+    url: primaryUrl,
+    description: lines.join('\n'),
+    color: 0x9b59b6,
+    timestamp: new Date().toISOString(),
+    footer: { text: 'Arena model detector • public pages only' },
+  };
+}
+
+async function sendDiscordEmbeds(embeds) {
+  const webhook = (process.env.DISCORD_WEBHOOK_URL || process.env.DISCORD_WEBHOOK || '').trim();
+  if (!webhook) {
+    console.log('DISCORD webhook is not set; model alert delivery skipped.');
+    for (const embed of embeds) {
+      console.log('[Model detection dry run]\n' + embed.title + '\n' + embed.description);
+    }
+    return;
+  }
+
+  // Discord permits at most 10 embeds per webhook message. One compact card per
+  // model keeps the alert readable and matches the main tracker style.
+  for (let offset = 0; offset < embeds.length; offset += 10) {
+    const batch = embeds.slice(offset, offset + 10);
+    let delivered = false;
+
+    for (let attempt = 1; attempt <= 4; attempt++) {
+      const response = await fetch(webhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ embeds: batch, allowed_mentions: { parse: [] } }),
+        signal: AbortSignal.timeout(10000),
+      });
+
+      if (response.ok) {
+        delivered = true;
+        break;
       }
-    }
-  }
-
-  return { seenKeys: [...new Set(seenKeys)], sameNameIds: sameNameIds.slice(0, 4) };
-}
-
-function formatMetric(change) {
-  return change.field + ': ' + String(change.before) + ' -> ' + String(change.after);
-}
-
-function formatModelSummary(model) {
-  const bits = [];
-  if (model.rank !== null && model.rank !== undefined) bits.push('rank ' + model.rank);
-  if (model.rating !== null && model.rating !== undefined) bits.push('score ' + Number(model.rating.toFixed(3)));
-  if (model.votes !== null && model.votes !== undefined) bits.push('votes/sessions ' + model.votes);
-  return '- ' + model.modelKey + ' -> ' + model.displayName +
-    (bits.length ? ' (' + bits.join(', ') + ')' : '');
-}
-
-function buildSourceMessage(source, changes, snapshot, selectorSnapshot) {
-  const lines = ['Source: ' + source.url, 'Current IDs: ' + Object.keys(snapshot[source.name] || {}).length];
-
-  if (changes.added.length) {
-    lines.push('', 'NEW IDs ON THIS PAGE (' + changes.added.length + ')');
-    for (const model of changes.added.slice(0, 10)) {
-      lines.push(formatModelSummary(model));
-      const context = sourceSeenElsewhere(model, source.name, snapshot);
-      if (context.seenKeys.length) {
-        lines.push('  Same ID already tracked on: ' + context.seenKeys.join(', '));
-      } else if (context.sameNameIds.length) {
-        lines.push('  Same display name under different IDs: ' +
-          context.sameNameIds.map((item) => item.key + ' on ' + item.source).join('; '));
-      } else {
-        lines.push('  First-seen ID across current tracked leaderboard snapshots.');
+      if (response.status !== 429 || attempt === 4) {
+        throw new Error('Discord webhook returned HTTP ' + response.status);
       }
-      const aliases = selectorAliasesForDisplay(model.displayName, selectorSnapshot);
-      if (aliases.length) lines.push('  Matching Direct-selector alias clue: ' + aliases.join('; '));
-    }
-    if (changes.added.length > 10) lines.push('...and ' + (changes.added.length - 10) + ' more new IDs.');
-  }
 
-  if (changes.mappingChanged.length) {
-    lines.push('', 'NAME / IDENTITY MAPPING CHANGES (' + changes.mappingChanged.length + ')');
-    for (const pair of changes.mappingChanged.slice(0, 8)) {
-      lines.push('- ' + pair.after.modelKey + ': ' + pair.before.displayName + ' -> ' + pair.after.displayName);
-    }
-    if (changes.mappingChanged.length > 8) lines.push('...and ' + (changes.mappingChanged.length - 8) + ' more.');
-  }
+      let retryAfter = Number(response.headers.get('Retry-After')) || 2;
+      try {
+        const data = await response.json();
+        retryAfter = Number(data.retry_after) || retryAfter;
+      } catch {
+        // Use Retry-After header when the response body is not JSON.
+      }
 
-  if (changes.metadataChanged.length) {
-    lines.push('', 'PUBLIC METADATA CHANGES (' + changes.metadataChanged.length + ')');
-    for (const item of changes.metadataChanged.slice(0, 8)) {
-      lines.push('- ' + item.after.modelKey + ' (' + item.after.displayName + '): ' + item.fields.join(', '));
+      const waitMs = Math.min(Math.max(retryAfter * 1000 + 250, 1000), 10000);
+      console.warn('Discord rate limit hit; retrying in ' + waitMs + 'ms.');
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
     }
-    if (changes.metadataChanged.length > 8) lines.push('...and ' + (changes.metadataChanged.length - 8) + ' more.');
-  }
 
-  if (changes.metricChanged.length) {
-    lines.push('', 'SIGNIFICANT RANK / SCORE CHANGES (' + changes.metricChanged.length + ')');
-    for (const item of changes.metricChanged.slice(0, 8)) {
-      lines.push('- ' + item.after.displayName + ' [' + item.after.modelKey + ']: ' +
-        item.changes.map(formatMetric).join('; '));
-    }
-    if (changes.metricChanged.length > 8) lines.push('...and ' + (changes.metricChanged.length - 8) + ' more.');
+    if (!delivered) throw new Error('Discord model alert was not delivered.');
   }
-
-  if (changes.removed.length) {
-    lines.push('', 'NO LONGER LISTED ON THIS PAGE (' + changes.removed.length + ')');
-    for (const model of changes.removed.slice(0, 8)) {
-      lines.push('- ' + model.modelKey + ' -> ' + model.displayName);
-    }
-    if (changes.removed.length > 8) lines.push('...and ' + (changes.removed.length - 8) + ' more.');
-  }
-
-  lines.push('', 'Public-page signals only: an alias or category-only ID is not proof of a stealth or unreleased model.');
-  return lines.join('\\n');
 }
 
 export async function runCategoryTracker() {
   const previousSnapshot = readJson(SNAPSHOT_FILE, {});
+  const overviewSnapshot = readJson(OVERVIEW_SNAPSHOT_FILE, {});
   const selectorSnapshot = readJson(SELECTOR_SNAPSHOT_FILE, {});
-  const results = await fetchWithConcurrency(CATEGORY_SOURCES, previousSnapshot);
-  const nextSnapshot = { ...previousSnapshot };
-  const baselineSources = [];
-  const reports = [];
+  const results = await fetchWithConcurrency(CATEGORY_SOURCES, previousSnapshot, 5);
 
-  for (const { source, models, error } of results) {
-    if (error) {
-      console.error(error.message || error);
-      continue;
-    }
-
-    const previous = previousSnapshot[source.name];
-    if (!previous || Object.keys(previous).length === 0) {
-      nextSnapshot[source.name] = models;
-      baselineSources.push({ source, count: Object.keys(models).length });
-      console.log('Category baseline saved: ' + source.name + ' (' + Object.keys(models).length + ' IDs).');
-      continue;
-    }
-
-    const changes = diffCategoryModels(previous, models);
-    nextSnapshot[source.name] = models;
-    console.log(
-      'Category ' + source.name + ': ' + Object.keys(models).length +
-      ' IDs; new=' + changes.added.length +
-      ', removed=' + changes.removed.length +
-      ', mapping_changes=' + changes.mappingChanged.length +
-      ', metadata_changes=' + changes.metadataChanged.length +
-      ', significant_metric_changes=' + changes.metricChanged.length
-    );
-
-    if (changes.added.length || changes.removed.length || changes.mappingChanged.length ||
-        changes.metadataChanged.length || changes.metricChanged.length) {
-      reports.push({ source, changes });
-    }
+  if (results.every((result) => result.error)) {
+    throw new Error('All category sources failed; preserving the model-ID baseline.');
   }
 
-  if (results.every((item) => item.error)) {
-    throw new Error('All category sources failed; preserving existing snapshot.');
+  const detections = findFirstSeenModels(results, previousSnapshot, overviewSnapshot, selectorSnapshot);
+  console.log('Model-discovery sources: ' +
+    results.filter((result) => !result.error).length + '/' + CATEGORY_SOURCES.length + ' successful.');
+  console.log('New distinct category-only model IDs: ' + detections.length + '.');
+
+  if (detections.length) {
+    await sendDiscordEmbeds(detections.map((model) => modelEmbed(model, selectorSnapshot)));
   }
 
-  // Build the new cross-source view before writing alerts. This lets us flag IDs
-  // that are new to one page but already visible on another tracked leaderboard.
-  for (const { source, models } of results) {
-    if (models) nextSnapshot[source.name] = models;
-  }
-
-  if (baselineSources.length) {
-    const total = baselineSources.reduce((sum, item) => sum + item.count, 0);
-    const lines = [
-      'Expanded coverage baselined ' + baselineSources.length + ' previously untracked leaderboard routes.',
-      'Model records across those routes (not deduplicated): ' + total + '.',
-      '',
-      ...baselineSources.map((item) =>
-        '- ' + item.source.name + ': ' + item.count + ' IDs · ' + item.source.url
-      ),
-      '',
-      'This is an inventory baseline, not a claim that these models launched now. Future runs compare each page independently.',
-    ];
-    await sendDiscord('🧭 Arena leaderboard coverage expanded', lines.join('\\n'));
-  }
-
-  if (reports.length) {
-    // Batch changes by source into bounded Discord messages instead of firing
-    // one webhook per category. This reduces 429s when several pages update.
-    const sections = reports.map(({ source, changes }) =>
-      '**' + source.name + '**\\n' + buildSourceMessage(source, changes, nextSnapshot, selectorSnapshot)
-    );
-    const chunks = [];
-    let chunk = '';
-    for (const section of sections) {
-      if (chunk && chunk.length + section.length + 10 > 3600) {
-        chunks.push(chunk);
-        chunk = '';
-      }
-      chunk += (chunk ? '\\n\\n---\\n\\n' : '') + section;
-    }
-    if (chunk) chunks.push(chunk);
-
-    for (let index = 0; index < chunks.length; index++) {
-      await sendDiscord(
-        '🧭 Arena leaderboard changes (' + (index + 1) + '/' + chunks.length + ')',
-        chunks[index]
-      );
+  // Retain only the active routes and compact identity records. No ranks, scores,
+  // votes, or general leaderboard metadata are persisted.
+  const nextSnapshot = {};
+  for (const source of CATEGORY_SOURCES) {
+    const result = results.find((item) => item.source.name === source.name);
+    if (result?.models) nextSnapshot[source.name] = result.models;
+    else if (isPlainObject(previousSnapshot[source.name])) {
+      nextSnapshot[source.name] = previousSnapshot[source.name];
     }
   }
 
   saveJson(SNAPSHOT_FILE, nextSnapshot);
 
-  const status = results.map(({ source, models, error }) => ({
-    name: source.name,
-    url: source.url,
-    count: models ? Object.keys(models).length : 0,
-    error: error ? error.message : null,
-  }));
-  console.log('Tracked leaderboard sources: ' + status.filter((item) => !item.error).length +
-    '/' + CATEGORY_SOURCES.length + ' successful.');
   return {
-    sources: status,
-    baselined: baselineSources.map((item) => item.source.name),
-    alerts: reports.length,
+    sourcesSucceeded: results.filter((result) => !result.error).length,
+    sourceCount: CATEGORY_SOURCES.length,
+    detections: detections.map((model) => ({
+      modelKey: model.modelKey,
+      displayName: model.displayName,
+      sources: model.sources.map((source) => source.name),
+    })),
+    errors: results.filter((result) => result.error).map((result) => ({
+      name: result.source.name,
+      error: result.error.message,
+    })),
   };
 }
 
