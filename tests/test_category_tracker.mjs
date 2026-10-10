@@ -2,46 +2,39 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizeCategoryModels, diffCategoryModels } from '../arena_category_tracker.mjs';
 
-test('normalizes category records around stable modelKey IDs', () => {
+test('normalizes stable model identity without storing leaderboard statistics', () => {
   const result = normalizeCategoryModels({
     'contenders/model-agent': {
       id: 'contenders/model-agent',
       displayName: 'Example Model (High)',
+      organization: 'Example Lab',
       rank: 4,
       rating: 1512.5,
       votes: 1200,
     },
   });
 
-  assert.equal(result['contenders/model-agent'].modelKey, 'contenders/model-agent');
-  assert.equal(result['contenders/model-agent'].displayName, 'Example Model (High)');
-  assert.equal(result['contenders/model-agent'].rank, 4);
+  assert.deepEqual(result['contenders/model-agent'], {
+    modelKey: 'contenders/model-agent',
+    displayName: 'Example Model (High)',
+    publicName: '',
+    organization: 'Example Lab',
+    provider: '',
+    userSelectable: null,
+  });
 });
 
-test('reports all new IDs on a category; cross-source context must not suppress tracking', () => {
+test('new IDs are the only category diff that can trigger a model alert', () => {
   const previous = {
-    'known-model': { modelKey: 'known-model', displayName: 'Known Model' },
+    'known-model': { modelKey: 'known-model', displayName: 'Known Model', rank: 9 },
+    'removed-model': { modelKey: 'removed-model', displayName: 'Removed Model' },
   };
   const current = {
-    'known-model': { modelKey: 'known-model', displayName: 'Known Model' },
-    'overview-model': { modelKey: 'overview-model', displayName: 'Overview Model' },
-    'category-only-model': { modelKey: 'category-only-model', displayName: 'Category Only Model' },
+    'known-model': { modelKey: 'known-model', displayName: 'Renamed Model', rank: 1, rating: 1600 },
+    'new-model': { modelKey: 'new-model', displayName: 'New Candidate' },
   };
 
   const result = diffCategoryModels(previous, current);
-  assert.deepEqual(result.added.map((model) => model.modelKey), ['overview-model', 'category-only-model']);
-  assert.equal(result.mappingChanged.length, 0);
-});
-
-test('detects display-name changes for an existing stable model key', () => {
-  const previous = {
-    'codename-123': { modelKey: 'codename-123', displayName: 'Anonymous Model' },
-  };
-  const current = {
-    'codename-123': { modelKey: 'codename-123', displayName: 'Revealed Model' },
-  };
-
-  const result = diffCategoryModels(previous, current);
-  assert.equal(result.mappingChanged.length, 1);
-  assert.equal(result.mappingChanged[0].after.displayName, 'Revealed Model');
+  assert.deepEqual(result.added.map((model) => model.modelKey), ['new-model']);
+  assert.deepEqual(Object.keys(result), ['added']);
 });
