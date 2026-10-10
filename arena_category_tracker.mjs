@@ -426,17 +426,20 @@ async function sendDiscordEmbeds(embeds) {
     return;
   }
 
-  // Discord permits at most 10 embeds per webhook message. One compact card per
-  // model keeps the alert readable and matches the main tracker style.
-  for (let offset = 0; offset < embeds.length; offset += 10) {
-    const batch = embeds.slice(offset, offset + 10);
+  // Match the main tracker: one independent Discord message per detected model.
+  // This keeps each alert readable and prevents several model cards being bundled
+  // into one long, difficult-to-scan message.
+  for (const embed of embeds) {
     let delivered = false;
 
     for (let attempt = 1; attempt <= 4; attempt++) {
       const response = await fetch(webhook, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ embeds: batch, allowed_mentions: { parse: [] } }),
+        body: JSON.stringify({
+          embeds: [embed],
+          allowed_mentions: { parse: [] },
+        }),
         signal: AbortSignal.timeout(10000),
       });
 
