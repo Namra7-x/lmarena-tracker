@@ -10124,6 +10124,20 @@
           "website"
         ]
       }
+    },
+    "heygen-voice": {
+      "displayName": "HeyGen Voice",
+      "provider": "heygen",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      }
     }
   },
   "providers": {
@@ -10441,7 +10455,9 @@
     "freya": "Freya",
     "meshy": "Meshy",
     "salvador": "salvador",
-    "goldfish": "goldfish"
+    "goldfish": "goldfish",
+    "heygen": "HeyGen",
+    "dakota": "dakota"
   },
   "pricing": {
     "qwen3-coder-480b-a35b-instruct": {
@@ -12066,6 +12082,10 @@
     "solar-mini4": {
       "text.input": 0.1,
       "text.output": 0.4
+    },
+    "heygen-voice": {
+      "text.input": 30,
+      "text.output": 0
     }
   }
 }
