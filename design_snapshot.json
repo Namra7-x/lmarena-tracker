@@ -10138,6 +10138,29 @@
           "tts"
         ]
       }
+    },
+    "muse-wonder-1.0": {
+      "displayName": "Muse Wonder (max)",
+      "provider": "meta",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -10457,7 +10480,8 @@
     "salvador": "salvador",
     "goldfish": "goldfish",
     "heygen": "HeyGen",
-    "dakota": "dakota"
+    "dakota": "dakota",
+    "arkansas": "arkansas"
   },
   "pricing": {
     "qwen3-coder-480b-a35b-instruct": {
@@ -12086,6 +12110,10 @@
     "heygen-voice": {
       "text.input": 30,
       "text.output": 0
+    },
+    "muse-wonder-1.0": {
+      "text.input": 4,
+      "text.output": 20
     }
   }
 }
