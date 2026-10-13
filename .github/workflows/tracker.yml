@@ -1,60 +1,55 @@
+name: DesignArena Tracker
+
 on:
   push:
     branches: [main]
     paths-ignore:
-      - snapshot.json
       - design_snapshot.json
-      - selector_snapshot.json
-      - category_snapshot.json
-      - .arena_alert_state.json
   repository_dispatch:
     types: [tracker]
   workflow_dispatch:
 
 concurrency:
-  group: arena-tracker
+  group: designarena-tracker
   cancel-in-progress: true
 
 permissions:
   contents: write
 
 jobs:
-  track:
+  track-designarena:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 1
           show-progress: false
 
-      - name: Test Arena parser
-        run: node --test tests/test_arena_parser.mjs tests/test_selector_tracker.mjs tests/test_arena_category_tracker.mjs tests/test_category_tracker.mjs
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
 
-      - name: Run Trackers in Parallel
+      - name: Install DesignArena tracker dependency
+        run: python -m pip install --disable-pip-version-check requests
+
+      - name: Run DesignArena tracker
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          node tracker.mjs &
-          PID1=$!
-          node design_tracker.mjs &
-          PID2=$!
-          node selector_tracker.mjs &
-          PID3=$!
-          wait $PID1 $PID2 $PID3
-          node arena_category_tracker.mjs
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python design_tracker.py
 
-      - name: Commit snapshots
-        if: always()
+      - name: Commit DesignArena snapshot
+        if: success()
         run: |
-          git config user.name "arena-tracker-bot"
+          git config user.name "designarena-tracker-bot"
           git config user.email "actions@github.com"
-          git add snapshot.json design_snapshot.json
-          if [ -f selector_snapshot.json ]; then git add selector_snapshot.json; fi
-          if [ -f category_snapshot.json ]; then git add category_snapshot.json; fi
-          if [ -f .arena_alert_state.json ]; then git add .arena_alert_state.json; fi
+          git add design_snapshot.json
           if ! git diff --cached --quiet; then
-            git commit -m "snapshot update"
+            git commit -m "Update DesignArena snapshot"
             git pull --rebase
             git push
           fi
