@@ -9879,6 +9879,20 @@
       "router": false,
       "vision": false
     },
+    "ultramarine-1-flash": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_slides"
+        ]
+      },
+      "displayName": "Ultramarine 1 Flash",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "paperinstruments",
+      "router": false,
+      "vision": true
+    },
     "uni-1.1": {
       "active": false,
       "arenas": {
@@ -11968,6 +11982,11 @@
       "text.input": 0.25,
       "text.output": 0.9
     },
+    "ultramarine-1-flash": {
+      "text.cachedInput": 0.03,
+      "text.input": 0.15,
+      "text.output": 0.5
+    },
     "uni-1.1": {
       "image.perImage": 0.0404
     },
@@ -12265,6 +12284,7 @@
     "oracle": "Oracle",
     "orange": "orange",
     "orchids": "Orchids",
+    "paperinstruments": "Paper Instruments",
     "peach": "peach",
     "pear": "pear",
     "pearl": "Pearl",
