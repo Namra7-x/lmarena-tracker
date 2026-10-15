@@ -2407,6 +2407,36 @@
       "router": false,
       "vision": false
     },
+    "flux-3-image-klein": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "logo"
+        ]
+      },
+      "displayName": "FLUX 3 Image Klein",
+      "inputModalities": [],
+      "openSource": true,
+      "provider": "black_forest_labs",
+      "router": false,
+      "vision": false
+    },
+    "flux-3-image-klein-edit": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetoimage"
+        ]
+      },
+      "displayName": "FLUX 3 Image Klein Edit",
+      "inputModalities": [],
+      "openSource": true,
+      "provider": "black_forest_labs",
+      "router": false,
+      "vision": false
+    },
     "flux-3-video": {
       "active": true,
       "arenas": {
@@ -5431,6 +5461,23 @@
       "router": false,
       "vision": false
     },
+    "heygen-video-1": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "multimodaltovideo",
+          "multitovideo",
+          "video"
+        ]
+      },
+      "displayName": "HeyGen Video 1.0",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "heygen",
+      "router": false,
+      "vision": false
+    },
     "heygen-voice": {
       "active": true,
       "arenas": {
@@ -7797,6 +7844,29 @@
       "router": false,
       "vision": false
     },
+    "muse-spark-open": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Muse Spark Open (xhigh)",
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": true,
+      "provider": "meta",
+      "router": false,
+      "vision": true
+    },
     "muse-wonder-1.0": {
       "active": true,
       "arenas": {
@@ -7860,6 +7930,30 @@
       "provider": "nvidia",
       "router": false,
       "vision": false
+    },
+    "nemotron-3.5-super-vl": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Nemotron 3.5 Super VL",
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": true,
+      "provider": "nvidia",
+      "router": false,
+      "vision": true
     },
     "nevada": {
       "active": false,
@@ -10681,6 +10775,12 @@
     "flux-3-image-edit": {
       "image.perImage": 0.048
     },
+    "flux-3-image-klein": {
+      "image.perImage": 0.009
+    },
+    "flux-3-image-klein-edit": {
+      "image.perImage": 0.009
+    },
     "flux-3-video": {
       "video.perSecond": 0.29
     },
@@ -11188,6 +11288,9 @@
     "hazel": {
       "image.perImage": 0.034
     },
+    "heygen-video-1": {
+      "video.perSecond": 0.02
+    },
     "heygen-voice": {
       "text.input": 30,
       "text.output": 0
@@ -11556,6 +11659,10 @@
       "text.input": 1.25,
       "text.output": 4.25
     },
+    "muse-spark-open": {
+      "text.input": 1.25,
+      "text.output": 4.25
+    },
     "muse-wonder-1.0": {
       "text.input": 4,
       "text.output": 20
@@ -11566,6 +11673,10 @@
     "nemotron-3-ultra-550b-a55b": {
       "text.input": 0.5,
       "text.output": 2.5
+    },
+    "nemotron-3.5-super-vl": {
+      "text.input": 0.15,
+      "text.output": 0.5
     },
     "nevada": {
       "text.cachedInput": 0.06,
