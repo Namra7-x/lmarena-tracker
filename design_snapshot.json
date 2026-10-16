@@ -9893,6 +9893,20 @@
       "router": false,
       "vision": true
     },
+    "ultramarine-slides": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "slides"
+        ]
+      },
+      "displayName": "Ultramarine",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "paperinstruments",
+      "router": false,
+      "vision": false
+    },
     "uni-1.1": {
       "active": false,
       "arenas": {
@@ -11986,6 +12000,9 @@
       "text.cachedInput": 0.03,
       "text.input": 0.15,
       "text.output": 0.5
+    },
+    "ultramarine-slides": {
+      "slides.perDeck": 0.07
     },
     "uni-1.1": {
       "image.perImage": 0.0404
