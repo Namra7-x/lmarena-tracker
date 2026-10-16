@@ -296,6 +296,28 @@
       "router": false,
       "vision": false
     },
+    "beam-1.0": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Beam 1.0 (max)",
+      "inputModalities": [
+        "text"
+      ],
+      "openSource": true,
+      "provider": "reflection",
+      "router": false,
+      "vision": false
+    },
     "black-panther": {
       "active": false,
       "arenas": {
@@ -10453,6 +10475,10 @@
     "babylon_2": {
       "image.perImage": 0.2
     },
+    "beam-1.0": {
+      "text.input": 0.25,
+      "text.output": 1
+    },
     "boogu-image": {
       "image.perImage": 0.04
     },
@@ -12328,6 +12354,7 @@
     "reaper": "Reaper",
     "recraft": "Recraft",
     "reef": "reef",
+    "reflection": "Reflection",
     "replit": "Replit",
     "resemble": "Resemble AI",
     "reve": "Reve",
