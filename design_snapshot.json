@@ -606,6 +606,20 @@
       "router": false,
       "vision": false
     },
+    "claude-code-opus-5-5": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "slides"
+        ]
+      },
+      "displayName": "Claude Opus 5.5 (Claude Code)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "claude_code",
+      "router": false,
+      "vision": false
+    },
     "claude-fable-5": {
       "active": false,
       "arenas": {
@@ -984,7 +998,7 @@
       "vision": true
     },
     "claude-pptx-opus": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "slides"
@@ -10520,6 +10534,9 @@
       "text.input": 3,
       "text.output": 15
     },
+    "claude-code-opus-5-5": {
+      "slides.perDeck": 1.5
+    },
     "claude-fable-5": {
       "text.input": 10,
       "text.output": 50
@@ -12171,6 +12188,7 @@
     "chocolate": "Chocolate",
     "chrysalis": "chrysalis",
     "cicada": "cicada",
+    "claude_code": "Claude Code",
     "claude_pptx": "Claude (PPTX)",
     "clawl-alpha": "clawl-alpha",
     "clover": "clover",
