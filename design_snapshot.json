@@ -8275,6 +8275,23 @@
       "router": false,
       "vision": false
     },
+    "oregon": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo",
+          "multimodaltovideo",
+          "multitovideo",
+          "video"
+        ]
+      },
+      "displayName": "HeyGen Video 1.0 (1080p, Ultraquality)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "heygen",
+      "router": false,
+      "vision": false
+    },
     "p-video-2": {
       "active": false,
       "arenas": {
@@ -11809,6 +11826,10 @@
       "text.input": 0.6,
       "text.output": 12
     },
+    "oregon": {
+      "video.perSecond": 0.09,
+      "video.perSecondReferenceToVideo": 0.18
+    },
     "p-video-2": {
       "video.perSecond": 0.025
     },
@@ -12379,7 +12400,6 @@
     "oracle": "Oracle",
     "orange": "orange",
     "orchids": "Orchids",
-    "oregon": "oregon",
     "paperinstruments": "Paper Instruments",
     "peach": "peach",
     "pear": "pear",
