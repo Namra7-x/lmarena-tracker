@@ -1816,7 +1816,7 @@
       "vision": false
     },
     "deepseek-v4-1-flash": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "3d",
@@ -1829,6 +1829,29 @@
         ]
       },
       "displayName": "DeepSeek-V4.1-Flash",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": true,
+      "provider": "deepseek",
+      "router": false,
+      "vision": true
+    },
+    "deepseek-v4-1-flash-1017": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "DeepSeek-V4.1-Flash-1017",
       "inputModalities": [
         "image",
         "text"
@@ -10743,6 +10766,11 @@
       "text.input": 0.3,
       "text.output": 1.2
     },
+    "deepseek-v4-1-flash-1017": {
+      "text.cachedInput": 0.006,
+      "text.input": 0.3,
+      "text.output": 1.2
+    },
     "deepseek-v4-flash": {
       "text.input": 0.14,
       "text.output": 0.28
@@ -12376,6 +12404,7 @@
     "raven": "Raven",
     "reaper": "Reaper",
     "recraft": "Recraft",
+    "redwood": "redwood",
     "reef": "reef",
     "reflection": "Reflection",
     "replit": "Replit",
@@ -12399,6 +12428,7 @@
     "seabed": "seabed",
     "seaside": "seaside",
     "sentry": "sentry",
+    "sequoia": "sequoia",
     "siege-tank": "Siege Tank",
     "silo": "silo",
     "slidesgpt": "SlidesGPT",
@@ -12411,6 +12441,7 @@
     "sparrow": "Sparrow",
     "spey": "spey",
     "sprinter": "Sprinter",
+    "spruce": "spruce",
     "stackblitz": "StackBlitz",
     "stalker": "stalker",
     "stampede": "stampede",
