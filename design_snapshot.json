@@ -7224,6 +7224,28 @@
       "router": false,
       "vision": false
     },
+    "mercury-3": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Mercury 3",
+      "inputModalities": [
+        "text"
+      ],
+      "openSource": false,
+      "provider": "inception",
+      "router": false,
+      "vision": false
+    },
     "meshy-7.1": {
       "active": true,
       "arenas": {
@@ -11672,6 +11694,10 @@
     "mercury-2": {
       "text.input": 0.25,
       "text.output": 0.75
+    },
+    "mercury-3": {
+      "text.input": 0.1,
+      "text.output": 0.35
     },
     "mimo-v2-flash": {
       "text.input": 0.14,
