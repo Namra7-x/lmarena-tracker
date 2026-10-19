@@ -7820,6 +7820,28 @@
       "router": false,
       "vision": false
     },
+    "muse-glimmer-30b": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Muse Glimmer 30B (xhigh)",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": true,
+      "provider": "meta",
+      "router": false,
+      "vision": true
+    },
     "muse-image-1.0": {
       "active": true,
       "arenas": {
@@ -11801,6 +11823,10 @@
     "murf_gen2": {
       "text.input": 30,
       "text.output": 0
+    },
+    "muse-glimmer-30b": {
+      "text.input": 0.35,
+      "text.output": 1.5
     },
     "muse-image-1.0": {
       "image.perImage": 0.01
