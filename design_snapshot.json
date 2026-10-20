@@ -76,7 +76,7 @@
       "vision": false
     },
     "aleph2": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "multimodaltovideo",
@@ -1396,7 +1396,6 @@
         "models": [
           "graphicdesign",
           "image",
-          "imagetovideo",
           "logo"
         ]
       },
@@ -5434,7 +5433,7 @@
       "vision": false
     },
     "hailuo-2.3-pro": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "imagetovideo",
@@ -5449,7 +5448,7 @@
       "vision": false
     },
     "hailuo-2.3-standard": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "imagetovideo",
@@ -5563,6 +5562,22 @@
       "inputModalities": [],
       "openSource": false,
       "provider": "heygen",
+      "router": false,
+      "vision": false
+    },
+    "hi3d-v3.0": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      },
+      "displayName": "Hi3D v3.0",
+      "inputModalities": [
+        "image"
+      ],
+      "openSource": false,
+      "provider": "hitem3d",
       "router": false,
       "vision": false
     },
@@ -5729,6 +5744,23 @@
       },
       "displayName": "Hunyuan 3D Pro",
       "inputModalities": [],
+      "openSource": false,
+      "provider": "tencent",
+      "router": false,
+      "vision": false
+    },
+    "hunyuan-3d-v3.1-pro": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      },
+      "displayName": "Hunyuan 3D v3.1 Pro",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
       "openSource": false,
       "provider": "tencent",
       "router": false,
@@ -6066,7 +6098,7 @@
       "vision": false
     },
     "kandinsky-5.0": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "video"
@@ -6080,7 +6112,7 @@
       "vision": false
     },
     "kandinsky-5.0-pro": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "imagetovideo",
@@ -6376,7 +6408,7 @@
       "vision": false
     },
     "kling-o1-ref": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "multitovideo"
@@ -6420,7 +6452,7 @@
       "vision": false
     },
     "kling-v2.5-turbo-pro": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "multitovideo",
@@ -6527,7 +6559,7 @@
       "vision": false
     },
     "krea-wan-14b": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "videotovideo"
@@ -6806,7 +6838,7 @@
       "vision": false
     },
     "lucy-2.5": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "multimodaltovideo",
@@ -9398,6 +9430,23 @@
       "router": false,
       "vision": true
     },
+    "rodin-gen-2.5": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      },
+      "displayName": "Rodin Gen-2.5",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "hyper3d",
+      "router": false,
+      "vision": false
+    },
     "rork": {
       "active": true,
       "arenas": {
@@ -9898,6 +9947,22 @@
       "router": false,
       "vision": false
     },
+    "trellis-2": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      },
+      "displayName": "TRELLIS 2",
+      "inputModalities": [
+        "image"
+      ],
+      "openSource": true,
+      "provider": "microsoft",
+      "router": false,
+      "vision": false
+    },
     "trinity-large-thinking": {
       "active": false,
       "arenas": {
@@ -9917,6 +9982,40 @@
       ],
       "openSource": true,
       "provider": "arceeai",
+      "router": false,
+      "vision": false
+    },
+    "tripo-h3.1": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      },
+      "displayName": "Tripo H3.1",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "tripo",
+      "router": false,
+      "vision": false
+    },
+    "tripo-p2": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      },
+      "displayName": "Tripo P2",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "tripo",
       "router": false,
       "vision": false
     },
@@ -10236,7 +10335,7 @@
       "vision": false
     },
     "vidu-q2-ref": {
-      "active": true,
+      "active": false,
       "arenas": {
         "models": [
           "multitovideo"
@@ -12390,11 +12489,13 @@
     "heygen": "HeyGen",
     "hidream": "HiDream",
     "higgsfield": "HiggsField",
+    "hitem3d": "Hitem3D",
     "hithink": "Hithink",
     "honeycomb": "Honeycomb",
     "honeydew": "Honeydew",
     "human": "Humanity",
     "hume": "Hume AI",
+    "hyper3d": "Hyper3D",
     "ideogram": "Ideogram",
     "imagineart": "ImagineArt",
     "immortal": "immortal",
@@ -12569,6 +12670,7 @@
     "thudm": "THUDM",
     "tomato": "tomato",
     "torch": "Torch",
+    "tripo": "Tripo AI",
     "uibakery": "UI Bakery",
     "upstage": "Upstage",
     "vanilla": "vanilla",
