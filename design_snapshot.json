@@ -10279,6 +10279,20 @@
       "router": false,
       "vision": false
     },
+    "voxtral-mini-tts-3-0": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "Voxtral TTS 3",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "mistral",
+      "router": false,
+      "vision": false
+    },
     "wan-2.2-t2v-a14b": {
       "active": false,
       "arenas": {
@@ -12196,6 +12210,10 @@
     },
     "voxtral-mini-tts-2603": {
       "text.input": 16,
+      "text.output": 0
+    },
+    "voxtral-mini-tts-3-0": {
+      "text.input": 13,
       "text.output": 0
     },
     "wan-2.2-t2v-a14b": {
