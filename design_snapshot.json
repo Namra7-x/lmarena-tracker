@@ -2287,6 +2287,28 @@
       "router": false,
       "vision": false
     },
+    "flint": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Flint",
+      "inputModalities": [
+        "text"
+      ],
+      "openSource": true,
+      "provider": "recursive",
+      "router": false,
+      "vision": false
+    },
     "floot-08-08": {
       "active": true,
       "arenas": {
@@ -11064,6 +11086,10 @@
       "text.input": 15,
       "text.output": 0
     },
+    "flint": {
+      "text.input": 0,
+      "text.output": 0
+    },
     "flux-2-dev": {
       "image.perImage": 0.03
     },
@@ -12685,6 +12711,7 @@
     "raven": "Raven",
     "reaper": "Reaper",
     "recraft": "Recraft",
+    "recursive": "Recursive",
     "redwood": "redwood",
     "reef": "reef",
     "reflection": "Reflection",
