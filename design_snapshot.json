@@ -1448,6 +1448,20 @@
       "router": false,
       "vision": false
     },
+    "dakota": {
+      "active": false,
+      "arenas": {
+        "models": [
+          "imagetoimage"
+        ]
+      },
+      "displayName": "Krea 3",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "krea",
+      "router": false,
+      "vision": false
+    },
     "dalle-3": {
       "active": false,
       "arenas": {
@@ -5542,6 +5556,20 @@
       "inputModalities": [],
       "openSource": false,
       "provider": "alibaba",
+      "router": false,
+      "vision": false
+    },
+    "hawaii": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetoimage"
+        ]
+      },
+      "displayName": "Krea 3 (Ultra Thinking)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "krea",
       "router": false,
       "vision": false
     },
@@ -12537,7 +12565,6 @@
     "cursor": "Cursor",
     "cypress": "cypress",
     "dahlia": "dahlia",
-    "dakota": "dakota",
     "decaf": "decaf",
     "decart": "Decart",
     "deepgram": "Deepgram",
@@ -12580,7 +12607,6 @@
     "greenleaf": "greenleaf",
     "grogu": "grogu",
     "halifax": "halifax",
-    "hawaii": "hawaii",
     "hazel": "Hazel",
     "hazelnut": "Hazelnut",
     "hellbat": "Hellbat",
