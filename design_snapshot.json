@@ -9831,6 +9831,30 @@
       "router": false,
       "vision": false
     },
+    "snowhare": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "MiniMax M3.1 Flash",
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": false,
+      "provider": "minimax",
+      "router": false,
+      "vision": true
+    },
     "solar-mini4": {
       "active": true,
       "arenas": {
@@ -12366,6 +12390,11 @@
     "slidesgpt": {
       "slides.perDeck": 0.5
     },
+    "snowhare": {
+      "text.cachedInput": 0.015,
+      "text.input": 0.15,
+      "text.output": 0.6
+    },
     "solar-mini4": {
       "text.input": 0.1,
       "text.output": 0.4
@@ -12769,7 +12798,6 @@
     "smallestai": "Smallest AI",
     "snapdeck": "Snapdeck",
     "snowflake": "Snowflake",
-    "snowhare": "Snowhare",
     "sora": "sora",
     "sourceful": "Sourceful",
     "sparrow": "Sparrow",
