@@ -8599,6 +8599,20 @@
       "router": false,
       "vision": false
     },
+    "pelican": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "image"
+        ]
+      },
+      "displayName": "Canva Craft",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "canva",
+      "router": false,
+      "vision": false
+    },
     "playyy": {
       "active": true,
       "arenas": {
@@ -12220,6 +12234,9 @@
     "pear": {
       "image.perImage": 0.01
     },
+    "pelican": {
+      "image.perImage": 0.05
+    },
     "prism": {
       "text.input": 0,
       "text.output": 0.3
@@ -12777,7 +12794,6 @@
     "peach": "peach",
     "pear": "pear",
     "pearl": "Pearl",
-    "pelican": "pelican",
     "pepper": "pepper",
     "peppermint": "Peppermint",
     "perceptis": "Perceptis",
