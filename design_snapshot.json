@@ -5618,6 +5618,20 @@
       "router": false,
       "vision": false
     },
+    "heygen-voice-turbo": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "tts"
+        ]
+      },
+      "displayName": "HeyGen Voice Turbo",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "heygen",
+      "router": false,
+      "vision": false
+    },
     "hi3d-v3.0": {
       "active": true,
       "arenas": {
@@ -11726,6 +11740,10 @@
     },
     "heygen-voice": {
       "text.input": 30,
+      "text.output": 0
+    },
+    "heygen-voice-turbo": {
+      "text.input": 4,
       "text.output": 0
     },
     "hidream-o1-image": {
