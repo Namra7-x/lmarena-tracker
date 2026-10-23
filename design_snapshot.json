@@ -6459,6 +6459,42 @@
       "router": false,
       "vision": true
     },
+    "kimi-k3.1-pro": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ],
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Kimi K3.1 Pro",
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "openSource": true,
+      "provider": "moonshot",
+      "router": false,
+      "vision": true
+    },
     "kling-o1-edit": {
       "active": true,
       "arenas": {
@@ -11897,6 +11933,10 @@
     "kimi-k3": {
       "text.input": 3,
       "text.output": 15
+    },
+    "kimi-k3.1-pro": {
+      "text.input": 2,
+      "text.output": 10
     },
     "kling-o1-edit": {
       "video.perSecond": 0.168
