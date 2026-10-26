@@ -4814,6 +4814,34 @@
       "router": false,
       "vision": true
     },
+    "gpt-6.1-terra": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_godot",
+          "agon_webapps",
+          "fullstack"
+        ],
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "GPT-6.1 Terra",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": true
+    },
     "gpt-image-1": {
       "active": false,
       "arenas": {
@@ -11655,6 +11683,12 @@
       "text.cachedInput": 0.1,
       "text.input": 2,
       "text.output": 10
+    },
+    "gpt-6.1-terra": {
+      "text.cacheWrite": 1.25,
+      "text.cachedInput": 0.05,
+      "text.input": 1,
+      "text.output": 5
     },
     "gpt-image-1": {
       "image.perImage": 0.042,
