@@ -7718,6 +7718,20 @@
       "router": false,
       "vision": false
     },
+    "mischief-1": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "imagetovideo"
+        ]
+      },
+      "displayName": "Mischief 1",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "tbc",
+      "router": false,
+      "vision": false
+    },
     "mistral-large-2411": {
       "active": false,
       "arenas": {
@@ -12167,6 +12181,9 @@
       "text.input": 0.15,
       "text.output": 0.15
     },
+    "mischief-1": {
+      "video.perSecond": 0.01
+    },
     "mistral-large-2411": {
       "text.input": 2,
       "text.output": 6
@@ -12958,6 +12975,7 @@
     "superstar": "superstar",
     "swan": "swan",
     "tangerine": "tangerine",
+    "tbc": "TBC",
     "tencent": "Tencent",
     "tesslate": "Tesslate",
     "the_world": "The World",
