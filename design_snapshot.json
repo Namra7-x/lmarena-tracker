@@ -5962,6 +5962,20 @@
       "router": false,
       "vision": false
     },
+    "ideogram-vector-1": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "svg"
+        ]
+      },
+      "displayName": "Ideogram Vector",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "ideogram",
+      "router": false,
+      "vision": false
+    },
     "imagen-3.0-generate-002": {
       "active": false,
       "arenas": {
@@ -11908,6 +11922,9 @@
     },
     "ideogram-v3": {
       "image.perImage": 0.06
+    },
+    "ideogram-vector-1": {
+      "image.perImage": 0.2
     },
     "imagen-3.0-generate-002": {
       "image.perImage": 0.03
