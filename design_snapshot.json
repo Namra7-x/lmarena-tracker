@@ -1012,6 +1012,44 @@
       "router": false,
       "vision": true
     },
+    "claude-opus-5-5-high": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_gamedev",
+          "agon_blender",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps"
+        ]
+      },
+      "displayName": "Claude Opus 5.5 (high)",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "anthropic",
+      "router": false,
+      "vision": true
+    },
+    "claude-opus-5-5-max": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agon_blender"
+        ]
+      },
+      "displayName": "Claude Opus 5.5 (max)",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "anthropic",
+      "router": false,
+      "vision": true
+    },
     "claude-pptx-opus": {
       "active": false,
       "arenas": {
@@ -4805,6 +4843,27 @@
         ]
       },
       "displayName": "GPT-6.1 Sol",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": true
+    },
+    "gpt-6.1-sol-max": {
+      "active": true,
+      "arenas": {
+        "agents": [
+          "agentic_gamedev",
+          "agon_blender",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps"
+        ]
+      },
+      "displayName": "GPT-6.1 Sol (max)",
       "inputModalities": [
         "image",
         "text"
@@ -11056,6 +11115,14 @@
       "text.input": 4,
       "text.output": 20
     },
+    "claude-opus-5-5-high": {
+      "text.input": 4,
+      "text.output": 20
+    },
+    "claude-opus-5-5-max": {
+      "text.input": 4,
+      "text.output": 20
+    },
     "claude-pptx-sonnet": {
       "slides.perDeck": 0.5
     },
@@ -11721,6 +11788,12 @@
       "text.output": 10
     },
     "gpt-6.1-sol": {
+      "text.cacheWrite": 2.5,
+      "text.cachedInput": 0.1,
+      "text.input": 2,
+      "text.output": 10
+    },
+    "gpt-6.1-sol-max": {
       "text.cacheWrite": 2.5,
       "text.cachedInput": 0.1,
       "text.input": 2,
