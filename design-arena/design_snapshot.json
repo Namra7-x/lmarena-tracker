@@ -75,6 +75,23 @@
       "router": false,
       "vision": false
     },
+    "alder": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "GPT Image 2.6 Flare (quality: low, complexity: low)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": false
+    },
     "aleph2": {
       "active": false,
       "arenas": {
@@ -386,6 +403,23 @@
       "inputModalities": [],
       "openSource": false,
       "provider": "stackblitz",
+      "router": false,
+      "vision": false
+    },
+    "bonsai": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "GPT Image 2.6 Sunburst (quality: auto, complexity: high)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "openai",
       "router": false,
       "vision": false
     },
@@ -5991,6 +6025,28 @@
       "router": false,
       "vision": false
     },
+    "hy4": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      },
+      "displayName": "Hy4",
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "openSource": true,
+      "provider": "tencent",
+      "router": false,
+      "vision": true
+    },
     "ideogram-v3": {
       "active": false,
       "arenas": {
@@ -9723,6 +9779,23 @@
       "router": false,
       "vision": false
     },
+    "rowan": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "GPT Image 2.6 Sunburst (quality: max, complexity: high)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": false
+    },
     "same.new": {
       "active": true,
       "arenas": {
@@ -9968,6 +10041,23 @@
       "router": false,
       "vision": false
     },
+    "sequoia": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "GPT Image 2.6 Flare (quality: auto, complexity: high)",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": false
+    },
     "silk-mulberry-1.5": {
       "active": true,
       "arenas": {
@@ -10144,6 +10234,23 @@
         ]
       },
       "displayName": "Sora 2 Pro",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "openai",
+      "router": false,
+      "vision": false
+    },
+    "spruce": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      },
+      "displayName": "GPT Image 2.6 Flare (quality: low, complexity: medium)",
       "inputModalities": [],
       "openSource": false,
       "provider": "openai",
@@ -11993,6 +12100,10 @@
       "text.input": 0.14,
       "text.output": 0.55
     },
+    "hy4": {
+      "text.input": 0.834,
+      "text.output": 2.501
+    },
     "ideogram-v3": {
       "image.perImage": 0.06
     },
@@ -12772,7 +12883,6 @@
     "ai_forever": "AI Forever",
     "alabama": "alabama",
     "alai": "Alai",
-    "alder": "alder",
     "alibaba": "Alibaba",
     "allenai": "Allen AI",
     "alpha_centauri": "alpha_centauri",
@@ -12805,7 +12915,6 @@
     "blizzard": "Blizzard",
     "bluebird": "Bluebird",
     "bluejay": "Blue Jay",
-    "bonsai": "bonsai",
     "boogu": "Boogu",
     "buttercup": "buttercup",
     "bytedance": "ByteDance",
@@ -13035,7 +13144,6 @@
     "robin": "Robin",
     "rockhopper": "Rockhopper",
     "rork": "Rork",
-    "rowan": "rowan",
     "ruby": "Ruby",
     "rumik": "Rumik AI",
     "runwayml": "RunwayML",
@@ -13048,7 +13156,6 @@
     "seabed": "seabed",
     "seaside": "seaside",
     "sentry": "sentry",
-    "sequoia": "sequoia",
     "siege-tank": "Siege Tank",
     "silo": "silo",
     "slidesgpt": "SlidesGPT",
@@ -13060,7 +13167,6 @@
     "sparrow": "Sparrow",
     "spey": "spey",
     "sprinter": "Sprinter",
-    "spruce": "spruce",
     "stackblitz": "StackBlitz",
     "stalker": "stalker",
     "stampede": "stampede",
