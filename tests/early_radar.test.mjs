@@ -2,12 +2,16 @@
  * Early Signal Radar - Test Suite
  * Tests Artificial Analysis parsing, ChatGPT & Claude manifest extraction,
  * SDK commit diff parsing, and Discord embed builder.
+ * Verifies ZERO HARDCODED MODEL NAMES.
  */
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { RADAR_CONFIG } from '../early-radar/config.mjs';
+import { extractModelIdentifiersFromDiff } from '../early-radar/sources/sdk_commits.mjs';
+import { extractDynamicModelIdentifiers } from '../early-radar/sources/chatgpt_manifest.mjs';
+import { extractDynamicClaudeIdentifiers } from '../early-radar/sources/claude_manifest.mjs';
 import {
   buildArtificialAnalysisEmbed,
   buildChatGPTBuildEmbed,
@@ -34,18 +38,63 @@ describe('Early Radar Configuration', () => {
   });
 });
 
+describe('Dynamic Model Extraction (Zero Hardcoded Names)', () => {
+  it('should dynamically extract arbitrary new model names from git diff', () => {
+    const mockDiff = `
+@@ -10,6 +10,8 @@
+-    "old-model-v1",
++    "unannounced-future-model-x99",
++    "experimental-quantum-reasoner",
++    // some comment
+    "existing-model",
+    `;
+
+    const extracted = extractModelIdentifiersFromDiff(mockDiff);
+    assert.deepEqual(extracted, [
+      'unannounced-future-model-x99',
+      'experimental-quantum-reasoner',
+    ]);
+  });
+
+  it('should dynamically extract arbitrary model slugs from ChatGPT chunk JS', () => {
+    const mockJs = `
+      const config = {
+        model_slug: "stealth-frontier-preview",
+        default_model: "autonomous-coder-v1",
+        timeout: 30000
+      };
+    `;
+
+    const extracted = extractDynamicModelIdentifiers(mockJs);
+    assert.ok(extracted.includes('stealth-frontier-preview'));
+    assert.ok(extracted.includes('autonomous-coder-v1'));
+    assert.equal(extracted.length, 2);
+  });
+
+  it('should dynamically extract arbitrary model IDs from Claude chunk JS', () => {
+    const mockJs = `
+      function getModel() {
+        return { modelId: "secret-hybrid-agent-77", isDefault: true };
+      }
+    `;
+
+    const extracted = extractDynamicClaudeIdentifiers(mockJs);
+    assert.deepEqual(extracted, ['secret-hybrid-agent-77']);
+  });
+});
+
 describe('Discord Embed Builder', () => {
   it('should build rich embed for Artificial Analysis new model', () => {
     const model = {
-      name: 'GPT-6 Astra',
-      slug: 'gpt-6-astra',
-      url: 'https://artificialanalysis.ai/models/gpt-6-astra',
+      name: 'Arbitrary New Model',
+      slug: 'arbitrary-new-model',
+      url: 'https://artificialanalysis.ai/models/arbitrary-new-model',
     };
     const embed = buildArtificialAnalysisEmbed(model);
     assert.ok(embed.title.includes('Artificial Analysis'));
     assert.equal(embed.color, RADAR_CONFIG.colors.artificialAnalysis);
-    assert.equal(embed.fields[0].value, 'GPT-6 Astra');
-    assert.equal(embed.fields[1].value, '`gpt-6-astra`');
+    assert.equal(embed.fields[0].value, 'Arbitrary New Model');
+    assert.equal(embed.fields[1].value, '`arbitrary-new-model`');
   });
 
   it('should build rich embed for ChatGPT web app build deployment', () => {
@@ -74,20 +123,22 @@ describe('Discord Embed Builder', () => {
     assert.equal(embed.fields[0].value, '`PYSO3vVA`');
   });
 
-  it('should build rich embed for SDK model commit', () => {
+  it('should build rich embed for SDK model commit with dynamic additions', () => {
     const event = {
       repo: 'openai/openai-python',
       filePath: 'src/openai/types/shared/chat_model.py',
       sha: '5b43cceea4a25bc1b9ed1b08f087408b47981083',
       shortSha: '5b43cce',
       author: 'Justin Beckwith',
-      message: 'chore(api): document upcoming model shutdowns (#4199)',
+      message: 'chore(api): update model enum (#4199)',
       commitUrl: 'https://github.com/openai/openai-python/commit/5b43cce',
-      additions: ['"gpt-4.5-preview"', '"o3-mini"'],
+      additions: ['"brand-new-unannounced-model"', '"secret-reasoner"'],
     };
     const embed = buildSdkCommitEmbed(event);
     assert.ok(embed.title.includes('OpenAI SDK'));
     assert.equal(embed.color, RADAR_CONFIG.colors.chatgpt);
     assert.ok(embed.fields.some((f) => f.name === 'Model Enum Additions'));
+    const additionsField = embed.fields.find((f) => f.name === 'Model Enum Additions');
+    assert.ok(additionsField.value.includes('brand-new-unannounced-model'));
   });
 });
