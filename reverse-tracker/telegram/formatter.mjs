@@ -30,6 +30,31 @@ export function formatUtcDateTime(date = new Date()) {
 }
 
 /**
+ * Format the Initial Baseline Calibration Message (sent once on FIRST_RUN)
+ */
+export function formatBaselineCalibrationMessage({
+  family = '',
+  components = [],
+  timestamp = new Date(),
+}) {
+  const famBadge = family ? `[${escapeHtml(family.toUpperCase())}] ` : '';
+  const timeStr = escapeHtml(formatUtcDateTime(timestamp));
+
+  let msg = `🚀 <b>${famBadge}BASELINE CALIBRATED & ACTIVE</b>\n`;
+  msg += `📅 <i>${timeStr}</i>\n\n`;
+  msg += `✅ <b>Current Tracked Versions:</b>\n`;
+
+  for (const comp of components) {
+    const name = escapeHtml(comp.name || comp.componentId);
+    const ver = escapeHtml(comp.version || 'latest');
+    msg += `• <b>${name}:</b> <code>v${ver}</code>\n`;
+  }
+
+  msg += `\n📡 <i>Baseline stored. Monitoring is active. Future updates will perform deep diff analysis and deliver leaks.txt, diff.txt, and strings.txt on new releases.</i>`;
+  return msg.slice(0, 4096);
+}
+
+/**
  * Format the Immediate Alert (sent BEFORE downloading/scanning)
  */
 export function formatImmediateAlert({
@@ -71,6 +96,8 @@ export function formatImmediateAlert({
 export function formatCompletionMessage({
   componentName = '',
   family = '',
+  oldVersion = '',
+  newVersion = '',
   scanId,
   counts = {},
   majorSignals = [],
@@ -78,17 +105,21 @@ export function formatCompletionMessage({
   moreFindings = [],
   coverage = {},
   countCheckText = '',
+  leakCount = 0,
+  newStringsCount = 0,
   timestamp = new Date(),
 }) {
   const familyBadge = family ? `[${escapeHtml(family.toUpperCase())}] ` : '';
   const comp = componentName ? `${escapeHtml(componentName.toUpperCase())} · ` : '';
   const sId = escapeHtml(scanId);
   const timeStr = escapeHtml(formatUtcDateTime(timestamp));
-  const statLine = `${counts.commands || 0} commands · ${counts.flags || 0} flags · ${counts.configs || 0} config keys · ${counts.endpoints || 0} endpoints`;
+  const totalLeaks = leakCount || (majorSignals.length + highSignals.length + moreFindings.length);
 
   let msg = `🤖 <b>${familyBadge}${comp}ANALYSIS COMPLETE</b>\n`;
-  msg += `🏷️ <b>Scan:</b> <code>${sId}</code> · 📅 <i>${timeStr}</i>\n`;
-  msg += `📊 <i>${escapeHtml(statLine)}</i>\n\n`;
+  if (oldVersion && newVersion) {
+    msg += `📦 <b>Version:</b> <code>${escapeHtml(oldVersion)}</code> ➔ <b><code>${escapeHtml(newVersion)}</code></b>\n`;
+  }
+  msg += `🏷️ <b>Scan:</b> <code>${sId}</code> · 📅 <i>${timeStr}</i>\n\n`;
 
   // Major Early Signals
   if (majorSignals.length > 0) {
@@ -107,21 +138,33 @@ export function formatCompletionMessage({
       msg += `• <b>${escapeHtml(sig.category)}:</b> <code>${escapeHtml(sig.value)}</code> (${sig.score} pts)\n`;
     }
     msg += '\n';
+  } else if (majorSignals.length === 0 && totalLeaks === 0) {
+    msg += `ℹ️ <i>Routine update: No early leak signals detected in this release.</i>\n\n`;
+  }
+
+  // Files summary badge
+  if (totalLeaks > 0) {
+    msg += `📁 <b>Attached Files:</b> <code>leaks.txt</code>, <code>diff.txt</code>, <code>strings.txt</code> (${newStringsCount} new strings)\n\n`;
+  } else {
+    msg += `📁 <b>Attached Files:</b> <code>diff.txt</code>\n\n`;
+  }
+  if (totalLeaks > 0) {
+    msg += `📁 <b>Attached Files:</b> <code>leaks.txt</code>, <code>diff.txt</code>, <code>strings.txt</code> (${newStringsCount} new strings)\n\n`;
+  } else {
+    msg += `📁 <b>Attached Files:</b> <code>diff.txt</code>\n\n`;
   }
 
   // Expandable blockquote for additional findings
-  if (moreFindings.length > 0) {
-    const quoteLines = moreFindings.slice(0, 30).map((f) => {
+  if (moreFindings.length > 0 && (majorSignals.length > 0 || highSignals.length > 0)) {
+    const quoteLines = moreFindings.slice(0, 20).map((f) => {
       return `• ${escapeHtml(f.category)}: ${escapeHtml(f.value)} (${f.score} pts)`;
     }).join('\n');
     msg += `<blockquote expandable>${quoteLines}</blockquote>\n\n`;
   }
 
-  // Mandatory Count Check & Coverage block
+  // Count Check / Coverage summary
   if (countCheckText) {
     msg += `<code>${escapeHtml(countCheckText)}</code>\n`;
-  } else {
-    msg += `Coverage: ${coverage.percentage || 100}% ✓  macOS ${coverage.macOk ? '✓' : '✗'} Windows ${coverage.winOk ? '✓' : '✗'}\n`;
   }
 
   return msg.slice(0, 4096);

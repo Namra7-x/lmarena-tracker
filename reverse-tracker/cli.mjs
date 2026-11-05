@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Early Feature & Major Signal Finder — Unified CLI Runner
- * Personal tool for static reverse analysis of desktop apps & CLIs across macOS & Windows.
+ * Dynamic reverse-engineering engine for desktop apps & CLIs.
  */
 
 import path from 'node:path';
@@ -10,21 +10,30 @@ import { FAMILIES, COMPONENTS, generateScanId } from './registry/components.mjs'
 import { discoverComponent } from './sources/index.mjs';
 import { classifyChange, CHANGE_TYPE } from './fingerprint/classifier.mjs';
 import { computeIdentityFingerprint } from './fingerprint/identity.mjs';
-import { loadComponentState, saveComponentState, validateStateAdvancement } from './state/store.mjs';
+import { loadComponentState, saveComponentState } from './state/store.mjs';
 import { downloadArtifact } from './acquisition/downloader.mjs';
 import { extractArtifact } from './extraction/dispatcher.mjs';
 import { extractStrings } from './extraction/strings.mjs';
 import { matchSignalsInText } from './finder/rules.mjs';
+import { evaluateNoise } from './finder/noise.mjs';
 import { detectPlatformAsymmetry } from './finder/asymmetry.mjs';
 import { scoreFinding, sortFindings } from './finder/scorer.mjs';
 import { computeExactDiff } from './diff/engine.mjs';
 import { generateReportBundle } from './reports/bundle.mjs';
 import { TelegramClient } from './telegram/client.mjs';
-import { formatImmediateAlert, formatCompletionMessage } from './telegram/formatter.mjs';
+import {
+  formatImmediateAlert,
+  formatCompletionMessage,
+  formatBaselineCalibrationMessage,
+} from './telegram/formatter.mjs';
 
 const STATE_DIR = process.env.STATE_DIR || path.resolve(process.cwd(), 'state');
 const REPORTS_DIR = process.env.REPORTS_DIR || path.resolve(process.cwd(), 'reports');
 
+/**
+ * Detect changes for a family or all components.
+ * Manages clean first-run calibration without spamming files.
+ */
 async function handleDetect(familyId) {
   console.log(`\n🔍 [Detect] Checking components for family: ${familyId || 'ALL'}`);
   const componentsToCheck = familyId
@@ -32,6 +41,9 @@ async function handleDetect(familyId) {
     : Object.keys(COMPONENTS);
 
   const changes = [];
+  const firstRuns = [];
+  const tg = new TelegramClient();
+  const topicId = tg.getTopicId(familyId);
 
   for (const compId of componentsToCheck) {
     try {
@@ -41,6 +53,14 @@ async function handleDetect(familyId) {
 
       if (classification.changeType === CHANGE_TYPE.NO_CHANGE) {
         console.log(`  ✓ ${compId}: Unchanged (${candidate.version})`);
+      } else if (classification.changeType === CHANGE_TYPE.FIRST_RUN) {
+        console.log(`  🆕 ${compId}: First run detected (${candidate.version}). Initializing baseline.`);
+        firstRuns.push({
+          componentId: compId,
+          name: COMPONENTS[compId].name,
+          version: candidate.version,
+          candidate,
+        });
       } else {
         console.log(`  🚨 ${compId}: ${classification.changeType} -> ${classification.reason}`);
         changes.push({
@@ -56,9 +76,44 @@ async function handleDetect(familyId) {
     }
   }
 
+  // Handle FIRST_RUN cleanly: Initialize baseline without spamming files
+  if (firstRuns.length > 0 && changes.length === 0) {
+    console.log(`\n🚀 Initializing clean baseline for ${firstRuns.length} component(s)...`);
+    for (const item of firstRuns) {
+      const identityFingerprint = computeIdentityFingerprint(item.candidate);
+      saveComponentState(STATE_DIR, item.componentId, {
+        version: item.candidate.version,
+        releaseId: item.candidate.releaseId,
+        channel: item.candidate.channel || 'stable',
+        identityFingerprint,
+        scanId: generateScanId(item.componentId),
+        coverageState: 'COMPLETE',
+        hotSignals: [],
+        recentSignals: [],
+        historicalSeenHashes: [],
+      });
+    }
+
+    // Send single calm status message to Telegram showing latest versions
+    const calibrationMsg = formatBaselineCalibrationMessage({
+      family: familyId || 'ALL',
+      components: firstRuns,
+    });
+    try {
+      await tg.sendMessage(calibrationMsg, { topicId });
+      console.log(`📡 Baseline calibration summary sent to Telegram.`);
+    } catch (tgErr) {
+      console.warn(`Could not send baseline calibration message: ${tgErr.message}`);
+    }
+    return []; // Return empty so handleScan doesn't dump spam files on first run!
+  }
+
   return changes;
 }
 
+/**
+ * Perform deep diff analysis on a changed component.
+ */
 async function handleScan(componentId, options = {}) {
   const comp = COMPONENTS[componentId];
   if (!comp) throw new Error(`Unknown component ${componentId}`);
@@ -68,11 +123,10 @@ async function handleScan(componentId, options = {}) {
   const candidate = await discoverComponent(componentId);
   const scanId = generateScanId(componentId);
   const tg = new TelegramClient();
-
   const topicId = tg.getTopicId(comp.family);
 
-  // Step 1: Update-First Rule (Section 1.2) - Send Immediate Alert BEFORE downloading
-  console.log(`📡 Sending immediate alert to Telegram for ${scanId} (topic: ${topicId || 'default'})...`);
+  // Step 1: Update-First Rule - Send Immediate Alert BEFORE downloading
+  console.log(`📡 Sending immediate alert to Telegram for ${scanId}...`);
   const alertText = formatImmediateAlert({
     componentName: comp.name,
     family: comp.family,
@@ -82,16 +136,21 @@ async function handleScan(componentId, options = {}) {
     targets: comp.primaryTargets,
     releaseUrl: candidate.artifacts?.[0]?.url,
   });
-  const alertRes = await tg.sendMessage(alertText, { topicId });
-  const alertMessageId = alertRes?.result?.message_id;
 
-  // Step 2: Acquisition & Integrity
+  let alertMessageId = null;
+  try {
+    const alertRes = await tg.sendMessage(alertText, { topicId });
+    alertMessageId = alertRes?.result?.message_id;
+  } catch (tgErr) {
+    console.warn(`Could not send immediate alert: ${tgErr.message}`);
+  }
+
+  // Step 2: Acquisition & Multi-Encoding Extraction
   console.log(`📦 Acquiring ${candidate.artifacts.length} target artifacts...`);
   const acquiredArtifacts = [];
+  const allExtractedStrings = new Set();
   const macFindings = [];
   const winFindings = [];
-  let totalExtractedStrings = 0;
-  const rawFindings = [];
 
   for (const art of candidate.artifacts) {
     try {
@@ -99,36 +158,27 @@ async function handleScan(componentId, options = {}) {
       const dl = await downloadArtifact(art);
       acquiredArtifacts.push(dl);
 
-      // Step 3: Extraction
-      console.log(`   Extracting and scanning strings for ${art.target}...`);
-      const { files, status } = extractArtifact(dl.buffer, art.format, art.target, art.url);
+      console.log(`   Extracting artifacts for ${art.target}...`);
+      const { files } = extractArtifact(dl.buffer, art.format, art.target, art.url);
 
       for (const f of files) {
+        // Fast string extraction from text
         const textContent = f.buffer.toString('utf8');
         const lines = textContent.split('\n');
 
-        // Text & signal matching
         for (const line of lines) {
-          if (line.trim().length > 3) {
-            const matches = matchSignalsInText(line, f.path, 'text');
-            for (const m of matches) {
-              m.platforms = art.target.includes('darwin') ? ['macOS'] : art.target.includes('win32') ? ['Windows'] : ['Linux'];
-              rawFindings.push(m);
-              if (art.target.includes('darwin')) macFindings.push(m);
-              if (art.target.includes('win32')) winFindings.push(m);
-            }
+          const trimmed = line.trim();
+          if (trimmed.length >= 4 && trimmed.length <= 1000) {
+            allExtractedStrings.add(trimmed);
           }
         }
 
-        // Multi-encoding string scan on binary files
+        // Multi-encoding binary string scan on priority binaries
         if (f.priority === 2) {
           const binaryStrings = extractStrings(f.buffer);
-          totalExtractedStrings += binaryStrings.length;
           for (const s of binaryStrings) {
-            const matches = matchSignalsInText(s.value, f.path, 'binary');
-            for (const m of matches) {
-              m.artifactClasses = ['binary'];
-              rawFindings.push(m);
+            if (s.value && s.value.length >= 4 && s.value.length <= 1000) {
+              allExtractedStrings.add(s.value);
             }
           }
         }
@@ -138,14 +188,47 @@ async function handleScan(componentId, options = {}) {
     }
   }
 
-  // Step 4: Cross-platform Asymmetry (Section 4.2)
+  const totalExtractedStrings = allExtractedStrings.size;
+  console.log(`   Total distinct strings extracted: ${totalExtractedStrings}`);
+
+  // Step 3: Compute String Set Delta (S_new = S_current \ S_baseline)
+  const historicalSeenHashes = new Set(baseline.historicalSeenHashes || []);
+  const newCleanStrings = [];
+
+  for (const str of allExtractedStrings) {
+    if (historicalSeenHashes.has(str)) continue;
+
+    // Filter through Noise Sieve (Shannon entropy, CSS, Webpack boilerplate, base64)
+    const noise = evaluateNoise(str);
+    if (!noise.isNoise) {
+      newCleanStrings.push(str);
+    }
+  }
+
+  console.log(`   New clean strings in delta: ${newCleanStrings.length}`);
+
+  // Step 4: Dynamic Heuristic Leak Detection on newCleanStrings
+  const rawFindings = [];
+  for (const str of newCleanStrings) {
+    const matches = matchSignalsInText(str, '', 'delta');
+    for (const m of matches) {
+      rawFindings.push(m);
+    }
+  }
+
+  console.log(`   Potential leak signals matched: ${rawFindings.length}`);
+
+  // Step 5: Cross-platform Asymmetry
   const platformAsymmetry = detectPlatformAsymmetry(macFindings, winFindings);
 
-  // Step 5: Exact Diff Engine (Section 7)
-  const historicalSeenHashes = new Set(baseline.historicalSeenHashes || []);
-  const diffResults = computeExactDiff(baseline.recentSignals || [], rawFindings, historicalSeenHashes);
+  // Step 6: Exact Diff Engine
+  const diffResults = computeExactDiff(
+    baseline.recentSignals || [],
+    rawFindings,
+    historicalSeenHashes
+  );
 
-  // Step 6: Scoring & Tier Assignment (Section 4.3 & 4.4)
+  // Step 7: Deterministic Scoring & Ranking
   const scoredFindings = rawFindings.map((f) => {
     const isNew = diffResults.newFindings.some((nf) => nf.value === f.value);
     const isFirstEver = !historicalSeenHashes.has(f.value);
@@ -157,7 +240,7 @@ async function handleScan(componentId, options = {}) {
   const highSignals = sortedScored.filter((f) => f.tier === 'HIGH-CONFIDENCE SIGNAL');
   const moreFindings = sortedScored.filter((f) => f.tier === 'EARLY SIGNAL');
 
-  // Step 7: Generate Report Bundle & Mandatory Count Check (Section 8.1)
+  // Step 8: Generate Report Bundle (leaks.txt, diff.txt, strings.txt)
   const coveragePercentage = candidate.artifacts.length > 0
     ? Math.round((acquiredArtifacts.length / candidate.artifacts.length) * 100)
     : 100;
@@ -171,8 +254,13 @@ async function handleScan(componentId, options = {}) {
   const reportBundle = generateReportBundle(scanReportsDir, {
     scanId,
     componentId,
+    family: comp.family,
     version: candidate.version,
-    diffResults,
+    oldVersion: baseline.version || 'unknown',
+    diffResults: {
+      ...diffResults,
+      newFindings: newCleanStrings.map((s) => ({ value: s })),
+    },
     scoredFindings: sortedScored,
     platformAsymmetry,
     coverage: {
@@ -182,15 +270,18 @@ async function handleScan(componentId, options = {}) {
       winOk: winFindings.length > 0,
       failedArtifacts: candidate.artifacts.length - acquiredArtifacts.length,
     },
-    totalExtractedStrings: totalExtractedStrings || rawFindings.length,
+    totalExtractedStrings,
+    artifactInventory: acquiredArtifacts,
   });
 
   console.log(`\n📊 Count Check Result:\n${reportBundle.countCheck.text}`);
 
-  // Step 8: Telegram Completion Message
+  // Step 9: Send Telegram Completion Message with Attached Files
   const completionText = formatCompletionMessage({
     componentName: comp.name,
     family: comp.family,
+    oldVersion: baseline.version || 'none',
+    newVersion: candidate.version,
     scanId,
     counts: {
       commands: sortedScored.filter((f) => f.category === 'hidden_command').length,
@@ -201,32 +292,38 @@ async function handleScan(componentId, options = {}) {
     majorSignals,
     highSignals,
     moreFindings,
+    leakCount: reportBundle.leaksCount,
+    newStringsCount: newCleanStrings.length,
     countCheckText: reportBundle.countCheck.text,
   });
 
-  if (alertMessageId) {
-    await tg.sendMessage(completionText, { replyToMessageId: alertMessageId, topicId });
-  } else {
-    await tg.sendMessage(completionText, { topicId });
+  try {
+    if (alertMessageId) {
+      await tg.sendMessage(completionText, { replyToMessageId: alertMessageId, topicId });
+    } else {
+      await tg.sendMessage(completionText, { topicId });
+    }
+  } catch (tgErr) {
+    console.warn(`Could not send completion message: ${tgErr.message}`);
   }
 
-  // Upload report files to Telegram
-  for (const file of reportBundle.files) {
+  // Upload the 3 clean report files (leaks.txt, diff.txt, strings.txt)
+  for (const file of reportBundle.telegramFiles) {
     try {
+      console.log(`   Uploading ${path.basename(file)} to Telegram...`);
       await tg.sendDocument(file, `Scan ${scanId} - ${path.basename(file)}`, { topicId });
-      // Gentle 500ms pacing between file uploads
       await new Promise((r) => setTimeout(r, 500));
     } catch (docErr) {
       console.warn(`Could not upload ${path.basename(file)} to Telegram: ${docErr.message}`);
     }
   }
 
-  // Step 9: Compact State Persistence
+  // Step 10: Compact State Persistence
   if (coverageState !== 'FAILED') {
     const identityFingerprint = candidate.identityFingerprint || computeIdentityFingerprint(candidate);
     const updatedSeenHashes = Array.from(
-      new Set([...historicalSeenHashes, ...rawFindings.map((f) => f.value)])
-    );
+      new Set([...historicalSeenHashes, ...newCleanStrings])
+    ).slice(0, 25000); // Retain up to 25,000 recent unique hashes
 
     saveComponentState(STATE_DIR, componentId, {
       version: candidate.version,
@@ -237,12 +334,13 @@ async function handleScan(componentId, options = {}) {
       coverageState,
       hotSignals: majorSignals.slice(0, 100),
       recentSignals: sortedScored.slice(0, 2000),
-      historicalSeenHashes: updatedSeenHashes.slice(0, 10000),
+      historicalSeenHashes: updatedSeenHashes,
     });
     console.log(`✅ Deep scan complete for ${componentId} (${scanId}). State updated (${coverageState}).`);
   } else {
     console.warn(`⚠️ Scan for ${componentId} FAILED required coverage. Baseline will not advance.`);
   }
+
   return { scanId, candidate, diffResults, reportBundle, coverageState };
 }
 
