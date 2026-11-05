@@ -1,7 +1,7 @@
 /**
  * Early Signal Radar - Test Suite
  * Tests Artificial Analysis parsing, ChatGPT & Claude manifest extraction,
- * SDK commit diff parsing, and Discord embed builder.
+ * SDK commit diff parsing, deep build analyzer, and Discord embed builder.
  * Verifies ZERO HARDCODED MODEL NAMES.
  */
 
@@ -12,6 +12,7 @@ import { RADAR_CONFIG } from '../early-radar/config.mjs';
 import { extractModelIdentifiersFromDiff } from '../early-radar/sources/sdk_commits.mjs';
 import { extractDynamicModelIdentifiers } from '../early-radar/sources/chatgpt_manifest.mjs';
 import { extractDynamicClaudeIdentifiers } from '../early-radar/sources/claude_manifest.mjs';
+import { analyzeChunkContent, writeBuildReport } from '../early-radar/analyzer.mjs';
 import {
   buildArtificialAnalysisEmbed,
   buildChatGPTBuildEmbed,
@@ -83,6 +84,36 @@ describe('Dynamic Model Extraction (Zero Hardcoded Names)', () => {
   });
 });
 
+describe('Deep Build Analyzer & Reports', () => {
+  it('should extract feature gates, tools, launch copy, and models from chunk text', () => {
+    const mockChunk = `
+      const gates = ["can_see_autonomous_tasks", "enable_deep_reasoning_v2"];
+      const tool = { name: "terminal_sandbox_action" };
+      const banner = "Introducing Project Titan: A new paradigm in reasoning";
+      const settings = { model_slug: "titan-preview" };
+    `;
+
+    const analysis = analyzeChunkContent(mockChunk);
+    assert.ok(analysis.models.includes('titan-preview'));
+    assert.ok(analysis.featureGates.includes('can_see_autonomous_tasks'));
+    assert.ok(analysis.featureGates.includes('enable_deep_reasoning_v2'));
+    assert.ok(analysis.toolSchemas.includes('terminal_sandbox_action'));
+    assert.ok(analysis.launchCopy.some((c) => c.includes('Introducing Project Titan')));
+  });
+
+  it('should generate a permanent markdown report file without errors', () => {
+    const analysis = {
+      models: ['titan-preview'],
+      featureGates: ['can_see_autonomous_tasks'],
+      toolSchemas: ['terminal_sandbox_action'],
+      launchCopy: ['Introducing Project Titan'],
+    };
+
+    const url = writeBuildReport('ChatGPT', 'test1234', analysis);
+    assert.ok(url.includes('BUILD_chatgpt_test1234.md'));
+  });
+});
+
 describe('Discord Embed Builder', () => {
   it('should build rich embed for Artificial Analysis new model', () => {
     const model = {
@@ -97,18 +128,23 @@ describe('Discord Embed Builder', () => {
     assert.equal(embed.fields[1].value, '`arbitrary-new-model`');
   });
 
-  it('should build rich embed for ChatGPT web app build deployment', () => {
+  it('should build rich embed for ChatGPT web app build deployment with detected models', () => {
     const event = {
       manifestHash: '1a91f86c',
       prevHash: 'old99999',
       manifestUrl: 'https://chatgpt.com/cdn/assets/manifest-1a91f86c.js',
       totalChunks: 6721,
+      models: ['titan-preview'],
+      featureGates: ['can_see_autonomous_tasks'],
+      launchCopy: ['Introducing Project Titan'],
+      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/feat/early-radar/early-radar/reports/BUILD_chatgpt_1a91f86c.md',
     };
     const embed = buildChatGPTBuildEmbed(event);
     assert.ok(embed.title.includes('ChatGPT Web App'));
     assert.equal(embed.color, RADAR_CONFIG.colors.chatgpt);
-    assert.equal(embed.fields[0].value, '`1a91f86c`');
-    assert.equal(embed.fields[1].value, '`old99999`');
+    assert.ok(embed.fields.some((f) => f.name.includes('Discovered Model Slugs')));
+    assert.ok(embed.fields.some((f) => f.name.includes('Feature Gates')));
+    assert.ok(embed.fields.some((f) => f.name.includes('Unabridged Full Report')));
   });
 
   it('should build rich embed for Claude web app build deployment', () => {
@@ -116,11 +152,13 @@ describe('Discord Embed Builder', () => {
       entryHash: 'PYSO3vVA',
       prevHash: 'OLDHASH1',
       entryUrl: 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-PYSO3vVA.js',
+      models: ['claude-4-preview'],
+      featureGates: ['can_see_computer_use_v2'],
     };
     const embed = buildClaudeBuildEmbed(event);
     assert.ok(embed.title.includes('Claude.ai'));
     assert.equal(embed.color, RADAR_CONFIG.colors.claude);
-    assert.equal(embed.fields[0].value, '`PYSO3vVA`');
+    assert.ok(embed.fields.some((f) => f.name.includes('Discovered Model Slugs')));
   });
 
   it('should build rich embed for SDK model commit with dynamic additions', () => {
@@ -137,8 +175,8 @@ describe('Discord Embed Builder', () => {
     const embed = buildSdkCommitEmbed(event);
     assert.ok(embed.title.includes('OpenAI SDK'));
     assert.equal(embed.color, RADAR_CONFIG.colors.chatgpt);
-    assert.ok(embed.fields.some((f) => f.name === 'Model Enum Additions'));
-    const additionsField = embed.fields.find((f) => f.name === 'Model Enum Additions');
+    assert.ok(embed.fields.some((f) => f.name.includes('Model Enum Additions')));
+    const additionsField = embed.fields.find((f) => f.name.includes('Model Enum Additions'));
     assert.ok(additionsField.value.includes('brand-new-unannounced-model'));
   });
 });
