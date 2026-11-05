@@ -2,7 +2,9 @@ name: Hugging Face Signal Tracker
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/1 * * * *'
+  repository_dispatch:
+    types: [tracker, hf_tracker]
   workflow_dispatch:
     inputs:
       init_ping:

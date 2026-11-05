@@ -1,6 +1,8 @@
 name: DesignArena Tracker
 
 on:
+  schedule:
+    - cron: '*/1 * * * *'
   push:
     branches: [main]
     paths-ignore:
