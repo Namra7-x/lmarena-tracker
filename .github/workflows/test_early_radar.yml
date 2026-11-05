@@ -30,10 +30,12 @@ jobs:
         env:
           INPUT_WEBHOOK_URL: ${{ inputs.webhook_url }}
           EARLY_RADAR_DISCORD_WEBHOOK_URL: ${{ secrets.EARLY_RADAR_DISCORD_WEBHOOK_URL }}
+          RADAR_DISCORD_WEBHOOK_URL: ${{ secrets.RADAR_DISCORD_WEBHOOK_URL }}
           HF_DISCORD_WEBHOOK_URL: ${{ secrets.HF_DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TARGET_URL="${INPUT_WEBHOOK_URL:-${EARLY_RADAR_DISCORD_WEBHOOK_URL:-$HF_DISCORD_WEBHOOK_URL}}"
+          TARGET_URL="${INPUT_WEBHOOK_URL:-${EARLY_RADAR_DISCORD_WEBHOOK_URL:-${RADAR_DISCORD_WEBHOOK_URL:-${HF_DISCORD_WEBHOOK_URL:-$DISCORD_WEBHOOK_URL}}}}"
           if [ -z "$TARGET_URL" ]; then
             echo "::error::No Discord webhook URL found. Please provide it in the workflow input or set EARLY_RADAR_DISCORD_WEBHOOK_URL in repository secrets."
             exit 1
