@@ -1,6 +1,16 @@
 {
   "Qwen": {
     "models": {
+      "Qwen/Qwen3.8-27B": {
+        "lastModified": "2026-11-05T15:15:29.000Z",
+        "gated": false,
+        "pipeline_tag": "image-text-to-text"
+      },
+      "Qwen/Qwen3.8-Flash-Next": {
+        "lastModified": "2026-11-05T15:13:40.000Z",
+        "gated": false,
+        "pipeline_tag": "image-text-to-text"
+      },
       "Qwen/Qwen-Image-2.1-Turbo": {
         "lastModified": "2026-10-12T09:45:49.000Z",
         "gated": false,
@@ -43,16 +53,6 @@
       },
       "Qwen/Qwen3.8-Flash-Next-FP8": {
         "lastModified": "2026-08-31T08:19:15.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "Qwen/Qwen3.8-Flash-Next": {
-        "lastModified": "2026-08-27T05:03:36.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "Qwen/Qwen3.8-27B": {
-        "lastModified": "2026-08-14T15:00:01.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text"
       },
@@ -230,11 +230,6 @@
         "lastUpdated": "2026-08-26T12:32:48.688Z",
         "itemCount": 2
       },
-      "Qwen/qwen3-tts-696fa0aecc17b9ea599b054b": {
-        "title": "Qwen3-TTS",
-        "lastUpdated": "2026-01-22T13:00:57.262Z",
-        "itemCount": 4
-      },
       "Qwen/qwen-scope-69f209ad6ecbae6a3bd0b2ea": {
         "title": "Qwen-Scope",
         "lastUpdated": "2026-05-14T07:14:30.062Z",
@@ -248,6 +243,11 @@
       "Qwen/qwen3-asr-6979d9a91a05838d032ae413": {
         "title": "Qwen3-ASR",
         "lastUpdated": "2026-06-26T09:04:25.732Z",
+        "itemCount": 4
+      },
+      "Qwen/qwen3-tts-696fa0aecc17b9ea599b054b": {
+        "title": "Qwen3-TTS",
+        "lastUpdated": "2026-01-22T13:00:57.262Z",
         "itemCount": 4
       },
       "Qwen/qwen3guard-68d2729abbfae4716f3343a1": {
@@ -1188,11 +1188,6 @@
         "lastUpdated": "2026-10-23T17:34:27.219Z",
         "itemCount": 4
       },
-      "mistralai/ministral-3-6915edd974b567e0458435f9": {
-        "title": "Ministral 3",
-        "lastUpdated": "2026-10-23T17:34:27.219Z",
-        "itemCount": 4
-      },
       "mistralai/leanstral-15-6adb9a9a4adb70a707766136": {
         "title": "Leanstral 1.5",
         "lastUpdated": "2026-10-23T17:35:13.833Z",
@@ -1212,6 +1207,11 @@
         "title": "Mistral Small 4",
         "lastUpdated": "2026-10-23T17:34:27.220Z",
         "itemCount": 3
+      },
+      "mistralai/ministral-3-6915edd974b567e0458435f9": {
+        "title": "Ministral 3",
+        "lastUpdated": "2026-10-23T17:34:27.219Z",
+        "itemCount": 4
       },
       "mistralai/shieldstral-6adb95c1fe62bfd2fcc2edda": {
         "title": "Shieldstral",
@@ -2092,11 +2092,6 @@
         "lastUpdated": "2026-10-20T13:47:42.613Z",
         "itemCount": 4
       },
-      "nvidia/nemotron-personas-68d550835d13d8028eccc340": {
-        "title": "Nemotron-Personas",
-        "lastUpdated": "2026-10-20T16:29:14.251Z",
-        "itemCount": 4
-      },
       "nvidia/llama-nemotron-67d92346030a2691293f200b": {
         "title": "Llama Nemotron",
         "lastUpdated": "2026-10-20T13:09:31.928Z",
@@ -2111,6 +2106,11 @@
         "title": "Nemotron 3.5 Retriever",
         "lastUpdated": "2026-10-20T13:47:18.258Z",
         "itemCount": 4
+      },
+      "nvidia/local-ai-optimized-checkpoints-6ad2a5823f5a7563a800ba56": {
+        "title": "Local AI Optimized Checkpoints ",
+        "lastUpdated": "2026-10-20T13:09:31.856Z",
+        "itemCount": 2
       }
     }
   },
