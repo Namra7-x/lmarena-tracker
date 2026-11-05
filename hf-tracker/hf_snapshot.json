@@ -2054,7 +2054,7 @@
       },
       "nvidia/nemotron-speech-6946215f3183fe85883afff8": {
         "title": "Nemotron Speech",
-        "lastUpdated": "2026-10-29T23:06:59.455Z",
+        "lastUpdated": "2026-11-05T18:59:42.426Z",
         "itemCount": 4
       },
       "nvidia/nemotron-pre-training-datasets-689d9de36f84279d83786b35": {
@@ -4155,6 +4155,11 @@
         "lastUpdated": "2026-10-28T22:30:11.600Z",
         "itemCount": 4
       },
+      "LiquidAI/liquid-longevity-llms-6a14e3abdc2400cb032f2586": {
+        "title": "🧪 Liquid Longevity LLMs",
+        "lastUpdated": "2026-10-28T22:30:11.609Z",
+        "itemCount": 2
+      },
       "LiquidAI/lfm25-audio-695ba9c301130378734e0991": {
         "title": "🔈 LFM2.5-Audio",
         "lastUpdated": "2026-10-28T22:30:11.616Z",
@@ -4169,11 +4174,6 @@
         "title": "🇯🇵 LFM JP",
         "lastUpdated": "2026-10-28T22:30:11.610Z",
         "itemCount": 4
-      },
-      "LiquidAI/liquid-longevity-llms-6a14e3abdc2400cb032f2586": {
-        "title": "🧪 Liquid Longevity LLMs",
-        "lastUpdated": "2026-10-28T22:30:11.609Z",
-        "itemCount": 2
       },
       "LiquidAI/lfm25-vl-695af285c6d0c7b22b0609a2": {
         "title": "👁️ LFM2.5-VL",
@@ -4903,6 +4903,11 @@
   },
   "stabilityai": {
     "models": {
+      "stabilityai/stable-audio-open-small": {
+        "lastModified": "2026-11-05T18:59:32.000Z",
+        "gated": false,
+        "pipeline_tag": "text-to-audio"
+      },
       "stabilityai/stable-audio-3-optimized": {
         "lastModified": "2026-10-30T00:22:06.000Z",
         "gated": false,
@@ -5020,11 +5025,6 @@
       },
       "stabilityai/stable-diffusion-3.5-large-tensorrt": {
         "lastModified": "2025-10-20T15:27:24.000Z",
-        "gated": false,
-        "pipeline_tag": "text-to-image"
-      },
-      "stabilityai/stable-diffusion-3-medium_amdgpu": {
-        "lastModified": "2025-07-16T16:48:14.000Z",
         "gated": false,
         "pipeline_tag": "text-to-image"
       }
@@ -5349,12 +5349,12 @@
   "allenai": {
     "models": {
       "allenai/Molmo2-4B-tb": {
-        "lastModified": "2026-11-05T18:12:40.000Z",
+        "lastModified": "2026-11-05T18:22:38.000Z",
         "gated": false,
         "pipeline_tag": "robotics"
       },
       "allenai/maniflow-tb": {
-        "lastModified": "2026-11-05T17:54:00.000Z",
+        "lastModified": "2026-11-05T18:21:34.000Z",
         "gated": false,
         "pipeline_tag": "robotics"
       },
