@@ -1,13 +1,13 @@
 {
   "componentId": "gemini-desktop",
-  "version": "build-70496ed-6aa1e4d0",
-  "releaseId": "gemini-desktop-build-70496ed-6aa1e4d0",
+  "version": "build-6e71e56-05ca0b27",
+  "releaseId": "gemini-desktop-build-6e71e56-05ca0b27",
   "channel": "stable",
-  "identityFingerprint": "cec6c01ea1f1823be931c16b7227768ff0a905026fac0aef7161027652ee6606",
+  "identityFingerprint": "50e084aab48b8119993a07eae49a047ca79987db969b9ad54d4ef9bcc8fead88",
   "diagnosticFingerprint": null,
   "scanId": "GD-20261105-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-05T14:57:09.297Z",
+  "lastSuccessfulScan": "2026-11-05T15:13:33.678Z",
   "hotSignals": [],
   "recentSignals": [
     {
@@ -18,14 +18,10 @@
       "dormantMarker": "canary",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -48,14 +44,10 @@
       "dormantMarker": "disabled",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -78,14 +70,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -104,14 +92,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -130,14 +114,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
