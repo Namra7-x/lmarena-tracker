@@ -1,0 +1,40 @@
+name: Early Signal Radar - Test Webhook
+
+on:
+  workflow_dispatch:
+    inputs:
+      webhook_url:
+        description: 'Discord Webhook URL (leave empty to use repository secret)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  test-radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Send All 5 Category Cards (1 Single Discord Message)
+        env:
+          INPUT_WEBHOOK_URL: ${{ inputs.webhook_url }}
+          EARLY_RADAR_DISCORD_WEBHOOK_URL: ${{ secrets.EARLY_RADAR_DISCORD_WEBHOOK_URL }}
+          HF_DISCORD_WEBHOOK_URL: ${{ secrets.HF_DISCORD_WEBHOOK_URL }}
+        run: |
+          TARGET_URL="${INPUT_WEBHOOK_URL:-${EARLY_RADAR_DISCORD_WEBHOOK_URL:-$HF_DISCORD_WEBHOOK_URL}}"
+          if [ -z "$TARGET_URL" ]; then
+            echo "::error::No Discord webhook URL found. Please provide it in the workflow input or set EARLY_RADAR_DISCORD_WEBHOOK_URL in repository secrets."
+            exit 1
+          fi
+          node early-radar/radar.mjs --test-webhook "$TARGET_URL"
