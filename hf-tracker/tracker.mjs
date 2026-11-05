@@ -61,7 +61,7 @@ async function main() {
   }
 
   // Handle initialization or test preview ping
-  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  const webhookUrl = process.env.HF_DISCORD_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
   const isTestPing = process.env.INIT_PING === 'true' || process.env.INIT_PING === '1';
 
   if (isTestPing && webhookUrl) {
@@ -115,7 +115,7 @@ async function main() {
   }
 
   // Dispatch to Discord
-  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  const webhookUrl = process.env.HF_DISCORD_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
   if (webhookUrl) {
     const res = await sendDiscordAlerts(allEvents, webhookUrl);
     console.log(`[HF Tracker] Dispatched ${res.sent}/${res.total} alerts to Discord webhook.`);

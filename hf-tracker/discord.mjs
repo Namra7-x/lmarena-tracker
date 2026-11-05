@@ -168,7 +168,10 @@ export function buildEmbed(event) {
  * Sends a list of embeds to the Discord Webhook URL.
  * Bundles up to 10 embeds per message to maintain Discord rate limits.
  */
-export async function sendDiscordAlerts(events, webhookUrl = process.env.DISCORD_WEBHOOK_URL) {
+export async function sendDiscordAlerts(
+  events,
+  webhookUrl = (process.env.HF_DISCORD_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL)
+) {
   if (!webhookUrl) {
     console.warn('[HF Tracker] No DISCORD_WEBHOOK_URL configured. Skipping Discord alert dispatch.');
     return { sent: 0, skipped: events.length };

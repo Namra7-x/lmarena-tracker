@@ -29,6 +29,7 @@ jobs:
 
       - name: Run Hugging Face Tracker
         env:
+          HF_DISCORD_WEBHOOK_URL: ${{ secrets.HF_DISCORD_WEBHOOK_URL }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           INIT_PING: ${{ inputs.init_ping || 'false' }}
         run: node hf-tracker/tracker.mjs
