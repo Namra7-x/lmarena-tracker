@@ -3,163 +3,12 @@
   "version": "build-45cac7fcd387eefa",
   "releaseId": "claude-desktop-build-45cac7fcd387eefa",
   "channel": "stable",
-  "identityFingerprint": "1b51ad41199266b264e76646b65bd4ac4fc2e873363a1cb42855ece2845dd1f0",
+  "identityFingerprint": "3e67df38250a2ec97053b4dd8f31fb6a5cd11abc30c994bafd35d49d75beeec4",
   "diagnosticFingerprint": null,
   "scanId": "CA-20261105-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-05T19:30:45.872Z",
-  "hotSignals": [
-    {
-      "category": "model_id",
-      "value": "cursor-default",
-      "context": "\"focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hid",
-      "hasDormantMarker": true,
-      "dormantMarker": "hidden",
-      "filePath": "",
-      "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (hidden) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "cursor-not-allowed",
-      "context": "\"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disable",
-      "hasDormantMarker": true,
-      "dormantMarker": "disabled",
-      "filePath": "",
-      "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (disabled) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "cursor-not-allowed",
-      "context": "\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:ar",
-      "hasDormantMarker": true,
-      "dormantMarker": "disabled",
-      "filePath": "",
-      "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (disabled) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "cursor-not-allowed",
-      "context": "\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py",
-      "hasDormantMarker": true,
-      "dormantMarker": "disabled",
-      "filePath": "",
-      "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (disabled) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "cursor-not-allowed",
-      "context": "\"border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destruct",
-      "hasDormantMarker": true,
-      "dormantMarker": "disabled",
-      "filePath": "",
-      "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (disabled) in context",
-          "points": 15
-        }
-      ]
-    }
-  ],
+  "lastSuccessfulScan": "2026-11-05T19:32:49.052Z",
+  "hotSignals": [],
   "recentSignals": [
     {
       "category": "model_id",
@@ -169,14 +18,10 @@
       "dormantMarker": "hidden",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
+      "score": 55,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -199,14 +44,10 @@
       "dormantMarker": "disabled",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
+      "score": 55,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -229,14 +70,10 @@
       "dormantMarker": "disabled",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
+      "score": 55,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -259,14 +96,10 @@
       "dormantMarker": "disabled",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
+      "score": 55,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -289,14 +122,10 @@
       "dormantMarker": "disabled",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
+      "score": 55,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -319,14 +148,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -349,14 +174,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -379,14 +200,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -409,14 +226,10 @@
       "dormantMarker": "preview",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -439,14 +252,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -469,14 +278,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -499,14 +304,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 55,
+      "score": 45,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -529,14 +330,10 @@
       "dormantMarker": "nda",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 52,
+      "score": 42,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -559,14 +356,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 52,
+      "score": 42,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -589,14 +382,10 @@
       "dormantMarker": "disabled",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 52,
+      "score": 42,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -619,14 +408,10 @@
       "dormantMarker": "preview",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -649,14 +434,10 @@
       "dormantMarker": "preview",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -679,14 +460,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -709,14 +486,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -739,14 +512,10 @@
       "dormantMarker": "experimental",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -769,14 +538,10 @@
       "dormantMarker": "experimental",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -799,14 +564,10 @@
       "dormantMarker": "experimental",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -829,14 +590,10 @@
       "dormantMarker": "experimental",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -859,14 +616,10 @@
       "dormantMarker": "experimental",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -889,14 +642,10 @@
       "dormantMarker": "experimental",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -919,14 +668,10 @@
       "dormantMarker": "internal",
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -949,14 +694,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -975,14 +716,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1001,14 +738,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1027,14 +760,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 50,
+      "score": 40,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1053,14 +782,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1079,14 +804,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1105,14 +826,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1131,14 +848,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1157,14 +870,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1183,14 +892,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1209,14 +914,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1235,14 +936,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1261,14 +958,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1287,14 +980,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1313,14 +1002,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1339,14 +1024,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1365,14 +1046,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1391,14 +1068,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1417,14 +1090,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1443,14 +1112,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1469,14 +1134,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1495,14 +1156,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1521,14 +1178,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1547,14 +1200,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1573,14 +1222,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1599,14 +1244,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1625,14 +1266,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1651,14 +1288,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1677,14 +1310,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1703,14 +1332,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1729,14 +1354,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1755,14 +1376,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1781,14 +1398,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1807,14 +1420,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1833,14 +1442,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1859,14 +1464,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1885,14 +1486,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1911,14 +1508,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1937,14 +1530,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1963,14 +1552,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -1989,14 +1574,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2015,14 +1596,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2041,14 +1618,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2067,14 +1640,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2093,14 +1662,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2119,14 +1684,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2145,14 +1706,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2171,14 +1728,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2197,14 +1750,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2223,14 +1772,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2249,14 +1794,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2275,14 +1816,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2301,14 +1838,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2327,14 +1860,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2353,14 +1882,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2379,14 +1904,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2405,14 +1926,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2431,14 +1948,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2457,14 +1970,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2483,14 +1992,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2509,14 +2014,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2535,14 +2036,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2561,14 +2058,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2587,14 +2080,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2613,14 +2102,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2639,14 +2124,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2665,14 +2146,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2691,14 +2168,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2717,14 +2190,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2743,14 +2212,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2769,14 +2234,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2795,14 +2256,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2821,14 +2278,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
+      "score": 30,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2847,14 +2300,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2873,14 +2322,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2899,14 +2344,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2925,14 +2366,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2951,14 +2388,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -2977,14 +2410,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3003,14 +2432,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3029,14 +2454,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3055,14 +2476,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3081,14 +2498,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3107,14 +2520,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3133,14 +2542,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3159,14 +2564,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3185,14 +2586,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3211,14 +2608,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3237,14 +2630,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3263,14 +2652,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3289,14 +2674,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3315,14 +2696,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3341,14 +2718,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3367,14 +2740,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3393,14 +2762,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3419,14 +2784,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3445,14 +2806,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3471,14 +2828,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3497,14 +2850,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3523,14 +2872,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3549,14 +2894,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3575,14 +2916,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3601,14 +2938,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3627,14 +2960,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3653,14 +2982,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3679,14 +3004,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3705,14 +3026,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3731,14 +3048,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3757,14 +3070,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3783,14 +3092,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3809,14 +3114,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3835,14 +3136,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3861,14 +3158,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3887,14 +3180,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3913,14 +3202,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3939,14 +3224,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3965,14 +3246,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -3991,14 +3268,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4017,14 +3290,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4043,14 +3312,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4069,14 +3334,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4095,14 +3356,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4121,14 +3378,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4147,14 +3400,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4173,14 +3422,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4199,14 +3444,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4225,14 +3466,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 37,
-      "tier": "EARLY SIGNAL",
+      "score": 27,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4251,14 +3488,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4277,14 +3510,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4303,14 +3532,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4329,14 +3554,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4355,14 +3576,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4381,14 +3598,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4407,14 +3620,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4433,14 +3642,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4459,14 +3664,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4485,14 +3686,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4511,14 +3708,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4537,14 +3730,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4563,14 +3752,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4589,14 +3774,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4615,14 +3796,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4641,14 +3818,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4667,14 +3840,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4693,14 +3862,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4719,14 +3884,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4745,14 +3906,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4771,14 +3928,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4797,14 +3950,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4823,14 +3972,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4849,14 +3994,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4875,14 +4016,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4901,14 +4038,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4927,14 +4060,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4953,14 +4082,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -4979,14 +4104,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5005,14 +4126,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5031,14 +4148,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5057,14 +4170,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5083,14 +4192,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5109,14 +4214,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5135,14 +4236,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5161,14 +4258,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5187,14 +4280,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5213,14 +4302,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5239,14 +4324,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5265,14 +4346,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5291,14 +4368,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5317,14 +4390,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5343,14 +4412,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5369,14 +4434,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5395,14 +4456,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5421,14 +4478,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5447,14 +4500,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5473,14 +4522,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5499,14 +4544,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5525,14 +4566,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5551,14 +4588,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5577,14 +4610,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5603,14 +4632,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5629,14 +4654,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5655,14 +4676,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5681,14 +4698,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5707,14 +4720,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5733,14 +4742,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5759,14 +4764,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5785,14 +4786,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5811,14 +4808,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5837,14 +4830,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5863,14 +4852,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5889,14 +4874,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5915,14 +4896,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5941,14 +4918,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5967,14 +4940,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -5993,14 +4962,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6019,14 +4984,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6045,14 +5006,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6071,14 +5028,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6097,14 +5050,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6123,14 +5072,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6149,14 +5094,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6175,14 +5116,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6201,14 +5138,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6227,14 +5160,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6253,14 +5182,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6279,14 +5204,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6305,14 +5226,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6331,14 +5248,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6357,14 +5270,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6383,14 +5292,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6409,14 +5314,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6435,14 +5336,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6461,14 +5358,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6487,14 +5380,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6513,14 +5402,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6539,14 +5424,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6565,14 +5446,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6591,14 +5468,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6617,14 +5490,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6643,14 +5512,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6669,14 +5534,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
@@ -6695,14 +5556,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
