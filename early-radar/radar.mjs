@@ -24,14 +24,21 @@ import {
   buildChatGPTBuildEmbed,
   buildClaudeBuildEmbed,
   buildSdkCommitEmbed,
+  buildRadarShowcaseEmbeds,
   sendDiscordEmbeds,
 } from './discord.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT_PATH = path.join(__dirname, 'radar_snapshot.json');
 
-// Resolve Webhook URL from environment variables
+// Resolve Webhook URL from CLI arguments or environment variables
 function getWebhookUrl() {
+  // Check CLI arguments: --test-webhook <url> or --webhook <url>
+  const webhookArgIdx = process.argv.findIndex((a) => a === '--test-webhook' || a === '--webhook');
+  if (webhookArgIdx !== -1 && process.argv[webhookArgIdx + 1]?.startsWith('https://discord.com/api/webhooks/')) {
+    return process.argv[webhookArgIdx + 1].trim();
+  }
+
   for (const envVar of RADAR_CONFIG.webhookEnvVars) {
     const val = process.env[envVar]?.trim();
     if (val && val.startsWith('https://discord.com/api/webhooks/')) {
@@ -63,11 +70,27 @@ function saveSnapshot(data) {
 }
 
 export async function runRadar(options = {}) {
-  const isInitPing = options.initPing || process.env.INIT_PING === '1' || process.argv.includes('--init-ping');
+  const isInitPing = options.initPing || process.env.INIT_PING === '1' || process.argv.includes('--init-ping') || process.argv.includes('--test-webhook');
   const githubToken = process.env.GITHUB_TOKEN || null;
-  const webhookUrl = getWebhookUrl();
+  const webhookUrl = options.webhookUrl || getWebhookUrl();
 
   console.log(`[RADAR] Starting Early Signal Radar...`);
+
+  // Handle INIT_PING / Test Mode: Delivers all 5 categories in ONE single Discord message
+  if (isInitPing) {
+    if (!webhookUrl) {
+      console.error(`[RADAR] ❌ Cannot send test showcase: No Discord webhook URL provided.`);
+      console.log(`[RADAR] Usage: node early-radar/radar.mjs --test-webhook <YOUR_DISCORD_WEBHOOK_URL>`);
+      return { eventsCount: 0, testDelivered: false };
+    }
+
+    console.log(`[RADAR] 🧪 Test Showcase Active: Building all 5 alert categories for 1-message preview...`);
+    const showcaseEmbeds = buildRadarShowcaseEmbeds();
+    await sendDiscordEmbeds(webhookUrl, showcaseEmbeds);
+    console.log(`[RADAR] ✅ All 5 category cards delivered in ONE message to your new Discord webhook!`);
+    return { eventsCount: 5, testDelivered: true };
+  }
+
   if (!webhookUrl) {
     console.log(`[RADAR] Notice: No Discord webhook configured. Running in audit mode.`);
   }
@@ -281,33 +304,13 @@ export async function runRadar(options = {}) {
     console.warn(`[Anthropic SDK] Warning: ${anthSdkRes.reason?.message}`);
   }
 
-  // 6. Handle INIT_PING mode (Test card delivery)
-  if (isInitPing && webhookUrl) {
-    console.log(`[RADAR] 🧪 INIT_PING active: Sending radar preview embed...`);
-    const previewEmbed = {
-      title: '⚡ Early Signal Radar | Webhook Active',
-      description: 'The unified early leak radar is connected and monitoring ground-truth sources every minute.',
-      color: RADAR_CONFIG.colors.init,
-      fields: [
-        { name: 'Artificial Analysis', value: `\`${snapshot.aa_known_slugs?.length || 0}\` models calibrated`, inline: true },
-        { name: 'ChatGPT Build', value: `\`${snapshot.chatgpt_manifest_hash || 'calibrated'}\``, inline: true },
-        { name: 'Claude Vite Build', value: `\`${snapshot.claude_entry_hash || 'calibrated'}\``, inline: true },
-        { name: 'OpenAI SDK Commit', value: `\`${snapshot.openai_sdk_sha?.slice(0, 7) || 'calibrated'}\``, inline: true },
-        { name: 'Anthropic SDK Commit', value: `\`${snapshot.anthropic_sdk_sha?.slice(0, 7) || 'calibrated'}\``, inline: true },
-      ],
-      footer: { text: 'Early Signal Radar • Zero Spam' },
-      timestamp: new Date().toISOString(),
-    };
-    await sendDiscordEmbeds(webhookUrl, [previewEmbed]);
-  }
-
-  // 7. Dispatch embeds if any events occurred
+  // Dispatch embeds if any events occurred
   if (embedsToSend.length > 0 && webhookUrl) {
     console.log(`[RADAR] Delivering ${embedsToSend.length} alert card(s) to Discord...`);
     await sendDiscordEmbeds(webhookUrl, embedsToSend);
   }
 
-  // 8. STRICT ANTI-BLOAT RULE:
+  // STRICT ANTI-BLOAT RULE:
   // Write snapshot to disk ONLY if it was the first calibration run OR genuine new events were detected.
   if (isFirstRun) {
     console.log(`[RADAR] Calibrated baseline saved to snapshot (${snapshot.aa_known_slugs.length} AA models).`);

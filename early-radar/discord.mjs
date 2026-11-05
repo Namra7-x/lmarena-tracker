@@ -154,13 +154,74 @@ export function buildSdkCommitEmbed(event) {
 }
 
 /**
- * Sends embeds to the Discord webhook in batches of up to 10.
+ * Builds a complete showcase containing 1 sample embed for every single radar category.
+ * Delivered together in one single Discord message (all 5 cards in 1 message).
+ */
+export function buildRadarShowcaseEmbeds() {
+  return [
+    // 1. Artificial Analysis
+    buildArtificialAnalysisEmbed({
+      name: 'DeepSeek-V4 Flash',
+      slug: 'deepseek-v4-flash',
+      url: 'https://artificialanalysis.ai/models/deepseek-v4-flash',
+    }),
+
+    // 2. ChatGPT Web App Build
+    buildChatGPTBuildEmbed({
+      manifestHash: 'e48d902a',
+      prevHash: '1a91f86c',
+      manifestUrl: 'https://chatgpt.com/cdn/assets/manifest-e48d902a.js',
+      totalChunks: 6721,
+      models: ['stealth-reasoner-v1', 'gpt-5-preview'],
+      featureGates: ['can_see_autonomous_tasks', 'enable_deep_research_v2', 'search_routing_v3'],
+      launchCopy: ['Introducing Autonomous Tasks: Execute multi-step agentic workflows directly in ChatGPT.'],
+      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/feat/early-radar/early-radar/reports/BUILD_chatgpt_e48d902a.md',
+    }),
+
+    // 3. Claude Web App Build
+    buildClaudeBuildEmbed({
+      entryHash: 'BlPlYMgx',
+      prevHash: 'PYSO3vVA',
+      entryUrl: 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BlPlYMgx.js',
+      models: ['claude-3-7-sonnet-preview'],
+      featureGates: ['can_see_computer_use_v2', 'enable_thinking_budget_slider'],
+      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/feat/early-radar/early-radar/reports/BUILD_claude_BlPlYMgx.md',
+    }),
+
+    // 4. OpenAI SDK Commit
+    buildSdkCommitEmbed({
+      repo: 'openai/openai-python',
+      filePath: 'src/openai/types/shared/chat_model.py',
+      sha: '4f82bc19a8234d',
+      shortSha: '4f82bc1',
+      author: 'Justin Beckwith',
+      message: 'feat(models): add stealth-reasoner-v1 to ChatModel literal enum (#4250)',
+      commitUrl: 'https://github.com/openai/openai-python/commit/4f82bc19a8234d',
+      additions: ['"stealth-reasoner-v1"', '"gpt-5-preview"'],
+    }),
+
+    // 5. Anthropic SDK Commit
+    buildSdkCommitEmbed({
+      repo: 'anthropics/anthropic-sdk-typescript',
+      filePath: 'src/resources/messages/messages.ts',
+      sha: '08e2e5ffa7566e',
+      shortSha: '08e2e5f',
+      author: 'anthropic-sdks-writer[bot]',
+      message: 'feat(models): add claude-3-7-sonnet to Model type enum',
+      commitUrl: 'https://github.com/anthropics/anthropic-sdk-typescript/commit/08e2e5ffa7566e',
+      additions: ['"claude-3-7-sonnet-20260219"', '"claude-3-7-sonnet-latest"'],
+    }),
+  ];
+}
+
+/**
+ * Sends embeds to the Discord webhook in batches of up to 10 (all 5 cards in 1 message).
  */
 export async function sendDiscordEmbeds(webhookUrl, embeds) {
   if (!webhookUrl || embeds.length === 0) return;
 
   const BATCH_SIZE = 10;
-  for (let i = 0; i < BATCH_SIZE && i < embeds.length; i += BATCH_SIZE) {
+  for (let i = 0; i < embeds.length; i += BATCH_SIZE) {
     const batch = embeds.slice(i, i + BATCH_SIZE);
     const payload = {
       username: 'Early Signal Radar',
@@ -177,6 +238,8 @@ export async function sendDiscordEmbeds(webhookUrl, embeds) {
     if (!res.ok) {
       const errText = await res.text();
       console.warn(`Discord webhook warning: HTTP ${res.status}: ${errText}`);
+    } else {
+      console.log(`[DISCORD] Successfully delivered ${batch.length} embed cards in 1 message.`);
     }
   }
 }
