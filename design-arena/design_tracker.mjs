@@ -5,9 +5,12 @@
  */
 
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const URL = 'https://www.designarena.ai/api/registry';
-const SNAPSHOT = 'design_snapshot.json';
+const SNAPSHOT = path.join(__dirname, 'design_snapshot.json');
 
 const DISCORD_WEBHOOK_URL = (
   process.env.DISCORD_WEBHOOK_URL ||
