@@ -104,8 +104,7 @@ async function main() {
   // Handle detected updates
   if (allEvents.length === 0) {
     console.log(`[HF Tracker] No new models, spaces, or collections detected. (took ${((Date.now() - startTime) / 1000).toFixed(2)}s)`);
-    // Save updated index to keep counters fresh
-    fs.writeFileSync(SNAPSHOT_FILE, JSON.stringify(newSnapshot, null, 2), 'utf8');
+    // Do not touch snapshot when there are no events - prevents commit bloat!
     return;
   }
 

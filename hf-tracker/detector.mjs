@@ -50,17 +50,14 @@ export function buildOrgIndex(state) {
     index.models[m.id] = {
       lastModified: m.lastModified || null,
       gated: Boolean(m.gated),
-      pipeline_tag: m.pipeline_tag || null,
-      likes: m.likes || 0,
-      downloads: m.downloads || 0
+      pipeline_tag: m.pipeline_tag || null
     };
   }
 
   for (const s of state.spaces || []) {
     index.spaces[s.id] = {
       lastModified: s.lastModified || null,
-      sdk: s.sdk || null,
-      likes: s.likes || 0
+      sdk: s.sdk || null
     };
   }
 
