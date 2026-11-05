@@ -1,9 +1,34 @@
 /**
  * ChatGPT Web App Reverse-Engineer Source Adapter
  * Tracks production build deployments and chunk assets on https://chatgpt.com/
+ * ZERO HARDCODED MODEL NAMES: dynamically parses model slugs and build hashes.
  */
 
 import { RADAR_CONFIG } from '../config.mjs';
+
+/**
+ * Dynamically extracts any model identifiers assigned in chunk text without hardcoding names.
+ */
+export function extractDynamicModelIdentifiers(jsText) {
+  if (!jsText || typeof jsText !== 'string') return [];
+
+  const extracted = new Set();
+  const patterns = [
+    /(?:model_slug|model_id|default_model|modelName)\s*[:=]\s*['"]([a-zA-Z0-9_\-\.\:\/]+)['"]/gi,
+    /"(?:model_slug|model_id|default_model)"\s*:\s*"([a-zA-Z0-9_\-\.\:\/]+)"/gi,
+  ];
+
+  for (const regex of patterns) {
+    for (const match of jsText.matchAll(regex)) {
+      const val = match[1].trim();
+      if (val.length > 2 && !['undefined', 'null', 'default', 'true', 'false'].includes(val.toLowerCase())) {
+        extracted.add(val);
+      }
+    }
+  }
+
+  return Array.from(extracted);
+}
 
 /**
  * Fetches https://chatgpt.com/ and extracts the current manifest hash and chunk registry.

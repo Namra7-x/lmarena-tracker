@@ -1,9 +1,34 @@
 /**
  * Claude Web App Reverse-Engineer Source Adapter
  * Tracks production build deployments and Vite chunks on https://claude.ai/
+ * ZERO HARDCODED MODEL NAMES: dynamically parses imported chunk hashes and model identifiers.
  */
 
 import { RADAR_CONFIG } from '../config.mjs';
+
+/**
+ * Dynamically extracts model identifiers from Claude JS chunks without hardcoded names.
+ */
+export function extractDynamicClaudeIdentifiers(jsText) {
+  if (!jsText || typeof jsText !== 'string') return [];
+
+  const extracted = new Set();
+  const patterns = [
+    /(?:modelId|model_id|defaultModel|modelName)\s*[:=]\s*['"]([a-zA-Z0-9_\-\.\:\/]+)['"]/gi,
+    /"(?:modelId|model_id|defaultModel)"\s*:\s*"([a-zA-Z0-9_\-\.\:\/]+)"/gi,
+  ];
+
+  for (const regex of patterns) {
+    for (const match of jsText.matchAll(regex)) {
+      const val = match[1].trim();
+      if (val.length > 2 && !['undefined', 'null', 'default', 'true', 'false'].includes(val.toLowerCase())) {
+        extracted.add(val);
+      }
+    }
+  }
+
+  return Array.from(extracted);
+}
 
 /**
  * Fetches https://claude.ai/ and extracts the current Vite entry bundle hash.
