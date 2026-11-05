@@ -56,11 +56,35 @@ export class TelegramClient {
       message_thread_id: threadId || undefined,
     };
 
-    return await this.requestWithRetry('sendMessage', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    try {
+      return await this.requestWithRetry('sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      // Fallback: if HTML parsing failed (400 Bad Request or parse entities), retry as plain text
+      if (err.message && (err.message.includes('400') || err.message.includes('parse entities') || err.message.includes("can't parse"))) {
+        console.warn('Telegram HTML parse failed, falling back to plain text...');
+        const plainPayload = {
+          ...payload,
+          parse_mode: undefined,
+          text: htmlText.replace(/<[^>]+>/g, '').slice(0, 4096),
+        };
+        try {
+          return await this.requestWithRetry('sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(plainPayload),
+          });
+        } catch (plainErr) {
+          console.error(`Telegram sendMessage failed in plain text fallback: ${plainErr.message}`);
+          return { ok: false, error: plainErr.message };
+        }
+      }
+      console.error(`Telegram sendMessage error: ${err.message}`);
+      return { ok: false, error: err.message };
+    }
   }
 
   /**
@@ -79,11 +103,16 @@ export class TelegramClient {
       parse_mode: 'HTML',
     };
 
-    return await this.requestWithRetry('editMessageText', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    try {
+      return await this.requestWithRetry('editMessageText', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      console.warn(`Telegram editMessageText failed: ${err.message}`);
+      return { ok: false, error: err.message };
+    }
   }
 
   /**
@@ -122,11 +151,16 @@ export class TelegramClient {
       Buffer.from(`${crlf}--${boundary}--${crlf}`),
     ]);
 
-    return await this.requestWithRetry('sendDocument', {
-      method: 'POST',
-      headers: { 'Content-Type': `multipart/form-data; boundary=${boundary}` },
-      body,
-    });
+    try {
+      return await this.requestWithRetry('sendDocument', {
+        method: 'POST',
+        headers: { 'Content-Type': `multipart/form-data; boundary=${boundary}` },
+        body,
+      });
+    } catch (err) {
+      console.warn(`Telegram sendDocument failed for ${filename}: ${err.message}`);
+      return { ok: false, error: err.message };
+    }
   }
 
   /**

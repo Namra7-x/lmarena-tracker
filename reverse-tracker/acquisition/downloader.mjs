@@ -6,7 +6,7 @@
 import { assertUrlAllowed } from '../registry/allowlist.mjs';
 import { verifyChecksum, computeSha256 } from './integrity.mjs';
 
-const DEFAULT_TIMEOUT_MS = 60000;
+const DEFAULT_TIMEOUT_MS = 120000; // 2 minutes
 const DEFAULT_MAX_SIZE_BYTES = 1024 * 1024 * 1024; // 1GB
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 
@@ -86,10 +86,10 @@ export async function downloadArtifact(artifact, options = {}) {
         }
       }
 
-      // Dedup check: if we already processed these exact bytes, mark as cached
+      // Dedup check: store sha256 hash in set (avoid storing entire buffer in memory)
       const isCached = DEDUP_CACHE.has(sha256);
       if (!isCached) {
-        DEDUP_CACHE.set(sha256, buffer);
+        DEDUP_CACHE.set(sha256, { size: buffer.length, timestamp: Date.now() });
       }
 
       return {

@@ -65,3 +65,15 @@ test('TelegramClient resolves topicId from environment variables', async () => {
   delete process.env.TELEGRAM_TOPIC_OPENAI;
   delete process.env.TELEGRAM_TOPIC_MAP;
 });
+
+test('TelegramClient gracefully falls back to mock mode when unconfigured', async () => {
+  const { TelegramClient } = await import('../reverse-tracker/telegram/client.mjs');
+  const client = new TelegramClient('', '');
+  assert.equal(client.isConfigured(), false);
+
+  const res = await client.sendMessage('<b>Test Alert</b>');
+  assert.equal(res.ok, true);
+
+  const docRes = await client.sendDocument('package.json', 'Test doc');
+  assert.equal(docRes.ok, true);
+});

@@ -4,6 +4,20 @@ on:
   repository_dispatch:
     types: [tracker, early_signal_tracker]
   workflow_dispatch:
+    inputs:
+      target_family:
+        description: 'Family to track (or "all" for all 6 families)'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - openai
+          - anthropic
+          - google
+          - cursor
+          - devin
+          - other
   schedule:
     - cron: '*/15 * * * *'
 
@@ -13,7 +27,9 @@ permissions:
 jobs:
   scan-family:
     name: Track ${{ matrix.family }}
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.target_family == 'all' || inputs.target_family == matrix.family }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     concurrency:
       group: ai-${{ matrix.family }}
       cancel-in-progress: false
@@ -41,16 +57,23 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Checkout State Branch
+      - name: Setup State Branch
         run: |
           mkdir -p state
-          git fetch origin state/${{ matrix.family }}:state/${{ matrix.family }} || true
-          if git rev-parse --verify state/${{ matrix.family }} >/dev/null 2>&1; then
-            git --work-tree=state checkout state/${{ matrix.family }} -- . || true
+          # Check if remote state branch exists
+          if git ls-remote --exit-code --heads origin state/${{ matrix.family }} >/dev/null 2>&1; then
+            echo "Fetching existing state for ${{ matrix.family }}..."
+            git fetch origin state/${{ matrix.family }}:refs/remotes/origin/state/${{ matrix.family }} --depth=1 || true
+            git archive refs/remotes/origin/state/${{ matrix.family }} 2>/dev/null | tar -x -C state/ 2>/dev/null || true
+            echo "State files loaded:"
+            ls -la state/ || true
+          else
+            echo "State branch state/${{ matrix.family }} does not exist yet. Initializing fresh baseline."
           fi
 
       - name: Run Tracker Detection & Deep Scan
         env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
           STATE_DIR: state
           REPORTS_DIR: reports
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
@@ -58,31 +81,50 @@ jobs:
         run: |
           node reverse-tracker/cli.mjs run --family=${{ matrix.family }}
 
-      - name: Commit Compact State to State Branch
+      - name: Persist State to State Branch
         if: success()
         run: |
-          # Backup state files before switching branches
-          mkdir -p /tmp/state_backup
-          cp -r state/* /tmp/state_backup/ 2>/dev/null || true
-          
+          if [ ! -d "state" ] || [ -z "$(ls -A state/*.json 2>/dev/null)" ]; then
+            echo "No state files to persist."
+            exit 0
+          fi
+
+          STATE_TMP="/tmp/state_repo_${{ matrix.family }}"
+          rm -rf "$STATE_TMP"
+          mkdir -p "$STATE_TMP"
+          cd "$STATE_TMP"
+
+          git init -b state/${{ matrix.family }}
           git config user.name "early-signal-tracker-bot"
           git config user.email "actions@github.com"
-          
-          # Initialize orphan branch if needed
-          if ! git rev-parse --verify state/${{ matrix.family }} >/dev/null 2>&1; then
-            git checkout --orphan state/${{ matrix.family }}
-            git rm -rf .
-          else
-            git checkout state/${{ matrix.family }}
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+
+          if git ls-remote --exit-code --heads origin state/${{ matrix.family }} >/dev/null 2>&1; then
+            echo "Pulling existing state/${{ matrix.family }}..."
+            git fetch --depth=1 origin state/${{ matrix.family }}:state/${{ matrix.family }} || true
+            git checkout state/${{ matrix.family }} || true
           fi
-          
-          # Copy state files into the root of the state branch
-          cp -r /tmp/state_backup/* . 2>/dev/null || true
-          git add *.json 2>/dev/null || true
-          
+
+          cp "$GITHUB_WORKSPACE"/state/*.json . 2>/dev/null || true
+          git add *.json
+
           if ! git diff --cached --quiet; then
+            echo "State changes detected. Committing..."
             git commit -m "Update compact state for ${{ matrix.family }} [skip ci]"
-            git push -u origin state/${{ matrix.family }}
+            for attempt in 1 2 3; do
+              echo "Pushing state (attempt $attempt)..."
+              if git push -u origin state/${{ matrix.family }}; then
+                echo "Successfully pushed state/${{ matrix.family }}"
+                break
+              else
+                echo "Push failed, pulling remote changes..."
+                git fetch --depth=2 origin state/${{ matrix.family }} || true
+                git rebase origin/state/${{ matrix.family }} || true
+                sleep 2
+              fi
+            done
+          else
+            echo "No state differences detected; skipping push."
           fi
 
       - name: Upload Scan Evidence Artifacts

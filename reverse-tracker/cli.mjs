@@ -158,6 +158,15 @@ async function handleScan(componentId, options = {}) {
   const moreFindings = sortedScored.filter((f) => f.tier === 'EARLY SIGNAL');
 
   // Step 7: Generate Report Bundle & Mandatory Count Check (Section 8.1)
+  const coveragePercentage = candidate.artifacts.length > 0
+    ? Math.round((acquiredArtifacts.length / candidate.artifacts.length) * 100)
+    : 100;
+  const coverageState = acquiredArtifacts.length === candidate.artifacts.length
+    ? 'COMPLETE'
+    : acquiredArtifacts.length > 0
+    ? 'PARTIAL'
+    : 'FAILED';
+
   const scanReportsDir = path.join(REPORTS_DIR, scanId);
   const reportBundle = generateReportBundle(scanReportsDir, {
     scanId,
@@ -166,7 +175,13 @@ async function handleScan(componentId, options = {}) {
     diffResults,
     scoredFindings: sortedScored,
     platformAsymmetry,
-    coverage: { percentage: 100, macOk: true, winOk: true },
+    coverage: {
+      percentage: coveragePercentage,
+      state: coverageState,
+      macOk: macFindings.length > 0,
+      winOk: winFindings.length > 0,
+      failedArtifacts: candidate.artifacts.length - acquiredArtifacts.length,
+    },
     totalExtractedStrings: totalExtractedStrings || rawFindings.length,
   });
 
@@ -199,31 +214,36 @@ async function handleScan(componentId, options = {}) {
   for (const file of reportBundle.files) {
     try {
       await tg.sendDocument(file, `Scan ${scanId} - ${path.basename(file)}`, { topicId });
+      // Gentle 500ms pacing between file uploads
+      await new Promise((r) => setTimeout(r, 500));
     } catch (docErr) {
       console.warn(`Could not upload ${path.basename(file)} to Telegram: ${docErr.message}`);
     }
   }
 
   // Step 9: Compact State Persistence
-  const identityFingerprint = candidate.identityFingerprint || computeIdentityFingerprint(candidate);
-  const updatedSeenHashes = Array.from(
-    new Set([...historicalSeenHashes, ...rawFindings.map((f) => f.value)])
-  );
+  if (coverageState !== 'FAILED') {
+    const identityFingerprint = candidate.identityFingerprint || computeIdentityFingerprint(candidate);
+    const updatedSeenHashes = Array.from(
+      new Set([...historicalSeenHashes, ...rawFindings.map((f) => f.value)])
+    );
 
-  saveComponentState(STATE_DIR, componentId, {
-    version: candidate.version,
-    releaseId: candidate.releaseId,
-    channel: candidate.channel,
-    identityFingerprint,
-    scanId,
-    coverageState: 'COMPLETE',
-    hotSignals: majorSignals.slice(0, 100),
-    recentSignals: sortedScored.slice(0, 2000),
-    historicalSeenHashes: updatedSeenHashes.slice(0, 10000),
-  });
-
-  console.log(`✅ Deep scan complete for ${componentId} (${scanId}). State updated.`);
-  return { scanId, candidate, diffResults, reportBundle };
+    saveComponentState(STATE_DIR, componentId, {
+      version: candidate.version,
+      releaseId: candidate.releaseId,
+      channel: candidate.channel,
+      identityFingerprint,
+      scanId,
+      coverageState,
+      hotSignals: majorSignals.slice(0, 100),
+      recentSignals: sortedScored.slice(0, 2000),
+      historicalSeenHashes: updatedSeenHashes.slice(0, 10000),
+    });
+    console.log(`✅ Deep scan complete for ${componentId} (${scanId}). State updated (${coverageState}).`);
+  } else {
+    console.warn(`⚠️ Scan for ${componentId} FAILED required coverage. Baseline will not advance.`);
+  }
+  return { scanId, candidate, diffResults, reportBundle, coverageState };
 }
 
 // CLI Command Parser
@@ -246,7 +266,11 @@ async function main() {
     const familyArg = args[1]?.replace(/^--family=/, '') || null;
     const changes = await handleDetect(familyArg);
     for (const change of changes) {
-      await handleScan(change.componentId);
+      try {
+        await handleScan(change.componentId);
+      } catch (scanErr) {
+        console.error(`✗ Error processing ${change.componentId}: ${scanErr.message}`);
+      }
     }
   } else {
     console.log(`Unknown command: ${command}. Usage: node cli.mjs [detect|scan|run] [--family=<id>] [--component=<id>]`);
