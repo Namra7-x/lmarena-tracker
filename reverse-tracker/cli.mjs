@@ -69,8 +69,10 @@ async function handleScan(componentId, options = {}) {
   const scanId = generateScanId(componentId);
   const tg = new TelegramClient();
 
+  const topicId = tg.getTopicId(comp.family);
+
   // Step 1: Update-First Rule (Section 1.2) - Send Immediate Alert BEFORE downloading
-  console.log(`📡 Sending immediate alert to Telegram for ${scanId}...`);
+  console.log(`📡 Sending immediate alert to Telegram for ${scanId} (topic: ${topicId || 'default'})...`);
   const alertText = formatImmediateAlert({
     componentName: comp.name,
     oldVersion: baseline.version,
@@ -79,7 +81,7 @@ async function handleScan(componentId, options = {}) {
     targets: comp.primaryTargets,
     releaseUrl: candidate.artifacts?.[0]?.url,
   });
-  const alertRes = await tg.sendMessage(alertText);
+  const alertRes = await tg.sendMessage(alertText, { topicId });
   const alertMessageId = alertRes?.result?.message_id;
 
   // Step 2: Acquisition & Integrity
@@ -185,15 +187,15 @@ async function handleScan(componentId, options = {}) {
   });
 
   if (alertMessageId) {
-    await tg.sendMessage(completionText, { replyToMessageId: alertMessageId });
+    await tg.sendMessage(completionText, { replyToMessageId: alertMessageId, topicId });
   } else {
-    await tg.sendMessage(completionText);
+    await tg.sendMessage(completionText, { topicId });
   }
 
   // Upload report files to Telegram
   for (const file of reportBundle.files) {
     try {
-      await tg.sendDocument(file, `Scan ${scanId} - ${path.basename(file)}`);
+      await tg.sendDocument(file, `Scan ${scanId} - ${path.basename(file)}`, { topicId });
     } catch (docErr) {
       console.warn(`Could not upload ${path.basename(file)} to Telegram: ${docErr.message}`);
     }

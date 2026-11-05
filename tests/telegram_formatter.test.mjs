@@ -46,3 +46,17 @@ test('formatCompletionMessage formats major signals, blockquotes, and respects 4
   assert.ok(msg.includes('<blockquote expandable>'));
   assert.ok(msg.length <= 4096);
 });
+
+test('TelegramClient resolves topicId from environment variables', async () => {
+  const { TelegramClient } = await import('../reverse-tracker/telegram/client.mjs');
+  process.env.TELEGRAM_TOPIC_OPENAI = '42';
+  process.env.TELEGRAM_TOPIC_MAP = JSON.stringify({ anthropic: 99 });
+
+  const client = new TelegramClient('test-token', '-100123456789');
+  assert.equal(client.getTopicId('openai'), 42);
+  assert.equal(client.getTopicId('anthropic'), 99);
+  assert.equal(client.getTopicId('google'), undefined);
+
+  delete process.env.TELEGRAM_TOPIC_OPENAI;
+  delete process.env.TELEGRAM_TOPIC_MAP;
+});

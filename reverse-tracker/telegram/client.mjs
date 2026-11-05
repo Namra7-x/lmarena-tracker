@@ -18,6 +18,25 @@ export class TelegramClient {
   }
 
   /**
+   * Get topic thread ID for a given family from environment variables if configured.
+   */
+  getTopicId(family) {
+    if (!family) return undefined;
+    const envKey = `TELEGRAM_TOPIC_${family.toUpperCase()}`;
+    if (process.env[envKey]) {
+      const parsed = parseInt(process.env[envKey], 10);
+      if (!isNaN(parsed)) return parsed;
+    }
+    if (process.env.TELEGRAM_TOPIC_MAP) {
+      try {
+        const map = JSON.parse(process.env.TELEGRAM_TOPIC_MAP);
+        if (map[family]) return map[family];
+      } catch {}
+    }
+    return undefined;
+  }
+
+  /**
    * Send a text message with HTML parsing.
    */
   async sendMessage(htmlText, options = {}) {
@@ -26,12 +45,15 @@ export class TelegramClient {
       return { ok: true, result: { message_id: 12345 } };
     }
 
+    const threadId = options.topicId || options.message_thread_id;
+
     const payload = {
       chat_id: this.chatId,
       text: htmlText.slice(0, 4096),
       parse_mode: 'HTML',
       disable_notification: Boolean(options.silent),
       reply_to_message_id: options.replyToMessageId || undefined,
+      message_thread_id: threadId || undefined,
     };
 
     return await this.requestWithRetry('sendMessage', {
@@ -67,7 +89,7 @@ export class TelegramClient {
   /**
    * Send a file document.
    */
-  async sendDocument(filePath, caption = '') {
+  async sendDocument(filePath, caption = '', options = {}) {
     if (!this.isConfigured()) {
       console.log(`[Telegram Mock] sendDocument: ${filePath} (${caption})`);
       return { ok: true };
@@ -75,17 +97,27 @@ export class TelegramClient {
 
     const filename = path.basename(filePath);
     const fileBytes = fs.readFileSync(filePath);
+    const threadId = options.topicId || options.message_thread_id;
 
     // Build standard multipart/form-data boundary
     const boundary = '----TelegramClientBoundary' + Math.random().toString(16).slice(2);
     const crlf = '\r\n';
 
+    let parts = [
+      `--${boundary}${crlf}Content-Disposition: form-data; name="chat_id"${crlf}${crlf}${this.chatId}${crlf}`,
+      `--${boundary}${crlf}Content-Disposition: form-data; name="caption"${crlf}${crlf}${caption.slice(0, 1024)}${crlf}`,
+    ];
+
+    if (threadId) {
+      parts.push(`--${boundary}${crlf}Content-Disposition: form-data; name="message_thread_id"${crlf}${crlf}${threadId}${crlf}`);
+    }
+
+    parts.push(
+      `--${boundary}${crlf}Content-Disposition: form-data; name="document"; filename="${filename}"${crlf}Content-Type: application/octet-stream${crlf}${crlf}`
+    );
+
     let body = Buffer.concat([
-      Buffer.from(
-        `--${boundary}${crlf}Content-Disposition: form-data; name="chat_id"${crlf}${crlf}${this.chatId}${crlf}` +
-        `--${boundary}${crlf}Content-Disposition: form-data; name="caption"${crlf}${crlf}${caption.slice(0, 1024)}${crlf}` +
-        `--${boundary}${crlf}Content-Disposition: form-data; name="document"; filename="${filename}"${crlf}Content-Type: application/octet-stream${crlf}${crlf}`
-      ),
+      Buffer.from(parts.join('')),
       fileBytes,
       Buffer.from(`${crlf}--${boundary}--${crlf}`),
     ]);
