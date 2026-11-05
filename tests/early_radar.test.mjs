@@ -115,17 +115,25 @@ describe('Deep Build Analyzer & Reports', () => {
 });
 
 describe('Discord Embed Builder', () => {
-  it('should build rich embed for Artificial Analysis new model', () => {
+  it('should build rich embed for Artificial Analysis new model with JSON block', () => {
     const model = {
       name: 'Arbitrary New Model',
       slug: 'arbitrary-new-model',
       url: 'https://artificialanalysis.ai/models/arbitrary-new-model',
+      creator: 'Test Lab',
+      rawJson: {
+        name: 'Arbitrary New Model',
+        slug: 'arbitrary-new-model',
+        parameters: '100B',
+      },
     };
     const embed = buildArtificialAnalysisEmbed(model);
     assert.ok(embed.title.includes('Artificial Analysis'));
     assert.equal(embed.color, RADAR_CONFIG.colors.artificialAnalysis);
-    assert.equal(embed.fields[0].value, 'Arbitrary New Model');
-    assert.equal(embed.fields[1].value, '`arbitrary-new-model`');
+    assert.ok(embed.fields.some((f) => f.name.includes('Raw JSON Block')));
+    const jsonField = embed.fields.find((f) => f.name.includes('Raw JSON Block'));
+    assert.ok(jsonField.value.includes('```json'));
+    assert.ok(jsonField.value.includes('arbitrary-new-model'));
   });
 
   it('should build rich embed for ChatGPT web app build deployment with detected models', () => {
@@ -144,7 +152,7 @@ describe('Discord Embed Builder', () => {
     assert.equal(embed.color, RADAR_CONFIG.colors.chatgpt);
     assert.ok(embed.fields.some((f) => f.name.includes('Discovered Model Slugs')));
     assert.ok(embed.fields.some((f) => f.name.includes('Feature Gates')));
-    assert.ok(embed.fields.some((f) => f.name.includes('Unabridged Full Report')));
+    assert.ok(embed.fields.some((f) => f.name.includes('Quick Links') && f.value.includes('Unabridged Report')));
   });
 
   it('should build rich embed for Claude web app build deployment', () => {
@@ -161,7 +169,7 @@ describe('Discord Embed Builder', () => {
     assert.ok(embed.fields.some((f) => f.name.includes('Discovered Model Slugs')));
   });
 
-  it('should build rich embed for SDK model commit with dynamic additions', () => {
+  it('should build rich embed for SDK model commit with direct GitHub links', () => {
     const event = {
       repo: 'openai/openai-python',
       filePath: 'src/openai/types/shared/chat_model.py',
@@ -176,7 +184,11 @@ describe('Discord Embed Builder', () => {
     assert.ok(embed.title.includes('OpenAI SDK'));
     assert.equal(embed.color, RADAR_CONFIG.colors.chatgpt);
     assert.ok(embed.fields.some((f) => f.name.includes('Model Enum Additions')));
-    const additionsField = embed.fields.find((f) => f.name.includes('Model Enum Additions'));
-    assert.ok(additionsField.value.includes('brand-new-unannounced-model'));
+    assert.ok(embed.fields.some((f) => f.name.includes('Direct GitHub Links')));
+
+    const linksField = embed.fields.find((f) => f.name.includes('Direct GitHub Links'));
+    assert.ok(linksField.value.includes('View Commit Diff on GitHub'));
+    assert.ok(linksField.value.includes('View Source File on GitHub'));
+    assert.ok(linksField.value.includes('GitHub Commits API Endpoint'));
   });
 });

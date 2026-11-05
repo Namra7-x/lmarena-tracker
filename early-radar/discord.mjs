@@ -34,8 +34,14 @@ export function buildArtificialAnalysisEmbed(model) {
 
   const jsonStr = JSON.stringify(rawSpecs, null, 2);
   fields.push({
-    name: '📦 Model Specs (Raw JSON)',
+    name: '📦 Model Specs (Raw JSON Block)',
     value: `\`\`\`json\n${jsonStr.slice(0, 950)}\n\`\`\``,
+    inline: false,
+  });
+
+  fields.push({
+    name: '🔗 Quick Links',
+    value: `• [View Model Card on Artificial Analysis](${model.url})\n• [View Master Model Index](https://artificialanalysis.ai/models)`,
     inline: false,
   });
 
@@ -84,14 +90,19 @@ export function buildChatGPTBuildEmbed(event) {
     });
   }
 
-  // 4. Link to Full Report
+  // 4. Quick Links
+  const links = [
+    `• [Open ChatGPT Web App](https://chatgpt.com/)`,
+    `• [Inspect Raw Production Manifest](${event.manifestUrl})`,
+  ];
   if (event.reportUrl) {
-    fields.push({
-      name: '📄 Unabridged Full Report',
-      value: `[View all extracted signals on GitHub](${event.reportUrl})`,
-      inline: false,
-    });
+    links.push(`• [View Full 100% Unabridged Report on GitHub](${event.reportUrl})`);
   }
+  fields.push({
+    name: '🔗 Quick Links',
+    value: links.join('\n'),
+    inline: false,
+  });
 
   return {
     title: `⚡ ChatGPT Web App | Production Build Deployed`,
@@ -129,14 +140,19 @@ export function buildClaudeBuildEmbed(event) {
     });
   }
 
-  // 3. Link to Full Report
+  // 3. Quick Links
+  const links = [
+    `• [Open Claude Web App](https://claude.ai/)`,
+    `• [Inspect Vite Entry Bundle](${event.entryUrl})`,
+  ];
   if (event.reportUrl) {
-    fields.push({
-      name: '📄 Unabridged Full Report',
-      value: `[View all extracted signals on GitHub](${event.reportUrl})`,
-      inline: false,
-    });
+    links.push(`• [View Full 100% Unabridged Report on GitHub](${event.reportUrl})`);
   }
+  fields.push({
+    name: '🔗 Quick Links',
+    value: links.join('\n'),
+    inline: false,
+  });
 
   return {
     title: `⚡ Claude.ai | Production Build Deployed`,
@@ -150,24 +166,40 @@ export function buildClaudeBuildEmbed(event) {
 }
 
 /**
- * Builds a Discord embed for an SDK Model Enum commit.
+ * Builds a Discord embed for an SDK Model Enum commit with direct GitHub links.
  */
 export function buildSdkCommitEmbed(event) {
   const isAnthropic = event.repo.includes('anthropic');
   const labName = isAnthropic ? 'Anthropic' : 'OpenAI';
   const color = isAnthropic ? RADAR_CONFIG.colors.claude : RADAR_CONFIG.colors.chatgpt;
 
+  const fileGithubUrl = `https://github.com/${event.repo}/blob/main/${event.filePath}`;
+  const rawFileUrl = `https://raw.githubusercontent.com/${event.repo}/main/${event.filePath}`;
+  const commitApiUrl = `https://api.github.com/repos/${event.repo}/commits?path=${encodeURIComponent(event.filePath)}&per_page=1`;
+
   const fields = [
     { name: 'Commit SHA', value: `[\`${event.shortSha}\`](${event.commitUrl})`, inline: true },
     { name: 'Author', value: event.author, inline: true },
-    { name: 'File', value: `\`${event.filePath}\``, inline: false },
-    { name: 'Message', value: event.message, inline: false },
+    { name: 'File', value: `[\`${event.filePath}\`](${fileGithubUrl})`, inline: false },
+    { name: 'Commit Message', value: `> ${event.message}`, inline: false },
   ];
 
   if (event.additions && event.additions.length > 0) {
     const preview = event.additions.slice(0, 8).map((l) => `🔥 **\`${l}\`**`).join('\n');
     fields.push({ name: '⚡ New Model Enum Additions', value: preview, inline: false });
   }
+
+  // Direct Clickable GitHub Navigation Links
+  fields.push({
+    name: '🔗 Direct GitHub Links',
+    value: [
+      `• **[View Commit Diff on GitHub](${event.commitUrl})**`,
+      `• **[View Source File on GitHub](${fileGithubUrl})**`,
+      `• **[View Raw File](${rawFileUrl})**`,
+      `• **[GitHub Commits API Endpoint](${commitApiUrl})**`,
+    ].join('\n'),
+    inline: false,
+  });
 
   return {
     title: `⚡ ${labName} SDK | Model Enum Commit`,
@@ -182,7 +214,7 @@ export function buildSdkCommitEmbed(event) {
 
 /**
  * Builds a complete showcase containing 1 sample embed for every single radar category.
- * Features realistic 2026 frontier models with raw JSON blocks.
+ * Features realistic 2026 frontier models with raw JSON blocks and direct GitHub links.
  */
 export function buildRadarShowcaseEmbeds() {
   return [
@@ -206,7 +238,7 @@ export function buildRadarShowcaseEmbeds() {
         parameters: '1,800B MoE',
         contextWindow: '2,000,000 tokens',
         isReasoning: true,
-        pricing: '$2.50/1M input, $10.00/1M output',
+        pricing: '$2.50/1M in, $10.00/1M out',
         outputSpeed: '142 tok/s',
         releaseDate: '2026-09-18',
         license: 'Proprietary',
@@ -235,7 +267,7 @@ export function buildRadarShowcaseEmbeds() {
       reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/main/early-radar/reports/BUILD_claude_BlPlYMgx.md',
     }),
 
-    // 4. OpenAI SDK Commit
+    // 4. OpenAI SDK Commit with Direct GitHub Links
     buildSdkCommitEmbed({
       repo: 'openai/openai-python',
       filePath: 'src/openai/types/shared/chat_model.py',
@@ -247,7 +279,7 @@ export function buildRadarShowcaseEmbeds() {
       additions: ['"gpt-6.1-terra-preview"', '"o4-mini"'],
     }),
 
-    // 5. Anthropic SDK Commit
+    // 5. Anthropic SDK Commit with Direct GitHub Links
     buildSdkCommitEmbed({
       repo: 'anthropics/anthropic-sdk-typescript',
       filePath: 'src/resources/messages/messages.ts',
