@@ -1,0 +1,57 @@
+name: Early Signal Radar
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+  workflow_dispatch:
+    inputs:
+      init_ping:
+        description: 'Send test preview card to verify webhook connection'
+        required: false
+        default: false
+        type: boolean
+  repository_dispatch:
+    types: [tracker, early_radar, radar]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: early-radar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run Early Signal Radar
+        env:
+          EARLY_RADAR_DISCORD_WEBHOOK_URL: ${{ secrets.EARLY_RADAR_DISCORD_WEBHOOK_URL }}
+          HF_DISCORD_WEBHOOK_URL: ${{ secrets.HF_DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INIT_PING: ${{ inputs.init_ping && '1' || '0' }}
+        run: node early-radar/radar.mjs
+
+      - name: Commit and Push Snapshot (Only if genuine new models detected)
+        run: |
+          if [ -n "$(git status --porcelain early-radar/radar_snapshot.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add early-radar/radar_snapshot.json
+            git commit -m "Update Early Radar snapshot [skip ci]"
+            git push origin feat/early-radar
+          else
+            echo "Zero changes detected. No commit needed."
+          fi
