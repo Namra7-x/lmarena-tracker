@@ -4,8 +4,8 @@ on:
   repository_dispatch:
     types: [tracker, early_signal_tracker]
   workflow_dispatch:
-  schedule:
-    - cron: '*/15 * * * *'
+  # schedule:
+  #   - cron: '*/15 * * * *'
 
 permissions:
   contents: write
@@ -82,7 +82,7 @@ jobs:
           git init -b state/${{ matrix.family }}
           git config user.name "early-signal-tracker-bot"
           git config user.email "actions@github.com"
-          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
 
           if git ls-remote --exit-code --heads origin state/${{ matrix.family }} >/dev/null 2>&1; then
             echo "Pulling existing state/${{ matrix.family }}..."

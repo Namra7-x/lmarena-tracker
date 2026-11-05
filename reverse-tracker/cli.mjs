@@ -94,17 +94,8 @@ async function handleDetect(familyId) {
       });
     }
 
-    // Send single calm status message to Telegram showing latest versions
-    const calibrationMsg = formatBaselineCalibrationMessage({
-      family: familyId || 'ALL',
-      components: firstRuns,
-    });
-    try {
-      await tg.sendMessage(calibrationMsg, { topicId });
-      console.log(`📡 Baseline calibration summary sent to Telegram.`);
-    } catch (tgErr) {
-      console.warn(`Could not send baseline calibration message: ${tgErr.message}`);
-    }
+    // Initial run calibrated silently - zero spam messages sent
+    console.log(`📡 Baseline calibrated silently for ${familyId || 'ALL'}. Zero spam messages sent.`);
     return []; // Return empty so handleScan doesn't dump spam files on first run!
   }
 
