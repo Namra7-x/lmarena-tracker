@@ -108,11 +108,11 @@ export function diffOrgState(org, currentState, previousIndex) {
         });
       }
 
-      // Check for weights / commit bump (within last 45 days only to avoid legacy doc touch noise)
-      if (model.lastModified && prev.lastModified && model.lastModified !== prev.lastModified) {
+      // Check for weights update ONLY if explicitly enabled (disabled by default to prevent commit touch spam)
+      if (process.env.TRACK_WEIGHTS === 'true' && model.lastModified && prev.lastModified && model.lastModified !== prev.lastModified) {
         const modDate = new Date(model.lastModified);
         const ageInDays = (Date.now() - modDate.getTime()) / (1000 * 60 * 60 * 24);
-        if (ageInDays <= 45) {
+        if (ageInDays <= 7) {
           events.push({
             type: 'WEIGHTS_UPDATED',
             org,

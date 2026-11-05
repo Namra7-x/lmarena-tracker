@@ -17,6 +17,9 @@ concurrency:
   group: hf-tracker
   cancel-in-progress: false
 
+permissions:
+  contents: write
+
 jobs:
   track-hf:
     runs-on: ubuntu-latest
@@ -26,6 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 1
           show-progress: false
 
