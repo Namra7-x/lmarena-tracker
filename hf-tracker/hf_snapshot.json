@@ -5348,6 +5348,11 @@
   },
   "allenai": {
     "models": {
+      "allenai/Molmo2-4B-tb": {
+        "lastModified": "2026-11-05T18:12:40.000Z",
+        "gated": false,
+        "pipeline_tag": "robotics"
+      },
       "allenai/maniflow-tb": {
         "lastModified": "2026-11-05T17:54:00.000Z",
         "gated": false,
@@ -5467,11 +5472,6 @@
         "lastModified": "2026-08-25T20:09:52.000Z",
         "gated": false,
         "pipeline_tag": null
-      },
-      "allenai/StdMoE_1b14b_1T": {
-        "lastModified": "2026-07-09T17:44:48.000Z",
-        "gated": false,
-        "pipeline_tag": "text-generation"
       }
     },
     "spaces": {
