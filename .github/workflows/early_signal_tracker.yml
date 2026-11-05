@@ -4,20 +4,6 @@ on:
   repository_dispatch:
     types: [tracker, early_signal_tracker]
   workflow_dispatch:
-    inputs:
-      target_family:
-        description: 'Family to track (or "all" for all 6 families)'
-        required: false
-        default: 'all'
-        type: choice
-        options:
-          - all
-          - openai
-          - anthropic
-          - google
-          - cursor
-          - devin
-          - other
   schedule:
     - cron: '*/15 * * * *'
 
@@ -27,7 +13,6 @@ permissions:
 jobs:
   scan-family:
     name: Track ${{ matrix.family }}
-    if: ${{ github.event_name != 'workflow_dispatch' || inputs.target_family == 'all' || inputs.target_family == matrix.family }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     concurrency:
