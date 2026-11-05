@@ -10820,6 +10820,27 @@
         ]
       }
     },
+    "california": {
+      "displayName": "Inkling 2 Small",
+      "provider": "thinkingmachines",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "gamedev",
+          "website"
+        ],
+        "agents": [
+          "agon_webapps"
+        ]
+      }
+    },
     "plywood": {
       "displayName": "Pika H3 Flex",
       "provider": "pika",
@@ -11439,7 +11460,6 @@
     "redwood": "redwood",
     "halifax": "halifax",
     "texas": "texas",
-    "california": "california",
     "vela": "vela",
     "hemlock": "hemlock",
     "larch": "larch",
