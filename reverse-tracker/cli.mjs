@@ -75,6 +75,7 @@ async function handleScan(componentId, options = {}) {
   console.log(`📡 Sending immediate alert to Telegram for ${scanId} (topic: ${topicId || 'default'})...`);
   const alertText = formatImmediateAlert({
     componentName: comp.name,
+    family: comp.family,
     oldVersion: baseline.version,
     newVersion: candidate.version,
     scanId,
@@ -173,6 +174,8 @@ async function handleScan(componentId, options = {}) {
 
   // Step 8: Telegram Completion Message
   const completionText = formatCompletionMessage({
+    componentName: comp.name,
+    family: comp.family,
     scanId,
     counts: {
       commands: sortedScored.filter((f) => f.category === 'hidden_command').length,

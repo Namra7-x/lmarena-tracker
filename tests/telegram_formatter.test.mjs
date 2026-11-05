@@ -16,7 +16,9 @@ test('formatImmediateAlert matches Section 8 specification', () => {
     releaseUrl: 'https://registry.npmjs.org/@openai/codex',
   });
 
-  assert.ok(alert.includes('🚨 <b>CODEX CLI 0.160.1 → 0.160.2</b>'));
+  assert.ok(alert.includes('CODEX CLI'));
+  assert.ok(alert.includes('0.160.1'));
+  assert.ok(alert.includes('0.160.2'));
   assert.ok(alert.includes('macOS ✓'));
   assert.ok(alert.includes('Windows ✓'));
   assert.ok(alert.includes('UTC'));
@@ -42,7 +44,8 @@ test('formatCompletionMessage formats major signals, blockquotes, and respects 4
     countCheckText: 'Extracted 100 = New 10 + Persistent 90\nListed in files 10 / 10 ✓\nCoverage 100% (macOS ✓ Windows ✓)',
   });
 
-  assert.ok(msg.includes('🔬 <b>ANALYSIS COMPLETE · CX-20261103-004</b>'));
+  assert.ok(msg.includes('ANALYSIS COMPLETE'));
+  assert.ok(msg.includes('CX-20261103-004'));
   assert.ok(msg.includes('🔥 <b>MAJOR EARLY SIGNALS</b>'));
   assert.ok(msg.includes('• <b>model_id:</b> <code>gpt-5-preview</code> (macOS+Windows)'));
   assert.ok(msg.includes('<blockquote expandable>'));

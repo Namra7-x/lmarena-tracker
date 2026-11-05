@@ -34,6 +34,7 @@ export function formatUtcDateTime(date = new Date()) {
  */
 export function formatImmediateAlert({
   componentName,
+  family = '',
   oldVersion,
   newVersion,
   scanId,
@@ -41,6 +42,7 @@ export function formatImmediateAlert({
   releaseUrl,
   timestamp = new Date(),
 }) {
+  const familyBadge = family ? `[${escapeHtml(family.toUpperCase())}] ` : '';
   const comp = escapeHtml(componentName.toUpperCase());
   const oldV = escapeHtml(oldVersion || 'none');
   const newV = escapeHtml(newVersion);
@@ -52,7 +54,8 @@ export function formatImmediateAlert({
   const linuxTarget = targets.some((t) => t.includes('linux')) ? 'Linux ✓' : null;
   const targetStr = [macTarget, winTarget, linuxTarget].filter(Boolean).join(' | ');
 
-  let msg = `🚨 <b>${comp} ${oldV} → ${newV}</b>\n`;
+  let msg = `🤖 <b>${familyBadge}${comp}</b>\n`;
+  msg += `🚨 <b>Version Change:</b> <code>${oldV}</code> → <b>${newV}</b>\n`;
   msg += `📅 <i>${timeStr}</i>\n`;
   msg += `🎯 <b>Targets:</b> ${targetStr}\n`;
   msg += `🏷️ <b>Scan ID:</b> <code>${sId}</code>\n`;
@@ -66,6 +69,8 @@ export function formatImmediateAlert({
  * Format Completion Message (edit or reply to alert)
  */
 export function formatCompletionMessage({
+  componentName = '',
+  family = '',
   scanId,
   counts = {},
   majorSignals = [],
@@ -75,12 +80,14 @@ export function formatCompletionMessage({
   countCheckText = '',
   timestamp = new Date(),
 }) {
+  const familyBadge = family ? `[${escapeHtml(family.toUpperCase())}] ` : '';
+  const comp = componentName ? `${escapeHtml(componentName.toUpperCase())} · ` : '';
   const sId = escapeHtml(scanId);
   const timeStr = escapeHtml(formatUtcDateTime(timestamp));
   const statLine = `${counts.commands || 0} commands · ${counts.flags || 0} flags · ${counts.configs || 0} config keys · ${counts.endpoints || 0} endpoints`;
 
-  let msg = `🔬 <b>ANALYSIS COMPLETE · ${sId}</b>\n`;
-  msg += `📅 <i>${timeStr}</i>\n`;
+  let msg = `🤖 <b>${familyBadge}${comp}ANALYSIS COMPLETE</b>\n`;
+  msg += `🏷️ <b>Scan:</b> <code>${sId}</code> · 📅 <i>${timeStr}</i>\n`;
   msg += `📊 <i>${escapeHtml(statLine)}</i>\n\n`;
 
   // Major Early Signals
