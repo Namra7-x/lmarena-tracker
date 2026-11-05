@@ -61,6 +61,10 @@ jobs:
       - name: Commit Compact State to State Branch
         if: success()
         run: |
+          # Backup state files before switching branches
+          mkdir -p /tmp/state_backup
+          cp -r state/* /tmp/state_backup/ 2>/dev/null || true
+          
           git config user.name "early-signal-tracker-bot"
           git config user.email "actions@github.com"
           
@@ -72,13 +76,13 @@ jobs:
             git checkout state/${{ matrix.family }}
           fi
           
-          # Copy state files over
-          cp -r state/* . 2>/dev/null || true
+          # Copy state files into the root of the state branch
+          cp -r /tmp/state_backup/* . 2>/dev/null || true
           git add *.json 2>/dev/null || true
           
           if ! git diff --cached --quiet; then
             git commit -m "Update compact state for ${{ matrix.family }} [skip ci]"
-            git push origin state/${{ matrix.family }}
+            git push -u origin state/${{ matrix.family }}
           fi
 
       - name: Upload Scan Evidence Artifacts
