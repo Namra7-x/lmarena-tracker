@@ -3941,6 +3941,31 @@
   },
   "LiquidAI": {
     "models": {
+      "LiquidAI/LFM3-Audio-2B-MLX-4bit": {
+        "lastModified": "2026-11-05T19:37:59.000Z",
+        "gated": false,
+        "pipeline_tag": "any-to-any"
+      },
+      "LiquidAI/LFM3-1.7B-MLX-bf16": {
+        "lastModified": "2026-11-05T19:37:57.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
+      "LiquidAI/LFM3-1.7B-MLX-6bit": {
+        "lastModified": "2026-11-05T19:37:56.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
+      "LiquidAI/LFM3-1.7B-MLX-5bit": {
+        "lastModified": "2026-11-05T19:37:54.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
+      "LiquidAI/LFM3-1.7B-MLX-4bit": {
+        "lastModified": "2026-11-05T19:37:53.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
       "LiquidAI/LFM3-1.7B-ONNX": {
         "lastModified": "2026-11-05T19:33:10.000Z",
         "gated": false,
@@ -4038,31 +4063,6 @@
       },
       "LiquidAI/d1-2B-MLX-4bit": {
         "lastModified": "2026-11-03T07:42:13.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "LiquidAI/d1-2B": {
-        "lastModified": "2026-11-03T07:42:05.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "LiquidAI/LFM3-VL-2B-ONNX": {
-        "lastModified": "2026-11-03T07:42:03.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "LiquidAI/LFM3-VL-2B-NVFP4": {
-        "lastModified": "2026-11-03T07:42:00.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "LiquidAI/LFM3-VL-2B-MLX-bf16": {
-        "lastModified": "2026-11-03T07:41:57.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "LiquidAI/LFM3-VL-2B-MLX-8bit": {
-        "lastModified": "2026-11-03T07:41:54.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text"
       }
