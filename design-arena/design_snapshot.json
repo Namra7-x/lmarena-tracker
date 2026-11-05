@@ -8925,6 +8925,21 @@
       "router": false,
       "vision": false
     },
+    "qwen-image-3.0-pro": {
+      "active": true,
+      "arenas": {
+        "models": [
+          "image",
+          "imagetoimage"
+        ]
+      },
+      "displayName": "Qwen Image 3.0 Pro",
+      "inputModalities": [],
+      "openSource": false,
+      "provider": "alibaba",
+      "router": false,
+      "vision": false
+    },
     "qwen-image-edit": {
       "active": true,
       "arenas": {
@@ -12561,6 +12576,9 @@
       "image.perImage": 0.075
     },
     "qwen-image-3": {
+      "image.perImage": 0.075
+    },
+    "qwen-image-3.0-pro": {
       "image.perImage": 0.075
     },
     "qwen-image-edit": {
