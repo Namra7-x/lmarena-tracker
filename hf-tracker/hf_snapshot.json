@@ -3941,6 +3941,26 @@
   },
   "LiquidAI": {
     "models": {
+      "LiquidAI/LFM3-VL-2B-NVFP4": {
+        "lastModified": "2026-11-05T19:58:36.000Z",
+        "gated": false,
+        "pipeline_tag": "image-text-to-text"
+      },
+      "LiquidAI/LFM3-VL-2B-FP8": {
+        "lastModified": "2026-11-05T19:58:35.000Z",
+        "gated": false,
+        "pipeline_tag": "image-text-to-text"
+      },
+      "LiquidAI/LFM3-1.7B-NVFP4": {
+        "lastModified": "2026-11-05T19:58:33.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
+      "LiquidAI/LFM3-1.7B-FP8": {
+        "lastModified": "2026-11-05T19:58:32.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
       "LiquidAI/d1-Omni-2B-ONNX": {
         "lastModified": "2026-11-05T19:38:29.000Z",
         "gated": false,
@@ -4045,26 +4065,6 @@
         "lastModified": "2026-11-05T19:37:59.000Z",
         "gated": false,
         "pipeline_tag": "any-to-any"
-      },
-      "LiquidAI/LFM3-1.7B-MLX-bf16": {
-        "lastModified": "2026-11-05T19:37:57.000Z",
-        "gated": false,
-        "pipeline_tag": "text-generation"
-      },
-      "LiquidAI/LFM3-1.7B-MLX-6bit": {
-        "lastModified": "2026-11-05T19:37:56.000Z",
-        "gated": false,
-        "pipeline_tag": "text-generation"
-      },
-      "LiquidAI/LFM3-1.7B-MLX-5bit": {
-        "lastModified": "2026-11-05T19:37:54.000Z",
-        "gated": false,
-        "pipeline_tag": "text-generation"
-      },
-      "LiquidAI/LFM3-1.7B-MLX-4bit": {
-        "lastModified": "2026-11-05T19:37:53.000Z",
-        "gated": false,
-        "pipeline_tag": "text-generation"
       }
     },
     "spaces": {
