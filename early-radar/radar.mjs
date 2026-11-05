@@ -3,8 +3,8 @@
  * Early Signal Radar - Unified Engine
  * Orchestrates:
  * 1. Artificial Analysis Index reverse-engineering
- * 2. ChatGPT Web App manifest hash reverse-engineering
- * 3. Claude Web App Vite entry reverse-engineering
+ * 2. ChatGPT Web App manifest hash & deep chunk analyzer
+ * 3. Claude Web App Vite entry & deep chunk analyzer
  * 4. OpenAI Python SDK model enum commit watcher
  * 5. Anthropic TypeScript SDK model enum commit watcher
  */
@@ -18,6 +18,7 @@ import { fetchArtificialAnalysisModels } from './sources/artificial_analysis.mjs
 import { fetchChatGPTManifest, fetchChatGPTChunkList } from './sources/chatgpt_manifest.mjs';
 import { fetchClaudeManifest } from './sources/claude_manifest.mjs';
 import { fetchLatestSdkCommit, fetchCommitModelDiff } from './sources/sdk_commits.mjs';
+import { analyzeChunkContent, writeBuildReport } from './analyzer.mjs';
 import {
   buildArtificialAnalysisEmbed,
   buildChatGPTBuildEmbed,
@@ -129,7 +130,7 @@ export async function runRadar(options = {}) {
     console.warn(`[AA] Warning: ${aaRes.reason?.message}`);
   }
 
-  // 2. Process ChatGPT Manifest
+  // 2. Process ChatGPT Manifest & Build Analyzer
   if (gptRes.status === 'fulfilled' && gptRes.value) {
     const { manifestHash, manifestUrl } = gptRes.value;
     console.log(`[ChatGPT] Current manifest hash: ${manifestHash}`);
@@ -140,10 +141,23 @@ export async function runRadar(options = {}) {
       console.log(`[ChatGPT] 🔥 Production build updated! ${snapshot.chatgpt_manifest_hash} -> ${manifestHash}`);
       
       let totalChunks = 0;
+      let analysis = { models: [], featureGates: [], toolSchemas: [], launchCopy: [] };
+      let reportUrl = null;
+
       try {
         const chunkInfo = await fetchChatGPTChunkList(manifestHash);
         totalChunks = chunkInfo.totalChunks;
-      } catch {}
+        
+        // Deep analyze manifest text
+        const mRes = await fetch(manifestUrl, { headers: { 'User-Agent': RADAR_CONFIG.userAgent } });
+        if (mRes.ok) {
+          const mText = await mRes.text();
+          analysis = analyzeChunkContent(mText);
+          reportUrl = writeBuildReport('ChatGPT', manifestHash, analysis);
+        }
+      } catch (err) {
+        console.warn(`[ChatGPT] Deep analysis warning: ${err.message}`);
+      }
 
       const event = {
         type: 'CHATGPT_BUILD_UPDATED',
@@ -151,6 +165,10 @@ export async function runRadar(options = {}) {
         prevHash: snapshot.chatgpt_manifest_hash,
         manifestUrl,
         totalChunks,
+        models: analysis.models,
+        featureGates: analysis.featureGates,
+        launchCopy: analysis.launchCopy,
+        reportUrl,
       };
 
       allEvents.push(event);
@@ -161,7 +179,7 @@ export async function runRadar(options = {}) {
     console.warn(`[ChatGPT] Warning: ${gptRes.reason?.message}`);
   }
 
-  // 3. Process Claude Manifest
+  // 3. Process Claude Manifest & Build Analyzer
   if (claudeRes.status === 'fulfilled' && claudeRes.value) {
     const { entryHash, entryUrl } = claudeRes.value;
     console.log(`[Claude] Current Vite entry hash: ${entryHash}`);
@@ -170,11 +188,29 @@ export async function runRadar(options = {}) {
       snapshot.claude_entry_hash = entryHash;
     } else if (snapshot.claude_entry_hash && snapshot.claude_entry_hash !== entryHash) {
       console.log(`[Claude] 🔥 Production deployment updated! ${snapshot.claude_entry_hash} -> ${entryHash}`);
+      
+      let analysis = { models: [], featureGates: [], toolSchemas: [], launchCopy: [] };
+      let reportUrl = null;
+
+      try {
+        const bRes = await fetch(entryUrl, { headers: { 'User-Agent': RADAR_CONFIG.userAgent } });
+        if (bRes.ok) {
+          const bText = await bRes.text();
+          analysis = analyzeChunkContent(bText);
+          reportUrl = writeBuildReport('Claude', entryHash, analysis);
+        }
+      } catch (err) {
+        console.warn(`[Claude] Deep analysis warning: ${err.message}`);
+      }
+
       const event = {
         type: 'CLAUDE_BUILD_UPDATED',
         entryHash,
         prevHash: snapshot.claude_entry_hash,
         entryUrl,
+        models: analysis.models,
+        featureGates: analysis.featureGates,
+        reportUrl,
       };
 
       allEvents.push(event);

@@ -32,8 +32,38 @@ export function buildChatGPTBuildEmbed(event) {
     { name: 'Previous Hash', value: `\`${event.prevHash || 'none'}\``, inline: true },
   ];
 
-  if (event.totalChunks) {
-    fields.push({ name: 'Web App Chunks', value: `${event.totalChunks} chunks`, inline: true });
+  // 1. HIGHEST PRIORITY: New Models detected in build
+  if (event.models && event.models.length > 0) {
+    const modelList = event.models.map((m) => `🔥 **\`${m}\`**`).join('\n');
+    fields.unshift({ name: '⚡ Discovered Model Slugs', value: modelList, inline: false });
+  }
+
+  // 2. Feature Gates
+  if (event.featureGates && event.featureGates.length > 0) {
+    const preview = event.featureGates.slice(0, 6).map((g) => `\`${g}\``).join(', ');
+    fields.push({
+      name: `🚩 Feature Gates (${event.featureGates.length})`,
+      value: preview,
+      inline: false,
+    });
+  }
+
+  // 3. Launch Copy
+  if (event.launchCopy && event.launchCopy.length > 0) {
+    fields.push({
+      name: '📢 Launch Copy',
+      value: `> "${event.launchCopy[0]}"`,
+      inline: false,
+    });
+  }
+
+  // 4. Link to Full Report
+  if (event.reportUrl) {
+    fields.push({
+      name: '📄 Unabridged Full Report',
+      value: `[View all extracted signals on GitHub](${event.reportUrl})`,
+      inline: false,
+    });
   }
 
   return {
@@ -51,15 +81,42 @@ export function buildChatGPTBuildEmbed(event) {
  * Builds a Discord embed for a Claude.ai web app build deployment.
  */
 export function buildClaudeBuildEmbed(event) {
+  const fields = [
+    { name: 'Vite Entry Hash', value: `\`${event.entryHash}\``, inline: true },
+    { name: 'Previous Hash', value: `\`${event.prevHash || 'none'}\``, inline: true },
+  ];
+
+  // 1. HIGHEST PRIORITY: New Models
+  if (event.models && event.models.length > 0) {
+    const modelList = event.models.map((m) => `🔥 **\`${m}\`**`).join('\n');
+    fields.unshift({ name: '⚡ Discovered Model Slugs', value: modelList, inline: false });
+  }
+
+  // 2. Feature Gates
+  if (event.featureGates && event.featureGates.length > 0) {
+    const preview = event.featureGates.slice(0, 6).map((g) => `\`${g}\``).join(', ');
+    fields.push({
+      name: `🚩 Feature Gates (${event.featureGates.length})`,
+      value: preview,
+      inline: false,
+    });
+  }
+
+  // 3. Link to Full Report
+  if (event.reportUrl) {
+    fields.push({
+      name: '📄 Unabridged Full Report',
+      value: `[View all extracted signals on GitHub](${event.reportUrl})`,
+      inline: false,
+    });
+  }
+
   return {
     title: `⚡ Claude.ai | Production Build Deployed`,
     url: event.entryUrl,
     description: `Anthropic pushed a new production deployment to [claude.ai](${RADAR_CONFIG.endpoints.claude}).`,
     color: RADAR_CONFIG.colors.claude,
-    fields: [
-      { name: 'Vite Entry Hash', value: `\`${event.entryHash}\``, inline: true },
-      { name: 'Previous Hash', value: `\`${event.prevHash || 'none'}\``, inline: true },
-    ],
+    fields,
     footer: { text: 'Claude Vite Radar • Build Canary' },
     timestamp: new Date().toISOString(),
   };
@@ -81,8 +138,8 @@ export function buildSdkCommitEmbed(event) {
   ];
 
   if (event.additions && event.additions.length > 0) {
-    const preview = event.additions.slice(0, 8).map((l) => `\`${l}\``).join('\n');
-    fields.push({ name: 'Model Enum Additions', value: preview, inline: false });
+    const preview = event.additions.slice(0, 8).map((l) => `🔥 **\`${l}\`**`).join('\n');
+    fields.push({ name: '⚡ New Model Enum Additions', value: preview, inline: false });
   }
 
   return {
@@ -103,7 +160,7 @@ export async function sendDiscordEmbeds(webhookUrl, embeds) {
   if (!webhookUrl || embeds.length === 0) return;
 
   const BATCH_SIZE = 10;
-  for (let i = 0; i < embeds.length; i += BATCH_SIZE) {
+  for (let i = 0; i < BATCH_SIZE && i < embeds.length; i += BATCH_SIZE) {
     const batch = embeds.slice(i, i + BATCH_SIZE);
     const payload = {
       username: 'Early Signal Radar',
