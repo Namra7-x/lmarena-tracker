@@ -1,23 +1,50 @@
 /**
  * Early Signal Radar - Discord Webhook Notifier
- * Sends sleek, rich embed cards formatted with direct links, commit SHAs, and model specs.
+ * Sends sleek, rich embed cards formatted with direct links, commit SHAs, model specs, and raw JSON blocks.
  */
 
 import { RADAR_CONFIG } from './config.mjs';
 
 /**
- * Builds a Discord embed for an Artificial Analysis new model release.
+ * Builds a Discord embed for an Artificial Analysis new model release with a formatted JSON block.
  */
 export function buildArtificialAnalysisEmbed(model) {
+  const fields = [
+    { name: 'Model Name', value: model.name, inline: true },
+    { name: 'Slug Identifier', value: `\`${model.slug}\``, inline: true },
+  ];
+
+  if (model.creator) {
+    fields.push({ name: 'Creator / Lab', value: model.creator, inline: true });
+  }
+
+  // Include JSON Code Block of the model's specs
+  const rawSpecs = model.rawJson || {
+    name: model.name,
+    slug: model.slug,
+    creator: model.creator || 'Unknown',
+    parameters: model.parameters ? `${model.parameters}B` : undefined,
+    contextWindow: model.contextWindowTokens ? `${model.contextWindowTokens.toLocaleString()} tokens` : undefined,
+    isReasoning: model.isReasoning || undefined,
+    pricing: model.price1mInput ? `$${model.price1mInput}/1M in, $${model.price1mOutput}/1M out` : undefined,
+    speed: model.outputSpeed ? `${model.outputSpeed} tok/s` : undefined,
+    releaseDate: model.releaseDate || undefined,
+    weightsUrl: model.weightsUrl || undefined,
+  };
+
+  const jsonStr = JSON.stringify(rawSpecs, null, 2);
+  fields.push({
+    name: '📦 Model Specs (Raw JSON)',
+    value: `\`\`\`json\n${jsonStr.slice(0, 950)}\n\`\`\``,
+    inline: false,
+  });
+
   return {
     title: `⚡ Artificial Analysis | New Model Indexed`,
     url: model.url,
     description: `**[${model.name}](${model.url})** has been added to the master index!`,
     color: RADAR_CONFIG.colors.artificialAnalysis,
-    fields: [
-      { name: 'Model Name', value: model.name, inline: true },
-      { name: 'Slug Identifier', value: `\`${model.slug}\``, inline: true },
-    ],
+    fields,
     footer: { text: 'Artificial Analysis Radar • Zero-Spam Tracker' },
     timestamp: new Date().toISOString(),
   };
@@ -155,15 +182,35 @@ export function buildSdkCommitEmbed(event) {
 
 /**
  * Builds a complete showcase containing 1 sample embed for every single radar category.
- * Delivered together in one single Discord message (all 5 cards in 1 message).
+ * Features realistic 2026 frontier models with raw JSON blocks.
  */
 export function buildRadarShowcaseEmbeds() {
   return [
-    // 1. Artificial Analysis
+    // 1. Artificial Analysis with JSON Block
     buildArtificialAnalysisEmbed({
-      name: 'DeepSeek-V4 Flash',
-      slug: 'deepseek-v4-flash',
-      url: 'https://artificialanalysis.ai/models/deepseek-v4-flash',
+      name: 'GPT-6 Astra (Max)',
+      slug: 'gpt-6-astra',
+      url: 'https://artificialanalysis.ai/models/gpt-6-astra',
+      creator: 'OpenAI',
+      parameters: 1800,
+      contextWindowTokens: 2000000,
+      isReasoning: true,
+      price1mInput: 2.50,
+      price1mOutput: 10.00,
+      outputSpeed: 142,
+      releaseDate: '2026-09-18',
+      rawJson: {
+        name: 'GPT-6 Astra (Max)',
+        slug: 'gpt-6-astra',
+        creator: 'OpenAI',
+        parameters: '1,800B MoE',
+        contextWindow: '2,000,000 tokens',
+        isReasoning: true,
+        pricing: '$2.50/1M input, $10.00/1M output',
+        outputSpeed: '142 tok/s',
+        releaseDate: '2026-09-18',
+        license: 'Proprietary',
+      },
     }),
 
     // 2. ChatGPT Web App Build
@@ -172,10 +219,10 @@ export function buildRadarShowcaseEmbeds() {
       prevHash: '1a91f86c',
       manifestUrl: 'https://chatgpt.com/cdn/assets/manifest-e48d902a.js',
       totalChunks: 6721,
-      models: ['stealth-reasoner-v1', 'gpt-5-preview'],
-      featureGates: ['can_see_autonomous_tasks', 'enable_deep_research_v2', 'search_routing_v3'],
-      launchCopy: ['Introducing Autonomous Tasks: Execute multi-step agentic workflows directly in ChatGPT.'],
-      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/feat/early-radar/early-radar/reports/BUILD_chatgpt_e48d902a.md',
+      models: ['gpt-6.1-terra-preview', 'o4-mini-preview'],
+      featureGates: ['can_see_autonomous_operator_v2', 'enable_terra_deep_routing', 'search_canvas_v3'],
+      launchCopy: ['Introducing GPT-6.1 Terra: Frontier intelligence with native autonomous environment execution.'],
+      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/main/early-radar/reports/BUILD_chatgpt_e48d902a.md',
     }),
 
     // 3. Claude Web App Build
@@ -183,9 +230,9 @@ export function buildRadarShowcaseEmbeds() {
       entryHash: 'BlPlYMgx',
       prevHash: 'PYSO3vVA',
       entryUrl: 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BlPlYMgx.js',
-      models: ['claude-3-7-sonnet-preview'],
-      featureGates: ['can_see_computer_use_v2', 'enable_thinking_budget_slider'],
-      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/feat/early-radar/early-radar/reports/BUILD_claude_BlPlYMgx.md',
+      models: ['claude-5-5-opus-preview'],
+      featureGates: ['can_see_computer_use_v3', 'enable_dynamic_thinking_budget'],
+      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/main/early-radar/reports/BUILD_claude_BlPlYMgx.md',
     }),
 
     // 4. OpenAI SDK Commit
@@ -195,9 +242,9 @@ export function buildRadarShowcaseEmbeds() {
       sha: '4f82bc19a8234d',
       shortSha: '4f82bc1',
       author: 'Justin Beckwith',
-      message: 'feat(models): add stealth-reasoner-v1 to ChatModel literal enum (#4250)',
+      message: 'feat(models): add gpt-6.1-terra to ChatModel literal enum (#4310)',
       commitUrl: 'https://github.com/openai/openai-python/commit/4f82bc19a8234d',
-      additions: ['"stealth-reasoner-v1"', '"gpt-5-preview"'],
+      additions: ['"gpt-6.1-terra-preview"', '"o4-mini"'],
     }),
 
     // 5. Anthropic SDK Commit
@@ -207,15 +254,15 @@ export function buildRadarShowcaseEmbeds() {
       sha: '08e2e5ffa7566e',
       shortSha: '08e2e5f',
       author: 'anthropic-sdks-writer[bot]',
-      message: 'feat(models): add claude-3-7-sonnet to Model type enum',
+      message: 'feat(models): add claude-5-5-opus to Model type enum',
       commitUrl: 'https://github.com/anthropics/anthropic-sdk-typescript/commit/08e2e5ffa7566e',
-      additions: ['"claude-3-7-sonnet-20260219"', '"claude-3-7-sonnet-latest"'],
+      additions: ['"claude-5-5-opus-20261105"', '"claude-5-5-opus-latest"'],
     }),
   ];
 }
 
 /**
- * Sends embeds to the Discord webhook in batches of up to 10 (all 5 cards in 1 message).
+ * Sends embeds to the Discord webhook in batches of up to 10.
  */
 export async function sendDiscordEmbeds(webhookUrl, embeds) {
   if (!webhookUrl || embeds.length === 0) return;
