@@ -2067,6 +2067,11 @@
         "lastUpdated": "2026-10-20T16:05:12.697Z",
         "itemCount": 3
       },
+      "nvidia/local-ai-optimized-checkpoints-6ad2a5823f5a7563a800ba56": {
+        "title": "Local AI Optimized Checkpoints ",
+        "lastUpdated": "2026-10-20T13:09:31.856Z",
+        "itemCount": 2
+      },
       "nvidia/ardy-6a4d8e6b5d083f6eefaf7181": {
         "title": "ARDY",
         "lastUpdated": "2026-10-21T21:34:37.152Z",
@@ -2106,11 +2111,6 @@
         "title": "Nemotron 3.5 Retriever",
         "lastUpdated": "2026-10-20T13:47:18.258Z",
         "itemCount": 4
-      },
-      "nvidia/local-ai-optimized-checkpoints-6ad2a5823f5a7563a800ba56": {
-        "title": "Local AI Optimized Checkpoints ",
-        "lastUpdated": "2026-10-20T13:09:31.856Z",
-        "itemCount": 2
       }
     }
   },
@@ -5348,6 +5348,11 @@
   },
   "allenai": {
     "models": {
+      "allenai/maniflow-tb": {
+        "lastModified": "2026-11-05T17:54:00.000Z",
+        "gated": false,
+        "pipeline_tag": "robotics"
+      },
       "allenai/OlmoEarth-v1_2-FT-LFMC-Base": {
         "lastModified": "2026-10-26T16:25:30.000Z",
         "gated": false,
@@ -5465,11 +5470,6 @@
       },
       "allenai/StdMoE_1b14b_1T": {
         "lastModified": "2026-07-09T17:44:48.000Z",
-        "gated": false,
-        "pipeline_tag": "text-generation"
-      },
-      "allenai/StdMoE_1b14b_130B": {
-        "lastModified": "2026-07-09T17:44:29.000Z",
         "gated": false,
         "pipeline_tag": "text-generation"
       }
