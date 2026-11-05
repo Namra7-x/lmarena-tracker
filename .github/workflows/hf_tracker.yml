@@ -1,0 +1,46 @@
+name: Hugging Face Signal Tracker
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      init_ping:
+        description: 'Send test initialization ping to Discord'
+        required: false
+        default: 'false'
+        type: boolean
+
+concurrency:
+  group: hf-tracker
+  cancel-in-progress: false
+
+jobs:
+  track-hf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Run Hugging Face Tracker
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          INIT_PING: ${{ inputs.init_ping || 'false' }}
+        run: node hf-tracker/tracker.mjs
+
+      - name: Commit HF Snapshot
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git add hf-tracker/hf_snapshot.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Hugging Face snapshot [skip ci]"
+            git pull --rebase
+            git push
+          fi
