@@ -10610,6 +10610,23 @@
         ]
       }
     },
+    "lithium-1015": {
+      "displayName": "Ling 3.2 Flash",
+      "provider": "antgroup",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "agents": [
+          "agon_webapps"
+        ]
+      }
+    },
     "flint": {
       "displayName": "Flint",
       "provider": "recursive",
@@ -11413,7 +11430,6 @@
     "heygen": "HeyGen",
     "mousey": "Mousey",
     "paperinstruments": "Paper Instruments",
-    "lithium-1015": "lithium-1015",
     "recursive": "Recursive",
     "reflection": "Reflection",
     "claude_code": "Claude Code",
