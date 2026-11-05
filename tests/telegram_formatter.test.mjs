@@ -17,8 +17,10 @@ test('formatImmediateAlert matches Section 8 specification', () => {
   });
 
   assert.ok(alert.includes('🚨 <b>CODEX CLI 0.160.1 → 0.160.2</b>'));
-  assert.ok(alert.includes('Targets: macOS ✓  Windows ✓'));
-  assert.ok(alert.includes('Scan: <code>CX-20261103-004</code>'));
+  assert.ok(alert.includes('macOS ✓'));
+  assert.ok(alert.includes('Windows ✓'));
+  assert.ok(alert.includes('UTC'));
+  assert.ok(alert.includes('Scan ID:'));
   assert.ok(alert.includes('[Official Release]'));
 });
 

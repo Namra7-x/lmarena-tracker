@@ -15,22 +15,49 @@ export function escapeHtml(str) {
 }
 
 /**
+ * Format UTC timestamp as YYYY-MM-DD HH:MM:SS UTC.
+ */
+export function formatUtcDateTime(date = new Date()) {
+  const d = date instanceof Date ? date : new Date(date);
+  const pad = (n) => String(n).padStart(2, '0');
+  const y = d.getUTCFullYear();
+  const m = pad(d.getUTCMonth() + 1);
+  const day = pad(d.getUTCDate());
+  const h = pad(d.getUTCHours());
+  const min = pad(d.getUTCMinutes());
+  const s = pad(d.getUTCSeconds());
+  return `${y}-${m}-${day} ${h}:${min}:${s} UTC`;
+}
+
+/**
  * Format the Immediate Alert (sent BEFORE downloading/scanning)
  */
-export function formatImmediateAlert({ componentName, oldVersion, newVersion, scanId, targets = [], releaseUrl }) {
+export function formatImmediateAlert({
+  componentName,
+  oldVersion,
+  newVersion,
+  scanId,
+  targets = [],
+  releaseUrl,
+  timestamp = new Date(),
+}) {
   const comp = escapeHtml(componentName.toUpperCase());
   const oldV = escapeHtml(oldVersion || 'none');
   const newV = escapeHtml(newVersion);
   const sId = escapeHtml(scanId);
+  const timeStr = escapeHtml(formatUtcDateTime(timestamp));
 
   const macTarget = targets.some((t) => t.includes('darwin')) ? 'macOS ✓' : 'macOS ✗';
   const winTarget = targets.some((t) => t.includes('win32')) ? 'Windows ✓' : 'Windows ✗';
+  const linuxTarget = targets.some((t) => t.includes('linux')) ? 'Linux ✓' : null;
+  const targetStr = [macTarget, winTarget, linuxTarget].filter(Boolean).join(' | ');
 
   let msg = `🚨 <b>${comp} ${oldV} → ${newV}</b>\n`;
-  msg += `Targets: ${macTarget}  ${winTarget}\n`;
-  msg += `Scan: <code>${sId}</code>\n`;
+  msg += `📅 <i>${timeStr}</i>\n`;
+  msg += `🎯 <b>Targets:</b> ${targetStr}\n`;
+  msg += `🏷️ <b>Scan ID:</b> <code>${sId}</code>\n`;
   if (releaseUrl) {
-    msg += `<a href="${escapeHtml(releaseUrl)}">[Official Release]</a>`;
+    msg += `🔗 <a href="${escapeHtml(releaseUrl)}">[Official Release]</a>`;
   }
   return msg;
 }
@@ -46,12 +73,15 @@ export function formatCompletionMessage({
   moreFindings = [],
   coverage = {},
   countCheckText = '',
+  timestamp = new Date(),
 }) {
   const sId = escapeHtml(scanId);
+  const timeStr = escapeHtml(formatUtcDateTime(timestamp));
   const statLine = `${counts.commands || 0} commands · ${counts.flags || 0} flags · ${counts.configs || 0} config keys · ${counts.endpoints || 0} endpoints`;
 
   let msg = `🔬 <b>ANALYSIS COMPLETE · ${sId}</b>\n`;
-  msg += `<i>${escapeHtml(statLine)}</i>\n\n`;
+  msg += `📅 <i>${timeStr}</i>\n`;
+  msg += `📊 <i>${escapeHtml(statLine)}</i>\n\n`;
 
   // Major Early Signals
   if (majorSignals.length > 0) {
