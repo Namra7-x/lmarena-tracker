@@ -37,24 +37,24 @@ jobs:
           fetch-depth: 1
           show-progress: false
 
+      - name: Checkout State Branch
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: state/${{ matrix.family }}
+          path: state
+          fetch-depth: 1
+
+      - name: Ensure State Directory Exists
+        run: |
+          mkdir -p state
+          echo "Current state files for ${{ matrix.family }}:"
+          ls -la state/ 2>/dev/null || true
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-
-      - name: Setup State Branch
-        run: |
-          mkdir -p state
-          # Check if remote state branch exists
-          if git ls-remote --exit-code --heads origin state/${{ matrix.family }} >/dev/null 2>&1; then
-            echo "Fetching existing state for ${{ matrix.family }}..."
-            git fetch origin state/${{ matrix.family }}:refs/remotes/origin/state/${{ matrix.family }} --depth=1 || true
-            git archive refs/remotes/origin/state/${{ matrix.family }} 2>/dev/null | tar -x -C state/ 2>/dev/null || true
-            echo "State files loaded:"
-            ls -la state/ || true
-          else
-            echo "State branch state/${{ matrix.family }} does not exist yet. Initializing fresh baseline."
-          fi
 
       - name: Run Tracker Detection & Deep Scan
         env:
@@ -74,23 +74,9 @@ jobs:
             exit 0
           fi
 
-          STATE_TMP="/tmp/state_repo_${{ matrix.family }}"
-          rm -rf "$STATE_TMP"
-          mkdir -p "$STATE_TMP"
-          cd "$STATE_TMP"
-
-          git init -b state/${{ matrix.family }}
+          cd state
           git config user.name "early-signal-tracker-bot"
           git config user.email "actions@github.com"
-          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-
-          if git ls-remote --exit-code --heads origin state/${{ matrix.family }} >/dev/null 2>&1; then
-            echo "Pulling existing state/${{ matrix.family }}..."
-            git fetch --depth=1 origin state/${{ matrix.family }}:state/${{ matrix.family }} || true
-            git checkout state/${{ matrix.family }} || true
-          fi
-
-          cp "$GITHUB_WORKSPACE"/state/*.json . 2>/dev/null || true
           git add *.json
 
           if ! git diff --cached --quiet; then
@@ -98,13 +84,12 @@ jobs:
             git commit -m "Update compact state for ${{ matrix.family }} [skip ci]"
             for attempt in 1 2 3; do
               echo "Pushing state (attempt $attempt)..."
-              if git push -u origin state/${{ matrix.family }}; then
+              if git push origin HEAD:refs/heads/state/${{ matrix.family }}; then
                 echo "Successfully pushed state/${{ matrix.family }}"
                 break
               else
                 echo "Push failed, pulling remote changes..."
-                git fetch --depth=2 origin state/${{ matrix.family }} || true
-                git rebase origin/state/${{ matrix.family }} || true
+                git pull --rebase origin state/${{ matrix.family }} || true
                 sleep 2
               fi
             done

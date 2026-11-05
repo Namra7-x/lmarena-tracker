@@ -51,7 +51,7 @@ async function handleDetect(familyId) {
       const candidate = await discoverComponent(compId);
       const classification = classifyChange(baseline, candidate);
 
-      if (classification.changeType === CHANGE_TYPE.NO_CHANGE) {
+      if (classification.changeType === CHANGE_TYPE.NO_CHANGE || classification.changeType === CHANGE_TYPE.DIAGNOSTIC_DRIFT) {
         console.log(`  ✓ ${compId}: Unchanged (${candidate.version})`);
       } else if (classification.changeType === CHANGE_TYPE.FIRST_RUN) {
         console.log(`  🆕 ${compId}: First run detected (${candidate.version}). Initializing baseline.`);
