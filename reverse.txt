@@ -1,0 +1,378 @@
+# Early Feature & Major Signal Finder — Plan
+
+Personal tool (single user). Desktop apps + CLIs only. Mobile apps are out of scope.
+Every component is tracked on **macOS and Windows** (Linux added where an official build exists).
+Notifications: one Telegram bot. Runs on GitHub Actions (no Docker). Static analysis only.
+
+Core invariant:
+> Fast when unchanged, parallel when changed, exhaustive when resources permit, explicit when anything is skipped, never advance state from incomplete evidence.
+
+---
+
+## 1. Components (13) × platforms
+
+Each row is one independent component with its own state. Each component expands into **targets** = component × OS × arch.
+
+| # | Component | Family (Telegram topic) | Source candidates | Status |
+|---|---|---|---|---|
+| 1 | Codex CLI | OpenAI | GitHub `openai/codex` releases, npm `@openai/codex`, official install scripts | known |
+| 2 | Codex Desktop (now the ChatGPT desktop app, includes Codex) | OpenAI | docs `learn.chatgpt.com/docs/app`; macOS dmg `persistent.oaistatic.com/codex-app-prod/Codex.dmg`; Windows and Linux builds exist | macOS verified; **Windows download URL to confirm** |
+| 3 | Claude Code | Anthropic | GitHub releases, npm `@anthropic-ai/claude-code`, changelog | known |
+| 4 | Claude Desktop | Anthropic | official Claude download page (macOS, Windows), Linux apt repo | known |
+| 5 | Gemini Desktop | Google | `gemini.google/desktop` (Windows `GeminiSetup.exe`, x64 + ARM64), `gemini.google/mac` (.dmg, Apple Silicon, macOS 15+) | known |
+| 6 | Antigravity Desktop | Google | official Antigravity download page | known |
+| 7 | Antigravity CLI | Google | official `install.sh`, `install.ps1`, `install.cmd`, CLI changelog | known |
+| 8 | Cursor Desktop | Cursor | `cursor.com/download`, changelog on cursor.com | page verified; **per-OS direct URLs to extract at runtime** |
+| 9 | Cursor CLI (`agent`) | Cursor | `curl https://cursor.com/install` (macOS/Linux), `https://cursor.com/install?win32=true` (Windows native). Not the separate "Origin CLI" (`downloads.cursor.com/origin/`) | verified |
+| 10 | Devin Desktop (ex-Windsurf) | Devin | `devin.ai/download` | known |
+| 11 | Devin CLI | Devin | `cli.devin.ai/install.sh`, Windows installers at `static.devin.ai/cli/devin-updater-<arch>-pc-windows.exe`, Homebrew cask `devin-cli` | known |
+| 12 | OpenCode CLI (**v2 channel, decided**) | Other | `opencode.ai`, GitHub `anomalyco/opencode`, installer `opencode.ai/v2/install`, npm `@opencode/cli`, Homebrew `anomalyco/tap/opencode-v2`. Do NOT track v1 `opencode-ai` or the old Go project `opencode-ai/opencode` | verified |
+| 13 | Droid CLI (Factory) | Other | installer `app.factory.ai/cli`, npm `droid`, direct binaries `downloads.factory.ai/factory-cli/releases/<version>/<os>/<arch>/droid` with `.sha256` | verified |
+
+### 1.1 Source trust policy (official, current, no look-alikes)
+
+- Allowlist by **official domain/org only** (vendor domains, official GitHub org/repo, official npm package). Anything else is rejected.
+- Never use mirrors, "download" aggregator sites, third-party wrappers or old forks. Known traps: the old Go repo `opencode-ai/opencode` (not the current OpenCode), `notdp/oroio` (Droid key manager, not Factory), Cursor's separate Origin CLI.
+- Prefer the most authoritative source per component: vendor checksum/manifest > npm registry > official GitHub release > official download page. Disagreements are logged as diagnostics.
+- Vendor sites move: OpenAI Codex docs and downloads now live under `learn.chatgpt.com` and `persistent.oaistatic.com`; Devin Desktop is the renamed Windsurf. Adapters must record the resolved final URL and fail loudly (not silently fall back) if a source stops matching its allowed domain.
+- Staleness guard: if an official source stops updating for a long time relative to its history, or redirects to a new domain, raise a `SOURCE_CHANGED` note to Telegram for manual review.
+- Dynamic pages are parsed at runtime. Firecrawl is optional: use it only as a fallback scraper for JavaScript-heavy official pages (needs an API key and uses credits). Primary discovery stays direct HTTP, npm and GitHub APIs.
+
+### 1.2 Update-first rule (message order)
+
+1. Detect a real identity change.
+2. **Send the "updated version" alert to Telegram first** (component, old to new version, per-OS availability, scanId, official link).
+2b. Only then start download, conversion/extraction and analysis.
+3. Then edit/reply with the analysis result. If analysis fails, the alert already told you the release exists, and the baseline does not advance so it retries.
+
+"verify" = the discovery adapter must confirm the official URL, release channel and file naming before it is trusted. Never guess volatile CDN URLs; parse them at runtime.
+
+Platform matrix rule:
+- Identity fingerprint includes artifacts for **every** official OS/arch target of the component.
+- A change on only one OS still counts as a real change.
+- Intel Mac / unsupported targets are recorded as `NOT_OFFERED`, not as failures.
+
+Telegram: one group with topics: OpenAI, Anthropic, Google, Cursor, Devin, Other.
+
+---
+
+## 2. Architecture
+
+```
+Cloudflare Worker (every minute)
+   cheap checks (npm / GitHub API / official pages)
+   └─ change seen → repository_dispatch "tracker" (payload: family/component)
+
+GitHub Actions: one workflow, one job per family (matrix, fail-fast: false)
+   concurrency group per family: ai-<family>, cancel-in-progress: false
+   detect → scan (only if changed) → finalize (state + Telegram)
+```
+
+- Quiet minutes do almost nothing: detect compares identity and exits.
+- Scan jobs install tools directly on the runner (`apt-get`, `setup-node`, cached npm). No Docker.
+- Inside a family, components scan in parallel; inside a component, OS targets scan in parallel (bounded workers).
+- A waiting run is replaced by a newer one; always compare against the saved baseline, never against the trigger.
+- If the repo is private, the Worker must pre-filter (free minutes are limited).
+
+### 2.1 GitHub layout: branches, state and evidence
+
+```
+main                      code + workflows (repository_dispatch only runs workflows on the default branch)
+state/openai              compact state for OpenAI components
+state/anthropic           compact state for Anthropic components
+state/google              compact state for Google components
+state/cursor              compact state for Cursor components
+state/devin               compact state for Devin components
+state/other              compact state for OpenCode + Droid
+```
+
+- **Code never changes from scans.** `main` only changes when you edit the tracker.
+- **State lives on separate branches, one per family.** Each family job reads and writes only its own state branch, so parallel jobs never push to the same branch and never conflict. Nothing is committed on quiet minutes.
+- State branches are created once as **orphan branches** (no shared history with `main`), so state commits never clutter code history.
+- Each job checks out `main` (code) and its state branch (into a folder such as `./state`), runs, and commits only if the accepted candidate changed state. Push uses `GITHUB_TOKEN` with `contents: write`; pushes made with it do not trigger new workflow runs.
+- Push retries: fetch, rebase, re-check `basedOnFingerprint`, push again (bounded). A stale candidate is rejected.
+- Large evidence (`report.zip`, JSONL, hash sets) goes to Actions artifacts and is sent to Telegram; it is never committed.
+- Optional: prune old state history occasionally (squash the state branch) to keep the repo small.
+
+---
+
+## 3. Fingerprints and change classification
+
+**Identity fingerprint** (only thing that triggers a deep scan): component, channel, normalized version, release ID, official artifact URLs per target, vendor checksums/integrity, artifact inventory. Excludes page HTML, changelog text, ETag, Last-Modified, Content-Length, timestamps.
+
+**Diagnostic fingerprint**: volatile observations. Produces `SOURCE_DRIFT` only, never a deep scan.
+
+Classification:
+1. No identity change → stop, silent.
+2. Version/release change → immediate Telegram alert, then deep scan.
+3. Same version, different URL/checksum → download, verify, compare bytes. Identical bytes = drift (no alert). Different bytes = real change.
+
+Every real scan gets a `scanId` (e.g. `CX-20261103-004`), used in the alert, the completion message, the report, state and logs.
+
+---
+
+## 4. The finder: what counts as an early feature or major signal
+
+A raw string is weak. A string **with context and agreement** is strong. Every finding keeps provenance: component, OS, artifact, file path, extraction method, original value, normalized value, surrounding context, first/last seen.
+
+### 4.1 Where early features hide
+- **Feature flags / rollout keys** (experiment names, gate names, remote-config keys).
+- **Hidden commands and flags** (`hidden: true` in CLI parsers, undocumented subcommands).
+- **Unreleased model identifiers and aliases.**
+- **New endpoints, domains, protocol/request/response fields.**
+- **UI strings and i18n files** — user-facing copy for features before launch (strongest for desktop apps).
+- **Settings / config schema keys, environment variables.**
+- **Agents, skills, subagents, MCP tools/servers, plugins, providers.**
+- **Sandbox/permission/auth controls, browser/computer-use, scheduling/background, remote-control/relay.**
+- **Platform entitlements and manifests:** macOS `Info.plist` keys, entitlements, URL schemes/deep links; Windows manifest capabilities and protocol handlers.
+- **Dependency and native-module additions** (a new SDK is often a feature preview).
+- **Dormant markers** near a finding: `internal`, `staff`, `dogfood`, `nightly`, `alpha`, `experimental`, `preview`, `hidden`, `disabled`, `unreleased`, `coming soon`, `waitlist`.
+
+### 4.2 Cross-platform asymmetry (new signal type)
+A finding present on macOS but missing on Windows (or the reverse) is flagged `PLATFORM_ONLY`. Gemini Desktop, for example, ships some features on macOS first, so asymmetry is meaningful. Platform-only findings get a bonus, but are never treated as bugs.
+
+### 4.3 Tiers (never call an unconfirmed finding a "leak")
+- **CONFIRMED**: matches release notes, changelog or official docs.
+- **HIGH-CONFIDENCE SIGNAL**: multiple independent supports, not in release notes.
+- **EARLY SIGNAL**: new, plausible, limited support or gated.
+- **WEAK SIGNAL**: single isolated string.
+- **SOURCE DRIFT**: page/metadata change only.
+
+**MAJOR EARLY SIGNAL** = HIGH-CONFIDENCE, not in release notes, and category is one of: model, new command/product surface, endpoint/protocol, agent/mode. Only these trigger a sound notification.
+
+### 4.4 Deterministic scoring
+
+| Factor | Points |
+|---|---|
+| New in exact diff vs previous release | +10 |
+| First-ever appearance in history | +15 |
+| Category: model id | +25 |
+| Category: feature/rollout flag | +15 |
+| Category: hidden command, endpoint/domain | +15 |
+| Category: agent/skill/MCP/plugin | +12 |
+| Category: UI feature string | +12 |
+| Category: env var, config key, protocol field, entitlement | +8 to +10 |
+| Category: dependency | +5 |
+| Early marker in same context | +15 |
+| 2+ artifact classes agree (e.g. JS + binary) | +10 |
+| Present on both macOS and Windows | +8 |
+| Source-map/source + binary agreement | +10 |
+| `PLATFORM_ONLY` | +6 |
+| Matches release notes | tier → CONFIRMED |
+| Attributed to third-party dependency | −20 |
+| Looks minified/identifier-like/hash | −15 |
+| High historical false-positive rate for the pattern | −10 |
+
+Tiers: 60+ HIGH, 35–59 EARLY, 15–34 WEAK, below 15 hidden (kept in report only). Weights live in config and can be tuned.
+
+### 4.5 Noise control
+- Attribute strings to first-party vs third-party using package paths and source maps; drop `node_modules`-style boilerplate.
+- Ignore version strings, build IDs, hashes, UUIDs, timestamps, license text.
+- Collapse duplicates into one record: value, occurrences, artifacts, platforms, confidence.
+- Deterministic ordering: score desc, category, value.
+- Keep a per-component allow/deny list that you can edit.
+- **Filters never delete.** They only change ranking and labels. Every extracted string stays in the evidence files.
+
+---
+
+## 5. Acquisition and integrity
+
+- Only allowlisted vendor/CDN/GitHub/npm/package hosts. URLs found inside binaries are evidence, never fetched.
+- Verify vendor checksum / npm integrity when available; always compute local SHA-256.
+- Content-addressed dedup: identical bytes analyzed once, even across URLs and mirrors.
+- Per-artifact limits: timeout, max size, max expansion, retry (transient only).
+- Backoff with jitter; no retry on 404, bad checksum, unsupported format.
+- Failed verification never becomes a baseline.
+
+---
+
+## 6. Extraction ("converting") per format, with fallbacks
+
+Never execute downloaded files. Each artifact gets its own try/catch, timeout and status.
+
+| Artifact | Primary | Fallback |
+|---|---|---|
+| .zip / .tar.gz / .tgz / .xz | `7z` / `tar` | streaming raw strings |
+| .dmg (macOS) | `7z` | `dmg2img` + mount-free extraction; raw strings |
+| .pkg (macOS) | `xar` + `pbzx` | `7z` |
+| .app bundle contents | read directly (`Info.plist`, `Resources/app.asar`, frameworks) | raw strings per file |
+| .exe installer (NSIS, Squirrel) | `7z` | raw strings |
+| .msi | `msiextract` | `7z` |
+| .msix / .nupkg / .appx | unzip (ZIP container) | `7z` |
+| app.asar | read-only ASAR parser (`@electron/asar` or own) | raw strings on the .asar |
+| npm tarball | `tar` | `7z` |
+| .deb / .rpm (Linux) | `dpkg-deb -x` / `rpm2cpio` + `cpio` | `7z` |
+| ELF / PE / Mach-O | no conversion; header/section parsing (`lief`, `llvm-objdump`) + string extraction | raw strings |
+| source maps | parse JSON, read `sourcesContent` | treat as JSON text |
+| WASM | `wasm-objdump`/`wasm-tools` strings + data | raw strings |
+
+String extraction: **one single-pass scanner** (Rust/Go or ripgrep `-a`) covering UTF-8/ASCII, UTF-16LE, UTF-16BE. Do not spawn `strings` multiple times per file.
+
+Safety: block zip-slip (`../`), escaping symlinks, cap expanded size and file count (zip bombs). Verify extracted file count/size against the archive listing; mismatch → `PARTIAL`.
+
+Priority order: 1) manifests, release notes, config/schema, installer scripts, npm tarballs, source maps; 2) asar/app bundles, native binaries, WASM; 3) assets, fonts, images, localization (i18n JSON stays Priority 1 because it carries feature copy).
+
+---
+
+## 7. Exact diff and state
+
+- Normalized records streamed as JSONL → SHA-256 → external sort → `comm`/join → exact new / removed / persistent / reintroduced. No Bloom filters as source of truth.
+- Compare: previous successful release (per target), and historical `seen` set.
+- Cross-OS diff: macOS set vs Windows set within the same release → `PLATFORM_ONLY`.
+- Structured diffs: commands, flags, config schema, env vars, endpoints/domains, models, MCP tools, dependencies, entitlements, artifact inventory.
+- Git holds compact state only: last successful identity, coverage level, bounded recent signals (cap 5,000), bounded hot signals.
+- Full evidence stays in compressed Actions artifacts (JSONL, chunked) and in `report.zip`.
+- Isolated candidates: `basedOnFingerprint`, `candidateFingerprint`, `scanId`, `status`, `coverage`. Accept only if the base still matches the baseline; else re-diff. Bounded Git rebase/retry.
+- Failed or incomplete required coverage → baseline does **not** advance → next minute retries.
+
+Coverage states: `COMPLETE`, `PARTIAL`, `FAILED`, with counts for discovered/analyzed/skipped/failed artifacts, extraction/parser failures, timeouts, resource skips, integrity failures. Never present a partial scan as complete.
+
+First run: cheap, representative baseline (one artifact per OS/arch, metadata/config/text analysis), recorded as `REPRESENTATIVE`. After the first real change, run the deep cross-platform scan.
+
+---
+
+## 8. Telegram messages
+
+Telegram `sendMessage`, `parse_mode=HTML`, inline URL buttons. Limits: 4096 chars per message, 1024 per file caption. Escape all values.
+
+**Immediate alert** (on version/real change):
+```
+🚨 CODEX CLI 0.160.1 → 0.160.2
+Targets: macOS ✓  Windows ✓
+Scan: CX-20261103-004
+[Official Release]
+```
+
+**Completion** (edit the alert with `editMessageText`, or reply to it):
+```
+🔬 ANALYSIS COMPLETE · CX-20261103-004
+12 commands · 7 flags · 5 config keys · 3 endpoints
+🔥 MAJOR EARLY SIGNALS
+• model: <name>   (mac+win, JS+binary)
+• command: <name> (hidden, not in notes)
+⭐ HIGH: ...
+<blockquote expandable>top 30 more ...</blockquote>
+Coverage: 100% ✓   macOS ✓  Windows ✓
+📎 findings.txt  📎 report.zip
+```
+
+Rules:
+- Sound only for MAJOR EARLY SIGNAL and real releases; `disable_notification=true` for weak/drift/partial info.
+- Incomplete: `⚠️ PARTIAL · Coverage 87% · 3 artifacts failed`.
+- Message is a compact index; the files in section 8.1 hold every record.
+- 429: honor `retry_after`, bounded retries with jitter. No retry on 400/403.
+- Pin the latest release alert per topic (optional).
+- Optional later: `/status`, `/rescan <component>`, `/mute 1h` handled by the Worker.
+
+### 8.1 Complete files and count check (nothing missed)
+
+Every scan sends these files (separate `sendDocument` messages or an album of up to 10):
+
+| File | Contains |
+|---|---|
+| `1-major-and-high.txt` | Major + high-confidence findings with context |
+| `2-early-and-weak.txt` | Early + weak findings |
+| `3-by-category.txt` | Models, endpoints, commands, flags, env vars, config keys, feature flags, UI strings, dependencies |
+| `4-all-new-strings.txt.gz` | **Every** string new vs the previous release |
+| `5-platform-only.txt` | Strings found on macOS only or Windows only |
+| `6-removed.txt.gz` | Strings that disappeared |
+| `report.zip` | All of the above + raw records, coverage, manifest |
+
+Large files: compress, then split into numbered parts (`part1of3`) of at most 45 MB, with a `manifest.sha256`. Keep the full bundle as an Actions artifact as well.
+
+**Count check (mandatory, in every completion message):**
+```
+Extracted 5,214,880 = New 19,402 + Persistent 5,190,311 + ...
+Listed in files 19,402 / 19,402 ✓
+Coverage 100% (macOS ✓ Windows ✓)
+```
+If the file counts do not match the extracted counts, the scan is marked `PARTIAL` and the message says so.
+
+Known limits are stated in the report when relevant: server-only features, encrypted or heavily obfuscated code, strings built at runtime.
+
+---
+
+## 9. Safety and resources
+
+- No execution of binaries, apps, installers or vendor scripts; installer scripts are parsed as text only.
+- Disk reserve check before big operations; delete each artifact after analysis; compress reports.
+- Bounded worker pools: separate network and CPU concurrency, configurable, with backpressure.
+- Time budget per component and per run; every skip recorded explicitly.
+- Cache only tools/dependencies (cache keys include tool versions). Do not cache vendor installers long-term.
+
+---
+
+## 10. Tests (minimum for a personal tool)
+
+- Fingerprints: page/changelog change ≠ deep scan; version change = alert; same-version URL swap needs byte check.
+- Acquisition: checksum mismatch, allowlist, retries, dedup.
+- Extraction fixtures: one small real sample per format (zip, tgz, dmg, pkg, exe, msi, asar, source map, ELF, PE, Mach-O, UTF-16), plus a corrupt file for each.
+- Diff: exact new/removed/persistent/reintroduced; cross-OS asymmetry.
+- State: stale candidate rejected; failed/partial scan does not advance baseline.
+- Scoring: deterministic ordering and tier boundaries.
+- Telegram: HTML escaping, 4096/1024 limits, 429 handling, scanId threading.
+
+---
+
+## 11. Build order
+
+1. Component registry + fingerprint/state contract.
+2. Source adapters on the allowlist, stable-channel selection, and the remaining open source items in section 12.
+3. Worker fast path (dispatch only on change) + detect job.
+4. Change classification + Telegram alert + scanId.
+5. Isolated candidates + transactional persist.
+6. Acquisition, integrity, dedup, resource/timeout guards.
+7. Extraction for easy formats first (npm tarball, zip/tgz, JS, source maps, text).
+8. Exact diff + scoring + finder tiers.
+9. Report bundle + completion message.
+10. Heavier extractors one at a time: asar, dmg/pkg, exe/msi/msix, WASM, native binaries.
+11. Cross-platform asymmetry, tuning, deny-lists.
+
+Quiet detection of all 13 components (steps 1–4) already delivers most of the value.
+
+---
+
+## 12. Accuracy and validation
+
+Goal: never miss a finding (recall) and do not report junk (precision), with proof.
+
+Recall:
+- Nothing is deleted, only ranked.
+- Parse structure, not just strings: JS syntax, source maps, i18n JSON, config schemas, `Info.plist`, manifests, CLI command/flag definitions.
+- Multi-encoding extraction (UTF-8, ASCII, UTF-16LE/BE) with format fallbacks.
+- For minified JS compare string literals and keys, not renamed variables. Strip build hashes and chunk filenames.
+- Compare against three baselines: previous release, full history (reintroduced items), other OS.
+
+Precision:
+- Category context rules (e.g. model IDs near model/provider keys).
+- Dependency attribution (dependency updates are labeled as dependency changes).
+- Agreement scoring (JS + binary + both OSes outranks an isolated string).
+- Release-note match turns a finding into CONFIRMED.
+
+Proof:
+- **Canary tests:** hide known strings in test archives (nested, UTF-16, inside ASAR); CI fails if any is missed.
+- **Replay test before going live:** run the finder on old release pairs and check that later-announced features were flagged early. This gives a measured recall number.
+- **Telegram feedback buttons (👍/👎)** on findings; votes tune weights and deny-lists over time.
+- Skipped or failed artifacts make the scan `PARTIAL`, never "complete".
+
+## 13. Optional AI notes (never part of detection)
+
+Code finds, AI explains. Raw converted text is never sent to an AI.
+
+- Funnel: millions of strings, then exact diff, noise filter, scoring, about 150 ranked findings, then optional AI, then a short Telegram summary.
+- AI input: only the top 50 to 150 findings (value, category, score, tier, about 200 characters of context, OS/artifacts, matching release-note line). If larger, chunk, summarize each chunk, then combine.
+- AI jobs: explain why a finding matters, group related findings, write the short summary. Optional: score-boost-only classification of candidates in small batches. It can never delete findings, set tiers, or decide baselines.
+- Safety: strings are untrusted data, never instructions; no tools or secrets for the model; require JSON output and validate the schema; label output "AI-generated, unverified".
+- Providers: free-tier APIs (check current limits first), e.g. Gemini API, Groq, OpenRouter, Cloudflare Workers AI.
+- Fallback chain: provider A (20 s timeout, 1 retry) then B then C then a built-in template summary. Honor 429 `retry_after`. Hard budget of about 60 s for the whole AI step, `continue-on-error`.
+- Never block Telegram on AI: send the deterministic completion message first, then edit it to add an "AI notes" block if the AI finishes in time.
+- Cache AI output by a hash of the findings.
+
+## 14. Open items
+
+- Confirm the Windows download URL for the ChatGPT/Codex desktop app, and per-OS direct URLs for Cursor Desktop.
+- Decide the Droid channel (npm `droid` vs direct binary with `.sha256`; direct binary preferred for integrity).
+- Confirm official Antigravity download URLs for macOS and Windows.
+- Decide the stable-channel rule per component (avoid alpha/beta becoming the baseline).
+- Decide whether Linux builds are tracked (default: only where official and cheap).
+- Confirm repo visibility (public = free Actions minutes; private = Worker must pre-filter).
