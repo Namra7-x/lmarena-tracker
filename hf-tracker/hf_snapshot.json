@@ -2039,7 +2039,7 @@
     "collections": {
       "nvidia/nemotron-35-transcribe-6ae0df1dd041d0ef9f1a69ff": {
         "title": "Nemotron 3.5 Transcribe ",
-        "lastUpdated": "2026-10-29T23:06:58.500Z",
+        "lastUpdated": "2026-11-05T19:03:26.537Z",
         "itemCount": 4
       },
       "nvidia/nemotron-labs-dory-6ad144360f3f993c43a2f66d": {
@@ -2054,7 +2054,7 @@
       },
       "nvidia/nemotron-speech-6946215f3183fe85883afff8": {
         "title": "Nemotron Speech",
-        "lastUpdated": "2026-11-05T18:59:42.426Z",
+        "lastUpdated": "2026-11-05T19:02:36.474Z",
         "itemCount": 4
       },
       "nvidia/nemotron-pre-training-datasets-689d9de36f84279d83786b35": {
@@ -3941,6 +3941,16 @@
   },
   "LiquidAI": {
     "models": {
+      "LiquidAI/LFM3-1.7B-ONNX": {
+        "lastModified": "2026-11-05T19:33:10.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
+      "LiquidAI/LFM3-1.7B-MLX-8bit": {
+        "lastModified": "2026-11-05T19:33:08.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
       "LiquidAI/LFM2.5-VL-450M-MLX-4bit": {
         "lastModified": "2026-11-04T22:57:11.000Z",
         "gated": false,
@@ -4053,16 +4063,6 @@
       },
       "LiquidAI/LFM3-VL-2B-MLX-8bit": {
         "lastModified": "2026-11-03T07:41:54.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "LiquidAI/LFM3-VL-2B-MLX-6bit": {
-        "lastModified": "2026-11-03T07:41:52.000Z",
-        "gated": false,
-        "pipeline_tag": "image-text-to-text"
-      },
-      "LiquidAI/LFM3-VL-2B-MLX-5bit": {
-        "lastModified": "2026-11-03T07:41:49.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text"
       }
@@ -4904,7 +4904,7 @@
   "stabilityai": {
     "models": {
       "stabilityai/stable-audio-open-small": {
-        "lastModified": "2026-11-05T18:59:32.000Z",
+        "lastModified": "2026-11-05T19:04:49.000Z",
         "gated": false,
         "pipeline_tag": "text-to-audio"
       },
@@ -5349,12 +5349,12 @@
   "allenai": {
     "models": {
       "allenai/Molmo2-4B-tb": {
-        "lastModified": "2026-11-05T18:22:38.000Z",
+        "lastModified": "2026-11-05T19:16:09.000Z",
         "gated": false,
         "pipeline_tag": "robotics"
       },
       "allenai/maniflow-tb": {
-        "lastModified": "2026-11-05T18:21:34.000Z",
+        "lastModified": "2026-11-05T19:16:08.000Z",
         "gated": false,
         "pipeline_tag": "robotics"
       },
