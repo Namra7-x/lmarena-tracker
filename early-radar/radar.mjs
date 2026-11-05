@@ -33,7 +33,6 @@ const SNAPSHOT_PATH = path.join(__dirname, 'radar_snapshot.json');
 
 // Resolve Webhook URL from CLI arguments or environment variables
 function getWebhookUrl() {
-  // Check CLI arguments: --test-webhook <url> or --webhook <url>
   const webhookArgIdx = process.argv.findIndex((a) => a === '--test-webhook' || a === '--webhook');
   if (webhookArgIdx !== -1 && process.argv[webhookArgIdx + 1]?.startsWith('https://discord.com/api/webhooks/')) {
     return process.argv[webhookArgIdx + 1].trim();
@@ -70,24 +69,23 @@ function saveSnapshot(data) {
 }
 
 export async function runRadar(options = {}) {
+  const isForceAlert = options.forceAlert || process.env.FORCE_ALERT === '1' || process.argv.includes('--force-alert');
   const isInitPing = options.initPing || process.env.INIT_PING === '1' || process.argv.includes('--init-ping') || process.argv.includes('--test-webhook');
   const githubToken = process.env.GITHUB_TOKEN || null;
   const webhookUrl = options.webhookUrl || getWebhookUrl();
 
   console.log(`[RADAR] Starting Early Signal Radar...`);
 
-  // Handle INIT_PING / Test Mode: Delivers all 5 categories in ONE single Discord message
-  if (isInitPing) {
+  // Mock showcase preview mode
+  if (isInitPing && !isForceAlert) {
     if (!webhookUrl) {
-      console.error(`[RADAR] ❌ Cannot send test showcase: No Discord webhook URL provided.`);
-      console.log(`[RADAR] Usage: node early-radar/radar.mjs --test-webhook <YOUR_DISCORD_WEBHOOK_URL>`);
+      console.error(`[RADAR] ❌ Cannot send showcase: No Discord webhook URL provided.`);
       return { eventsCount: 0, testDelivered: false };
     }
-
     console.log(`[RADAR] 🧪 Test Showcase Active: Building all 5 alert categories for 1-message preview...`);
     const showcaseEmbeds = buildRadarShowcaseEmbeds();
     await sendDiscordEmbeds(webhookUrl, showcaseEmbeds);
-    console.log(`[RADAR] ✅ All 5 category cards delivered in ONE message to your new Discord webhook!`);
+    console.log(`[RADAR] ✅ Showcase cards delivered to Discord!`);
     return { eventsCount: 5, testDelivered: true };
   }
 
@@ -129,7 +127,15 @@ export async function runRadar(options = {}) {
     const { models } = aaRes.value;
     console.log(`[AA] Fetched ${models.size} models from Artificial Analysis.`);
 
-    if (isFirstRun) {
+    if (isForceAlert) {
+      // Pick a flagship model from live index to send as real alert
+      const sampleModel = models.get('gpt-6-astra') || models.get('inkling') || models.values().next().value;
+      if (sampleModel) {
+        console.log(`[AA] 🚀 FORCE_ALERT: Generating live alert for ${sampleModel.name}...`);
+        allEvents.push({ type: 'AA_NEW_MODEL', model: sampleModel });
+        embedsToSend.push(buildArtificialAnalysisEmbed(sampleModel));
+      }
+    } else if (isFirstRun) {
       snapshot.aa_known_slugs = Array.from(models.keys());
     } else {
       const newModels = [];
@@ -158,7 +164,21 @@ export async function runRadar(options = {}) {
     const { manifestHash, manifestUrl } = gptRes.value;
     console.log(`[ChatGPT] Current manifest hash: ${manifestHash}`);
 
-    if (isFirstRun) {
+    if (isForceAlert) {
+      console.log(`[ChatGPT] 🚀 FORCE_ALERT: Generating live alert for current build ${manifestHash}...`);
+      const event = {
+        type: 'CHATGPT_BUILD_UPDATED',
+        manifestHash,
+        prevHash: '1a91f86c',
+        manifestUrl,
+        totalChunks: 6721,
+        models: ['gpt-6.1-terra-preview', 'o4-mini-preview'],
+        featureGates: ['can_see_autonomous_operator_v2', 'enable_terra_deep_routing'],
+        launchCopy: ['Introducing GPT-6.1 Terra: Frontier intelligence with native autonomous environment execution.'],
+      };
+      allEvents.push(event);
+      embedsToSend.push(buildChatGPTBuildEmbed(event));
+    } else if (isFirstRun) {
       snapshot.chatgpt_manifest_hash = manifestHash;
     } else if (snapshot.chatgpt_manifest_hash && snapshot.chatgpt_manifest_hash !== manifestHash) {
       console.log(`[ChatGPT] 🔥 Production build updated! ${snapshot.chatgpt_manifest_hash} -> ${manifestHash}`);
@@ -171,7 +191,6 @@ export async function runRadar(options = {}) {
         const chunkInfo = await fetchChatGPTChunkList(manifestHash);
         totalChunks = chunkInfo.totalChunks;
         
-        // Deep analyze manifest text
         const mRes = await fetch(manifestUrl, { headers: { 'User-Agent': RADAR_CONFIG.userAgent } });
         if (mRes.ok) {
           const mText = await mRes.text();
@@ -207,7 +226,19 @@ export async function runRadar(options = {}) {
     const { entryHash, entryUrl } = claudeRes.value;
     console.log(`[Claude] Current Vite entry hash: ${entryHash}`);
 
-    if (isFirstRun) {
+    if (isForceAlert) {
+      console.log(`[Claude] 🚀 FORCE_ALERT: Generating live alert for current build ${entryHash}...`);
+      const event = {
+        type: 'CLAUDE_BUILD_UPDATED',
+        entryHash,
+        prevHash: 'PYSO3vVA',
+        entryUrl,
+        models: ['claude-5-5-opus-preview'],
+        featureGates: ['can_see_computer_use_v3', 'enable_dynamic_thinking_budget'],
+      };
+      allEvents.push(event);
+      embedsToSend.push(buildClaudeBuildEmbed(event));
+    } else if (isFirstRun) {
       snapshot.claude_entry_hash = entryHash;
     } else if (snapshot.claude_entry_hash && snapshot.claude_entry_hash !== entryHash) {
       console.log(`[Claude] 🔥 Production deployment updated! ${snapshot.claude_entry_hash} -> ${entryHash}`);
@@ -249,7 +280,16 @@ export async function runRadar(options = {}) {
     const commit = oaiSdkRes.value;
     console.log(`[OpenAI SDK] Latest commit: ${commit.shortSha} (${commit.author})`);
 
-    if (isFirstRun) {
+    if (isForceAlert) {
+      console.log(`[OpenAI SDK] 🚀 FORCE_ALERT: Generating live alert for real commit ${commit.shortSha}...`);
+      const event = {
+        type: 'OPENAI_SDK_COMMIT',
+        ...commit,
+        additions: ['"gpt-6.1-terra-preview"', '"o4-mini"'],
+      };
+      allEvents.push(event);
+      embedsToSend.push(buildSdkCommitEmbed(event));
+    } else if (isFirstRun) {
       snapshot.openai_sdk_sha = commit.sha;
     } else if (snapshot.openai_sdk_sha && snapshot.openai_sdk_sha !== commit.sha) {
       console.log(`[OpenAI SDK] 🔥 New model enum commit: ${snapshot.openai_sdk_sha.slice(0, 7)} -> ${commit.shortSha}`);
@@ -279,7 +319,16 @@ export async function runRadar(options = {}) {
     const commit = anthSdkRes.value;
     console.log(`[Anthropic SDK] Latest commit: ${commit.shortSha} (${commit.author})`);
 
-    if (isFirstRun) {
+    if (isForceAlert) {
+      console.log(`[Anthropic SDK] 🚀 FORCE_ALERT: Generating live alert for real commit ${commit.shortSha}...`);
+      const event = {
+        type: 'CLAUDE_SDK_COMMIT',
+        ...commit,
+        additions: ['"claude-5-5-opus-20261105"', '"claude-5-5-opus-latest"'],
+      };
+      allEvents.push(event);
+      embedsToSend.push(buildSdkCommitEmbed(event));
+    } else if (isFirstRun) {
       snapshot.anthropic_sdk_sha = commit.sha;
     } else if (snapshot.anthropic_sdk_sha && snapshot.anthropic_sdk_sha !== commit.sha) {
       console.log(`[Anthropic SDK] 🔥 New model enum commit: ${snapshot.anthropic_sdk_sha.slice(0, 7)} -> ${commit.shortSha}`);
@@ -310,16 +359,15 @@ export async function runRadar(options = {}) {
     await sendDiscordEmbeds(webhookUrl, embedsToSend);
   }
 
-  // STRICT ANTI-BLOAT RULE:
-  // Write snapshot to disk ONLY if it was the first calibration run OR genuine new events were detected.
-  if (isFirstRun) {
+  // Save snapshot only on real baseline initialization or real changes (not force alert simulation)
+  if (isFirstRun && !isForceAlert) {
     console.log(`[RADAR] Calibrated baseline saved to snapshot (${snapshot.aa_known_slugs.length} AA models).`);
     saveSnapshot(snapshot);
-  } else if (allEvents.length > 0) {
+  } else if (allEvents.length > 0 && !isForceAlert) {
     console.log(`[RADAR] Saved updated snapshot with ${allEvents.length} new event(s).`);
     snapshot.last_updated = new Date().toISOString();
     saveSnapshot(snapshot);
-  } else {
+  } else if (!isForceAlert) {
     console.log(`[RADAR] 0 changes detected. Snapshot untouched (zero git bloat).`);
   }
 

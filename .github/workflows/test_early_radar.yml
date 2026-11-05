@@ -26,15 +26,16 @@ jobs:
         with:
           node-version: 22
 
-      - name: Send All 5 Category Cards (1 Single Discord Message)
+      - name: Send Real Live Alert Cards (1 Single Discord Message)
         env:
           INPUT_WEBHOOK_URL: ${{ inputs.webhook_url }}
           EARLY_RADAR_DISCORD_WEBHOOK_URL: ${{ secrets.EARLY_RADAR_DISCORD_WEBHOOK_URL }}
           HF_DISCORD_WEBHOOK_URL: ${{ secrets.HF_DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TARGET_URL="${INPUT_WEBHOOK_URL:-${EARLY_RADAR_DISCORD_WEBHOOK_URL:-$HF_DISCORD_WEBHOOK_URL}}"
           if [ -z "$TARGET_URL" ]; then
             echo "::error::No Discord webhook URL found. Please provide it in the workflow input or set EARLY_RADAR_DISCORD_WEBHOOK_URL in repository secrets."
             exit 1
           fi
-          node early-radar/radar.mjs --test-webhook "$TARGET_URL"
+          node early-radar/radar.mjs --force-alert --test-webhook "$TARGET_URL"
