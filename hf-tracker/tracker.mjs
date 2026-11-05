@@ -60,59 +60,44 @@ async function main() {
     }
   }
 
-  // Handle first run
+  // Handle initialization or test preview ping
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  const isTestPing = process.env.INIT_PING === 'true' || process.env.INIT_PING === '1';
+
+  if (isTestPing && webhookUrl) {
+    console.log('[HF Tracker] Generating test preview cards for Qwen and DeepSeek...');
+    const testEvents = [];
+    
+    const qwenModel = orgStates.find(o => o.org === 'Qwen')?.state?.models?.[0];
+    const deepseekModel = orgStates.find(o => o.org === 'deepseek-ai')?.state?.models?.[0];
+
+    if (qwenModel) {
+      testEvents.push({
+        type: 'NEW_MODEL',
+        org: 'Qwen',
+        item: qwenModel,
+        details: { summary: '🧪 **Setup Test Card**: Sample preview of how Qwen releases will appear in Discord.' }
+      });
+    }
+    if (deepseekModel) {
+      testEvents.push({
+        type: 'NEW_MODEL',
+        org: 'deepseek-ai',
+        item: deepseekModel,
+        details: { summary: '🧪 **Setup Test Card**: Sample preview of how DeepSeek releases will appear in Discord.' }
+      });
+    }
+
+    if (testEvents.length > 0) {
+      await sendDiscordAlerts(testEvents, webhookUrl);
+      console.log(`[HF Tracker] Sent ${testEvents.length} test preview cards (Qwen + DeepSeek) to Discord.`);
+    }
+  }
+
+  // Handle first run baseline save
   if (isFirstRun) {
     fs.writeFileSync(SNAPSHOT_FILE, JSON.stringify(newSnapshot, null, 2), 'utf8');
     console.log(`[HF Tracker] Baseline established for ${TRACKED_ORG_IDS.length} labs. Saved to ${SNAPSHOT_FILE}.`);
-
-    // Send single initialization verification embed to Discord if webhook configured
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-    if (webhookUrl && (process.env.INIT_PING === 'true' || process.env.INIT_PING === '1')) {
-      const initPayload = {
-        username: 'Hugging Face Radar',
-        avatar_url: 'https://huggingface.co/front/assets/huggingface_logo-noborder.png',
-        embeds: [
-          {
-            title: '📡 Hugging Face Signal Tracker Initialized',
-            description: `Now monitoring **${TRACKED_ORG_IDS.length} Tier-1 AI Labs & Model Creators** for new releases.`,
-            color: 0x10B981,
-            fields: [
-              {
-                name: '🏢 Tracked Frontier Labs',
-                value: Object.values(LABS).map(l => `• ${l.name}`).slice(0, 15).join('\n') + `\n...and ${TRACKED_ORG_IDS.length - 15} more.`,
-                inline: false
-              },
-              {
-                name: '🔍 Monitored Events',
-                value: '• New Models & Weights\n• New Spaces & Live Demos\n• Curated Collections\n• Gating / Access Changes',
-                inline: true
-              },
-              {
-                name: '⚡ Cadence',
-                value: 'Every 15 minutes via GitHub Actions',
-                inline: true
-              }
-            ],
-            footer: {
-              text: 'Hugging Face Signal Tracker • Operational',
-              icon_url: 'https://huggingface.co/front/assets/huggingface_logo-noborder.png'
-            },
-            timestamp: new Date().toISOString()
-          }
-        ]
-      };
-
-      try {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(initPayload)
-        });
-        console.log('[HF Tracker] Sent initialization welcome embed to Discord.');
-      } catch (err) {
-        console.warn('[HF Tracker] Could not send init ping:', err.message);
-      }
-    }
     return;
   }
 
