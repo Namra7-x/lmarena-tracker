@@ -1,0 +1,91 @@
+name: Early Feature & Signal Tracker
+
+on:
+  repository_dispatch:
+    types: [tracker, early_signal_tracker]
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  scan-family:
+    name: Track ${{ matrix.family }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ai-${{ matrix.family }}
+      cancel-in-progress: false
+    strategy:
+      fail-fast: false
+      matrix:
+        family:
+          - openai
+          - anthropic
+          - google
+          - cursor
+          - devin
+          - other
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Checkout State Branch
+        run: |
+          mkdir -p state
+          git fetch origin state/${{ matrix.family }}:state/${{ matrix.family }} || true
+          if git rev-parse --verify state/${{ matrix.family }} >/dev/null 2>&1; then
+            git --work-tree=state checkout state/${{ matrix.family }} -- . || true
+          fi
+
+      - name: Run Tracker Detection & Deep Scan
+        env:
+          STATE_DIR: state
+          REPORTS_DIR: reports
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          node reverse-tracker/cli.mjs run --family=${{ matrix.family }}
+
+      - name: Commit Compact State to State Branch
+        if: success()
+        run: |
+          git config user.name "early-signal-tracker-bot"
+          git config user.email "actions@github.com"
+          
+          # Initialize orphan branch if needed
+          if ! git rev-parse --verify state/${{ matrix.family }} >/dev/null 2>&1; then
+            git checkout --orphan state/${{ matrix.family }}
+            git rm -rf .
+          else
+            git checkout state/${{ matrix.family }}
+          fi
+          
+          # Copy state files over
+          cp -r state/* . 2>/dev/null || true
+          git add *.json 2>/dev/null || true
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "Update compact state for ${{ matrix.family }} [skip ci]"
+            git push origin state/${{ matrix.family }}
+          fi
+
+      - name: Upload Scan Evidence Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ matrix.family }}
+          path: reports/
+          if-no-files-found: ignore
+          retention-days: 14

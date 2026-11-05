@@ -1,0 +1,11 @@
+name = "reverse-signal-tracker-worker"
+main = "worker.mjs"
+compatibility_date = "2026-11-01"
+
+[triggers]
+crons = ["* * * * *"]
+
+# To bind KV namespace for version storage:
+# [[kv_namespaces]]
+# binding = "TRACKER_KV"
+# id = "your-kv-namespace-id"
