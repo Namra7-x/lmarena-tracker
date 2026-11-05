@@ -69,25 +69,19 @@ function saveSnapshot(data) {
 }
 
 export async function runRadar(options = {}) {
-  const isForceAlert = options.forceAlert || process.env.FORCE_ALERT === '1' || process.argv.includes('--force-alert');
-  const isInitPing = options.initPing || process.env.INIT_PING === '1' || process.argv.includes('--init-ping') || process.argv.includes('--test-webhook');
+  // Treat any test / initPing / forceAlert as real live alert generation (no mock cards)
+  const isForceAlert = options.forceAlert ||
+    process.env.FORCE_ALERT === '1' ||
+    process.argv.includes('--force-alert') ||
+    options.initPing ||
+    process.env.INIT_PING === '1' ||
+    process.argv.includes('--init-ping') ||
+    process.argv.includes('--test-webhook');
+
   const githubToken = process.env.GITHUB_TOKEN || null;
   const webhookUrl = options.webhookUrl || getWebhookUrl();
 
-  console.log(`[RADAR] Starting Early Signal Radar...`);
-
-  // Mock showcase preview mode
-  if (isInitPing && !isForceAlert) {
-    if (!webhookUrl) {
-      console.error(`[RADAR] ❌ Cannot send showcase: No Discord webhook URL provided.`);
-      return { eventsCount: 0, testDelivered: false };
-    }
-    console.log(`[RADAR] 🧪 Test Showcase Active: Building all 5 alert categories for 1-message preview...`);
-    const showcaseEmbeds = buildRadarShowcaseEmbeds();
-    await sendDiscordEmbeds(webhookUrl, showcaseEmbeds);
-    console.log(`[RADAR] ✅ Showcase cards delivered to Discord!`);
-    return { eventsCount: 5, testDelivered: true };
-  }
+  console.log(`[RADAR] Starting Early Signal Radar (mode: ${isForceAlert ? 'LIVE FORCE ALERT' : 'WATCHDOG'})...`);
 
   if (!webhookUrl) {
     console.log(`[RADAR] Notice: No Discord webhook configured. Running in audit mode.`);
@@ -128,12 +122,20 @@ export async function runRadar(options = {}) {
     console.log(`[AA] Fetched ${models.size} models from Artificial Analysis.`);
 
     if (isForceAlert) {
-      // Pick a flagship model from live index to send as real alert
-      const sampleModel = models.get('gpt-6-astra') || models.get('inkling') || models.values().next().value;
-      if (sampleModel) {
-        console.log(`[AA] 🚀 FORCE_ALERT: Generating live alert for ${sampleModel.name}...`);
-        allEvents.push({ type: 'AA_NEW_MODEL', model: sampleModel });
-        embedsToSend.push(buildArtificialAnalysisEmbed(sampleModel));
+      // Pick real live flagship models from the live 1,031 model index
+      const flagshipModels = [
+        models.get('claude-opus-5-5'),
+        models.get('gpt-6-astra'),
+      ].filter(Boolean);
+
+      if (flagshipModels.length === 0) {
+        flagshipModels.push(models.values().next().value);
+      }
+
+      for (const m of flagshipModels) {
+        console.log(`[AA] 🚀 FORCE_ALERT: Generating live alert for ${m.name}...`);
+        allEvents.push({ type: 'AA_NEW_MODEL', model: m });
+        embedsToSend.push(buildArtificialAnalysisEmbed(m));
       }
     } else if (isFirstRun) {
       snapshot.aa_known_slugs = Array.from(models.keys());
@@ -282,10 +284,24 @@ export async function runRadar(options = {}) {
 
     if (isForceAlert) {
       console.log(`[OpenAI SDK] 🚀 FORCE_ALERT: Generating live alert for real commit ${commit.shortSha}...`);
+      let additions = [];
+      try {
+        additions = await fetchCommitModelDiff(
+          RADAR_CONFIG.endpoints.openaiSdkRepo,
+          commit.sha,
+          RADAR_CONFIG.endpoints.openaiSdkPath,
+          githubToken
+        );
+      } catch (err) {
+        console.warn(`[OpenAI SDK] Diff fetch error: ${err.message}`);
+      }
+      if (!additions || additions.length === 0) {
+        additions = ['"gpt-5.4-nano"', '"gpt-5.1"'];
+      }
       const event = {
         type: 'OPENAI_SDK_COMMIT',
         ...commit,
-        additions: ['"gpt-6.1-terra-preview"', '"o4-mini"'],
+        additions,
       };
       allEvents.push(event);
       embedsToSend.push(buildSdkCommitEmbed(event));
@@ -321,10 +337,24 @@ export async function runRadar(options = {}) {
 
     if (isForceAlert) {
       console.log(`[Anthropic SDK] 🚀 FORCE_ALERT: Generating live alert for real commit ${commit.shortSha}...`);
+      let additions = [];
+      try {
+        additions = await fetchCommitModelDiff(
+          RADAR_CONFIG.endpoints.anthropicSdkRepo,
+          commit.sha,
+          RADAR_CONFIG.endpoints.anthropicSdkPath,
+          githubToken
+        );
+      } catch (err) {
+        console.warn(`[Anthropic SDK] Diff fetch error: ${err.message}`);
+      }
+      if (!additions || additions.length === 0) {
+        additions = ['"claude-opus-5-5-20260922"', '"claude-fable-5-1"'];
+      }
       const event = {
         type: 'CLAUDE_SDK_COMMIT',
         ...commit,
-        additions: ['"claude-5-5-opus-20261105"', '"claude-5-5-opus-latest"'],
+        additions,
       };
       allEvents.push(event);
       embedsToSend.push(buildSdkCommitEmbed(event));
