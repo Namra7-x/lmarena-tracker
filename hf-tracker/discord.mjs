@@ -113,17 +113,41 @@ export function buildEmbed(event) {
     });
   }
 
+  // Exact list of newly added items for collection updates
+  if (type === 'COLLECTION_UPDATED' && details?.addedItems && details.addedItems.length > 0) {
+    const addedList = details.addedItems
+      .slice(0, 5)
+      .map((i) => `• [${i.id}](https://huggingface.co/${i.id})`)
+      .join('\n');
+    fields.push({
+      name: '➕ Newly Added Models',
+      value: addedList + (details.addedItems.length > 5 ? `\n...and ${details.addedItems.length - 5} more` : ''),
+      inline: false
+    });
+  } else if (type === 'NEW_COLLECTION' && details?.items && details.items.length > 0) {
+    const includedList = details.items
+      .slice(0, 5)
+      .map((i) => `• [${i.id}](https://huggingface.co/${i.id})`)
+      .join('\n');
+    fields.push({
+      name: '📦 Included Models',
+      value: includedList + (details.items.length > 5 ? `\n...and ${details.items.length - 5} more` : ''),
+      inline: false
+    });
+  }
+
   // Quick Action Links
   const quickLinks = [];
   if (isCollection) {
     quickLinks.push(`[Open Collection](${targetUrl})`);
+    quickLinks.push(`[All ${lab.name} Collections](https://huggingface.co/collections/${org})`);
   } else if (isSpace) {
     quickLinks.push(`[Open Space Demo](${targetUrl})`);
     quickLinks.push(`[View Code](${targetUrl}/tree/main)`);
   } else {
     quickLinks.push(`[Model Card](${targetUrl})`);
     quickLinks.push(`[Files & Weights](${targetUrl}/tree/main)`);
-    quickLinks.push(`[Community](${targetUrl}/discussions)`);
+    quickLinks.push(`[Config JSON](${targetUrl}/raw/main/config.json)`);
   }
 
   fields.push({

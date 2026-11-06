@@ -50,7 +50,14 @@ async function main() {
     }
 
     const currentIndex = buildOrgIndex(state);
-    newSnapshot[org] = currentIndex;
+    const prevOrg = previousSnapshot?.[org] || { models: {}, spaces: {}, collections: {} };
+
+    // Accumulative memory: never forget previously indexed models, spaces, or collections
+    newSnapshot[org] = {
+      models: { ...prevOrg.models, ...currentIndex.models },
+      spaces: { ...prevOrg.spaces, ...currentIndex.spaces },
+      collections: { ...prevOrg.collections, ...currentIndex.collections },
+    };
 
     if (previousSnapshot?.[org]) {
       const events = diffOrgState(org, state, previousSnapshot[org]);

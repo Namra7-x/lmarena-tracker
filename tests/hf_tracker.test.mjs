@@ -106,3 +106,57 @@ test('buildEmbed generates rich Discord embed with lab avatar, links, and stylin
   assert.equal(embed.fields.some(f => f.name === '🏷️ Task' && f.value === '`text-generation`'), true);
   assert.equal(embed.fields.some(f => f.name === '🔗 Quick Links'), true);
 });
+
+test('diffOrgState ignores ancient models (>72h old) and rejects fake release alerts', () => {
+  const previous = {
+    models: {},
+    spaces: {},
+    collections: {}
+  };
+
+  const current = {
+    models: [
+      // Model from 2024 (ancient)
+      { id: 'facebook/UMA', createdAt: '2024-10-27T14:58:57.000Z', gated: false },
+      // Model from yesterday (genuine new)
+      { id: 'facebook/SAM-3-Realtime', createdAt: new Date(Date.now() - 3600000).toISOString(), gated: false, pipeline_tag: 'vision' }
+    ],
+    spaces: [],
+    collections: [
+      // Collection from 2025 (ancient)
+      { slug: 'facebook/old-suite', title: 'Old Suite', lastUpdated: '2025-01-01T00:00:00Z', items: [] }
+    ]
+  };
+
+  const events = diffOrgState('facebook', current, previous);
+  // Only the genuine 1-hour-old model should be emitted
+  assert.equal(events.length, 1);
+  assert.equal(events[0].type, 'NEW_MODEL');
+  assert.equal(events[0].item.id, 'facebook/SAM-3-Realtime');
+});
+
+test('buildEmbed formats newly added collection models with exact links', () => {
+  const event = {
+    type: 'COLLECTION_UPDATED',
+    org: 'Qwen',
+    item: {
+      slug: 'Qwen/qwen38-suite',
+      title: 'Qwen 3.8 Suite',
+      items: [
+        { id: 'Qwen/Qwen3.8-27B' },
+        { id: 'Qwen/Qwen3.8-72B' }
+      ]
+    },
+    details: {
+      summary: 'Collection **Qwen 3.8 Suite** expanded from 1 to 2 items.',
+      addedItems: [
+        { id: 'Qwen/Qwen3.8-72B' }
+      ]
+    }
+  };
+
+  const embed = buildEmbed(event);
+  assert.equal(embed.title.includes('Qwen 3.8 Suite'), true);
+  assert.equal(embed.url, 'https://huggingface.co/collections/Qwen/qwen38-suite');
+  assert.equal(embed.fields.some(f => f.name === '➕ Newly Added Models' && f.value.includes('Qwen/Qwen3.8-72B')), true);
+});
