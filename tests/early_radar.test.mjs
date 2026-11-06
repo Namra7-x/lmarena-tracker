@@ -5,8 +5,13 @@
  * Verifies ZERO HARDCODED MODEL NAMES.
  */
 
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import { RADAR_CONFIG } from '../early-radar/config.mjs';
 import { extractModelIdentifiersFromDiff } from '../early-radar/sources/sdk_commits.mjs';
@@ -111,6 +116,12 @@ describe('Deep Build Analyzer & Reports', () => {
 
     const url = writeBuildReport('ChatGPT', 'test1234', analysis);
     assert.ok(url.includes('BUILD_chatgpt_test1234.md'));
+
+    // Clean up test report file
+    const testReportPath = path.join(__dirname, '../early-radar/reports/BUILD_chatgpt_test1234.md');
+    if (fs.existsSync(testReportPath)) {
+      fs.unlinkSync(testReportPath);
+    }
   });
 });
 
@@ -145,7 +156,7 @@ describe('Discord Embed Builder', () => {
       models: ['titan-preview'],
       featureGates: ['can_see_autonomous_tasks'],
       launchCopy: ['Introducing Project Titan'],
-      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/feat/early-radar/early-radar/reports/BUILD_chatgpt_1a91f86c.md',
+      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/main/early-radar/reports/BUILD_chatgpt_1a91f86c.md',
     };
     const embed = buildChatGPTBuildEmbed(event);
     assert.ok(embed.title.includes('ChatGPT Web App'));

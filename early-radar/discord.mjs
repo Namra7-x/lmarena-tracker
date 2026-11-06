@@ -65,6 +65,10 @@ export function buildChatGPTBuildEmbed(event) {
     { name: 'Previous Hash', value: `\`${event.prevHash || 'none'}\``, inline: true },
   ];
 
+  if (event.totalChunks) {
+    fields.push({ name: 'Dissected Chunks', value: `\`${event.totalChunks} chunks\``, inline: true });
+  }
+
   // 1. HIGHEST PRIORITY: New Models detected in build
   if (event.models && event.models.length > 0) {
     const modelList = event.models.map((m) => `🔥 **\`${m}\`**`).join('\n');
@@ -81,7 +85,17 @@ export function buildChatGPTBuildEmbed(event) {
     });
   }
 
-  // 3. Launch Copy
+  // 3. Agentic Tools & MCP Schemas
+  if (event.toolSchemas && event.toolSchemas.length > 0) {
+    const preview = event.toolSchemas.slice(0, 6).map((t) => `\`${t}\``).join(', ');
+    fields.push({
+      name: `🛠️ Agentic Tools / MCP (${event.toolSchemas.length})`,
+      value: preview,
+      inline: false,
+    });
+  }
+
+  // 4. Launch Copy
   if (event.launchCopy && event.launchCopy.length > 0) {
     fields.push({
       name: '📢 Launch Copy',
@@ -90,7 +104,7 @@ export function buildChatGPTBuildEmbed(event) {
     });
   }
 
-  // 4. Quick Links
+  // 5. Quick Links
   const links = [
     `• [Open ChatGPT Web App](https://chatgpt.com/)`,
     `• [Inspect Raw Production Manifest](${event.manifestUrl})`,
@@ -124,6 +138,10 @@ export function buildClaudeBuildEmbed(event) {
     { name: 'Previous Hash', value: `\`${event.prevHash || 'none'}\``, inline: true },
   ];
 
+  if (event.totalChunks) {
+    fields.push({ name: 'Dissected Chunks', value: `\`${event.totalChunks} chunks\``, inline: true });
+  }
+
   // 1. HIGHEST PRIORITY: New Models
   if (event.models && event.models.length > 0) {
     const modelList = event.models.map((m) => `🔥 **\`${m}\`**`).join('\n');
@@ -140,7 +158,17 @@ export function buildClaudeBuildEmbed(event) {
     });
   }
 
-  // 3. Quick Links
+  // 3. Agentic Tools & MCP Schemas
+  if (event.toolSchemas && event.toolSchemas.length > 0) {
+    const preview = event.toolSchemas.slice(0, 6).map((t) => `\`${t}\``).join(', ');
+    fields.push({
+      name: `🛠️ Agentic Tools / MCP (${event.toolSchemas.length})`,
+      value: preview,
+      inline: false,
+    });
+  }
+
+  // 4. Quick Links
   const links = [
     `• [Open Claude Web App](https://claude.ai/)`,
     `• [Inspect Vite Entry Bundle](${event.entryUrl})`,

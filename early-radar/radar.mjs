@@ -15,8 +15,8 @@ import { fileURLToPath } from 'node:url';
 
 import { RADAR_CONFIG } from './config.mjs';
 import { fetchArtificialAnalysisModels } from './sources/artificial_analysis.mjs';
-import { fetchChatGPTManifest, fetchChatGPTChunkList } from './sources/chatgpt_manifest.mjs';
-import { fetchClaudeManifest } from './sources/claude_manifest.mjs';
+import { fetchChatGPTManifest, fetchChatGPTChunkList, harvestChatGPTFullWebChunks } from './sources/chatgpt_manifest.mjs';
+import { fetchClaudeManifest, harvestClaudeFullWebChunks } from './sources/claude_manifest.mjs';
 import { fetchLatestSdkCommit, fetchCommitModelDiff } from './sources/sdk_commits.mjs';
 import { analyzeChunkContent, writeBuildReport } from './analyzer.mjs';
 import {
@@ -196,15 +196,11 @@ export async function runRadar(options = {}) {
         let reportUrl = null;
 
         try {
-          const chunkInfo = await fetchChatGPTChunkList(manifestHash);
-          totalChunks = chunkInfo.totalChunks;
-          
-          const mRes = await fetch(manifestUrl, { headers: { 'User-Agent': RADAR_CONFIG.userAgent } });
-          if (mRes.ok) {
-            const mText = await mRes.text();
-            analysis = analyzeChunkContent(mText);
-            reportUrl = writeBuildReport('ChatGPT', manifestHash, analysis);
-          }
+          console.log(`[ChatGPT] Harvesting full web chunk graph for build ${manifestHash}...`);
+          const harvest = await harvestChatGPTFullWebChunks(gptRes.value);
+          totalChunks = harvest.totalChunks;
+          analysis = analyzeChunkContent(harvest.corpus);
+          reportUrl = writeBuildReport('ChatGPT', manifestHash, analysis);
         } catch (err) {
           console.warn(`[ChatGPT] Deep analysis warning: ${err.message}`);
         }
@@ -218,7 +214,7 @@ export async function runRadar(options = {}) {
         // Emit alert ONLY if genuine new model or feature gate signals are present
         const hasSignal = (analysis.models?.length > 0) || (analysis.featureGates?.length > 0) || (analysis.toolSchemas?.length > 0);
         if (hasSignal) {
-          console.log(`[ChatGPT] 🚨 Genuine signal detected in build ${manifestHash}!`);
+          console.log(`[ChatGPT] 🚨 Genuine signal detected in build ${manifestHash}! (${totalChunks} chunks analyzed)`);
           const event = {
             type: 'CHATGPT_BUILD_UPDATED',
             manifestHash,
@@ -227,13 +223,14 @@ export async function runRadar(options = {}) {
             totalChunks,
             models: analysis.models,
             featureGates: analysis.featureGates,
+            toolSchemas: analysis.toolSchemas,
             launchCopy: analysis.launchCopy,
             reportUrl,
           };
           allEvents.push(event);
           embedsToSend.push(buildChatGPTBuildEmbed(event));
         } else {
-          console.log(`[ChatGPT] Build ${manifestHash} contains 0 model/feature signals. Silently recording without alert.`);
+          console.log(`[ChatGPT] Build ${manifestHash} contains 0 model/feature signals across ${totalChunks} chunks. Silently recording without alert.`);
         }
       }
     }
@@ -266,16 +263,16 @@ export async function runRadar(options = {}) {
       if (!knownClaudeHashes.has(entryHash)) {
         console.log(`[Claude] New entry hash observed: ${snapshot.claude_entry_hash} -> ${entryHash}`);
         
+        let totalChunks = 0;
         let analysis = { models: [], featureGates: [], toolSchemas: [], launchCopy: [] };
         let reportUrl = null;
 
         try {
-          const bRes = await fetch(entryUrl, { headers: { 'User-Agent': RADAR_CONFIG.userAgent } });
-          if (bRes.ok) {
-            const bText = await bRes.text();
-            analysis = analyzeChunkContent(bText);
-            reportUrl = writeBuildReport('Claude', entryHash, analysis);
-          }
+          console.log(`[Claude] Harvesting full web chunk graph for build ${entryHash}...`);
+          const harvest = await harvestClaudeFullWebChunks(claudeRes.value);
+          totalChunks = harvest.totalChunks;
+          analysis = analyzeChunkContent(harvest.corpus);
+          reportUrl = writeBuildReport('Claude', entryHash, analysis);
         } catch (err) {
           console.warn(`[Claude] Deep analysis warning: ${err.message}`);
         }
@@ -289,20 +286,22 @@ export async function runRadar(options = {}) {
         // Emit alert ONLY if genuine new model or feature gate signals are present
         const hasSignal = (analysis.models?.length > 0) || (analysis.featureGates?.length > 0) || (analysis.toolSchemas?.length > 0);
         if (hasSignal) {
-          console.log(`[Claude] 🚨 Genuine signal detected in build ${entryHash}!`);
+          console.log(`[Claude] 🚨 Genuine signal detected in build ${entryHash}! (${totalChunks} chunks analyzed)`);
           const event = {
             type: 'CLAUDE_BUILD_UPDATED',
             entryHash,
             prevHash,
             entryUrl,
+            totalChunks,
             models: analysis.models,
             featureGates: analysis.featureGates,
+            toolSchemas: analysis.toolSchemas,
             reportUrl,
           };
           allEvents.push(event);
           embedsToSend.push(buildClaudeBuildEmbed(event));
         } else {
-          console.log(`[Claude] Build ${entryHash} contains 0 model/feature signals. Silently recording without alert.`);
+          console.log(`[Claude] Build ${entryHash} contains 0 model/feature signals across ${totalChunks} chunks. Silently recording without alert.`);
         }
       }
     }
