@@ -1,15 +1,42 @@
 {
   "componentId": "gemini-desktop",
-  "version": "latest",
-  "releaseId": "gemini-desktop-latest",
+  "version": "build-6e71e56-05ca0b27",
+  "releaseId": "gemini-desktop-build-6e71e56-05ca0b27",
   "channel": "stable",
-  "identityFingerprint": "33d92ae773134fd11e254144a508d267edaa92848ab1a5feb62bbe6aa5217f6e",
+  "identityFingerprint": "50e084aab48b8119993a07eae49a047ca79987db969b9ad54d4ef9bcc8fead88",
   "diagnosticFingerprint": null,
   "scanId": "GD-20261106-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-06T20:10:27.520Z",
+  "lastSuccessfulScan": "2026-11-06T20:11:03.001Z",
   "hotSignals": [],
-  "recentSignals": [],
+  "recentSignals": [
+    {
+      "category": "env_var",
+      "value": "INVALID_DM_TOKEN",
+      "context": "INVALID_DM_TOKEN",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "filePath": "",
+      "artifactClass": "delta",
+      "score": 35,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: env var / config / entitlement",
+          "points": 10
+        }
+      ]
+    }
+  ],
   "historicalSeenHashes": [
     "!This program cannot be run in DOS mode.$",
     ".text",
