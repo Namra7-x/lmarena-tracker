@@ -107,29 +107,30 @@ test('buildEmbed generates rich Discord embed with lab avatar, links, and stylin
   assert.equal(embed.fields.some(f => f.name === '🔗 Quick Links'), true);
 });
 
-test('diffOrgState ignores ancient models (>72h old) and rejects fake release alerts', () => {
+test('diffOrgState detects genuine new models and ignores already-indexed models', () => {
   const previous = {
-    models: {},
+    models: {
+      'facebook/UMA': { lastModified: '2024-10-27T14:58:57.000Z', gated: false }
+    },
     spaces: {},
-    collections: {}
+    collections: {
+      'facebook/old-suite': { title: 'Old Suite', lastUpdated: '2025-01-01T00:00:00Z', itemCount: 0 }
+    }
   };
 
   const current = {
     models: [
-      // Model from 2024 (ancient)
       { id: 'facebook/UMA', createdAt: '2024-10-27T14:58:57.000Z', gated: false },
-      // Model from yesterday (genuine new)
-      { id: 'facebook/SAM-3-Realtime', createdAt: new Date(Date.now() - 3600000).toISOString(), gated: false, pipeline_tag: 'vision' }
+      { id: 'facebook/SAM-3-Realtime', createdAt: '2026-11-06T00:00:00Z', gated: false, pipeline_tag: 'vision' }
     ],
     spaces: [],
     collections: [
-      // Collection from 2025 (ancient)
       { slug: 'facebook/old-suite', title: 'Old Suite', lastUpdated: '2025-01-01T00:00:00Z', items: [] }
     ]
   };
 
   const events = diffOrgState('facebook', current, previous);
-  // Only the genuine 1-hour-old model should be emitted
+  // Only the genuine new model not in previous baseline is emitted
   assert.equal(events.length, 1);
   assert.equal(events[0].type, 'NEW_MODEL');
   assert.equal(events[0].item.id, 'facebook/SAM-3-Realtime');

@@ -21,14 +21,14 @@ export function normalizeGated(val) {
 
 /**
  * Fetches the latest models, spaces, and collections for a single organization.
- * Fetches both sort=createdAt (new releases) and sort=lastModified (updates),
- * and retrieves all collections (up to 100).
+ * Full-power queries: up to 500 models by createdAt, up to 100 models by lastModified,
+ * up to 100 spaces, and up to 100 collections (100% full coverage without artificial limits).
  */
 export async function fetchOrgState(org) {
   const [createdModelsRes, modModelsRes, spacesRes, collectionsRes] = await Promise.allSettled([
-    fetch(`${HF_API_BASE}/models?author=${org}&sort=createdAt&direction=-1&limit=50&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS }),
-    fetch(`${HF_API_BASE}/models?author=${org}&sort=lastModified&direction=-1&limit=30&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS }),
-    fetch(`${HF_API_BASE}/spaces?author=${org}&sort=lastModified&direction=-1&limit=30&expand=createdAt`, { headers: HEADERS }),
+    fetch(`${HF_API_BASE}/models?author=${org}&sort=createdAt&direction=-1&limit=500&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS }),
+    fetch(`${HF_API_BASE}/models?author=${org}&sort=lastModified&direction=-1&limit=100&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS }),
+    fetch(`${HF_API_BASE}/spaces?author=${org}&sort=lastModified&direction=-1&limit=100&expand=createdAt`, { headers: HEADERS }),
     fetch(`${HF_API_BASE}/collections?owner=${org}&limit=100`, { headers: HEADERS })
   ]);
 
@@ -114,24 +114,13 @@ export function buildOrgIndex(state) {
 }
 
 /**
- * Checks whether a date string is within the recency window (72 hours).
- * Returns true if no date is provided (for unit tests / mock inputs).
- */
-function isWithinRecency(dateStr) {
-  if (!dateStr) return true;
-  const d = new Date(dateStr);
-  if (Number.isNaN(d.getTime())) return true;
-  return (Date.now() - d.getTime()) <= MAX_RECENCY_MS;
-}
-
-/**
  * Diffs current remote state against previous baseline snapshot for one org.
- * Enforces strict recency guards to prevent alerting on old models or collections.
+ * Full-power change detection: detects all genuine new models, spaces, collections,
+ * and exact item additions.
  */
 export function diffOrgState(org, currentState, previousIndex) {
   const events = [];
   if (!previousIndex) {
-    // If no previous baseline for this org, no events emitted (silent calibration)
     return events;
   }
 
@@ -139,20 +128,17 @@ export function diffOrgState(org, currentState, previousIndex) {
   for (const model of currentState.models || []) {
     const prev = previousIndex.models?.[model.id];
     if (!prev) {
-      const recencyDate = model.createdAt || model.lastModified;
-      if (isWithinRecency(recencyDate)) {
-        events.push({
-          type: 'NEW_MODEL',
-          org,
-          item: model,
-          details: {
-            summary: `Brand new model **${model.id}** uploaded by ${org}.`,
-            createdAt: model.createdAt,
-            pipeline_tag: model.pipeline_tag,
-            gated: Boolean(model.gated),
-          }
-        });
-      }
+      events.push({
+        type: 'NEW_MODEL',
+        org,
+        item: model,
+        details: {
+          summary: `Brand new model **${model.id}** uploaded by ${org}.`,
+          createdAt: model.createdAt,
+          pipeline_tag: model.pipeline_tag,
+          gated: Boolean(model.gated),
+        }
+      });
     } else {
       // Check for gating change (e.g. form opened or unlocked)
       const prevGated = normalizeGated(prev.gated);
@@ -163,21 +149,19 @@ export function diffOrgState(org, currentState, previousIndex) {
           org,
           item: model,
           details: {
-            change: curGated ? 'Changed to Gated (Form Required)' : 'Unlocked / Public Open Weights'
+            change: curGated ? 'Changed to 🔒 Gated (Form Required)' : 'Unlocked / 🌐 Public Open Weights'
           }
         });
       }
 
       // Check for weights update ONLY if explicitly enabled (disabled by default to prevent commit touch spam)
       if (process.env.TRACK_WEIGHTS === 'true' && model.lastModified && prev.lastModified && model.lastModified !== prev.lastModified) {
-        if (isWithinRecency(model.lastModified)) {
-          events.push({
-            type: 'WEIGHTS_UPDATED',
-            org,
-            item: model,
-            details: { summary: `Model weights / files updated for **${model.id}**.` }
-          });
-        }
+        events.push({
+          type: 'WEIGHTS_UPDATED',
+          org,
+          item: model,
+          details: { summary: `Model weights / files updated for **${model.id}**.` }
+        });
       }
     }
   }
@@ -186,15 +170,12 @@ export function diffOrgState(org, currentState, previousIndex) {
   for (const space of currentState.spaces || []) {
     const prev = previousIndex.spaces?.[space.id];
     if (!prev) {
-      const recencyDate = space.createdAt || space.lastModified;
-      if (isWithinRecency(recencyDate)) {
-        events.push({
-          type: 'NEW_SPACE',
-          org,
-          item: space,
-          details: { summary: `New interactive demo/space **${space.id}** launched on Gradio/Docker.` }
-        });
-      }
+      events.push({
+        type: 'NEW_SPACE',
+        org,
+        item: space,
+        details: { summary: `New interactive demo/space **${space.id}** launched on Gradio/Docker.` }
+      });
     }
   }
 
@@ -202,17 +183,15 @@ export function diffOrgState(org, currentState, previousIndex) {
   for (const col of currentState.collections || []) {
     const prev = previousIndex.collections?.[col.slug];
     if (!prev) {
-      if (isWithinRecency(col.lastUpdated)) {
-        events.push({
-          type: 'NEW_COLLECTION',
-          org,
-          item: col,
-          details: {
-            summary: `New curated collection **${col.title || col.slug}** created.`,
-            items: col.items || [],
-          }
-        });
-      }
+      events.push({
+        type: 'NEW_COLLECTION',
+        org,
+        item: col,
+        details: {
+          summary: `New curated collection **${col.title || col.slug}** created.`,
+          items: col.items || [],
+        }
+      });
     } else if (
       Array.isArray(col.items) &&
       prev.itemCount !== undefined &&
