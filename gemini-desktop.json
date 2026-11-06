@@ -1,13 +1,13 @@
 {
   "componentId": "gemini-desktop",
-  "version": "build-6e71e56-05ca0b27",
-  "releaseId": "gemini-desktop-build-6e71e56-05ca0b27",
+  "version": "build-713490c-6aa1e4d0",
+  "releaseId": "gemini-desktop-build-713490c-6aa1e4d0",
   "channel": "stable",
-  "identityFingerprint": "50e084aab48b8119993a07eae49a047ca79987db969b9ad54d4ef9bcc8fead88",
+  "identityFingerprint": "d882cc3cd478541b44371d672c2eb1397b1abc3cf95c2641a87ea48b9d1b326f",
   "diagnosticFingerprint": null,
   "scanId": "GD-20261106-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-06T20:11:03.001Z",
+  "lastSuccessfulScan": "2026-11-06T20:12:12.065Z",
   "hotSignals": [],
   "recentSignals": [
     {
@@ -18,14 +18,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
