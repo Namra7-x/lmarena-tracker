@@ -7,65 +7,9 @@
   "diagnosticFingerprint": null,
   "scanId": "GD-20261106-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-06T16:30:50.300Z",
+  "lastSuccessfulScan": "2026-11-06T18:10:13.885Z",
   "hotSignals": [],
   "recentSignals": [
-    {
-      "category": "feature_flag",
-      "value": "feature_usage",
-      "context": "disabled-by-default-blink.feature_usage",
-      "hasDormantMarker": true,
-      "dormantMarker": "disabled",
-      "filePath": "",
-      "artifactClass": "delta",
-      "score": 55,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: feature/rollout flag",
-          "points": 15
-        },
-        {
-          "rule": "Dormant marker (disabled) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "feature_name",
-      "context": "FieldTrialParams-feature_name",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: feature/rollout flag",
-          "points": 15
-        }
-      ]
-    },
     {
       "category": "env_var",
       "value": "INVALID_DM_TOKEN",
@@ -74,14 +18,10 @@
       "dormantMarker": null,
       "filePath": "",
       "artifactClass": "delta",
-      "score": 35,
-      "tier": "EARLY SIGNAL",
+      "score": 25,
+      "tier": "WEAK SIGNAL",
       "isMajorEarlySignal": false,
       "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
         {
           "rule": "First-ever appearance in history",
           "points": 15
