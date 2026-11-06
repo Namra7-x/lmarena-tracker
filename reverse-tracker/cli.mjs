@@ -117,23 +117,35 @@ async function handleScan(componentId, options = {}) {
   const topicId = tg.getTopicId(comp.family);
 
   // Step 1: Update-First Rule - Send Immediate Alert BEFORE downloading
-  console.log(`📡 Sending immediate alert to Telegram for ${scanId}...`);
-  const alertText = formatImmediateAlert({
-    componentName: comp.name,
-    family: comp.family,
-    oldVersion: baseline.version,
-    newVersion: candidate.version,
-    scanId,
-    targets: comp.primaryTargets,
-    releaseUrl: candidate.artifacts?.[0]?.url,
-  });
-
   let alertMessageId = null;
-  try {
-    const alertRes = await tg.sendMessage(alertText, { topicId });
-    alertMessageId = alertRes?.result?.message_id;
-  } catch (tgErr) {
-    console.warn(`Could not send immediate alert: ${tgErr.message}`);
+  const isAlreadyAlerted = baseline.alertedVersion === candidate.version;
+
+  if (!isAlreadyAlerted) {
+    console.log(`📡 Sending immediate alert to Telegram for ${scanId}...`);
+    const alertText = formatImmediateAlert({
+      componentName: comp.name,
+      family: comp.family,
+      oldVersion: baseline.version,
+      newVersion: candidate.version,
+      scanId,
+      targets: comp.primaryTargets,
+      releaseUrl: candidate.artifacts?.[0]?.url,
+    });
+
+    try {
+      const alertRes = await tg.sendMessage(alertText, { topicId });
+      alertMessageId = alertRes?.result?.message_id;
+      // Immediately mark as alerted in local state so retries/re-runs never spam
+      baseline.alertedVersion = candidate.version;
+      saveComponentState(STATE_DIR, componentId, {
+        ...baseline,
+        alertedVersion: candidate.version,
+      });
+    } catch (tgErr) {
+      console.warn(`Could not send immediate alert: ${tgErr.message}`);
+    }
+  } else {
+    console.log(`ℹ️ Immediate alert already sent for ${componentId} (${candidate.version}). Skipping duplicate alert.`);
   }
 
   // Step 2: Acquisition & Multi-Encoding Extraction
@@ -153,20 +165,22 @@ async function handleScan(componentId, options = {}) {
       const { files } = extractArtifact(dl.buffer, art.format, art.target, art.url);
 
       for (const f of files) {
-        // Fast string extraction from text
-        const textContent = f.buffer.toString('utf8');
-        const lines = textContent.split('\n');
+        // Fast string extraction from text files ONLY (priority 1 and <= 10MB)
+        if (f.priority === 1 && f.buffer && f.buffer.length <= 10 * 1024 * 1024) {
+          const textContent = f.buffer.toString('utf8');
+          const lines = textContent.split('\n');
 
-        for (const line of lines) {
-          const trimmed = line.trim();
-          if (trimmed.length >= 4 && trimmed.length <= 1000) {
-            allExtractedStrings.add(trimmed);
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (trimmed.length >= 4 && trimmed.length <= 1000) {
+              allExtractedStrings.add(trimmed);
+            }
           }
         }
 
-        // Multi-encoding binary string scan on priority binaries
-        if (f.priority === 2) {
-          const binaryStrings = extractStrings(f.buffer);
+        // Multi-encoding binary string scan on priority binaries (priority 2 or executables)
+        if (f.priority === 2 && f.buffer) {
+          const binaryStrings = extractStrings(f.buffer, { maxStrings: 25000, maxScanBytes: 64 * 1024 * 1024 });
           for (const s of binaryStrings) {
             if (s.value && s.value.length >= 4 && s.value.length <= 1000) {
               allExtractedStrings.add(s.value);
@@ -314,10 +328,11 @@ async function handleScan(componentId, options = {}) {
     const identityFingerprint = candidate.identityFingerprint || computeIdentityFingerprint(candidate);
     const updatedSeenHashes = Array.from(
       new Set([...historicalSeenHashes, ...newCleanStrings])
-    ).slice(0, 25000); // Retain up to 25,000 recent unique hashes
+    ).slice(0, 10000); // Retain up to 10,000 clean unique hashes
 
     saveComponentState(STATE_DIR, componentId, {
       version: candidate.version,
+      alertedVersion: candidate.version,
       releaseId: candidate.releaseId,
       channel: candidate.channel,
       identityFingerprint,
@@ -329,7 +344,17 @@ async function handleScan(componentId, options = {}) {
     });
     console.log(`✅ Deep scan complete for ${componentId} (${scanId}). State updated (${coverageState}).`);
   } else {
-    console.warn(`⚠️ Scan for ${componentId} FAILED required coverage. Baseline will not advance.`);
+    console.warn(`⚠️ Scan for ${componentId} FAILED required coverage. Updating baseline state with alerted version to prevent spam loop.`);
+    saveComponentState(STATE_DIR, componentId, {
+      ...baseline,
+      version: candidate.version,
+      alertedVersion: candidate.version,
+      releaseId: candidate.releaseId,
+      channel: candidate.channel || baseline.channel,
+      scanId,
+      coverageState: 'FAILED',
+      lastFailureTime: new Date().toISOString(),
+    });
   }
 
   return { scanId, candidate, diffResults, reportBundle, coverageState };

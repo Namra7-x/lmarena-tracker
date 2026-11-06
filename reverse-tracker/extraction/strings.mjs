@@ -23,12 +23,19 @@ function isPrintableAscii(byte) {
 export function extractStrings(buffer, options = {}) {
   const minLen = options.minLength || MIN_STRING_LEN;
   const maxLen = options.maxLength || MAX_STRING_LEN;
-  const len = buffer.length;
+  const maxStrings = options.maxStrings || 50000;
+  const maxScanBytes = options.maxScanBytes || 64 * 1024 * 1024; // Cap scanning at 64MB for large binaries
+  const len = Math.min(buffer.length, maxScanBytes);
   const results = [];
+
+  const isValidString = (str) => {
+    return str && /[a-zA-Z0-9]/.test(str);
+  };
 
   // Pass 1: ASCII & UTF-8 scan
   let start = -1;
   for (let i = 0; i < len; i++) {
+    if (results.length >= maxStrings) break;
     const b = buffer[i];
     if (isPrintableAscii(b)) {
       if (start === -1) start = i;
@@ -37,23 +44,30 @@ export function extractStrings(buffer, options = {}) {
         const strLen = i - start;
         if (strLen >= minLen && strLen <= maxLen) {
           const val = buffer.subarray(start, i).toString('utf8');
-          results.push({ value: val, encoding: 'utf8', offset: start, length: strLen });
+          if (isValidString(val)) {
+            results.push({ value: val, encoding: 'utf8', offset: start, length: strLen });
+          }
         }
         start = -1;
       }
     }
   }
-  if (start !== -1) {
+  if (start !== -1 && results.length < maxStrings) {
     const strLen = len - start;
     if (strLen >= minLen && strLen <= maxLen) {
-      results.push({ value: buffer.subarray(start, len).toString('utf8'), encoding: 'utf8', offset: start, length: strLen });
+      const val = buffer.subarray(start, len).toString('utf8');
+      if (isValidString(val)) {
+        results.push({ value: val, encoding: 'utf8', offset: start, length: strLen });
+      }
     }
   }
 
   // Pass 2: UTF-16LE scan ([char, 0x00, char, 0x00]) - test both byte alignments
   for (const align of [0, 1]) {
+    if (results.length >= maxStrings) break;
     let u16Start = -1;
     for (let i = align; i + 1 < len; i += 2) {
+      if (results.length >= maxStrings) break;
       const b0 = buffer[i];
       const b1 = buffer[i + 1];
       if (b1 === 0x00 && isPrintableAscii(b0)) {
@@ -63,25 +77,31 @@ export function extractStrings(buffer, options = {}) {
           const charCount = (i - u16Start) / 2;
           if (charCount >= minLen && charCount <= maxLen) {
             const val = buffer.subarray(u16Start, i).toString('utf16le');
-            results.push({ value: val, encoding: 'utf16le', offset: u16Start, length: charCount });
+            if (isValidString(val)) {
+              results.push({ value: val, encoding: 'utf16le', offset: u16Start, length: charCount });
+            }
           }
           u16Start = -1;
         }
       }
     }
-    if (u16Start !== -1) {
+    if (u16Start !== -1 && results.length < maxStrings) {
       const charCount = (len - (len % 2 === align ? 0 : 1) - u16Start) / 2;
       if (charCount >= minLen && charCount <= maxLen) {
         const val = buffer.subarray(u16Start, u16Start + charCount * 2).toString('utf16le');
-        results.push({ value: val, encoding: 'utf16le', offset: u16Start, length: charCount });
+        if (isValidString(val)) {
+          results.push({ value: val, encoding: 'utf16le', offset: u16Start, length: charCount });
+        }
       }
     }
   }
 
   // Pass 3: UTF-16BE scan ([0x00, char, 0x00, char]) - test both byte alignments
   for (const align of [0, 1]) {
+    if (results.length >= maxStrings) break;
     let beStart = -1;
     for (let i = align; i + 1 < len; i += 2) {
+      if (results.length >= maxStrings) break;
       const b0 = buffer[i];
       const b1 = buffer[i + 1];
       if (b0 === 0x00 && isPrintableAscii(b1)) {
@@ -93,19 +113,23 @@ export function extractStrings(buffer, options = {}) {
             const slice = Buffer.from(buffer.subarray(beStart, i));
             slice.swap16();
             const val = slice.toString('utf16le');
-            results.push({ value: val, encoding: 'utf16be', offset: beStart, length: charCount });
+            if (isValidString(val)) {
+              results.push({ value: val, encoding: 'utf16be', offset: beStart, length: charCount });
+            }
           }
           beStart = -1;
         }
       }
     }
-    if (beStart !== -1) {
+    if (beStart !== -1 && results.length < maxStrings) {
       const charCount = (len - (len % 2 === align ? 0 : 1) - beStart) / 2;
       if (charCount >= minLen && charCount <= maxLen) {
         const slice = Buffer.from(buffer.subarray(beStart, beStart + charCount * 2));
         slice.swap16();
         const val = slice.toString('utf16le');
-        results.push({ value: val, encoding: 'utf16be', offset: beStart, length: charCount });
+        if (isValidString(val)) {
+          results.push({ value: val, encoding: 'utf16be', offset: beStart, length: charCount });
+        }
       }
     }
   }

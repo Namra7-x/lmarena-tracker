@@ -107,8 +107,16 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     const m = text.match(pat);
     if (m && m[1]) {
       const val = m[1].toLowerCase().trim();
-      // Guard against false positives like common words
-      if (val.length >= 3 && !['model', 'models', 'default', 'preview'].includes(val)) {
+      const CSS_CURSOR_VALUES = new Set([
+  'cursor-default', 'cursor-pointer', 'cursor-not-allowed', 'cursor-wait',
+  'cursor-text', 'cursor-move', 'cursor-help', 'cursor-none', 'cursor-progress',
+  'cursor-cell', 'cursor-crosshair', 'cursor-copy', 'cursor-alias',
+  'cursor-col-resize', 'cursor-row-resize', 'cursor-grab', 'cursor-grabbing',
+  'cursor-auto'
+]);
+
+// Guard against false positives like common words and CSS cursor classes
+      if (val.length >= 3 && !['model', 'models', 'default', 'preview'].includes(val) && !CSS_CURSOR_VALUES.has(val)) {
         findings.push({
           category: CATEGORIES.MODEL_ID,
           value: val,

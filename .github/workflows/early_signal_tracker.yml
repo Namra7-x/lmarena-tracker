@@ -5,7 +5,7 @@ on:
     types: [tracker, early_signal_tracker]
   workflow_dispatch:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: write
@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 15
     concurrency:
       group: ai-${{ matrix.family }}
-      cancel-in-progress: false
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:

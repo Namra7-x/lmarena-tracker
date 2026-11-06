@@ -113,6 +113,18 @@ export function evaluateNoise(value) {
     return { isNoise: true, reason: 'too_long' };
   }
 
+  // 1b. Binary garbage rejection: reject unprintable chars, control bytes, or non-alphanumeric noise
+  if (/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F\uFFFD]/.test(trimmed)) {
+    return { isNoise: true, reason: 'binary_non_printable' };
+  }
+  if (!/[a-zA-Z0-9]/.test(trimmed)) {
+    return { isNoise: true, reason: 'no_alphanumeric' };
+  }
+  const alphanumericCount = (trimmed.match(/[a-zA-Z0-9]/g) || []).length;
+  if (alphanumericCount / len < 0.40 && len >= 6) {
+    return { isNoise: true, reason: 'high_symbol_density_binary_noise' };
+  }
+
   // 2. Exact UUID / Hash
   if (UUID_REGEX.test(trimmed)) {
     return { isNoise: true, isHashOrUuid: true, reason: 'uuid' };
