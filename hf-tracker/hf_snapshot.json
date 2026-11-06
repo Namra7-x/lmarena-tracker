@@ -3941,6 +3941,11 @@
   },
   "LiquidAI": {
     "models": {
+      "LiquidAI/LFM2.5-24B-A2B-GGUF": {
+        "lastModified": "2026-11-06T03:22:24.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation"
+      },
       "LiquidAI/LFM3-VL-2B-NVFP4": {
         "lastModified": "2026-11-05T19:58:36.000Z",
         "gated": false,
@@ -4058,11 +4063,6 @@
       },
       "LiquidAI/LFM3-Audio-2B-MLX-8bit": {
         "lastModified": "2026-11-05T19:38:01.000Z",
-        "gated": false,
-        "pipeline_tag": "any-to-any"
-      },
-      "LiquidAI/LFM3-Audio-2B-MLX-4bit": {
-        "lastModified": "2026-11-05T19:37:59.000Z",
         "gated": false,
         "pipeline_tag": "any-to-any"
       }
