@@ -724,6 +724,11 @@
   },
   "facebook": {
     "models": {
+      "facebook/UMA": {
+        "lastModified": "2026-11-05T22:04:04.000Z",
+        "gated": false,
+        "pipeline_tag": null
+      },
       "facebook/ODAC25": {
         "lastModified": "2026-11-02T18:10:20.000Z",
         "gated": false,
@@ -736,11 +741,6 @@
       },
       "facebook/eva-flow": {
         "lastModified": "2026-10-28T20:06:36.000Z",
-        "gated": false,
-        "pipeline_tag": null
-      },
-      "facebook/UMA": {
-        "lastModified": "2026-10-27T14:58:57.000Z",
         "gated": false,
         "pipeline_tag": null
       },
@@ -2037,14 +2037,14 @@
       }
     },
     "collections": {
-      "nvidia/nemotron-35-transcribe-6ae0df1dd041d0ef9f1a69ff": {
-        "title": "Nemotron 3.5 Transcribe ",
-        "lastUpdated": "2026-11-05T19:03:26.537Z",
-        "itemCount": 4
-      },
       "nvidia/nemotron-labs-dory-6ad144360f3f993c43a2f66d": {
         "title": "Nemotron Labs Dory",
         "lastUpdated": "2026-10-20T13:09:31.859Z",
+        "itemCount": 4
+      },
+      "nvidia/nemotron-35-transcribe-6ae0df1dd041d0ef9f1a69ff": {
+        "title": "Nemotron 3.5 Transcribe ",
+        "lastUpdated": "2026-11-05T19:03:26.537Z",
         "itemCount": 4
       },
       "nvidia/cosmos3-69ab2f273c55ae147e43c342": {
@@ -5577,6 +5577,11 @@
         "lastUpdated": "2025-12-23T17:10:38.757Z",
         "itemCount": 4
       },
+      "allenai/ifbench-683f590687f61b512558cdf1": {
+        "title": "IFBench",
+        "lastUpdated": "2025-12-23T17:10:38.759Z",
+        "itemCount": 3
+      },
       "allenai/benchmirt-6a8e13b814439116c7f75be2": {
         "title": "BenchMIRT",
         "lastUpdated": "2026-09-01T19:54:26.703Z",
@@ -5625,11 +5630,6 @@
       "allenai/emo-69f27993fcfae8b65e9b908d": {
         "title": "EMO",
         "lastUpdated": "2026-05-08T17:01:53.335Z",
-        "itemCount": 4
-      },
-      "allenai/olmpool-69efc33e3e16d884714138f5": {
-        "title": "OlmPool",
-        "lastUpdated": "2026-04-30T18:15:04.065Z",
         "itemCount": 4
       }
     }
