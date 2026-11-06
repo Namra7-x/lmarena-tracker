@@ -55,14 +55,25 @@ export async function fetchClaudeManifest() {
   }
 
   const html = await res.text();
-  const indexMatch = html.match(/index-([a-zA-Z0-9_\-]+)\.js/);
 
-  if (!indexMatch) {
-    throw new Error('Claude entry bundle hash not found in HTML');
+  // Browser-grade entry script extraction (completely agnostic of filename or prefix)
+  const moduleScriptMatch = html.match(/<script[^>]+type=["']module["'][^>]+src=["']([^"']+)["']/i) ||
+                            html.match(/<script[^>]+src=["']([^"']*(?:assets\/v[0-9]+|assets)\/[^"']+\.js)["']/i);
+  let entryUrl = moduleScriptMatch ? moduleScriptMatch[1] : null;
+  let entryHash = 'unknown';
+
+  if (entryUrl) {
+    const hashMatch = entryUrl.match(/(?:[a-zA-Z0-9_\-]+-)?([a-zA-Z0-9_\-]+)\.js$/);
+    if (hashMatch) entryHash = hashMatch[1];
+  } else {
+    const fallbackMatch = html.match(/(?:index|app|main|entry)-([a-zA-Z0-9_\-]+)\.js/i);
+    if (fallbackMatch) {
+      entryHash = fallbackMatch[1];
+      entryUrl = `https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-${entryHash}.js`;
+    } else {
+      throw new Error('Claude entry bundle script not found in HTML');
+    }
   }
-
-  const entryHash = indexMatch[1];
-  const entryUrl = `https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-${entryHash}.js`;
 
   // Discover all script and modulepreload URLs from landing page HTML
   const initialUrls = new Set();
