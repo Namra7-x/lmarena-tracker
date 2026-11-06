@@ -10837,6 +10837,7 @@
           "website"
         ],
         "agents": [
+          "agon_slides",
           "agon_webapps"
         ]
       }
@@ -11470,6 +11471,7 @@
     "calfhollow": "calfhollow",
     "idaho": "idaho",
     "utah": "utah",
+    "washington": "washington",
     "alabama": "alabama"
   },
   "pricing": {
@@ -13265,6 +13267,11 @@
     "voxtral-mini-tts-3-0": {
       "text.input": 13,
       "text.output": 0
+    },
+    "california": {
+      "text.input": 0.3,
+      "text.output": 1,
+      "text.cachedInput": 0.03
     },
     "plywood": {
       "video.perSecond": 0.02
