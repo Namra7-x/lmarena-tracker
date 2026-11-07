@@ -122,7 +122,16 @@ test('TelegramClient resolves family-specific bot tokens and falls back graceful
   const clientGoogle = new TelegramClient(null, null, 'google');
   assert.equal(clientGoogle.token, 'fallback-token-00000', 'Must fallback to general token');
 
+  // Test OpenCode bot token resolution by component and family
+  process.env.TELEGRAM_TOKEN_OPENCODE = 'bot-opencode-55555';
+  const clientOpenCode = new TelegramClient(null, null, 'other', 'opencode-cli');
+  assert.equal(clientOpenCode.token, 'bot-opencode-55555');
+
+  const clientOpenCodeFamily = new TelegramClient(null, null, 'opencode');
+  assert.equal(clientOpenCodeFamily.token, 'bot-opencode-55555');
+
   // Cleanup
+  delete process.env.TELEGRAM_TOKEN_OPENCODE;
   delete process.env.TELEGRAM_BOT_TOKEN_OPENAI;
   delete process.env.TELEGRAM_BOT_TOKEN_ANTHROPIC;
   delete process.env.TELEGRAM_TOKEN;

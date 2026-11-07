@@ -128,8 +128,8 @@ async function handleScan(componentId, options = {}) {
   const baseline = loadComponentState(STATE_DIR, componentId) || {};
   const candidate = await discoverComponent(componentId);
   const scanId = generateScanId(componentId);
-  const tg = new TelegramClient(null, null, comp.family);
-  const topicId = tg.getTopicId(comp.family);
+  const tg = new TelegramClient(null, null, comp.family, componentId);
+  const topicId = tg.getTopicId(comp.family, componentId);
 
   // Step 1: Update-First Rule - Send Immediate Alert BEFORE downloading
   let alertMessageId = null;
