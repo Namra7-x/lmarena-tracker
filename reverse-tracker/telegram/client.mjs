@@ -21,33 +21,62 @@ export class TelegramClient {
     }
     const candidates = [];
 
-    // Component-level tokens (e.g. OpenCode CLI, Droid CLI)
+    // Component-level tokens (e.g. OpenCode CLI, Droid CLI, Cursor Desktop/CLI)
     if (componentId) {
       const compUpper = componentId.toUpperCase().replace(/[^A-Z0-9]/g, '_');
-      if (compUpper.includes('OPENCODE')) {
-        candidates.push('TELEGRAM_TOKEN_OPENCODE', 'TELEGRAM_BOT_TOKEN_OPENCODE');
+      if (compUpper.includes('OPENCODE') || compUpper.includes('CURSOR')) {
+        // Cursor shares the OpenCode bot token due to BotFather bot limits
+        candidates.push(
+          'TELEGRAM_TOKEN_CURSOR',
+          'TELEGRAM_BOT_TOKEN_CURSOR',
+          'TELEGRAM_TOKEN_OPENCODE',
+          'TELEGRAM_BOT_TOKEN_OPENCODE'
+        );
       } else if (compUpper.includes('DROID') || compUpper.includes('FACTORY')) {
-        candidates.push('TELEGRAM_TOKEN_FACTORY', 'TELEGRAM_BOT_TOKEN_FACTORY', 'TELEGRAM_TOKEN_DROID', 'TELEGRAM_BOT_TOKEN_DROID');
+        candidates.push(
+          'TELEGRAM_TOKEN_FACTORY',
+          'TELEGRAM_BOT_TOKEN_FACTORY',
+          'TELEGRAM_TOKEN_DROID',
+          'TELEGRAM_BOT_TOKEN_DROID',
+          'TELEGRAM_TOKEN_OPENCODE',
+          'TELEGRAM_BOT_TOKEN_OPENCODE'
+        );
       }
       candidates.push(`TELEGRAM_TOKEN_${compUpper}`, `TELEGRAM_BOT_TOKEN_${compUpper}`);
     }
 
     if (family) {
       const famUpper = family.toUpperCase();
-      candidates.push(
-        `TELEGRAM_TOKEN_${famUpper}`,
-        `TELEGRAM_BOT_TOKEN_${famUpper}`
-      );
+      if (famUpper === 'CURSOR') {
+        // Cursor shares the OpenCode bot token due to BotFather bot limits
+        candidates.push(
+          'TELEGRAM_TOKEN_CURSOR',
+          'TELEGRAM_BOT_TOKEN_CURSOR',
+          'TELEGRAM_TOKEN_OPENCODE',
+          'TELEGRAM_BOT_TOKEN_OPENCODE'
+        );
+      } else if (famUpper === 'OTHER') {
+        candidates.push(
+          'TELEGRAM_TOKEN_OTHER',
+          'TELEGRAM_BOT_TOKEN_OTHER',
+          'TELEGRAM_TOKEN_OPENCODE',
+          'TELEGRAM_BOT_TOKEN_OPENCODE',
+          'TELEGRAM_TOKEN_FACTORY',
+          'TELEGRAM_BOT_TOKEN_FACTORY'
+        );
+      } else {
+        candidates.push(
+          `TELEGRAM_TOKEN_${famUpper}`,
+          `TELEGRAM_BOT_TOKEN_${famUpper}`
+        );
+      }
+
       if (famUpper === 'OPENAI') {
         candidates.push('TELEGRAM_TOKEN_CHATGPT', 'TELEGRAM_BOT_TOKEN_CHATGPT');
       } else if (famUpper === 'ANTHROPIC') {
         candidates.push('TELEGRAM_TOKEN_CLAUDE', 'TELEGRAM_BOT_TOKEN_CLAUDE');
       } else if (famUpper === 'GOOGLE') {
         candidates.push('TELEGRAM_TOKEN_GEMINI', 'TELEGRAM_BOT_TOKEN_GEMINI');
-      } else if (famUpper === 'CURSOR') {
-        candidates.push('TELEGRAM_TOKEN_OPENCODE', 'TELEGRAM_BOT_TOKEN_OPENCODE');
-      } else if (famUpper === 'OTHER') {
-        candidates.push('TELEGRAM_TOKEN_OPENCODE', 'TELEGRAM_BOT_TOKEN_OPENCODE', 'TELEGRAM_TOKEN_FACTORY');
       }
     }
 
@@ -66,24 +95,27 @@ export class TelegramClient {
 
     if (componentId) {
       const compUpper = componentId.toUpperCase().replace(/[^A-Z0-9]/g, '_');
-      if (compUpper.includes('OPENCODE')) {
-        candidates.push('TELEGRAM_CHAT_ID_OPENCODE');
+      if (compUpper.includes('OPENCODE') || compUpper.includes('CURSOR')) {
+        candidates.push('TELEGRAM_CHAT_ID_CURSOR', 'TELEGRAM_CHAT_ID_OPENCODE');
       } else if (compUpper.includes('DROID') || compUpper.includes('FACTORY')) {
-        candidates.push('TELEGRAM_CHAT_ID_FACTORY', 'TELEGRAM_CHAT_ID_DROID');
+        candidates.push('TELEGRAM_CHAT_ID_FACTORY', 'TELEGRAM_CHAT_ID_DROID', 'TELEGRAM_CHAT_ID_OPENCODE');
       }
       candidates.push(`TELEGRAM_CHAT_ID_${compUpper}`);
     }
 
     if (family) {
       const famUpper = family.toUpperCase();
-      candidates.push(
-        `TELEGRAM_CHAT_ID_${famUpper}`
-      );
+      if (famUpper === 'CURSOR') {
+        candidates.push('TELEGRAM_CHAT_ID_CURSOR', 'TELEGRAM_CHAT_ID_OPENCODE');
+      } else if (famUpper === 'OTHER') {
+        candidates.push('TELEGRAM_CHAT_ID_OTHER', 'TELEGRAM_CHAT_ID_OPENCODE', 'TELEGRAM_CHAT_ID_FACTORY');
+      } else {
+        candidates.push(`TELEGRAM_CHAT_ID_${famUpper}`);
+      }
+
       if (famUpper === 'OPENAI') candidates.push('TELEGRAM_CHAT_ID_CHATGPT');
       if (famUpper === 'ANTHROPIC') candidates.push('TELEGRAM_CHAT_ID_CLAUDE');
       if (famUpper === 'GOOGLE') candidates.push('TELEGRAM_CHAT_ID_GEMINI');
-      if (famUpper === 'CURSOR') candidates.push('TELEGRAM_CHAT_ID_OPENCODE');
-      if (famUpper === 'OTHER') candidates.push('TELEGRAM_CHAT_ID_OPENCODE', 'TELEGRAM_CHAT_ID_FACTORY');
     }
 
     for (const envKey of candidates) {
@@ -103,9 +135,12 @@ export class TelegramClient {
   getTopicId(family, componentId = null) {
     if (componentId) {
       const compUpper = componentId.toUpperCase().replace(/[^A-Z0-9]/g, '_');
-      if (compUpper.includes('OPENCODE') && process.env.TELEGRAM_TOPIC_OPENCODE) {
-        const parsed = parseInt(process.env.TELEGRAM_TOPIC_OPENCODE, 10);
-        if (!isNaN(parsed)) return parsed;
+      if (compUpper.includes('OPENCODE') || compUpper.includes('CURSOR')) {
+        const topicVal = process.env.TELEGRAM_TOPIC_CURSOR || process.env.TELEGRAM_TOPIC_OPENCODE;
+        if (topicVal) {
+          const parsed = parseInt(topicVal, 10);
+          if (!isNaN(parsed)) return parsed;
+        }
       }
     }
     if (family) {

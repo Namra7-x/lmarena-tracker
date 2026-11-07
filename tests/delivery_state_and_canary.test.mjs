@@ -89,6 +89,72 @@ test('Phase 6: Multi-Bot Token Resolution & Topic Routing Across All 6 Families'
   }
 });
 
+test('User Exact Secrets: 5 Bot Tokens with Cursor & Other cleanly mapped to OpenCode', () => {
+  const originalEnv = { ...process.env };
+
+  try {
+    // Clear all bot env vars
+    for (const key of Object.keys(process.env)) {
+      if (key.startsWith('TELEGRAM_')) {
+        delete process.env[key];
+      }
+    }
+
+    // User's exact 5 secrets:
+    process.env.TELEGRAM_TOKEN_ANTHROPIC = 'token-anthropic-user';
+    process.env.TELEGRAM_TOKEN_DEVIN = 'token-devin-user';
+    process.env.TELEGRAM_TOKEN_GOOGLE = 'token-google-user';
+    process.env.TELEGRAM_TOKEN_OPENAI = 'token-openai-user';
+    process.env.TELEGRAM_TOKEN_OPENCODE = 'token-opencode-user';
+    process.env.TELEGRAM_CHAT_ID = 'chat-id-user-global';
+
+    // 1. OpenAI family
+    const cxCli = new TelegramClient(null, null, 'openai', 'codex-cli');
+    const cxDesk = new TelegramClient(null, null, 'openai', 'codex-desktop');
+    assert.equal(cxCli.token, 'token-openai-user');
+    assert.equal(cxDesk.token, 'token-openai-user');
+    assert.equal(cxCli.chatId, 'chat-id-user-global');
+
+    // 2. Anthropic family
+    const caDesk = new TelegramClient(null, null, 'anthropic', 'claude-desktop');
+    const ccCli = new TelegramClient(null, null, 'anthropic', 'claude-code');
+    assert.equal(caDesk.token, 'token-anthropic-user');
+    assert.equal(ccCli.token, 'token-anthropic-user');
+
+    // 3. Google family
+    const agCli = new TelegramClient(null, null, 'google', 'antigravity-cli');
+    const agDesk = new TelegramClient(null, null, 'google', 'antigravity-desktop');
+    const gmDesk = new TelegramClient(null, null, 'google', 'gemini-desktop');
+    assert.equal(agCli.token, 'token-google-user');
+    assert.equal(agDesk.token, 'token-google-user');
+    assert.equal(gmDesk.token, 'token-google-user');
+
+    // 4. Devin family
+    const dvCli = new TelegramClient(null, null, 'devin', 'devin-cli');
+    const dvDesk = new TelegramClient(null, null, 'devin', 'devin-desktop');
+    assert.equal(dvCli.token, 'token-devin-user');
+    assert.equal(dvDesk.token, 'token-devin-user');
+
+    // 5. Cursor family (shares TELEGRAM_TOKEN_OPENCODE due to BotFather bot limit)
+    const crDesk = new TelegramClient(null, null, 'cursor', 'cursor-desktop');
+    const crCli = new TelegramClient(null, null, 'cursor', 'cursor-cli');
+    const crFamOnly = new TelegramClient(null, null, 'cursor');
+    assert.equal(crDesk.token, 'token-opencode-user', 'Cursor desktop must route to OpenCode bot token');
+    assert.equal(crCli.token, 'token-opencode-user', 'Cursor CLI must route to OpenCode bot token');
+    assert.equal(crFamOnly.token, 'token-opencode-user', 'Cursor family must route to OpenCode bot token');
+
+    // 6. Other family (opencode-cli & droid-cli route to TELEGRAM_TOKEN_OPENCODE)
+    const ocCli = new TelegramClient(null, null, 'other', 'opencode-cli');
+    const drCli = new TelegramClient(null, null, 'other', 'droid-cli');
+    const otherFamOnly = new TelegramClient(null, null, 'other');
+    assert.equal(ocCli.token, 'token-opencode-user');
+    assert.equal(drCli.token, 'token-opencode-user');
+    assert.equal(otherFamOnly.token, 'token-opencode-user');
+  } finally {
+    process.env = originalEnv;
+  }
+});
+
 test('Phase 6: Alert Deduplication Key Digest Consistency & Suppression', () => {
   const compId = 'antigravity-cli';
   const ver = '1.5.4';
