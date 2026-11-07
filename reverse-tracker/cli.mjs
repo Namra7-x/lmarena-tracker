@@ -54,6 +54,15 @@ async function handleDetect(familyId) {
 
       if (classification.changeType === CHANGE_TYPE.NO_CHANGE || classification.changeType === CHANGE_TYPE.DIAGNOSTIC_DRIFT) {
         console.log(`  ✓ ${compId}: Unchanged (${candidate.version})`);
+      } else if (baseline?.alertedVersion === candidate.version) {
+        console.log(`  ℹ️ ${compId}: Version ${candidate.version} already alerted. Syncing baseline silently.`);
+        saveComponentState(STATE_DIR, compId, {
+          ...baseline,
+          version: candidate.version,
+          releaseId: candidate.releaseId,
+          identityFingerprint: classification.identityFingerprint,
+          alertedVersion: candidate.version,
+        });
       } else if (classification.changeType === CHANGE_TYPE.FIRST_RUN) {
         console.log(`  🆕 ${compId}: First run detected (${candidate.version}). Initializing baseline.`);
         firstRuns.push({
@@ -219,7 +228,9 @@ async function handleScan(componentId, options = {}) {
           const binaryStrings = extractStrings(f.buffer);
           for (const s of binaryStrings) {
             if (s.value && s.value.length >= 4 && s.value.length <= 1000) {
-              allExtractedStrings.add(s.value);
+              if (isHumanReadableString(s.value)) {
+                allExtractedStrings.add(s.value);
+              }
             }
           }
         }

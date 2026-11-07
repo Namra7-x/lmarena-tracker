@@ -142,10 +142,7 @@ export async function fetchAntigravityCli() {
   const base = 'https://antigravity-cli-auto-updater-974169037036.us-central1.run.app/manifests';
   const platforms = [
     { target: 'darwin-arm64', key: 'darwin_arm64', format: 'tgz' },
-    { target: 'darwin-x64', key: 'darwin_amd64', format: 'tgz' },
     { target: 'win32-x64', key: 'windows_amd64', format: 'exe' },
-    { target: 'win32-arm64', key: 'windows_arm64', format: 'exe' },
-    { target: 'linux-x64', key: 'linux_amd64', format: 'tgz' },
   ];
 
   let resolvedVersion = null;
