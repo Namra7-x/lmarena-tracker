@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import { evaluateNoise, computeShannonEntropy } from '../reverse-tracker/finder/noise.mjs';
+import { evaluateNoise, computeShannonEntropy, isHumanReadableString } from '../reverse-tracker/finder/noise.mjs';
 import { matchSignalsInText, CATEGORIES } from '../reverse-tracker/finder/rules.mjs';
 import { generateReportBundle } from '../reverse-tracker/reports/bundle.mjs';
 
@@ -100,5 +100,80 @@ test('generateReportBundle produces clean leaks.txt, diff.txt, strings.txt and s
   assert.ok(bundle.telegramFiles.some(f => f.endsWith('strings.txt')));
 
   // Cleanup
+  fs.rmSync(tmpDir, { recursive: true, force: true });
+});
+
+test('isHumanReadableString strictly validates readability and rejects unreadable binary noise', () => {
+  // Genuinely human-readable strings
+  assert.equal(isHumanReadableString('claude-3-5-sonnet-20241022'), true);
+  assert.equal(isHumanReadableString('enable_autonomous_coder_v2'), true);
+  assert.equal(isHumanReadableString('https://api.devin.ai/v1/sessions'), true);
+  assert.equal(isHumanReadableString('--experimental-sandbox-flag'), true);
+  assert.equal(isHumanReadableString('Introducing frontier reasoning model'), true);
+
+  // Unreadable binary control characters and gibberish
+  assert.equal(isHumanReadableString('\u001d?8&"U3\u0005'), false, 'Must reject control bytes');
+  assert.equal(isHumanReadableString('\x00\x01\x02binary'), false, 'Must reject nulls/control bytes');
+  assert.equal(isHumanReadableString('corrupted\uFFFDstring'), false, 'Must reject replacement chars');
+  assert.equal(isHumanReadableString('@@@@####$$$$%%%%'), false, 'Must reject symbol noise');
+  assert.equal(isHumanReadableString('??????'), false, 'Must reject repeated punctuation');
+  assert.equal(isHumanReadableString('------'), false, 'Must reject repeated dashes');
+  assert.equal(isHumanReadableString('??_R0?AVexception@@@8'), false, 'Must reject compiler mangling');
+  assert.equal(isHumanReadableString('cursor-default'), false, 'Must reject CSS cursor styles');
+  assert.equal(isHumanReadableString('cursor-not-allowed'), false, 'Must reject CSS cursor styles');
+  assert.equal(isHumanReadableString('aHR0cHM6Ly9zdGFnaW5nLmFwaS5leGFtcGxlLmNvbS92MS9zZWNyZXQvcGF0aD90b2tlbj14eXoxMjM0NTY3ODk='), false, 'Must reject high entropy base64');
+});
+
+test('strings.txt in generateReportBundle strictly excludes unreadable binary garbage and CSS styles', () => {
+  const tmpDir = path.join(os.tmpdir(), `tracker-strings-cleanliness-${Date.now()}`);
+
+  const scanData = {
+    scanId: 'DEVIN-20261107-001',
+    componentId: 'devin-desktop',
+    family: 'devin',
+    version: '1.2.0',
+    oldVersion: '1.1.0',
+    diffResults: {
+      newFindings: [
+        { value: 'silicon-low' },
+        { value: 'enable_terminal_sandbox' },
+        { value: '\u001d?8&"U3\u0005' },          // Unreadable binary garbage
+        { value: 'cursor-default' },              // CSS style
+        { value: 'cursor-not-allowed' },          // CSS style
+        { value: '??????' },                      // Repeated punctuation
+        { value: '??_R0?AVtype_info@@@8' },       // Compiler mangling
+      ],
+      persistentFindings: [],
+      removedFindings: [],
+      reintroducedFindings: [],
+    },
+    scoredFindings: [
+      { category: 'model_id', value: 'silicon-low', score: 80, tier: 'HIGH-CONFIDENCE SIGNAL' },
+    ],
+    platformAsymmetry: { macOnly: [], winOnly: [] },
+    coverage: { percentage: 100, macOk: true, winOk: true },
+    totalExtractedStrings: 7,
+    artifactInventory: [],
+  };
+
+  generateReportBundle(tmpDir, scanData);
+
+  const stringsContent = fs.readFileSync(path.join(tmpDir, 'strings.txt'), 'utf8');
+
+  // Must include valid human-readable strings
+  assert.ok(stringsContent.includes('silicon-low'), 'Must include silicon-low');
+  assert.ok(stringsContent.includes('enable_terminal_sandbox'), 'Must include enable_terminal_sandbox');
+
+  // Must NEVER include unreadable binary junk, CSS cursors, or compiler symbols
+  assert.ok(!stringsContent.includes('\u001d'), 'strings.txt must never include binary control bytes');
+  assert.ok(!stringsContent.includes('\u0005'), 'strings.txt must never include binary control bytes');
+  assert.ok(!stringsContent.includes('cursor-default'), 'strings.txt must never include cursor-default');
+  assert.ok(!stringsContent.includes('cursor-not-allowed'), 'strings.txt must never include cursor-not-allowed');
+  assert.ok(!stringsContent.includes('??????'), 'strings.txt must never include repeated symbol noise');
+  assert.ok(!stringsContent.includes('??_R0'), 'strings.txt must never include compiler mangling');
+
+  // Verify total count header matches clean strings count
+  assert.ok(stringsContent.includes('# Total Count: 2'), 'Total count must reflect only the 2 clean strings');
+
   fs.rmSync(tmpDir, { recursive: true, force: true });
 });

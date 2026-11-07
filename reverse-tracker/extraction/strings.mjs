@@ -83,12 +83,23 @@ export function extractStrings(buffer, options = {}) {
     if (!val || val.length < minLen || val.length > maxLen) return;
     if (!/[a-zA-Z0-9]/.test(val)) return;
 
-    const tokens = unpackGluedTokens(val);
-    for (const tok of tokens) {
-      if (tok.length >= minLen && !seen.has(tok)) {
-        if (results.length >= maxStrings) return;
-        seen.add(tok);
-        results.push({ value: tok, encoding, offset, length: tok.length });
+    // Reject control characters or unprintable byte sequences
+    if (/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F\uFFFD]/.test(val)) return;
+
+    // Split on newlines so each extracted string is a clean, single-line candidate
+    const lines = val.split(/[\r\n]+/);
+    for (const line of lines) {
+      const clean = line.trim();
+      if (clean.length < minLen || clean.length > maxLen) continue;
+      if (!/[a-zA-Z0-9]/.test(clean)) continue;
+
+      const tokens = unpackGluedTokens(clean);
+      for (const tok of tokens) {
+        if (tok.length >= minLen && !seen.has(tok)) {
+          if (results.length >= maxStrings) return;
+          seen.add(tok);
+          results.push({ value: tok, encoding, offset, length: tok.length });
+        }
       }
     }
   }

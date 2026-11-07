@@ -96,6 +96,64 @@ export function isThirdPartyPath(filePath) {
 }
 
 /**
+ * Evaluates whether a string is clean, printable, and genuinely human-readable.
+ * Rejects binary garbage, control bytes, compiler symbols, high symbol noise, and CSS.
+ */
+export function isHumanReadableString(value) {
+  if (!value || typeof value !== 'string') return false;
+
+  const trimmed = value.trim();
+  const len = trimmed.length;
+
+  // 1. Length bounds: readable strings must be at least 4 chars and at most 1000 chars
+  if (len < 4 || len > 1000) return false;
+
+  // 2. Control characters & unprintable bytes: strictly rejected (\x00-\x1F, \x7F-\x9F, \uFFFD)
+  if (/[\x00-\x1F\x7F-\x9F\uFFFD]/.test(trimmed)) return false;
+
+  // 3. Must contain letters or digits
+  if (!/[a-zA-Z0-9]/.test(trimmed)) return false;
+
+  // 4. Alphanumeric density: at least 45% alphanumeric (or at least 3 letters/digits for short tokens)
+  const alphanumericCount = (trimmed.match(/[a-zA-Z0-9]/g) || []).length;
+  if (alphanumericCount < 3) return false;
+  if (alphanumericCount / len < 0.45 && len >= 6) return false;
+
+  // 5. Excessive repeated punctuation/symbols (e.g. "----", "////", "????", "@@@@", "****")
+  if (/([^\w\s])\1{3,}/.test(trimmed)) return false;
+
+  // 6. Compiler mangling & binary symbol noise
+  if (/^(\?\?|\?_|\$|\.L|__imp_|__libc_|_ZTV|_ZTI|__gxx)/.test(trimmed)) return false;
+
+  // 7. High entropy random hashes / base64 noise
+  if (!trimmed.includes(' ') && len >= 24) {
+    const entropy = computeShannonEntropy(trimmed);
+    if (entropy > 4.65) return false;
+  }
+
+  // 8. UUIDs & raw hex hashes
+  if (UUID_REGEX.test(trimmed) || HASH_REGEX.test(trimmed)) return false;
+
+  // 9. CSS styles, colors, and SVG paths
+  if (HEX_COLOR_REGEX.test(trimmed) || CSS_TAILWIND_REGEX.test(trimmed) || CSS_PROPERTY_REGEX.test(trimmed) || SVG_PATH_REGEX.test(trimmed)) {
+    return false;
+  }
+
+  // 10. Multi-class CSS lists
+  if (trimmed.includes(' ')) {
+    const tokens = trimmed.split(/\s+/).filter(Boolean);
+    if (tokens.length >= 2 && tokens.every((t) => CSS_TAILWIND_REGEX.test(t) || HEX_COLOR_REGEX.test(t))) {
+      return false;
+    }
+  }
+
+  // 11. Webpack / Bundler boilerplate
+  if (WEBPACK_BOILERPLATE.has(trimmed)) return false;
+
+  return true;
+}
+
+/**
  * Comprehensive Noise Sieve.
  * Filters out hashes, UUIDs, CSS, Webpack boilerplate, and high-entropy noise.
  */

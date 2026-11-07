@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { createHash } from 'node:crypto';
+import { isHumanReadableString } from '../finder/noise.mjs';
 
 /**
  * Generate all report files for a scan.
@@ -138,10 +139,15 @@ export function generateReportBundle(outputDir, scanData) {
   fs.writeFileSync(diffFilePath, diffContent, 'utf8');
 
   // -------------------------------------------------------------
-  // 3. `strings.txt`: Clean, newly added strings (sorted)
+  // 3. `strings.txt`: Clean, newly added strings (100% human-readable & sorted)
   // -------------------------------------------------------------
   const uniqueCleanNewStrings = Array.from(
-    new Set(newFindings.map((f) => (typeof f === 'string' ? f : f.value)).filter(Boolean))
+    new Set(
+      newFindings
+        .map((f) => (typeof f === 'string' ? f : f.value))
+        .filter(Boolean)
+        .filter(isHumanReadableString)
+    )
   ).sort();
 
   let stringsContent = `# Newly Introduced Strings in ${componentId} (${version})\n`;

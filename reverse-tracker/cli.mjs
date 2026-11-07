@@ -15,7 +15,7 @@ import { downloadArtifact } from './acquisition/downloader.mjs';
 import { extractArtifact } from './extraction/dispatcher.mjs';
 import { extractStrings } from './extraction/strings.mjs';
 import { matchSignalsInText } from './finder/rules.mjs';
-import { evaluateNoise } from './finder/noise.mjs';
+import { evaluateNoise, isHumanReadableString } from './finder/noise.mjs';
 import { detectPlatformAsymmetry } from './finder/asymmetry.mjs';
 import { scoreFinding, sortFindings } from './finder/scorer.mjs';
 import { computeExactDiff } from './diff/engine.mjs';
@@ -226,6 +226,9 @@ async function handleScan(componentId, options = {}) {
 
   for (const str of allExtractedStrings) {
     if (historicalSeenHashes.has(str)) continue;
+
+    // Reject non-human-readable, unprintable, or corrupted binary noise
+    if (!isHumanReadableString(str)) continue;
 
     // Filter through Noise Sieve, but always preserve any string matching signal rules
     const noise = evaluateNoise(str);
