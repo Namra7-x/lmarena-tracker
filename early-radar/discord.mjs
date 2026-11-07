@@ -101,149 +101,12 @@ export function buildArtificialAnalysisBenchmarkEmbed(benchmark) {
 }
 
 /**
- * Builds a Discord embed for a ChatGPT web app production build deployment.
- */
-export function buildChatGPTBuildEmbed(event) {
-  const fields = [
-    { name: 'Build Manifest Hash', value: `\`${event.manifestHash}\``, inline: true },
-    { name: 'Previous Hash', value: `\`${event.prevHash || 'none'}\``, inline: true },
-  ];
-
-  if (event.totalChunks) {
-    fields.push({ name: 'Dissected Chunks', value: `\`${event.totalChunks} chunks\``, inline: true });
-  }
-
-  // 1. HIGHEST PRIORITY: New Models detected in build
-  if (event.models && event.models.length > 0) {
-    const modelList = event.models.map((m) => `🔥 **\`${m}\`**`).join('\n');
-    fields.unshift({ name: '⚡ Discovered Model Slugs', value: modelList, inline: false });
-  }
-
-  // 2. Feature Gates
-  if (event.featureGates && event.featureGates.length > 0) {
-    const preview = event.featureGates.slice(0, 6).map((g) => `\`${g}\``).join(', ');
-    fields.push({
-      name: `🚩 Feature Gates (${event.featureGates.length})`,
-      value: preview,
-      inline: false,
-    });
-  }
-
-  // 3. Agentic Tools & MCP Schemas
-  if (event.toolSchemas && event.toolSchemas.length > 0) {
-    const preview = event.toolSchemas.slice(0, 6).map((t) => `\`${t}\``).join(', ');
-    fields.push({
-      name: `🛠️ Agentic Tools / MCP (${event.toolSchemas.length})`,
-      value: preview,
-      inline: false,
-    });
-  }
-
-  // 4. Launch Copy
-  if (event.launchCopy && event.launchCopy.length > 0) {
-    fields.push({
-      name: '📢 Launch Copy',
-      value: `> "${event.launchCopy[0]}"`,
-      inline: false,
-    });
-  }
-
-  // 5. Quick Links
-  const links = [
-    `• [Open ChatGPT Web App](https://chatgpt.com/)`,
-    `• [Inspect Raw Production Manifest](${event.manifestUrl})`,
-  ];
-  if (event.reportUrl) {
-    links.push(`• [View Full 100% Unabridged Report on GitHub](${event.reportUrl})`);
-  }
-  fields.push({
-    name: '🔗 Quick Links',
-    value: links.join('\n'),
-    inline: false,
-  });
-
-  return {
-    title: `⚡ ChatGPT Web App | Production Build Deployed`,
-    url: event.manifestUrl,
-    description: `OpenAI pushed a new production build to [chatgpt.com](${RADAR_CONFIG.endpoints.chatgpt}).`,
-    color: RADAR_CONFIG.colors.chatgpt,
-    fields,
-    footer: { text: 'ChatGPT Manifest Radar • Build Canary' },
-    timestamp: new Date().toISOString(),
-  };
-}
-
-/**
- * Builds a Discord embed for a Claude.ai web app build deployment.
- */
-export function buildClaudeBuildEmbed(event) {
-  const fields = [
-    { name: 'Vite Entry Hash', value: `\`${event.entryHash}\``, inline: true },
-    { name: 'Previous Hash', value: `\`${event.prevHash || 'none'}\``, inline: true },
-  ];
-
-  if (event.totalChunks) {
-    fields.push({ name: 'Dissected Chunks', value: `\`${event.totalChunks} chunks\``, inline: true });
-  }
-
-  // 1. HIGHEST PRIORITY: New Models
-  if (event.models && event.models.length > 0) {
-    const modelList = event.models.map((m) => `🔥 **\`${m}\`**`).join('\n');
-    fields.unshift({ name: '⚡ Discovered Model Slugs', value: modelList, inline: false });
-  }
-
-  // 2. Feature Gates
-  if (event.featureGates && event.featureGates.length > 0) {
-    const preview = event.featureGates.slice(0, 6).map((g) => `\`${g}\``).join(', ');
-    fields.push({
-      name: `🚩 Feature Gates (${event.featureGates.length})`,
-      value: preview,
-      inline: false,
-    });
-  }
-
-  // 3. Agentic Tools & MCP Schemas
-  if (event.toolSchemas && event.toolSchemas.length > 0) {
-    const preview = event.toolSchemas.slice(0, 6).map((t) => `\`${t}\``).join(', ');
-    fields.push({
-      name: `🛠️ Agentic Tools / MCP (${event.toolSchemas.length})`,
-      value: preview,
-      inline: false,
-    });
-  }
-
-  // 4. Quick Links
-  const links = [
-    `• [Open Claude Web App](https://claude.ai/)`,
-    `• [Inspect Vite Entry Bundle](${event.entryUrl})`,
-  ];
-  if (event.reportUrl) {
-    links.push(`• [View Full 100% Unabridged Report on GitHub](${event.reportUrl})`);
-  }
-  fields.push({
-    name: '🔗 Quick Links',
-    value: links.join('\n'),
-    inline: false,
-  });
-
-  return {
-    title: `⚡ Claude.ai | Production Build Deployed`,
-    url: event.entryUrl,
-    description: `Anthropic pushed a new production deployment to [claude.ai](${RADAR_CONFIG.endpoints.claude}).`,
-    color: RADAR_CONFIG.colors.claude,
-    fields,
-    footer: { text: 'Claude Vite Radar • Build Canary' },
-    timestamp: new Date().toISOString(),
-  };
-}
-
-/**
  * Builds a Discord embed for an SDK Model Enum commit with direct GitHub links.
  */
 export function buildSdkCommitEmbed(event) {
   const isAnthropic = event.repo.includes('anthropic');
   const labName = isAnthropic ? 'Anthropic' : 'OpenAI';
-  const color = isAnthropic ? RADAR_CONFIG.colors.claude : RADAR_CONFIG.colors.chatgpt;
+  const color = isAnthropic ? RADAR_CONFIG.colors.anthropic : RADAR_CONFIG.colors.openai;
 
   const fileGithubUrl = `https://github.com/${event.repo}/blob/main/${event.filePath}`;
   const rawFileUrl = `https://raw.githubusercontent.com/${event.repo}/main/${event.filePath}`;
@@ -285,34 +148,34 @@ export function buildSdkCommitEmbed(event) {
 }
 
 /**
- * Builds a complete showcase containing 1 sample embed for every single radar category.
- * Features realistic 2026 frontier models with raw JSON blocks and direct GitHub links.
+ * Builds a complete showcase containing 1 sample embed for every active radar category.
+ * Features realistic frontier models and benchmarks with raw JSON blocks and direct GitHub links.
  */
 export function buildRadarShowcaseEmbeds() {
   return [
     // 1. Artificial Analysis Model with JSON Block
     buildArtificialAnalysisEmbed({
-      name: 'GPT-6 Astra (Max)',
-      slug: 'gpt-6-astra',
-      url: 'https://artificialanalysis.ai/models/gpt-6-astra',
-      creator: 'OpenAI',
+      name: 'Gemini 4 Carbon',
+      slug: 'gemini-4-carbon',
+      url: 'https://artificialanalysis.ai/models/gemini-4-carbon',
+      creator: 'Google',
       parameters: 1800,
       contextWindowTokens: 2000000,
       isReasoning: true,
       price1mInput: 2.50,
       price1mOutput: 10.00,
       outputSpeed: 142,
-      releaseDate: '2026-09-18',
+      releaseDate: '2026-10-28',
       rawJson: {
-        name: 'GPT-6 Astra (Max)',
-        slug: 'gpt-6-astra',
-        creator: 'OpenAI',
+        name: 'Gemini 4 Carbon',
+        slug: 'gemini-4-carbon',
+        creator: 'Google',
         parameters: '1,800B MoE',
         contextWindow: '2,000,000 tokens',
         isReasoning: true,
         pricing: '$2.50/1M in, $10.00/1M out',
         outputSpeed: '142 tok/s',
-        releaseDate: '2026-09-18',
+        releaseDate: '2026-10-28',
         license: 'Proprietary',
       },
     }),
@@ -330,29 +193,7 @@ export function buildRadarShowcaseEmbeds() {
       },
     }),
 
-    // 2. ChatGPT Web App Build
-    buildChatGPTBuildEmbed({
-      manifestHash: 'e48d902a',
-      prevHash: '1a91f86c',
-      manifestUrl: 'https://chatgpt.com/cdn/assets/manifest-e48d902a.js',
-      totalChunks: 6721,
-      models: ['gpt-6.1-terra-preview', 'o4-mini-preview'],
-      featureGates: ['can_see_autonomous_operator_v2', 'enable_terra_deep_routing', 'search_canvas_v3'],
-      launchCopy: ['Introducing GPT-6.1 Terra: Frontier intelligence with native autonomous environment execution.'],
-      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/main/early-radar/reports/BUILD_chatgpt_e48d902a.md',
-    }),
-
-    // 3. Claude Web App Build
-    buildClaudeBuildEmbed({
-      entryHash: 'BlPlYMgx',
-      prevHash: 'PYSO3vVA',
-      entryUrl: 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BlPlYMgx.js',
-      models: ['claude-5-5-opus-preview'],
-      featureGates: ['can_see_computer_use_v3', 'enable_dynamic_thinking_budget'],
-      reportUrl: 'https://github.com/Namra7-x/lmarena-tracker/blob/main/early-radar/reports/BUILD_claude_BlPlYMgx.md',
-    }),
-
-    // 4. OpenAI SDK Commit with Direct GitHub Links
+    // 3. OpenAI SDK Commit with Direct GitHub Links
     buildSdkCommitEmbed({
       repo: 'openai/openai-python',
       filePath: 'src/openai/types/shared/chat_model.py',
@@ -364,7 +205,7 @@ export function buildRadarShowcaseEmbeds() {
       additions: ['"gpt-6.1-terra-preview"', '"o4-mini"'],
     }),
 
-    // 5. Anthropic SDK Commit with Direct GitHub Links
+    // 4. Anthropic SDK Commit with Direct GitHub Links
     buildSdkCommitEmbed({
       repo: 'anthropics/anthropic-sdk-typescript',
       filePath: 'src/resources/messages/messages.ts',

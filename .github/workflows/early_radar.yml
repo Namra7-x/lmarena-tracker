@@ -46,13 +46,13 @@ jobs:
           FORCE_ALERT: ${{ inputs.force_alert == true && '1' || '0' }}
         run: node early-radar/radar.mjs
 
-      - name: Commit and Push Snapshot & Build Reports (Only if changes detected)
+      - name: Commit and Push Snapshot (Only if changes detected)
         run: |
-          if [ -n "$(git status --porcelain early-radar/)" ]; then
+          if [ -n "$(git status --porcelain early-radar/radar_snapshot.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add early-radar/radar_snapshot.json early-radar/reports/
-            git commit -m "Update Early Radar snapshot & build reports [skip ci]"
+            git add early-radar/radar_snapshot.json
+            git commit -m "Update Early Radar snapshot [skip ci]"
             git push origin main
           else
             echo "Zero changes detected. No commit needed."

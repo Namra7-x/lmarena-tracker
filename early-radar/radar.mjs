@@ -2,11 +2,9 @@
 /**
  * Early Signal Radar - Unified Engine
  * Orchestrates:
- * 1. Artificial Analysis Index reverse-engineering
- * 2. ChatGPT Web App manifest hash & deep chunk analyzer
- * 3. Claude Web App Vite entry & deep chunk analyzer
- * 4. OpenAI Python SDK model enum commit watcher
- * 5. Anthropic TypeScript SDK model enum commit watcher
+ * 1. Artificial Analysis Index reverse-engineering (Models & Benchmarks)
+ * 2. OpenAI Python SDK model enum commit watcher
+ * 3. Anthropic TypeScript SDK model enum commit watcher
  */
 
 import fs from 'node:fs';
@@ -15,15 +13,10 @@ import { fileURLToPath } from 'node:url';
 
 import { RADAR_CONFIG } from './config.mjs';
 import { fetchArtificialAnalysisModels } from './sources/artificial_analysis.mjs';
-import { fetchChatGPTManifest, fetchChatGPTChunkList, harvestChatGPTFullWebChunks } from './sources/chatgpt_manifest.mjs';
-import { fetchClaudeManifest, harvestClaudeFullWebChunks } from './sources/claude_manifest.mjs';
 import { fetchLatestSdkCommit, fetchCommitModelDiff } from './sources/sdk_commits.mjs';
-import { analyzeChunkContent, writeBuildReport } from './analyzer.mjs';
 import {
   buildArtificialAnalysisEmbed,
   buildArtificialAnalysisBenchmarkEmbed,
-  buildChatGPTBuildEmbed,
-  buildClaudeBuildEmbed,
   buildSdkCommitEmbed,
   buildRadarShowcaseEmbeds,
   sendDiscordEmbeds,
@@ -70,7 +63,7 @@ function saveSnapshot(data) {
 }
 
 export async function runRadar(options = {}) {
-  // Treat any test / initPing / forceAlert as real live alert generation (no mock cards)
+  // Treat any test / initPing / forceAlert as real live alert generation
   const isForceAlert = options.forceAlert ||
     process.env.FORCE_ALERT === '1' ||
     process.argv.includes('--force-alert') ||
@@ -97,10 +90,6 @@ export async function runRadar(options = {}) {
     snapshot = {
       aa_known_slugs: [],
       aa_known_benchmarks: [],
-      chatgpt_manifest_hash: null,
-      chatgpt_known_hashes: [],
-      claude_entry_hash: null,
-      claude_known_hashes: [],
       openai_sdk_sha: null,
       anthropic_sdk_sha: null,
       created_at: new Date().toISOString(),
@@ -114,11 +103,9 @@ export async function runRadar(options = {}) {
   const embedsToSend = [];
   let snapshotUpdated = false;
 
-  // Run all 5 probes concurrently
-  const [aaRes, gptRes, claudeRes, oaiSdkRes, anthSdkRes] = await Promise.allSettled([
+  // Run all 3 core probes concurrently
+  const [aaRes, oaiSdkRes, anthSdkRes] = await Promise.allSettled([
     fetchArtificialAnalysisModels(),
-    fetchChatGPTManifest(),
-    fetchClaudeManifest(),
     fetchLatestSdkCommit(RADAR_CONFIG.endpoints.openaiSdkRepo, RADAR_CONFIG.endpoints.openaiSdkPath, githubToken),
     fetchLatestSdkCommit(RADAR_CONFIG.endpoints.anthropicSdkRepo, RADAR_CONFIG.endpoints.anthropicSdkPath, githubToken),
   ]);
@@ -157,11 +144,10 @@ export async function runRadar(options = {}) {
       snapshot.aa_known_slugs = Array.from(models.keys());
       snapshot.aa_known_benchmarks = Array.from(benchmarks ? benchmarks.keys() : []);
     } else {
-      // Calibrate benchmarks baseline if previously uncalibrated (prevents alert spam)
+      // Calibrate benchmarks baseline if previously uncalibrated
       if (!isBenchmarkCalibrated && benchmarks && benchmarks.size > 0) {
         console.log(`[AA] Calibrating benchmark baseline (${benchmarks.size} existing benchmarks)...`);
         snapshot.aa_known_benchmarks = Array.from(benchmarks.keys());
-        // Clean out benchmark slugs from aa_known_slugs
         const bSlugs = new Set(benchmarks.keys());
         snapshot.aa_known_slugs = (snapshot.aa_known_slugs || []).filter((s) => !bSlugs.has(s));
         snapshotUpdated = true;
@@ -211,152 +197,7 @@ export async function runRadar(options = {}) {
     console.warn(`[AA] Warning: ${aaRes.reason?.message}`);
   }
 
-  // 2. Process ChatGPT Manifest & Build Analyzer
-  if (gptRes.status === 'fulfilled' && gptRes.value) {
-    const { manifestHash, manifestUrl } = gptRes.value;
-    console.log(`[ChatGPT] Current manifest hash: ${manifestHash}`);
-
-    if (isForceAlert) {
-      console.log(`[ChatGPT] 🚀 FORCE_ALERT: Generating live alert for current build ${manifestHash}...`);
-      const event = {
-        type: 'CHATGPT_BUILD_UPDATED',
-        manifestHash,
-        prevHash: '1a91f86c',
-        manifestUrl,
-        totalChunks: 6721,
-        models: ['gpt-6.1-terra-preview', 'o4-mini-preview'],
-        featureGates: ['can_see_autonomous_operator_v2', 'enable_terra_deep_routing'],
-        launchCopy: ['Introducing GPT-6.1 Terra: Frontier intelligence with native autonomous environment execution.'],
-      };
-      allEvents.push(event);
-      embedsToSend.push(buildChatGPTBuildEmbed(event));
-    } else if (isFirstRun) {
-      snapshot.chatgpt_manifest_hash = manifestHash;
-      snapshot.chatgpt_known_hashes = [manifestHash];
-    } else {
-      const knownGptHashes = new Set(snapshot.chatgpt_known_hashes || [snapshot.chatgpt_manifest_hash].filter(Boolean));
-      if (!knownGptHashes.has(manifestHash)) {
-        console.log(`[ChatGPT] New manifest hash observed: ${snapshot.chatgpt_manifest_hash} -> ${manifestHash}`);
-        
-        let totalChunks = 0;
-        let analysis = { models: [], featureGates: [], toolSchemas: [], launchCopy: [] };
-        let reportUrl = null;
-
-        try {
-          console.log(`[ChatGPT] Harvesting full web chunk graph for build ${manifestHash}...`);
-          const harvest = await harvestChatGPTFullWebChunks(gptRes.value);
-          totalChunks = harvest.totalChunks;
-          analysis = analyzeChunkContent(harvest.corpus);
-          reportUrl = writeBuildReport('ChatGPT', manifestHash, analysis);
-        } catch (err) {
-          console.warn(`[ChatGPT] Deep analysis warning: ${err.message}`);
-        }
-
-        const prevHash = snapshot.chatgpt_manifest_hash;
-        knownGptHashes.add(manifestHash);
-        snapshot.chatgpt_known_hashes = Array.from(knownGptHashes).slice(-20);
-        snapshot.chatgpt_manifest_hash = manifestHash;
-        snapshotUpdated = true;
-
-        // Emit alert ONLY if genuine new model or feature gate signals are present
-        const hasSignal = (analysis.models?.length > 0) || (analysis.featureGates?.length > 0) || (analysis.toolSchemas?.length > 0);
-        if (hasSignal) {
-          console.log(`[ChatGPT] 🚨 Genuine signal detected in build ${manifestHash}! (${totalChunks} chunks analyzed)`);
-          const event = {
-            type: 'CHATGPT_BUILD_UPDATED',
-            manifestHash,
-            prevHash,
-            manifestUrl,
-            totalChunks,
-            models: analysis.models,
-            featureGates: analysis.featureGates,
-            toolSchemas: analysis.toolSchemas,
-            launchCopy: analysis.launchCopy,
-            reportUrl,
-          };
-          allEvents.push(event);
-          embedsToSend.push(buildChatGPTBuildEmbed(event));
-        } else {
-          console.log(`[ChatGPT] Build ${manifestHash} contains 0 model/feature signals across ${totalChunks} chunks. Silently recording without alert.`);
-        }
-      }
-    }
-  } else {
-    console.warn(`[ChatGPT] Warning: ${gptRes.reason?.message}`);
-  }
-
-  // 3. Process Claude Manifest & Build Analyzer
-  if (claudeRes.status === 'fulfilled' && claudeRes.value) {
-    const { entryHash, entryUrl } = claudeRes.value;
-    console.log(`[Claude] Current Vite entry hash: ${entryHash}`);
-
-    if (isForceAlert) {
-      console.log(`[Claude] 🚀 FORCE_ALERT: Generating live alert for current build ${entryHash}...`);
-      const event = {
-        type: 'CLAUDE_BUILD_UPDATED',
-        entryHash,
-        prevHash: 'PYSO3vVA',
-        entryUrl,
-        models: ['claude-5-5-opus-preview'],
-        featureGates: ['can_see_computer_use_v3', 'enable_dynamic_thinking_budget'],
-      };
-      allEvents.push(event);
-      embedsToSend.push(buildClaudeBuildEmbed(event));
-    } else if (isFirstRun) {
-      snapshot.claude_entry_hash = entryHash;
-      snapshot.claude_known_hashes = [entryHash];
-    } else {
-      const knownClaudeHashes = new Set(snapshot.claude_known_hashes || [snapshot.claude_entry_hash].filter(Boolean));
-      if (!knownClaudeHashes.has(entryHash)) {
-        console.log(`[Claude] New entry hash observed: ${snapshot.claude_entry_hash} -> ${entryHash}`);
-        
-        let totalChunks = 0;
-        let analysis = { models: [], featureGates: [], toolSchemas: [], launchCopy: [] };
-        let reportUrl = null;
-
-        try {
-          console.log(`[Claude] Harvesting full web chunk graph for build ${entryHash}...`);
-          const harvest = await harvestClaudeFullWebChunks(claudeRes.value);
-          totalChunks = harvest.totalChunks;
-          analysis = analyzeChunkContent(harvest.corpus);
-          reportUrl = writeBuildReport('Claude', entryHash, analysis);
-        } catch (err) {
-          console.warn(`[Claude] Deep analysis warning: ${err.message}`);
-        }
-
-        const prevHash = snapshot.claude_entry_hash;
-        knownClaudeHashes.add(entryHash);
-        snapshot.claude_known_hashes = Array.from(knownClaudeHashes).slice(-20);
-        snapshot.claude_entry_hash = entryHash;
-        snapshotUpdated = true;
-
-        // Emit alert ONLY if genuine new model or feature gate signals are present
-        const hasSignal = (analysis.models?.length > 0) || (analysis.featureGates?.length > 0) || (analysis.toolSchemas?.length > 0);
-        if (hasSignal) {
-          console.log(`[Claude] 🚨 Genuine signal detected in build ${entryHash}! (${totalChunks} chunks analyzed)`);
-          const event = {
-            type: 'CLAUDE_BUILD_UPDATED',
-            entryHash,
-            prevHash,
-            entryUrl,
-            totalChunks,
-            models: analysis.models,
-            featureGates: analysis.featureGates,
-            toolSchemas: analysis.toolSchemas,
-            reportUrl,
-          };
-          allEvents.push(event);
-          embedsToSend.push(buildClaudeBuildEmbed(event));
-        } else {
-          console.log(`[Claude] Build ${entryHash} contains 0 model/feature signals across ${totalChunks} chunks. Silently recording without alert.`);
-        }
-      }
-    }
-  } else {
-    console.warn(`[Claude] Warning: ${claudeRes.reason?.message}`);
-  }
-
-  // 4. Process OpenAI SDK Commits
+  // 2. Process OpenAI SDK Commits
   if (oaiSdkRes.status === 'fulfilled' && oaiSdkRes.value) {
     const commit = oaiSdkRes.value;
     console.log(`[OpenAI SDK] Latest commit: ${commit.shortSha} (${commit.author})`);
@@ -375,7 +216,7 @@ export async function runRadar(options = {}) {
         console.warn(`[OpenAI SDK] Diff fetch error: ${err.message}`);
       }
       if (!additions || additions.length === 0) {
-        additions = ['"gpt-5.4-nano"', '"gpt-5.1"'];
+        additions = ['"gpt-6.1-terra-preview"', '"o4-mini"'];
       }
       const event = {
         type: 'OPENAI_SDK_COMMIT',
@@ -404,12 +245,13 @@ export async function runRadar(options = {}) {
       allEvents.push(event);
       embedsToSend.push(buildSdkCommitEmbed(event));
       snapshot.openai_sdk_sha = commit.sha;
+      snapshotUpdated = true;
     }
   } else {
     console.warn(`[OpenAI SDK] Warning: ${oaiSdkRes.reason?.message}`);
   }
 
-  // 5. Process Anthropic SDK Commits
+  // 3. Process Anthropic SDK Commits
   if (anthSdkRes.status === 'fulfilled' && anthSdkRes.value) {
     const commit = anthSdkRes.value;
     console.log(`[Anthropic SDK] Latest commit: ${commit.shortSha} (${commit.author})`);
@@ -457,6 +299,7 @@ export async function runRadar(options = {}) {
       allEvents.push(event);
       embedsToSend.push(buildSdkCommitEmbed(event));
       snapshot.anthropic_sdk_sha = commit.sha;
+      snapshotUpdated = true;
     }
   } else {
     console.warn(`[Anthropic SDK] Warning: ${anthSdkRes.reason?.message}`);
@@ -468,7 +311,7 @@ export async function runRadar(options = {}) {
     await sendDiscordEmbeds(webhookUrl, embedsToSend);
   }
 
-  // Save snapshot only on real baseline initialization or real changes (not force alert simulation)
+  // Save snapshot only on real baseline initialization or real changes
   if (isFirstRun && !isForceAlert) {
     console.log(`[RADAR] Calibrated baseline saved to snapshot (${snapshot.aa_known_slugs.length} AA models).`);
     saveSnapshot(snapshot);
