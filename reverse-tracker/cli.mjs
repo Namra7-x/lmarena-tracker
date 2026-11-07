@@ -61,6 +61,20 @@ async function handleDetect(familyId) {
           version: candidate.version,
           candidate,
         });
+      } else if (
+        classification.changeType === CHANGE_TYPE.BYTE_CHANGE &&
+        baseline &&
+        baseline.version === candidate.version &&
+        baseline.releaseId === candidate.releaseId
+      ) {
+        // Internal artifact URL/integrity change for the exact same release version
+        // Update baseline identity fingerprint silently to avoid spamming identical versions
+        console.log(`  🔄 ${compId}: Silently migrating identity fingerprint for existing version (${candidate.version})`);
+        saveComponentState(STATE_DIR, compId, {
+          ...baseline,
+          identityFingerprint: classification.identityFingerprint,
+          alertedVersion: candidate.version,
+        });
       } else {
         console.log(`  🚨 ${compId}: ${classification.changeType} -> ${classification.reason}`);
         changes.push({
@@ -118,7 +132,8 @@ async function handleScan(componentId, options = {}) {
 
   // Step 1: Update-First Rule - Send Immediate Alert BEFORE downloading
   let alertMessageId = null;
-  const isAlreadyAlerted = baseline.alertedVersion === candidate.version;
+  const isSameVersion = Boolean(baseline.version && baseline.version === candidate.version);
+  const isAlreadyAlerted = isSameVersion || baseline.alertedVersion === candidate.version;
 
   if (!isAlreadyAlerted) {
     console.log(`📡 Sending immediate alert to Telegram for ${scanId}...`);
