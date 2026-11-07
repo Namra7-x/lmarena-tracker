@@ -25,7 +25,17 @@ export const CATEGORIES = {
   UI_STRING: 'ui_string',
   ENV_VAR: 'env_var',
   INTERNAL_FUNCTION: 'internal_function',
+  PLAN_ENTITLEMENT: 'plan_entitlement',
+  PLATFORM_ENTITLEMENT: 'platform_entitlement',
 };
+
+export const SUBSCRIPTION_PLANS = new Set([
+  'free', 'plus', 'pro', 'max', 'ultra', 'team', 'enterprise', 'staff', 'dogfood', 'vip', 'developer', 'unlimited'
+]);
+
+export const EFFORT_LEVELS = new Set([
+  'low', 'medium', 'high', 'xhigh', 'extra-high', 'max', 'ultra', 'minimal', 'extreme', 'unlimited'
+]);
 
 export const DORMANT_MARKERS = [
   'internal', 'staff', 'dogfood', 'nightly', 'alpha',
@@ -268,6 +278,19 @@ const DARK_UI_PATTERNS = [
   /["']?((?:Generate full application|Autonomous computer use|Deep research mode|Run full terminal commands autonomously|Connect external tools via MCP)[a-zA-Z0-9\s,\.'"-]{0,80})["']?/i,
 ];
 
+// 8. Search & Grounding Capabilities (web search, live browsing, grounding)
+const SEARCH_PATTERNS = [
+  /\b((?:enable_|use_|supports_)?[a-zA-Z0-9_]*(?:web_search|search_web|google_search|bing_search|live_search|search_grounding|grounding_search|tavily_search|brave_search|deep_research|web_retrieval)[a-zA-Z0-9_]*)\b/i,
+  /["']((?:googleSearch|webSearch|searchGrounding|web_search_tool))["']/i,
+];
+
+// 9. Plan & Subscription Entitlements (pro, plus, max, ultra, team, enterprise)
+const PLAN_PATTERNS = [
+  /(?:available_to|availableTo|required_plan|requiredPlan|min_plan|minPlan|subscription_tier|required_tier|plan_tier)\s*[:=]\s*["']([a-zA-Z0-9_\-\.\:\/]+)["']/i,
+  /\b((?:is_?|has_?)(?:pro|plus|max|ultra|enterprise|team|staff)_?(?:user|subscriber|access|entitled|tier)?)\b/i,
+  /["']?\b((?:Available|Unlock|Exclusive|Reserved)\s+(?:only\s+)?(?:to|for)\s+(?:pro|plus|max|ultra|team|enterprise|subscribers)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
+];
+
 /**
  * Scan a text/string line and match potential signals.
  * Returns array of { category, value, context, hasDormantMarker, dormantMarker }.
@@ -431,6 +454,46 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         context: text.slice(0, 200),
         hasDormantMarker: true,
         dormantMarker: 'dark_ui_copy',
+        activationStatus: ACTIVATION_STATUS.CONFIGURED,
+        filePath,
+        artifactClass,
+        status: 'accepted',
+        rejectionReason: null,
+      });
+    }
+  }
+
+  // 8. Search & Grounding Capabilities (web search, live browsing, grounding)
+  for (const pat of SEARCH_PATTERNS) {
+    const m = text.match(pat);
+    if (m && m[1]) {
+      const val = m[1].trim();
+      findings.push({
+        category: CATEGORIES.CAPABILITY,
+        value: val,
+        context: text.slice(0, 200),
+        hasDormantMarker: Boolean(matchedMarker),
+        dormantMarker: matchedMarker,
+        activationStatus: defaultActivation,
+        filePath,
+        artifactClass,
+        status: 'accepted',
+        rejectionReason: null,
+      });
+    }
+  }
+
+  // 9. Plan & Subscription Entitlements (pro, plus, max, ultra, team, enterprise)
+  for (const pat of PLAN_PATTERNS) {
+    const m = text.match(pat);
+    if (m && m[1]) {
+      const val = m[1].trim();
+      findings.push({
+        category: CATEGORIES.PLAN_ENTITLEMENT,
+        value: val,
+        context: text.slice(0, 200),
+        hasDormantMarker: Boolean(matchedMarker),
+        dormantMarker: matchedMarker,
         activationStatus: ACTIVATION_STATUS.CONFIGURED,
         filePath,
         artifactClass,

@@ -332,3 +332,59 @@ test('8. Report Bundle Preservation: 4-Tier leaks.txt and unknown_candidates.jso
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 });
+
+test('9. Reasoning Effort Levels, Subscription Plans & Web Search Capabilities', () => {
+  // A. Reasoning Effort Levels (xhigh, max, ultra, high, medium, low)
+  const effortCode = `
+    const REASONING_SLOTS = {
+      primary: {
+        id: "o3-mini-reasoning",
+        context_window: 128000,
+        max_tokens: 16000,
+        reasoning_effort: "xhigh",
+        supports_thinking: true
+      }
+    };
+  `;
+  const effortFindings = extractSignalsFromAst(effortCode, 'src/engine.js');
+  const o3Model = effortFindings.find((f) => f.value === 'o3-mini-reasoning');
+  assert.ok(o3Model, 'Model with reasoning_effort must be extracted');
+  assert.equal(o3Model.related.reasoningEffort, 'xhigh');
+
+  // B. Plan Entitlements (pro, plus, max, ultra, enterprise)
+  const planCode = `
+    const FEATURE_ENTITLEMENTS = {
+      deep_canvas: {
+        id: "feat_deep_canvas",
+        required_plan: "ultra",
+        enabled: true
+      }
+    };
+  `;
+  const planFindings = extractSignalsFromAst(planCode, 'src/entitlements.js');
+  const ultraPlan = planFindings.find((f) => f.category === CATEGORIES.PLAN_ENTITLEMENT);
+  assert.ok(ultraPlan, 'Required plan entitlement must be discovered');
+  assert.equal(ultraPlan.value, 'ultra');
+
+  // Text matching for plan availability announcements
+  const planTextMatches = matchSignalsInText('Available only to Pro and Max subscribers');
+  assert.ok(planTextMatches.some((f) => f.category === CATEGORIES.PLAN_ENTITLEMENT));
+
+  const planSubscriberCheck = matchSignalsInText('const isPro = is_pro_user && is_plus_subscriber;');
+  assert.ok(planSubscriberCheck.some((f) => f.category === CATEGORIES.PLAN_ENTITLEMENT && f.value.toLowerCase().includes('pro')));
+
+  // C. Web Search Capabilities
+  const searchCode = `
+    const TOOL_CONFIG = {
+      web_search: true,
+      grounding_search: { enabled: true }
+    };
+  `;
+  const searchFindings = extractSignalsFromAst(searchCode, 'src/tools.js');
+  const webSearch = searchFindings.find((f) => f.category === CATEGORIES.CAPABILITY && f.value === 'web_search');
+  assert.ok(webSearch, 'Web search capability in configuration must be discovered');
+
+  // Text matching for web search and search grounding
+  const searchMatches = matchSignalsInText('enable_google_search_grounding with live_web_retrieval');
+  assert.ok(searchMatches.some((f) => f.category === CATEGORIES.CAPABILITY));
+});

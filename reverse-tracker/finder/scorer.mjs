@@ -86,8 +86,9 @@ export function scoreFinding(finding, context = {}) {
       break;
     case CATEGORIES.ENV_VAR:
     case CATEGORIES.PLATFORM_ENTITLEMENT:
-      score += 10;
-      breakdown.push({ rule: 'Category: env var / config / entitlement', points: 10 });
+    case CATEGORIES.PLAN_ENTITLEMENT:
+      score += 12;
+      breakdown.push({ rule: 'Category: env var / plan / entitlement', points: 12 });
       break;
     case CATEGORIES.DEPENDENCY:
       score += 5;

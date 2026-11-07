@@ -523,7 +523,7 @@ export function extractSignalsFromAst(code, filePath = '') {
         }
       }
 
-      // B. AI Hyperparameter Configuration (detects models configured with context_window, max_tokens)
+      // B. AI Hyperparameter Configuration (detects models configured with context_window, max_tokens, reasoning_effort)
       let hyperparamCount = 0;
       for (const hp of AI_HYPERPARAMS) {
         if (propMap.has(hp)) hyperparamCount++;
@@ -534,13 +534,42 @@ export function extractSignalsFromAst(code, filePath = '') {
         if (idProp) {
           const mVal = foldBinaryExpression(idProp.value) || (idProp.value?.type === 'Literal' && typeof idProp.value.value === 'string' ? idProp.value.value : null);
           if (mVal && isValidModelIdentifier(mVal)) {
+            // Extract reasoning effort if configured
+            const effortProp = propMap.get('reasoning_effort') || propMap.get('thinking_effort') || propMap.get('effort_level') || propMap.get('effort');
+            const effortVal = effortProp ? (foldBinaryExpression(effortProp.value) || (effortProp.value?.type === 'Literal' ? effortProp.value.value : null)) : null;
+
             addFinding(CATEGORIES.MODEL_ID, mVal, idProp, 'ObjectHyperparameterConfig', {
               discoveryMethod: 'ast_hyperparam_object',
               activationStatus: ACTIVATION_STATUS.CONFIGURED,
-              related: { hyperparameters: Array.from(propMap.keys()).filter((k) => AI_HYPERPARAMS.has(k)) },
+              related: {
+                hyperparameters: Array.from(propMap.keys()).filter((k) => AI_HYPERPARAMS.has(k)),
+                reasoningEffort: effortVal,
+              },
             });
           }
         }
+      }
+
+      // C. Plan & Subscription Entitlements (e.g. { required_plan: "ultra", available_to: "pro" })
+      const planProp = propMap.get('required_plan') || propMap.get('requiredplan') || propMap.get('min_plan') || propMap.get('minplan') || propMap.get('available_to') || propMap.get('availableto') || propMap.get('subscription_tier') || propMap.get('plan_tier');
+      if (planProp) {
+        const planVal = foldBinaryExpression(planProp.value) || (planProp.value?.type === 'Literal' && typeof planProp.value.value === 'string' ? planProp.value.value : null);
+        if (planVal && typeof planVal === 'string') {
+          addFinding(CATEGORIES.PLAN_ENTITLEMENT, planVal, planProp, 'PlanEntitlementConfig', {
+            discoveryMethod: 'ast_plan_entitlement',
+            activationStatus: ACTIVATION_STATUS.CONFIGURED,
+          });
+        }
+      }
+
+      // D. Search & Grounding Capabilities (e.g. { web_search: true, search_grounding: ... })
+      const searchProp = propMap.get('web_search') || propMap.get('search_web') || propMap.get('google_search') || propMap.get('search_grounding') || propMap.get('grounding_search');
+      if (searchProp) {
+        const searchKey = (searchProp.key.name || searchProp.key.value || '').toString();
+        addFinding(CATEGORIES.CAPABILITY, searchKey, searchProp, 'SearchCapabilityConfig', {
+          discoveryMethod: 'ast_search_capability',
+          activationStatus: ACTIVATION_STATUS.CONFIGURED,
+        });
       }
 
       // C. Experiment & Feature Rollout Configuration

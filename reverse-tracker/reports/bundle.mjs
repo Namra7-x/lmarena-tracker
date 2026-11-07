@@ -57,7 +57,7 @@ export function generateReportBundle(outputDir, scanData) {
   // -------------------------------------------------------------
   const tierGroups = {
     'TIER 1: 🤖 UNANNOUNCED MODELS & CODENAMES': validLeaks.filter((f) => f.category === 'model_id'),
-    'TIER 2: 🚩 FEATURE GATES, EXPERIMENTS & ROLLOUTS': validLeaks.filter((f) => ['feature_flag', 'experiment', 'env_var'].includes(f.category)),
+    'TIER 2: 🚩 FEATURE GATES, EXPERIMENTS & ROLLOUTS': validLeaks.filter((f) => ['feature_flag', 'experiment', 'env_var', 'plan_entitlement', 'platform_entitlement'].includes(f.category)),
     'TIER 3: 🛠️ AGENT CAPABILITIES, MCP TOOLS & DARK UI': validLeaks.filter((f) => ['agent_mode', 'capability', 'hidden_command', 'ui_string'].includes(f.category)),
     'TIER 4: 🌐 INTERNAL ENDPOINTS & RPC ROUTES': validLeaks.filter((f) => ['endpoint_domain', 'internal_function'].includes(f.category)),
   };
