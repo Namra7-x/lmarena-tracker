@@ -19290,7 +19290,7 @@
       },
       "nvidia/GLM-5.3-Flash-FP4-Local": {
         "createdAt": "2026-10-08T16:19:57.000Z",
-        "lastModified": "2026-10-16T20:28:36.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -19311,7 +19311,7 @@
       },
       "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB": {
         "createdAt": "2026-10-07T17:50:42.000Z",
-        "lastModified": "2026-10-20T20:02:05.000Z",
+        "lastModified": "2026-11-07T10:54:51.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -22380,6 +22380,13 @@
         "lastModified": "2026-11-07T04:46:41.000Z",
         "gated": false,
         "pipeline_tag": "reinforcement-learning",
+        "numParameters": null
+      },
+      "nvidia/video-to-data-GR00T-N1.7-finetuned-tissue-box-lift": {
+        "createdAt": "2026-09-21T20:53:18.000Z",
+        "lastModified": "2026-11-07T04:46:41.000Z",
+        "gated": false,
+        "pipeline_tag": "robotics",
         "numParameters": null
       }
     },
