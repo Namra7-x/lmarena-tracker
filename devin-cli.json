@@ -1,19 +1,71 @@
 {
   "componentId": "devin-cli",
-  "version": "3000.12.17",
-  "releaseId": "devin-cli@3000.12.17",
+  "version": "3000.11.234",
+  "releaseId": "devin-cli@3000.11.234",
   "channel": "stable",
-  "identityFingerprint": "b918e08598de4985ee7d727a7029abe216b09f660de5a25b2bd5f10cc56834e5",
+  "identityFingerprint": "8d2a20c45b17eb71c8238715b48d13a1792bb98c29133fa7b79604b34e2627e5",
   "diagnosticFingerprint": null,
   "scanId": "DC-20261107-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-07T00:13:00.940Z",
+  "lastSuccessfulScan": "2026-11-07T00:15:07.503Z",
   "hotSignals": [],
   "recentSignals": [
     {
       "category": "agent_mode",
-      "value": "agent_idI9M",
-      "context": "agent_idI9M",
+      "value": "agent_idH9",
+      "context": "agent_idH9",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "filePath": "",
+      "artifactClass": "delta",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent/skill/MCP/plugin",
+          "points": 12
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_idH9",
+      "context": "agent_idH9\n",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "filePath": "",
+      "artifactClass": "delta",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent/skill/MCP/plugin",
+          "points": 12
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_idI9E",
+      "context": "agent_idI9E",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "filePath": "",
