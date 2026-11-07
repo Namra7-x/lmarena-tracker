@@ -6,6 +6,9 @@
 
 import path from 'node:path';
 import fs from 'node:fs';
+import os from 'node:os';
+import crypto from 'node:crypto';
+import { performance } from 'node:perf_hooks';
 import { FAMILIES, COMPONENTS, generateScanId } from './registry/components.mjs';
 import { discoverComponent } from './sources/index.mjs';
 import { classifyChange, CHANGE_TYPE } from './fingerprint/classifier.mjs';
@@ -15,6 +18,8 @@ import { downloadArtifact } from './acquisition/downloader.mjs';
 import { extractArtifact } from './extraction/dispatcher.mjs';
 import { extractStrings } from './extraction/strings.mjs';
 import { extractApplicationUrls } from './extraction/urls.mjs';
+import { extractSignalsFromAst } from './extraction/ast.mjs';
+import { extractGoMetadata, isGoBinary } from './extraction/go.mjs';
 import { matchSignalsInText } from './finder/rules.mjs';
 import { evaluateNoise, isHumanReadableString } from './finder/noise.mjs';
 import { detectPlatformAsymmetry } from './finder/asymmetry.mjs';
@@ -134,11 +139,20 @@ async function handleScan(componentId, options = {}) {
   if (!comp) throw new Error(`Unknown component ${componentId}`);
 
   console.log(`\n🚀 [Scan] Initiating deep scan for: ${comp.name} (${componentId})`);
+  const scanStartTime = performance.now();
   const baseline = loadComponentState(STATE_DIR, componentId) || {};
   const candidate = await discoverComponent(componentId);
   const scanId = generateScanId(componentId);
   const tg = new TelegramClient(null, null, comp.family, componentId);
   const topicId = tg.getTopicId(comp.family, componentId);
+
+  const analyzerStatus = {
+    acornAst: 'skipped',
+    goReSym: 'skipped',
+    sourceMap: 'skipped',
+    sevenZip: 'skipped',
+    multiEncodingScanner: 'completed',
+  };
 
   // Step 1: Update-First Rule - Send Immediate Alert BEFORE downloading
   let alertMessageId = null;
@@ -178,6 +192,8 @@ async function handleScan(componentId, options = {}) {
   const acquiredArtifacts = [];
   const allExtractedStrings = new Set();
   const allExtractedUrls = new Map();
+  const astFindings = [];
+  const goFindings = [];
   const macFindings = [];
   const winFindings = [];
 
@@ -188,7 +204,11 @@ async function handleScan(componentId, options = {}) {
       acquiredArtifacts.push(dl);
 
       console.log(`   Extracting artifacts for ${art.target}...`);
-      const { files } = extractArtifact(dl.buffer, art.format, art.target, art.url);
+      const { files, status: extractStatus } = extractArtifact(dl.buffer, art.format, art.target, art.url);
+
+      if (extractStatus?.analyzers?.sevenZip === 'completed') {
+        analyzerStatus.sevenZip = 'completed';
+      }
 
       for (const f of files) {
         // Application URL & endpoint scanner on all valid files
@@ -234,6 +254,97 @@ async function handleScan(componentId, options = {}) {
             }
           }
         }
+
+        // JavaScript AST Intelligence Engine (Acorn)
+        if (f.buffer && (f.path.endsWith('.js') || f.path.endsWith('.mjs') || f.path.endsWith('.cjs'))) {
+          try {
+            const jsCode = f.buffer.toString('utf8');
+            const extracted = extractSignalsFromAst(jsCode, f.path);
+            if (extracted && extracted.length > 0) {
+              analyzerStatus.acornAst = 'completed';
+              for (const ef of extracted) {
+                allExtractedStrings.add(ef.value);
+                if (ef.category === 'endpoint_domain' && !allExtractedUrls.has(ef.value)) {
+                  allExtractedUrls.set(ef.value, {
+                    url: ef.value,
+                    category: 'internal_api',
+                    confidence: 0.9,
+                    origin: 'ast',
+                  });
+                }
+                astFindings.push(ef);
+              }
+            } else if (analyzerStatus.acornAst === 'skipped') {
+              analyzerStatus.acornAst = 'completed';
+            }
+          } catch {
+            analyzerStatus.acornAst = 'failed';
+          }
+        }
+
+        // Source Map Presence Analyzer
+        if (f.path.endsWith('.map') || (f.buffer && f.buffer.includes('sourceMappingURL='))) {
+          analyzerStatus.sourceMap = 'completed';
+        }
+
+        // Go Binary Inspection (GoReSym)
+        if (f.buffer && isGoBinary(f.buffer)) {
+          try {
+            const tmpGoPath = path.join(os.tmpdir(), `temp-go-${Date.now()}-${path.basename(f.path) || 'bin'}`);
+            fs.writeFileSync(tmpGoPath, f.buffer);
+            try {
+              const goMeta = extractGoMetadata(tmpGoPath);
+              if (goMeta.status === 'completed') {
+                analyzerStatus.goReSym = 'completed';
+                if (Array.isArray(goMeta.strings)) {
+                  for (const s of goMeta.strings) {
+                    if (s && s.length >= 4 && s.length <= 1000) {
+                      allExtractedStrings.add(s);
+                    }
+                  }
+                }
+                if (Array.isArray(goMeta.userFunctions)) {
+                  for (const fn of goMeta.userFunctions) {
+                    const fnName = typeof fn === 'string' ? fn : (fn.Name || fn.name);
+                    if (fnName) {
+                      goFindings.push({
+                        category: 'go_function',
+                        value: fnName,
+                        filePath: f.path,
+                        origin: 'go_symbol',
+                        offset: { line: 0, column: 0 },
+                        context: `Go user function: ${fnName}`,
+                        status: 'accepted',
+                      });
+                    }
+                  }
+                }
+                if (Array.isArray(goMeta.types)) {
+                  for (const typ of goMeta.types) {
+                    const typeName = typeof typ === 'string' ? typ : (typ.Name || typ.name);
+                    if (typeName) {
+                      goFindings.push({
+                        category: 'go_type',
+                        value: typeName,
+                        filePath: f.path,
+                        origin: 'go_symbol',
+                        offset: { line: 0, column: 0 },
+                        context: `Go type: ${typeName}`,
+                        status: 'accepted',
+                      });
+                    }
+                  }
+                }
+              } else if (goMeta.status === 'failed') {
+                analyzerStatus.goReSym = 'failed';
+              }
+            } finally {
+              try { fs.unlinkSync(tmpGoPath); } catch {}
+            }
+          } catch {
+            analyzerStatus.goReSym = 'failed';
+          }
+        }
       }
     } catch (artErr) {
       console.error(`   ✗ Target ${art.target} acquisition error: ${artErr.message}`);
@@ -273,12 +384,24 @@ async function handleScan(componentId, options = {}) {
   }
   console.log(`   Application endpoints discovered: ${allExtractedUrls.size} (${newCleanUrls.length} new in this release)`);
 
-  // Step 4: Dynamic Heuristic Leak Detection on newCleanStrings
+  // Step 4: Dynamic Heuristic Leak Detection on newCleanStrings & AST / Go Findings
   const rawFindings = [];
   for (const str of newCleanStrings) {
     const matches = matchSignalsInText(str, '', 'delta');
     for (const m of matches) {
       rawFindings.push(m);
+    }
+  }
+
+  // Integrate AST and GoReSym findings (preserving file paths and source offsets)
+  for (const af of astFindings) {
+    if (!historicalSeenHashes.has(af.value)) {
+      rawFindings.push(af);
+    }
+  }
+  for (const gf of goFindings) {
+    if (!historicalSeenHashes.has(gf.value)) {
+      rawFindings.push(gf);
     }
   }
 
@@ -344,52 +467,79 @@ async function handleScan(componentId, options = {}) {
 
   console.log(`\n📊 Count Check Result:\n${reportBundle.countCheck.text}`);
 
+  // Alert Deduplication Key: SHA256(componentId:version:artifactSha256:findingsDigest)
+  const artifactSha256 = crypto
+    .createHash('sha256')
+    .update(acquiredArtifacts.map((a) => a.hash || a.url || '').sort().join(','))
+    .digest('hex');
+
+  const findingsDigest = crypto
+    .createHash('sha256')
+    .update(sortedScored.map((f) => `${f.category}:${f.value}`).sort().join(';'))
+    .digest('hex');
+
+  const alertDeduplicationKey = crypto
+    .createHash('sha256')
+    .update(`${componentId}:${candidate.version}:${artifactSha256}:${findingsDigest}`)
+    .digest('hex');
+
+  const isDuplicateAlert = Boolean(baseline.lastAlertDigest && baseline.lastAlertDigest === alertDeduplicationKey);
+
+  // Benchmark Execution Time & Memory
+  const executionTimeMs = Math.round(performance.now() - scanStartTime);
+  const peakMemoryMb = Math.round(process.memoryUsage().heapUsed / 1024 / 1024);
+  console.log(`⏱️ Scan completed in ${executionTimeMs}ms (Heap: ${peakMemoryMb}MB, Analyzers: AST=${analyzerStatus.acornAst}, Go=${analyzerStatus.goReSym})`);
+
   // Step 9: Send Telegram Completion Message with Attached Files
-  const completionText = formatCompletionMessage({
-    componentName: comp.name,
-    family: comp.family,
-    oldVersion: baseline.version || 'none',
-    newVersion: candidate.version,
-    scanId,
-    counts: {
-      commands: sortedScored.filter((f) => f.category === 'hidden_command').length,
-      flags: sortedScored.filter((f) => f.category === 'feature_flag').length,
-      configs: sortedScored.filter((f) => f.category === 'env_var').length,
-      endpoints: sortedScored.filter((f) => f.category === 'endpoint_domain').length,
-    },
-    majorSignals,
-    highSignals,
-    moreFindings,
-    leakCount: reportBundle.leaksCount,
-    newStringsCount: newCleanStrings.length,
-    urlsCount: allExtractedUrls.size,
-    newUrls: newCleanUrls,
-    countCheckText: reportBundle.countCheck.text,
-  });
+  if (isDuplicateAlert) {
+    console.log(`ℹ️ Duplicate alert digest ${alertDeduplicationKey.slice(0, 12)} already sent. Skipping Telegram completion message.`);
+  } else {
+    const completionText = formatCompletionMessage({
+      componentName: comp.name,
+      family: comp.family,
+      oldVersion: baseline.version || 'none',
+      newVersion: candidate.version,
+      scanId,
+      counts: {
+        commands: sortedScored.filter((f) => f.category === 'hidden_command').length,
+        flags: sortedScored.filter((f) => f.category === 'feature_flag').length,
+        configs: sortedScored.filter((f) => f.category === 'env_var').length,
+        endpoints: sortedScored.filter((f) => f.category === 'endpoint_domain').length,
+      },
+      majorSignals,
+      highSignals,
+      moreFindings,
+      leakCount: reportBundle.leaksCount,
+      newStringsCount: newCleanStrings.length,
+      urlsCount: allExtractedUrls.size,
+      newUrls: newCleanUrls,
+      countCheckText: reportBundle.countCheck.text,
+    });
 
-  try {
-    if (alertMessageId) {
-      await tg.sendMessage(completionText, { replyToMessageId: alertMessageId, topicId });
-    } else {
-      await tg.sendMessage(completionText, { topicId });
-    }
-  } catch (tgErr) {
-    console.warn(`Could not send completion message: ${tgErr.message}`);
-  }
-
-  // Upload the 3 clean report files (leaks.txt, diff.txt, strings.txt)
-  for (const file of reportBundle.telegramFiles) {
     try {
-      console.log(`   Uploading ${path.basename(file)} to Telegram...`);
-      await tg.sendDocument(file, `Scan ${scanId} - ${path.basename(file)}`, { topicId });
-      await new Promise((r) => setTimeout(r, 500));
-    } catch (docErr) {
-      console.warn(`Could not upload ${path.basename(file)} to Telegram: ${docErr.message}`);
+      if (alertMessageId) {
+        await tg.sendMessage(completionText, { replyToMessageId: alertMessageId, topicId });
+      } else {
+        await tg.sendMessage(completionText, { topicId });
+      }
+    } catch (tgErr) {
+      console.warn(`Could not send completion message: ${tgErr.message}`);
+    }
+
+    // Upload the 3 clean report files (leaks.txt, diff.txt, strings.txt)
+    for (const file of reportBundle.telegramFiles) {
+      try {
+        console.log(`   Uploading ${path.basename(file)} to Telegram...`);
+        await tg.sendDocument(file, `Scan ${scanId} - ${path.basename(file)}`, { topicId });
+        await new Promise((r) => setTimeout(r, 500));
+      } catch (docErr) {
+        console.warn(`Could not upload ${path.basename(file)} to Telegram: ${docErr.message}`);
+      }
     }
   }
 
-  // Step 10: Compact State Persistence
-  if (coverageState !== 'FAILED') {
+  // Step 10: State Integrity — Advance baseline ONLY when coverageState === 'COMPLETE'
+  if (coverageState === 'COMPLETE') {
     const identityFingerprint = candidate.identityFingerprint || computeIdentityFingerprint(candidate);
     const updatedSeenHashes = Array.from(
       new Set([...historicalSeenHashes, ...newCleanStrings])
@@ -407,27 +557,29 @@ async function handleScan(componentId, options = {}) {
       identityFingerprint,
       scanId,
       coverageState,
+      analyzerStatus,
+      lastAlertDigest: alertDeduplicationKey,
+      benchmark: { executionTimeMs, peakMemoryMb },
       hotSignals: majorSignals.slice(0, 100),
       recentSignals: sortedScored.slice(0, 2000),
       historicalSeenHashes: updatedSeenHashes,
       historicalSeenUrls: updatedSeenUrls,
     });
-    console.log(`✅ Deep scan complete for ${componentId} (${scanId}). State updated (${coverageState}).`);
+    console.log(`✅ Deep scan complete for ${componentId} (${scanId}). Baseline advanced (${coverageState}).`);
   } else {
-    console.warn(`⚠️ Scan for ${componentId} FAILED required coverage. Updating baseline state with alerted version to prevent spam loop.`);
+    console.warn(`⚠️ Scan for ${componentId} achieved ${coverageState} coverage (${coveragePercentage}%). Preserving previous baseline version (${baseline.version || 'none'}).`);
     saveComponentState(STATE_DIR, componentId, {
       ...baseline,
-      version: candidate.version,
       alertedVersion: candidate.version,
-      releaseId: candidate.releaseId,
-      channel: candidate.channel || baseline.channel,
       scanId,
-      coverageState: 'FAILED',
+      coverageState,
+      analyzerStatus,
       lastFailureTime: new Date().toISOString(),
+      benchmark: { executionTimeMs, peakMemoryMb },
     });
   }
 
-  return { scanId, candidate, diffResults, reportBundle, coverageState };
+  return { scanId, candidate, diffResults, reportBundle, coverageState, analyzerStatus, executionTimeMs };
 }
 
 // CLI Command Parser

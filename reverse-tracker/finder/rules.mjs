@@ -117,6 +117,44 @@ export function isValidModelIdentifier(val) {
   return true;
 }
 
+/**
+ * Validates whether a candidate string is a plausible feature flag name.
+ */
+export function isValidFeatureFlag(val) {
+  if (!val || typeof val !== 'string') return false;
+  const str = val.trim();
+  const len = str.length;
+  if (len < 4 || len > 100) return false;
+  if (!/^[a-zA-Z_]/.test(str)) return false;
+  if (!/^[a-zA-Z0-9_\-\.]+$/.test(str)) return false;
+  const lower = str.toLowerCase();
+  if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
+  return true;
+}
+
+/**
+ * Validates whether a candidate string is an agent capability, tool schema, or MCP identifier.
+ */
+export function isValidAgentTool(val) {
+  if (!val || typeof val !== 'string') return false;
+  const str = val.trim();
+  if (str.length < 4 || str.length > 80) return false;
+  if (!/^[a-zA-Z_]/.test(str)) return false;
+  return /^(?:mcp__|mcp_|agent_|subagent_|connector_|tool_|computer_control|browser_use|terminal_exec|voice_canvas|canvas_reasoning|deep_research)/i.test(str);
+}
+
+/**
+ * Validates whether a candidate string is a plausible Go symbol, package path, or type identifier.
+ */
+export function isValidGoSymbol(val) {
+  if (!val || typeof val !== 'string') return false;
+  const str = val.trim();
+  if (str.length < 3 || str.length > 250) return false;
+  if (!/^[a-zA-Z0-9_\.\/\*\[\]\(\)\-\:]+$/.test(str)) return false;
+  if (/[\x00-\x1F\x7F-\x9F\uFFFD]/.test(str)) return false;
+  return true;
+}
+
 // 1. Dynamic Models & AI Engines (Zero Hardcoded Model Names)
 const MODEL_PATTERNS = [
   // A. Structural Model Slots in Code & Config (captures ANY model assigned to a property)
@@ -256,7 +294,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     const m = text.match(pat);
     if (m && m[1]) {
       const val = m[1].trim();
-      if (val.length >= 5) {
+      if (isValidFeatureFlag(val)) {
         findings.push({
           category: CATEGORIES.FEATURE_FLAG,
           value: val,
@@ -265,6 +303,8 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
           dormantMarker: matchedMarker,
           filePath,
           artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
         });
       }
     }
@@ -282,6 +322,8 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         dormantMarker: matchedMarker || 'hidden_command',
         filePath,
         artifactClass,
+        status: 'accepted',
+        rejectionReason: null,
       });
     }
   }
@@ -298,6 +340,8 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         dormantMarker: matchedMarker,
         filePath,
         artifactClass,
+        status: 'accepted',
+        rejectionReason: null,
       });
     }
   }
@@ -306,15 +350,20 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
   for (const pat of AGENT_PATTERNS) {
     const m = text.match(pat);
     if (m && m[1]) {
-      findings.push({
-        category: CATEGORIES.AGENT_MODE,
-        value: m[1].trim(),
-        context: text.slice(0, 200),
-        hasDormantMarker: Boolean(matchedMarker),
-        dormantMarker: matchedMarker,
-        filePath,
-        artifactClass,
-      });
+      const val = m[1].trim();
+      if (isValidAgentTool(val)) {
+        findings.push({
+          category: CATEGORIES.AGENT_MODE,
+          value: val,
+          context: text.slice(0, 200),
+          hasDormantMarker: Boolean(matchedMarker),
+          dormantMarker: matchedMarker,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
     }
   }
 

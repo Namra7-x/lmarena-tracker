@@ -36,10 +36,16 @@ export function computeExactDiff(previousFindings = [], candidateFindings = [], 
   const reintroducedFindings = [];
   const persistentFindings = [];
   const removedFindings = [];
+  const changedFindings = [];
 
   for (const [hash, finding] of candMap.entries()) {
     if (prevMap.has(hash)) {
-      persistentFindings.push({ ...finding, diffStatus: 'persistent' });
+      const prev = prevMap.get(hash);
+      if (prev.context !== finding.context || prev.filePath !== finding.filePath) {
+        changedFindings.push({ ...finding, diffStatus: 'changed', previousContext: prev.context });
+      } else {
+        persistentFindings.push({ ...finding, diffStatus: 'persistent' });
+      }
     } else {
       if (
         historicalSeenHashes.has(hash) ||
@@ -61,12 +67,16 @@ export function computeExactDiff(previousFindings = [], candidateFindings = [], 
 
   return {
     newFindings,
+    addedFindings: newFindings,
+    changedFindings,
     reintroducedFindings,
     persistentFindings,
     removedFindings,
     counts: {
       totalCandidate: candidateFindings.length,
       newCount: newFindings.length,
+      addedCount: newFindings.length,
+      changedCount: changedFindings.length,
       reintroducedCount: reintroducedFindings.length,
       persistentCount: persistentFindings.length,
       removedCount: removedFindings.length,
