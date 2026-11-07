@@ -58,6 +58,22 @@ async function handleDetect(familyId) {
       const candidate = await discoverComponent(compId);
       const classification = classifyChange(baseline, candidate);
 
+      // One-time pipeline test: if this component has not yet sent its test alert for this version
+      const needsOneTimeTest = (!baseline?.lastTestAlertVersion || baseline.lastTestAlertVersion !== candidate.version) && process.env.SKIP_TEST_RUN !== 'true';
+
+      if (needsOneTimeTest) {
+        console.log(`  🧪 ${compId}: One-time pipeline test pending for version ${candidate.version}. Queuing for test scan.`);
+        changes.push({
+          componentId: compId,
+          family: COMPONENTS[compId].family,
+          candidate,
+          baseline,
+          classification: { changeType: 'ONE_TIME_TEST', reason: 'One-time pipeline test scan' },
+          isTestRun: true,
+        });
+        continue;
+      }
+
       if (classification.changeType === CHANGE_TYPE.NO_CHANGE || classification.changeType === CHANGE_TYPE.DIAGNOSTIC_DRIFT) {
         console.log(`  ✓ ${compId}: Unchanged (${candidate.version})`);
       } else if (baseline?.alertedVersion === candidate.version) {
@@ -669,7 +685,7 @@ async function main() {
     const changes = await handleDetect(familyArg);
     for (const change of changes) {
       try {
-        await handleScan(change.componentId);
+        await handleScan(change.componentId, { isTestRun: change.isTestRun, force: Boolean(change.isTestRun) });
       } catch (scanErr) {
         console.error(`✗ Error processing ${change.componentId}: ${scanErr.message}`);
       }
