@@ -1,14 +1,32 @@
 {
   "componentId": "cursor-cli",
   "version": "latest",
+  "alertedVersion": "latest",
   "releaseId": "cursor-cli@latest",
   "channel": "stable",
   "identityFingerprint": "581ba40c6c4e164958190334b3e4f6d89e1a2c0879be2fcf8f86912f954b32fc",
   "diagnosticFingerprint": null,
-  "scanId": "INIT-CURSOR",
-  "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-05T11:42:07.553Z",
+  "scanId": "CL-20261107-001",
+  "coverageState": "FAILED",
+  "lastFailureTime": "2026-11-07T14:49:16.607Z",
+  "lastAlertDigest": null,
+  "lastTestAlertVersion": "latest",
+  "analyzerStatus": {
+    "acornAst": "skipped",
+    "goReSym": "skipped",
+    "sourceMap": "skipped",
+    "sevenZip": "skipped",
+    "asar": "skipped",
+    "tar": "skipped",
+    "zip": "skipped",
+    "multiEncodingScanner": "completed"
+  },
+  "benchmark": {
+    "executionTimeMs": 1092,
+    "peakMemoryMb": 11
+  },
   "hotSignals": [],
   "recentSignals": [],
-  "historicalSeenHashes": []
+  "historicalSeenHashes": [],
+  "historicalSeenUrls": []
 }
