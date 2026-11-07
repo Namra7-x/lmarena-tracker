@@ -282,6 +282,8 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
               dormantMarker: matchedMarker,
               filePath,
               artifactClass,
+              status: 'accepted',
+              rejectionReason: null,
             });
           }
         }
@@ -379,6 +381,8 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         dormantMarker: matchedMarker,
         filePath,
         artifactClass,
+        status: 'accepted',
+        rejectionReason: null,
       });
     }
   }
@@ -395,6 +399,8 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         dormantMarker: 'dark_ui_copy',
         filePath,
         artifactClass,
+        status: 'accepted',
+        rejectionReason: null,
       });
     }
   }

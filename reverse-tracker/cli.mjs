@@ -414,7 +414,24 @@ async function handleScan(componentId, options = {}) {
   const highSignals = sortedScored.filter((f) => f.tier === 'HIGH-CONFIDENCE SIGNAL');
   const moreFindings = sortedScored.filter((f) => f.tier === 'EARLY SIGNAL');
 
-  // Step 8: Generate Report Bundle (leaks.txt, diff.txt, strings.txt)
+  // Step 8: Empirical Benchmark & Generate Report Bundle
+  const executionTimeMs = Math.round(performance.now() - scanStartTime);
+  const heapUsage = process.memoryUsage();
+  const peakMemoryMb = Math.round(heapUsage.heapUsed / 1024 / 1024);
+  const rssMemoryMb = Math.round(heapUsage.rss / 1024 / 1024);
+  const totalExtractedBytes = acquiredArtifacts.reduce((acc, a) => acc + (a.buffer ? a.buffer.length : 0), 0);
+
+  const benchmark = {
+    executionTimeMs,
+    peakMemoryMb,
+    rssMemoryMb,
+    totalExtractedBytes,
+    totalExtractedStrings,
+    newCleanStringsCount: newCleanStrings.length,
+    endpointsCount: allExtractedUrls.size,
+    timestamp: new Date().toISOString(),
+  };
+
   const coveragePercentage = candidate.artifacts.length > 0
     ? Math.round((acquiredArtifacts.length / candidate.artifacts.length) * 100)
     : 100;
@@ -448,9 +465,11 @@ async function handleScan(componentId, options = {}) {
     },
     totalExtractedStrings,
     artifactInventory: acquiredArtifacts,
+    benchmark,
   });
 
   console.log(`\n📊 Count Check Result:\n${reportBundle.countCheck.text}`);
+  console.log(`⏱️ Empirical Benchmark: ${executionTimeMs}ms latency | ${peakMemoryMb}MB heap (${rssMemoryMb}MB RSS) | ${(totalExtractedBytes / (1024 * 1024)).toFixed(2)}MB analyzed | AST: ${analyzerStatus.acornAst}, Go: ${analyzerStatus.goReSym}`);
 
   // Alert Deduplication Key: SHA256(componentId:version:artifactSha256:findingsDigest)
   const artifactSha256 = crypto
@@ -469,11 +488,6 @@ async function handleScan(componentId, options = {}) {
     .digest('hex');
 
   const isDuplicateAlert = Boolean(baseline.lastAlertDigest && baseline.lastAlertDigest === alertDeduplicationKey);
-
-  // Benchmark Execution Time & Memory
-  const executionTimeMs = Math.round(performance.now() - scanStartTime);
-  const peakMemoryMb = Math.round(process.memoryUsage().heapUsed / 1024 / 1024);
-  console.log(`⏱️ Scan completed in ${executionTimeMs}ms (Heap: ${peakMemoryMb}MB, Analyzers: AST=${analyzerStatus.acornAst}, Go=${analyzerStatus.goReSym})`);
 
   // Step 9: Send Telegram Completion Message with Attached Files
   if (isDuplicateAlert) {

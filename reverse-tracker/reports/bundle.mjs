@@ -135,6 +135,22 @@ export function generateReportBundle(outputDir, scanData) {
     diffContent += `  • ${cat}: ${list.length}\n`;
   }
 
+  if (diffResults.byCategory && Object.keys(diffResults.byCategory).length > 0) {
+    diffContent += `\n🔬 STRUCTURAL SIGNAL CATEGORIES BREAKDOWN:\n`;
+    for (const [cat, stats] of Object.entries(diffResults.byCategory)) {
+      diffContent += `  • ${cat}: +${stats.added} added, *${stats.changed} changed, -${stats.removed} removed\n`;
+    }
+  }
+
+  if (scanData.benchmark) {
+    diffContent += `\n⏱️ EMPIRICAL RUNTIME BENCHMARK:\n`;
+    diffContent += `  • Execution Latency:  ${scanData.benchmark.executionTimeMs || 0} ms\n`;
+    diffContent += `  • Peak Memory (Heap): ${scanData.benchmark.peakMemoryMb || 0} MB\n`;
+    if (scanData.benchmark.totalExtractedBytes) {
+      diffContent += `  • Bytes Analyzed:     ${(scanData.benchmark.totalExtractedBytes / (1024 * 1024)).toFixed(2)} MB\n`;
+    }
+  }
+
   const diffFilePath = path.join(outputDir, 'diff.txt');
   fs.writeFileSync(diffFilePath, diffContent, 'utf8');
 
