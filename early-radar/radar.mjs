@@ -21,6 +21,7 @@ import { fetchLatestSdkCommit, fetchCommitModelDiff } from './sources/sdk_commit
 import { analyzeChunkContent, writeBuildReport } from './analyzer.mjs';
 import {
   buildArtificialAnalysisEmbed,
+  buildArtificialAnalysisBenchmarkEmbed,
   buildChatGPTBuildEmbed,
   buildClaudeBuildEmbed,
   buildSdkCommitEmbed,
@@ -95,6 +96,7 @@ export async function runRadar(options = {}) {
     console.log(`[RADAR] No baseline snapshot found. Initializing calibration...`);
     snapshot = {
       aa_known_slugs: [],
+      aa_known_benchmarks: [],
       chatgpt_manifest_hash: null,
       chatgpt_known_hashes: [],
       claude_entry_hash: null,
@@ -106,6 +108,8 @@ export async function runRadar(options = {}) {
   }
 
   const knownAASlugs = new Set(snapshot.aa_known_slugs || []);
+  const knownAABenchmarks = new Set(snapshot.aa_known_benchmarks || []);
+  const isBenchmarkCalibrated = Array.isArray(snapshot.aa_known_benchmarks) && snapshot.aa_known_benchmarks.length > 0;
   const allEvents = [];
   const embedsToSend = [];
   let snapshotUpdated = false;
@@ -121,28 +125,49 @@ export async function runRadar(options = {}) {
 
   // 1. Process Artificial Analysis
   if (aaRes.status === 'fulfilled' && aaRes.value) {
-    const { models } = aaRes.value;
-    console.log(`[AA] Fetched ${models.size} models from Artificial Analysis.`);
+    const { models, benchmarks } = aaRes.value;
+    console.log(`[AA] Fetched ${models.size} models and ${benchmarks?.size || 0} benchmarks from Artificial Analysis.`);
 
     if (isForceAlert) {
-      // Pick real live flagship models from the live 1,031 model index
+      // Pick real live flagship models from the live model index
       const flagshipModels = [
-        models.get('claude-opus-5-5'),
-        models.get('gpt-6-astra'),
+        models.get('gemini-4-carbon') || models.get('claude-opus-5-5') || models.get('gpt-6-astra'),
       ].filter(Boolean);
 
-      if (flagshipModels.length === 0) {
+      if (flagshipModels.length === 0 && models.size > 0) {
         flagshipModels.push(models.values().next().value);
       }
 
       for (const m of flagshipModels) {
-        console.log(`[AA] 🚀 FORCE_ALERT: Generating live alert for ${m.name}...`);
+        console.log(`[AA] 🚀 FORCE_ALERT: Generating live alert for model ${m.name}...`);
         allEvents.push({ type: 'AA_NEW_MODEL', model: m });
         embedsToSend.push(buildArtificialAnalysisEmbed(m));
       }
+
+      // Also pick a live benchmark to demonstrate benchmark alert
+      if (benchmarks && benchmarks.size > 0) {
+        const sampleBenchmark = benchmarks.get('artificial-analysis-intelligence-index') || benchmarks.values().next().value;
+        if (sampleBenchmark) {
+          console.log(`[AA] 🚀 FORCE_ALERT: Generating live alert for benchmark ${sampleBenchmark.name}...`);
+          allEvents.push({ type: 'AA_NEW_BENCHMARK', benchmark: sampleBenchmark });
+          embedsToSend.push(buildArtificialAnalysisBenchmarkEmbed(sampleBenchmark));
+        }
+      }
     } else if (isFirstRun) {
       snapshot.aa_known_slugs = Array.from(models.keys());
+      snapshot.aa_known_benchmarks = Array.from(benchmarks ? benchmarks.keys() : []);
     } else {
+      // Calibrate benchmarks baseline if previously uncalibrated (prevents alert spam)
+      if (!isBenchmarkCalibrated && benchmarks && benchmarks.size > 0) {
+        console.log(`[AA] Calibrating benchmark baseline (${benchmarks.size} existing benchmarks)...`);
+        snapshot.aa_known_benchmarks = Array.from(benchmarks.keys());
+        // Clean out benchmark slugs from aa_known_slugs
+        const bSlugs = new Set(benchmarks.keys());
+        snapshot.aa_known_slugs = (snapshot.aa_known_slugs || []).filter((s) => !bSlugs.has(s));
+        snapshotUpdated = true;
+      }
+
+      // Check for new models
       const newModels = [];
       for (const [slug, model] of models) {
         if (!knownAASlugs.has(slug)) {
@@ -158,6 +183,28 @@ export async function runRadar(options = {}) {
           embedsToSend.push(buildArtificialAnalysisEmbed(m));
         }
         snapshot.aa_known_slugs = Array.from(knownAASlugs);
+        snapshotUpdated = true;
+      }
+
+      // Check for new benchmarks
+      if (isBenchmarkCalibrated && benchmarks && benchmarks.size > 0) {
+        const newBenchmarks = [];
+        for (const [slug, b] of benchmarks) {
+          if (!knownAABenchmarks.has(slug)) {
+            newBenchmarks.push(b);
+            knownAABenchmarks.add(slug);
+          }
+        }
+
+        if (newBenchmarks.length > 0) {
+          console.log(`[AA] 📊 Detected ${newBenchmarks.length} NEW benchmark(s) indexed!`);
+          for (const b of newBenchmarks) {
+            allEvents.push({ type: 'AA_NEW_BENCHMARK', benchmark: b });
+            embedsToSend.push(buildArtificialAnalysisBenchmarkEmbed(b));
+          }
+          snapshot.aa_known_benchmarks = Array.from(knownAABenchmarks);
+          snapshotUpdated = true;
+        }
       }
     }
   } else {

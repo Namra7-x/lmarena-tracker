@@ -9,6 +9,7 @@ import { RADAR_CONFIG } from './config.mjs';
  * Builds a Discord embed for an Artificial Analysis new model release with a formatted JSON block.
  */
 export function buildArtificialAnalysisEmbed(model) {
+  const modelUrl = model.url || `https://artificialanalysis.ai/models/${model.releaseSlug || model.slug}`;
   const fields = [
     { name: 'Model Name', value: model.name, inline: true },
     { name: 'Slug Identifier', value: `\`${model.slug}\``, inline: true },
@@ -30,6 +31,7 @@ export function buildArtificialAnalysisEmbed(model) {
     speed: model.outputSpeed ? `${model.outputSpeed} tok/s` : undefined,
     releaseDate: model.releaseDate || undefined,
     weightsUrl: model.weightsUrl || undefined,
+    url: modelUrl,
   };
 
   const jsonStr = JSON.stringify(rawSpecs, null, 2);
@@ -41,17 +43,59 @@ export function buildArtificialAnalysisEmbed(model) {
 
   fields.push({
     name: '🔗 Quick Links',
-    value: `• [View Model Card on Artificial Analysis](${model.url})\n• [View Master Model Index](https://artificialanalysis.ai/models)`,
+    value: `• [View Model Card on Artificial Analysis](${modelUrl})\n• [View Master Model Index](https://artificialanalysis.ai/models)`,
     inline: false,
   });
 
   return {
     title: `⚡ Artificial Analysis | New Model Indexed`,
-    url: model.url,
-    description: `**[${model.name}](${model.url})** has been added to the master index!`,
+    url: modelUrl,
+    description: `**[${model.name}](${modelUrl})** has been added to the master index!`,
     color: RADAR_CONFIG.colors.artificialAnalysis,
     fields,
     footer: { text: 'Artificial Analysis Radar • Zero-Spam Tracker' },
+    timestamp: new Date().toISOString(),
+  };
+}
+
+/**
+ * Builds a Discord embed for an Artificial Analysis new benchmark / evaluation.
+ */
+export function buildArtificialAnalysisBenchmarkEmbed(benchmark) {
+  const benchmarkUrl = benchmark.url || `https://artificialanalysis.ai/evaluations/${benchmark.slug}`;
+  const fields = [
+    { name: 'Benchmark Name', value: benchmark.name, inline: true },
+    { name: 'Slug Identifier', value: `\`${benchmark.slug}\``, inline: true },
+    { name: 'Category', value: 'Evaluation / Benchmark', inline: true },
+  ];
+
+  const rawSpecs = benchmark.rawJson || {
+    name: benchmark.name,
+    slug: benchmark.slug,
+    category: 'Evaluation Benchmark',
+    url: benchmarkUrl,
+  };
+
+  const jsonStr = JSON.stringify(rawSpecs, null, 2);
+  fields.push({
+    name: '📊 Benchmark Specs (Raw JSON Block)',
+    value: `\`\`\`json\n${jsonStr.slice(0, 950)}\n\`\`\``,
+    inline: false,
+  });
+
+  fields.push({
+    name: '🔗 Quick Links',
+    value: `• [View Benchmark on Artificial Analysis](${benchmarkUrl})\n• [View All Evaluations](https://artificialanalysis.ai/evaluations)`,
+    inline: false,
+  });
+
+  return {
+    title: `📊 Artificial Analysis | New Benchmark Indexed`,
+    url: benchmarkUrl,
+    description: `**[${benchmark.name}](${benchmarkUrl})** has been added to Artificial Analysis evaluations!`,
+    color: RADAR_CONFIG.colors.artificialAnalysis,
+    fields,
+    footer: { text: 'Artificial Analysis Radar • Benchmark Canary' },
     timestamp: new Date().toISOString(),
   };
 }
@@ -246,7 +290,7 @@ export function buildSdkCommitEmbed(event) {
  */
 export function buildRadarShowcaseEmbeds() {
   return [
-    // 1. Artificial Analysis with JSON Block
+    // 1. Artificial Analysis Model with JSON Block
     buildArtificialAnalysisEmbed({
       name: 'GPT-6 Astra (Max)',
       slug: 'gpt-6-astra',
@@ -270,6 +314,19 @@ export function buildRadarShowcaseEmbeds() {
         outputSpeed: '142 tok/s',
         releaseDate: '2026-09-18',
         license: 'Proprietary',
+      },
+    }),
+
+    // 2. Artificial Analysis Benchmark with JSON Block
+    buildArtificialAnalysisBenchmarkEmbed({
+      name: 'Artificial Analysis Intelligence Index v5.0',
+      slug: 'artificial-analysis-intelligence-index',
+      url: 'https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index',
+      rawJson: {
+        name: 'Artificial Analysis Intelligence Index v5.0',
+        slug: 'artificial-analysis-intelligence-index',
+        category: 'Evaluation Benchmark',
+        url: 'https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index',
       },
     }),
 
