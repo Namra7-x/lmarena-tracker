@@ -1,6 +1,7 @@
 {
   "componentId": "claude-desktop",
   "version": "build-4e1a4dd989dbc487",
+  "alertedVersion": "build-4e1a4dd989dbc487",
   "releaseId": "claude-desktop-build-4e1a4dd989dbc487",
   "channel": "stable",
   "identityFingerprint": "080e77f0b48ad22cac774df9cb427eb0515e4a8a56299afac0a1e0f0442cc408",
@@ -8,6 +9,11 @@
   "scanId": "CA-20261106-001",
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-06T16:31:46.944Z",
+  "lastFailureTime": null,
+  "lastAlertDigest": null,
+  "lastTestAlertVersion": "build-4e1a4dd989dbc487",
+  "analyzerStatus": null,
+  "benchmark": null,
   "hotSignals": [],
   "recentSignals": [],
   "historicalSeenHashes": [
@@ -6351,5 +6357,6 @@
     "V(M9",
     "L$QD",
     "txH9"
-  ]
+  ],
+  "historicalSeenUrls": []
 }
