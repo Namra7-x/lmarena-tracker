@@ -21,15 +21,34 @@ export const DORMANT_MARKERS = [
   'dark_launch', 'confidential', 'nda',
 ];
 
+const CSS_CURSOR_VALUES = new Set([
+  'cursor-default', 'cursor-pointer', 'cursor-not-allowed', 'cursor-wait',
+  'cursor-text', 'cursor-move', 'cursor-help', 'cursor-none', 'cursor-progress',
+  'cursor-cell', 'cursor-crosshair', 'cursor-copy', 'cursor-alias',
+  'cursor-col-resize', 'cursor-row-resize', 'cursor-grab', 'cursor-grabbing',
+  'cursor-auto'
+]);
+
 // 1. Dynamic Models & AI Engines
 const MODEL_PATTERNS = [
+  // Claude models: versioned (claude-3, claude-4) and codenames (claude-donut-eap, claude-onigiri-e, claude-fable-5-1, claude-mythos-5-1)
+  /\b(claude-[a-z0-9]+(?:-[a-z0-9._-]+)*)\b/i,
+  // Silicon models (Devin custom model family: silicon-low, silicon-medium, silicon-high, silicon-xhigh, silicon-max)
+  /\b(silicon-(?:ultra-)?(?:low|medium|high|xhigh|max|mini|pro|fast|[a-z0-9_-]+))\b/i,
+  // Obsidian models (obsidian-3-low, obsidian-3-medium, obsidian-3-high, obsidian-3-max)
+  /\b(obsidian-(?:[0-9]+-)?(?:low|medium|high|xhigh|max|mini|pro|[a-z0-9_-]+))\b/i,
+  // SWE-bench / agent models (swe-1-6-fast, swe-1.7, swe-2-low, swe-2-high, swe-2-max)
+  /\b(swe-(?:[0-9]+(?:[.-][0-9]+)*-)?(?:low|medium|high|max|fast|bench|[a-z0-9_-]+))\b/i,
+  // Unreleased lab codenames (cactus, kraken, hyperion, penguin, pigeon, chimera, titan, phoenix, orion, hermes)
+  /\b((?:cactus|kraken|hyperion|penguin|pigeon|chimera|titan|phoenix|orion|hermes)-[a-z0-9_-]+)\b/i,
+  // OpenAI GPT & reasoning series (gpt-4, gpt-4.5, gpt-5, o1, o2, o3, o4)
   /\b(gpt-[4-9](?:\.[0-9]+)?(?:-[a-z0-9_-]+)?)\b/i,
-  /\b(o[2-9](?:-mini|-max|-preview|-thinking|-pro)?)\b/i,
-  /\b(claude-[3-9](?:-[0-9]+)?(?:-[a-z0-9_-]+)?)\b/i,
-  /\b(gemini-[2-9](?:\.[0-9]+)?(?:-[a-z0-9_-]+)?)\b/i,
-  /\b(sonnet-[3-9](?:-[a-z0-9_-]+)?)\b/i,
-  /\b(opus-[3-9](?:-[a-z0-9_-]+)?)\b/i,
-  /\b(haiku-[3-9](?:-[a-z0-9_-]+)?)\b/i,
+  /\b(o[1-9](?:-mini|-max|-preview|-thinking|-pro|-chat)?(?:-[a-z0-9_-]+)?)\b/i,
+  // Google Gemini & Antigravity
+  /\b(gemini-[1-9](?:\.[0-9]+)?(?:-[a-z0-9_-]+)?)\b/i,
+  // Anthropic tier names
+  /\b((?:sonnet|opus|haiku)-[3-9](?:-[a-z0-9_-]+)?)\b/i,
+  // AI Dev tools / products
   /\b((?:codex|cursor|devin|droid|deepseek|qwen|grok|llama)-[a-z0-9_-]+)\b/i,
   /\b([a-z0-9_]+-(?:instruct|reasoning|thinking|canvas|vision)-preview)\b/i,
   // Parameter definitions (e.g. model: "...", defaultModel: "...")
@@ -104,28 +123,23 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
 
   // 1. Models
   for (const pat of MODEL_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      const val = m[1].toLowerCase().trim();
-      const CSS_CURSOR_VALUES = new Set([
-  'cursor-default', 'cursor-pointer', 'cursor-not-allowed', 'cursor-wait',
-  'cursor-text', 'cursor-move', 'cursor-help', 'cursor-none', 'cursor-progress',
-  'cursor-cell', 'cursor-crosshair', 'cursor-copy', 'cursor-alias',
-  'cursor-col-resize', 'cursor-row-resize', 'cursor-grab', 'cursor-grabbing',
-  'cursor-auto'
-]);
-
-// Guard against false positives like common words and CSS cursor classes
-      if (val.length >= 3 && !['model', 'models', 'default', 'preview'].includes(val) && !CSS_CURSOR_VALUES.has(val)) {
-        findings.push({
-          category: CATEGORIES.MODEL_ID,
-          value: val,
-          context: text.slice(0, 200),
-          hasDormantMarker: Boolean(matchedMarker),
-          dormantMarker: matchedMarker,
-          filePath,
-          artifactClass,
-        });
+    const globalPat = new RegExp(pat.source, pat.flags.includes('g') ? pat.flags : pat.flags + 'g');
+    let m;
+    while ((m = globalPat.exec(text)) !== null) {
+      if (m && m[1]) {
+        const val = m[1].toLowerCase().trim();
+        // Guard against false positives like common words and CSS cursor classes
+        if (val.length >= 3 && !['model', 'models', 'default', 'preview'].includes(val) && !CSS_CURSOR_VALUES.has(val)) {
+          findings.push({
+            category: CATEGORIES.MODEL_ID,
+            value: val,
+            context: text.slice(0, 200),
+            hasDormantMarker: Boolean(matchedMarker),
+            dormantMarker: matchedMarker,
+            filePath,
+            artifactClass,
+          });
+        }
       }
     }
   }
@@ -229,5 +243,16 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     }
   }
 
-  return findings;
+  // Deduplicate findings by category + value
+  const seenFindings = new Set();
+  const uniqueFindings = [];
+  for (const f of findings) {
+    const key = `${f.category}:${f.value}`;
+    if (!seenFindings.has(key)) {
+      seenFindings.add(key);
+      uniqueFindings.push(f);
+    }
+  }
+
+  return uniqueFindings;
 }

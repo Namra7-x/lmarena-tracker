@@ -25,27 +25,33 @@ export async function fetchDevinDesktop() {
   const artifacts = [
     {
       target: 'darwin-arm64',
-      url: `https://windsurf-stable.codeiumdata.com/darwin-arm64-dmg/stable/${commitHash}/Devin-darwin-arm64-${version}.dmg`,
-      format: 'dmg',
-      type: 'dmg',
+      url: `https://windsurf-stable.codeiumdata.com/darwin-arm64/stable/${commitHash}/Devin-darwin-arm64-${version}.zip`,
+      format: 'zip',
+      type: 'zip',
     },
     {
       target: 'darwin-x64',
-      url: `https://windsurf-stable.codeiumdata.com/darwin-x64-dmg/stable/${commitHash}/Devin-darwin-x64-${version}.dmg`,
-      format: 'dmg',
-      type: 'dmg',
+      url: `https://windsurf-stable.codeiumdata.com/darwin-x64/stable/${commitHash}/Devin-darwin-x64-${version}.zip`,
+      format: 'zip',
+      type: 'zip',
     },
     {
       target: 'win32-x64',
-      url: `https://windsurf-stable.codeiumdata.com/win32-x64-user/stable/${commitHash}/DevinUserSetup-x64-${version}.exe`,
-      format: 'exe',
-      type: 'exe',
+      url: `https://windsurf-stable.codeiumdata.com/win32-x64-archive/stable/${commitHash}/Devin-win32-x64-${version}.zip`,
+      format: 'zip',
+      type: 'zip',
     },
     {
       target: 'win32-arm64',
-      url: `https://windsurf-stable.codeiumdata.com/win32-arm64-user/stable/${commitHash}/DevinUserSetup-arm64-${version}.exe`,
-      format: 'exe',
-      type: 'exe',
+      url: `https://windsurf-stable.codeiumdata.com/win32-arm64-archive/stable/${commitHash}/Devin-win32-arm64-${version}.zip`,
+      format: 'zip',
+      type: 'zip',
+    },
+    {
+      target: 'linux-x64',
+      url: `https://windsurf-stable.codeiumdata.com/linux-x64/stable/${commitHash}/Devin-linux-x64-${version}.tar.gz`,
+      format: 'tgz',
+      type: 'tarball',
     },
   ];
 

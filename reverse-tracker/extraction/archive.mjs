@@ -7,7 +7,21 @@ import zlib from 'node:zlib';
 import path from 'node:path';
 
 const MAX_FILE_COUNT = 5000;
-const MAX_EXPANDED_BYTES = 500 * 1024 * 1024; // 500MB
+const MAX_EXPANDED_BYTES = 1024 * 1024 * 1024; // 1GB safe expansion limit
+
+/**
+ * Filter out pure media/font assets that do not contain leak signals to optimize memory.
+ */
+export function isIgnoredAsset(filePath) {
+  if (!filePath) return false;
+  const lower = filePath.toLowerCase();
+  return lower.endsWith('.png') || lower.endsWith('.jpg') || lower.endsWith('.jpeg') ||
+         lower.endsWith('.gif') || lower.endsWith('.ico') || lower.endsWith('.icns') ||
+         lower.endsWith('.svg') || lower.endsWith('.ttf') || lower.endsWith('.woff') ||
+         lower.endsWith('.woff2') || lower.endsWith('.eot') || lower.endsWith('.mp3') ||
+         lower.endsWith('.wav') || lower.endsWith('.mp4') || lower.endsWith('.mov') ||
+         lower.endsWith('.pdf') || lower.endsWith('.psd');
+}
 
 /**
  * Validate path against zip-slip vulnerabilities.
@@ -65,6 +79,11 @@ export function extractTar(buffer) {
     offset += 512;
 
     if (rawName && (typeFlag === '0' || typeFlag === '\0')) {
+      if (isIgnoredAsset(rawName)) {
+        offset += Math.ceil(size / 512) * 512;
+        continue;
+      }
+
       if (!isSafeRelativePath(rawName)) {
         console.warn(`Skipping potentially unsafe path in tar: ${rawName}`);
         offset += Math.ceil(size / 512) * 512;
@@ -124,7 +143,7 @@ export function extractZip(buffer) {
 
     if (dataEnd > buffer.length) break;
 
-    if (isSafeRelativePath(fileName) && !fileName.endsWith('/')) {
+    if (isSafeRelativePath(fileName) && !fileName.endsWith('/') && !isIgnoredAsset(fileName)) {
       if (files.length >= MAX_FILE_COUNT) break;
 
       totalBytes += uncompressedSize;

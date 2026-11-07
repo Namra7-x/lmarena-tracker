@@ -165,22 +165,31 @@ async function handleScan(componentId, options = {}) {
       const { files } = extractArtifact(dl.buffer, art.format, art.target, art.url);
 
       for (const f of files) {
-        // Fast string extraction from text files ONLY (priority 1 and <= 10MB)
-        if (f.priority === 1 && f.buffer && f.buffer.length <= 10 * 1024 * 1024) {
-          const textContent = f.buffer.toString('utf8');
-          const lines = textContent.split('\n');
+        // Fast string extraction from text files (priority 1)
+        if (f.priority === 1 && f.buffer) {
+          if (f.buffer.length <= 10 * 1024 * 1024) {
+            const textContent = f.buffer.toString('utf8');
+            const lines = textContent.split('\n');
 
-          for (const line of lines) {
-            const trimmed = line.trim();
-            if (trimmed.length >= 4 && trimmed.length <= 1000) {
-              allExtractedStrings.add(trimmed);
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (trimmed.length >= 4 && trimmed.length <= 1000) {
+                allExtractedStrings.add(trimmed);
+              }
+            }
+          } else {
+            const textStrings = extractStrings(f.buffer);
+            for (const s of textStrings) {
+              if (s.value && s.value.length >= 4 && s.value.length <= 1000) {
+                allExtractedStrings.add(s.value);
+              }
             }
           }
         }
 
         // Multi-encoding binary string scan on priority binaries (priority 2 or executables)
         if (f.priority === 2 && f.buffer) {
-          const binaryStrings = extractStrings(f.buffer, { maxStrings: 25000, maxScanBytes: 64 * 1024 * 1024 });
+          const binaryStrings = extractStrings(f.buffer);
           for (const s of binaryStrings) {
             if (s.value && s.value.length >= 4 && s.value.length <= 1000) {
               allExtractedStrings.add(s.value);
@@ -203,9 +212,10 @@ async function handleScan(componentId, options = {}) {
   for (const str of allExtractedStrings) {
     if (historicalSeenHashes.has(str)) continue;
 
-    // Filter through Noise Sieve (Shannon entropy, CSS, Webpack boilerplate, base64)
+    // Filter through Noise Sieve, but always preserve any string matching signal rules
     const noise = evaluateNoise(str);
-    if (!noise.isNoise) {
+    const signalMatches = matchSignalsInText(str, '', 'delta');
+    if (!noise.isNoise || signalMatches.length > 0) {
       newCleanStrings.push(str);
     }
   }
