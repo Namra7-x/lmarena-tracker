@@ -31,6 +31,8 @@ export function generateReportBundle(outputDir, scanData) {
     coverage = {},
     totalExtractedStrings = 0,
     artifactInventory = [],
+    unknownCandidates = [],
+    artifactSha256 = null,
   } = scanData;
 
   const {
@@ -43,25 +45,22 @@ export function generateReportBundle(outputDir, scanData) {
   // Filter out noise/empty findings from scored leaks
   const validLeaks = scoredFindings.filter((f) => f.score > 0);
 
-  // -------------------------------------------------------------
-  // 1. `leaks.txt`: The curated real leaks, grouped by category
-  // -------------------------------------------------------------
-  const categoryTitles = {
-    model_id: '🤖 UNANNOUNCED MODELS & CODENAMES',
-    feature_flag: '🚩 FEATURE GATES & EXPERIMENTS',
-    hidden_command: '⌨️ HIDDEN CLI SWITCHES & COMMANDS',
-    endpoint_domain: '🌐 INTERNAL ENDPOINTS & RPCs',
-    agent_mode: '🛠️ AGENT TOOLS & CAPABILITIES',
-    ui_string: '📝 DARK UI & FEATURE DESCRIPTIONS',
-    env_var: '⚙️ CONFIG & ENVIRONMENT CONTROLS',
-  };
-
   const leaksByCategory = {};
   for (const leak of validLeaks) {
     const cat = leak.category || 'other';
     if (!leaksByCategory[cat]) leaksByCategory[cat] = [];
     leaksByCategory[cat].push(leak);
   }
+
+  // -------------------------------------------------------------
+  // 1. `leaks.txt`: The curated real leaks, grouped by 4 clean tiers
+  // -------------------------------------------------------------
+  const tierGroups = {
+    'TIER 1: 🤖 UNANNOUNCED MODELS & CODENAMES': validLeaks.filter((f) => f.category === 'model_id'),
+    'TIER 2: 🚩 FEATURE GATES, EXPERIMENTS & ROLLOUTS': validLeaks.filter((f) => ['feature_flag', 'experiment', 'env_var'].includes(f.category)),
+    'TIER 3: 🛠️ AGENT CAPABILITIES, MCP TOOLS & DARK UI': validLeaks.filter((f) => ['agent_mode', 'capability', 'hidden_command', 'ui_string'].includes(f.category)),
+    'TIER 4: 🌐 INTERNAL ENDPOINTS & RPC ROUTES': validLeaks.filter((f) => ['endpoint_domain', 'internal_function'].includes(f.category)),
+  };
 
   let leaksContent = `======================================================================\n`;
   leaksContent += `LEAKS & EARLY SIGNALS REPORT\n`;
@@ -74,17 +73,24 @@ export function generateReportBundle(outputDir, scanData) {
   if (validLeaks.length === 0) {
     leaksContent += `No high-confidence early leaks detected in this release.\n`;
   } else {
-    for (const [cat, list] of Object.entries(leaksByCategory)) {
-      const title = categoryTitles[cat] || `OTHER SIGNALS (${cat.toUpperCase()})`;
-      leaksContent += `[${title}] (${list.length})\n`;
+    for (const [tierTitle, list] of Object.entries(tierGroups)) {
+      if (list.length === 0) continue;
+      leaksContent += `[${tierTitle}] (${list.length})\n`;
       leaksContent += `----------------------------------------------------------------------\n`;
       for (const item of list) {
         const badge = item.isMajorEarlySignal ? '🔥 MAJOR EARLY SIGNAL' : item.tier;
         const plat = (item.platforms || []).join(', ') || 'all';
-        leaksContent += `• [${badge}] (${item.score} pts) [${item.category}]\n`;
+        const status = item.activationStatus || 'UNKNOWN';
+        leaksContent += `• [${badge}] (${item.score} pts) [${item.category}] [Status: ${status}]\n`;
         leaksContent += `  Finding:   ${item.value}\n`;
+        if (item.discoveryMethod && item.discoveryMethod !== 'heuristic') {
+          leaksContent += `  Discovery: ${item.discoveryMethod}\n`;
+        }
         if (item.context && item.context !== item.value) {
           leaksContent += `  Context:   ${item.context.trim().replace(/\r?\n/g, ' ')}\n`;
+        }
+        if (item.related) {
+          leaksContent += `  Related:   ${JSON.stringify(item.related)}\n`;
         }
         if (item.filePath) {
           leaksContent += `  File:      ${item.filePath}\n`;
@@ -222,9 +228,17 @@ export function generateReportBundle(outputDir, scanData) {
     scanId,
     componentId,
     version,
+    artifactSha256,
     generatedAt: new Date().toISOString(),
     leakCount: validLeaks.length,
     newStringCount: uniqueCleanNewStrings.length,
+    unknownCandidatesCount: unknownCandidates.length,
+    activationStatusSummary: {
+      enabled: validLeaks.filter((l) => l.activationStatus === 'ENABLED').length,
+      configured: validLeaks.filter((l) => l.activationStatus === 'CONFIGURED').length,
+      referenced: validLeaks.filter((l) => l.activationStatus === 'REFERENCED').length,
+      unknown: validLeaks.filter((l) => l.activationStatus === 'UNKNOWN' || !l.activationStatus).length,
+    },
     benchmark: scanData.benchmark || null,
   };
   fs.writeFileSync(path.join(outputDir, 'manifest.json'), JSON.stringify(manifestData, null, 2), 'utf8');
@@ -233,15 +247,19 @@ export function generateReportBundle(outputDir, scanData) {
   const candidateRecords = (scanData.candidates || scoredFindings).map((f) => ({
     category: f.category,
     value: f.value,
+    activationStatus: f.activationStatus || 'UNKNOWN',
+    discoveryMethod: f.discoveryMethod || f.origin || 'heuristic',
     filePath: f.filePath || '',
     offset: f.offset || { line: 0, column: 0 },
     context: f.context || '',
     rawExpression: f.rawExpression || f.value,
+    related: f.related || null,
     origin: f.origin || 'heuristic',
     status: f.status || 'accepted',
     rejectionReason: f.rejectionReason || null,
     score: f.score || 0,
     tier: f.tier || 'UNSCORED',
+    confidenceExplanation: f.confidenceExplanation || '',
   }));
   fs.writeFileSync(
     path.join(outputDir, 'candidates.json'),
@@ -250,8 +268,36 @@ export function generateReportBundle(outputDir, scanData) {
         scanId,
         componentId,
         version,
+        artifactSha256,
         totalCandidates: candidateRecords.length,
         candidates: candidateRecords,
+      },
+      null,
+      2
+    ),
+    'utf8'
+  );
+
+  // Preserve Uncertain / Unknown candidates without silently dropping them
+  const unknownRecords = unknownCandidates.map((u) => ({
+    value: u.value,
+    filePath: u.filePath || '',
+    offset: u.offset || { line: 0, column: 0 },
+    context: u.context || '',
+    reason: u.reason || 'unfamiliar_identifier',
+    contextHint: u.contextHint || '',
+    activationStatus: u.activationStatus || 'UNKNOWN',
+  }));
+  fs.writeFileSync(
+    path.join(outputDir, 'unknown_candidates.json'),
+    JSON.stringify(
+      {
+        scanId,
+        componentId,
+        version,
+        artifactSha256,
+        totalUnknownCandidates: unknownRecords.length,
+        candidates: unknownRecords,
       },
       null,
       2

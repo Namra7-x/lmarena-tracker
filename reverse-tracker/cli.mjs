@@ -225,11 +225,13 @@ async function handleScan(componentId, options = {}) {
   const goFindings = [];
   const macFindings = [];
   const winFindings = [];
+  const allUnknownCandidates = [];
 
   for (const art of candidate.artifacts) {
     try {
       console.log(`   Downloading ${art.target} (${art.format})...`);
       const dl = await downloadArtifact(art);
+      dl.sha256 = crypto.createHash('sha256').update(dl.buffer).digest('hex');
       acquiredArtifacts.push(dl);
 
       console.log(`   Extracting artifacts for ${art.target}...`);
@@ -297,6 +299,7 @@ async function handleScan(componentId, options = {}) {
             if (extracted && extracted.length > 0) {
               analyzerStatus.acornAst = 'completed';
               for (const ef of extracted) {
+                ef.artifactSha256 = dl.sha256;
                 allExtractedStrings.add(ef.value);
                 if (ef.category === 'endpoint_domain' && !allExtractedUrls.has(ef.value)) {
                   allExtractedUrls.set(ef.value, {
@@ -310,6 +313,13 @@ async function handleScan(componentId, options = {}) {
               }
             } else if (analyzerStatus.acornAst === 'skipped') {
               analyzerStatus.acornAst = 'completed';
+            }
+
+            if (extracted?.unknownCandidates && Array.isArray(extracted.unknownCandidates)) {
+              for (const uc of extracted.unknownCandidates) {
+                uc.artifactSha256 = dl.sha256;
+                allUnknownCandidates.push(uc);
+              }
             }
           } catch {
             analyzerStatus.acornAst = 'failed';
@@ -382,12 +392,10 @@ async function handleScan(componentId, options = {}) {
     // Reject non-human-readable, unprintable, or corrupted binary noise
     if (!isHumanReadableString(str)) continue;
 
-    // Filter through Noise Sieve, but always preserve any string matching signal rules
+    // Filter through Noise Sieve - strictly drop any noise
     const noise = evaluateNoise(str);
-    const signalMatches = matchSignalsInText(str, '', 'delta');
-    if (!noise.isNoise || signalMatches.length > 0) {
-      newCleanStrings.push(str);
-    }
+    if (noise.isNoise) continue;
+    newCleanStrings.push(str);
   }
 
   console.log(`   New clean strings in delta: ${newCleanStrings.length}`);
@@ -499,6 +507,8 @@ async function handleScan(componentId, options = {}) {
     },
     totalExtractedStrings,
     artifactInventory: acquiredArtifacts,
+    unknownCandidates: allUnknownCandidates,
+    artifactSha256: acquiredArtifacts[0]?.sha256 || null,
     benchmark,
   });
 
@@ -666,7 +676,8 @@ async function main() {
   } else if (command === 'scan') {
     const compId = args.find((a) => a.startsWith('--component='))?.replace(/^--component=/, '') || args[1] || 'codex-cli';
     const forceFlag = args.includes('--force') || args.includes('--test-run');
-    await handleScan(compId, { force: forceFlag, isTestRun: forceFlag });
+    const bypassDedup = args.includes('--bypass-dedup');
+    await handleScan(compId, { force: forceFlag, isTestRun: forceFlag, bypassDedup });
   } else if (command === 'test-run') {
     const familyArg = args.find((a) => a.startsWith('--family='))?.replace(/^--family=/, '') || null;
     const compArg = args.find((a) => a.startsWith('--component='))?.replace(/^--component=/, '') || null;

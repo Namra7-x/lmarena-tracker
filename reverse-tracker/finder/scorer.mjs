@@ -32,6 +32,20 @@ export function scoreFinding(finding, context = {}) {
     };
   }
 
+  // Reject definite noise (CSS properties, licenses, file assets, bundler boilerplate)
+  const noise = evaluateNoise(finding.value);
+  if (noise.isNoise && (noise.reason === 'w3c_css_property' || noise.reason === 'spdx_license' || noise.reason === 'media_or_archive_extension' || noise.reason === 'css_style_or_svg' || noise.reason === 'webpack_boilerplate')) {
+    return {
+      ...finding,
+      score: 0,
+      tier: TIERS.HIDDEN,
+      isMajorEarlySignal: false,
+      status: 'rejected',
+      rejectionReason: `Noise rejected: ${noise.reason}`,
+      breakdown: [{ rule: `Rejected as noise (${noise.reason})`, points: 0 }],
+    };
+  }
+
   let score = 0;
   const breakdown = [];
 
@@ -52,17 +66,19 @@ export function scoreFinding(finding, context = {}) {
       breakdown.push({ rule: 'Category: model id', points: 25 });
       break;
     case CATEGORIES.FEATURE_FLAG:
+    case CATEGORIES.EXPERIMENT:
       score += 15;
-      breakdown.push({ rule: 'Category: feature/rollout flag', points: 15 });
+      breakdown.push({ rule: `Category: ${finding.category}`, points: 15 });
       break;
     case CATEGORIES.HIDDEN_COMMAND:
     case CATEGORIES.ENDPOINT_DOMAIN:
       score += 15;
       breakdown.push({ rule: 'Category: hidden command / endpoint', points: 15 });
       break;
+    case CATEGORIES.CAPABILITY:
     case CATEGORIES.AGENT_MODE:
-      score += 12;
-      breakdown.push({ rule: 'Category: agent/skill/MCP/plugin', points: 12 });
+      score += 14;
+      breakdown.push({ rule: `Category: ${finding.category}`, points: 14 });
       break;
     case CATEGORIES.UI_STRING:
       score += 12;
@@ -79,6 +95,24 @@ export function scoreFinding(finding, context = {}) {
       break;
     default:
       break;
+  }
+
+  // Discovery Method Bonuses (structural and semantic AST anchors)
+  if (finding.discoveryMethod === 'ast_array_peer_cluster') {
+    score += 15;
+    breakdown.push({ rule: 'AST Array Peer Cluster with known AI model', points: 15 });
+  } else if (finding.discoveryMethod === 'ast_hyperparam_object') {
+    score += 20;
+    breakdown.push({ rule: 'AST AI Hyperparameter context (tokens/context_window)', points: 20 });
+  } else if (finding.discoveryMethod === 'ast_config_object') {
+    score += 15;
+    breakdown.push({ rule: 'AST Rollout / Experiment configuration object', points: 15 });
+  } else if (finding.discoveryMethod === 'ast_switch_case_model') {
+    score += 12;
+    breakdown.push({ rule: 'AST Switch-case model selection branch', points: 12 });
+  } else if (finding.discoveryMethod === 'ast_call_gate') {
+    score += 10;
+    breakdown.push({ rule: 'AST Feature gate / SDK variation call', points: 10 });
   }
 
   // 3. Dormant marker context
@@ -111,7 +145,6 @@ export function scoreFinding(finding, context = {}) {
     breakdown.push({ rule: 'Attributed to third-party dependency', points: -20 });
   }
 
-  const noise = evaluateNoise(finding.value);
   if (noise.isNoise) {
     if (noise.isMinified || noise.isHashOrUuid) {
       score -= 15;
@@ -146,13 +179,19 @@ export function scoreFinding(finding, context = {}) {
     (finding.category === CATEGORIES.MODEL_ID ||
       finding.category === CATEGORIES.HIDDEN_COMMAND ||
       finding.category === CATEGORIES.ENDPOINT_DOMAIN ||
-      finding.category === CATEGORIES.AGENT_MODE);
+      finding.category === CATEGORIES.AGENT_MODE ||
+      finding.category === CATEGORIES.CAPABILITY);
+
+  const activationStatus = finding.activationStatus || 'UNKNOWN';
+  const confidenceExplanation = breakdown.map((b) => `${b.rule} (${b.points >= 0 ? '+' : ''}${b.points} pts)`).join('; ');
 
   return {
     ...finding,
     score,
     tier,
     isMajorEarlySignal,
+    activationStatus,
+    confidenceExplanation,
     breakdown,
   };
 }

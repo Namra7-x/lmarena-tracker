@@ -5,15 +5,26 @@
  */
 
 import { unpackGluedTokens } from '../extraction/strings.mjs';
+import { evaluateNoise } from './noise.mjs';
+
+export const ACTIVATION_STATUS = {
+  REFERENCED: 'REFERENCED',
+  CONFIGURED: 'CONFIGURED',
+  ENABLED: 'ENABLED',
+  UNKNOWN: 'UNKNOWN',
+};
 
 export const CATEGORIES = {
   MODEL_ID: 'model_id',
   FEATURE_FLAG: 'feature_flag',
+  EXPERIMENT: 'experiment',
+  CAPABILITY: 'capability',
   HIDDEN_COMMAND: 'hidden_command',
   ENDPOINT_DOMAIN: 'endpoint_domain',
   AGENT_MODE: 'agent_mode',
   UI_STRING: 'ui_string',
   ENV_VAR: 'env_var',
+  INTERNAL_FUNCTION: 'internal_function',
 };
 
 export const DORMANT_MARKERS = [
@@ -62,12 +73,22 @@ export function isValidModelIdentifier(val) {
   // compiler symbols ('_call...'), and encodings starting with digits ('8859-1')
   if (!/^[a-zA-Z]/.test(str)) return false;
 
-  // 3. Must only contain valid identifier characters
-  if (!/^[a-zA-Z0-9_\-\.\:\/]+$/.test(str)) return false;
+  // 3. Must only contain valid identifier characters (supports single spaces for multi-word lab codenames like 'Onion Alpha' or 'Tell Me News')
+  if (!/^[a-zA-Z0-9_\-\.\:\/ ]+$/.test(str)) return false;
+  if (str.includes('  ')) return false;
+  const words = str.split(' ');
+  if (words.length > 4) return false;
+  for (const w of words) {
+    if (!w || !/^[a-zA-Z0-9]/.test(w)) return false;
+  }
 
   // 4. Case-insensitive exact match in non-model common terms
   const lower = str.toLowerCase();
   if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
+
+  // 4b. Reject any noise (W3C CSS properties, SPDX licenses, media/archive extensions)
+  const noiseCheck = evaluateNoise(str);
+  if (noiseCheck.isNoise && noiseCheck.reason !== 'too_short') return false;
 
   // 5. Date & Time format layouts (e.g. "02-jan-0", "02-jan-200", "2006-01-02", "jan-2024")
   if (/^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[-_]\d+$/i.test(str)) return false;
@@ -98,7 +119,7 @@ export function isValidModelIdentifier(val) {
 
   // 11. OpenAI Reasoning series constraint (o1, o3, o4...)
   if (/^o[1-9]/i.test(str)) {
-    if (!/^o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|\d{4}-\d{2}-\d{2}))?$/i.test(str)) {
+    if (!/^o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|reasoning|\d{4}-\d{2}-\d{2}))*$/i.test(str)) {
       return false;
     }
   }
@@ -129,6 +150,7 @@ export function isValidFeatureFlag(val) {
   if (!/^[a-zA-Z0-9_\-\.]+$/.test(str)) return false;
   const lower = str.toLowerCase();
   if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
+  if (evaluateNoise(str).isNoise) return false;
   return true;
 }
 
@@ -170,7 +192,7 @@ const MODEL_PATTERNS = [
   /\b((?:claude|gpt|gemini|devin|cursor|codex|droid|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|whisper)-[a-zA-Z0-9_\-\.]+)\b/i,
 
   // E. OpenAI Reasoning Series (o1, o3, o4, o5...)
-  /\b(o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|\d{4}-\d{2}-\d{2}))?)(?![-a-zA-Z0-9_])/i,
+  /\b(o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|reasoning|\d{4}-\d{2}-\d{2}))*)(?![-a-zA-Z0-9_])/i,
 
   // F. Anthropic Tier Wildcards
   /\b((?:sonnet|opus|haiku|mythos|fable)-[a-zA-Z0-9_\-\.]+)\b/i,
@@ -256,8 +278,13 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
   const findings = [];
   const lowerText = text.toLowerCase();
 
-  // Check dormant markers
-  const matchedMarker = DORMANT_MARKERS.find((m) => lowerText.includes(m)) || null;
+  // Check dormant markers with strict word boundaries to prevent 'boundary' or 'secondary' matching 'nda'
+  const matchedMarker = DORMANT_MARKERS.find((m) => {
+    const escaped = m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(?:^|[^a-z0-9_])${escaped}(?:$|[^a-z0-9_])`, 'i');
+    return regex.test(lowerText);
+  }) || null;
+  const defaultActivation = matchedMarker ? ACTIVATION_STATUS.CONFIGURED : ACTIVATION_STATUS.REFERENCED;
 
   // Unpack glued binary string tokens if present (e.g. "_callgemini-3.8-flash-ttslyria-3-clip-preview")
   const textCandidates = unpackGluedTokens(text);
@@ -280,6 +307,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
               context: text.slice(0, 200),
               hasDormantMarker: Boolean(matchedMarker),
               dormantMarker: matchedMarker,
+              activationStatus: defaultActivation,
               filePath,
               artifactClass,
               status: 'accepted',
@@ -291,18 +319,20 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     }
   }
 
-  // 2. Feature Flags
+  // 2. Feature Flags & Experiments
   for (const pat of FLAG_PATTERNS) {
     const m = text.match(pat);
     if (m && m[1]) {
       const val = m[1].trim();
       if (isValidFeatureFlag(val)) {
+        const isExp = /^(?:exp_|experiment_)/i.test(val) || /(?:variation|getExperiment|useExperiment)\s*\(/i.test(text);
         findings.push({
-          category: CATEGORIES.FEATURE_FLAG,
+          category: isExp ? CATEGORIES.EXPERIMENT : CATEGORIES.FEATURE_FLAG,
           value: val,
           context: text.slice(0, 200),
           hasDormantMarker: Boolean(matchedMarker),
           dormantMarker: matchedMarker,
+          activationStatus: defaultActivation,
           filePath,
           artifactClass,
           status: 'accepted',
@@ -322,6 +352,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         context: text.slice(0, 200),
         hasDormantMarker: true,
         dormantMarker: matchedMarker || 'hidden_command',
+        activationStatus: ACTIVATION_STATUS.CONFIGURED,
         filePath,
         artifactClass,
         status: 'accepted',
@@ -340,6 +371,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         context: text.slice(0, 200),
         hasDormantMarker: Boolean(matchedMarker),
         dormantMarker: matchedMarker,
+        activationStatus: defaultActivation,
         filePath,
         artifactClass,
         status: 'accepted',
@@ -360,6 +392,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
           context: text.slice(0, 200),
           hasDormantMarker: Boolean(matchedMarker),
           dormantMarker: matchedMarker,
+          activationStatus: defaultActivation,
           filePath,
           artifactClass,
           status: 'accepted',
@@ -379,6 +412,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         context: text.slice(0, 200),
         hasDormantMarker: Boolean(matchedMarker),
         dormantMarker: matchedMarker,
+        activationStatus: defaultActivation,
         filePath,
         artifactClass,
         status: 'accepted',
@@ -397,6 +431,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         context: text.slice(0, 200),
         hasDormantMarker: true,
         dormantMarker: 'dark_ui_copy',
+        activationStatus: ACTIVATION_STATUS.CONFIGURED,
         filePath,
         artifactClass,
         status: 'accepted',
