@@ -19,7 +19,8 @@ import { extractArtifact } from './extraction/dispatcher.mjs';
 import { extractStrings } from './extraction/strings.mjs';
 import { extractApplicationUrls } from './extraction/urls.mjs';
 import { extractSignalsFromAst } from './extraction/ast.mjs';
-import { extractGoMetadata, isGoBinary } from './extraction/go.mjs';
+import { extractGoMetadata, isGoBinary, parseGoSignals } from './extraction/go.mjs';
+import { extractSourceMapMetadata } from './extraction/sourcemap.mjs';
 import { matchSignalsInText } from './finder/rules.mjs';
 import { evaluateNoise, isHumanReadableString } from './finder/noise.mjs';
 import { detectPlatformAsymmetry } from './finder/asymmetry.mjs';
@@ -282,9 +283,21 @@ async function handleScan(componentId, options = {}) {
           }
         }
 
-        // Source Map Presence Analyzer
+        // Source Map Presence & Symbol Name Extraction
         if (f.path.endsWith('.map') || (f.buffer && f.buffer.includes('sourceMappingURL='))) {
-          analyzerStatus.sourceMap = 'completed';
+          try {
+            const smMeta = extractSourceMapMetadata(f.buffer);
+            analyzerStatus.sourceMap = 'completed';
+            if (Array.isArray(smMeta.names)) {
+              for (const sym of smMeta.names) {
+                if (sym && sym.length >= 4 && sym.length <= 120) {
+                  allExtractedStrings.add(sym);
+                }
+              }
+            }
+          } catch {
+            analyzerStatus.sourceMap = 'completed';
+          }
         }
 
         // Go Binary Inspection (GoReSym)
@@ -303,37 +316,9 @@ async function handleScan(componentId, options = {}) {
                     }
                   }
                 }
-                if (Array.isArray(goMeta.userFunctions)) {
-                  for (const fn of goMeta.userFunctions) {
-                    const fnName = typeof fn === 'string' ? fn : (fn.Name || fn.name);
-                    if (fnName) {
-                      goFindings.push({
-                        category: 'go_function',
-                        value: fnName,
-                        filePath: f.path,
-                        origin: 'go_symbol',
-                        offset: { line: 0, column: 0 },
-                        context: `Go user function: ${fnName}`,
-                        status: 'accepted',
-                      });
-                    }
-                  }
-                }
-                if (Array.isArray(goMeta.types)) {
-                  for (const typ of goMeta.types) {
-                    const typeName = typeof typ === 'string' ? typ : (typ.Name || typ.name);
-                    if (typeName) {
-                      goFindings.push({
-                        category: 'go_type',
-                        value: typeName,
-                        filePath: f.path,
-                        origin: 'go_symbol',
-                        offset: { line: 0, column: 0 },
-                        context: `Go type: ${typeName}`,
-                        status: 'accepted',
-                      });
-                    }
-                  }
+                const parsedSignals = parseGoSignals(goMeta, f.path);
+                for (const sig of parsedSignals) {
+                  goFindings.push(sig);
                 }
               } else if (goMeta.status === 'failed') {
                 analyzerStatus.goReSym = 'failed';

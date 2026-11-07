@@ -18,7 +18,8 @@ import {
   foldBinaryExpression,
   extractSignalsFromAst,
 } from '../reverse-tracker/extraction/ast.mjs';
-import { isGoBinary, extractGoMetadata } from '../reverse-tracker/extraction/go.mjs';
+import { isGoBinary, extractGoMetadata, isGoStdLibSymbol, parseGoSignals } from '../reverse-tracker/extraction/go.mjs';
+import { extractSourceMapMetadata } from '../reverse-tracker/extraction/sourcemap.mjs';
 import { computeExactDiff } from '../reverse-tracker/diff/engine.mjs';
 
 function createMockAsar(filesObj = { 'index.js': { size: 12, offset: '0' } }, payloadStr = 'console.log()') {
@@ -160,6 +161,45 @@ test('Acorn JavaScript AST Analysis & Constant Expression Folding', () => {
   const brokenCode = 'function broken( { ';
   const brokenFindings = extractSignalsFromAst(brokenCode, 'broken.js');
   assert.deepEqual(brokenFindings, []);
+
+  // 6. Model Array and Variable Declarators
+  const modelArrayCode = `
+    const SUPPORTED_MODELS = [
+      "gemini-3.8-flash-tts",
+      "claude-4.0-sonnet-preview",
+      "o3-high-reasoning"
+    ];
+    const DEFAULT_MODEL = "gemini-3.5-flash";
+  `;
+  const arrayFindings = extractSignalsFromAst(modelArrayCode, 'models.js');
+  const extractedModels = arrayFindings.filter((f) => f.category === 'model_id').map((f) => f.value);
+  assert.ok(extractedModels.includes('gemini-3.8-flash-tts'));
+  assert.ok(extractedModels.includes('claude-4.0-sonnet-preview'));
+  assert.ok(extractedModels.includes('o3-high-reasoning'));
+  assert.ok(extractedModels.includes('gemini-3.5-flash'));
+
+  // 7. Assignment Expression detection
+  const assignCode = 'config.defaultModel = "gpt-4.5-preview";';
+  const assignFindings = extractSignalsFromAst(assignCode, 'setup.js');
+  assert.equal(assignFindings.length, 1);
+  assert.equal(assignFindings[0].value, 'gpt-4.5-preview');
+
+  // 8. Fully Folded Template Literals
+  const tplFoldCode = 'const url = `https://${"api"}.${"anthropic.com"}/v1/messages`;';
+  const tplFoldFindings = extractSignalsFromAst(tplFoldCode, 'client.js');
+  assert.equal(tplFoldFindings.length, 1);
+  assert.equal(tplFoldFindings[0].value, 'https://api.anthropic.com/v1/messages');
+
+  // 9. Modern JSX Fallback
+  const jsxCode = `
+    export function Header() {
+      const activeModel = "claude-3-7-sonnet";
+      return <div className="header">Model: {activeModel}</div>;
+    }
+  `;
+  const jsxFindings = extractSignalsFromAst(jsxCode, 'Header.jsx');
+  const jsxModel = jsxFindings.find((f) => f.value === 'claude-3-7-sonnet');
+  assert.ok(jsxModel, 'JSX syntax stripped gracefully to recover model constant');
 });
 
 test('Go Binary Detection and GoReSym Fallback', () => {
@@ -177,6 +217,68 @@ test('Go Binary Detection and GoReSym Fallback', () => {
   // Fallback when binary does not exist
   const resNonExistent = extractGoMetadata('/tmp/non-existent-binary-12345');
   assert.equal(resNonExistent.status, 'skipped');
+
+  // Go Standard Library filter check
+  assert.equal(isGoStdLibSymbol('runtime.newobject'), true);
+  assert.equal(isGoStdLibSymbol('fmt.Printf'), true);
+  assert.equal(isGoStdLibSymbol('sync/atomic.LoadInt64'), true);
+  assert.equal(isGoStdLibSymbol('github.com/google/jetski/agent.Run'), false);
+  assert.equal(isGoStdLibSymbol('main.initSession'), false);
+
+  // parseGoSignals with mock GoReSym JSON output
+  const mockGoMetadata = {
+    status: 'completed',
+    version: 'go1.23.2',
+    userFunctions: [
+      { FullName: 'runtime.gcWork' }, // should be filtered out (stdlib)
+      { FullName: 'github.com/google/jetski/agent.StartAgentSession' }, // user function
+      { FullName: 'main.InitModelRouter' }, // user function
+    ],
+    types: [
+      { Name: 'runtime.g', Fields: [] }, // should be filtered out (stdlib)
+      {
+        Name: 'github.com/google/jetski/config.AgentConfig',
+        Fields: [{ Name: 'DefaultModel' }, { Name: 'TimeoutSeconds' }],
+      },
+    ],
+    files: [
+      '/usr/local/go/src/runtime/panic.go', // should be filtered out
+      'github.com/google/jetski/agent/session.go', // repo file
+    ],
+  };
+
+  const signals = parseGoSignals(mockGoMetadata, 'bin/antigravity-cli');
+  const signalValues = signals.map((s) => s.value);
+
+  // Check user functions extracted and stdlib filtered
+  assert.ok(signalValues.includes('github.com/google/jetski/agent.StartAgentSession'));
+  assert.ok(signalValues.includes('main.InitModelRouter'));
+  assert.ok(!signalValues.includes('runtime.gcWork'), 'Standard library function filtered');
+
+  // Check types and fields extracted
+  assert.ok(signalValues.includes('github.com/google/jetski/config.AgentConfig'));
+  assert.ok(signalValues.includes('github.com/google/jetski/config.AgentConfig.DefaultModel'));
+  assert.ok(!signalValues.includes('runtime.g'), 'Standard library type filtered');
+
+  // Check repo source file extracted
+  assert.ok(signalValues.includes('github.com/google/jetski/agent/session.go'));
+});
+
+test('Source Map Metadata Parsing (names and sources without sourcesContent)', () => {
+  // Production source map where sourcesContent is omitted
+  const prodMap = JSON.stringify({
+    version: 3,
+    sources: ['webpack:///src/agent/modelRouter.ts', 'webpack:///node_modules/lodash/index.js'],
+    names: ['activeModel', 'gemini38FlashTts', 'useFeatureGate', 'launchDarklyFlag'],
+    mappings: 'AAAA,SAAS...',
+  });
+
+  const parsed = extractSourceMapMetadata(prodMap);
+  assert.equal(parsed.hasSourcesContent, false);
+  assert.equal(parsed.files.length, 0, 'No empty files created when sourcesContent is stripped');
+  assert.deepEqual(parsed.sources, ['src/agent/modelRouter.ts'], 'First party source retained, node_modules filtered');
+  assert.ok(parsed.names.includes('gemini38FlashTts'));
+  assert.ok(parsed.names.includes('useFeatureGate'));
 });
 
 test('3-Way Structural Diffing (Added, Changed, Removed, Persistent, Reintroduced)', () => {
