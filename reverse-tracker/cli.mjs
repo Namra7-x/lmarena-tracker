@@ -14,6 +14,7 @@ import { loadComponentState, saveComponentState } from './state/store.mjs';
 import { downloadArtifact } from './acquisition/downloader.mjs';
 import { extractArtifact } from './extraction/dispatcher.mjs';
 import { extractStrings } from './extraction/strings.mjs';
+import { extractApplicationUrls } from './extraction/urls.mjs';
 import { matchSignalsInText } from './finder/rules.mjs';
 import { evaluateNoise, isHumanReadableString } from './finder/noise.mjs';
 import { detectPlatformAsymmetry } from './finder/asymmetry.mjs';
@@ -42,7 +43,7 @@ async function handleDetect(familyId) {
 
   const changes = [];
   const firstRuns = [];
-  const tg = new TelegramClient();
+  const tg = new TelegramClient(null, null, familyId);
   const topicId = tg.getTopicId(familyId);
 
   for (const compId of componentsToCheck) {
@@ -127,7 +128,7 @@ async function handleScan(componentId, options = {}) {
   const baseline = loadComponentState(STATE_DIR, componentId) || {};
   const candidate = await discoverComponent(componentId);
   const scanId = generateScanId(componentId);
-  const tg = new TelegramClient();
+  const tg = new TelegramClient(null, null, comp.family);
   const topicId = tg.getTopicId(comp.family);
 
   // Step 1: Update-First Rule - Send Immediate Alert BEFORE downloading
@@ -167,6 +168,7 @@ async function handleScan(componentId, options = {}) {
   console.log(`📦 Acquiring ${candidate.artifacts.length} target artifacts...`);
   const acquiredArtifacts = [];
   const allExtractedStrings = new Set();
+  const allExtractedUrls = new Map();
   const macFindings = [];
   const winFindings = [];
 
@@ -180,6 +182,16 @@ async function handleScan(componentId, options = {}) {
       const { files } = extractArtifact(dl.buffer, art.format, art.target, art.url);
 
       for (const f of files) {
+        // Application URL & endpoint scanner on all valid files
+        if (f.buffer) {
+          const fileUrls = extractApplicationUrls(f.buffer);
+          for (const u of fileUrls) {
+            if (!allExtractedUrls.has(u.url)) {
+              allExtractedUrls.set(u.url, u);
+            }
+          }
+        }
+
         // Fast string extraction from text files (priority 1)
         if (f.priority === 1 && f.buffer) {
           if (f.buffer.length <= 10 * 1024 * 1024) {
@@ -240,6 +252,16 @@ async function handleScan(componentId, options = {}) {
 
   console.log(`   New clean strings in delta: ${newCleanStrings.length}`);
 
+  // URL & Endpoint Delta
+  const historicalSeenUrls = new Set(baseline.historicalSeenUrls || []);
+  const newCleanUrls = [];
+  for (const [url, item] of allExtractedUrls.entries()) {
+    if (!historicalSeenUrls.has(url)) {
+      newCleanUrls.push({ ...item, isNew: true });
+    }
+  }
+  console.log(`   Application endpoints discovered: ${allExtractedUrls.size} (${newCleanUrls.length} new in this release)`);
+
   // Step 4: Dynamic Heuristic Leak Detection on newCleanStrings
   const rawFindings = [];
   for (const str of newCleanStrings) {
@@ -295,6 +317,8 @@ async function handleScan(componentId, options = {}) {
       newFindings: newCleanStrings.map((s) => ({ value: s })),
     },
     scoredFindings: sortedScored,
+    urlsInventory: Array.from(allExtractedUrls.values()),
+    newUrls: newCleanUrls,
     platformAsymmetry,
     coverage: {
       percentage: coveragePercentage,
@@ -327,6 +351,8 @@ async function handleScan(componentId, options = {}) {
     moreFindings,
     leakCount: reportBundle.leaksCount,
     newStringsCount: newCleanStrings.length,
+    urlsCount: allExtractedUrls.size,
+    newUrls: newCleanUrls,
     countCheckText: reportBundle.countCheck.text,
   });
 
@@ -358,6 +384,10 @@ async function handleScan(componentId, options = {}) {
       new Set([...historicalSeenHashes, ...newCleanStrings])
     ).slice(0, 10000); // Retain up to 10,000 clean unique hashes
 
+    const updatedSeenUrls = Array.from(
+      new Set([...historicalSeenUrls, ...Array.from(allExtractedUrls.keys())])
+    ).slice(0, 5000);
+
     saveComponentState(STATE_DIR, componentId, {
       version: candidate.version,
       alertedVersion: candidate.version,
@@ -369,6 +399,7 @@ async function handleScan(componentId, options = {}) {
       hotSignals: majorSignals.slice(0, 100),
       recentSignals: sortedScored.slice(0, 2000),
       historicalSeenHashes: updatedSeenHashes,
+      historicalSeenUrls: updatedSeenUrls,
     });
     console.log(`✅ Deep scan complete for ${componentId} (${scanId}). State updated (${coverageState}).`);
   } else {

@@ -7,10 +7,58 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export class TelegramClient {
-  constructor(token = process.env.TELEGRAM_TOKEN, chatId = process.env.TELEGRAM_CHAT_ID) {
-    this.token = (token || '').trim();
-    this.chatId = (chatId || '').trim();
+  constructor(token, chatId, family = null) {
+    this.family = family;
+    this.token = this.resolveToken(token, family);
+    this.chatId = this.resolveChatId(chatId, family);
     this.apiBase = `https://api.telegram.org/bot${this.token}`;
+  }
+
+  resolveToken(explicitToken, family) {
+    if (explicitToken && typeof explicitToken === 'string' && explicitToken.trim()) {
+      return explicitToken.trim();
+    }
+    if (family) {
+      const famUpper = family.toUpperCase();
+      const candidates = [
+        `TELEGRAM_TOKEN_${famUpper}`,
+        `TELEGRAM_BOT_TOKEN_${famUpper}`,
+      ];
+      if (famUpper === 'OPENAI') {
+        candidates.push('TELEGRAM_TOKEN_CHATGPT', 'TELEGRAM_BOT_TOKEN_CHATGPT');
+      } else if (famUpper === 'ANTHROPIC') {
+        candidates.push('TELEGRAM_TOKEN_CLAUDE', 'TELEGRAM_BOT_TOKEN_CLAUDE');
+      } else if (famUpper === 'GOOGLE') {
+        candidates.push('TELEGRAM_TOKEN_GEMINI', 'TELEGRAM_BOT_TOKEN_GEMINI');
+      }
+
+      for (const envKey of candidates) {
+        const val = process.env[envKey]?.trim();
+        if (val) return val;
+      }
+    }
+    return (process.env.TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_TOKEN || '').trim();
+  }
+
+  resolveChatId(explicitChatId, family) {
+    if (explicitChatId && typeof explicitChatId === 'string' && explicitChatId.trim()) {
+      return explicitChatId.trim();
+    }
+    if (family) {
+      const famUpper = family.toUpperCase();
+      const candidates = [
+        `TELEGRAM_CHAT_ID_${famUpper}`,
+      ];
+      if (famUpper === 'OPENAI') candidates.push('TELEGRAM_CHAT_ID_CHATGPT');
+      if (famUpper === 'ANTHROPIC') candidates.push('TELEGRAM_CHAT_ID_CLAUDE');
+      if (famUpper === 'GOOGLE') candidates.push('TELEGRAM_CHAT_ID_GEMINI');
+
+      for (const envKey of candidates) {
+        const val = process.env[envKey]?.trim();
+        if (val) return val;
+      }
+    }
+    return (process.env.TELEGRAM_CHAT_ID || '').trim();
   }
 
   isConfigured() {

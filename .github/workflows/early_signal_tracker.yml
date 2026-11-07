@@ -63,6 +63,11 @@ jobs:
           REPORTS_DIR: reports
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOKEN_OPENAI: ${{ secrets.TELEGRAM_TOKEN_OPENAI || secrets.TELEGRAM_TOKEN_CHATGPT }}
+          TELEGRAM_TOKEN_ANTHROPIC: ${{ secrets.TELEGRAM_TOKEN_ANTHROPIC || secrets.TELEGRAM_TOKEN_CLAUDE }}
+          TELEGRAM_TOKEN_GOOGLE: ${{ secrets.TELEGRAM_TOKEN_GOOGLE || secrets.TELEGRAM_TOKEN_GEMINI }}
+          TELEGRAM_TOKEN_CURSOR: ${{ secrets.TELEGRAM_TOKEN_CURSOR }}
+          TELEGRAM_TOKEN_DEVIN: ${{ secrets.TELEGRAM_TOKEN_DEVIN }}
         run: |
           node reverse-tracker/cli.mjs run --family=${{ matrix.family }}
 

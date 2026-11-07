@@ -107,6 +107,8 @@ export function formatCompletionMessage({
   countCheckText = '',
   leakCount = 0,
   newStringsCount = 0,
+  urlsCount = 0,
+  newUrls = [],
   timestamp = new Date(),
 }) {
   const familyBadge = family ? `[${escapeHtml(family.toUpperCase())}] ` : '';
@@ -143,15 +145,23 @@ export function formatCompletionMessage({
   }
 
   // Files summary badge
-  if (totalLeaks > 0) {
-    msg += `📁 <b>Attached Files:</b> <code>leaks.txt</code>, <code>diff.txt</code>, <code>strings.txt</code> (${newStringsCount} new strings)\n\n`;
+  const attachedNames = ['diff.txt'];
+  if (totalLeaks > 0) attachedNames.unshift('leaks.txt');
+  if (newStringsCount > 0) attachedNames.push('strings.txt');
+  if (urlsCount > 0 || (newUrls && newUrls.length > 0)) attachedNames.push('urls.txt');
+
+  const attachedCode = attachedNames.map((n) => `<code>${n}</code>`).join(', ');
+  msg += `📁 <b>Attached Files:</b> ${attachedCode}\n`;
+  if (newUrls && newUrls.length > 0) {
+    msg += `🌐 <b>New Application Routes (${newUrls.length}):</b>\n`;
+    for (const u of newUrls.slice(0, 5)) {
+      const uStr = typeof u === 'string' ? u : u.url;
+      const cat = typeof u === 'string' ? '' : `[${u.category?.replace(/_/g, ' ') || 'ENDPOINT'}] `;
+      msg += `• ${escapeHtml(cat)}<code>${escapeHtml(uStr)}</code>\n`;
+    }
+    msg += '\n';
   } else {
-    msg += `📁 <b>Attached Files:</b> <code>diff.txt</code>\n\n`;
-  }
-  if (totalLeaks > 0) {
-    msg += `📁 <b>Attached Files:</b> <code>leaks.txt</code>, <code>diff.txt</code>, <code>strings.txt</code> (${newStringsCount} new strings)\n\n`;
-  } else {
-    msg += `📁 <b>Attached Files:</b> <code>diff.txt</code>\n\n`;
+    msg += '\n';
   }
 
   // Expandable blockquote for additional findings

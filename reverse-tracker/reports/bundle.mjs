@@ -226,6 +226,62 @@ export function generateReportBundle(outputDir, scanData) {
     `Coverage ${coverage.percentage || 100}% (macOS ${macOk} Windows ${winOk})`,
   ].join('\n');
 
+  // -------------------------------------------------------------
+  // 4. `urls.txt`: Clean, categorized endpoints & new URL signals
+  // -------------------------------------------------------------
+  const { urlsInventory = [], newUrls = [] } = scanData;
+  const newUrlSet = new Set(newUrls.map((u) => (typeof u === 'string' ? u : u.url)));
+
+  const categoryNames = {
+    CATALOG_AND_UPDATES: '📦 CATALOG & AUTO-UPDATE FEEDS',
+    MODEL_AND_AI_APIS: '🤖 MODEL & INFERENCE APIS',
+    INTERNAL_AND_STAGING: '🚩 INTERNAL & STAGING ROUTES',
+    REMOTE_CONFIG_AND_FLAGS: '⚙️ REMOTE CONFIG & FEATURE GATES',
+    STORAGE_AND_CDN: '🗄️ STORAGE & CDN BUCKETS',
+    SERVICE_AND_RPCS: '🌐 BACKEND SERVICE RPCS',
+  };
+
+  const urlsByCategory = {};
+  for (const item of urlsInventory) {
+    const cat = item.category || 'SERVICE_AND_RPCS';
+    if (!urlsByCategory[cat]) urlsByCategory[cat] = [];
+    urlsByCategory[cat].push(item);
+  }
+
+  let urlsContent = `======================================================================\n`;
+  urlsContent += `APPLICATION ENDPOINTS & ROUTES INVENTORY\n`;
+  urlsContent += `Component: ${componentId}\n`;
+  urlsContent += `Version:   ${version}\n`;
+  urlsContent += `Scan ID:   ${scanId}\n`;
+  urlsContent += `Total Endpoints Discovered: ${urlsInventory.length}\n`;
+  urlsContent += `New Endpoints in This Release: ${newUrls.length}\n`;
+  urlsContent += `======================================================================\n\n`;
+
+  if (newUrls.length > 0) {
+    urlsContent += `🔥 [NEWLY INTRODUCED ENDPOINTS IN THIS RELEASE] (${newUrls.length})\n`;
+    urlsContent += `----------------------------------------------------------------------\n`;
+    for (const nu of newUrls) {
+      const uStr = typeof nu === 'string' ? nu : nu.url;
+      const cat = typeof nu === 'string' ? 'NEW' : nu.category || 'NEW';
+      urlsContent += `• [${cat}] ${uStr}\n`;
+    }
+    urlsContent += `\n`;
+  }
+
+  urlsContent += `📦 [ACTIVE ENDPOINTS BY OPERATIONAL CATEGORY]\n`;
+  urlsContent += `----------------------------------------------------------------------\n`;
+  for (const [cat, list] of Object.entries(urlsByCategory)) {
+    const title = categoryNames[cat] || cat;
+    urlsContent += `\n[${title}] (${list.length})\n`;
+    for (const item of list) {
+      const isNewBadge = newUrlSet.has(item.url) ? '🔥 NEW' : '✓';
+      urlsContent += `  ${isNewBadge} ${item.url}\n`;
+    }
+  }
+
+  const urlsFilePath = path.join(outputDir, 'urls.txt');
+  fs.writeFileSync(urlsFilePath, urlsContent, 'utf8');
+
   // Telegram attachments: exactly the clean requested files
   const telegramFiles = [];
   if (validLeaks.length > 0 && fs.existsSync(leaksFilePath)) {
@@ -243,6 +299,9 @@ export function generateReportBundle(outputDir, scanData) {
       telegramFiles.push(stringsFilePath);
     }
   }
+  if (urlsInventory.length > 0 && fs.existsSync(urlsFilePath)) {
+    telegramFiles.push(urlsFilePath);
+  }
 
   return {
     files: [
@@ -255,6 +314,7 @@ export function generateReportBundle(outputDir, scanData) {
       leaksFilePath,
       diffFilePath,
       stringsFilePath,
+      urlsFilePath,
     ],
     telegramFiles,
     countCheck: {
@@ -263,5 +323,7 @@ export function generateReportBundle(outputDir, scanData) {
     },
     leaksCount: validLeaks.length,
     newStringsCount: uniqueCleanNewStrings.length,
+    urlsCount: urlsInventory.length,
+    newUrlsCount: newUrls.length,
   };
 }
