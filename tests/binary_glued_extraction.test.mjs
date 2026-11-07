@@ -31,12 +31,23 @@ test('matchSignalsInText matches unannounced codenames and non-standard model fa
     { input: 'claude-donut-eap', expected: 'claude-donut-eap' },
     { input: 'claude-onigiri-e', expected: 'claude-onigiri-e' },
     { input: 'claude-fable-5-1', expected: 'claude-fable-5-1' },
+    { input: 'claude-3.5-sonnet', expected: 'claude-3.5-sonnet' },
+    { input: 'claude-3.7-sonnet', expected: 'claude-3.7-sonnet' },
     { input: 'silicon-low', expected: 'silicon-low' },
     { input: 'silicon-max', expected: 'silicon-max' },
     { input: 'obsidian-3-max', expected: 'obsidian-3-max' },
     { input: 'swe-1-6-fast', expected: 'swe-1-6-fast' },
     { input: 'swe-2-high', expected: 'swe-2-high' },
     { input: 'cactus-preview', expected: 'cactus-preview' },
+    { input: 'gpt-4o', expected: 'gpt-4o' },
+    { input: 'gpt-4o-mini', expected: 'gpt-4o-mini' },
+    { input: 'gpt-5o-preview', expected: 'gpt-5o-preview' },
+    { input: 'o3-mini', expected: 'o3-mini' },
+    { input: 'gemini-2.0-flash', expected: 'gemini-2.0-flash' },
+    { input: 'gemini-exp-1206', expected: 'gemini-exp-1206' },
+    { input: 'gemini-ultra', expected: 'gemini-ultra' },
+    { input: 'mythos-5.1', expected: 'mythos-5.1' },
+    { input: 'fable-5.1', expected: 'fable-5.1' },
   ];
 
   for (const { input, expected } of modelsToTest) {
@@ -50,6 +61,9 @@ test('matchSignalsInText matches unannounced codenames and non-standard model fa
 test('getFilePriority assigns priority 2 to extensionless binaries and ELF/Mach-O/PE headers', () => {
   assert.equal(getFilePriority('bin/devin'), 2, 'bin/devin must be priority 2');
   assert.equal(getFilePriority('devin'), 2, 'devin must be priority 2');
+  assert.equal(getFilePriority('Codex.dmg'), 2, 'Codex.dmg must be priority 2');
+  assert.equal(getFilePriority('Claude.dmg'), 2, 'Claude.dmg must be priority 2');
+  assert.equal(getFilePriority('installer.msi'), 2, 'installer.msi must be priority 2');
   assert.equal(getFilePriority('app.js'), 1, 'app.js must be priority 1');
 
   const elfHeader = Buffer.from([0x7f, 0x45, 0x4c, 0x46, 0x02, 0x01]);

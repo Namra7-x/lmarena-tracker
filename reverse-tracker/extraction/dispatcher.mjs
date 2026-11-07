@@ -28,7 +28,10 @@ export function getFilePriority(filePath, buffer = null) {
   }
   if (lower.endsWith('.asar') || lower.endsWith('.exe') || lower.endsWith('.dll') ||
       lower.endsWith('.dylib') || lower.endsWith('.so') || lower.endsWith('.wasm') ||
-      lower.endsWith('.node') || lower.startsWith('bin/') || lower.includes('/bin/') ||
+      lower.endsWith('.node') || lower.endsWith('.dmg') || lower.endsWith('.pkg') ||
+      lower.endsWith('.msi') || lower.endsWith('.bin') || lower.endsWith('.appimage') ||
+      lower.endsWith('.deb') || lower.endsWith('.rpm') ||
+      lower.startsWith('bin/') || lower.includes('/bin/') ||
       lower.startsWith('usr/bin/') || lower.includes('/usr/bin/')) {
     return 2;
   }
