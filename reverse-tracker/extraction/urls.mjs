@@ -7,8 +7,10 @@
 
 // XML namespaces, standards, and static documentation hosts that are NOT app routes
 const NOISE_HOST_DOMAINS = new Set([
-  'www.w3.org',
   'w3.org',
+  'whatwg.org',
+  'ietf.org',
+  'ecma-international.org',
   'schemas.microsoft.com',
   'schemas.openxmlformats.org',
   'schema.org',
@@ -23,6 +25,7 @@ const NOISE_HOST_DOMAINS = new Set([
   'npmjs.com',
   'registry.npmjs.org',
   'crates.io',
+  'rust-lang.org',
   'pypi.org',
   'apache.org',
   'mozilla.org',
@@ -33,6 +36,10 @@ const NOISE_HOST_DOMAINS = new Set([
   'fonts.gstatic.com',
   'twitter.com',
   'x.com',
+  'unicode.org',
+  'iso.org',
+  'khronos.org',
+  'apple.com',
 ]);
 
 // Static assets and binary extensions that are not API endpoints
@@ -78,8 +85,10 @@ export function cleanAndValidateUrl(rawUrl) {
     try {
       const parsed = new URL(cleaned);
       const host = parsed.hostname.toLowerCase();
-      if (NOISE_HOST_DOMAINS.has(host)) return null;
-      if (host.endsWith('.w3.org') || host.endsWith('.github.com') || host.endsWith('.github.io')) return null;
+      for (const d of NOISE_HOST_DOMAINS) {
+        if (host === d || host.endsWith('.' + d)) return null;
+      }
+      if (host.endsWith('.github.io')) return null;
       if (/^\d+\.\d+\.\d+\.\d+$/.test(host) && (host.startsWith('127.') || host.startsWith('10.') || host.startsWith('192.168.'))) {
         return null;
       }

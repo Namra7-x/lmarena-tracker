@@ -12,7 +12,9 @@ import {
   matchSignalsInText,
 } from '../reverse-tracker/finder/rules.mjs';
 import { evaluateNoise, isHumanReadableString } from '../reverse-tracker/finder/noise.mjs';
-import { scoreFinding, TIERS } from '../reverse-tracker/finder/scorer.mjs';
+import { scoreFinding, sortFindings, deduplicateFindings, TIERS } from '../reverse-tracker/finder/scorer.mjs';
+import { unpackGluedTokens } from '../reverse-tracker/extraction/strings.mjs';
+import { cleanAndValidateUrl } from '../reverse-tracker/extraction/urls.mjs';
 import { generateReportBundle } from '../reverse-tracker/reports/bundle.mjs';
 
 test('1. Arbitrary Model Codename Discovery via AST Array Peer Clustering (No Hardcoded Names)', () => {
@@ -387,4 +389,67 @@ test('9. Reasoning Effort Levels, Subscription Plans & Web Search Capabilities',
   // Text matching for web search and search grounding
   const searchMatches = matchSignalsInText('enable_google_search_grounding with live_web_retrieval');
   assert.ok(searchMatches.some((f) => f.category === CATEGORIES.CAPABILITY));
+});
+
+test('10. Crate & Compiler Register Noise Elimination, Glued Model Unpacking & Finding Deduplication', () => {
+  // A. Unpack concatenated multi-model binary strings
+  const unpacked1 = unpackGluedTokens('gpt-6-lunaaurora-alphahalo-alpha');
+  assert.ok(unpacked1.includes('gpt-6-luna'), 'Must unpack gpt-6-luna');
+  assert.ok(unpacked1.includes('aurora-alpha'), 'Must unpack aurora-alpha');
+  assert.ok(unpacked1.includes('halo-alpha'), 'Must unpack halo-alpha');
+
+  const unpacked2 = unpackGluedTokens('availableswe-1-6-fast');
+  assert.ok(unpacked2.includes('swe-1-6-fast'), 'Must cleanly detach prefix from swe-1-6-fast');
+
+  const unpacked3 = unpackGluedTokens('agentswe-1-6-fast');
+  assert.ok(unpacked3.includes('swe-1-6-fast'), 'Must cleanly detach agent prefix from swe-1-6-fast');
+
+  // B. Rust Crate & Software Package Noise Rejection
+  const crateNoise = ['axum-0.8', 'hyper-1.8', 'rav1e-0.7', 'dom-0.3', 'harfrust-0.8', 'rmcp-3.2', 'box-0.8', 'core-0.8', 'spec-1.1'];
+  for (const crate of crateNoise) {
+    assert.equal(isValidModelIdentifier(crate), false, `${crate} must be rejected as an AI model`);
+    const findings = matchSignalsInText(crate);
+    assert.equal(findings.filter((f) => f.category === CATEGORIES.MODEL_ID).length, 0, `${crate} must not produce model finding`);
+  }
+
+  // C. Compiler Registers vs Real Reasoning Models
+  // Standalone register noise
+  const registers = ['o4', 'o5', 'o6', 'o7', 'o8', 'o9'];
+  for (const reg of registers) {
+    assert.equal(isValidModelIdentifier(reg), false, `${reg} without suffix must be rejected`);
+    const findings = matchSignalsInText(`loop with register ${reg}`);
+    assert.equal(findings.filter((f) => f.category === CATEGORIES.MODEL_ID).length, 0, `${reg} must not match as model`);
+  }
+  // Genuine models
+  const realModels = ['o1', 'o3', 'o1-mini', 'o3-high', 'o4-preview'];
+  for (const rm of realModels) {
+    assert.equal(isValidModelIdentifier(rm), true, `${rm} must be valid model`);
+  }
+
+  // D. Truncated -pro protocol noise & UI preview
+  const truncatedPro = ['content-type1connect-pro', 'agent-client-pro', 'skippingoauth-pro', 'event-streamgetmcp-pro', 'browser-preview'];
+  for (const tp of truncatedPro) {
+    assert.equal(isValidModelIdentifier(tp), false, `${tp} must be rejected as an AI model`);
+  }
+
+  // E. W3C / WHATWG / Mozilla Standards URL Rejection
+  const standardsUrls = [
+    'http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul',
+    'https://html.spec.whatwg.org/#bidi-rendering',
+    'https://html.spec.whatwg.org/#the-hr-element-2',
+  ];
+  for (const su of standardsUrls) {
+    assert.equal(cleanAndValidateUrl(su), null, `${su} must be filtered out as standards noise`);
+  }
+
+  // F. Deduplication of Findings
+  const duplicates = [
+    { category: 'model_id', value: 'astra-cyber-preview', score: 65, tier: 'HIGH-CONFIDENCE SIGNAL', isMajorEarlySignal: true, platforms: ['darwin-arm64'], context: 'context 1' },
+    { category: 'model_id', value: 'astra-cyber-preview', score: 65, tier: 'HIGH-CONFIDENCE SIGNAL', isMajorEarlySignal: true, platforms: ['win32-x64'], context: 'context 2' },
+    { category: 'model_id', value: 'astra-cyber-preview', score: 65, tier: 'HIGH-CONFIDENCE SIGNAL', isMajorEarlySignal: true, platforms: ['linux-x64'], context: 'context 3' },
+  ];
+  const deduped = deduplicateFindings(duplicates);
+  assert.equal(deduped.length, 1, 'Duplicate findings must be consolidated into single item');
+  assert.equal(deduped[0].occurrences, 3, 'Must record 3 occurrences');
+  assert.equal(deduped[0].platforms.length, 3, 'Must merge all platforms');
 });

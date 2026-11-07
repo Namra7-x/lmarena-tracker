@@ -173,15 +173,16 @@ export function scoreFinding(finding, context = {}) {
   }
 
   // 7. MAJOR EARLY SIGNAL qualification:
-  // HIGH-CONFIDENCE (60+), not in release notes, and category is model, command, endpoint, or agent
+  // HIGH-CONFIDENCE (60+), or MODEL_ID with score >= 50, not in release notes
   const isMajorEarlySignal =
-    tier === TIERS.HIGH_CONFIDENCE &&
     !context.matchesReleaseNotes &&
-    (finding.category === CATEGORIES.MODEL_ID ||
-      finding.category === CATEGORIES.HIDDEN_COMMAND ||
-      finding.category === CATEGORIES.ENDPOINT_DOMAIN ||
-      finding.category === CATEGORIES.AGENT_MODE ||
-      finding.category === CATEGORIES.CAPABILITY);
+    ((tier === TIERS.HIGH_CONFIDENCE &&
+      (finding.category === CATEGORIES.MODEL_ID ||
+        finding.category === CATEGORIES.HIDDEN_COMMAND ||
+        finding.category === CATEGORIES.ENDPOINT_DOMAIN ||
+        finding.category === CATEGORIES.AGENT_MODE ||
+        finding.category === CATEGORIES.CAPABILITY)) ||
+      (finding.category === CATEGORIES.MODEL_ID && score >= 50));
 
   const activationStatus = finding.activationStatus || 'UNKNOWN';
   const confidenceExplanation = breakdown.map((b) => `${b.rule} (${b.points >= 0 ? '+' : ''}${b.points} pts)`).join('; ');
@@ -206,4 +207,55 @@ export function sortFindings(findings) {
     if (a.category !== b.category) return a.category.localeCompare(b.category);
     return a.value.localeCompare(b.value);
   });
+}
+
+/**
+ * Deduplicate findings by (category, value.toLowerCase()).
+ * Merges occurrences, upgrades score & tier, combines platforms, and preserves distinct contexts.
+ */
+export function deduplicateFindings(findings) {
+  const map = new Map();
+  for (const f of findings) {
+    if (!f || !f.value || f.score <= 0) continue;
+    const normVal = (f.value || '').toString().toLowerCase().trim();
+    const key = `${f.category || 'other'}:${normVal}`;
+    const existing = map.get(key);
+    if (!existing) {
+      map.set(key, {
+        ...f,
+        occurrences: 1,
+        contexts: f.context && f.context !== f.value ? [f.context.trim()] : [],
+        locations: f.location ? [f.location] : [],
+        platforms: Array.from(new Set(f.platforms || (f.platform ? [f.platform] : ['all']))),
+      });
+    } else {
+      existing.occurrences++;
+      // Upgrade score & tier if higher
+      if (f.score > existing.score) {
+        existing.score = f.score;
+        existing.tier = f.tier;
+        existing.isMajorEarlySignal = f.isMajorEarlySignal;
+      }
+      // Upgrade activation status: ENABLED (4) > CONFIGURED (3) > REFERENCED (2) > UNKNOWN (1)
+      const statusWeight = { ENABLED: 4, CONFIGURED: 3, REFERENCED: 2, UNKNOWN: 1 };
+      if ((statusWeight[f.activationStatus] || 0) > (statusWeight[existing.activationStatus] || 0)) {
+        existing.activationStatus = f.activationStatus;
+      }
+      if (f.context && f.context !== f.value && !existing.contexts.includes(f.context.trim()) && existing.contexts.length < 3) {
+        existing.contexts.push(f.context.trim());
+      }
+      if (f.filePath && !existing.filePath) {
+        existing.filePath = f.filePath;
+      }
+      if (f.related && !existing.related) {
+        existing.related = f.related;
+      }
+      const existingPlats = new Set(existing.platforms);
+      for (const p of f.platforms || (f.platform ? [f.platform] : [])) {
+        existingPlats.add(p);
+      }
+      existing.platforms = Array.from(existingPlats);
+    }
+  }
+  return sortFindings(Array.from(map.values()));
 }

@@ -8,6 +8,7 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { isHumanReadableString } from '../finder/noise.mjs';
+import { deduplicateFindings } from '../finder/scorer.mjs';
 
 /**
  * Generate all report files for a scan.
@@ -42,8 +43,8 @@ export function generateReportBundle(outputDir, scanData) {
     reintroducedFindings = [],
   } = diffResults;
 
-  // Filter out noise/empty findings from scored leaks
-  const validLeaks = scoredFindings.filter((f) => f.score > 0);
+  // Deduplicate and filter out noise from scored leaks
+  const validLeaks = deduplicateFindings(scoredFindings);
 
   const leaksByCategory = {};
   for (const leak of validLeaks) {
@@ -81,12 +82,17 @@ export function generateReportBundle(outputDir, scanData) {
         const badge = item.isMajorEarlySignal ? '🔥 MAJOR EARLY SIGNAL' : item.tier;
         const plat = (item.platforms || []).join(', ') || 'all';
         const status = item.activationStatus || 'UNKNOWN';
-        leaksContent += `• [${badge}] (${item.score} pts) [${item.category}] [Status: ${status}]\n`;
+        const occStr = item.occurrences > 1 ? ` (${item.occurrences}x)` : '';
+        leaksContent += `• [${badge}] (${item.score} pts) [${item.category}] [Status: ${status}]${occStr}\n`;
         leaksContent += `  Finding:   ${item.value}\n`;
         if (item.discoveryMethod && item.discoveryMethod !== 'heuristic') {
           leaksContent += `  Discovery: ${item.discoveryMethod}\n`;
         }
-        if (item.context && item.context !== item.value) {
+        if (item.contexts && item.contexts.length > 0) {
+          for (const ctx of item.contexts) {
+            leaksContent += `  Context:   ${ctx.replace(/\r?\n/g, ' ')}\n`;
+          }
+        } else if (item.context && item.context !== item.value) {
           leaksContent += `  Context:   ${item.context.trim().replace(/\r?\n/g, ' ')}\n`;
         }
         if (item.related) {

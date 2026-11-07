@@ -24,7 +24,7 @@ import { extractSourceMapMetadata } from './extraction/sourcemap.mjs';
 import { matchSignalsInText } from './finder/rules.mjs';
 import { evaluateNoise, isHumanReadableString } from './finder/noise.mjs';
 import { detectPlatformAsymmetry } from './finder/asymmetry.mjs';
-import { scoreFinding, sortFindings } from './finder/scorer.mjs';
+import { scoreFinding, sortFindings, deduplicateFindings } from './finder/scorer.mjs';
 import { computeExactDiff } from './diff/engine.mjs';
 import { generateReportBundle } from './reports/bundle.mjs';
 import { TelegramClient } from './telegram/client.mjs';
@@ -445,15 +445,16 @@ async function handleScan(componentId, options = {}) {
 
   // Step 7: Deterministic Scoring & Ranking
   const scoredFindings = rawFindings.map((f) => {
-    const isNew = diffResults.newFindings.some((nf) => nf.value === f.value);
-    const isFirstEver = !historicalSeenHashes.has(f.value);
+    const isNew = isTestRun || diffResults.newFindings.some((nf) => nf.value === f.value);
+    const isFirstEver = isTestRun || !historicalSeenHashes.has(f.value);
     return scoreFinding(f, { isNewInDiff: isNew, isFirstEverSeen: isFirstEver });
   });
 
   const sortedScored = sortFindings(scoredFindings);
-  const majorSignals = sortedScored.filter((f) => f.isMajorEarlySignal);
-  const highSignals = sortedScored.filter((f) => f.tier === 'HIGH-CONFIDENCE SIGNAL');
-  const moreFindings = sortedScored.filter((f) => f.tier === 'EARLY SIGNAL');
+  const dedupedFindings = deduplicateFindings(sortedScored);
+  const majorSignals = dedupedFindings.filter((f) => f.isMajorEarlySignal);
+  const highSignals = dedupedFindings.filter((f) => f.tier === 'HIGH-CONFIDENCE SIGNAL');
+  const moreFindings = dedupedFindings.filter((f) => f.tier === 'EARLY SIGNAL');
 
   // Step 8: Empirical Benchmark & Generate Report Bundle
   const executionTimeMs = Math.round(performance.now() - scanStartTime);

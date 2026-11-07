@@ -8,7 +8,10 @@ const MIN_STRING_LEN = 4;
 const MAX_STRING_LEN = 2048;
 
 // Universal structural model tier & version boundaries across ALL AI models (Zero hardcoded lab names)
-const DYNAMIC_TIER_OR_VERSION_SUFFIX = /(?<=-)(?:low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap|tts|clip|audio|video|image|music|embed|embedding|multimodal|v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*)(?=[a-zA-Z0-9])/gi;
+const DYNAMIC_TIER_OR_VERSION_SUFFIX = /(?<=-)(?:low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap|tts|clip|audio|video|image|music|embed|embedding|multimodal|alpha|beta|luna|terra|sol|nova|astro|stellar|atlas|orion|fable|mythos|v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*)(?=[a-zA-Z0-9])/gi;
+
+// Glued code prefixes before known AI model anchors (e.g. "availableswe-1-6-fast" -> "available", "swe-1-6-fast")
+const GLUED_MODEL_PREFIX = /(?<=[a-zA-Z0-9_])(?=(?:swe|gpt|claude|gemini|o[1-9]|astra|deepseek|llama|qwen|mistral|sonnet|opus|haiku|fable|mythos|obsidian|cactus|silicon|keken|aurora|halo)-[a-zA-Z0-9])/gi;
 
 // Universal feature flag, MCP protocol, and connector boundaries
 const DYNAMIC_GATE_PREFIX = /(?<=[a-zA-Z0-9_])(?=(?:can_see_|canUse|is_internal_|enable_|has_feature_|experiment_|feature_|mcp__|mcp_|agent_|subagent_|connector_|tool_)[a-zA-Z0-9])/gi;
@@ -74,6 +77,18 @@ export function unpackGluedTokens(str) {
     }
   }
   tokens = providerSplit;
+
+  // 1b. Split on glued model prefixes (e.g. "availableswe-1-6-fast" -> "available", "swe-1-6-fast")
+  const modelPrefixSplit = [];
+  for (const t of tokens) {
+    if (GLUED_MODEL_PREFIX.test(t)) {
+      GLUED_MODEL_PREFIX.lastIndex = 0;
+      modelPrefixSplit.push(...t.replace(GLUED_MODEL_PREFIX, '\n').split('\n').filter(Boolean));
+    } else {
+      modelPrefixSplit.push(t);
+    }
+  }
+  tokens = modelPrefixSplit;
 
   // 2. Split on universal model tier or version boundaries
   const tierSplit = [];

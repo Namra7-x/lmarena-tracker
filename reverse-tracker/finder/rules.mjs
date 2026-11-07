@@ -129,18 +129,49 @@ export function isValidModelIdentifier(val) {
 
   // 11. OpenAI Reasoning series constraint (o1, o3, o4...)
   if (/^o[1-9]/i.test(str)) {
+    // Only o1 and o3 can be bare 2-character identifiers; o2, o4..o9 MUST have a hyphen and model suffix
+    if (/^o[24-9]$/i.test(str)) return false;
     if (!/^o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|reasoning|\d{4}-\d{2}-\d{2}))*$/i.test(str)) {
       return false;
     }
   }
 
-  // 12. Generic prefix check: if suffix is one of the generic code words (pro, base, code, agent, low),
+  // 12. Generic prefix and code token checks
+  if (/\.(?:rs|ts|js|jsx|tsx|go|py|c|cpp|h|json|toml|yaml|yml|md|txt|lock)$/i.test(str)) return false;
+  if (str.includes('/src/') || str.includes('crates.io') || str.includes('.cargo') || str.includes('node_modules')) return false;
+
+  // Reject non-model software tokens
+  if (/-(?:token|session|rs|lib|crate|client|manifest|plugin|header|footer|cache|mutex|lock|protocol|proto|schema)$/i.test(str)) return false;
+
+  // Reject UI preview features
+  if (['browser-preview', 'tab-preview', 'window-preview', 'screen-preview', 'page-preview'].includes(lower)) return false;
+  if (/browser-preview/i.test(str)) return false;
+
+  // Reject OS architectures, platform build targets, and compiler targets (e.g. "devin-locallinuxx86_64", "x86_64", "aarch64")
+  if (/(?:linux|darwin|macos|windows|win32|x86_64|aarch64|arm64|amd64)/i.test(str)) return false;
+
+  // If candidate has slashes (e.g. "cli/current/manifest"), require an AI provider prefix
+  if (str.includes('/')) {
+    const providerSlashMatch = /^(?:anthropic|openai|google|meta-llama|deepseek|mistral|qwen|cohere|stabilityai)\//i.test(str);
+    if (!providerSlashMatch) return false;
+  }
+
+  // Generic prefix check: if suffix is one of the generic code words (pro, base, code, agent, low),
   // ensure the prefix is not a 2-letter word or standard programming word
   if (/-(?:pro|base|code|agent|low)$/i.test(str)) {
-    const parts = str.split('-');
-    const prefix = parts[0].toLowerCase();
-    if (prefix.length <= 2) return false;
-    if (['exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi'].includes(prefix)) {
+    const fullStem = str.slice(0, str.lastIndexOf('-')).toLowerCase();
+    if (fullStem.length <= 2) return false;
+    if (['connect', 'oauth', 'mcp', 'client', 'tool-in', 'cross', 'chisel', 'stream', 'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp', 'exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi'].some((w) => fullStem.includes(w))) {
+      return false;
+    }
+  }
+
+  // 13. Package semver check: strings formatted like "<name>-<version>" (e.g. "axum-0.8", "hyper-1.8", "box-0.8")
+  // are software crate/package dependencies unless they match a known model provider or end with an AI tier suffix.
+  if (/^[a-zA-Z][a-zA-Z0-9_]{1,30}-[0-9]+(?:\.[0-9]+)+(?:-[0-9a-zA-Z._-]+)?$/i.test(str)) {
+    const isKnownProvider = /^(?:gpt|claude|gemini|o[1-9]|deepseek|llama|qwen|mistral|kimi|lyria|imagen|chinchilla|devin|cursor|codex|whisper|sora|sonnet|opus|haiku|mythos|fable|swe)-/i.test(str);
+    const hasTierSuffix = /-(?:turbo|preview|flash|pro|plus|instruct|mini|nano|micro|ultra|lite|base|chat|thinking|reasoning|vision|high|max|fast|low|coder|sonnet|opus|haiku|alpha|beta|eval|distill|eap|tts|clip)$/i.test(str);
+    if (!isKnownProvider && !hasTierSuffix) {
       return false;
     }
   }
@@ -161,8 +192,21 @@ export function isValidFeatureFlag(val) {
   const lower = str.toLowerCase();
   if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
   if (evaluateNoise(str).isNoise) return false;
+  // Reject UI DOM properties mistaken as feature flags
+  if (/^preview_(?:id|width|height|style|dom|element|view|node|ptr|item|modal|close|closed)/i.test(str)) return false;
   return true;
 }
+
+const AGENT_CODE_NOUNS = new Set([
+  'impl', 'ext', 'builder', 'setup', 'init', 'state', 'context', 'session',
+  'handler', 'handlers', 'error', 'errors', 'runner', 'dispatcher', 'manager',
+  'panel', 'view', 'views', 'controller', 'component', 'props', 'schema',
+  'result', 'results', 'content', 'contents', 'footer', 'header', 'body',
+  'id', 'ids', 'type', 'types', 'val', 'key', 'keys', 'arg', 'args', 'param', 'params',
+  'data', 'info', 'cache', 'mutex', 'lock', 'arc', 'rc', 'ptr', 'ref',
+  'call', 'calls', 'event', 'events', 'msg', 'message', 'messages',
+  'iterationcore', 'idsubagent', 'profilesassertion'
+]);
 
 /**
  * Validates whether a candidate string is an agent capability, tool schema, or MCP identifier.
@@ -172,6 +216,13 @@ export function isValidAgentTool(val) {
   const str = val.trim();
   if (str.length < 4 || str.length > 80) return false;
   if (!/^[a-zA-Z_]/.test(str)) return false;
+  const lower = str.toLowerCase();
+  // Filter out internal code nouns
+  for (const noun of AGENT_CODE_NOUNS) {
+    if (lower === `agent_${noun}` || lower === `tool_${noun}` || lower === `mcp_${noun}` || lower.endsWith(`_${noun}`)) {
+      return false;
+    }
+  }
   return /^(?:mcp__|mcp_|agent_|subagent_|connector_|tool_|computer_control|browser_use|terminal_exec|voice_canvas|canvas_reasoning|deep_research)/i.test(str);
 }
 
@@ -196,13 +247,13 @@ const MODEL_PATTERNS = [
   /\b([a-zA-Z][a-zA-Z0-9_]{2,30}(?:-[a-zA-Z0-9_]{1,30})*-(?:ultra|mini|nano|micro|pro|plus|lite|turbo|instruct|thinking|reasoning|vision|eval|distill|preview|eap|tts|clip|flash|max|low|high)(?:-[0-9]{2,4}(?:-[0-9]{2,4})*)?)\b/i,
 
   // C. Structural Versioned Model Identifiers (e.g. swe-1-6-fast, swe-2-high, mythos-5.1, fable-5.1, hyper-v3-coder)
-  /\b([a-zA-Z][a-zA-Z0-9_]{2,25}-(?:v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*-(?:turbo|preview|flash|pro|plus|instruct|mini|nano|micro|ultra|lite|base|chat|thinking|reasoning|vision|high|max|fast|low|coder|sonnet|opus|haiku)[a-zA-Z0-9._-]*|v[0-9]+(?:\.[0-9]+)*|[0-9]+\.[0-9]+(?:-[a-zA-Z0-9._-]+)*))\b/i,
+  /\b([a-zA-Z][a-zA-Z0-9_]{2,25}-(?:v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*-(?:turbo|preview|flash|pro|plus|instruct|mini|nano|micro|ultra|lite|base|chat|thinking|reasoning|vision|high|max|fast|low|coder|sonnet|opus|haiku|alpha|beta|eval|distill|eap|tts|clip)[a-zA-Z0-9._-]*))\b/i,
 
   // D. Provider Anchor Wildcards (provider-(ANYTHING))
   /\b((?:claude|gpt|gemini|devin|cursor|codex|droid|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|whisper)-[a-zA-Z0-9_\-\.]+)\b/i,
 
-  // E. OpenAI Reasoning Series (o1, o3, o4, o5...)
-  /\b(o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|reasoning|\d{4}-\d{2}-\d{2}))*)(?![-a-zA-Z0-9_])/i,
+  // E. OpenAI Reasoning Series (o1-mini, o3-mini, o4-preview... then standalone o1, o3)
+  /\b(o[1-9]-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|reasoning|\d{4}-\d{2}-\d{2})|o1|o3)\b/i,
 
   // F. Anthropic Tier Wildcards
   /\b((?:sonnet|opus|haiku|mythos|fable)-[a-zA-Z0-9_\-\.]+)\b/i,
@@ -213,7 +264,7 @@ const FLAG_PATTERNS = [
   // SDK invocation patterns: variation("..."), checkGate("..."), isFeatureEnabled("...")
   /(?:variation|checkGate|getExperiment|isFeatureEnabled|useFeatureFlag|useExperiment|isEnabled)\s*\(\s*["']([a-zA-Z0-9_.-]{3,60})["']/i,
   // Snake_case with explicit gate prefixes
-  /\b((?:enable|canary|dogfood|dark|gate|exp|experiment|rollout|feature|preview|beta)_[a-z0-9_]{3,50})\b/i,
+  /\b((?:enable|canary|dogfood|dark|gate|exp|experiment|rollout|feature_gate|feature_flag|beta)_[a-z0-9_]{3,50})\b/i,
   // Flag configuration dictionaries
   /["']([a-zA-Z0-9_.-]+(?:Experiment|FeatureFlag|RolloutGate|FeatureGate))["']/,
   // CamelCase boolean toggles
