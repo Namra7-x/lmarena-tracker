@@ -70,6 +70,44 @@ test('getFilePriority assigns priority 2 to extensionless binaries and ELF/Mach-
   assert.equal(getFilePriority('unknown-file', elfHeader), 2, 'ELF magic header must be priority 2');
 });
 
+test('zero-hardcoding dynamic extraction catches arbitrary unseen lab models and slots', () => {
+  // Test arbitrary, completely unseen model names from unknown future labs
+  const arbitraryModels = [
+    { input: 'quantum-max', expected: 'quantum-max' },
+    { input: 'zephyr-ultra', expected: 'zephyr-ultra' },
+    { input: 'stargate-pro', expected: 'stargate-pro' },
+    { input: 'nebula-turbo', expected: 'nebula-turbo' },
+    { input: 'carbon-low', expected: 'carbon-low' },
+    { input: 'supernova-preview', expected: 'supernova-preview' },
+    { input: 'hyper-v3-coder', expected: 'hyper-v3-coder' },
+    { input: 'const cfg = { defaultModel: "alien-brain-x" }', expected: 'alien-brain-x' },
+    { input: 'export const run = { primary_model: "omega-9" }', expected: 'omega-9' },
+  ];
+
+  for (const { input, expected } of arbitraryModels) {
+    const findings = matchSignalsInText(input);
+    const modelFinding = findings.find((f) => f.category === CATEGORIES.MODEL_ID);
+    assert.ok(modelFinding, `Zero-hardcoded rules must dynamically find '${expected}' in '${input}'`);
+    assert.equal(modelFinding.value, expected);
+  }
+
+  // Dynamic binary unpack of arbitrary unseen models
+  const arbitraryGlued = Buffer.from(
+    '\x00\x00quantum-maxzephyr-ultrastargate-pro\x00\x00' +
+    'nebula-turbocarbon-lowsupernova-preview\x00\x00',
+    'utf8'
+  );
+  const unpacked = extractStrings(arbitraryGlued);
+  const vals = new Set(unpacked.map((u) => u.value));
+
+  assert.ok(vals.has('quantum-max'), 'Must dynamically unpack quantum-max');
+  assert.ok(vals.has('zephyr-ultra'), 'Must dynamically unpack zephyr-ultra');
+  assert.ok(vals.has('stargate-pro'), 'Must dynamically unpack stargate-pro');
+  assert.ok(vals.has('nebula-turbo'), 'Must dynamically unpack nebula-turbo');
+  assert.ok(vals.has('carbon-low'), 'Must dynamically unpack carbon-low');
+  assert.ok(vals.has('supernova-preview'), 'Must dynamically unpack supernova-preview');
+});
+
 test('fetchDevinDesktop points to direct native archive URLs (.zip and .tar.gz)', async () => {
   const desktop = await fetchDevinDesktop();
   assert.ok(desktop.artifacts.length >= 4, 'Must provide desktop artifacts');

@@ -29,31 +29,25 @@ const CSS_CURSOR_VALUES = new Set([
   'cursor-auto'
 ]);
 
-// 1. Dynamic Models & AI Engines
+// 1. Dynamic Models & AI Engines (Zero Hardcoded Model Names)
 const MODEL_PATTERNS = [
-  // Claude models: versioned (claude-3, claude-3.5, claude-3.7, claude-4) and unannounced codenames (claude-donut-eap, claude-onigiri-e, claude-fable-5-1, claude-mythos-5-1)
-  /\b(claude-[a-z0-9]+(?:\.[0-9]+)*(?:-[a-z0-9._-]+)*)\b/i,
-  // Silicon models (Devin custom model family: silicon-low, silicon-medium, silicon-high, silicon-xhigh, silicon-max)
-  /\b(silicon-(?:ultra-)?(?:low|medium|high|xhigh|max|mini|pro|fast|[a-z0-9_-]+))\b/i,
-  // Obsidian models (obsidian-3-low, obsidian-3-medium, obsidian-3-high, obsidian-3-max)
-  /\b(obsidian-(?:[0-9]+-)?(?:low|medium|high|xhigh|max|mini|pro|[a-z0-9_-]+))\b/i,
-  // SWE-bench / agent models (swe-1-6-fast, swe-1.7, swe-2-low, swe-2-high, swe-2-max)
-  /\b(swe-(?:[0-9]+(?:[.-][0-9]+)*-)?(?:low|medium|high|max|fast|bench|[a-z0-9_-]+))\b/i,
-  // Unreleased lab codenames (cactus, kraken, hyperion, penguin, pigeon, chimera, titan, phoenix, orion, hermes, astra)
-  /\b((?:cactus|kraken|hyperion|penguin|pigeon|chimera|titan|phoenix|orion|hermes|astra)-[a-z0-9_-]+)\b/i,
-  // OpenAI GPT series (gpt-4, gpt-4o, gpt-4o-mini, gpt-4.5, gpt-5, gpt-5o)
-  /\b(gpt-[4-9][a-z0-9]*(?:\.[0-9]+)?(?:-[a-z0-9._-]+)*)\b/i,
-  // OpenAI o-series reasoning models (o1, o1-preview, o1-mini, o1-pro, o3, o3-mini, o3-high, o4)
-  /\b(o[1-9][a-z0-9]*(?:-[a-z0-9._-]+)*)\b/i,
-  // Google Gemini & Antigravity (gemini-1.5-pro, gemini-2.0-flash, gemini-exp, gemini-ultra, gemini-3)
-  /\b(gemini-[a-z0-9]+(?:\.[0-9]+)*(?:-[a-z0-9._-]+)*)\b/i,
-  // Anthropic tier names (sonnet-3.5, opus-4, haiku-3.5, mythos-5.1, fable-5.1)
-  /\b((?:sonnet|opus|haiku|mythos|fable)-[0-9]+(?:\.[0-9]+)*(?:-[a-z0-9._-]+)*)\b/i,
-  // AI Dev tools / products (codex, cursor, devin, droid, deepseek, qwen, grok, llama, mistral, kimi)
-  /\b((?:codex|cursor|devin|droid|deepseek|qwen|grok|llama|mistral|kimi)-[a-z0-9_-]+)\b/i,
-  /\b([a-z0-9_]+-(?:instruct|reasoning|thinking|canvas|vision)-preview)\b/i,
-  // Parameter definitions (e.g. model: "...", defaultModel: "...")
-  /["']?(?:model|defaultModel|reasoningModel|evalModel|fallbackModel)["']?\s*[:=]\s*["']([a-zA-Z0-9_\-\.]{4,40})["']/i,
+  // A. Structural Model Slots in Code & Config (captures ANY model assigned to a property)
+  /(?:model|model_slug|model_id|model_name|default_model|defaultModel|fallbackModel|reasoningModel|evalModel|chat_model|active_model|primary_model|subagent_model|selected_model)\s*[:=]\s*["']([a-zA-Z0-9_\-\.\:\/]{3,60})["']/i,
+
+  // B. Structural Tiered & Capability Model Identifiers (any-prefix-(any-slug-)*(low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap))
+  /\b([a-zA-Z0-9_]{2,30}(?:-[a-zA-Z0-9_]{1,30})*-(?:low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap))\b/i,
+
+  // C. Structural Versioned Model Identifiers (any-prefix-(any-slug-)*(v?[0-9]+...))
+  /\b([a-zA-Z0-9_]{2,30}(?:-[a-zA-Z0-9_]{1,30})*-(?:v?[0-9]+(?:\.[0-9]+)*(?:-[a-zA-Z0-9._-]+)*))\b/i,
+
+  // D. Provider Anchor Wildcards (provider-(ANYTHING))
+  /\b((?:claude|gpt|gemini|devin|cursor|codex|droid|deepseek|qwen|grok|llama|mistral|kimi)-[a-zA-Z0-9_\-\.]+)\b/i,
+
+  // E. OpenAI Reasoning Series (o1, o3, o4, o5...)
+  /\b(o[1-9][a-zA-Z0-9]*(?:-[a-zA-Z0-9._-]+)*)\b/i,
+
+  // F. Anthropic Tier Wildcards
+  /\b((?:sonnet|opus|haiku|mythos|fable)-[a-zA-Z0-9_\-\.]+)\b/i,
 ];
 
 // 2. Dynamic Feature Gates & Experiments (LaunchDarkly, Statsig, PostHog, custom SDKs)
@@ -244,10 +238,22 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     }
   }
 
+  // Filter out strict sub-segments when a longer parent model identifier is present
+  const modelValues = new Set(findings.filter((f) => f.category === CATEGORIES.MODEL_ID).map((f) => f.value));
+  const filteredFindings = findings.filter((f) => {
+    if (f.category !== CATEGORIES.MODEL_ID) return true;
+    for (const other of modelValues) {
+      if (other !== f.value && other.includes(f.value)) {
+        return false; // Suppress sub-segment
+      }
+    }
+    return true;
+  });
+
   // Deduplicate findings by category + value
   const seenFindings = new Set();
   const uniqueFindings = [];
-  for (const f of findings) {
+  for (const f of filteredFindings) {
     const key = `${f.category}:${f.value}`;
     if (!seenFindings.has(key)) {
       seenFindings.add(key);

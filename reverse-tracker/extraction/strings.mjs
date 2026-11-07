@@ -7,51 +7,56 @@
 const MIN_STRING_LEN = 4;
 const MAX_STRING_LEN = 2048;
 
-// Regular expressions to split concatenated/glued string literals in Rust/Go binaries
-const GLUED_MODEL_REGEX = /(?=(?:(?<!claude-)(?:sonnet|opus|haiku)|claude|silicon|obsidian|cactus|kraken|hyperion|swe|penguin|pigeon|kimi|deepseek|grok|llama|qwen|mistral|codex|devin|gpt|gemini|o[1-9])-(?:[a-zA-Z0-9]))/gi;
-const GLUED_FLAG_REGEX = /(?=(?:enable|canary|dogfood|dark|gate|exp|experiment|feature)_[a-zA-Z0-9])/gi;
-const GLUED_MCP_REGEX = /(?=(?:mcp__|mcp_|agent_|subagent_)[a-zA-Z0-9])/gi;
+// Universal structural model tier & version boundaries across ALL AI models (Zero hardcoded lab names)
+const DYNAMIC_TIER_OR_VERSION_SUFFIX = /(?<=-)(?:low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap|v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*)(?=[a-zA-Z0-9])/gi;
+
+// Universal feature flag and MCP protocol boundaries
+const DYNAMIC_GATE_PREFIX = /(?=(?:can_see_|canUse|is_internal_|enable_|has_feature_|experiment_|feature_|mcp__|mcp_|agent_|subagent_)[a-zA-Z0-9])/gi;
 
 /**
- * Unpack concatenated string literals that lack null terminators in compiled binaries.
+ * Split repeated prefixes in a single glued identifier dynamically (e.g. "prefix-..." repeating 2+ times).
+ */
+function splitRepeatedPrefixes(str) {
+  const prefixMatch = str.match(/\b([a-zA-Z0-9_]{3,20}[-_])/);
+  if (prefixMatch) {
+    const prefix = prefixMatch[1];
+    const occurrences = str.split(prefix).length - 1;
+    if (occurrences >= 2) {
+      return str.replaceAll(prefix, '\n' + prefix).split('\n').filter(Boolean);
+    }
+  }
+  return [str];
+}
+
+/**
+ * Unpack concatenated string literals lacking null terminators in compiled binaries (Zero hardcoded lab names).
  */
 export function unpackGluedTokens(str) {
   if (!str || typeof str !== 'string' || str.length < 8) return [str];
+
   let tokens = [str];
 
-  if (GLUED_MODEL_REGEX.test(str)) {
-    GLUED_MODEL_REGEX.lastIndex = 0;
-    const split = str.split(GLUED_MODEL_REGEX);
-    if (split.length > 1) {
-      tokens = split.map((s) => s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '')).filter((s) => s.length >= 4);
-    }
+  // 1. Split on universal model tier or version boundaries
+  if (str.includes('-') && DYNAMIC_TIER_OR_VERSION_SUFFIX.test(str)) {
+    DYNAMIC_TIER_OR_VERSION_SUFFIX.lastIndex = 0;
+    const split = str.replaceAll(DYNAMIC_TIER_OR_VERSION_SUFFIX, (match) => match + '\n');
+    tokens = split.split('\n').map((s) => s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '')).filter((s) => s.length >= 4);
   }
 
+  // 2. Check for recurring prefix patterns in each token
   const out = [];
   for (const t of tokens) {
-    if (t.length >= 12 && GLUED_FLAG_REGEX.test(t)) {
-      GLUED_FLAG_REGEX.lastIndex = 0;
-      const split = t.split(GLUED_FLAG_REGEX);
-      if (split.length > 1) {
-        for (const s of split) {
-          const clean = s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '');
-          if (clean.length >= 4) out.push(clean);
-        }
-        continue;
+    const subTokens = splitRepeatedPrefixes(t);
+    for (const st of subTokens) {
+      // 3. Split on feature gates or MCP protocol boundaries
+      if (DYNAMIC_GATE_PREFIX.test(st)) {
+        DYNAMIC_GATE_PREFIX.lastIndex = 0;
+        const gateSplit = st.split(DYNAMIC_GATE_PREFIX).map((s) => s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '')).filter((s) => s.length >= 4);
+        out.push(...(gateSplit.length > 0 ? gateSplit : [st]));
+      } else {
+        out.push(st);
       }
     }
-    if (t.length >= 10 && GLUED_MCP_REGEX.test(t)) {
-      GLUED_MCP_REGEX.lastIndex = 0;
-      const split = t.split(GLUED_MCP_REGEX);
-      if (split.length > 1) {
-        for (const s of split) {
-          const clean = s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '');
-          if (clean.length >= 4) out.push(clean);
-        }
-        continue;
-      }
-    }
-    out.push(t);
   }
 
   return out.length > 0 ? out : [str];
