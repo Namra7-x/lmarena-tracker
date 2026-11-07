@@ -208,9 +208,26 @@ export function evaluateNoise(value) {
     return { isNoise: true, reason: 'standard_generic_word' };
   }
 
-  // 5. CSS / Tailwind / Hex color / SVG
+  // 5. CSS / Tailwind / Hex color / SVG / Coordinates
   if (HEX_COLOR_REGEX.test(trimmed) || CSS_TAILWIND_REGEX.test(trimmed) || CSS_PROPERTY_REGEX.test(trimmed) || SVG_PATH_REGEX.test(trimmed)) {
     return { isNoise: true, reason: 'css_style_or_svg' };
+  }
+  if (/[0-9]+[hvlzsqta][0-9.-]/i.test(trimmed) || /^[0-9]+-[0-9.]+$/.test(trimmed)) {
+    return { isNoise: true, reason: 'svg_coordinate' };
+  }
+  if (/^(?:o[1-9]|v[0-9]|col|row|flex|grid|p|m|px|py|bg|text|border|ring|shadow)-(?:card|btn|button|input|modal|badge|alert|text|bg|border|ring|muted|container|header|footer|row|col|flex|grid|icon|avatar|tooltip|switch|nav|sidebar|tab|label|select|checkbox|radio)/i.test(trimmed)) {
+    return { isNoise: true, reason: 'css_component_class' };
+  }
+
+  // 5b. Date formats, calendar layouts, encodings, and cloud regions
+  if (/^\d{2,4}[-_]\d{1,2}(?:[-_]\d{1,4})?$/.test(trimmed) || /^\d{1,2}[-_](?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(trimmed) || /^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[-_]\d+$/i.test(trimmed)) {
+    return { isNoise: true, reason: 'date_layout' };
+  }
+  if (/^(?:utf|ucs|iso|windows|cp|koi8|ascii|ansi|ebcdic|shift[-_]jis|euc)[-_]/i.test(trimmed)) {
+    return { isNoise: true, reason: 'encoding_standard' };
+  }
+  if (/^(?:us|eu|ap|sa|ca|me|af|cn|gov|asia)-(?:central|east|west|north|south|northeast|northwest|southeast|southwest)-\d+$/i.test(trimmed)) {
+    return { isNoise: true, reason: 'cloud_region' };
   }
 
   // Check multi-class Tailwind strings (e.g. "flex items-center px-4 bg-slate-900")

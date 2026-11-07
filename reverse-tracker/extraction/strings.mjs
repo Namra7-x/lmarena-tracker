@@ -8,10 +8,19 @@ const MIN_STRING_LEN = 4;
 const MAX_STRING_LEN = 2048;
 
 // Universal structural model tier & version boundaries across ALL AI models (Zero hardcoded lab names)
-const DYNAMIC_TIER_OR_VERSION_SUFFIX = /(?<=-)(?:low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap|v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*)(?=[a-zA-Z0-9])/gi;
+const DYNAMIC_TIER_OR_VERSION_SUFFIX = /(?<=-)(?:low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap|tts|clip|audio|video|image|music|embed|embedding|multimodal|v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*)(?=[a-zA-Z0-9])/gi;
 
-// Universal feature flag and MCP protocol boundaries
-const DYNAMIC_GATE_PREFIX = /(?=(?:can_see_|canUse|is_internal_|enable_|has_feature_|experiment_|feature_|mcp__|mcp_|agent_|subagent_)[a-zA-Z0-9])/gi;
+// Universal feature flag, MCP protocol, and connector boundaries
+const DYNAMIC_GATE_PREFIX = /(?<=[a-zA-Z0-9_])(?=(?:can_see_|canUse|is_internal_|enable_|has_feature_|experiment_|feature_|mcp__|mcp_|agent_|subagent_|connector_|tool_)[a-zA-Z0-9])/gi;
+
+// Provider anchor boundaries inside glued strings (splits "_callgemini-..." or "ttslyria-...")
+const GLUED_PROVIDER_ANCHOR = /(?<=[a-zA-Z0-9_])(?=(?:gemini|claude|gpt|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|devin|cursor|codex|whisper|sora|sonnet|opus|haiku|o[1-9])-[a-zA-Z0-9])/gi;
+
+// 8-digit date/timestamp prefixes attached to letters (e.g. "20250929gemini...")
+const GLUED_TIMESTAMP_PREFIX = /(?<=\b\d{8})(?=[a-zA-Z])/g;
+
+// 4-digit year date suffixes attached to identifiers (e.g. "teams2006-01-02" -> "teams", "2006-01-02")
+const GLUED_DATE_SUFFIX = /(?<=[a-zA-Z_])(?=(?:19|20)\d{2}[-_]\d{2}[-_]\d{2})/g;
 
 /**
  * Split repeated prefixes in a single glued identifier dynamically (e.g. "prefix-..." repeating 2+ times).
@@ -32,26 +41,61 @@ function splitRepeatedPrefixes(str) {
  * Unpack concatenated string literals lacking null terminators in compiled binaries (Zero hardcoded lab names).
  */
 export function unpackGluedTokens(str) {
-  if (!str || typeof str !== 'string' || str.length < 8) return [str];
+  if (!str || typeof str !== 'string' || str.length < 6) return [str];
 
   let tokens = [str];
 
-  // 1. Split on universal model tier or version boundaries
-  if (str.includes('-') && DYNAMIC_TIER_OR_VERSION_SUFFIX.test(str)) {
-    DYNAMIC_TIER_OR_VERSION_SUFFIX.lastIndex = 0;
-    const split = str.replaceAll(DYNAMIC_TIER_OR_VERSION_SUFFIX, (match) => match + '\n');
-    tokens = split.split('\n').map((s) => s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '')).filter((s) => s.length >= 4);
+  // 0. Split 8-digit timestamp prefixes (e.g. "20250929gemini..." -> "20250929", "gemini...")
+  if (GLUED_TIMESTAMP_PREFIX.test(str)) {
+    GLUED_TIMESTAMP_PREFIX.lastIndex = 0;
+    tokens = str.replace(GLUED_TIMESTAMP_PREFIX, '\n').split('\n').filter(Boolean);
   }
 
-  // 2. Check for recurring prefix patterns in each token
+  // 0b. Split date suffixes (e.g. "teams2006-01-02" -> "teams", "2006-01-02")
+  const dateSplit = [];
+  for (const t of tokens) {
+    if (GLUED_DATE_SUFFIX.test(t)) {
+      GLUED_DATE_SUFFIX.lastIndex = 0;
+      dateSplit.push(...t.replace(GLUED_DATE_SUFFIX, '\n').split('\n').filter(Boolean));
+    } else {
+      dateSplit.push(t);
+    }
+  }
+  tokens = dateSplit;
+
+  // 1. Split on provider anchors (e.g. "_callgemini-..." -> "_call", "gemini-...")
+  const providerSplit = [];
+  for (const t of tokens) {
+    if (GLUED_PROVIDER_ANCHOR.test(t)) {
+      GLUED_PROVIDER_ANCHOR.lastIndex = 0;
+      providerSplit.push(...t.replace(GLUED_PROVIDER_ANCHOR, '\n').split('\n').filter(Boolean));
+    } else {
+      providerSplit.push(t);
+    }
+  }
+  tokens = providerSplit;
+
+  // 2. Split on universal model tier or version boundaries
+  const tierSplit = [];
+  for (const t of tokens) {
+    if (t.includes('-') && DYNAMIC_TIER_OR_VERSION_SUFFIX.test(t)) {
+      DYNAMIC_TIER_OR_VERSION_SUFFIX.lastIndex = 0;
+      const split = t.replaceAll(DYNAMIC_TIER_OR_VERSION_SUFFIX, (match) => match + '\n');
+      tierSplit.push(...split.split('\n').map((s) => s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '')).filter((s) => s.length >= 2));
+    } else {
+      tierSplit.push(t);
+    }
+  }
+  tokens = tierSplit;
+
+  // 3. Check for recurring prefix patterns & feature gate boundaries
   const out = [];
   for (const t of tokens) {
     const subTokens = splitRepeatedPrefixes(t);
     for (const st of subTokens) {
-      // 3. Split on feature gates or MCP protocol boundaries
       if (DYNAMIC_GATE_PREFIX.test(st)) {
         DYNAMIC_GATE_PREFIX.lastIndex = 0;
-        const gateSplit = st.split(DYNAMIC_GATE_PREFIX).map((s) => s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '')).filter((s) => s.length >= 4);
+        const gateSplit = st.split(DYNAMIC_GATE_PREFIX).map((s) => s.trim().replace(/[^a-zA-Z0-9_\-\.]+$/, '')).filter((s) => s.length >= 2);
         out.push(...(gateSplit.length > 0 ? gateSplit : [st]));
       } else {
         out.push(st);

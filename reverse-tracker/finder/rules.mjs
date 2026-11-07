@@ -4,6 +4,8 @@
  * hidden CLI commands, agent/MCP capabilities, and dark UI strings.
  */
 
+import { unpackGluedTokens } from '../extraction/strings.mjs';
+
 export const CATEGORIES = {
   MODEL_ID: 'model_id',
   FEATURE_FLAG: 'feature_flag',
@@ -30,22 +32,107 @@ const CSS_CURSOR_VALUES = new Set([
   'cursor-auto'
 ]);
 
+const NON_MODEL_COMMON_TERMS = new Set([
+  'exit-code', 'status-code', 'error-code', 'return-code', 'source-code', 'postal-code', 'zip-code', 'qr-code', 'bar-code', 'op-code',
+  'user-agent', 'http-agent', 'proxy-agent', 'caller-agent', 'system-agent', 'multi-agent', 'ssh-agent', 'relay-agent', 'build-agent',
+  'ruby-base', 'file-base', 'data-base', 'code-base', 'knowledge-base', 'temp-base', 'home-base', 'path-base',
+  'in-pro', 'go-pro', 're-pro', 'error-pro', 'semi-pro', 'non-pro',
+  'char-low', 'alphabetic-low', 'numeric-low',
+  'upper-case', 'lower-case', 'camel-case', 'kebab-case', 'snake-case',
+  'link-preview', 'print-preview', 'web-preview', 'tab-preview',
+  'model', 'models', 'default', 'preview', 'fallback', 'primary', 'active', 'selected', 'primary_model', 'default_model',
+  'undefined', 'null', 'none', 'true', 'false', 'test', 'example',
+]);
+
+/**
+ * Validates whether a candidate string is a genuine AI model identifier.
+ * Rejects dates, timestamps, SVG coordinates, CSS classes, encodings, AWS regions,
+ * and generic programming/system tokens.
+ */
+export function isValidModelIdentifier(val) {
+  if (!val || typeof val !== 'string') return false;
+  const str = val.trim();
+  const len = str.length;
+
+  // 1. Length bounds (e.g. "o1" to "deep-research-pro-preview-12-2025")
+  if (len < 2 || len > 70) return false;
+
+  // 2. Must start with an ASCII letter (e.g. 'gemini', 'claude', 'o1')
+  // Strictly rejects dates ('01-02', '1970-01-01'), SVG ('1h-9', '43l7-4.4', '58-4.2'),
+  // compiler symbols ('_call...'), and encodings starting with digits ('8859-1')
+  if (!/^[a-zA-Z]/.test(str)) return false;
+
+  // 3. Must only contain valid identifier characters
+  if (!/^[a-zA-Z0-9_\-\.\:\/]+$/.test(str)) return false;
+
+  // 4. Case-insensitive exact match in non-model common terms
+  const lower = str.toLowerCase();
+  if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
+
+  // 5. Date & Time format layouts (e.g. "02-jan-0", "02-jan-200", "2006-01-02", "jan-2024")
+  if (/^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[-_]\d+$/i.test(str)) return false;
+  if (/^\d{1,2}[-_](?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(str)) return false;
+  if (/^(?:mon|tue|wed|thu|fri|sat|sun)[-_]/i.test(str)) return false;
+  if (/^(?:19|20)\d{2}[-_]\d{1,2}(?:[-_]\d{1,2})?$/.test(str)) return false;
+
+  // 6. SVG / Canvas path coordinates & commands (e.g. "1h-9", "43l7-4.4", "58-4.2", "4v-2")
+  if (/[0-9]+[hvlzsqta][0-9.-]/i.test(str)) return false;
+  if (/^[a-z]?[0-9]+-[0-9.]+$/i.test(str)) return false;
+
+  // 7. Character encodings, protocols & crypto standards (e.g. "utf-8", "utf-16", "iso-8859-1", "sha-256")
+  if (/^(?:utf|ucs|iso|windows|cp|koi8|ascii|ansi|ebcdic|shift[-_]jis|euc)[-_]/i.test(str)) return false;
+  if (/^(?:sha|md5|hmac|blake|aes|des|rsa|ecdsa|chacha|tls|ssl|rfc|fips|csa)[-_0-9]/i.test(str)) return false;
+
+  // 8. Cloud regions & network zones (e.g. "ap-southeast-2", "us-west-1", "eu-central-1")
+  if (/^(?:us|eu|ap|sa|ca|me|af|cn|gov|asia)-(?:central|east|west|north|south|northeast|northwest|southeast|southwest)-\d+$/i.test(str)) return false;
+
+  // 9. Regex character ranges / tokens (e.g. "za-z0-9", "a-z0-9")
+  if (/^[a-z]{1,2}-[a-z0-9]{1,2}(?:-[a-z0-9]{1,2})+$/i.test(str)) return false;
+
+  // 10. CSS / UI classes (e.g. "o2-card", "o2-btn", "o2-border", "o2-ring", "o2-muted")
+  if (/^(?:o[1-9]|v[0-9]|col|row|flex|grid|p|m|px|py|bg|text|border|ring|shadow)-[a-z0-9_-]+$/i.test(str)) {
+    if (/(?:card|btn|button|input|modal|badge|alert|text|bg|border|ring|muted|container|header|footer|row|col|flex|grid|icon|avatar|tooltip|switch|nav|sidebar|tab|label|select|checkbox|radio|wrapper|item|body|group|content|inner|outer|divider|spacer|overlay|backdrop|popup|dropdown|dialog|panel|list|tile|thumb|track|handle|knob|slot|viewport|pane|window)/i.test(str)) {
+      return false;
+    }
+  }
+
+  // 11. OpenAI Reasoning series constraint (o1, o3, o4...)
+  if (/^o[1-9]/i.test(str)) {
+    if (!/^o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|\d{4}-\d{2}-\d{2}))?$/i.test(str)) {
+      return false;
+    }
+  }
+
+  // 12. Generic prefix check: if suffix is one of the generic code words (pro, base, code, agent, low),
+  // ensure the prefix is not a 2-letter word or standard programming word
+  if (/-(?:pro|base|code|agent|low)$/i.test(str)) {
+    const parts = str.split('-');
+    const prefix = parts[0].toLowerCase();
+    if (prefix.length <= 2) return false;
+    if (['exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi'].includes(prefix)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 // 1. Dynamic Models & AI Engines (Zero Hardcoded Model Names)
 const MODEL_PATTERNS = [
   // A. Structural Model Slots in Code & Config (captures ANY model assigned to a property)
-  /(?:model|model_slug|model_id|model_name|default_model|defaultModel|fallbackModel|reasoningModel|evalModel|chat_model|active_model|primary_model|subagent_model|selected_model)\s*[:=]\s*["']([a-zA-Z0-9_\-\.\:\/]{3,60})["']/i,
+  /(?:model|model_slug|model_id|model_name|default_model|defaultModel|fallbackModel|reasoningModel|evalModel|chat_model|active_model|primary_model|subagent_model|selected_model)\s*[:=]\s*["']([a-zA-Z0-9_\-\.\:\/]{2,60})["']/i,
 
-  // B. Structural Tiered & Capability Model Identifiers (any-prefix-(any-slug-)*(low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap))
-  /\b([a-zA-Z0-9_]{2,30}(?:-[a-zA-Z0-9_]{1,30})*-(?:low|medium|high|xhigh|max|ultra|mini|nano|micro|pro|plus|lite|turbo|fast|small|large|base|instruct|thinking|reasoning|vision|chat|code|agent|canvas|eval|distill|discounted|preview|eap))\b/i,
+  // B. Structural Tiered & Capability Model Identifiers (e.g. banana-pro-preview, quantum-max, supernova-preview, silicon-low)
+  /\b([a-zA-Z][a-zA-Z0-9_]{2,30}(?:-[a-zA-Z0-9_]{1,30})*-(?:ultra|mini|nano|micro|pro|plus|lite|turbo|instruct|thinking|reasoning|vision|eval|distill|preview|eap|tts|clip|flash|max|low|high)(?:-[0-9]{2,4}(?:-[0-9]{2,4})*)?)\b/i,
 
-  // C. Structural Versioned Model Identifiers (any-prefix-(any-slug-)*(v?[0-9]+...))
-  /\b([a-zA-Z0-9_]{2,30}(?:-[a-zA-Z0-9_]{1,30})*-(?:v?[0-9]+(?:\.[0-9]+)*(?:-[a-zA-Z0-9._-]+)*))\b/i,
+  // C. Structural Versioned Model Identifiers (e.g. swe-1-6-fast, swe-2-high, mythos-5.1, fable-5.1, hyper-v3-coder)
+  /\b([a-zA-Z][a-zA-Z0-9_]{2,25}-(?:v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*-(?:turbo|preview|flash|pro|plus|instruct|mini|nano|micro|ultra|lite|base|chat|thinking|reasoning|vision|high|max|fast|low|coder|sonnet|opus|haiku)[a-zA-Z0-9._-]*|v[0-9]+(?:\.[0-9]+)*|[0-9]+\.[0-9]+(?:-[a-zA-Z0-9._-]+)*))\b/i,
 
   // D. Provider Anchor Wildcards (provider-(ANYTHING))
-  /\b((?:claude|gpt|gemini|devin|cursor|codex|droid|deepseek|qwen|grok|llama|mistral|kimi)-[a-zA-Z0-9_\-\.]+)\b/i,
+  /\b((?:claude|gpt|gemini|devin|cursor|codex|droid|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|whisper)-[a-zA-Z0-9_\-\.]+)\b/i,
 
   // E. OpenAI Reasoning Series (o1, o3, o4, o5...)
-  /\b(o[1-9][a-zA-Z0-9]*(?:-[a-zA-Z0-9._-]+)*)\b/i,
+  /\b(o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|\d{4}-\d{2}-\d{2}))?)(?![-a-zA-Z0-9_])/i,
 
   // F. Anthropic Tier Wildcards
   /\b((?:sonnet|opus|haiku|mythos|fable)-[a-zA-Z0-9_\-\.]+)\b/i,
@@ -86,6 +173,8 @@ const AGENT_PATTERNS = [
   /\b(mcp_[a-z0-9_]{3,40})\b/i,
   /\b(agent_[a-z0-9_]{3,40})\b/i,
   /\b(subagent_[a-z0-9_]{3,40})\b/i,
+  /\b(connector_[a-z0-9_]{3,50})\b/i,
+  /\b(tool_[a-z0-9_]{3,50})\b/i,
   /["'](?:mcp_servers|mcp_tools|custom_agents|agent_capabilities)["']\s*:\s*\{([^}]+)\}/i,
   /\b((?:computer_control|browser_use|terminal_exec|voice_canvas|canvas_reasoning|deep_research))\b/i,
 ];
@@ -132,24 +221,31 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
   // Check dormant markers
   const matchedMarker = DORMANT_MARKERS.find((m) => lowerText.includes(m)) || null;
 
+  // Unpack glued binary string tokens if present (e.g. "_callgemini-3.8-flash-ttslyria-3-clip-preview")
+  const textCandidates = unpackGluedTokens(text);
+  if (!textCandidates.includes(text)) {
+    textCandidates.push(text);
+  }
+
   // 1. Models
-  for (const pat of MODEL_PATTERNS) {
-    const globalPat = new RegExp(pat.source, pat.flags.includes('g') ? pat.flags : pat.flags + 'g');
-    let m;
-    while ((m = globalPat.exec(text)) !== null) {
-      if (m && m[1]) {
-        const val = m[1].toLowerCase().trim();
-        // Guard against false positives like common words and CSS cursor classes
-        if (val.length >= 3 && !['model', 'models', 'default', 'preview'].includes(val) && !CSS_CURSOR_VALUES.has(val)) {
-          findings.push({
-            category: CATEGORIES.MODEL_ID,
-            value: val,
-            context: text.slice(0, 200),
-            hasDormantMarker: Boolean(matchedMarker),
-            dormantMarker: matchedMarker,
-            filePath,
-            artifactClass,
-          });
+  for (const candidate of textCandidates) {
+    for (const pat of MODEL_PATTERNS) {
+      const globalPat = new RegExp(pat.source, pat.flags.includes('g') ? pat.flags : pat.flags + 'g');
+      let m;
+      while ((m = globalPat.exec(candidate)) !== null) {
+        if (m && m[1]) {
+          const val = m[1].toLowerCase().trim();
+          if (isValidModelIdentifier(val)) {
+            findings.push({
+              category: CATEGORIES.MODEL_ID,
+              value: val,
+              context: text.slice(0, 200),
+              hasDormantMarker: Boolean(matchedMarker),
+              dormantMarker: matchedMarker,
+              filePath,
+              artifactClass,
+            });
+          }
         }
       }
     }

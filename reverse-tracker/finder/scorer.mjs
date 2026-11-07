@@ -2,7 +2,7 @@
  * Deterministic Scoring Engine & Tier Assignment (Section 4.3 & 4.4)
  */
 
-import { CATEGORIES } from './rules.mjs';
+import { CATEGORIES, isValidModelIdentifier } from './rules.mjs';
 import { isThirdPartyPath, evaluateNoise } from './noise.mjs';
 
 export const TIERS = {
@@ -21,6 +21,17 @@ export const TIERS = {
  * @returns {Object} scored finding with score, tier, isMajorEarlySignal, breakdown
  */
 export function scoreFinding(finding, context = {}) {
+  // Defense in depth: strictly reject invalid model identifiers from scoring
+  if (finding.category === CATEGORIES.MODEL_ID && !isValidModelIdentifier(finding.value)) {
+    return {
+      ...finding,
+      score: 0,
+      tier: TIERS.HIDDEN,
+      isMajorEarlySignal: false,
+      breakdown: [{ rule: 'Rejected: invalid model identifier', points: 0 }],
+    };
+  }
+
   let score = 0;
   const breakdown = [];
 
