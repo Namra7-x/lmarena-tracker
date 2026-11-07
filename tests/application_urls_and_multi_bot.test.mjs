@@ -130,6 +130,10 @@ test('TelegramClient resolves family-specific bot tokens and falls back graceful
   const clientOpenCodeFamily = new TelegramClient(null, null, 'opencode');
   assert.equal(clientOpenCodeFamily.token, 'bot-opencode-55555');
 
+  // Test Cursor falling back to TELEGRAM_TOKEN_OPENCODE when rate limited
+  const clientCursor = new TelegramClient(null, null, 'cursor');
+  assert.equal(clientCursor.token, 'bot-opencode-55555', 'Cursor must use TELEGRAM_TOKEN_OPENCODE when cursor token not set');
+
   // Cleanup
   delete process.env.TELEGRAM_TOKEN_OPENCODE;
   delete process.env.TELEGRAM_BOT_TOKEN_OPENAI;
