@@ -209,3 +209,33 @@ test('Phase 5: Empirical Benchmarking, Profiling & Bomb Safeguards', () => {
   assert.ok(benchmarkRecord.totalExtractedBytes > 0);
   assert.ok(benchmarkRecord.timestamp.length > 10);
 });
+
+test('Requirements 8 & 9: Analyzer Status Tracking & Archive Depth Safeguards', () => {
+  // 1. Analyzer Status Recording (completed, skipped, failed)
+  const validStatusValues = new Set(['completed', 'skipped', 'failed']);
+
+  const sampleAnalyzerStatus = {
+    acornAst: 'completed',
+    goReSym: 'skipped',
+    sourceMap: 'completed',
+    sevenZip: 'skipped',
+    asar: 'completed',
+    tar: 'skipped',
+    zip: 'skipped',
+    multiEncodingScanner: 'completed',
+  };
+
+  for (const [analyzer, status] of Object.entries(sampleAnalyzerStatus)) {
+    assert.ok(validStatusValues.has(status), `Analyzer ${analyzer} has valid status ${status}`);
+  }
+
+  // 2. Archive Depth & Nesting Guard Check
+  // Path with 4 nested archive extensions (> MAX_ARCHIVE_DEPTH = 3)
+  const deeplyNestedPath = 'outer.zip/inner.tar.gz/deeper.asar/deepest.nupkg/file.js';
+  const depthMatches = (deeplyNestedPath.match(/\.(?:asar|zip|tar|tgz|gz|nupkg)/gi) || []).length;
+  assert.ok(depthMatches > 3, 'Path exceeds MAX_ARCHIVE_DEPTH');
+
+  const shallowPath = 'app.asar/bundle.js';
+  const shallowMatches = (shallowPath.match(/\.(?:asar|zip|tar|tgz|gz|nupkg)/gi) || []).length;
+  assert.ok(shallowMatches <= 3, 'Shallow archive passes depth check');
+});

@@ -26,6 +26,7 @@ import { extractSourceMap, extractInlineSourceMaps } from './sourcemap.mjs';
 const MAX_TOTAL_EXTRACTED_BYTES = 1024 * 1024 * 1024; // 1 GB safe expansion cap
 const MAX_FILE_COUNT = 10000;
 const MAX_ARCHIVE_DEPTH = 3;
+const MAX_SINGLE_FILE_BYTES = 100 * 1024 * 1024; // 100MB per file cap to protect V8 heap
 
 /**
  * Check if 7z or 7za CLI is available on the host system.
@@ -210,7 +211,11 @@ export function extractArtifact(buffer, format, target, artifactUrl = '') {
 
     // 3. Process files, unpacking nested asar archives if present
     for (const f of rawFiles) {
-      if (f.path.endsWith('.asar') || isAsar(f.buffer)) {
+      // Archive depth check: count occurrences of archive extensions in path
+      const depthMatches = (f.path.match(/\.(?:asar|zip|tar|tgz|gz|nupkg)/gi) || []).length;
+      const isNestedArchive = f.path.endsWith('.asar') || isAsar(f.buffer);
+
+      if (isNestedArchive && depthMatches <= MAX_ARCHIVE_DEPTH) {
         try {
           const asarFiles = extractAsar(f.buffer);
           status.analyzers.asar = 'completed';

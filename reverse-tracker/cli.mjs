@@ -152,6 +152,9 @@ async function handleScan(componentId, options = {}) {
     goReSym: 'skipped',
     sourceMap: 'skipped',
     sevenZip: 'skipped',
+    asar: 'skipped',
+    tar: 'skipped',
+    zip: 'skipped',
     multiEncodingScanner: 'completed',
   };
 
@@ -207,8 +210,13 @@ async function handleScan(componentId, options = {}) {
       console.log(`   Extracting artifacts for ${art.target}...`);
       const { files, status: extractStatus } = extractArtifact(dl.buffer, art.format, art.target, art.url);
 
-      if (extractStatus?.analyzers?.sevenZip === 'completed') {
-        analyzerStatus.sevenZip = 'completed';
+      if (extractStatus?.analyzers) {
+        if (extractStatus.analyzers.sevenZip === 'completed') analyzerStatus.sevenZip = 'completed';
+        else if (extractStatus.analyzers.sevenZip === 'failed') analyzerStatus.sevenZip = 'failed';
+        if (extractStatus.analyzers.asar === 'completed') analyzerStatus.asar = 'completed';
+        else if (extractStatus.analyzers.asar === 'failed') analyzerStatus.asar = 'failed';
+        if (extractStatus.analyzers.tar === 'completed') analyzerStatus.tar = 'completed';
+        if (extractStatus.analyzers.zip === 'completed') analyzerStatus.zip = 'completed';
       }
 
       for (const f of files) {
