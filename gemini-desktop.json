@@ -1,6 +1,7 @@
 {
   "componentId": "gemini-desktop",
   "version": "build-713490c-6aa1e4d0",
+  "alertedVersion": "build-713490c-6aa1e4d0",
   "releaseId": "gemini-desktop-build-713490c-6aa1e4d0",
   "channel": "stable",
   "identityFingerprint": "d882cc3cd478541b44371d672c2eb1397b1abc3cf95c2641a87ea48b9d1b326f",
@@ -8,6 +9,11 @@
   "scanId": "GD-20261106-001",
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-06T21:41:09.661Z",
+  "lastFailureTime": null,
+  "lastAlertDigest": null,
+  "lastTestAlertVersion": "build-713490c-6aa1e4d0",
+  "analyzerStatus": null,
+  "benchmark": null,
   "hotSignals": [],
   "recentSignals": [
     {
@@ -10034,5 +10040,6 @@
     "algorithm %d",
     "..\\..\\third_party\\boringssl\\src\\crypto\\evp\\evp_ctx.cc",
     "..\\..\\mojo\\public\\cpp\\bindings\\connection_group_ref.cc"
-  ]
+  ],
+  "historicalSeenUrls": []
 }
