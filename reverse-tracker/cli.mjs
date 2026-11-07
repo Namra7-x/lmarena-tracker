@@ -453,6 +453,7 @@ async function handleScan(componentId, options = {}) {
       newFindings: newCleanStrings.map((s) => ({ value: s })),
     },
     scoredFindings: sortedScored,
+    candidates: rawFindings,
     urlsInventory: Array.from(allExtractedUrls.values()),
     newUrls: newCleanUrls,
     platformAsymmetry,

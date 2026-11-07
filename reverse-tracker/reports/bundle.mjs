@@ -225,8 +225,39 @@ export function generateReportBundle(outputDir, scanData) {
     generatedAt: new Date().toISOString(),
     leakCount: validLeaks.length,
     newStringCount: uniqueCleanNewStrings.length,
+    benchmark: scanData.benchmark || null,
   };
   fs.writeFileSync(path.join(outputDir, 'manifest.json'), JSON.stringify(manifestData, null, 2), 'utf8');
+
+  // Evidence Preservation: candidate signals with offsets, context, and raw expressions
+  const candidateRecords = (scanData.candidates || scoredFindings).map((f) => ({
+    category: f.category,
+    value: f.value,
+    filePath: f.filePath || '',
+    offset: f.offset || { line: 0, column: 0 },
+    context: f.context || '',
+    rawExpression: f.rawExpression || f.value,
+    origin: f.origin || 'heuristic',
+    status: f.status || 'accepted',
+    rejectionReason: f.rejectionReason || null,
+    score: f.score || 0,
+    tier: f.tier || 'UNSCORED',
+  }));
+  fs.writeFileSync(
+    path.join(outputDir, 'candidates.json'),
+    JSON.stringify(
+      {
+        scanId,
+        componentId,
+        version,
+        totalCandidates: candidateRecords.length,
+        candidates: candidateRecords,
+      },
+      null,
+      2
+    ),
+    'utf8'
+  );
 
   // Mandatory Count Check verification (Section 8.1)
   const countCheckPassed = (
