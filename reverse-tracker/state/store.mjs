@@ -52,6 +52,7 @@ export function saveComponentState(stateDir, componentId, newState) {
     lastSuccessfulScan: newState.coverageState === 'COMPLETE' ? (newState.lastSuccessfulScan || new Date().toISOString()) : undefined,
     lastFailureTime: newState.lastFailureTime || null,
     lastAlertDigest: newState.lastAlertDigest || null,
+    lastTestAlertVersion: newState.lastTestAlertVersion || null,
     analyzerStatus: newState.analyzerStatus || null,
     benchmark: newState.benchmark || null,
     hotSignals: newState.hotSignals || [],

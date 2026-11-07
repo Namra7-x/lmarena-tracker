@@ -136,16 +136,23 @@ async function handleDetect(familyId) {
  * Perform deep diff analysis on a changed component.
  */
 async function handleScan(componentId, options = {}) {
+  const isTestRun = Boolean(options.isTestRun || options.force);
   const comp = COMPONENTS[componentId];
   if (!comp) throw new Error(`Unknown component ${componentId}`);
 
-  console.log(`\n🚀 [Scan] Initiating deep scan for: ${comp.name} (${componentId})`);
+  console.log(`\n🚀 [Scan] Initiating deep scan for: ${comp.name} (${componentId})${isTestRun ? ' [TEST RUN]' : ''}`);
   const scanStartTime = performance.now();
   const baseline = loadComponentState(STATE_DIR, componentId) || {};
   const candidate = await discoverComponent(componentId);
   const scanId = generateScanId(componentId);
   const tg = new TelegramClient(null, null, comp.family, componentId);
   const topicId = tg.getTopicId(comp.family, componentId);
+
+  // If this is a test run and we have already sent the test alert for this exact version, skip to avoid duplicate spam
+  if (isTestRun && baseline.lastTestAlertVersion === candidate.version && !options.bypassDedup) {
+    console.log(`ℹ️ [Test Run] Component ${componentId} already tested on version ${candidate.version}. Skipping duplicate test message.`);
+    return { scanId: baseline.scanId, skipped: true, reason: 'ALREADY_TESTED' };
+  }
 
   const analyzerStatus = {
     acornAst: 'skipped',
@@ -161,7 +168,7 @@ async function handleScan(componentId, options = {}) {
   // Step 1: Update-First Rule - Send Immediate Alert BEFORE downloading
   let alertMessageId = null;
   const isSameVersion = Boolean(baseline.version && baseline.version === candidate.version);
-  const isAlreadyAlerted = isSameVersion || baseline.alertedVersion === candidate.version;
+  const isAlreadyAlerted = !isTestRun && (isSameVersion || baseline.alertedVersion === candidate.version);
 
   if (!isAlreadyAlerted) {
     console.log(`📡 Sending immediate alert to Telegram for ${scanId}...`);
@@ -173,6 +180,7 @@ async function handleScan(componentId, options = {}) {
       scanId,
       targets: comp.primaryTargets,
       releaseUrl: candidate.artifacts?.[0]?.url,
+      isTestRun,
     });
 
     try {
@@ -183,6 +191,7 @@ async function handleScan(componentId, options = {}) {
       saveComponentState(STATE_DIR, componentId, {
         ...baseline,
         alertedVersion: candidate.version,
+        ...(isTestRun ? { lastTestAlertVersion: candidate.version } : {}),
       });
     } catch (tgErr) {
       console.warn(`Could not send immediate alert: ${tgErr.message}`);
@@ -496,7 +505,7 @@ async function handleScan(componentId, options = {}) {
     .update(`${componentId}:${candidate.version}:${artifactSha256}:${findingsDigest}`)
     .digest('hex');
 
-  const isDuplicateAlert = Boolean(baseline.lastAlertDigest && baseline.lastAlertDigest === alertDeduplicationKey);
+  const isDuplicateAlert = !isTestRun && Boolean(baseline.lastAlertDigest && baseline.lastAlertDigest === alertDeduplicationKey);
 
   // Step 9: Send Telegram Completion Message with Attached Files
   if (isDuplicateAlert) {
@@ -522,6 +531,7 @@ async function handleScan(componentId, options = {}) {
       urlsCount: allExtractedUrls.size,
       newUrls: newCleanUrls,
       countCheckText: reportBundle.countCheck.text,
+      isTestRun,
     });
 
     try {
@@ -534,7 +544,7 @@ async function handleScan(componentId, options = {}) {
       console.warn(`Could not send completion message: ${tgErr.message}`);
     }
 
-    // Upload the 3 clean report files (leaks.txt, diff.txt, strings.txt)
+    // Upload the clean report files (leaks.txt, diff.txt, strings.txt, urls.txt)
     for (const file of reportBundle.telegramFiles) {
       try {
         console.log(`   Uploading ${path.basename(file)} to Telegram...`);
@@ -560,6 +570,7 @@ async function handleScan(componentId, options = {}) {
     saveComponentState(STATE_DIR, componentId, {
       version: candidate.version,
       alertedVersion: candidate.version,
+      lastTestAlertVersion: candidate.version,
       releaseId: candidate.releaseId,
       channel: candidate.channel,
       identityFingerprint,
@@ -579,6 +590,7 @@ async function handleScan(componentId, options = {}) {
     saveComponentState(STATE_DIR, componentId, {
       ...baseline,
       alertedVersion: candidate.version,
+      lastTestAlertVersion: candidate.version,
       scanId,
       coverageState,
       analyzerStatus,
@@ -590,13 +602,45 @@ async function handleScan(componentId, options = {}) {
   return { scanId, candidate, diffResults, reportBundle, coverageState, analyzerStatus, executionTimeMs };
 }
 
+/**
+ * One-time test scan on latest versions for testing Telegram bots and leaks delivery.
+ * Executes full deep scan, sends immediate test alert, uploads all report files (leaks.txt, diff.txt, strings.txt, urls.txt),
+ * and marks the component as tested and alerted in baseline so it never repeats.
+ */
+async function handleTestRun(familyId = null, specificCompId = null, options = {}) {
+  console.log(`\n🧪 [Test Run] Initiating one-time pipeline test on latest versions (Family: ${familyId || 'ALL'})...`);
+
+  const componentsToTest = specificCompId
+    ? [specificCompId]
+    : familyId
+      ? (FAMILIES[familyId]?.components || [])
+      : Object.keys(COMPONENTS);
+
+  console.log(`📋 Components queued for one-time test run (${componentsToTest.length}): ${componentsToTest.join(', ')}`);
+
+  const results = [];
+  for (const compId of componentsToTest) {
+    try {
+      console.log(`\n--- [Test Run] Scanning ${compId} ---`);
+      const scanRes = await handleScan(compId, { force: true, isTestRun: true, ...options });
+      results.push({ componentId: compId, success: true, scanRes });
+    } catch (err) {
+      console.error(`✗ [Test Run Error] Failed testing ${compId}: ${err.message}`);
+      results.push({ componentId: compId, success: false, error: err.message });
+    }
+  }
+
+  console.log(`\n🎉 [Test Run] Completed one-time pipeline test for ${familyId || 'ALL'}. Baseline updated.`);
+  return results;
+}
+
 // CLI Command Parser
 const args = process.argv.slice(2);
 const command = args[0] || 'detect';
 
 async function main() {
   if (command === 'detect') {
-    const familyArg = args[1]?.replace(/^--family=/, '') || null;
+    const familyArg = args.find((a) => a.startsWith('--family='))?.replace(/^--family=/, '') || args[1] || null;
     const changes = await handleDetect(familyArg);
     if (changes.length > 0) {
       console.log(`\nFound ${changes.length} changed component(s).`);
@@ -604,10 +648,24 @@ async function main() {
       console.log('\nAll components up-to-date.');
     }
   } else if (command === 'scan') {
-    const compId = args[1]?.replace(/^--component=/, '') || 'codex-cli';
-    await handleScan(compId);
+    const compId = args.find((a) => a.startsWith('--component='))?.replace(/^--component=/, '') || args[1] || 'codex-cli';
+    const forceFlag = args.includes('--force') || args.includes('--test-run');
+    await handleScan(compId, { force: forceFlag, isTestRun: forceFlag });
+  } else if (command === 'test-run') {
+    const familyArg = args.find((a) => a.startsWith('--family='))?.replace(/^--family=/, '') || null;
+    const compArg = args.find((a) => a.startsWith('--component='))?.replace(/^--component=/, '') || null;
+    const bypassDedup = args.includes('--bypass-dedup');
+    await handleTestRun(familyArg, compArg, { bypassDedup });
   } else if (command === 'run') {
-    const familyArg = args[1]?.replace(/^--family=/, '') || null;
+    const familyArg = args.find((a) => a.startsWith('--family='))?.replace(/^--family=/, '') || null;
+    const isForcedTest = args.includes('--test-run') || args.includes('--force') || process.env.FORCE_TEST_RUN === 'true';
+
+    if (isForcedTest) {
+      console.log(`🧪 Detected force test run flag. Executing one-time test scan for family: ${familyArg || 'ALL'}...`);
+      await handleTestRun(familyArg);
+      return;
+    }
+
     const changes = await handleDetect(familyArg);
     for (const change of changes) {
       try {
@@ -617,7 +675,7 @@ async function main() {
       }
     }
   } else {
-    console.log(`Unknown command: ${command}. Usage: node cli.mjs [detect|scan|run] [--family=<id>] [--component=<id>]`);
+    console.log(`Unknown command: ${command}. Usage: node cli.mjs [detect|scan|run|test-run] [--family=<id>] [--component=<id>] [--force]`);
   }
 }
 

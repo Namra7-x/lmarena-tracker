@@ -1,9 +1,18 @@
 name: Early Feature & Signal Tracker
 
 on:
+  push:
+    branches:
+      - main
   repository_dispatch:
     types: [tracker, early_signal_tracker]
   workflow_dispatch:
+    inputs:
+      test_run:
+        description: 'One-time test scan on latest versions and send leaks to Telegram'
+        required: false
+        type: boolean
+        default: true
   schedule:
     - cron: '*/5 * * * *'
 
@@ -101,7 +110,15 @@ jobs:
           TELEGRAM_TOPIC_OPENCODE: ${{ secrets.TELEGRAM_TOPIC_OPENCODE }}
           TELEGRAM_TOPIC_OTHER: ${{ secrets.TELEGRAM_TOPIC_OTHER || secrets.TELEGRAM_TOPIC_OPENCODE }}
         run: |
-          node reverse-tracker/cli.mjs run --family=${{ matrix.family }}
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.test_run }}" = "true" ]; then
+            echo "🧪 Workflow dispatch test run requested for family: ${{ matrix.family }}..."
+            node reverse-tracker/cli.mjs test-run --family=${{ matrix.family }}
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            echo "🧪 Commit push detected: executing one-time pipeline test for family: ${{ matrix.family }}..."
+            node reverse-tracker/cli.mjs test-run --family=${{ matrix.family }}
+          else
+            node reverse-tracker/cli.mjs run --family=${{ matrix.family }}
+          fi
 
       - name: Persist State to State Branch
         if: always()

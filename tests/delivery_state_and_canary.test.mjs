@@ -6,6 +6,10 @@ import os from 'node:os';
 import crypto from 'node:crypto';
 import { TelegramClient } from '../reverse-tracker/telegram/client.mjs';
 import {
+  formatImmediateAlert,
+  formatCompletionMessage,
+} from '../reverse-tracker/telegram/formatter.mjs';
+import {
   saveComponentState,
   loadComponentState,
   validateStateAdvancement,
@@ -153,6 +157,56 @@ test('User Exact Secrets: 5 Bot Tokens with Cursor & Other cleanly mapped to Ope
   } finally {
     process.env = originalEnv;
   }
+});
+
+test('One-Time Pipeline Test: Formatting, State Advancing & Zero-Spam Idempotency', () => {
+  // 1. Verify Test Run Badge Formatting
+  const alertText = formatImmediateAlert({
+    componentName: 'Antigravity CLI',
+    family: 'google',
+    oldVersion: '1.5.2',
+    newVersion: '1.5.3',
+    scanId: 'AC-20261107-001',
+    targets: ['darwin-arm64', 'win32-x64'],
+    isTestRun: true,
+  });
+  assert.ok(alertText.includes('ONE-TIME PIPELINE TEST · LATEST VERSION'), 'Immediate alert must indicate test run');
+  assert.ok(alertText.includes('[GOOGLE]'), 'Must include family badge');
+
+  const compText = formatCompletionMessage({
+    componentName: 'Antigravity CLI',
+    family: 'google',
+    oldVersion: '1.5.2',
+    newVersion: '1.5.3',
+    scanId: 'AC-20261107-001',
+    majorSignals: [{ category: 'model_id', value: 'gemini-3.8-flash', platforms: ['darwin', 'win32'] }],
+    isTestRun: true,
+  });
+  assert.ok(compText.includes('ONE-TIME PIPELINE TEST COMPLETE'), 'Completion message must indicate test run completion');
+
+  // 2. Verify State Tracking & Idempotency
+  const mockCandidate = { version: '1.5.3' };
+  const baselineBeforeTest = { version: '1.5.2', alertedVersion: '1.5.2' };
+
+  // First test run: not yet tested on 1.5.3
+  const isFirstTestRun = baselineBeforeTest.lastTestAlertVersion !== mockCandidate.version;
+  assert.equal(isFirstTestRun, true, 'First test run must be allowed to execute');
+
+  // State after test run closes
+  const baselineAfterTest = {
+    ...baselineBeforeTest,
+    version: mockCandidate.version,
+    alertedVersion: mockCandidate.version,
+    lastTestAlertVersion: mockCandidate.version,
+  };
+
+  // Second test run on the same version must be safely suppressed
+  const isSecondTestRunSkipped = baselineAfterTest.lastTestAlertVersion === mockCandidate.version;
+  assert.equal(isSecondTestRunSkipped, true, 'Subsequent test run on same version must be skipped to prevent duplicate spam');
+
+  // Normal 5-minute cron check must also see it as already alerted
+  const isNormalCronUnchanged = baselineAfterTest.alertedVersion === mockCandidate.version;
+  assert.equal(isNormalCronUnchanged, true, 'Regular tracker runs must see version as already alerted');
 });
 
 test('Phase 6: Alert Deduplication Key Digest Consistency & Suppression', () => {

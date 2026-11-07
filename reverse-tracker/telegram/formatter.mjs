@@ -66,7 +66,9 @@ export function formatImmediateAlert({
   targets = [],
   releaseUrl,
   timestamp = new Date(),
+  isTestRun = false,
 }) {
+  const testBadge = isTestRun ? '🧪 <b>[ONE-TIME PIPELINE TEST · LATEST VERSION]</b>\n' : '';
   const familyBadge = family ? `[${escapeHtml(family.toUpperCase())}] ` : '';
   const comp = escapeHtml(componentName.toUpperCase());
   const oldV = escapeHtml(oldVersion || 'none');
@@ -79,7 +81,7 @@ export function formatImmediateAlert({
   const linuxTarget = targets.some((t) => t.includes('linux')) ? 'Linux ✓' : null;
   const targetStr = [macTarget, winTarget, linuxTarget].filter(Boolean).join(' | ');
 
-  let msg = `🤖 <b>${familyBadge}${comp}</b>\n`;
+  let msg = `${testBadge}🤖 <b>${familyBadge}${comp}</b>\n`;
   msg += `🚨 <b>Version Change:</b> <code>${oldV}</code> → <b>${newV}</b>\n`;
   msg += `📅 <i>${timeStr}</i>\n`;
   msg += `🎯 <b>Targets:</b> ${targetStr}\n`;
@@ -110,14 +112,16 @@ export function formatCompletionMessage({
   urlsCount = 0,
   newUrls = [],
   timestamp = new Date(),
+  isTestRun = false,
 }) {
+  const testBadge = isTestRun ? '🧪 <b>[ONE-TIME PIPELINE TEST COMPLETE]</b>\n' : '';
   const familyBadge = family ? `[${escapeHtml(family.toUpperCase())}] ` : '';
   const comp = componentName ? `${escapeHtml(componentName.toUpperCase())} · ` : '';
   const sId = escapeHtml(scanId);
   const timeStr = escapeHtml(formatUtcDateTime(timestamp));
   const totalLeaks = leakCount || (majorSignals.length + highSignals.length + moreFindings.length);
 
-  let msg = `🤖 <b>${familyBadge}${comp}ANALYSIS COMPLETE</b>\n`;
+  let msg = `${testBadge}🤖 <b>${familyBadge}${comp}ANALYSIS COMPLETE</b>\n`;
   if (oldVersion && newVersion) {
     msg += `📦 <b>Version:</b> <code>${escapeHtml(oldVersion)}</code> ➔ <b><code>${escapeHtml(newVersion)}</code></b>\n`;
   }
