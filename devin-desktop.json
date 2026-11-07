@@ -1,30 +1,29 @@
 {
   "componentId": "devin-desktop",
   "version": "3.12.28",
-  "alertedVersion": "3.12.28",
+  "alertedVersion": "3.12.17",
   "releaseId": "devin-desktop@3.12.28-91c3aec41579d2c1795b64f82fa6a8a202ea4c69",
   "channel": "stable",
   "identityFingerprint": "212432674bbda5c534c51d2a300971d461e097315dee24697254679b1e4c2bd0",
   "diagnosticFingerprint": null,
   "scanId": "DD-20261107-001",
-  "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-07T22:48:36.916Z",
-  "lastFailureTime": null,
+  "coverageState": "FAILED",
+  "lastFailureTime": "2026-11-07T22:48:56.095Z",
   "lastAlertDigest": "4dc00c21f2c4baf07ba5384ca7974bf5da589ba077b802de66f1dbaaa10c1246",
-  "lastTestAlertVersion": "3.12.28",
+  "lastTestAlertVersion": "3.12.17",
   "analyzerStatus": {
     "acornAst": "skipped",
     "goReSym": "skipped",
-    "sourceMap": "completed",
+    "sourceMap": "skipped",
     "sevenZip": "skipped",
     "asar": "skipped",
-    "tar": "completed",
-    "zip": "completed",
+    "tar": "skipped",
+    "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 100384,
-    "peakMemoryMb": 134
+    "executionTimeMs": 1072,
+    "peakMemoryMb": 15
   },
   "hotSignals": [
     {
