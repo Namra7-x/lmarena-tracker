@@ -19,6 +19,7 @@ export const DORMANT_MARKERS = [
   'experimental', 'preview', 'hidden', 'disabled',
   'unreleased', 'coming soon', 'waitlist', 'canary',
   'dark_launch', 'confidential', 'nda',
+  'research preview', 'early access', 'now available', 'introducing',
 ];
 
 const CSS_CURSOR_VALUES = new Set([
@@ -97,10 +98,25 @@ const ENV_VAR_PATTERNS = [
   /\b(EXPERIMENT_[A-Z0-9_]{3,40})\b/,
 ];
 
-// 7. Dark UI Copy (natural language announcing upcoming capabilities)
+// 7. Dark UI Copy & Natural Language Announcements (models, capabilities, and preview banners)
 const DARK_UI_PATTERNS = [
-  /["']([A-Z][a-zA-Z0-9\s,\.'"-]{20,120}(?:coming soon|waitlist|internal dogfood|preview only|early access))["']/i,
-  /["']((?:Generate full application|Autonomous computer use|Deep research mode|Run full terminal commands autonomously|Connect external tools via MCP)[a-zA-Z0-9\s,\.'"-]{0,80})["']/i,
+  // A. Product/Model Introductions (e.g. "Introducing Claude 3.7 Sonnet", "Announcing GPT-5", "Welcome to Canvas")
+  /["']?\b((?:Introducing|Announcing|Welcome to|Try the new|Experience)\s+[A-Z0-9][a-zA-Z0-9_\-\.\s]{3,80})\b/i,
+
+  // B. Preview & Availability Status (e.g. "Now in research preview", "Now available in early access", "Now generally available")
+  /["']?\b((?:Now in|Now available in|Available in|In)\s+(?:research preview|preview|preview mode|early access|public beta|private beta|canary|dogfood)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
+
+  // C. General Availability & Launch Statements (e.g. "Now available to all users", "Now live for subscribers")
+  /["']?\b((?:Now available|Now live|Generally available)\s+(?:to all users|for pro|for plus|for enterprise|globally|in your region)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
+
+  // D. Engine Attribution (e.g. "Powered by Claude 3.5 Sonnet", "Powered by Gemini 2.0 Flash")
+  /["']?\b((?:Powered by|Built on|Backed by)\s+[A-Z0-9][a-zA-Z0-9_\-\.\s]{3,60})\b/i,
+
+  // E. Pre-launch Callouts (coming soon, waitlist, early access, preview only)
+  /["']?([A-Z][a-zA-Z0-9\s,\.'"-]{10,120}?(?:coming soon|waitlist|internal dogfood|preview only|early access|research preview|waitlist only))["']?/i,
+
+  // F. Major Dark Capabilities UI Copy
+  /["']?((?:Generate full application|Autonomous computer use|Deep research mode|Run full terminal commands autonomously|Connect external tools via MCP)[a-zA-Z0-9\s,\.'"-]{0,80})["']?/i,
 ];
 
 /**

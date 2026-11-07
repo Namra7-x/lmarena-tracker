@@ -44,9 +44,18 @@ test('matchSignalsInText identifies dynamic feature gates, internal RPCs, and da
   const rpcFinding = matchSignalsInText('service: "openai.internal.v1.AgentService"');
   assert.ok(rpcFinding.some(f => f.category === CATEGORIES.ENDPOINT_DOMAIN && f.value.includes('internal.v1')));
 
-  // 4. Dark UI copy
+  // 4. Dark UI copy & Natural Language Announcements
   const uiFinding = matchSignalsInText('"Generate full application with autonomous browser use coming soon"');
   assert.ok(uiFinding.some(f => f.category === CATEGORIES.UI_STRING));
+
+  const introFinding = matchSignalsInText('Introducing Claude 3.7 Sonnet, now in research preview.');
+  assert.ok(introFinding.some(f => f.category === CATEGORIES.UI_STRING && f.value.includes('Introducing Claude 3.7 Sonnet')));
+
+  const availFinding = matchSignalsInText('Now available to all users worldwide');
+  assert.ok(availFinding.some(f => f.category === CATEGORIES.UI_STRING && f.value.includes('Now available to all users')));
+
+  const poweredFinding = matchSignalsInText('Powered by Gemini 2.0 Flash Thinking');
+  assert.ok(poweredFinding.some(f => f.category === CATEGORIES.UI_STRING && f.value.includes('Powered by Gemini 2.0 Flash Thinking')));
 });
 
 test('generateReportBundle produces clean leaks.txt, diff.txt, strings.txt and selects telegramFiles', () => {
