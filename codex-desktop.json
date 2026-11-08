@@ -1,17 +1,17 @@
 {
   "componentId": "codex-desktop",
-  "version": "etag-0x8DF3DCD59E122D",
-  "alertedVersion": "etag-0x8DF3DCD59E122D",
-  "releaseId": "codex-desktop-etag-0x8DF3DCD59E122D",
+  "version": "etag-0x8DF3C83147F7DF",
+  "alertedVersion": "etag-0x8DF3C83147F7DF",
+  "releaseId": "codex-desktop-etag-0x8DF3C83147F7DF",
   "channel": "prod",
-  "identityFingerprint": "3334cc17c0e8f76e32c230e7cadaf50b1628e5f32cef9811505f6ce7b7851773",
+  "identityFingerprint": "9a73a4bd2b0cffc430e10079498ec7adf9d598f7cd2bf873b71c8a0fed3b7608",
   "diagnosticFingerprint": null,
   "scanId": "CD-20261108-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-08T20:19:09.673Z",
+  "lastSuccessfulScan": "2026-11-08T20:22:06.044Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "b65b4d28ad53c65d5422be7f2991c5fd348e989edd9afd9c626fd0e0238fa806",
-  "lastTestAlertVersion": "etag-0x8DF3DCD59E122D",
+  "lastAlertDigest": "c465636b36335a2b014fed288c88f24055fb06ef073268d47ab5e26ce13cb91d",
+  "lastTestAlertVersion": "etag-0x8DF3C83147F7DF",
   "analyzerStatus": {
     "acornAst": "skipped",
     "goReSym": "skipped",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 19120,
-    "peakMemoryMb": 15
+    "executionTimeMs": 18462,
+    "peakMemoryMb": 26
   },
   "hotSignals": [],
   "recentSignals": [],
