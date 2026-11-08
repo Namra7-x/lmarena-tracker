@@ -1,0 +1,85 @@
+name: Official AI SDK Tracker
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      force_alert:
+        description: 'Send real live alert card with diff document right now'
+        required: false
+        default: false
+        type: boolean
+  repository_dispatch:
+    types: [tracker, sdk_tracker]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-sdk-tracker
+  cancel-in-progress: true
+
+jobs:
+  track-sdks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Run Official SDK Tracker & Reverser
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOKEN_CLAUDE: ${{ secrets.TELEGRAM_TOKEN_CLAUDE }}
+          TELEGRAM_TOKEN_ANTHROPIC: ${{ secrets.TELEGRAM_TOKEN_ANTHROPIC }}
+          TELEGRAM_CHAT_ID_CLAUDE: ${{ secrets.TELEGRAM_CHAT_ID_CLAUDE }}
+          TELEGRAM_CHAT_ID_ANTHROPIC: ${{ secrets.TELEGRAM_CHAT_ID_ANTHROPIC }}
+          TELEGRAM_TOPIC_CLAUDE: ${{ secrets.TELEGRAM_TOPIC_CLAUDE }}
+          TELEGRAM_TOPIC_ANTHROPIC: ${{ secrets.TELEGRAM_TOPIC_ANTHROPIC }}
+          TELEGRAM_TOKEN_CHATGPT: ${{ secrets.TELEGRAM_TOKEN_CHATGPT }}
+          TELEGRAM_TOKEN_OPENAI: ${{ secrets.TELEGRAM_TOKEN_OPENAI }}
+          TELEGRAM_CHAT_ID_CHATGPT: ${{ secrets.TELEGRAM_CHAT_ID_CHATGPT }}
+          TELEGRAM_CHAT_ID_OPENAI: ${{ secrets.TELEGRAM_CHAT_ID_OPENAI }}
+          TELEGRAM_TOPIC_OPENAI: ${{ secrets.TELEGRAM_TOPIC_OPENAI }}
+          TELEGRAM_TOKEN_GEMINI: ${{ secrets.TELEGRAM_TOKEN_GEMINI }}
+          TELEGRAM_TOKEN_GOOGLE: ${{ secrets.TELEGRAM_TOKEN_GOOGLE }}
+          TELEGRAM_CHAT_ID_GEMINI: ${{ secrets.TELEGRAM_CHAT_ID_GEMINI }}
+          TELEGRAM_CHAT_ID_GOOGLE: ${{ secrets.TELEGRAM_CHAT_ID_GOOGLE }}
+          TELEGRAM_TOPIC_GOOGLE: ${{ secrets.TELEGRAM_TOPIC_GOOGLE }}
+          FORCE_ALERT: ${{ inputs.force_alert == true && '1' || '0' }}
+        run: node reverse-tracker/cli.mjs sdk
+
+      - name: Commit and Push Snapshot (Only if changes detected)
+        run: |
+          if [ -n "$(git status --porcelain reverse-tracker/state/sdk_snapshot.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add reverse-tracker/state/sdk_snapshot.json
+            git commit -m "Update official SDK snapshot [skip ci]"
+            for attempt in 1 2 3; do
+              echo "Pushing SDK snapshot (attempt $attempt)..."
+              if git pull --rebase origin main && git push origin main; then
+                echo "Successfully updated SDK snapshot"
+                exit 0
+              fi
+              echo "Concurrent push detected. Retrying in 2s..."
+              sleep 2
+            done
+            echo "Contention high. Snapshot will automatically sync on next run."
+            exit 0
+          else
+            echo "Zero changes detected. No commit needed."
+          fi

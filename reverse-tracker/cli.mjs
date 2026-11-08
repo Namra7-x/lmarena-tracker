@@ -702,8 +702,12 @@ async function main() {
         console.error(`✗ Error processing ${change.componentId}: ${scanErr.message}`);
       }
     }
+  } else if (command === 'sdk' || command === 'sdk:scan') {
+    const { runSdkTracker } = await import('./sdk/tracker.mjs');
+    const forceFlag = args.includes('--force') || args.includes('--force-alert') || args.includes('--test-run');
+    await runSdkTracker({ forceAlert: forceFlag });
   } else {
-    console.log(`Unknown command: ${command}. Usage: node cli.mjs [detect|scan|run|test-run] [--family=<id>] [--component=<id>] [--force]`);
+    console.log(`Unknown command: ${command}. Usage: node cli.mjs [detect|scan|run|test-run|sdk] [--family=<id>] [--component=<id>] [--force]`);
   }
 }
 
