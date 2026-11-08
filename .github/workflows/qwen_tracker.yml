@@ -1,0 +1,69 @@
+name: Qwen Cloud Signal Tracker
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      force_alert:
+        description: 'Send real live alert cards right now'
+        required: false
+        default: false
+        type: boolean
+  repository_dispatch:
+    types: [tracker, qwen_tracker]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: qwen-tracker
+  cancel-in-progress: true
+
+jobs:
+  track-qwen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run Qwen Cloud Tracker
+        env:
+          QWEN_DISCORD_WEBHOOK_URL: ${{ secrets.QWEN_DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_ALERT: ${{ inputs.force_alert == true && '1' || '0' }}
+        run: node qwen-tracker/tracker.mjs
+
+      - name: Commit and Push Snapshot (Only if changes detected)
+        run: |
+          if [ -n "$(git status --porcelain qwen-tracker/qwen_snapshot.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add qwen-tracker/qwen_snapshot.json
+            git commit -m "Update Qwen Cloud snapshot [skip ci]"
+            for attempt in 1 2 3; do
+              echo "Pushing Qwen Cloud snapshot (attempt $attempt)..."
+              if git pull --rebase origin main && git push origin main; then
+                echo "Successfully updated Qwen Cloud snapshot"
+                exit 0
+              fi
+              echo "Concurrent push detected. Retrying in 2s..."
+              sleep 2
+            done
+            echo "Contention high. Snapshot will automatically sync on next run."
+            exit 0
+          else
+            echo "Zero changes detected. No commit needed."
+          fi

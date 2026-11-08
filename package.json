@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node --test tests/**/*.test.mjs",
     "tracker:design": "node design-arena/design_tracker.mjs",
+    "tracker:qwen": "node qwen-tracker/tracker.mjs",
     "tracker:detect": "node reverse-tracker/cli.mjs detect",
     "tracker:scan": "node reverse-tracker/cli.mjs scan",
     "tracker:run": "node reverse-tracker/cli.mjs run"
