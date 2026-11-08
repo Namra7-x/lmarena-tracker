@@ -23,10 +23,10 @@ jobs:
   scan-family:
     name: Track ${{ matrix.family }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     concurrency:
-      group: ai-${{ matrix.family }}
-      cancel-in-progress: false
+      group: ai-tracker-${{ matrix.family }}
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:
@@ -64,22 +64,34 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: 'npm'
 
       - name: Install Node Dependencies
         run: npm ci
 
-      - name: Install 7-Zip and Pin GoReSym v3.4.1
+      - name: Cache GoReSym Binary
+        id: cache-goresym
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin/GoReSym
+          key: goresym-v3.4.1-linux-x64
+
+      - name: Install GoReSym (If not cached)
+        if: steps.cache-goresym.outputs.cache-hit != 'true'
+        continue-on-error: true
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq p7zip-full curl unzip
           GORESYM_URL="https://github.com/mandiant/GoReSym/releases/download/v3.4.1/GoReSym-linux.zip"
           GORESYM_SHA256="a557124857f95a589f8ce3525119c2d18c7c7fc7c4225c92ff94e3effb38748d"
-          curl -sSL "$GORESYM_URL" -o /tmp/GoReSym.zip
-          echo "$GORESYM_SHA256  /tmp/GoReSym.zip" | sha256sum -c -
-          sudo unzip -o /tmp/GoReSym.zip -d /usr/local/bin/
-          sudo chmod +x /usr/local/bin/GoReSym
-          rm -f /tmp/GoReSym.zip
-          GoReSym -h || true
+          curl -sSL --retry 3 --retry-delay 2 "$GORESYM_URL" -o /tmp/GoReSym.zip || true
+          if [ -f /tmp/GoReSym.zip ] && echo "$GORESYM_SHA256  /tmp/GoReSym.zip" | sha256sum -c - >/dev/null 2>&1; then
+            sudo unzip -o /tmp/GoReSym.zip -d /usr/local/bin/
+            sudo chmod +x /usr/local/bin/GoReSym
+            rm -f /tmp/GoReSym.zip
+            echo "✅ GoReSym installed and verified"
+          else
+            echo "⚠️ GoReSym unavailable or checksum error; tracker will use native string extraction fallback."
+            rm -f /tmp/GoReSym.zip
+          fi
 
       - name: Run Tracker Detection & Deep Scan
         env:

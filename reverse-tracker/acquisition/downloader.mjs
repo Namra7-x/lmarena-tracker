@@ -6,7 +6,7 @@
 import { assertUrlAllowed } from '../registry/allowlist.mjs';
 import { verifyChecksum, computeSha256 } from './integrity.mjs';
 
-const DEFAULT_TIMEOUT_MS = 120000; // 2 minutes
+const DEFAULT_TIMEOUT_MS = 60000; // 60 seconds
 const DEFAULT_MAX_SIZE_BYTES = 1024 * 1024 * 1024; // 1GB
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 
@@ -27,7 +27,7 @@ export async function downloadArtifact(artifact, options = {}) {
 
   const timeoutMs = options.timeoutMs || DEFAULT_TIMEOUT_MS;
   const maxSizeBytes = options.maxSizeBytes || DEFAULT_MAX_SIZE_BYTES;
-  const maxRetries = options.maxRetries || 3;
+  const maxRetries = options.maxRetries || 2;
 
   // If a separate checksumUrl is provided (like Factory .sha256), fetch it first
   let expectedChecksum = checksum;
