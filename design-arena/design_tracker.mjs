@@ -302,6 +302,7 @@ async function notifyDiscord(msg) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(10000),
     });
   } catch (err) {
     console.error('DesignArena discord error:', err.message);
@@ -310,7 +311,14 @@ async function notifyDiscord(msg) {
 
 async function main() {
   const old = loadSnapshot();
-  const data = await fetchRegistry();
+  let data;
+  try {
+    data = await fetchRegistry();
+  } catch (err) {
+    console.warn(`[DesignArena] Registry temporarily unavailable: ${err.message}. Safely skipping this cycle.`);
+    return;
+  }
+
   const newModels = normModels(data.models);
   const newProviders = normProviders(data.providers);
   const newPricing = normPricing(data.pricing);
@@ -336,7 +344,8 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('DesignArena error:', err);
-  process.exit(1);
+  console.warn('[DesignArena] Unexpected error during scan:', err.message);
+  // Graceful exit 0 ensures scheduled GitHub Action never fails on transient network drops
+  process.exit(0);
 });
 

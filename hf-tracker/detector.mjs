@@ -26,10 +26,10 @@ export function normalizeGated(val) {
  */
 export async function fetchOrgState(org) {
   const [createdModelsRes, modModelsRes, spacesRes, collectionsRes] = await Promise.allSettled([
-    fetch(`${HF_API_BASE}/models?author=${org}&sort=createdAt&direction=-1&limit=500&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS }),
-    fetch(`${HF_API_BASE}/models?author=${org}&sort=lastModified&direction=-1&limit=100&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS }),
-    fetch(`${HF_API_BASE}/spaces?author=${org}&sort=lastModified&direction=-1&limit=100&expand=createdAt`, { headers: HEADERS }),
-    fetch(`${HF_API_BASE}/collections?owner=${org}&limit=100`, { headers: HEADERS })
+    fetch(`${HF_API_BASE}/models?author=${org}&sort=createdAt&direction=-1&limit=500&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS, signal: AbortSignal.timeout(15000) }),
+    fetch(`${HF_API_BASE}/models?author=${org}&sort=lastModified&direction=-1&limit=100&expand=gated&expand=createdAt&expand=pipeline_tag`, { headers: HEADERS, signal: AbortSignal.timeout(15000) }),
+    fetch(`${HF_API_BASE}/spaces?author=${org}&sort=lastModified&direction=-1&limit=100&expand=createdAt`, { headers: HEADERS, signal: AbortSignal.timeout(15000) }),
+    fetch(`${HF_API_BASE}/collections?owner=${org}&limit=100`, { headers: HEADERS, signal: AbortSignal.timeout(15000) })
   ]);
 
   let createdModels = [];

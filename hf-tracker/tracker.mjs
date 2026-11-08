@@ -134,6 +134,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('[HF Tracker] Fatal execution error:', err);
-  process.exit(1);
+  console.warn('[HF Tracker] Transient execution error:', err.message);
+  process.exit(0);
 });

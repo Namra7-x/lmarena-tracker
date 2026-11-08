@@ -221,7 +221,8 @@ export async function sendDiscordAlerts(
       const res = await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(10000),
       });
 
       if (!res.ok) {

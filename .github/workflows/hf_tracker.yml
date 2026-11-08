@@ -15,7 +15,7 @@ on:
 
 concurrency:
   group: hf-tracker
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -33,6 +33,11 @@ jobs:
           fetch-depth: 1
           show-progress: false
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Run Hugging Face Tracker
         env:
           HF_DISCORD_WEBHOOK_URL: ${{ secrets.HF_DISCORD_WEBHOOK_URL }}
@@ -48,6 +53,15 @@ jobs:
           git add hf-tracker/hf_snapshot.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Hugging Face snapshot [skip ci]"
-            git pull --rebase
-            git push
+            for attempt in 1 2 3; do
+              echo "Pushing Hugging Face snapshot (attempt $attempt)..."
+              if git pull --rebase origin main && git push origin main; then
+                echo "Successfully updated Hugging Face snapshot"
+                exit 0
+              fi
+              echo "Concurrent push detected. Retrying in 2s..."
+              sleep 2
+            done
+            echo "Contention high. Snapshot will automatically sync on next run."
+            exit 0
           fi

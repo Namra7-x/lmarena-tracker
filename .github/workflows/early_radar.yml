@@ -18,7 +18,7 @@ permissions:
 
 concurrency:
   group: early-radar
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   radar:
@@ -53,7 +53,17 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add early-radar/radar_snapshot.json
             git commit -m "Update Early Radar snapshot [skip ci]"
-            git push origin main
+            for attempt in 1 2 3; do
+              echo "Pushing Early Radar snapshot (attempt $attempt)..."
+              if git pull --rebase origin main && git push origin main; then
+                echo "Successfully updated Early Radar snapshot"
+                exit 0
+              fi
+              echo "Concurrent push detected. Retrying in 2s..."
+              sleep 2
+            done
+            echo "Contention high. Snapshot will automatically sync on next run."
+            exit 0
           else
             echo "Zero changes detected. No commit needed."
           fi

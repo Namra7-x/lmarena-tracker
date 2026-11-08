@@ -234,17 +234,22 @@ export async function sendDiscordEmbeds(webhookUrl, embeds) {
       embeds: batch,
     };
 
-    const res = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const res = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(10000),
+      });
 
-    if (!res.ok) {
-      const errText = await res.text();
-      console.warn(`Discord webhook warning: HTTP ${res.status}: ${errText}`);
-    } else {
-      console.log(`[DISCORD] Successfully delivered ${batch.length} embed cards in 1 message.`);
+      if (!res.ok) {
+        const errText = await res.text();
+        console.warn(`Discord webhook warning: HTTP ${res.status}: ${errText}`);
+      } else {
+        console.log(`[DISCORD] Successfully delivered ${batch.length} embed cards in 1 message.`);
+      }
+    } catch (err) {
+      console.warn(`[DISCORD] Failed to deliver embed batch: ${err.message}`);
     }
   }
 }

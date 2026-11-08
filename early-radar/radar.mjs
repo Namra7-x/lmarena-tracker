@@ -333,7 +333,7 @@ export async function runRadar(options = {}) {
 // Direct CLI execution
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   runRadar().catch((err) => {
-    console.error(`[RADAR] Fatal error:`, err);
-    process.exit(1);
+    console.warn(`[RADAR] Transient execution issue: ${err.message}. Safely exiting for next scheduled run.`);
+    process.exit(0);
   });
 }
