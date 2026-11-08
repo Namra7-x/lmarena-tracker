@@ -201,6 +201,8 @@ export function buildRemovedModelEmbed(model) {
 export async function sendDiscordEmbeds(embeds, webhookUrl = null) {
   const url = (
     webhookUrl ||
+    process.env.API_DISCORD_WEBHOOK_URL ||
+    process.env.API_TRACKER_DISCORD_WEBHOOK_URL ||
     process.env.QWEN_DISCORD_WEBHOOK_URL ||
     process.env.DISCORD_WEBHOOK_URL ||
     ''
@@ -217,7 +219,7 @@ export async function sendDiscordEmbeds(embeds, webhookUrl = null) {
   for (let i = 0; i < embeds.length; i += BATCH_SIZE) {
     const batch = embeds.slice(i, i + BATCH_SIZE);
     const payload = {
-      username: 'Qwen Cloud Radar',
+      username: 'API Tracker',
       avatar_url: QWEN_CONFIG.qwenAvatar,
       embeds: batch,
     };

@@ -40,6 +40,8 @@ jobs:
 
       - name: Run Qwen Cloud Tracker
         env:
+          API_DISCORD_WEBHOOK_URL: ${{ secrets.API_DISCORD_WEBHOOK_URL }}
+          API_TRACKER_DISCORD_WEBHOOK_URL: ${{ secrets.API_TRACKER_DISCORD_WEBHOOK_URL }}
           QWEN_DISCORD_WEBHOOK_URL: ${{ secrets.QWEN_DISCORD_WEBHOOK_URL }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

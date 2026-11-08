@@ -45,6 +45,8 @@ export const QWEN_CONFIG = {
   },
 
   webhookEnvVars: [
+    'API_DISCORD_WEBHOOK_URL',
+    'API_TRACKER_DISCORD_WEBHOOK_URL',
     'QWEN_DISCORD_WEBHOOK_URL',
     'DISCORD_WEBHOOK_URL',
   ],
