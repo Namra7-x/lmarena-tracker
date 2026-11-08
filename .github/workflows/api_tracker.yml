@@ -1,4 +1,4 @@
-name: Qwen Cloud Signal Tracker
+name: API Signal Tracker
 
 on:
   schedule:
@@ -11,17 +11,17 @@ on:
         default: false
         type: boolean
   repository_dispatch:
-    types: [tracker, qwen_tracker]
+    types: [tracker, api_tracker, qwen_tracker]
 
 permissions:
   contents: write
 
 concurrency:
-  group: qwen-tracker
+  group: api-tracker
   cancel-in-progress: true
 
 jobs:
-  track-qwen:
+  track-api:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Run Qwen Cloud Tracker
+      - name: Run API Tracker
         env:
           API_DISCORD_WEBHOOK_URL: ${{ secrets.API_DISCORD_WEBHOOK_URL }}
           API_TRACKER_DISCORD_WEBHOOK_URL: ${{ secrets.API_TRACKER_DISCORD_WEBHOOK_URL }}
@@ -46,19 +46,19 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FORCE_ALERT: ${{ inputs.force_alert == true && '1' || '0' }}
-        run: node qwen-tracker/tracker.mjs
+        run: node api-tracker/tracker.mjs
 
       - name: Commit and Push Snapshot (Only if changes detected)
         run: |
-          if [ -n "$(git status --porcelain qwen-tracker/qwen_snapshot.json)" ]; then
+          if [ -n "$(git status --porcelain api-tracker/api_snapshot.json)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add qwen-tracker/qwen_snapshot.json
-            git commit -m "Update Qwen Cloud snapshot [skip ci]"
+            git add api-tracker/api_snapshot.json
+            git commit -m "Update API snapshot [skip ci]"
             for attempt in 1 2 3; do
-              echo "Pushing Qwen Cloud snapshot (attempt $attempt)..."
+              echo "Pushing API snapshot (attempt $attempt)..."
               if git pull --rebase origin main && git push origin main; then
-                echo "Successfully updated Qwen Cloud snapshot"
+                echo "Successfully updated API snapshot"
                 exit 0
               fi
               echo "Concurrent push detected. Retrying in 2s..."

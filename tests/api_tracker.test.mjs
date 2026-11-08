@@ -1,14 +1,14 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { parseModelMarkdown } from '../qwen-tracker/markdown.mjs';
-import { diffQwenState, hasEvents } from '../qwen-tracker/diff.mjs';
+import { parseModelMarkdown } from '../api-tracker/markdown.mjs';
+import { diffQwenState, hasEvents } from '../api-tracker/diff.mjs';
 import {
   buildNewModelEmbed,
   buildPriceChangeEmbed,
   buildContextChangeEmbed,
   buildRemovedModelEmbed,
-} from '../qwen-tracker/discord.mjs';
+} from '../api-tracker/discord.mjs';
 
 describe('Qwen Cloud Markdown Parser', () => {
   it('should parse pricing and rate limits from standard model markdown', () => {

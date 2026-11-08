@@ -20,7 +20,7 @@ import {
 } from './discord.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SNAPSHOT_FILE = path.join(__dirname, 'qwen_snapshot.json');
+const SNAPSHOT_FILE = path.join(__dirname, 'api_snapshot.json');
 
 /**
  * Loads snapshot from disk.
