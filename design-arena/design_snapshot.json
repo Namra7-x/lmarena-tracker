@@ -11074,6 +11074,30 @@
         ]
       }
     },
+    "idaho": {
+      "displayName": "Muse Ember",
+      "provider": "meta",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text",
+        "video"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
+    },
     "hy4": {
       "displayName": "Hy4",
       "provider": "tencent",
@@ -11469,7 +11493,6 @@
     "cowhollow": "cowhollow",
     "pacheights": "pacheights",
     "calfhollow": "calfhollow",
-    "idaho": "idaho",
     "utah": "utah",
     "washington": "washington",
     "alabama": "alabama",
@@ -13324,6 +13347,11 @@
       "text.output": 10,
       "text.cachedInput": 0.1,
       "text.cacheWrite": 2.5
+    },
+    "idaho": {
+      "text.input": 0.1,
+      "text.output": 0.5,
+      "text.cachedInput": 0.004
     },
     "hy4": {
       "text.input": 0.834,
