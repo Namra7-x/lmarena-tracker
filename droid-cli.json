@@ -1,18 +1,30 @@
 {
   "componentId": "droid-cli",
   "version": "1.6.0",
-  "alertedVersion": "1.6.0",
+  "alertedVersion": "1.6.1",
   "releaseId": "droid@1.6.0",
   "channel": "stable",
   "identityFingerprint": "5ad40e91c40ebb95a36351ea881ecf137144d633199e845e691b7c69391173ef",
   "diagnosticFingerprint": null,
-  "scanId": "DR-20261107-001",
+  "scanId": "DR-20261109-001",
   "coverageState": "PARTIAL",
-  "lastFailureTime": null,
+  "lastFailureTime": "2026-11-09T21:47:36.104Z",
   "lastAlertDigest": null,
-  "lastTestAlertVersion": "1.6.0",
-  "analyzerStatus": null,
-  "benchmark": null,
+  "lastTestAlertVersion": "1.6.1",
+  "analyzerStatus": {
+    "acornAst": "skipped",
+    "goReSym": "skipped",
+    "sourceMap": "completed",
+    "sevenZip": "skipped",
+    "asar": "skipped",
+    "tar": "skipped",
+    "zip": "skipped",
+    "multiEncodingScanner": "completed"
+  },
+  "benchmark": {
+    "executionTimeMs": 30985,
+    "peakMemoryMb": 95
+  },
   "hotSignals": [],
   "recentSignals": [],
   "historicalSeenHashes": [
