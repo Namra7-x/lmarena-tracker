@@ -11152,6 +11152,42 @@
           "videotovideo"
         ]
       }
+    },
+    "claude-fable-5-2": {
+      "displayName": "Claude Fable 5.2",
+      "provider": "anthropic",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      }
     }
   },
   "providers": {
@@ -13362,6 +13398,12 @@
     },
     "gemini-omni-flash-1.2": {
       "video.perSecond": 0.07
+    },
+    "claude-fable-5-2": {
+      "text.input": 8,
+      "text.output": 40,
+      "text.cachedInput": 0.2,
+      "text.cacheWrite": 10
     }
   }
 }
