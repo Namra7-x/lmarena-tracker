@@ -1,17 +1,17 @@
 {
   "componentId": "devin-cli",
-  "version": "3000.12.28",
-  "alertedVersion": "3000.12.28",
-  "releaseId": "devin-cli@3000.12.28",
+  "version": "3000.12.32",
+  "alertedVersion": "3000.12.32",
+  "releaseId": "devin-cli@3000.12.32",
   "channel": "stable",
-  "identityFingerprint": "3441bfd9221a0cc7c3bcdb3155b4096f4b53fc6487cf8110722503185cb77491",
+  "identityFingerprint": "1a2b1f745533029b6858870e0bb021dd2906a7ebd9044aab220a05e8a7da0ae3",
   "diagnosticFingerprint": null,
-  "scanId": "DC-20261107-001",
+  "scanId": "DC-20261109-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-07T19:57:36.180Z",
+  "lastSuccessfulScan": "2026-11-09T00:13:27.765Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "8b83c929d02af5c44578b2d18d56a30008fa8f05dedb4bffbfe484b422c13b12",
-  "lastTestAlertVersion": "3000.12.28",
+  "lastAlertDigest": "c5e0b9f6ee993e2f781fb28ceccf9239798cf013712354886fe265440f18d709",
+  "lastTestAlertVersion": "3000.12.32",
   "analyzerStatus": {
     "acornAst": "skipped",
     "goReSym": "failed",
@@ -23,7 +23,7 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 35526,
+    "executionTimeMs": 33546,
     "peakMemoryMb": 97
   },
   "hotSignals": [
@@ -793,48 +793,8 @@
     },
     {
       "category": "model_id",
-      "value": "gpt-5.6-astra-cyber-preview-medium",
-      "context": "gpt-5.6-astra-cyber-preview-medium",
-      "hasDormantMarker": true,
-      "dormantMarker": "preview",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (preview) in context",
-          "points": 15
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "gpt-6",
-      "context": "ription drops its \"not for file operations\" warning. Available in every channel; hidden from `--help`DEVIN_PREFER_EXEC_TOOLSIDEKICK_PREFER_EXEC_TOOLGive the Local Fusion sidekick the shell-first file-",
+      "context": "never check trust.respect-workspace-trustShell-first file operations: the system prompt tells the model to read, search and edit files through `exec` wherever the shell can do the job, and the `exec` ",
       "hasDormantMarker": true,
       "dormantMarker": "hidden",
       "activationStatus": "CONFIGURED",
@@ -864,9 +824,9 @@
           "points": 15
         }
       ],
-      "occurrences": 7,
+      "occurrences": 8,
       "contexts": [
-        "ription drops its \"not for file operations\" warning. Available in every channel; hidden from `--help`DEVIN_PREFER_EXEC_TOOLSIDEKICK_PREFER_EXEC_TOOLGive the Local Fusion sidekick the shell-first file-",
+        "never check trust.respect-workspace-trustShell-first file operations: the system prompt tells the model to read, search and edit files through `exec` wherever the shell can do the job, and the `exec`",
         "k-prefer-exec-toolDEVIN_SIDEKICK_PREFER_EXEC_TOOLSCRIPTED_TOOLSRegister the `scripted_tools` tool, which runs model-written JavaScript that calls the other tools: `alongside` the standard tools, or as",
         "scripted_tools`, not even the GPT-6 defaultdescription() is deprecated; use Display"
       ],
@@ -952,8 +912,48 @@
       ],
       "occurrences": 2,
       "contexts": [
-        "rendered-preview&f"
+        "rendered-preview&"
       ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "sidechain_messagrendered-preview",
+      "context": "sidechain_messagrendered-preview",
+      "hasDormantMarker": true,
+      "dormantMarker": "preview",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (preview) in context",
+          "points": 15
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [],
       "locations": [],
       "platforms": [
         "all"
@@ -1290,6 +1290,44 @@
       ],
       "occurrences": 1,
       "contexts": [],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-code-skillopenclawau",
+      "context": "claude-code-skillopenclawAU;G",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [
+        "claude-code-skillopenclawAU;G"
+      ],
       "locations": [],
       "platforms": [
         "all"
@@ -3722,42 +3760,6 @@
       "platforms": [
         "all"
       ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-opus-4-8-max",
-      "context": "claude-opus-4-8-max",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
     }
   ],
   "recentSignals": [
@@ -4511,42 +4513,8 @@
     },
     {
       "category": "model_id",
-      "value": "gpt-5.6-astra-cyber-preview-medium",
-      "context": "gpt-5.6-astra-cyber-preview-medium",
-      "hasDormantMarker": true,
-      "dormantMarker": "preview",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (preview) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "gpt-6",
-      "context": "ription drops its \"not for file operations\" warning. Available in every channel; hidden from `--help`DEVIN_PREFER_EXEC_TOOLSIDEKICK_PREFER_EXEC_TOOLGive the Local Fusion sidekick the shell-first file-",
+      "context": "never check trust.respect-workspace-trustShell-first file operations: the system prompt tells the model to read, search and edit files through `exec` wherever the shell can do the job, and the `exec` ",
       "hasDormantMarker": true,
       "dormantMarker": "hidden",
       "activationStatus": "CONFIGURED",
@@ -4682,7 +4650,41 @@
     {
       "category": "model_id",
       "value": "rendered-preview",
-      "context": "rendered-preview&f",
+      "context": "rendered-preview&",
+      "hasDormantMarker": true,
+      "dormantMarker": "preview",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (preview) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "sidechain_messagrendered-preview",
+      "context": "sidechain_messagrendered-preview",
       "hasDormantMarker": true,
       "dormantMarker": "preview",
       "activationStatus": "CONFIGURED",
@@ -4851,6 +4853,40 @@
     },
     {
       "category": "agent_mode",
+      "value": "mcp_config",
+      "context": "CLI init complete; dispatching command internal error: entered unreachable code: Desktop command should be handled before thisinternal error: entered unreachable code: Version command should be handle",
+      "hasDormantMarker": true,
+      "dormantMarker": "internal",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts); Dormant marker (internal) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        },
+        {
+          "rule": "Dormant marker (internal) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "mcp_servers",
       "context": "mcp_servers>a string serializes to JSONSession Modethought_levelspeedSpeedenabledAllow the agent to delegate work to subagents. Persisted to the user config (config.json)._windsurf_subagentssubagentsS",
       "hasDormantMarker": true,
@@ -4953,10 +4989,10 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_nameguardcacheclassifierpath",
-      "context": "tool_nameguardcacheclassifierpath contains invalid UTF-8 charactersfalseapplication/protocancelledall branches are disabled and there is no else branchgot response, draining sse stream for connection ",
+      "value": "TOOL_FOOTERCONTINUE_ON_OUTPUT_TRUNCATIONWhen",
+      "context": "TOOL_FOOTERCONTINUE_ON_OUTPUT_TRUNCATIONWhen a response hits the output-token limit before making a tool call, tell the model to act and continue the turn (at most twice per turn) instead of ending it",
       "hasDormantMarker": true,
-      "dormantMarker": "disabled",
+      "dormantMarker": "hidden",
       "activationStatus": "CONFIGURED",
       "filePath": "",
       "artifactClass": "delta",
@@ -4965,7 +5001,7 @@
       "score": 54,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts); Dormant marker (disabled) in context (+15 pts)",
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts); Dormant marker (hidden) in context (+15 pts)",
       "breakdown": [
         {
           "rule": "New in exact diff",
@@ -4980,7 +5016,7 @@
           "points": 14
         },
         {
-          "rule": "Dormant marker (disabled) in context",
+          "rule": "Dormant marker (hidden) in context",
           "points": 15
         }
       ]
@@ -5837,6 +5873,36 @@
       "category": "model_id",
       "value": "claude-code-skillopenclaw",
       "context": "claude-code-skillopenclaw",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-code-skillopenclawau",
+      "context": "claude-code-skillopenclawAU;G",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10065,36 +10131,6 @@
     },
     {
       "category": "model_id",
-      "value": "claude-sonnet-5-med",
-      "context": "claude-sonnet-5-med",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "claude-sonnet-5-medium",
       "context": "claude-sonnet-5-medium",
       "hasDormantMarker": false,
@@ -10335,8 +10371,38 @@
     },
     {
       "category": "model_id",
-      "value": "devin-256",
-      "context": "devin-256",
+      "value": "devin-4",
+      "context": "devin-4",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "devin-8",
+      "context": "devin-8",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12555,36 +12621,6 @@
     },
     {
       "category": "model_id",
-      "value": "devin-session-to",
-      "context": "devin-session-to>",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "devin-session-tok",
       "context": "devin-session-toK`a$",
       "hasDormantMarker": false,
@@ -12615,8 +12651,38 @@
     },
     {
       "category": "model_id",
-      "value": "devin-session-tos1",
-      "context": "devin-session-toS1$",
+      "value": "devin-session-ton",
+      "context": "devin-session-toN",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "devin-session-tos",
+      "context": "devin-session-tos",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12705,8 +12771,38 @@
     },
     {
       "category": "model_id",
-      "value": "devin-sessionpluginboard-ticketsuperdevinlocal-item",
-      "context": "devin-sessionpluginboard-ticketsuperdevinlocal-item",
+      "value": "devin-sessionpluginboard-ticketsuperdevin",
+      "context": "devin-sessionpluginboard-ticketsuperdevin",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "devin-sessionpluginboard-ticketsuperdevinlocal-item7",
+      "context": "devin-sessionpluginboard-ticketsuperdevinlocal-item7",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12737,6 +12833,36 @@
       "category": "model_id",
       "value": "devin-sessionpluginboard-ticketsuperdevinlocal-iteminternally",
       "context": "devin-sessionpluginboard-ticketsuperdevinlocal-iteminternally tagged enum FileSearchResultRichContentTextNodeslash-command-mentionbulletinline-code",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "devin-sessionpluginboard-ticketsuperdevinlocal-itemjv",
+      "context": "devin-sessionpluginboard-ticketsuperdevinlocal-itemjV=I",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12797,36 +12923,6 @@
       "category": "model_id",
       "value": "devin-sessionpluginboard-ticketsuperdevinlocal-itemvariant",
       "context": "devin-sessionpluginboard-ticketsuperdevinlocal-itemvariant index 0 <= i < 19slash-command-mentionbulletinline-code",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "devin-sessionpluginboard-ticketsuperdevinuser",
-      "context": "devin-sessionpluginboard-ticketsuperdevinuser",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13486,7 +13582,7 @@
     {
       "category": "model_id",
       "value": "fill-ava-moz-min-content-moz-max",
-      "context": "fill-ava-moz-min-content-moz-max-content-moz-fit-contentZ",
+      "context": "fill-ava-moz-min-content-moz-max-content-moz-fit-content",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13516,7 +13612,7 @@
     {
       "category": "model_id",
       "value": "fill-ava-moz-min-content-moz-max",
-      "context": "fill-ava-moz-min-content-moz-max-content-moz-fit-content",
+      "context": "fill-ava-moz-min-content-moz-max-content-moz-fit-contentZ>",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -14655,36 +14751,6 @@
     },
     {
       "category": "model_id",
-      "value": "gpt-4-1-mini-usa",
-      "context": "gpt-4-1-mini-usa\\e",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "gpt-4-1-mini-usaa",
       "context": "gpt-4-1-mini-usaa formatting trait implementation returned an error when the underlying stream did not",
       "hasDormantMarker": false,
@@ -14867,36 +14933,6 @@
       "category": "model_id",
       "value": "gpt-5-2025-08-0",
       "context": "gpt-5-2025-08-0",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gpt-5-4",
-      "context": "gpt-5-4",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17925,6 +17961,36 @@
     },
     {
       "category": "model_id",
+      "value": "gpt-5.6",
+      "context": "gpt-5.6-",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "gpt-5.6-h9",
       "context": "gpt-5.6-H9",
       "hasDormantMarker": false,
@@ -18167,6 +18233,36 @@
       "category": "model_id",
       "value": "gpt-5.6-luna-medium",
       "context": "gpt-5.6-luna-medium",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-5.6-luna-medium-fas",
+      "context": "gpt-5.6-luna-medium-fas",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -19246,7 +19342,7 @@
     {
       "category": "model_id",
       "value": "gpt-6",
-      "context": "scripted_tools`, not even the GPT-6 default()description() is deprecated; use Display",
+      "context": "gpt-6-",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -19275,8 +19371,8 @@
     },
     {
       "category": "model_id",
-      "value": "gpt-6-1",
-      "context": "gpt-6-1-",
+      "value": "gpt-6",
+      "context": "scripted_tools`, not even the GPT-6 default()description() is deprecated; use Display",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -20416,7 +20512,7 @@
     {
       "category": "model_id",
       "value": "gpt-6-astra",
-      "context": "gpt-6-astra",
+      "context": "gpt-6-astra-",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -20446,7 +20542,7 @@
     {
       "category": "model_id",
       "value": "gpt-6-astra",
-      "context": "gpt-6-astra-",
+      "context": "gpt-6-astra",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -23086,7 +23182,7 @@
     {
       "category": "model_id",
       "value": "gpt-exec",
-      "context": "gpt-exec&lt;&gt;ppidwhatopen",
+      "context": "gpt-exec&lt;&gt;ppidwhat",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -23265,6 +23361,36 @@
     },
     {
       "category": "model_id",
+      "value": "gpt-tc1",
+      "context": "gpt-tC1",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "gpt-toe1",
       "context": "gpt-tOE1",
       "hasDormantMarker": false,
@@ -23297,6 +23423,36 @@
       "category": "model_id",
       "value": "gpt-tqe1",
       "context": "gpt-tQE1",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-tse1",
+      "context": "gpt-tSE1",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -23565,36 +23721,6 @@
     },
     {
       "category": "model_id",
-      "value": "imagereadaudiovideopenguin-mini",
-      "context": "struct ImageReadAUDIOVIDEOpenguin-mini-v4-g",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "inlog-outuser-checkcredit-cardfolder-openfolder-plus",
       "context": "mcpResourceAccountSystemSessionlog-inlog-outuser-checkcredit-cardfolder-openfolder-plus",
       "hasDormantMarker": false,
@@ -23807,36 +23933,6 @@
       "category": "model_id",
       "value": "kimi-k3-rl",
       "context": "accounts/cognition/deployments/kimi-k3-rl-",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "kimi-k3-rl",
-      "context": "accounts/cognition/deployments/kimi-k3-rl-/usr/local/cargo/registry/src/pkg.cognition.build-3983",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -24167,36 +24263,6 @@
       "category": "model_id",
       "value": "min-max",
       "context": "?min-max- * 1nonenot autotrueonlyleftFINENonenamekindTimeSomeTrueDarkZero",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "mini-low",
-      "context": "-mini-low-usa",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -24945,36 +25011,6 @@
     },
     {
       "category": "model_id",
-      "value": "sec-websocket-pro",
-      "context": "sec-websocket-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "sessions-db-write-pro",
       "context": ".sessions-db-write-pro",
       "hasDormantMarker": false,
@@ -25247,6 +25283,36 @@
       "category": "model_id",
       "value": "sonnet-5-5-low",
       "context": "-sonnet-5-5-low",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "sonnet-5-medium",
+      "context": "de-sonnet-5-medium",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -26055,36 +26121,6 @@
     },
     {
       "category": "model_id",
-      "value": "terra-low",
-      "context": ".6-terra-low-fast",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "textbadgesyntax-pro",
       "context": "padding-rightwidthchisel_ui::text_badge::TextBadgesyntax-pro",
       "hasDormantMarker": false,
@@ -26416,7 +26452,7 @@
     {
       "category": "model_id",
       "value": "valuelog-inlog-outuser-checkcredit-cardfolder-openfolder-plus",
-      "context": "AccountSystemSessionLazy instance has previously been poisonedmid > lencalled `Result::unwrap()` on an `Err` valuelog-inlog-outuser-checkcredit-cardfolder-openfolder-plus",
+      "context": "mid > lencalled `Result::unwrap()` on an `Err` valuelog-inlog-outuser-checkcredit-cardfolder-openfolder-plus",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -26746,7 +26782,7 @@
     {
       "category": "endpoint_domain",
       "value": "cli/current/manifest",
-      "context": "tocol-versionprocess fallback initialize responseclient message acceptedgot new sse streamold-session POSTs did not finish before the recovery deadlinestreamable HTTP response stream closed before its",
+      "context": "run auth login firstcannot determine manifest URL for this distributionresolve portal manifest URLfailed to parse release manifestFailed to persist config change: https://static.devin.ai/cli/current/m",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -26776,7 +26812,7 @@
     {
       "category": "endpoint_domain",
       "value": "cli/current/manifest",
-      "context": "run auth login firstresolve portal manifest URL-Removed man page link: agents.mdAGENTS.local.md.windsurfrulesfailed to load rule from plugin: Imported rule '' from mdagentsDevinImporter: loaded  agent",
+      "context": "tocol-versionprocess fallback initialize responseclient message acceptedgot new sse streamold-session POSTs did not finish before the recovery deadlinestreamable HTTP response stream closed before its",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -26926,7 +26962,7 @@
     {
       "category": "endpoint_domain",
       "value": "cli/current/manifest",
-      "context": "Failed to set credentials on backend: Devin CLIlocal project configproject configuser configoverflow in Duration::newcalled `Result::unwrap()` on an `Err` valuehttps://static.devin.ai/cli/current/mani",
+      "context": "Failed to set credentials on backend: Devin CLIlocal project configproject configuser confighttps://api.devin.aioverflow in Duration::newcalled `Result::unwrap()` on an `Err` valuehttps://static.devin",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -27076,7 +27112,7 @@
     {
       "category": "endpoint_domain",
       "value": "cli/current/manifest",
-      "context": "https://api.devin.aihttps://static.devin.ai/cli/current/manifest.jsonhttps://static.devinenterprise.com/cli/current/",
+      "context": "; will retry on next startuphttps://static.devin.ai/cli/current/manifest.jsonhttps://static.devinenterprise.com/cli/current/",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -27106,7 +27142,7 @@
     {
       "category": "endpoint_domain",
       "value": "cli/current/manifest",
-      "context": "; will retry on next startuphttps://static.devin.ai/cli/current/manifest.jsonhttps://static.devinenterprise.com/cli/current/",
+      "context": "run auth login firstcannot determine manifest URL for this distributionresolve portal manifest URLFailed to persist config change: https://static.devin.ai/cli/current/manifest.jsonhttps://static.devin",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -27166,7 +27202,37 @@
     {
       "category": "endpoint_domain",
       "value": "cli/current/manifest",
-      "context": "run auth login firstresolve portal manifest URL-Removed man page link:  MCP registry entries from  that do not follow the spec (missing server definition)MCP registry response from  does not follow th",
+      "context": "run auth login firstresolve portal manifest URL-Removed man page link: Telemetry config cache not found at Loaded telemetry config cache at Deleted telemetry config cache at Failed to load telemetry c",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: hidden command / endpoint (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: hidden command / endpoint",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "cli/current/manifest",
+      "context": "run auth login firstcannot determine manifest URL for this distributionresolve portal manifest URLConnecting to streamable HTTP MCP server '' at: Connecting to legacy SSE MCP server 'Starting stdio MC",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -28875,36 +28941,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_order_hintp2",
-      "context": "assertion failed: !seq.enable_order_hintp2",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: feature_flag (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: feature_flag",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_OUTPUT_FLUSH_DELAY",
       "context": "ENABLE_OUTPUT_FLUSH_DELAY for environments that need it",
       "hasDormantMarker": false,
@@ -28997,6 +29033,36 @@
       "category": "feature_flag",
       "value": "ENABLE_OUTPUT_FLUSH_DELAYFailed",
       "context": "ENABLE_OUTPUT_FLUSH_DELAYFailed to open PTY/bin/sh-cVSCODE_SHELL_INTEGRATIONfreshly created processor is uncontended",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: feature_flag (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: feature_flag",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_OUTPUT_FLUSH_DELAYFailed",
+      "context": "ENABLE_OUTPUT_FLUSH_DELAYFailed to open PTY/bin/sh-cVSCODE_SHELL_INTEGRATIONfreshly created processor is uncontended`f;I",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -29716,7 +29782,7 @@
     {
       "category": "agent_mode",
       "value": "agent_channel_closedAgent",
-      "context": "agent_channel_closedAgent communication channel closedNo MCP servers are configured.Not connectedConnectingConnectedErrorAuthentication requiredBlocked by policy",
+      "context": "agent_channel_closedAgent communication channel closeddevin_messageACP load: failed to read conversation history: No MCP servers are configured.Not connectedConnectingConnectedErrorAuthentication requ",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -29776,7 +29842,7 @@
     {
       "category": "agent_mode",
       "value": "agent_channel_closedAgent",
-      "context": "agent_channel_closedAgent communication channel closeddevin_messageACP load: failed to read conversation history: &quot;\"&amp;&multiple cognition.ai/userShellCommand content blocks are not allowed; se",
+      "context": "agent_channel_closedAgent communication channel closeddevin_messageACP load: failed to read conversation history: That goal is not the session's current goal.&quot;\"&amp;&multiple cognition.ai/userShe",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -30226,7 +30292,7 @@
     {
       "category": "agent_mode",
       "value": "agent_client_protocol",
-      "context": "agent_client_protocol::jsonrpc::UntypedMessagescrollback::app::ViewBus<chisel_ui::view::ReplView>scrollback::app::ViewBus<chisel::trusted_workspace::TrustDialogView>scrollback::app::ViewBus<chisel::se",
+      "context": "agent_client_protocol::jsonrpc::UntypedMessage",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -30406,7 +30472,7 @@
     {
       "category": "agent_mode",
       "value": "agent_client_protocol",
-      "context": "agent_client_protocol::jsonrpc::UntypedMessagea floatan integera boolean{}.Ignoring invalid config field \"\" while updating config: Failed to serialize valuefewer elements in arrayUntypedMessagemethodp",
+      "context": "agent_client_protocol::jsonrpc::UntypedMessagea floatan integera boolean{}.Ignoring invalid config field \"\" while updating config: Failed to serialize valuefewer elements in arrayfile identifier missi",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -30556,36 +30622,6 @@
     {
       "category": "agent_mode",
       "value": "agent_client_protocol",
-      "context": "agent_client_protocol::jsonrpc::UntypedMessage",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_client_protocol",
       "context": "agent_client_protocol::role::acp::ClientNORMALACCEPT EDITSSMARTPLANASKBYPASSAUTONOMOUS",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -30646,7 +30682,37 @@
     {
       "category": "agent_mode",
       "value": "agent_client_protocol",
-      "context": "agent_client_protocol::role::acp::ClientWindowUpdatestream_idsize_incrementackpayload`SpecificChannels` does not support deep data yetclient_capabilitiesclient_infolayoutmessage_idtype_valuessession_i",
+      "context": "agent_client_protocol::jsonrpc::UntypedMessagea floatan integera boolean{}.Ignoring invalid config field \"\" while updating config: Failed to serialize valuefewer elements in arrayUntypedMessagemethodp",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_client_protocol",
+      "context": "agent_client_protocol::role::acp::ClientWindowUpdatestream_idsize_incrementackpayloadpoll after Poll::Ready`SpecificChannels` does not support deep data yetclient_capabilitiesclient_infolayoutmessage_",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -30677,36 +30743,6 @@
       "category": "agent_mode",
       "value": "agent_client_protocol",
       "context": "agent_client_protocol::role::acp::AgentMaybeDone polled after value takenno layer in the image matched your specified requirementsmin_lengthmax_lengthenum_valuesone_ofMessageIdmethod_idavailable_comma",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_client_protocol",
-      "context": "agent_client_protocol::jsonrpc::UntypedMessagea floatan integera boolean{}.Ignoring invalid config field \"\" while updating config: Failed to serialize valuefewer elements in array",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -30946,6 +30982,36 @@
     {
       "category": "agent_mode",
       "value": "agent_client_protocol",
+      "context": "agent_client_protocol::rolecounterpartpeer9x/G",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_client_protocol",
       "context": "agent_client_protocol::jsonrpc::incoming_actormessagedispatchtarget/patch/agent-client-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -31066,7 +31132,7 @@
     {
       "category": "agent_mode",
       "value": "agent_client_protocol",
-      "context": "agent_client_protocol::role::acp::Client`SpecificChannels` does not support deep data yetstruct variant Response::Resultstruct JsonRpcMessagestruct JsonRpcRequeststruct JsonRpcResponsestruct JsonRpcNo",
+      "context": "agent_client_protocol::role::acp::Clientinternal error: entered unreachable code: invalid Once state`SpecificChannels` does not support deep data yetstruct variant Response::Resultstruct JsonRpcMessag",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -31096,7 +31162,7 @@
     {
       "category": "agent_mode",
       "value": "agent_client_protocol",
-      "context": "agent_client_protocol::role::acp::Agentno layer in the image matched your specified requirementsJsonRpcVersion2_0RequestOptionalParamTerminalIdRequestNoParamNotificationNoParamJsonRpcRequestrequestfla",
+      "context": "agent_client_protocol::role::acp::Agentno layer in the image matched your specified requirementsJsonRpcVersion2_0RequestOptionalParamTerminalIdRequestNoParamNotificationNoParamJsonRpcRequestrequestPro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -31635,8 +31701,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_completedsuccesscognition",
-      "context": "agent_completedsuccesscognition.ai",
+      "value": "agent_completedsuccesssummarycognition",
+      "context": "agent_completedsuccesssummarycognition.ai/sub",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -31667,36 +31733,6 @@
       "category": "agent_mode",
       "value": "agent_completedsuccesssummarycognition",
       "context": "agent_completedsuccesssummarycognition.ai",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_completedsuccesssummarycognition",
-      "context": "agent_completedsuccesssummarycognition.ai/sub",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -31905,8 +31941,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_completion_notification0",
-      "context": "agent_completion_notification0",
+      "value": "agent_completion_notification",
+      "context": "agent_completion_notification@ziH",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -31996,7 +32032,7 @@
     {
       "category": "agent_mode",
       "value": "agent_completion_notificationX",
-      "context": "agent_completion_notificationX.-G",
+      "context": "agent_completion_notificationX^.G",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -32087,36 +32123,6 @@
       "category": "agent_mode",
       "value": "agent_completionsub",
       "context": "agent_completionsub",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_completp",
-      "context": "agent_completp-content-blockschisel/acp-conteFailed to parse  params at line reasoning_tokensgeneration_modelmodelPreferencestraceTextDiagramDeleted session Persisting node open in a client, terminal_",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -32326,37 +32332,7 @@
     {
       "category": "agent_mode",
       "value": "agent_configenabled",
-      "context": "agent_configenabled chisel-agent/src/acp_server/agent_impl.rs:184event chisel-agent/src/acp_server/agent_imp",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_configenabled",
-      "context": "agent_configenabled",
+      "context": "agent_configenabled chisel-agent/src/analytics/mod.rs:375chisel_agent::analyticschisel-agent/src/analytics/mod.rsevent chisel-agent/src/analytics/mod.rs:375enabled chisel-agent/src/analytics/mod.rs:39",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -32476,6 +32452,36 @@
     {
       "category": "agent_mode",
       "value": "agent_contextcognition",
+      "context": "agent_contextcognition.ai/sub'1r",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_contextcognition",
       "context": "agent_contextcognition.ai/sub",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -32536,7 +32542,7 @@
     {
       "category": "agent_mode",
       "value": "agent_contextcognition",
-      "context": "agent_contextcognition.ai/subW",
+      "context": "agent_contextcognition.ai/subwF",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -32597,6 +32603,36 @@
       "category": "agent_mode",
       "value": "agent_contextdescriptionread_subagent",
       "context": "agent_contextdescriptionread_subagent",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_contextk",
+      "context": "agent_contextk",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -32746,7 +32782,7 @@
     {
       "category": "agent_mode",
       "value": "agent_contextparentAgentIdrunIdcognition",
-      "context": "agent_contextparentAgentIdrunIdcognition.ai/processIdcognition.ai/inferenceToolNamecognition.ai/reasoncognition.ai/headBranchcognition.ai/baseBranchco",
+      "context": "agent_contextparentAgentIdrunIdcognition.ai/inferenceToolNamecognition.ai/clientEnvironmentcognition.ai/sessionDefaultscognition.ai/externalHistorySkeletoncognition.ai/cloudHandoffcognition.ai/loadSta",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -32775,38 +32811,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_contextparentAgentIdrunIdmodelcognition",
-      "context": "agent_contextparentAgentIdrunIdmodelcognition.ai/goalcognition.ai/inputTokenscognition.ai/outputTokenscognition.ai/cachedReadTokenscognition.ai/cachedWriteTokenscognition.ai/totalCreditCostcognition.a",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_contexts",
-      "context": "agent_contexts",
+      "value": "agent_contextparentAgentIdrunIdcognition",
+      "context": "agent_contextparentAgentIdrunIdcognition.ai/inferenceToolNamecognition.ai/clientEnvironmentcognition.ai/sessionDefaultscognition.ai/externalHistorySkeletoncognition.ai/cloudHandoffcognition.ai/loadSta",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -32896,7 +32902,7 @@
     {
       "category": "agent_mode",
       "value": "agent_control",
-      "context": "agent_control=, workspace_dir_commands=, chains=, browser_preview=, browser_preview_open=, clipboard_write=, cloud_handoff=, local_tools=ACP: failed to send replayed turn stats",
+      "context": "agent_control=, workspace_dir_commands=, chains=, browser_preview=, browser_preview_open=, clipboard_write=, cloud_handoff=, local_tools=ACP: failed to send replayed turn stats: (s",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -33075,36 +33081,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_decidablepath_triggered_countJSON",
-      "context": "agent_decidablepath_triggered_countJSON number out of rangenot a JSON numberu64 value was too largethere should be an errorserialize_value called before serialize_key",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "agent_decided",
       "context": "agent_decided",
       "hasDormantMarker": false,
@@ -33167,6 +33143,36 @@
       "category": "agent_mode",
       "value": "agent_decidedmanualtriggeruserInvocable",
       "context": "agent_decidedmanualtriggeruserInvocable",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_default_m",
+      "context": "agent_default_m",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -33375,8 +33381,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_descriptionuser_invocablecognition",
-      "context": "agent_descriptionuser_invocablecognition.ai/scripted_runscriptedRunId",
+      "value": "agent_descriptionuser_invocable",
+      "context": "agent_descriptionuser_invocable^8",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -33975,36 +33981,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_explore",
-      "context": "agent_explore",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "agent_exploreExploreRead",
       "context": "agent_exploreExploreRead-only subagent for codebase exploration, research, and search. Use this when you need to find code, understand architecture, trace dependencies, or answer questions about the c",
       "hasDormantMarker": false,
@@ -34037,6 +34013,36 @@
       "category": "agent_mode",
       "value": "agent_exploreRead",
       "context": "agent_exploreRead-only subagent for codebase exploration, research, and search. Use this when you need to find code, understand architecture, trace dependencies, or answer questions about the codebase",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_explorex",
+      "context": "agent_explorex",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -34606,7 +34612,7 @@
     {
       "category": "agent_mode",
       "value": "agent_heads",
-      "context": "agent_heads",
+      "context": "agent_heads WHERE session_id = ?1DELETE FROM",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -34636,7 +34642,7 @@
     {
       "category": "agent_mode",
       "value": "agent_heads",
-      "context": "agent_heads WHERE session_id = ?1DELETE FROM",
+      "context": "agent_heads",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -35205,8 +35211,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_idmain_request_iddecisionattempt",
-      "context": "agent_idmain_request_iddecisionattempt",
+      "value": "agent_idp",
+      "context": "<agent_idp",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -35326,7 +35332,7 @@
     {
       "category": "agent_mode",
       "value": "agent_idtimeoutvariant",
-      "context": "agent_idtimeoutvariant index 0 <= i < 4",
+      "context": "agent_idtimeoutvariant index 0 <= i < 3",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -35386,7 +35392,7 @@
     {
       "category": "agent_mode",
       "value": "agent_ient",
-      "context": "chisel/goal-contsubagent/agent_ient/profile_namesubagent/profileu",
+      "context": "chisel/goal-contsubagent/agent_ient/profile_namesubagent/profile",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -36106,7 +36112,7 @@
     {
       "category": "agent_mode",
       "value": "agent_instance",
-      "context": "method_not_foundcognition.ai/terminal/killBackgroundShellACP reads/recentModelUids: no recent model uids store configuredACP reads/promptHistory: no prompt history store configuredACP config/write: em",
+      "context": "ACP: authenticate # (agent_instance=, client=, had_credentials=, method_id=, meta_keys=)`X]G",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -36645,6 +36651,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "agent_logs2",
+      "context": "agent_logs2",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "agent_logsExport",
       "context": "agent_logsExport failed: No session state availableCogs: (no session state available)Cogs: (failed to determine data directory)Cogs: (serialization error)Completion input: (no session state available)",
       "hasDormantMarker": false,
@@ -36855,8 +36891,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_message_chnt_thought_chunk",
-      "context": "agent_message_chnt_thought_chunk",
+      "value": "agent_mess",
+      "context": "agent_mess",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -36885,8 +36921,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_mode",
-      "context": "ALTER TABLE sessions RENAME COLUMN permission_mode TO agent_mode;",
+      "value": "agent_message_chnt_thought_chunk",
+      "context": "agent_message_chnt_thought_chunk",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -36976,7 +37012,7 @@
     {
       "category": "agent_mode",
       "value": "agent_mode",
-      "context": "view/capturecognition.ai/browserPreview/openedcognition.ai/revert/stepsUpdatedcognition.ai/revert/historyRewoundcognition.ai/processMemorycognition.ai/loadStartingcognition.ai/loadReadcognition.ai/han",
+      "context": "zationRequiredcognition.ai/mcp/authorizationFinishedcognition.ai/plugins/changedcognition.ai/browserPreview/capturecognition.ai/browserPreview/openedcognition.ai/revert/stepsUpdatedcognition.ai/revert",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37037,6 +37073,36 @@
       "category": "agent_mode",
       "value": "agent_mode",
       "context": "UPDATE sessions SET agent_mode = ?1, last_activity_at = ?2 WHERE id = ?3 and last_activity_at to SELECT json_extract(chat_message, '$.content')",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_mode",
+      "context": "ALTER TABLE sessions RENAME COLUMN permission_mode TO agent_mode;",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37186,37 +37252,7 @@
     {
       "category": "agent_mode",
       "value": "agent_mode",
-      "context": "_shell) VALUES (?1, ?2, ?3, ?4)Saved prompt to history for session Forked session INSERT INTO sessions (id, working_directory, backend_type, model, agent_mode,",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_modehiddenma",
-      "context": "agent_modehiddenma",
+      "context": "ctory, backend_type, model, agent_mode,",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37246,7 +37282,7 @@
     {
       "category": "agent_mode",
       "value": "agent_model",
-      "context": "agent_model`; subagents use the defaultcore/plan_model_overridesnormalask5URL is required for HTTP/SSE transport.",
+      "context": "agent_model`; subagents use the defaultcore/plan_model_overridesnormalaskNot logged in. Please run `auth login` first.Devin API URL not found in credentials. Please re-authenticate.`acp --cloud` requi",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37366,37 +37402,7 @@
     {
       "category": "agent_mode",
       "value": "agent_model",
-      "context": "agent_model`; subagents use the defaultcore/plan_model_overridesnormalasksession not foundNo ModelInfo available for model ''; model identity message will be missing5URL is required for HTTP/SSE trans",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_model",
-      "context": "agent_model`; subagents use the defaultcore/plan_model_overridesnormalaskYou are already on the latest version.session not foundNo ModelInfo available for model ''; model identity message will be miss",
+      "context": "agent_model`; subagents use the defaultcore/plan_model_overridesnormalaskNot logged in. Please run `auth login` first.Devin API URL not found in credentials. Please re-authenticate.`acp --cloud` requi",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37427,6 +37433,36 @@
       "category": "agent_mode",
       "value": "agent_model_for_parent",
       "context": "agent_model_for_parent",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_model_tools",
+      "context": "agent_model_tools[Attached image]slice out of boundsPP",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37547,36 +37583,6 @@
       "category": "agent_mode",
       "value": "agent_model_toolsmemory",
       "context": "agent_model_toolsmemory.statslice out of bounds",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_model_toolsslice",
-      "context": "agent_model_toolsslice out of bounds",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -38026,7 +38032,7 @@
     {
       "category": "agent_mode",
       "value": "agent_pausedcognition",
-      "context": "agent_pausedcognition.ai/subg&u",
+      "context": "agent_pausedcognition.ai/sub",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -38057,36 +38063,6 @@
       "category": "agent_mode",
       "value": "agent_pausedcognition",
       "context": "agent_pausedcognition.ai/sub/editableCommandcognition.ai/edipermissionReasoncognition.ai/peri/permissionRulecognition.ai/percognition.ai/cwdnferenceToolNamecognition.ai/inftion.ai/canceledcognition.ai",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_pausedcognition",
-      "context": "agent_pausedcognition.ai/sub",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -38207,6 +38183,36 @@
       "category": "agent_mode",
       "value": "agent_pausedpausedcognition",
       "context": "agent_pausedpausedcognition.ai/streamTimestampcognition.ai/displayMessagecognition.ai/instantcognition.ai/foldsTurncognition.ai/contextUsagecognitio",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_pausedpausedcontent",
+      "context": "agent_pausedpausedcontent",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -39225,8 +39231,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_sidekickfewer",
-      "context": "agent_sidekickfewer elements in mapfewer elements in sequence",
+      "value": "agent_sidekicka",
+      "context": "agent_sidekicka formatting trait implementation returned an error when the underlying stream did notinternal error: entered unreachable codeproperties$defsdefinitionserrordata did not match any varian",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -39256,7 +39262,7 @@
     {
       "category": "agent_mode",
       "value": "agent_sidekickinternal",
-      "context": "agent_sidekickinternal error: entered unreachable codeproperties$defsdefinitionsdata did not match any variant of untagged enum VerbosityConfigThinkingDisplayModestreamshow_full_thinkingdata did not m",
+      "context": "agent_sidekickinternal error: entered unreachable code",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -39855,6 +39861,66 @@
     },
     {
       "category": "agent_mode",
+      "value": "agent_startedprofiledepthisBackgroundcognition",
+      "context": "agent_startedprofiledepthisBackgroundcognition.ai/sub",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_starteds",
+      "context": "agent_starteds",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "agent_startedSubagentFinished",
       "context": "agent_startedSubagentFinished",
       "hasDormantMarker": false,
@@ -40366,7 +40432,7 @@
     {
       "category": "agent_mode",
       "value": "agent_stoppedon",
-      "context": "Allow network aci/handoff/statuscognition.ai/hanllingInformationcognition.ai/bilp/serversChanged/clipboard/writeion.ai/showModalhinking_completecognition.ai/thigentNotificationconnection_retryai/agent",
+      "context": "Allow network aci/handoff/statuscognition.ai/hanllingInformationcognition.ai/bilp/serversChanged/clipboard/writeion.ai/showModalnition.ai/outputhinking_completecognition.ai/thigentNotificationconnecti",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -41025,8 +41091,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_updatedSubagentToolCall",
-      "context": "agent_updatedSubagentToolCall",
+      "value": "agent_uow_run_completedworkflow_run_comT",
+      "context": "agent_uow_run_completedworkflow_run_comT",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -41055,8 +41121,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_updateworkflo",
-      "context": "agent_updateworkflo",
+      "value": "agent_updatedSubagentToolCall",
+      "context": "agent_updatedSubagentToolCall",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -41115,8 +41181,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_versiontruncatedtranscriptimages",
-      "context": "agent_versiontruncatedtranscriptimages",
+      "value": "agent_versiontruncatedtranscriptUrlinternally",
+      "context": "agent_versiontruncatedtranscriptUrlinternally tagged enum ElicitationModerequestedSchemaelicitationIdStringFormatemaildate-timeactioninternally tagged enum ElicitationActionElicitationActionCancelDecl",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -41147,6 +41213,36 @@
       "category": "agent_mode",
       "value": "Connector_Punctuation",
       "context": "Pc,Connector_Punctuation",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "MCP__create_new_outpost__Create",
+      "context": "MCP__create_new_outpost__Create a new outpostSelect an outpost to servelinuxno outposts exist on this account yet",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -41565,36 +41661,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "mcp_auth_errormcp",
-      "context": "mcp_auth_errormcp",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "mcp_auth_request",
       "context": "mcp_auth_request",
       "hasDormantMarker": false,
@@ -41985,36 +42051,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "mcp_call_toolHN",
-      "context": "On success, you will automatically switch to Code mode and can begin implementation.exit_plan_modeExecute a tool on an MCP server. Use this to interact with external services like Linear, GitHub, Slac",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "mcp_call_toolWhitespaceNotWhitespacestruct",
       "context": "ntation.exit_plan_modeExecute a tool on an MCP server. Use this to interact with external services like Linear, GitHub, Slack, databases, and more. The tool result will be returned as structured data.",
       "hasDormantMarker": false,
@@ -42167,36 +42203,6 @@
       "category": "agent_mode",
       "value": "mcp_catalog_fetchenabled",
       "context": "mcp_catalog_fetchenabled",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "mcp_catalog_fetchenabled",
-      "context": "mcp_catalog_fetchenabled chisel-agent/src/fd_binary.rs:387chisel_agent::fd_binarychisel-agent/src/fd_binary.rsenabled chisel-agent/src/fd_binary.rs:415event chisel-agent/src/fd_binary.rs:415event chis",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -42796,7 +42802,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_config",
-      "context": "mcp_config.local.jsonloading machine fingerprintclap: --key is required unless --from-dotenv is present",
+      "context": "mcp_config.local.jsonloading machine fingerprintskipping the stale plugin MCP sweep: could not resolve the plugin store: skipping the stale plugin MCP sweep: could not read the plugin store: pruned  M",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -42856,7 +42862,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_config",
-      "context": "mcp_config.local.jsonloading machine fingerprintlocal-tools session-status request failed: clap: --key is required unless --from-dotenv is present",
+      "context": "mcp_config.local.jsonloading machine fingerprintlocal-tools session-status request failed: pruned skipping the stale plugin MCP sweep: could not resolve the plugin store: skipping the stale plugin MCP",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -43096,7 +43102,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_config",
-      "context": "mcp_config.local.json(",
+      "context": "mcp_config.local.jsonx",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -43306,6 +43312,36 @@
     {
       "category": "agent_mode",
       "value": "mcp_config",
+      "context": "mcp_config.local.jsonxy]G",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_config",
       "context": "workspace/config_protectionworkspace/read_permissions**/config*.json**/mcp_config*.jsonworkspace/src/lib.rs",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -43397,6 +43433,66 @@
       "category": "agent_mode",
       "value": "mcp_config",
       "context": "mcp_config.json.windsurfglobal_rules.mdImported Windsurf global_rules.md from WindsurfImporter: loaded Imported rule 'DevinImporter: loaded  skills from skillshooks.jsonWINDSURF_CODEIUM_DIRassertion f",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_config",
+      "context": "mcp_config.local.jsonUpgradewebsocket13missing `Upgrade: websocket`upgrademissing `Connection: Upgrade``Sec-WebSocket-Accept` does not match the request keyFailed to render MCP servers prompt: sandbox",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_config",
+      "context": "mcp_config.local.jsonUpgradewebsocket13missing `Upgrade: websocket`upgrademissing `Connection: Upgrade``Sec-WebSocket-Accept` does not match the request keyFailed to render MCP servers prompt: sandbox",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -43816,7 +43912,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_list_serverswrite_to_process",
-      "context": "agent_completp-content-blockschisel/acp-conteFailed to parse  params at line reasoning_tokensgeneration_modelmodelPreferencestraceTextDiagramDeleted session Persisting node open in a client, terminal_",
+      "context": "p-content-blockschisel/acp-conteFailed to parse  params at line modelPreferencesopen in a client, terminal_auth=, client_models=, cloud_handoff= db_file_exists= write_probe_ok=mcp_list_serverswrite_to",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -43846,7 +43942,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_list_serverswrite_to_processgit",
-      "context": "Failed to parse  params at line modelPreferencescredentials.toml, terminal_auth=, client_models=, cloud_handoff= db_file_exists= write_probe_ok=mcp_list_serverswrite_to_processgit reset --hardgit push",
+      "context": "Failed to parse  params at line reasoning_tokensgeneration_modelmodelPreferencestraceTextDiagramcredentials.toml, terminal_auth=, client_models=, cloud_handoff= db_file_exists= write_probe_ok=mcp_list",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -44536,7 +44632,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_prompts",
-      "context": "codeauthorize response had no codechisel-agent/src/mcp_prompts.rs",
+      "context": "Failed to create temp file for atomic writeFailed to write to temp fileFailed to rename temp file into placechisel-agent/src/mcp_prompts.rs",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -44806,7 +44902,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_read_resourc",
-      "context": "mcp_read_resourc@scripted_tools:// @scripted_too-B",
+      "context": "mcp_read_resourc@scripted_tools:// @scripted_too",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -45167,6 +45263,36 @@
       "category": "agent_mode",
       "value": "mcp_registry_urlscli_default_disabledmid",
       "context": "mcp_registry_urlscli_default_disabledmid > len/buf.len() must fit in remaining(); buf.len",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_registrycascade_hooks_jsondefault_m",
+      "context": "mcp_registrycascade_hooks_jsondefault_m",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -46036,7 +46162,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_servers",
-      "context": "could not load plugin lockfile: plugins discovery: cwd= hooks= rules= mcp_servers=handle_incoming_dispatch: enterhandle_incoming_dispatch: responsehandle_incoming_dispatch: Counterpart style, passing ",
+      "context": "my-outpostoutpost name cannot be emptycould not load plugin lockfile: plugins discovery: cwd= hooks= rules= mcp_servers=handle_incoming_dispatch: enterhandle_incoming_dispatch: responsehandle_incoming",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -46366,36 +46492,6 @@
     {
       "category": "agent_mode",
       "value": "mcp_servers",
-      "context": "my-outpostoutpost name cannot be emptyinternal error: entered unreachable code: failed to match bindhandle_incoming_dispatch: enterhandle_incoming_dispatch: responsehandle_incoming_dispatch: Counterpa",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "mcp_servers",
       "context": "tool_metadatastruct OverflowMetadata with 3 elementstimeout_secsmax_output_tokensstruct ScriptSourceOptions with 2 elements`event_listener` should never be `None`future polled after completionfailed t",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -46667,6 +46763,36 @@
       "category": "agent_mode",
       "value": "mcp_serversAcpTerminalInputUnknownScopeType",
       "context": "core/mcp_serversAcpTerminalInputUnknownScopeType",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_serversfetched_atallowed_m",
+      "context": "mcp_serversfetched_atallowed_m",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -47686,37 +47812,7 @@
     {
       "category": "agent_mode",
       "value": "mcp_writer",
-      "context": "Failed to load user config for auto-update check: config-importers/src/mcp_writer.rs",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_acti",
-      "context": "tool_acti",
+      "context": "Command revision failed to create stream: Command revision failed: config-importers/src/mcp_writer.rs",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -48255,66 +48351,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_availab",
-      "context": "tool_availab",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_availabilitagentRestrictionSubagentRestrict",
-      "context": "tool_availabilitagentRestrictionSubagentRestrict",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "tool_availability",
       "context": "*tool_availability",
       "hasDormantMarker": false,
@@ -48556,7 +48592,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_contentagent",
-      "context": "MetadataFrontmatterdevinvariant index 0 <= i < 4variant index 0 <= i < 3terminal-authimageschisel/undocalled `Result::unwrap()` on an `Err` valuecalled `Result::unwrap_err()` on an `Ok` valueshould ha",
+      "context": "variant index 0 <= i < 4variant index 0 <= i < 3terminal-authimageschisel/undocalled `Result::unwrap()` on an `Err` valuecalled `Result::unwrap_err()` on an `Ok` valuechisel/tool_call_contentagent-ext",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -48616,7 +48652,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_contentagent",
-      "context": "selectvariant index 0 <= i < 4variant index 0 <= i < 3terminal-authcalled `Result::unwrap()` on an `Err` valuecalled `Result::unwrap_err()` on an `Ok` valueimageschisel/undofilled must not become larg",
+      "context": "variant index 0 <= i < 4variant index 0 <= i < 3terminal-authcalled `Result::unwrap()` on an `Err` valuecalled `Result::unwrap_err()` on an `Ok` valueimageschisel/undofilled must not become larger tha",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -48676,7 +48712,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_contentagent",
-      "context": "chisel/tool_call_contentagent-ext/title-source-textchisel/terminal_outputchisel/file_operationschisel/deferred_fieldsclearfatal runtime error: Allocation failure, aborting",
+      "context": "chisel/tool_call_contentagent-ext/title-source-textchisel/terminal_outputchisel/file_operationschisel/deferred_fieldsfatal runtime error: Allocation failure, aborting",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -48736,7 +48772,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_contentagent",
-      "context": "Untitledchisel/tool_call_contentagent-ext/title-source-textchisel/terminal_outputchisel/file_operationschisel/deferred_fields",
+      "context": "chisel/tool_call_contentagent-ext/title-source-textchisel/terminal_outputchisel/file_operationschisel/deferred_fields",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -48796,7 +48832,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_contentagent",
-      "context": "ryRewoundcognition.ai/processMemorycognition.ai/loadStartingcognition.ai/loadReadcognition.ai/loadStatscognition.ai/handoff/statuschisel/tool_call_contentagent-ext/title-source-textchisel/terminal_out",
+      "context": "nition.ai/revert/historyRewoundcognition.ai/processMemorycognition.ai/loadStartingcognition.ai/loadReadcognition.ai/loadStatscognition.ai/handoff/statuschisel/tool_call_contentagent-ext/title-source-t",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -49156,67 +49192,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_idcalled",
-      "context": "tool_call_idcalled after completestruct variant Response::ErrorErrorStrElicitationIdObjectSessionIdmarketplacepluginsMarketplacePluginResult",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_call_idcommand",
-      "context": "tool_call_idcommand",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_call_idJSON",
-      "context": "tool_call_idJSON number out of rangeblueprints",
+      "context": "tool_call_idcalled after completestruct variant Response::ErrorErrorStrExtNotificationMutex<locked>poisonedElicitationIdObjectSessionIdmarketplacepluginsMarketplacePluginResultAgent",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -49277,6 +49253,36 @@
       "category": "agent_mode",
       "value": "tool_call_idraw_inputraw_output",
       "context": "TaskStatusNotificationParamstaskRunningService dropped without explicit close(). The connection will be closed asynchronously. For guaranteed cleanup, call close() or cancel() before dropping.tool_cal",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_idraw_inputraw_outputoverflow",
+      "context": "tool_call_idraw_inputraw_outputoverflow subtracting duration from datefieldsToolCallId",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -49456,36 +49462,6 @@
     {
       "category": "agent_mode",
       "value": "tool_call_json",
-      "context": "tool_call_json     TEXT,",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_call_json",
       "context": "tool_call_json, ",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -49575,8 +49551,68 @@
     },
     {
       "category": "agent_mode",
+      "value": "tool_call_json",
+      "context": "tool_call_json     TEXT,",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "tool_call_jsonUPDATE",
       "context": "tool_call_jsonUPDATE ",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_metainternally",
+      "context": "tool_call_metainternally tagged enum ContentBlockTextContentannotationsImageContentmimeTypeAudioContentresourceResourceLinkresource_linkimageTextResourceContentsBlobResourceContentsblobdata did not ma",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -49936,7 +49972,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_statelive_rowstarted_atinternally",
-      "context": "tool_call_statelive_rowstarted_atinternally tagged enum IndexLineIndexLineUnknownuritoolCallIdmessageformatentriesprioritypendingin_progresscompletedcursorvaluegroupcurrentValuemodel_configthought_lev",
+      "context": "tool_call_statelive_rowstarted_atinternally tagged enum IndexLineIndexLineUnknowntoolCallIdformatcursorvaluegroupcurrentValuemodel_configthought_levelselectinternally tagged enum ContentBlockTextConte",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -50116,7 +50152,7 @@
     {
       "category": "agent_mode",
       "value": "tool_call_statestarted_atinternally",
-      "context": "tool_call_statestarted_atinternally tagged enum IndexLinestruct ImageData with 6 elementsstruct MediaData with 3 elementschisel/terminal-context-inj",
+      "context": "tool_call_statestarted_atinternally tagged enum IndexLinestruct ImageData with 6 elementsstruct MediaData with 3 elementschisel/terminal-context-injectedchisel_agent::session_files::logIndexLineUnknow",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -50296,36 +50332,6 @@
     {
       "category": "agent_mode",
       "value": "tool_call_update_json",
-      "context": "tool_call_update_json TEXT,",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_call_update_json",
       "context": "tool_call_update_json",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -50357,6 +50363,66 @@
       "category": "agent_mode",
       "value": "tool_call_update_json",
       "context": "tool_call_update_json = ?3",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_update_json",
+      "context": "tool_call_update_json TEXT,",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_updateCKC",
+      "context": "tool_call_updateCKC",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -50745,8 +50811,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_callchisel",
-      "context": "tool_callchisel/script_to4",
+      "value": "tool_callcognition",
+      "context": "tool_callcognition.ai/eventType",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -50775,8 +50841,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_callcognition",
-      "context": "tool_callcognition.ai/eventType",
+      "value": "tool_callcontentformatatupdate",
+      "context": "tool_callcontentformatatupdate",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -50865,68 +50931,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_callerror_codeatupdate",
-      "context": "tool_callerror_codeatupdate",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "tool_callfunction_callinvoke",
       "context": "do not stop at the single most obvious one.The following skills can be invoked using your skill tools.tool_callfunction_callinvoke</summary>enabled agent-ext/src/hooks/evaluator.rs:706",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_callinternally",
-      "context": "tool_callinternally tagged enum ContentBlockTextContentImageContentAudioContentTextResourceContentsBlobResourceContentsdata did not match any variant of untagged enum EmbeddedResourceResource",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -50987,36 +50993,6 @@
       "category": "agent_mode",
       "value": "tool_callMcpServerListStarted",
       "context": "tool_callMcpServerListStarted",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_callnodeatupdate",
-      "context": "tool_callnodeatupdate",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -51527,6 +51503,36 @@
       "category": "agent_mode",
       "value": "tool_callNtB6_24CognitionGenericToolCall4meta",
       "context": "tool_callNtB6_24CognitionGenericToolCall4meta",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_callPluginSkillsources",
+      "context": "tool_callPluginSkillsources",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -52125,36 +52131,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_callspull_request_description_guideline",
-      "context": "tool_callspull_request_description_guideline",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "tool_callsreasoning_details",
       "context": "tool_callsreasoning_details",
       "hasDormantMarker": false,
@@ -52187,36 +52163,6 @@
       "category": "agent_mode",
       "value": "tool_callsreasoning_detailsmetadata",
       "context": "tool_callsreasoning_detailsmetadata",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_callsrequires_supercomplete_cleantab_route_to_moda",
-      "context": "tool_callsrequires_supercomplete_cleantab_route_to_moda",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -52785,36 +52731,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_definitions",
-      "context": "tool_definitions",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "tool_definitions_omittedshare_sanitized",
       "context": "tool_definitions_omittedshare_sanitized",
       "hasDormantMarker": false,
@@ -52996,7 +52912,37 @@
     {
       "category": "agent_mode",
       "value": "tool_definitionspermission_modeATIF",
-      "context": "tool_definitionspermission_modeATIF-v1.7",
+      "context": "tool_definitionspermission_modeATIF-v1.7{lnG",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_definitionst",
+      "context": "tool_definitionst",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -53385,6 +53331,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "tool_fail",
+      "context": "tool_fail`",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "tool_failchisel",
       "context": "tool_failchisel/",
       "hasDormantMarker": false,
@@ -53686,7 +53662,7 @@
     {
       "category": "agent_mode",
       "value": "TOOL_FOOTERCONTINUE_ON_OUTPUT_TRUNCATIONWhen",
-      "context": "TOOL_FOOTERCONTINUE_ON_OUTPUT_TRUNCATIONWhen a response hits the output-token limit before making a tool call, tell the model to act and continue the tur",
+      "context": "TOOL_FOOTERCONTINUE_ON_OUTPUT_TRUNCATIONWhen a response hits the output-token limit before mak",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -53717,36 +53693,6 @@
       "category": "agent_mode",
       "value": "TOOL_FOOTEREnable",
       "context": "TOOL_FOOTEREnable or disable the lead's parallel tool-result footer (a one-line batching nudge after tool results). Forwarded to the agent child as `DEVIN_PARALLEL_",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_formatter_typeinference_server_u",
-      "context": "tool_formatter_typeinference_server_u",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54465,36 +54411,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_list_startedmemory_drive_syncedmemory_u",
-      "context": "tool_list_startedmemory_drive_syncedmemory_u",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "tool_list_startedmemory_drive_syncedmemory_updateme",
       "context": "tool_list_startedmemory_drive_syncedmemory_updateme",
       "hasDormantMarker": false,
@@ -54856,37 +54772,7 @@
     {
       "category": "agent_mode",
       "value": "tool_metadatainternally",
-      "context": "tool_metadatainternally tagged enum LocalTransportLocalTransportStdiointernally tagged enum RemoteTransportRegistryPackagetransportRegistryServernamedescriptionpackagesremotesordinarypairedtotal_credi",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_metadatainternally",
-      "context": "tool_metadatainternally tagged enum LocalTransportLocalTransportStdiointernally tagged enum RemoteTransportRegistryPackagetransportRegistryServernamedescriptionpackagesremotesindexpromptordinarypaired",
+      "context": "tool_metadatainternally tagged enum LocalTransportLocalTransportStdiointernally tagged enum RemoteTransportRegistryPackagetransportRegistryServerdescriptionremotesErrormessageinternally tagged enum Co",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54916,7 +54802,7 @@
     {
       "category": "agent_mode",
       "value": "tool_metadataremotesvariant",
-      "context": "tool_metadataremotesvariant index 0 <= i < 8variant index 0 <= i < 3variant index 0 <= i < 5field index 0 <= i < 0variant index 0 <= i < 4variant index 0 <= i < 1total_credit_costtotal_acu_costrespons",
+      "context": "tool_metadataremotesvariant index 0 <= i < 8variant index 0 <= i < 3variant index 0 <= i < 5field index 0 <= i < 0variant index 0 <= i < 1variant index 0 <= i < 17variant index 0 <= i < 4languageIdcur",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54946,7 +54832,7 @@
     {
       "category": "agent_mode",
       "value": "tool_metadataremotesvariant",
-      "context": "tool_metadataremotesvariant index 0 <= i < 8variant index 0 <= i < 3variant index 0 <= i < 5field index 0 <= i < 0variant index 0 <= i < 4querycognition.ai/filterAnnotatedParticipantcognition.ai/filte",
+      "context": "tool_metadataremotesvariant index 0 <= i < 8variant index 0 <= i < 3variant index 0 <= i < 5field index 0 <= i < 0queryvariant index 0 <= i < 4cognition.ai/filterAnnotatedParticipantcognition.ai/filte",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54977,6 +54863,36 @@
       "category": "agent_mode",
       "value": "tool_metadataShellCommandInputcommandtimeout_ms",
       "context": "tool_metadataShellCommandInputcommandtimeout_ms",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_metadatastdiostreamable",
+      "context": "tool_metadatastdiostreamable-httpsse",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -55125,6 +55041,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "tool_metadataThemeModedarklightterminal",
+      "context": "tool_metadataThemeModedarklightterminal-darkterminal-lightnocolor16colorterminal-colorsclaudewindsurfidnameerrorcwddescriptionpathtitlefailedmodel",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "tool_metadataThemeModelightterminal",
       "context": "tool_metadataThemeModelightterminal-darkterminal-lightnocolor16colorterminal-colorsUnicodeModeunicodeasciiallowaskPreToolUsePostToolUsePostCompactionContextInputPreCompactPostCompactSessionStartSessio",
       "hasDormantMarker": false,
@@ -55157,36 +55103,6 @@
       "category": "agent_mode",
       "value": "tool_metadatatimeout_secsmax_output_tokensstruct",
       "context": "tool_metadatatimeout_secsmax_output_tokensstruct ScriptSourceOptions with 2 elementsstruct OverflowMetadata with 3 elements`event_listener` should never be `None`string or map",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_metadatatransportpackagesremotescwd",
-      "context": "tool_metadatatransportpackagesremotescwd",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -55665,36 +55581,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_namecommanddirexclude_pathsskillsJSON",
-      "context": "tool_namecommanddirexclude_pathsskillsJSON number out of rangecontentactivationdisplay_pathpluginplugin_identityalways_onpath_globs",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "tool_namecreated_at",
       "context": "tool_namecreated_at",
       "hasDormantMarker": false,
@@ -55725,8 +55611,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_namedecisionExtendContextInputreason",
-      "context": "tool_namedecisionExtendContextInputreason",
+      "value": "tool_namedecisiondirexclude_paths",
+      "context": "tool_namedecisiondirexclude_paths",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56085,6 +55971,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "tool_namesguardaction_too_largecacheclassifier",
+      "context": "tool_namesguardaction_too_largecacheclassifier",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "tool_namesnamestaskprofileis_backgroundresume",
       "context": "tool_namesnamestaskprofileis_backgroundresume",
       "hasDormantMarker": false,
@@ -56265,36 +56181,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_namesnotequerypathsextrauidgroup_titleinit",
-      "context": "tool_namesnotequerypathsextrauidgroup_titleinit",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "tool_namesnotequerypathsid",
       "context": "tool_namesnotequerypathsid",
       "hasDormantMarker": false,
@@ -56415,8 +56301,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_namesquerypathsextragroup_title",
-      "context": "tool_namesquerypathsextragroup_title",
+      "value": "tool_namesquerypathsextragroup_titleinit",
+      "context": "tool_namesquerypathsextragroup_titleinit",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56447,6 +56333,36 @@
       "category": "agent_mode",
       "value": "tool_namesquerypathsextraid",
       "context": "tool_namesquerypathsextraid",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_namesquerypathsextrauidgroup_title",
+      "context": "tool_namesquerypathsextrauidgroup_title",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56566,7 +56482,7 @@
     {
       "category": "agent_mode",
       "value": "tool_namesrangeImage",
-      "context": "tool_namesrangeImage caption request timed outCHISEL_SESSION_DBexec sessions are being handed off to an updated process; retry shortlyCancelled by the userACP: save_session_state: session  not foundAC",
+      "context": "tool_namesrangeImage caption request timed outCHISEL_SESSION_DBLazy instance has previously been poisonedexec sessions are being handed off to an updated process; retry shortlyCancelled by the userACP",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56627,6 +56543,36 @@
       "category": "agent_mode",
       "value": "tool_namesyntheticpendingthinking_beforethinking_after",
       "context": "tool_namesyntheticpendingthinking_beforethinking_after",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_namezshpowershellJSON",
+      "context": "tool_namezshpowershellJSON number out of rangeargument_hintrepo_originsetup_completestartup_messages_remainingexec_shellvariant index 0 <= i < 2feature-updatedfeature-removedsegment-updatedsegment-rem",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -58875,6 +58821,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "tool_resultToolUseAudioaudioImageimageinternally",
+      "context": "tool_resultToolUseAudioaudioImageimageinternally tagged enum SamplingMessageContentBlockallServersthisServerCreateMessageRequestParamssystemPromptincludeContexttemperaturemaxTokensstopSequencestoolsto",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "tool_resultunknownusersystemassistant",
       "context": "tool_resultunknownusersystemassistant",
       "hasDormantMarker": false,
@@ -58905,8 +58881,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_resultunknownusersystemassistantcast_slice_mut",
-      "context": "tool_resultunknownusersystemassistantcast_slice_mut.tmpcontext_sourcemethod",
+      "value": "tool_resultunknownusersystemassistantfile",
+      "context": "tool_resultunknownusersystemassistantfile identifier missing/usr/local/cargo/registry/src/pkg.cognition.build-3983",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -59566,7 +59542,7 @@
     {
       "category": "agent_mode",
       "value": "tool_search__mid",
-      "context": "tool_search__mid > lencalled `Result::unwrap()` on an `Err` valueUnsupported image formatBad DRI length, Corrupt JPEGPremature End of imageNo more bytes[strict-mode]: Extra bytes between headersCould ",
+      "context": "tool_search__mid > lenfunctioncustomidnameargumentsindexkindnamespacedescriptionparameterscustom_tooldefer_loadingstrictgrammargrammar_syntaxnative_description",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -59596,7 +59572,37 @@
     {
       "category": "agent_mode",
       "value": "tool_search__mid",
-      "context": "tool_search__mid > len",
+      "context": "tool_search__mid > lencalled `Result::unwrap()` on an `Err` valueUnsupported image formatBad DRI length, Corrupt JPEGPremature End of imageNo more bytes[strict-mode]: Extra bytes between headersCould ",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_search__sentry",
+      "context": "tool_search__sentry-trace",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -60736,7 +60742,7 @@
     {
       "category": "agent_mode",
       "value": "tool_update",
-      "context": "HighMediumLowmarketplacepluginsraw_inputraw_outputRootHomeWorkspaceAcquireErrorfieldsMarketplacePluginPathPatternliteralToolCallIdcore/tool_update",
+      "context": "HighMediumLowraw_inputraw_outputRootHomeWorkspaceBinaryAcquireErrorfieldsPathPatternliteralCloseToolCallIdcore/tool_update",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61036,7 +61042,7 @@
     {
       "category": "agent_mode",
       "value": "tool_updateOkErr",
-      "context": "ResponseRouterAgentcore/tool_updateOkErr",
+      "context": "ResponseRoutercore/tool_updateOkErr",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61096,7 +61102,7 @@
     {
       "category": "agent_mode",
       "value": "tool_use_idConnectErrorSystemTimeErrordescription",
-      "context": "McpInterruptedError()tool_use_idConnectErrorSystemTimeErrordescription() is deprecated; use Display",
+      "context": "tool_use_idConnectErrorSystemTimeErrordescription() is deprecated; use Display",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61157,6 +61163,36 @@
       "category": "agent_mode",
       "value": "tool_use_iddescription",
       "context": "tool_use_iddescription() is deprecated; use Displaybytes remaining on stream",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_use_idDetailedTaskpayloaddescription",
+      "context": "tool_use_idDetailedTaskpayloaddescription() is deprecated; use Display",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61307,36 +61343,6 @@
       "category": "agent_mode",
       "value": "tool_use_idsuccess",
       "context": "tool_use_idsuccess",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_useAudioaudioImageimageinternally",
-      "context": "tool_useAudioaudioImageimageinternally tagged enum SamplingMessageContentBlockallServersthisServerCreateMessageRequestParamsmessagesmodelPreferencessystemPromptincludeContexttemperaturemaxTokensstopSe",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61726,6 +61732,36 @@
     {
       "category": "agent_mode",
       "value": "tool_usemessagesession_idsinternally",
+      "context": "tool_usemessagesession_idsinternally tagged enum WdwToolActivityappplannerplanhad_rewritenext_stepsbrowserurl_before_actionsscreenshot_keyactionsshellshell_idinternally tagged enum ActiveAppDetailsScr",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_usemessagesession_idsinternally",
       "context": "tool_usemessagesession_idsinternally tagged enum WdwToolActivityappplannerhad_rewritenext_stepsbrowserurl_before_actionsscreenshot_keyactionsshell_idinternally tagged enum ActiveAppDetailsScriptedTool",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -61846,7 +61882,7 @@
     {
       "category": "agent_mode",
       "value": "tool_usemessagesession_idsinternally",
-      "context": "tool_usemessagesession_idsinternally tagged enum WdwToolActivityappplannerplanhad_rewritenext_stepsbrowserurl_before_actionsscreenshot_keyactionsshellshell_idinternally tagged enum ActiveAppDetailsScr",
+      "context": "tool_usemessagesession_idsinternally tagged enum WdwToolActivityappplannerhad_rewritenext_stepsbrowserurl_before_actionsscreenshot_keyactionsshellinternally tagged enum ActiveAppDetailsScriptedToolsVa",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61876,7 +61912,37 @@
     {
       "category": "agent_mode",
       "value": "tool_usemessagesession_idsinternally",
-      "context": "tool_usemessagesession_idsinternally tagged enum WdwToolActivityappplannerhad_rewritenext_stepsbrowserurlurl_before_actionsscreenshot_keyactionsinternally tagged enum ActiveAppDetailsScriptedToolsVari",
+      "context": "tool_usemessagesession_idsinternally tagged enum WdwToolActivityappplannerhad_rewritenext_stepsbrowserurl_before_actionsscreenshot_keyactionsshellinternally tagged enum ActiveAppDetailsScriptedToolsVa",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_useP",
+      "context": "tool_useP",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61907,6 +61973,36 @@
       "category": "agent_mode",
       "value": "tool_usepost_",
       "context": "tool_usepost_",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_usesession_idsinternally",
+      "context": "tool_usesession_idsinternally tagged enum WdwToolActivityappplannerhad_rewritenext_stepsbrowserurl_before_actionsscreenshot_keyactionsshellshell_idinternally tagged enum ActiveAppDetailsScriptedToolsV",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -62057,36 +62153,6 @@
       "category": "agent_mode",
       "value": "tool_uset_setup_worktreepost_setup_workt",
       "context": "tool_uset_setup_worktreepost_setup_workt*** Update File",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_useweb_get_contentsweb_searchwork_item_linkedwor",
-      "context": "tool_useweb_get_contentsweb_searchwork_item_linkedwor",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -62355,8 +62421,8 @@
     },
     {
       "category": "capability",
-      "value": "apply_patchview_imageask_user_questionweb_search",
-      "context": "apply_patchview_imageask_user_questionweb_search",
+      "value": "apply_patchview_imageweb_search",
+      "context": "apply_patchview_imageweb_search",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -62745,8 +62811,8 @@
     },
     {
       "category": "capability",
-      "value": "RichContentNodewriteexit_plan_modeweb_searchserverallexactmcpliteralharnessdeletesearchexecutethinkfetchotherToolCallKindcustomargumentsindexnamespaceAllowListExtendAllowListBlockListExtendAvailableAllowScopeAllPrefixExactWriteCommandmatcherFetchWriteToProcesscommand_idMcpmcpConfigPathcognition",
-      "context": "attachmentwidthheightinternally tagged enum RichContentTaggedNodedata did not match any variant of untagged enum RichContentNodewriteexit_plan_modeweb_searchserverallexactmcpliteralharnessdeletesearch",
+      "value": "semaphoreTimeReviewFindingMetastartLineendLinenote_usedProgressNotetimestampMsnote_idis_auto_generatedpull_numberbase_ref_namehead_ref_namecontextreview_statechanges_requestedwriteexit_plan_modeweb_searchserverallexactmcpliteralharnessdeletesearchexecutethinkfetchotherToolCallKindcustomargumentsindexnamespaceAllowListExtendAllowListBlockListExtendAvailableAllowScopeAllPrefixExactWriteCommandmatcherFetchWriteToProcesscommand_idMcpQuoteAnchorQuoteScreenshotevent_contextprpr_descriptionpr_commentworklogeditortext_blocksidechain_messagepreviewcomponentinternally",
+      "context": "ment_urlcomment_bodycheck_run_datastatus_dataCodeReportCompletionMetacognition.ai/filesProcessedcognition.ai/timeSpentcognition.ai/coreReportIdcognition.ai/endTimecognition.ai/semaphoreTimeReviewFindi",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -63165,8 +63231,8 @@
     },
     {
       "category": "capability",
-      "value": "tool_useweb_get_contentsweb_searchwork_item_linkedwor",
-      "context": "tool_useweb_get_contentsweb_searchwork_item_linkedwor",
+      "value": "tool_searchesphaseStableToolNamewriteexit_plan_modeweb_searchMcpMatcherserverallToolNameMatcherexactmcpliteralharnessdeletesearchexecutethinkfetchothercustomargumentsindexnamespaceToolMatcherAllowListExtendAllowListBlockListAllowToolPermissionMatcherScopeAllPrefixExactPermissionSc",
+      "context": "tool_searchesphaseStableToolNamewriteexit_plan_modeweb_searchMcpMatcherserverallToolNameMatcherexactmcpliteralharnessdeletesearchexecutethinkfetchothercustomargumentsindexnamespaceToolMatcherAllowList",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -63256,7 +63322,7 @@
     {
       "category": "capability",
       "value": "typetextJudgmentverdictreasonJudgeToolCallResponsejudgmentmodel_request_idGetWebSearchResultsResponseresultssummaryweb_search_urlErrormessagerepo",
-      "context": "MarkdownHeaderr#typetextJudgmentverdictreasonJudgeToolCallResponsejudgmentmodel_request_idGetWebSearchResultsResponseresultssummaryweb_search_urlErrormessagerepo plugin ingestion failed for : 8",
+      "context": "MarkdownHeaderr#typetextJudgmentverdictreasonJudgeToolCallResponsejudgmentmodel_request_idGetWebSearchResultsResponseresultssummaryweb_search_urlErrormessagerepo plugin ingestion failed for :",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -63887,66 +63953,6 @@
       "category": "capability",
       "value": "web_searchnum_resultsresult_urlscognition",
       "context": "auto-approved by bypass modeACP tool conversion failed: web_searchnum_resultsresult_urlscognition.ai/errorKindcognition.ai/retryablecognition.ai/retryAfterSecondsunavailableresource_exhausteddeadline_",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: capability (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: capability",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "web_searchrun_subagentread_subagent",
-      "context": "Hash table capacity overflow, web_searchrun_subagentread_subagent/upgrade to access this modeluser/subagents",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: capability (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: capability",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "web_searchrun_subagentread_subagentchisel",
-      "context": ", web_searchrun_subagentread_subagentchisel/acp-content-blockschisel/tool_call_contentagent-ext/skills-loadedagent-ext/rules-loadedagent-ext/lints-injectedchisel/editor-context-injectedchisel/terminal",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -74112,6 +74118,9 @@
     "https://static.devin.ai/cli/current/manifest.jsonhttps://static.devinenterprise.com/cli/current/manifest-enterprise.jsonhttps://static.windsurf.com/cli/current/manifest-windsurfcom.jsonassertion",
     "https://docs.rs/rustls/latest/rustls/manual/_03_howto/index.html#unexpected-eofW",
     "https://api.devin.aihttps",
-    "https://devin.ai/supportcorrupt"
+    "https://devin.ai/supportcorrupt",
+    "http://ns.adobe.Qrd",
+    "https://learn.microsoft.com/windows/wsl/installv%",
+    "https://unleash.codeium.com/api/Failed"
   ]
 }
