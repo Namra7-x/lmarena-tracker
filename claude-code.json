@@ -1,17 +1,17 @@
 {
   "componentId": "claude-code",
-  "version": "2.1.319",
-  "alertedVersion": "2.1.319",
-  "releaseId": "@anthropic-ai/claude-code@2.1.319",
+  "version": "2.1.321",
+  "alertedVersion": "2.1.321",
+  "releaseId": "@anthropic-ai/claude-code@2.1.321",
   "channel": "stable",
-  "identityFingerprint": "f7b1b9dede956824ebb14b39845dee748260e366a934346c11788b8a20699c4b",
+  "identityFingerprint": "139e03a4e681f42e60cfcd141c05d4b08473bdc797e19d49fb8c1cfe4b9463d0",
   "diagnosticFingerprint": null,
-  "scanId": "CC-20261107-001",
+  "scanId": "CC-20261109-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-07T14:38:43.903Z",
+  "lastSuccessfulScan": "2026-11-09T19:20:55.089Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "c970542924c6129a94511a64d5be69014e7224707255acccc4441a2407370dea",
-  "lastTestAlertVersion": "2.1.319",
+  "lastAlertDigest": "08703b4e7626c36e99c2b75cb48b93e4b25b581aaf1ac571d027233cebe1836d",
+  "lastTestAlertVersion": "2.1.321",
   "analyzerStatus": {
     "acornAst": "completed",
     "goReSym": "skipped",
@@ -23,404 +23,11 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 4854,
-    "peakMemoryMb": 15
+    "executionTimeMs": 2112,
+    "peakMemoryMb": 16
   },
   "hotSignals": [],
-  "recentSignals": [
-    {
-      "category": "model_id",
-      "value": "claude-code",
-      "context": "const PACKAGE_PREFIX = '@anthropic-ai/claude-code'",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-code",
-      "context": "echo \"  node node_modules/@anthropic-ai/claude-code/install.cjs\" >&2",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "node-pro",
-      "context": "// and pay the Node-process overhead as the price.",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "mcp_send_message",
-      "context": "* Server-attested source token: \"github_webhook\" | \"trigger_fire\" | \"mcp_send_message\" (open set; unknown well-formed tokens pass through verbatim, off-grammar values coerce to \"unknown\").",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "subagent_overspawn",
-      "context": "| \"subagent_overspawn\"",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "subagent_type",
-      "context": "subagent_type?: string;",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "subagent_type",
-      "context": "* Optional model override for this agent. Takes precedence over the agent definition's model frontmatter and the configured default subagent model. If omitted, uses the agent definition's model, else ",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "subagent_type",
-      "context": "* Reasoning effort for this agent. Set this ONLY when the user, or instructions such as CLAUDE.md or a skill, explicitly ask that this agent or delegated work run at a specific effort level, never on ",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_result",
-      "context": "* Document page number of the first extracted page (1 when no range was requested); labels the page images in the model-facing tool_result",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_result",
-      "context": "* Extracted page images, in page order. Present only transiently in-process: the page image bytes are delivered solely as image blocks in the model-facing tool_result content and are not retained on t",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_result",
-      "context": "* True when the user edited the plan (CCR web UI or Ctrl+G); determines whether the plan is echoed back in tool_result",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_use",
-      "context": "* The task's description as saved. It can differ from the tool_use input if Claude Code corrects a malformed call or a PreToolUse hook changes the input. Absent in results from older Claude Code versi",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_use_id",
-      "context": "tool_use_id: string;",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_use_result",
-      "context": "* Page text. PostToolUse hooks get it; tool_use_result does not.",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 37,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent/skill/MCP/plugin",
-          "points": 12
-        }
-      ]
-    }
-  ],
+  "recentSignals": [],
   "historicalSeenHashes": [
     "echo \"Error: claude native binary not installed.\" >&2\necho \"\" >&2\necho \"Either postinstall did not run (--ignore-scripts, some pnpm configs)\" >&2\necho \"or the platform-native optional dependency was not downloaded\" >&2\necho \"(--omit=optional).\" >&2\necho \"\" >&2\necho \"Run the postinstall manually (adjust path for local vs global install):\" >&2\necho \"  node node_modules/@anthropic-ai/claude-code/install.cjs\" >&2\necho \"\" >&2\necho \"Or reinstall without --ignore-scripts / --omit=optional.\" >&2\nexit 1\n",
     "\"name\": \"@anthropic-ai/claude-code\",",
@@ -1888,7 +1495,17 @@
     "* ISO timestamp captured at tool execution on the emitting process. Optional — resumed sessions replay pre-sentAt outputs verbatim.",
     "sentAt?: string;",
     "export interface ClaudeDesignOutput {",
-    "isError?: boolean;"
+    "isError?: boolean;",
+    "\"version\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-darwin-arm64\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-darwin-x64\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-linux-x64\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-linux-arm64\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-linux-x64-musl\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-linux-arm64-musl\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-win32-x64\": \"2.1.321\",",
+    "\"@anthropic-ai/claude-code-win32-arm64\": \"2.1.321\"",
+    "endedLoopWakeup?: true;"
   ],
   "historicalSeenUrls": [
     "https://code.claude.com/docs/en/legal-and-compliance",
