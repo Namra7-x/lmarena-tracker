@@ -6363,7 +6363,7 @@
       },
       "facebook/pe-a-frame-base": {
         "createdAt": "2025-10-13T15:12:33.000Z",
-        "lastModified": "2025-12-23T19:29:54.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -8984,6 +8984,13 @@
         "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-to-audio",
+        "numParameters": null
+      },
+      "facebook/SCALE4D": {
+        "createdAt": "2026-11-06T22:44:32.000Z",
+        "lastModified": "2026-11-09T08:03:10.000Z",
+        "gated": true,
+        "pipeline_tag": null,
         "numParameters": null
       }
     },
@@ -19430,21 +19437,21 @@
       },
       "nvidia/Flora-Rewarder": {
         "createdAt": "2026-10-02T18:01:10.000Z",
-        "lastModified": "2026-11-06T19:43:48.000Z",
+        "lastModified": "2026-11-09T20:19:54.000Z",
         "gated": false,
         "pipeline_tag": "video-text-to-text",
         "numParameters": null
       },
       "nvidia/Flora-TempSeg": {
         "createdAt": "2026-10-01T22:24:12.000Z",
-        "lastModified": "2026-11-06T19:43:46.000Z",
+        "lastModified": "2026-11-09T20:19:53.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
       },
       "nvidia/Flora-Captioner": {
         "createdAt": "2026-10-01T22:22:57.000Z",
-        "lastModified": "2026-11-06T19:43:43.000Z",
+        "lastModified": "2026-11-09T20:19:50.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -22398,7 +22405,7 @@
       },
       "nvidia/simready-central": {
         "createdAt": "2026-09-28T14:52:11.000Z",
-        "lastModified": "2026-11-03T14:35:24.000Z",
+        "lastModified": "2026-11-09T13:07:42.000Z",
         "sdk": null
       },
       "nvidia/AlpasimE2EClosedLoopChallenge2026": {
@@ -23072,7 +23079,7 @@
       },
       "nvidia/nvidia-aerial-6a85fcbb92fd6a88037033e2": {
         "title": "NVIDIA Aerial",
-        "lastUpdated": "2026-10-20T13:09:31.866Z",
+        "lastUpdated": "2026-11-09T07:06:12.818Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/aerial-isac-srs-iq",
@@ -29018,7 +29025,7 @@
       },
       "LiquidAI/LFM3-1.7B": {
         "createdAt": "2026-10-23T21:35:42.000Z",
-        "lastModified": "2026-11-03T18:08:34.000Z",
+        "lastModified": "2026-11-09T17:57:55.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -29053,7 +29060,7 @@
       },
       "LiquidAI/LFM3-VL-2B": {
         "createdAt": "2026-10-19T19:51:46.000Z",
-        "lastModified": "2026-11-03T21:29:55.000Z",
+        "lastModified": "2026-11-09T18:02:58.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -33098,14 +33105,14 @@
       },
       "stabilityai/sdxl-base-amdnpu-medusa": {
         "createdAt": "2026-10-26T16:26:44.000Z",
-        "lastModified": "2026-10-26T16:26:44.000Z",
+        "lastModified": "2026-11-09T12:06:37.000Z",
         "gated": false,
-        "pipeline_tag": null,
+        "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "stabilityai/stable-diffusion-3.5-medium-amdnpu-medusa": {
         "createdAt": "2026-10-26T16:25:13.000Z",
-        "lastModified": "2026-10-26T16:26:40.000Z",
+        "lastModified": "2026-11-09T12:05:32.000Z",
         "gated": false,
         "pipeline_tag": "text-to-image",
         "numParameters": null
