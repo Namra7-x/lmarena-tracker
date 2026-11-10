@@ -3856,7 +3856,7 @@
     "models": {
       "deepseek-ai/DeepSeek-V4.1-Flash-1017": {
         "createdAt": "2026-10-17T02:40:38.000Z",
-        "lastModified": "2026-10-17T05:46:55.000Z",
+        "lastModified": "2026-11-10T02:22:56.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -6363,7 +6363,7 @@
       },
       "facebook/pe-a-frame-base": {
         "createdAt": "2025-10-13T15:12:33.000Z",
-        "lastModified": null,
+        "lastModified": "2025-12-23T19:29:54.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -19325,7 +19325,7 @@
       },
       "nvidia/cosmos3-nano-libero10-sdg-export-S_all": {
         "createdAt": "2026-10-07T16:51:49.000Z",
-        "lastModified": "2026-10-18T20:15:58.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -19367,14 +19367,14 @@
       },
       "nvidia/cosmos3-nano-libero10-sdg-export-D2": {
         "createdAt": "2026-10-07T16:46:35.000Z",
-        "lastModified": "2026-10-18T20:16:02.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
       },
       "nvidia/cosmos3-nano-libero10-sdg-export-S2": {
         "createdAt": "2026-10-07T16:43:30.000Z",
-        "lastModified": "2026-10-18T20:16:06.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -22395,6 +22395,27 @@
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
+      },
+      "nvidia/Cosmos3-Nano-FP8": {
+        "createdAt": "2026-09-14T03:54:38.000Z",
+        "lastModified": "2026-11-10T05:01:29.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
+      },
+      "nvidia/Cosmos3-Super-FP8": {
+        "createdAt": "2026-09-14T03:54:38.000Z",
+        "lastModified": "2026-11-10T05:01:30.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
+      },
+      "nvidia/Cosmos3-Edge-FP8": {
+        "createdAt": "2026-09-14T03:54:37.000Z",
+        "lastModified": "2026-11-10T05:01:32.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
       }
     },
     "spaces": {
@@ -22971,7 +22992,7 @@
       },
       "nvidia/cosmos3-examples-6a7b2b4c27ed0983ccbd64e4": {
         "title": "Cosmos3-Examples",
-        "lastUpdated": "2026-10-20T23:07:47.745Z",
+        "lastUpdated": "2026-11-10T05:12:30.238Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos3-Nano-Sim-Auto",
@@ -25706,7 +25727,7 @@
       },
       "MiniMaxAI/MiniMax-H3": {
         "createdAt": "2026-07-28T10:45:18.000Z",
-        "lastModified": "2026-08-13T01:46:29.000Z",
+        "lastModified": "2026-11-09T23:28:00.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-video",
         "numParameters": null
