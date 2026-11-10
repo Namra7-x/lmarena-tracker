@@ -1,17 +1,17 @@
 {
   "componentId": "opencode-cli",
-  "version": "2.2.6",
-  "alertedVersion": "2.2.6",
-  "releaseId": "@opencode/cli@2.2.6",
+  "version": "2.2.7",
+  "alertedVersion": "2.2.7",
+  "releaseId": "@opencode/cli@2.2.7",
   "channel": "v2",
-  "identityFingerprint": "9a864a21f3be9a390c7304bebf20c967342d7e8ed989b335699c5cae8ff75336",
+  "identityFingerprint": "dabc9ece6003a9103ee9f634e60675152ad868ec888e1904b8e98cf132abb41d",
   "diagnosticFingerprint": null,
-  "scanId": "OC-20261107-001",
+  "scanId": "OC-20261110-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-07T14:38:42.274Z",
+  "lastSuccessfulScan": "2026-11-10T10:33:57.478Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "9fdabf9f82df42b60f7efc49decb712c54af5742fd11007c5f57074293bc3469",
-  "lastTestAlertVersion": "2.2.6",
+  "lastAlertDigest": "d38e77aff25263fed6d78ff92e1977274b26e9efbbeefa93d3dcdf99d07658d1",
+  "lastTestAlertVersion": "2.2.7",
   "analyzerStatus": {
     "acornAst": "completed",
     "goReSym": "skipped",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 4678,
-    "peakMemoryMb": 27
+    "executionTimeMs": 1045,
+    "peakMemoryMb": 26
   },
   "hotSignals": [],
   "recentSignals": [],
@@ -190,7 +190,20 @@
     "main()",
     "} catch (error) {",
     "console.error(error instanceof Error ? error.message : String(error))",
-    "process.exit(1)"
+    "process.exit(1)",
+    "\"version\": \"2.2.7\",",
+    "\"@opencode/cli-darwin-arm64\": \"2.2.7\",",
+    "\"@opencode/cli-windows-arm64\": \"2.2.7\",",
+    "\"@opencode/cli-linux-x64-musl\": \"2.2.7\",",
+    "\"@opencode/cli-linux-x64-baseline\": \"2.2.7\",",
+    "\"@opencode/cli-linux-arm64-musl\": \"2.2.7\",",
+    "\"@opencode/cli-darwin-x64\": \"2.2.7\",",
+    "\"@opencode/cli-windows-x64-baseline\": \"2.2.7\",",
+    "\"@opencode/cli-windows-x64\": \"2.2.7\",",
+    "\"@opencode/cli-linux-x64\": \"2.2.7\",",
+    "\"@opencode/cli-linux-arm64\": \"2.2.7\",",
+    "\"@opencode/cli-linux-x64-baseline-musl\": \"2.2.7\",",
+    "\"@opencode/cli-darwin-x64-baseline\": \"2.2.7\""
   ],
   "historicalSeenUrls": []
 }
