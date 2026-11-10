@@ -11156,7 +11156,7 @@
     "claude-fable-5-2": {
       "displayName": "Claude Fable 5.2",
       "provider": "anthropic",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": true,
@@ -11168,6 +11168,59 @@
         "models": [
           "3d",
           "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      }
+    },
+    "minimax-h3-image": {
+      "displayName": "MiniMax H3-Image",
+      "provider": "minimax",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "image",
+          "imagetoimage"
+        ]
+      }
+    },
+    "gemini-4-carbon": {
+      "displayName": "Gemini 4 Carbon",
+      "provider": "google",
+      "active": false,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
           "dataviz",
           "gamedev",
           "svg",
@@ -13404,6 +13457,14 @@
       "text.output": 40,
       "text.cachedInput": 0.2,
       "text.cacheWrite": 10
+    },
+    "minimax-h3-image": {
+      "image.perImage": 0.023
+    },
+    "gemini-4-carbon": {
+      "text.input": 2,
+      "text.output": 10,
+      "text.cachedInput": 0.1
     }
   }
 }
