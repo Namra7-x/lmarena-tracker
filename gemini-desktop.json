@@ -1,17 +1,17 @@
 {
   "componentId": "gemini-desktop",
-  "version": "build-713490c-6aa1e4d0",
-  "alertedVersion": "build-713490c-6aa1e4d0",
-  "releaseId": "gemini-desktop-build-713490c-6aa1e4d0",
+  "version": "latest",
+  "alertedVersion": "latest",
+  "releaseId": "gemini-desktop-latest",
   "channel": "stable",
-  "identityFingerprint": "d882cc3cd478541b44371d672c2eb1397b1abc3cf95c2641a87ea48b9d1b326f",
+  "identityFingerprint": "33d92ae773134fd11e254144a508d267edaa92848ab1a5feb62bbe6aa5217f6e",
   "diagnosticFingerprint": null,
   "scanId": "GD-20261110-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-10T02:03:24.343Z",
+  "lastSuccessfulScan": "2026-11-10T18:21:18.228Z",
   "lastFailureTime": null,
   "lastAlertDigest": "3eee8302e5c56c917a466a0df305eb682dd3e091a7a6ea5c4f4568b3e87d566c",
-  "lastTestAlertVersion": "build-713490c-6aa1e4d0",
+  "lastTestAlertVersion": "latest",
   "analyzerStatus": {
     "acornAst": "skipped",
     "goReSym": "skipped",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 21029,
-    "peakMemoryMb": 14
+    "executionTimeMs": 20678,
+    "peakMemoryMb": 19
   },
   "hotSignals": [],
   "recentSignals": [],
