@@ -19276,7 +19276,7 @@
       },
       "nvidia/cosmos3-nano-libero10-sdg-export-S_best": {
         "createdAt": "2026-10-08T18:25:07.000Z",
-        "lastModified": "2026-10-18T20:16:15.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -19332,7 +19332,7 @@
       },
       "nvidia/cosmos3-nano-libero10-sdg-export-D_half": {
         "createdAt": "2026-10-07T16:48:52.000Z",
-        "lastModified": "2026-10-18T20:16:11.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -19584,7 +19584,7 @@
       },
       "nvidia/Nemotron-3-Diarization": {
         "createdAt": "2026-09-01T13:16:57.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-10T10:42:18.000Z",
         "gated": false,
         "pipeline_tag": "voice-activity-detection",
         "numParameters": null
@@ -19878,7 +19878,7 @@
       },
       "nvidia/Cosmos3-Edge-Policy-DROID": {
         "createdAt": "2026-07-09T21:19:56.000Z",
-        "lastModified": "2026-11-09T01:52:38.000Z",
+        "lastModified": "2026-11-10T05:38:20.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -19899,14 +19899,14 @@
       },
       "nvidia/Cosmos3-Super-Image2Video-4Step": {
         "createdAt": "2026-07-07T01:00:23.000Z",
-        "lastModified": "2026-11-09T01:53:02.000Z",
+        "lastModified": "2026-11-10T05:38:13.000Z",
         "gated": false,
         "pipeline_tag": "image-to-video",
         "numParameters": null
       },
       "nvidia/Cosmos3-Super-Text2Image-4Step": {
         "createdAt": "2026-07-07T01:00:22.000Z",
-        "lastModified": "2026-11-09T01:53:07.000Z",
+        "lastModified": "2026-11-10T05:38:09.000Z",
         "gated": false,
         "pipeline_tag": "text-to-image",
         "numParameters": null
@@ -20256,7 +20256,7 @@
       },
       "nvidia/Cosmos3-Super-Text2Image": {
         "createdAt": "2026-05-28T03:49:21.000Z",
-        "lastModified": "2026-11-09T01:53:05.000Z",
+        "lastModified": "2026-11-10T05:38:00.000Z",
         "gated": false,
         "pipeline_tag": "text-to-image",
         "numParameters": null
@@ -20333,14 +20333,14 @@
       },
       "nvidia/Cosmos3-Super-Image2Video": {
         "createdAt": "2026-05-21T19:21:28.000Z",
-        "lastModified": "2026-11-09T01:53:00.000Z",
+        "lastModified": "2026-11-10T05:38:04.000Z",
         "gated": false,
         "pipeline_tag": "image-to-video",
         "numParameters": null
       },
       "nvidia/Cosmos3-Nano-Policy-DROID": {
         "createdAt": "2026-05-21T19:20:17.000Z",
-        "lastModified": "2026-11-09T01:52:44.000Z",
+        "lastModified": "2026-11-10T05:38:17.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -21460,7 +21460,7 @@
       },
       "nvidia/cbottle": {
         "createdAt": "2026-01-09T19:25:25.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-10T13:35:59.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -22992,7 +22992,7 @@
       },
       "nvidia/cosmos3-examples-6a7b2b4c27ed0983ccbd64e4": {
         "title": "Cosmos3-Examples",
-        "lastUpdated": "2026-11-10T05:12:30.238Z",
+        "lastUpdated": "2026-11-10T05:12:51.730Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos3-Nano-Sim-Auto",
@@ -25821,6 +25821,20 @@
         "lastModified": "2025-06-10T02:53:28.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "MiniMaxAI/MiniMax-H3-Image-PE": {
+        "createdAt": "2026-11-08T15:35:23.000Z",
+        "lastModified": "2026-11-10T14:38:41.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "MiniMaxAI/MiniMax-H3-Image": {
+        "createdAt": "2026-11-03T06:34:36.000Z",
+        "lastModified": "2026-11-10T14:50:23.000Z",
+        "gated": false,
+        "pipeline_tag": "text-to-image",
         "numParameters": null
       }
     },
