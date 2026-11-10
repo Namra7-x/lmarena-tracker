@@ -298,7 +298,7 @@
     "family": "openai"
   },
   "@google/genai": {
-    "version": "3.0.0",
+    "version": "3.1.0",
     "models": [
       "gemini-2.0-flash",
       "gemini-2.0-flash-001",
@@ -324,11 +324,13 @@
       "gemini-3.8-flash-lite-tts",
       "gemini-3.8-flash-tts",
       "gemini-4-argon",
+      "gemini-4-carbon",
       "gemini-flash-latest",
       "gemini-flash-lite-latest",
       "gemini-live-2.5-flash-preview",
       "gemini-nano-banana-2.1",
       "gemini-omni-1.1-flash",
+      "gemini-omni-1.2-flash",
       "gemini-omni-flash-preview",
       "gemini-pro-latest",
       "gemini-robotics-er-1.6-preview",
@@ -337,8 +339,8 @@
     "betaHeaders": [],
     "reasoningEfforts": [],
     "toolDefinitions": [],
-    "lastUpdated": "2026-11-08T18:23:20.377Z",
-    "shasum": "c232c67803ab2435ddb46d79011c80bda622f84e",
+    "lastUpdated": "2026-11-10T20:47:39.289Z",
+    "shasum": "bfe6f302be15085d822759e39b8cd8615108ca07",
     "displayName": "Google GenAI SDK (v1)",
     "family": "google"
   },
