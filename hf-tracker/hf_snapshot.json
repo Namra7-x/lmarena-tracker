@@ -20060,7 +20060,7 @@
       },
       "nvidia/NVIDIA-Nemotron-Parse-2.0": {
         "createdAt": "2026-06-30T20:14:50.000Z",
-        "lastModified": "2026-10-20T20:22:30.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -22472,12 +22472,19 @@
         "gated": false,
         "pipeline_tag": "fill-mask",
         "numParameters": null
+      },
+      "nvidia/Kimi-K3.1-Pro-NVFP4": {
+        "createdAt": "2026-11-11T00:57:46.000Z",
+        "lastModified": "2026-11-11T06:16:27.000Z",
+        "gated": false,
+        "pipeline_tag": "image-text-to-text",
+        "numParameters": null
       }
     },
     "spaces": {
       "nvidia/rfd4-proteina-zerogpu": {
         "createdAt": "2026-10-06T15:33:36.000Z",
-        "lastModified": "2026-11-11T01:08:45.000Z",
+        "lastModified": "2026-11-11T14:47:22.000Z",
         "sdk": null
       },
       "nvidia/simready-central": {
