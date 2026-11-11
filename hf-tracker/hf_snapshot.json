@@ -6363,7 +6363,7 @@
       },
       "facebook/pe-a-frame-base": {
         "createdAt": "2025-10-13T15:12:33.000Z",
-        "lastModified": "2025-12-23T19:29:54.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -8991,6 +8991,13 @@
         "lastModified": "2026-11-09T08:03:10.000Z",
         "gated": true,
         "pipeline_tag": null,
+        "numParameters": null
+      },
+      "facebook/stereo_crossinjection": {
+        "createdAt": "2026-10-28T12:11:58.000Z",
+        "lastModified": "2026-11-03T14:50:44.000Z",
+        "gated": true,
+        "pipeline_tag": "depth-estimation",
         "numParameters": null
       }
     },
@@ -22470,12 +22477,12 @@
     "spaces": {
       "nvidia/rfd4-proteina-zerogpu": {
         "createdAt": "2026-10-06T15:33:36.000Z",
-        "lastModified": "2026-11-10T15:04:25.000Z",
+        "lastModified": "2026-11-11T01:08:45.000Z",
         "sdk": null
       },
       "nvidia/simready-central": {
         "createdAt": "2026-09-28T14:52:11.000Z",
-        "lastModified": "2026-11-09T13:07:42.000Z",
+        "lastModified": "2026-11-11T09:11:23.000Z",
         "sdk": null
       },
       "nvidia/AlpasimE2EClosedLoopChallenge2026": {
@@ -23149,7 +23156,7 @@
       },
       "nvidia/nvidia-aerial-6a85fcbb92fd6a88037033e2": {
         "title": "NVIDIA Aerial",
-        "lastUpdated": "2026-11-09T07:06:12.818Z",
+        "lastUpdated": "2026-11-11T01:52:04.737Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/aerial-isac-srs-iq",
@@ -25881,7 +25888,7 @@
       },
       "MiniMaxAI/MiniMax-H3-Image": {
         "createdAt": "2026-11-03T06:34:36.000Z",
-        "lastModified": "2026-11-11T00:30:36.000Z",
+        "lastModified": "2026-11-11T07:10:27.000Z",
         "gated": false,
         "pipeline_tag": "text-to-image",
         "numParameters": null
