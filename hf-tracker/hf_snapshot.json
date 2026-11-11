@@ -22484,7 +22484,7 @@
     "spaces": {
       "nvidia/rfd4-proteina-zerogpu": {
         "createdAt": "2026-10-06T15:33:36.000Z",
-        "lastModified": "2026-11-11T14:56:51.000Z",
+        "lastModified": "2026-11-11T16:43:33.000Z",
         "sdk": null
       },
       "nvidia/simready-central": {
@@ -23939,6 +23939,15 @@
           "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
           "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4",
           "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-FP8"
+        ]
+      },
+      "nvidia/scoring-verifiers-67ec0b680a585d6967015a5f": {
+        "title": "Scoring Verifiers",
+        "lastUpdated": "2026-10-20T13:09:31.949Z",
+        "itemCount": 2,
+        "itemIds": [
+          "nvidia/Scoring-Verifiers",
+          "2502.13820"
         ]
       }
     }
@@ -29307,7 +29316,7 @@
       },
       "LiquidAI/d1-3B": {
         "createdAt": "2026-10-05T09:55:28.000Z",
-        "lastModified": "2026-10-07T20:23:00.000Z",
+        "lastModified": "2026-11-11T17:09:05.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -29342,7 +29351,7 @@
       },
       "LiquidAI/LFM2.5-8B-A1B-DSpark-GGUF": {
         "createdAt": "2026-08-19T14:14:48.000Z",
-        "lastModified": "2026-08-21T10:28:47.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -29356,7 +29365,7 @@
       },
       "LiquidAI/LFM2.5-1.2B-Instruct-DSpark-GGUF": {
         "createdAt": "2026-08-19T14:07:19.000Z",
-        "lastModified": "2026-08-21T10:28:46.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -29972,7 +29981,7 @@
       },
       "LiquidAI/LFM2-24B-A2B": {
         "createdAt": "2026-02-24T13:50:32.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-11T17:09:31.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -30322,7 +30331,7 @@
       },
       "LiquidAI/LFM2.5-Audio-1.5B": {
         "createdAt": "2025-12-18T10:21:11.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-11T17:09:25.000Z",
         "gated": false,
         "pipeline_tag": "audio-to-audio",
         "numParameters": null
