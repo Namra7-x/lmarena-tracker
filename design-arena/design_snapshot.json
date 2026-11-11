@@ -11047,9 +11047,11 @@
         "agents": [
           "agentic_gamedev",
           "agon_blender",
+          "agon_godot",
           "agon_slides",
           "agon_slides_html",
-          "agon_webapps"
+          "agon_webapps",
+          "fullstack"
         ]
       }
     },
@@ -11068,9 +11070,11 @@
         "agents": [
           "agentic_gamedev",
           "agon_blender",
+          "agon_godot",
           "agon_slides",
           "agon_slides_html",
-          "agon_webapps"
+          "agon_webapps",
+          "fullstack"
         ]
       }
     },
@@ -11239,6 +11243,36 @@
           "fullstack_gamedev",
           "mobileapps",
           "nativeapps"
+        ]
+      }
+    },
+    "seedream-5.5": {
+      "displayName": "Seedream 5.5",
+      "provider": "bytedance",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "logo"
+        ]
+      }
+    },
+    "seedream-5.5-edit": {
+      "displayName": "Seedream 5.5 Edit",
+      "provider": "bytedance",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetoimage"
         ]
       }
     }
