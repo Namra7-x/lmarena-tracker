@@ -1,17 +1,17 @@
 {
   "componentId": "claude-code",
-  "version": "2.1.322",
-  "alertedVersion": "2.1.322",
-  "releaseId": "@anthropic-ai/claude-code@2.1.322",
+  "version": "2.1.323",
+  "alertedVersion": "2.1.323",
+  "releaseId": "@anthropic-ai/claude-code@2.1.323",
   "channel": "stable",
-  "identityFingerprint": "2b0bb134efff86f35f145d94855cc613ca1f558591914a1b1eb672ad5ae1aa05",
+  "identityFingerprint": "d00533c02c8e3206a54faf3993626dea039524a6cfa557715d5a29bcf146d9b5",
   "diagnosticFingerprint": null,
-  "scanId": "CC-20261110-001",
+  "scanId": "CC-20261112-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-10T02:29:44.959Z",
+  "lastSuccessfulScan": "2026-11-12T22:12:13.725Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "9486ed4ef8ed153d6d561848c07a7aa18039e14c35c8d2e05c5ddeacd24b1ff5",
-  "lastTestAlertVersion": "2.1.322",
+  "lastAlertDigest": "fdc6cc512287b9b36cbfadbcd13a7d6e9bbb6a8d8b93be6784c2cdb85075f024",
+  "lastTestAlertVersion": "2.1.323",
   "analyzerStatus": {
     "acornAst": "completed",
     "goReSym": "skipped",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 1298,
-    "peakMemoryMb": 15
+    "executionTimeMs": 1644,
+    "peakMemoryMb": 16
   },
   "hotSignals": [],
   "recentSignals": [],
@@ -1514,7 +1514,18 @@
     "\"@anthropic-ai/claude-code-linux-x64-musl\": \"2.1.322\",",
     "\"@anthropic-ai/claude-code-linux-arm64-musl\": \"2.1.322\",",
     "\"@anthropic-ai/claude-code-win32-x64\": \"2.1.322\",",
-    "\"@anthropic-ai/claude-code-win32-arm64\": \"2.1.322\""
+    "\"@anthropic-ai/claude-code-win32-arm64\": \"2.1.322\"",
+    "\"version\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-darwin-arm64\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-darwin-x64\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-linux-x64\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-linux-arm64\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-linux-x64-musl\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-linux-arm64-musl\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-win32-x64\": \"2.1.323\",",
+    "\"@anthropic-ai/claude-code-win32-arm64\": \"2.1.323\"",
+    "image_attached?: boolean;",
+    "page?: number;"
   ],
   "historicalSeenUrls": [
     "https://code.claude.com/docs/en/legal-and-compliance",
