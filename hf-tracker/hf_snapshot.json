@@ -21931,7 +21931,7 @@
       },
       "nvidia/NVIDIA-Nemotron-Parse-v1.1-TC": {
         "createdAt": "2025-11-15T19:47:33.000Z",
-        "lastModified": "2026-10-20T20:26:44.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -22508,6 +22508,13 @@
         "lastModified": "2026-11-12T19:58:41.000Z",
         "gated": true,
         "pipeline_tag": null,
+        "numParameters": null
+      },
+      "nvidia/GR00T-E2E-Reference-Workflow-SIM-H2-N1.7-AppleHandoverPlate-Model": {
+        "createdAt": "2026-09-13T12:11:52.000Z",
+        "lastModified": "2026-11-12T19:58:35.000Z",
+        "gated": false,
+        "pipeline_tag": "robotics",
         "numParameters": null
       }
     },
