@@ -11275,6 +11275,41 @@
           "imagetoimage"
         ]
       }
+    },
+    "wan-2.2-a14b": {
+      "displayName": "Wan 2.2 A14B",
+      "provider": "alibaba",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "imagetovideo"
+        ]
+      }
+    },
+    "ernie-5-5-flash-preview": {
+      "displayName": "ERNIE 5.5 Flash Preview",
+      "provider": "baidu",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -13506,6 +13541,13 @@
     },
     "seedream-5.5-edit": {
       "image.perImage": 0.04
+    },
+    "wan-2.2-a14b": {
+      "video.perSecond": 0.08
+    },
+    "ernie-5-5-flash-preview": {
+      "text.input": 0,
+      "text.output": 0
     }
   }
 }
