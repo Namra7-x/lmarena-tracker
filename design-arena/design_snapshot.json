@@ -11310,6 +11310,45 @@
           "website"
         ]
       }
+    },
+    "gemini-4-hydrogen": {
+      "displayName": "Gemini 4 Hydrogen",
+      "provider": "google",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      }
     }
   },
   "providers": {
@@ -13553,6 +13592,11 @@
     "ernie-5-5-flash-preview": {
       "text.input": 0,
       "text.output": 0
+    },
+    "gemini-4-hydrogen": {
+      "text.input": 1.5,
+      "text.output": 7.5,
+      "text.cachedInput": 0.075
     }
   }
 }
