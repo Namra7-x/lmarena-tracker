@@ -5523,7 +5523,7 @@
       },
       "facebook/meta-encoder": {
         "createdAt": "2026-09-30T18:00:19.000Z",
-        "lastModified": "2026-10-13T18:03:14.000Z",
+        "lastModified": "2026-11-12T04:54:56.000Z",
         "gated": true,
         "pipeline_tag": "feature-extraction",
         "numParameters": null
@@ -6041,7 +6041,7 @@
       },
       "facebook/pixio-vitl16": {
         "createdAt": "2025-12-15T23:39:02.000Z",
-        "lastModified": null,
+        "lastModified": "2025-12-26T16:46:47.000Z",
         "gated": true,
         "pipeline_tag": "image-feature-extraction",
         "numParameters": null
@@ -14943,7 +14943,7 @@
       },
       "microsoft/FrogNano-4B-2609": {
         "createdAt": "2026-09-17T00:13:57.000Z",
-        "lastModified": "2026-10-02T18:50:47.000Z",
+        "lastModified": "2026-11-12T15:01:56.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -18984,7 +18984,7 @@
       },
       "nvidia/Cosmos3-Nano-Transfer-Auto": {
         "createdAt": "2026-08-31T19:41:35.000Z",
-        "lastModified": "2026-11-09T01:52:52.000Z",
+        "lastModified": "2026-11-12T18:49:33.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -21938,7 +21938,7 @@
       },
       "nvidia/NVIDIA-Nemotron-Parse-v1.1": {
         "createdAt": "2025-11-15T15:15:54.000Z",
-        "lastModified": "2026-10-20T20:26:42.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -22502,17 +22502,24 @@
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
+      },
+      "nvidia/GR00T-E2E-Reference-Workflow-SIM-G1-N1.7-AppletoPlate-Model": {
+        "createdAt": "2026-09-03T19:41:32.000Z",
+        "lastModified": "2026-11-12T19:58:41.000Z",
+        "gated": true,
+        "pipeline_tag": null,
+        "numParameters": null
       }
     },
     "spaces": {
       "nvidia/rfd4-proteina-zerogpu": {
         "createdAt": "2026-10-06T15:33:36.000Z",
-        "lastModified": "2026-11-11T16:43:33.000Z",
+        "lastModified": "2026-11-12T11:15:33.000Z",
         "sdk": null
       },
       "nvidia/simready-central": {
         "createdAt": "2026-09-28T14:52:11.000Z",
-        "lastModified": "2026-11-11T09:11:23.000Z",
+        "lastModified": "2026-11-12T14:50:35.000Z",
         "sdk": null
       },
       "nvidia/AlpasimE2EClosedLoopChallenge2026": {
@@ -29360,7 +29367,7 @@
       },
       "LiquidAI/Liquid-Codec": {
         "createdAt": "2026-09-16T21:24:55.000Z",
-        "lastModified": "2026-10-27T17:16:46.000Z",
+        "lastModified": "2026-11-12T19:27:59.000Z",
         "gated": false,
         "pipeline_tag": "feature-extraction",
         "numParameters": null
