@@ -1,17 +1,17 @@
 {
   "componentId": "antigravity-cli",
-  "version": "1.5.7",
-  "alertedVersion": "1.5.7",
-  "releaseId": "antigravity-cli@1.5.7",
+  "version": "1.5.8",
+  "alertedVersion": "1.5.8",
+  "releaseId": "antigravity-cli@1.5.8",
   "channel": "stable",
-  "identityFingerprint": "cf09bf1afe2fe82be0e5438730e41141b032c3398f29616fb06e2be77d38852d",
+  "identityFingerprint": "59985ed595df5e205539e7be352c0d283c07efa1655eecb5ccdd3d8930a43196",
   "diagnosticFingerprint": null,
-  "scanId": "AC-20261112-001",
+  "scanId": "AC-20261113-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-12T15:19:47.866Z",
+  "lastSuccessfulScan": "2026-11-13T05:01:38.467Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "904ab3bd16851aaa007f6b229df7a7ed6b2411b074f57a5897d81c466ca0c770",
-  "lastTestAlertVersion": "1.5.7",
+  "lastAlertDigest": "0dffc032273d5d8537a39a4fa1466bb6828d1f47a18adf1fb5f8b4874fdefaaf",
+  "lastTestAlertVersion": "1.5.8",
   "analyzerStatus": {
     "acornAst": "skipped",
     "goReSym": "failed",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 27872,
-    "peakMemoryMb": 153
+    "executionTimeMs": 21432,
+    "peakMemoryMb": 147
   },
   "hotSignals": [
     {
@@ -355,8 +355,50 @@
     },
     {
       "category": "model_id",
+      "value": "gemini-3.1-pro-preview-customtoolsgrpc",
+      "context": "gemini-3.1-pro-preview-customtoolsgrpc: message too large (",
+      "hasDormantMarker": true,
+      "dormantMarker": "preview",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (preview) in context",
+          "points": 15
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [
+        "gemini-3.1-pro-preview-customtoolsgrpc: message too large ("
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "get-callback-pro",
-      "context": "NAMESPACE-NAME|LOGIN-EXPIRATION-TIMESTAMP|DEFINE-USER-EVENT-MANAGER|PERSISTENT-CACHE-DISABLED|SERVER-CONNECTION-CONTEXT|GET-CALLBACK-PRO",
+      "context": "XML-ENTITY-EXPANSION-LIMIT|GET-TYPE-BY-NAMESPACE-NAME|LOGIN-EXPIRATION-TIMESTAMP|DEFINE-USER-EVENT-MANAGER|PERSISTENT-CACHE-DISABLED|SERVER-CONNECTION-CONTEXT|GET-CALLBACK-PRO",
       "hasDormantMarker": true,
       "dormantMarker": "disabled",
       "activationStatus": "CONFIGURED",
@@ -388,7 +430,7 @@
       ],
       "occurrences": 2,
       "contexts": [
-        "NAMESPACE-NAME|LOGIN-EXPIRATION-TIMESTAMP|DEFINE-USER-EVENT-MANAGER|PERSISTENT-CACHE-DISABLED|SERVER-CONNECTION-CONTEXT|GET-CALLBACK-PRO",
+        "XML-ENTITY-EXPANSION-LIMIT|GET-TYPE-BY-NAMESPACE-NAME|LOGIN-EXPIRATION-TIMESTAMP|DEFINE-USER-EVENT-MANAGER|PERSISTENT-CACHE-DISABLED|SERVER-CONNECTION-CONTEXT|GET-CALLBACK-PRO",
         "CEDURE|CREATE-LIKE-SEQUENTIAL|WORK-AREA-WIDTH-PIXELS|PRINTER-CONTROL-HANDLE|GET-CALLBACK-PRO"
       ],
       "locations": [],
@@ -482,50 +524,8 @@
     },
     {
       "category": "model_id",
-      "value": "pro-preview",
-      "context": "gemini-3.1-pro-preview-customtoolsexa.api_server_pb.ApiServerServiceGetStreamingModelAPITextCompletionEMBEDDING_RETRY_POLICY_UNSPECIFIEDFEEDBACK_EXTRA_INFO_PARTIAL_ACCEPTgrpc: message too large (",
-      "hasDormantMarker": true,
-      "dormantMarker": "preview",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (preview) in context",
-          "points": 15
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [
-        "gemini-3.1-pro-preview-customtoolsexa.api_server_pb.ApiServerServiceGetStreamingModelAPITextCompletionEMBEDDING_RETRY_POLICY_UNSPECIFIEDFEEDBACK_EXTRA_INFO_PARTIAL_ACCEPTgrpc: message too large ("
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "sec-websocket-pro",
-      "context": "000-line code artifactno open summaries streamsummaries streams closedMocked thinking details.mock: file is missing %qmock: no cloud plugin %qrequest body is requiredunexpected trailing JSON%s: %s ent",
+      "context": "rf-conversation-secondFirst small conversationProject %02d environment5,000-line code artifactno open summaries streamsummaries streams closedMocked thinking details.mock: file is missing %qmock: no c",
       "hasDormantMarker": true,
       "dormantMarker": "internal",
       "activationStatus": "CONFIGURED",
@@ -557,8 +557,51 @@
       ],
       "occurrences": 2,
       "contexts": [
-        "000-line code artifactno open summaries streamsummaries streams closedMocked thinking details.mock: file is missing %qmock: no cloud plugin %qrequest body is requiredunexpected trailing JSON%s: %s ent",
+        "rf-conversation-secondFirst small conversationProject %02d environment5,000-line code artifactno open summaries streamsummaries streams closedMocked thinking details.mock: file is missing %qmock: no c",
         "invalid scalar kind %v^[A-Z][A-Z0-9_]{0,63}$Sec-Websocket-Pro"
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "sum-max",
+      "context": "WIDGET-E|WAIT-FOR|ON-FRAME|PATHNAME|INITIATE|ASCENDIN|DESCENDI|INPUT-OU|ASSEMBLY|ATTRIBUT|INSERT-B|GO-PENDI|AUTO-IND|VERTICAL|VARIABLE|PERSISTE|INSERT-T|AUTO-RET|DICTIONA|VALIDATE|USE-TEXT|IS-ATTR-|AU",
+      "hasDormantMarker": true,
+      "dormantMarker": "disabled",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (disabled) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (disabled) in context",
+          "points": 15
+        }
+      ],
+      "occurrences": 2,
+      "contexts": [
+        "WIDGET-E|WAIT-FOR|ON-FRAME|PATHNAME|INITIATE|ASCENDIN|DESCENDI|INPUT-OU|ASSEMBLY|ATTRIBUT|INSERT-B|GO-PENDI|AUTO-IND|VERTICAL|VARIABLE|PERSISTE|INSERT-T|AUTO-RET|DICTIONA|VALIDATE|USE-TEXT|IS-ATTR-|AU",
+        "MUM|SYSTEM-HELP|FROM-CURREN|LEFT-ALIGNE|FROM-PIXELS|FULL-HEIGHT|FULL-PATHNA|FULL-WIDTH-|LIST-EVENTS|SUPPRESS-WA|LABEL-PFCO|URL-DECODE|BIG-ENDIAN|BEFORE-HID|PAGE-BOTTO|BATCH-SIZE|LIST-ITEMS|FULL-WIDTH|"
       ],
       "locations": [],
       "platforms": [
@@ -694,7 +737,7 @@
     {
       "category": "model_id",
       "value": "window-max",
-      "context": "MI|PROGRESS-SOUR|FILE-MOD-DATE|FILE-MOD-TIME|TEMP-DIRECTOR|TEXT-SEG-GROW|TEXT-SELECTED|GRID-FACTOR-H|INSERT-BACKTA|TITLE-BGCOLOR|MIN-HEIGHT-CH|INSERT-STRING|TITLE-FGCOLOR|TOP-NAV-QUERY|MESSAGE-LINES|B",
+      "context": "TITLE-FGCOLOR|TOP-NAV-QUERY|MESSAGE-LINES|BORDER-LEFT-C|CLEAR-SELECTI|MIN-HEIGHT-PI|PRINTER-SETUP|FIND-BY-ROWID|IS-ATTR-SPACE|ALWAYS-ON-TOP|MAXIMUM-LEVEL|BOX-SELECTABL|PUT-KEY-VALUE|MIN-WIDTH-CHA|UNLE",
       "hasDormantMarker": true,
       "dormantMarker": "hidden",
       "activationStatus": "CONFIGURED",
@@ -726,9 +769,53 @@
       ],
       "occurrences": 5,
       "contexts": [
-        "MI|PROGRESS-SOUR|FILE-MOD-DATE|FILE-MOD-TIME|TEMP-DIRECTOR|TEXT-SEG-GROW|TEXT-SELECTED|GRID-FACTOR-H|INSERT-BACKTA|TITLE-BGCOLOR|MIN-HEIGHT-CH|INSERT-STRING|TITLE-FGCOLOR|TOP-NAV-QUERY|MESSAGE-LINES|B",
+        "TITLE-FGCOLOR|TOP-NAV-QUERY|MESSAGE-LINES|BORDER-LEFT-C|CLEAR-SELECTI|MIN-HEIGHT-PI|PRINTER-SETUP|FIND-BY-ROWID|IS-ATTR-SPACE|ALWAYS-ON-TOP|MAXIMUM-LEVEL|BOX-SELECTABL|PUT-KEY-VALUE|MIN-WIDTH-CHA|UNLE",
         "CEDURE|MOVE-AFTER-TAB-I|VIRTUAL-HEIGHT-C|WINDOW-MAX",
         "MPT|SYSTEM-ALERT-BO|END-EVENT-GROUP|ENCRYPTION-SALT|SAX-WRITE-BEGIN|WINDOW-MAX"
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "window-mini",
+      "context": "CEDURES|STATUS-AREA-FONT|WRITE-ENTITY-REF|BORDER-TOP-PIXEL|FULL-WIDTH-PIXEL|MIN-HEIGHT-PIXEL|MIN-HEIGHT-CHARS|CURRENT-LANGUAGE|FULL-WIDTH-CHARS|PROC-TEXT-BUFFER|FILE-CREATE-DATE|FILE-CREATE-TIME|LIST-",
+      "hasDormantMarker": true,
+      "dormantMarker": "hidden",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (hidden) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (hidden) in context",
+          "points": 15
+        }
+      ],
+      "occurrences": 5,
+      "contexts": [
+        "CEDURES|STATUS-AREA-FONT|WRITE-ENTITY-REF|BORDER-TOP-PIXEL|FULL-WIDTH-PIXEL|MIN-HEIGHT-PIXEL|MIN-HEIGHT-CHARS|CURRENT-LANGUAGE|FULL-WIDTH-CHARS|PROC-TEXT-BUFFER|FILE-CREATE-DATE|FILE-CREATE-TIME|LIST-",
+        "CEDURE|WINDOW-MINI",
+        "IMIZ|SIDE-LABEL-HAN|MIN-WIDTH-PIXE|MAX-WIDTH-CHAR|GRID-FACTOR-VE|BORDER-TOP-PIX|MAX-WIDTH-PIXE|MIN-WIDTH-CHAR|SELECTION-LIST|BOX-SELECTABLE|CLEAR-SELECTIO|GET-WAIT-STATE|WINDOW-MINI"
       ],
       "locations": [],
       "platforms": [
@@ -852,7 +939,7 @@
     {
       "category": "model_id",
       "value": "add-super-pro",
-      "context": "CEDURE|MARGIN-HEIGHT-PIXELS|GRID-UNIT-HEIGHT-PIX|MEMPTR-TO-NODE-VALUE|FIND-NEXT-OCCURRENCE|FOCUSED-ROW-SELECTED|FIRST-ASYNCH-REQUEST|CURRENT-ENVIRONMENT|ADD-SUPER-PRO",
+      "context": "RID-UNIT-HEIGHT-PIX|MEMPTR-TO-NODE-VALUE|FIND-NEXT-OCCURRENCE|FOCUSED-ROW-SELECTED|FIRST-ASYNCH-REQUEST|CURRENT-ENVIRONMENT|ADD-SUPER-PRO",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -880,45 +967,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "CEDURE|MARGIN-HEIGHT-PIXELS|GRID-UNIT-HEIGHT-PIX|MEMPTR-TO-NODE-VALUE|FIND-NEXT-OCCURRENCE|FOCUSED-ROW-SELECTED|FIRST-ASYNCH-REQUEST|CURRENT-ENVIRONMENT|ADD-SUPER-PRO"
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "agent_loopflash-lite",
-      "context": "AGENT_LOOPflash-lite",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [
-        "AGENT_LOOPflash-lite"
+        "RID-UNIT-HEIGHT-PIX|MEMPTR-TO-NODE-VALUE|FIND-NEXT-OCCURRENCE|FOCUSED-ROW-SELECTED|FIRST-ASYNCH-REQUEST|CURRENT-ENVIRONMENT|ADD-SUPER-PRO"
       ],
       "locations": [],
       "platforms": [
@@ -964,7 +1013,7 @@
     {
       "category": "model_id",
       "value": "aicode-pro",
-      "context": "Gemini 3 Pro ImageAICODE_DEV_PROJECTremediation_actionccpa_missing_countccpa_exp_ids_countremaining_fractionJETSKI_OAUTH_TOKENfetchAdminControlsX-Aicode-Pro",
+      "context": "Gemini 3 Pro ImageAICODE_DEV_PROJECTremediation_actionccpa_missing_countccpa_exp_ids_countremaining_fractionJETSKI_OAUTH_TOKENX-Aicode-Pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -992,7 +1041,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "Gemini 3 Pro ImageAICODE_DEV_PROJECTremediation_actionccpa_missing_countccpa_exp_ids_countremaining_fractionJETSKI_OAUTH_TOKENfetchAdminControlsX-Aicode-Pro"
+        "Gemini 3 Pro ImageAICODE_DEV_PROJECTremediation_actionccpa_missing_countccpa_exp_ids_countremaining_fractionJETSKI_OAUTH_TOKENX-Aicode-Pro"
       ],
       "locations": [],
       "platforms": [
@@ -1113,42 +1162,6 @@
         "5. **Anti-Pro",
         "1. **Anti-Pro"
       ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "ard-dataw32-selection-exists-pw32-set-clip",
-      "context": "ard-dataw32-selection-exists-pw32-set-clip",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [],
       "locations": [],
       "platforms": [
         "all"
@@ -2398,7 +2411,7 @@
     {
       "category": "model_id",
       "value": "claude-opus-5-5",
-      "context": "Gemini 4 Argon (Medium)Gemini 3.8 Flash (High)Gemini 3.7 Flash (High)Gemini 3.6 Flash (High)Gemini 3.5 Flash (High)claude-opus-5-5@defaultClaude Sonnet 5.5 (Max)Claude Sonnet 5.5 (Low)getting HTTP cli",
+      "context": "Gemini 4 Hydrogen (Low)Gemini 4 Argon (Medium)Gemini 3.8 Flash (High)Gemini 3.7 Flash (High)Gemini 3.6 Flash (High)Gemini 3.5 Flash (High)claude-opus-5-5@defaultClaude Sonnet 5.5 (Max)Claude Sonnet 5.",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -2426,7 +2439,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "Gemini 4 Argon (Medium)Gemini 3.8 Flash (High)Gemini 3.7 Flash (High)Gemini 3.6 Flash (High)Gemini 3.5 Flash (High)claude-opus-5-5@defaultClaude Sonnet 5.5 (Max)Claude Sonnet 5.5 (Low)getting HTTP cli"
+        "Gemini 4 Hydrogen (Low)Gemini 4 Argon (Medium)Gemini 3.8 Flash (High)Gemini 3.7 Flash (High)Gemini 3.6 Flash (High)Gemini 3.5 Flash (High)claude-opus-5-5@defaultClaude Sonnet 5.5 (Max)Claude Sonnet 5."
       ],
       "locations": [],
       "platforms": [
@@ -2657,7 +2670,7 @@
     {
       "category": "model_id",
       "value": "claude-sonnet-4-5",
-      "context": "claude-sonnet-4-5^[a-z][-a-z0-9]*$personal_consumeraicode_latency_mstier_display_namedetected_locationhost bridge errorBAICODE_USER_TIERcheckUrlAntivirus/%s:fetchLicensesuse-aicode-mendelUpdateStoredT",
+      "context": "claude-sonnet-4-5@20250929",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -2683,9 +2696,8 @@
           "points": 25
         }
       ],
-      "occurrences": 2,
+      "occurrences": 1,
       "contexts": [
-        "claude-sonnet-4-5^[a-z][-a-z0-9]*$personal_consumeraicode_latency_mstier_display_namedetected_locationhost bridge errorBAICODE_USER_TIERcheckUrlAntivirus/%s:fetchLicensesuse-aicode-mendelUpdateStoredT",
         "claude-sonnet-4-5@20250929"
       ],
       "locations": [],
@@ -2878,7 +2890,7 @@
     {
       "category": "model_id",
       "value": "cli-suggest-auto-mode-in-permission-pro",
-      "context": "in the pluginYou can switch conversations with /resume.cli-suggest-auto-mode-in-permission-pro",
+      "context": "ailing commasskills[%d]: %q doesn't exist in the pluginYou can switch conversations with /resume.cli-suggest-auto-mode-in-permission-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -2906,7 +2918,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "in the pluginYou can switch conversations with /resume.cli-suggest-auto-mode-in-permission-pro"
+        "ailing commasskills[%d]: %q doesn't exist in the pluginYou can switch conversations with /resume.cli-suggest-auto-mode-in-permission-pro"
       ],
       "locations": [],
       "platforms": [
@@ -3339,7 +3351,7 @@
     {
       "category": "model_id",
       "value": "control-pro",
-      "context": "y error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for mcpretroactive_migration_attempt",
+      "context": "eyond-session-idset up telemetry error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for m",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -3367,45 +3379,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "y error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for mcpretroactive_migration_attempt"
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "crm-pro",
-      "context": "Server type: 'stdio' or 'http'called entry on non-entry nodetoo few operands for format '%os: process handle unavailableerrSymlink is not user-visibleruntime.AddCleanup: ptr is nilSetCCommandLine alre",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [
-        "Server type: 'stdio' or 'http'called entry on non-entry nodetoo few operands for format '%os: process handle unavailableerrSymlink is not user-visibleruntime.AddCleanup: ptr is nilSetCCommandLine alre"
+        "eyond-session-idset up telemetry error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for m"
       ],
       "locations": [],
       "platforms": [
@@ -3865,6 +3839,44 @@
       "platforms": [
         "all"
       ]
+    },
+    {
+      "category": "model_id",
+      "value": "elementsimple-condition-format-controlinternal-default-pro",
+      "context": "missing field %s for join tableALTER TABLE `%v` RENAME TO `%v`%s: failed to compile rules: %wcould not find <config> elementsimple-condition-format-controlinternal-default-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [
+        "missing field %s for join tableALTER TABLE `%v` RENAME TO `%v`%s: failed to compile rules: %wcould not find <config> elementsimple-condition-format-controlinternal-default-pro"
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
     }
   ],
   "recentSignals": [
@@ -4142,8 +4154,42 @@
     },
     {
       "category": "model_id",
+      "value": "gemini-3.1-pro-preview-customtoolsgrpc",
+      "context": "gemini-3.1-pro-preview-customtoolsgrpc: message too large (",
+      "hasDormantMarker": true,
+      "dormantMarker": "preview",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (preview) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "get-callback-pro",
-      "context": "NAMESPACE-NAME|LOGIN-EXPIRATION-TIMESTAMP|DEFINE-USER-EVENT-MANAGER|PERSISTENT-CACHE-DISABLED|SERVER-CONNECTION-CONTEXT|GET-CALLBACK-PRO",
+      "context": "XML-ENTITY-EXPANSION-LIMIT|GET-TYPE-BY-NAMESPACE-NAME|LOGIN-EXPIRATION-TIMESTAMP|DEFINE-USER-EVENT-MANAGER|PERSISTENT-CACHE-DISABLED|SERVER-CONNECTION-CONTEXT|GET-CALLBACK-PRO",
       "hasDormantMarker": true,
       "dormantMarker": "disabled",
       "activationStatus": "CONFIGURED",
@@ -4244,42 +4290,8 @@
     },
     {
       "category": "model_id",
-      "value": "pro-preview",
-      "context": "gemini-3.1-pro-preview-customtoolsexa.api_server_pb.ApiServerServiceGetStreamingModelAPITextCompletionEMBEDDING_RETRY_POLICY_UNSPECIFIEDFEEDBACK_EXTRA_INFO_PARTIAL_ACCEPTgrpc: message too large (",
-      "hasDormantMarker": true,
-      "dormantMarker": "preview",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 65,
-      "tier": "HIGH-CONFIDENCE SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (preview) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        },
-        {
-          "rule": "Dormant marker (preview) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "sec-websocket-pro",
-      "context": "000-line code artifactno open summaries streamsummaries streams closedMocked thinking details.mock: file is missing %qmock: no cloud plugin %qrequest body is requiredunexpected trailing JSON%s: %s ent",
+      "context": "rf-conversation-secondFirst small conversationProject %02d environment5,000-line code artifactno open summaries streamsummaries streams closedMocked thinking details.mock: file is missing %qmock: no c",
       "hasDormantMarker": true,
       "dormantMarker": "internal",
       "activationStatus": "CONFIGURED",
@@ -4306,6 +4318,40 @@
         },
         {
           "rule": "Dormant marker (internal) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "sum-max",
+      "context": "WIDGET-E|WAIT-FOR|ON-FRAME|PATHNAME|INITIATE|ASCENDIN|DESCENDI|INPUT-OU|ASSEMBLY|ATTRIBUT|INSERT-B|GO-PENDI|AUTO-IND|VERTICAL|VARIABLE|PERSISTE|INSERT-T|AUTO-RET|DICTIONA|VALIDATE|USE-TEXT|IS-ATTR-|AU",
+      "hasDormantMarker": true,
+      "dormantMarker": "disabled",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (disabled) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (disabled) in context",
           "points": 15
         }
       ]
@@ -4449,7 +4495,41 @@
     {
       "category": "model_id",
       "value": "window-max",
-      "context": "MI|PROGRESS-SOUR|FILE-MOD-DATE|FILE-MOD-TIME|TEMP-DIRECTOR|TEXT-SEG-GROW|TEXT-SELECTED|GRID-FACTOR-H|INSERT-BACKTA|TITLE-BGCOLOR|MIN-HEIGHT-CH|INSERT-STRING|TITLE-FGCOLOR|TOP-NAV-QUERY|MESSAGE-LINES|B",
+      "context": "TITLE-FGCOLOR|TOP-NAV-QUERY|MESSAGE-LINES|BORDER-LEFT-C|CLEAR-SELECTI|MIN-HEIGHT-PI|PRINTER-SETUP|FIND-BY-ROWID|IS-ATTR-SPACE|ALWAYS-ON-TOP|MAXIMUM-LEVEL|BOX-SELECTABL|PUT-KEY-VALUE|MIN-WIDTH-CHA|UNLE",
+      "hasDormantMarker": true,
+      "dormantMarker": "hidden",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (hidden) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (hidden) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "window-mini",
+      "context": "CEDURES|STATUS-AREA-FONT|WRITE-ENTITY-REF|BORDER-TOP-PIXEL|FULL-WIDTH-PIXEL|MIN-HEIGHT-PIXEL|MIN-HEIGHT-CHARS|CURRENT-LANGUAGE|FULL-WIDTH-CHARS|PROC-TEXT-BUFFER|FILE-CREATE-DATE|FILE-CREATE-TIME|LIST-",
       "hasDormantMarker": true,
       "dormantMarker": "hidden",
       "activationStatus": "CONFIGURED",
@@ -5503,7 +5583,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_ENVIRONMENT_BACKGROUND_WORKTREEsyncing",
-      "context": "AGENT_ENVIRONMENT_BACKGROUND_WORKTREEsyncing the server accounts of %s: %winvalid character %q in identifier %sError getting internal OS version: %vfeatured_cfg:empty_customization_ids:marketplace nam",
+      "context": "AGENT_ENVIRONMENT_BACKGROUND_WORKTREEsyncing the server accounts of %s: %w## Browser Step History (append-only)featured_cfg:empty_customization_ids:marketplace name %q is not kebab-casearchive unpacks",
       "hasDormantMarker": true,
       "dormantMarker": "internal",
       "activationStatus": "CONFIGURED",
@@ -5674,40 +5754,6 @@
       "category": "agent_mode",
       "value": "tool_response",
       "context": "USER: <tool_response>ArtifactDirectoryPathunsupported sampler: TraceIDRatioBased{%g}unsupported relationsALTER TABLE ? ADD ? ?DROP VIEW IF EXISTS ?^\\s*\\{[lcr|@{}.\\s]*\\}aligned cell (%q): %wRun gcert t",
-      "hasDormantMarker": true,
-      "dormantMarker": "internal",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 54,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts); Dormant marker (internal) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        },
-        {
-          "rule": "Dormant marker (internal) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "TOOL_UNSPECIFIEDUTF8_VALIDATION_UNKNOWNproto_compare",
-      "context": "TOOL_UNSPECIFIEDUTF8_VALIDATION_UNKNOWNproto_compare.redactionpage.waitForTimeout(ms)page.webmcp.listTools()teamwork_explore_falserteamwork_explore_mergerpipeline_sentinel_agentinvalid level specified",
       "hasDormantMarker": true,
       "dormantMarker": "internal",
       "activationStatus": "CONFIGURED",
@@ -5978,8 +6024,8 @@
     },
     {
       "category": "ui_string",
-      "value": "Built on Nov 11 2026 22",
-      "context": "Built on Nov 11 2026 22:26:57 (1794464817)",
+      "value": "Built on Nov 12 2026 19",
+      "context": "Built on Nov 12 2026 19:13:26 (1794539606)",
       "hasDormantMarker": true,
       "dormantMarker": "dark_ui_copy",
       "activationStatus": "CONFIGURED",
@@ -6386,40 +6432,6 @@
     },
     {
       "category": "ui_string",
-      "value": "Parent AgentRecordSearchRecordMQueryJoinWaitlist",
-      "context": "iles.%s: %wROLE_HANDOFFmultipathtcp127.0.0.1:53pointtopointno such hostunknown portCIDR addressinvalid porthttpmuxgo121Cookie.ValuemoreSpecific100-continuestatus code Multi-StatusNot ModifiedI'm a tea",
-      "hasDormantMarker": true,
-      "dormantMarker": "dark_ui_copy",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 52,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: UI feature string (+12 pts); Dormant marker (dark_ui_copy) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: UI feature string",
-          "points": 12
-        },
-        {
-          "rule": "Dormant marker (dark_ui_copy) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "ui_string",
       "value": "runtime.mutexWaitList",
       "context": "runtime.mutexWaitListHead",
       "hasDormantMarker": true,
@@ -6545,37 +6557,7 @@
     {
       "category": "model_id",
       "value": "add-super-pro",
-      "context": "CEDURE|MARGIN-HEIGHT-PIXELS|GRID-UNIT-HEIGHT-PIX|MEMPTR-TO-NODE-VALUE|FIND-NEXT-OCCURRENCE|FOCUSED-ROW-SELECTED|FIRST-ASYNCH-REQUEST|CURRENT-ENVIRONMENT|ADD-SUPER-PRO",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "agent_loopflash-lite",
-      "context": "AGENT_LOOPflash-lite",
+      "context": "RID-UNIT-HEIGHT-PIX|MEMPTR-TO-NODE-VALUE|FIND-NEXT-OCCURRENCE|FOCUSED-ROW-SELECTED|FIRST-ASYNCH-REQUEST|CURRENT-ENVIRONMENT|ADD-SUPER-PRO",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -6635,7 +6617,7 @@
     {
       "category": "model_id",
       "value": "aicode-pro",
-      "context": "Gemini 3 Pro ImageAICODE_DEV_PROJECTremediation_actionccpa_missing_countccpa_exp_ids_countremaining_fractionJETSKI_OAUTH_TOKENfetchAdminControlsX-Aicode-Pro",
+      "context": "Gemini 3 Pro ImageAICODE_DEV_PROJECTremediation_actionccpa_missing_countccpa_exp_ids_countremaining_fractionJETSKI_OAUTH_TOKENX-Aicode-Pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -6906,36 +6888,6 @@
       "category": "model_id",
       "value": "anti-pro",
       "context": "1. **Anti-Pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "ard-dataw32-selection-exists-pw32-set-clip",
-      "context": "ard-dataw32-selection-exists-pw32-set-clip",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -8105,7 +8057,7 @@
     {
       "category": "model_id",
       "value": "claude-opus-5-5",
-      "context": "Gemini 4 Argon (Medium)Gemini 3.8 Flash (High)Gemini 3.7 Flash (High)Gemini 3.6 Flash (High)Gemini 3.5 Flash (High)claude-opus-5-5@defaultClaude Sonnet 5.5 (Max)Claude Sonnet 5.5 (Low)getting HTTP cli",
+      "context": "Gemini 4 Hydrogen (Low)Gemini 4 Argon (Medium)Gemini 3.8 Flash (High)Gemini 3.7 Flash (High)Gemini 3.6 Flash (High)Gemini 3.5 Flash (High)claude-opus-5-5@defaultClaude Sonnet 5.5 (Max)Claude Sonnet 5.",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -8345,36 +8297,6 @@
     {
       "category": "model_id",
       "value": "claude-sonnet-4-5",
-      "context": "claude-sonnet-4-5^[a-z][-a-z0-9]*$personal_consumeraicode_latency_mstier_display_namedetected_locationhost bridge errorBAICODE_USER_TIERcheckUrlAntivirus/%s:fetchLicensesuse-aicode-mendelUpdateStoredT",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-sonnet-4-5",
       "context": "claude-sonnet-4-5@20250929",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -8555,7 +8477,7 @@
     {
       "category": "model_id",
       "value": "cli-suggest-auto-mode-in-permission-pro",
-      "context": "in the pluginYou can switch conversations with /resume.cli-suggest-auto-mode-in-permission-pro",
+      "context": "ailing commasskills[%d]: %q doesn't exist in the pluginYou can switch conversations with /resume.cli-suggest-auto-mode-in-permission-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9125,37 +9047,7 @@
     {
       "category": "model_id",
       "value": "control-pro",
-      "context": "y error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for mcpretroactive_migration_attempt",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "crm-pro",
-      "context": "Server type: 'stdio' or 'http'called entry on non-entry nodetoo few operands for format '%os: process handle unavailableerrSymlink is not user-visibleruntime.AddCleanup: ptr is nilSetCCommandLine alre",
+      "context": "eyond-session-idset up telemetry error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for m",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9755,7 +9647,7 @@
     {
       "category": "model_id",
       "value": "event-pro",
-      "context": "C-CONTEXT|CREATE-RESULT-LIST-ENTRY|DELETE-RESULT-LIST-ENTRY|DATA-SOURCE-COMPLETE-MAP|INITIALIZE-DOCUMENT-TYPE|STRICT-ENTITY-RESOLUTION|SYMMETRIC-ENCRYPTION-KEY|SET-EVENT-MANAGER-OPTION|WORK-AREA-HEIGH",
+      "context": "ORK-AREA-HEIGHT-PIXELS|BLOCK-ITERATION-DISPLAY|SYMMETRIC-ENCRYPTION-IV|SERVER-CONNECTION-BOUND|GRID-UNIT-HEIGHT-PIXELS|EVENT-PRO",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9814,8 +9706,38 @@
     },
     {
       "category": "model_id",
+      "value": "exists-pw32-set-clip",
+      "context": "exists-pw32-set-clip",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "first-pro",
-      "context": "LIGHT|WRITE-CHARACTERS|MARGIN-HEIGHT-CH|MARGIN-WIDTH-PIX|MARGIN-WIDTH-CHA|AUTO-SYNCHRONIZE|BORDER-LEFT-CHAR|GRID-FACTOR-VERT|GRID-UNIT-HEIGHT|MARGIN-HEIGHT-P|INHERIT-FGCOLOR|REPOSITION-MODE|BORDER-LEF",
+      "context": "HT-P|INHERIT-FGCOLOR|REPOSITION-MODE|BORDER-LEFT-PIX|BORDER-LEFT-CHA|APPL-CONTEXT-ID|REGISTER-DOMAIN|MARGIN-WIDTH-CH|USE-WIDGET-POOL|FORM-LONG-INPUT|ADD-LIKE-COLUMN|MARGIN-WIDTH-PI|GRID-FACTOR-VER|MAR",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9905,7 +9827,7 @@
     {
       "category": "model_id",
       "value": "first-pro",
-      "context": "AUTO-RETURN|MOVE-TO-EOF|MOVE-TO-BOT|MOVE-COLUMN|IS-ATTR-SPA|SCHEMA-PATH|ERROR-COLUM|ERROR-STATU|SCREEN-VALU|CONTROL-BOX|UNSUBSCRIBE|MOVE-BEFORE|SCROLL-BARS|GET-RED-VAL|IS-SELECTED|SCROLL-TO-I|UNFORMAT",
+      "context": "MOVE-AFTER-|SCROLLBAR-H|MOUSE-POINT|CONFIG-NAME|SCROLLBAR-V|COLUMN-LABE|TRANSPARENT|GET-MESSAGE|TRANSACTION|COLUMN-FONT|GET-KEY-VAL|COLOR-TABLE|GET-GREEN-V|COLON-ALIGN|SEARCH-SELF|TITLE-FGCOL|MIN-WIDT",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9935,7 +9857,7 @@
     {
       "category": "model_id",
       "value": "first-pro",
-      "context": "CE|HEX-DECODE|DISPLAY-TY|DEFAULT-EX|HEIGHT-PIX|FRAME-NAME|FRAME-LINE|TEMP-TABLE|FRAME-INDE|FRAME-FILE|HEIGHT-CHA|FRAME-DOWN|DEFAULT-BU|IMPLEMENTS|BORDER-LEF|STOP-AFTER|LAST-EVENT|NUM-FIELDS|PRIVATE-DA",
+      "context": "-CHILD|STANDALONE|WORD-INDEX|FORM INPUT|FOREGROUND|NUM-COLUMN|BORDER-TOP|LAST-BATCH|PRIVILEGES|HORIZONTAL|NUM-BUTTON|SMALL-ICON|PROC-HANDL|SIZE-PIXEL|MAX-BUTTON|WINDOW-STA|FORCE-FILE|MAX-HEIGHT|INDEX-",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10174,36 +10096,6 @@
     },
     {
       "category": "model_id",
-      "value": "gemini--rcfile.strip",
-      "context": "verdict:Tool: %sname: %s%s|%s|%sadc.json<ctrl94><ctrl95>Failed: os.popen-fprint0-fprintf-execdirgfs_userunbufferxvfb-runbz2.openos.mkdiros.mknodnp.savezsf.writecopyfilecopytree.to_json.savefig.dump_to",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "gemini-2.5",
       "context": "gemini-2.5",
       "hasDormantMarker": false,
@@ -10266,6 +10158,36 @@
       "category": "model_id",
       "value": "gemini-2.5-flash-lite",
       "context": "gemini-2.5-flash-lite",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-2.5-flashgrpc.lb.localityconnection",
+      "context": "gemini-2.5-flashgrpc.lb.localityconnection resetDeepInvestigatorfeatured_pluginsTASK_UNSPECIFIEDAPPLICATION_JSONIMAGE_SIZE_ONE_KIMAGE_SIZE_TWO_Kinvalid type: %T\"ALREADY_EXISTS\"DeadlineExceededPermissi",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10625,7 +10547,7 @@
     {
       "category": "model_id",
       "value": "gemini-3.1-ultra",
-      "context": "gemini-3.1-ultra/.user_uploaded/mock-marketplaceuser@example.commock-terminal-%dinit_read_legacycontext_cancelednil agent script",
+      "context": "gemini-3.1-ultra/.user_uploaded/mock-marketplace",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10716,6 +10638,36 @@
       "category": "model_id",
       "value": "gemini-3.5-flash-lite",
       "context": "gemini-3.5-flash-lite",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-3.5-flash-lite",
+      "context": "losedJETSKI_STDIORPC_PERSISTENT=1stdiorpc: %s: empty responseRELEVANCE_REASON_UNSPECIFIEDDESCRIPTION_TYPE_UNSPECIFIEDno handler registered for %sBUDGET_SCOPE_FORWARD_LOOKINGFailed to prune trajectorie",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10986,6 +10938,36 @@
       "category": "model_id",
       "value": "gemini-3.7-flash-medium",
       "context": "gemini-3.7-flash-medium",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-3.7-flash-tieredgrpc.lb.backend_servicelatest",
+      "context": "gemini-3.7-flash-tieredgrpc.lb.backend_servicelatest balancer error: AGY_LLM_GATEWAY_API_KEYAGY_LLM_GATEWAY_HEADERSRESPONSE_STYLE_BALANCEDRESPONSE_STYLE_CREATIVEHARM_CATEGORY_JAILBREAKENVIRONMENT_UNSP",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -11404,6 +11386,126 @@
     },
     {
       "category": "model_id",
+      "value": "gemini-4-hydrogen-high",
+      "context": "gemini-4-hydrogen-high",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-4-hydrogen-low",
+      "context": "gemini-4-hydrogen-low",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-4-hydrogen-medium",
+      "context": "gemini-4-hydrogen-medium",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-4-hydrogen-xhigh",
+      "context": "gemini-4-hydrogen-xhigh",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "gemini-api",
       "context": "gemini-api:/models/snowballGemini for Google 3.1 FlashSetBrowserJsExecutionPolicyAckAgentCoordinationMentionPERMISSION_GRANT_LIST_ALLOWsecret not found in keyringperformance_analyze_insight",
       "hasDormantMarker": false,
@@ -11794,6 +11896,36 @@
     },
     {
       "category": "model_id",
+      "value": "gemini-for-google-3.1-flashchannel",
+      "context": "gemini-for-google-3.1-flashChannel authority set to %qoriginal dial target is: %qlistenerAddressForServeHTTPAGY_LLM_GATEWAY_CLIENT_CERTinvalid UTF-8 in string: %qinsufficient security levelCurveP256Cu",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "gemini-format",
       "context": "- Fixed enterprise model gateways that validate the request format rejecting every request, because the CLI sent a non-standard `sessionId` field in Gemini-format requests.",
       "hasDormantMarker": false,
@@ -12095,7 +12227,7 @@
     {
       "category": "model_id",
       "value": "gpt-oss-120",
-      "context": "permission_grants_globalUploadPerformanceProfileRecordCodeTrackerUpdatesValidateRegistrationCodeRegisterHybridDeploymentNested channel(id:%d) %sMalformed method name %qAGY_LLM_GATEWAY_TIER_PROASPECT_R",
+      "context": "RecordCodeTrackerUpdatesValidateRegistrationCodeRegisterHybridDeploymentUploadPerformanceProfileNested channel(id:%d) %sMalformed method name %qAGY_LLM_GATEWAY_TIER_PROASPECT_RATIO_UNSPECIFIEDHARM_SEV",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12125,7 +12257,7 @@
     {
       "category": "model_id",
       "value": "gpt-oss-20",
-      "context": "irmationCLIENT_TRAFFIC_SECRET_0SERVER_TRAFFIC_SECRET_0tls: invalid PSK binderQUICEncryptionLevel(%v)invalid PrintableStringx509: malformed UTCTimex509: invalid key usagex509: malformed versionCREDIT_T",
+      "context": "protocolech accept confirmationCLIENT_TRAFFIC_SECRET_0SERVER_TRAFFIC_SECRET_0tls: invalid PSK binderQUICEncryptionLevel(%v)invalid PrintableStringx509: malformed UTCTimex509: invalid key usagex509: ma",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12755,7 +12887,7 @@
     {
       "category": "model_id",
       "value": "jetski-voice-pro",
-      "context": "ECIFIEDlisting the server's catalog plugins: %wfailed to build generate content requestExplore other marketplace customizationsaudiotranscribe: TokenSource is requiredaudiotranscribe: transcribed -> %",
+      "context": "ECIFIEDlisting the server's catalog plugins: %wfailed to build generate content requestbrowser sandbox: failed to remove %s: %vExplore other marketplace customizationsaudiotranscribe: TokenSource is r",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12875,7 +13007,7 @@
     {
       "category": "model_id",
       "value": "last-pro",
-      "context": "AME-END|NUM-SELECTED-W|LARGE-TO-SMALL|GET-BLUE-VALUE|NUMERIC-FORMAT|SET-WAIT-STATE|SET-SORT-ARROW|NUM-REFERENCES|HTML-TITLE-END|NUM-PARAMETERS|GET-FILE-OFFSE|BORDER-RIGHT-P|SUPPRESS-WARNI|SCHEMA-MARSH",
+      "context": "FSE|BORDER-RIGHT-P|SUPPRESS-WARNI|SCHEMA-MARSHAL|IMAGE-SIZE-CHA|LAST-PRO",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12905,7 +13037,7 @@
     {
       "category": "model_id",
       "value": "last-pro",
-      "context": "ROUTINE-LEVEL|FULL-HEIGHT-P|SET-PARAMETER|KEEP-FRAME-Z-|PBE-HASH-ALGO|CURRENT-VALUE|SCROLL-OFFSET|YES-NO-CANCEL|START-ELEMENT|SET-RED-VALUE|FULL-PATHNAME|CONTEXT-POPUP|BORDER-RIGHT-|VIRTUAL-WIDTH|FULL",
+      "context": "GREEN-VAL|AUTO-COMPLETI|GENERATE-UUID|HEIGHT-PIXELS|LABEL-BGCOLOR|BUFFER-DELETE|ROW-RESIZABLE|ON-FRAME-BORD|LAST-PRO",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12995,7 +13127,7 @@
     {
       "category": "model_id",
       "value": "last-pro",
-      "context": "MENU|SUB-AVERAG|POPUP-ONLY|TEMP-DIREC|FRAME-VALU|PREPROCESS|DISCONNECT|BIND-WHERE|LAST-TAB-I|BACKGROUND|IMAGE-SIZE|FRAME-SPAC|LOGIN-HOST|GET-BLUE-V|WORK-TABLE|PREV-TAB-I|HEX-ENCODE|BORDER-BOT|LAST-PRO",
+      "context": "IMU|OS-COMMAND|DIALOG-BOX|FROM-PIXEL|PAGE-NUMBE|PAGE-WIDTH|WRITE-JSON|LOAD-IMAGE|SUBSTITUTE|ACCUMULATE|ON-FRAME-B|LEFT-ALIGN|FROM-CURRE|DESCENDING|ADD-BUFFER|FROM-CHARS|PERSISTENT|IMAGE-DOWN|TABLE-SCA",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13294,6 +13426,36 @@
     },
     {
       "category": "model_id",
+      "value": "max-pro",
+      "context": "agent_turnsfull_duplextokyo nightcode searchpermissions--init-file--html-path--info-path--exec-path--delimiter--max-chars--max-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "module-pro",
       "context": "e\\?|module-pro",
       "hasDormantMarker": false,
@@ -13385,7 +13547,7 @@
     {
       "category": "model_id",
       "value": "mysqltm-pro",
-      "context": "og.toml.exampleCOPYING.regexINSTALL.mysqlLICENSE.mysqltm-pro",
+      "context": "teSystemVerilog.toml.exampleCOPYING.regexINSTALL.mysqlLICENSE.mysqltm-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13445,7 +13607,7 @@
     {
       "category": "model_id",
       "value": "needs-pro",
-      "context": "IS-ATTR-SPAC|MESSAGE-AREA|TITLE-FGCOLO|TITLE-DCOLOR|TITLE-BGCOLO|INSERT-BACKT|CLEAR-SELECT|INPUT-OUTPUT|PROGRESS-SOU|FILE-INFORMA|GRAPHIC-EDGE|MIN-HEIGHT-C|PROGRAM-NAME|PRIVATE-DATA|SERIALIZABLE|MIN-H",
+      "context": "DEFAULT-NOXL|SET-CALLBACK|TABLE-HANDLE|SET-CONTENTS|ERROR-COLUMN|TAB-POSITION|BUFFER-CHARS|MOVE-TO-BOTT|CANCEL-BREAK|MULTIPLE-KEY|SET-GREEN-VA|STOP-PARSING|NEEDS-PRO",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13476,36 +13638,6 @@
       "category": "model_id",
       "value": "new-pro",
       "context": "ject` and `--new-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "next-pro",
-      "context": "ATTR-LIS|DATA-SOURCE|DATA-RELATI|RETURN-VALU|NEXT-TAB-IT|INSERT-BACK|CURSOR-LINE|NEXT-PRO",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15155,7 +15287,7 @@
     {
       "category": "model_id",
       "value": "show-pro",
-      "context": "_double42u - 3u // 39usubtract_uint641 < 1.1 // true1u < 2u // true1u < 23 // true2.1 < 3 // true-2 <= 3 // true1 <= 2u // true2 > 1.1 // true2u > 1u // true23u > 1 // true0u > -1 // true3.1 > 3 // tr",
+      "context": "_uint641 < 1.1 // true1u < 2u // true1u < 23 // true2.1 < 3 // true-2 <= 3 // true1 <= 2u // true2 > 1.1 // true2u > 1u // true23u > 1 // true0u > -1 // true3.1 > 3 // true3 >= -2 // true3 >= 2u // tr",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15185,7 +15317,7 @@
     {
       "category": "model_id",
       "value": "sice-lite",
-      "context": "open: %wstat: %w--attach--method--header%s/%s#%dtask_altFinalizefrontierSnapshotoutputs/shots=%dpre_tooldeadlinebalancedholdconn%w: (%s)pranswerrtx_ssrcsendrecvsendonlyrecvonlyinactive%s %d %drtcp-mux",
+      "context": "open: %wstat: %w--attach--method--header%s/%s#%dtask_altFinalizefrontierSnapshotpre_tooldeadlinebalancedholdconn%w: (%s)pranswerrtx_ssrcsendrecvsendonlyrecvonlyinactive%s %d %drtcp-mux%d %s %sice-lite",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15455,7 +15587,7 @@
     {
       "category": "model_id",
       "value": "stored-pro",
-      "context": "VIRTUAL-WIDTH-PI|NUM-SELECTED-WID|DISABLE-AUTO-ZAP|COLUMN-READ-ONLY|COLUMN-RESIZABLE|COLUMN-SCROLLING|GET-TEXT-HEIGHT-|STORED-PRO",
+      "context": "ATE-TEST-FILE|SCROLLBAR-VERTIC|HTML-END-OF-LINE|APPL-ALERT-BOXES|APPSERVER-USERID|VIRTUAL-WIDTH-PI|NUM-SELECTED-WID|DISABLE-AUTO-ZAP|COLUMN-READ-ONLY|COLUMN-RESIZABLE|COLUMN-SCROLLING|GET-TEXT-HEIGHT-",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -16084,36 +16216,6 @@
     },
     {
       "category": "model_id",
-      "value": "sum-max",
-      "context": "UBLIC-ID|SUBSTITUT|ACCUMULAT|LOAD-ICON|PARAMETER|FROM-PIXE|PAGE-WIDT|PAGE-SIZE|WRITE-XML|SCREEN-IO|BATCH-MOD|PAGE-NUMB|OS-APPEND|SUM-MAX",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "suppress-namespace-pro",
       "context": "CESSING|SERVER-CONNECTION-BOUND-REQUEST|SYMMETRIC-ENCRYPTION-ALGORITHM|SUPPRESS-NAMESPACE-PRO",
       "hasDormantMarker": false,
@@ -16444,8 +16546,8 @@
     },
     {
       "category": "model_id",
-      "value": "testingdune-pro",
-      "context": "BlockCommentInvalidTokenfiltered outminiswe_bashminiswe_loopAnalyzing %swith name %qSerializableLinearizable_auto_vacuum_synchronoussqlite_cryptauth_enabledRATE_LIMITEDopacity:0.33display:noneTODO: De",
+      "value": "textrewriteuriflash-lite",
+      "context": "AGENT_LOOPRecordChatjavascripttypescriptdockerfilegit-commitgit-rebasehandlebarsplain textRewriteUriflash-lite",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -16895,7 +16997,37 @@
     {
       "category": "model_id",
       "value": "valways-pro",
-      "context": "https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=%sWarning: Failed to stat shell profile target %s: %v. Skipping.context provider %q is skipped: %q already uses the trigger %qused instead o",
+      "context": "skip failed for %s step %d: %valways-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "valways-pro",
+      "context": "https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=%sWarning: Failed to stat shell profile target %s: %v. Skipping.plugins are unavailable until your organization's policy loadscontext provid",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17195,36 +17327,6 @@
     {
       "category": "model_id",
       "value": "window-mini",
-      "context": "S|ADD-COLUMNS-FROM|DATA-ENTRY-RETUR|SIDE-LABEL-HANDL|START-ROW-RESIZE|LOAD-MOUSE-POINT|FIND-WRAP-AROUND|MAX-HEIGHT-PIXEL|MAX-HEIGHT-CHARS|VALIDATE-MESSAGE|CHARACTER_LENGTH|WINDOW-MINI",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "window-mini",
       "context": "CEDURE|WINDOW-MINI",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -17255,7 +17357,7 @@
     {
       "category": "model_id",
       "value": "window-mini",
-      "context": "IN-WIDTH-CHAR|SELECTION-LIST|BOX-SELECTABLE|CLEAR-SELECTIO|GET-WAIT-STATE|WINDOW-MINI",
+      "context": "IMIZ|SIDE-LABEL-HAN|MIN-WIDTH-PIXE|MAX-WIDTH-CHAR|GRID-FACTOR-VE|BORDER-TOP-PIX|MAX-WIDTH-PIXE|MIN-WIDTH-CHAR|SELECTION-LIST|BOX-SELECTABLE|CLEAR-SELECTIO|GET-WAIT-STATE|WINDOW-MINI",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17705,36 +17807,6 @@
     {
       "category": "experiment",
       "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SINGLE_PROMPT\\\",\\n    \\\"max_token_limit\\\": \\\"128000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n    \\\"max_overhead_ratio\\\": \\\"0.15\\\",",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_CHECKPOINTER",
       "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_UNSPECIFIED\\\",\\n    \\\"max_token_limit\\\": \\\"80000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n    \\\"max_overhead_ratio\\\": \\\"0.15\\\",\\n ",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -17795,7 +17867,7 @@
     {
       "category": "experiment",
       "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY",
+      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_UNSPECIFIED\\\",\\n    \\\"max_token_limit\\\": \\\"160000",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17825,7 +17897,7 @@
     {
       "category": "experiment",
       "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SAME_MODEL\\\",\\n    \\\"max_token_limit",
+      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SAME_MODEL\\\",\\n    \\\"max_token_limit\\\": \\\"256000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17885,7 +17957,7 @@
     {
       "category": "experiment",
       "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SAME_MODEL\\\",\\n    \\\"max_token_limit\\\": \\\"256000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n    \\\"max_overhead_ratio",
+      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SAME_MODEL\\\",\\n    \\\"max_token_limit\\\": \\\"256000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n    \\\"max_overhead_ratio\\\": \\\"0.15\\\",\\n ",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -21905,7 +21977,7 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_AUTOSHARDING_LBecdsa",
-      "context": "ENABLE_AUTOSHARDING_LBecdsa: requested hash function unavailable: MODEL_NATIVE_",
+      "context": "ENABLE_AUTOSHARDING_LBecdsa: requested hash function unavailable: number of return value must be 1 or 2 but %doauth2/google: unable to marshal request: %vbytes,501006184,opt,name=file_vetting_status- ",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -30305,6 +30377,36 @@
     {
       "category": "feature_flag",
       "value": "enable_terminal_sandbox",
+      "context": "Failed to create customization manager to inspect %q: %v%s isn't an object, so no context providers load from it%s isn't declared in \"variables\", so it's passed as is%sunknown field \"httpUrl\" is ignor",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: feature_flag (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: feature_flag",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_terminal_sandbox",
       "context": "enable_terminal_sandbox",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -34624,6 +34726,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "agent_accumulator",
+      "context": "agent_accumulator.go",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "agent_action_diffs",
       "context": "agent_action_diffs",
       "hasDormantMarker": false,
@@ -36725,7 +36857,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_BEHAVIOR_INTERACTIVEtiered",
-      "context": "AGENT_BEHAVIOR_INTERACTIVEtiered model config is nilCONVERSATION_WIDTH_DEFAULTPRODUCT_SKIN_NON_TECHNICALMIGRATION_STATUS_COMPLETEDfailed to fetch archive %qunsupported source type %qsource url %q is n",
+      "context": "AGENT_BEHAVIOR_INTERACTIVEtiered model config is nilCONVERSATION_WIDTH_DEFAULTARTIFACT_WIDTH_UNSPECIFIEDCONTRAST_LEVEL_UNSPECIFIEDPRODUCT_SKIN_NON_TECHNICALMIGRATION_STATUS_COMPLETEDlatest_browser_ste",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -36785,7 +36917,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_BEHAVIOR_MINIMALunknown",
-      "context": "AGENT_BEHAVIOR_MINIMALunknown model tier: %qTHEME_MODE_UNSPECIFIEDPRODUCT_SKIN_DEVELOPERGenerateContent failedduplicate_id_collisionunsupported_url_schemefailed to read archivecontains invalid UTF-8",
+      "context": "AGENT_BEHAVIOR_MINIMALunknown model tier: %qTHEME_MODE_UNSPECIFIEDARTIFACT_WIDTH_DEFAULTCONTRAST_LEVEL_DEFAULTPRODUCT_SKIN_DEVELOPERGenerateContent failedduplicate_id_collisionunsupported_url_schemefa",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37025,6 +37157,36 @@
     {
       "category": "agent_mode",
       "value": "agent_browser_tools",
+      "context": "agent_browser_tools,omitempty\" reflect:\"unexport\"(",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_browser_tools",
       "context": "agent_browser_tools,omitempty\" reflect:\"unexport\"",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -37116,6 +37278,36 @@
       "category": "agent_mode",
       "value": "AGENT_BROWSER_TOOLS_UNSPECIFIED",
       "context": "AGENT_BROWSER_TOOLS_UNSPECIFIED",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_Builtin",
+      "context": "agent_Builtin",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37326,6 +37518,36 @@
       "category": "agent_mode",
       "value": "agent_chat",
       "context": "agent_chat,omitempty",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_CHAT",
+      "context": "```AGENT_CHAT",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37954,6 +38176,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "agent_Config",
+      "context": "agent_Config",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "agent_config_absolute_uri",
       "context": "agent_config_absolute_uri",
       "hasDormantMarker": false,
@@ -38345,7 +38597,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_CONFIGURATIONlisting",
-      "context": "AGENT_CONFIGURATIONlisting the server's plugin installations: %wfile is not valid",
+      "context": "AGENT_CONFIGURATIONlisting the ser",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -39245,7 +39497,7 @@
     {
       "category": "agent_mode",
       "value": "agent_detailKeySubagentKillremote",
-      "context": "agent_detailKeySubagentKillremote settingsNo, deny accessQuota availableQuota exhaustedArtifact ReviewAnimation SpeedQueued Messagesalways proceedsasks for reviewcreating %s: %wgc pause max ms (low th",
+      "context": "agent_detailKeySubagentKillremote settingsNo, deny accessnext/prev matchQuota availableQuota exhaustedArtifact ReviewAnimation SpeedQueued Messagesalways proceedsasks for reviewcreating %s: %wgc pause",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -39546,36 +39798,6 @@
       "category": "agent_mode",
       "value": "agent_efficiency",
       "context": "third_party/jetski/cortex/core/contrib/variants/agent_efficiency/variant.go",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_efficiency_work_efficientlyreduce_",
-      "context": "agent_efficiency_work_efficientlyreduce_",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -39995,7 +40217,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_ENVIRONMENT_UNSPECIFIEDFailed",
-      "context": "AGENT_ENVIRONMENT_UNSPECIFIEDFailed to truncate prompt: %sfailed to parse major versionfailed to parse minor versionfailed to parse patch versionfeatured_cfg:missing_card_id:archive %q returned status",
+      "context": "AGENT_ENVIRONMENT_UNSPECIFIEDFailed to truncate prompt: %sstepcompactor.frame_text_fileStepHeader: step %d not foundfailed to marshal plugin.jsonfeatured_cfg:missing_card_id:archive %q returned status",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54245,7 +54467,7 @@
     {
       "category": "agent_mode",
       "value": "agent_interaction",
-      "context": "m keyring, falling back to file: %vcould not determine model for Gateway request: model name is emptyno model specified; set agent_interaction.antigravity_config.modelfailed to copy global artifact re",
+      "context": ": preserving custom endpoint %q[CLIAuthProvider] UpdateEndpointURL called with CLOUD_CODE_URL: %qKeyring LoadToken timed out after %v, falling back to file storageFailed to load stored token from keyr",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54546,36 +54768,6 @@
       "category": "agent_mode",
       "value": "AGENT_LOOP",
       "context": "AGENT_LOOP",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_LOOPflash",
-      "context": "AGENT_LOOPflash-lite",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -55085,67 +55277,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_MEMORY_REVISION_VIEW_CONTENT_DIFF",
-      "context": "AGENT_MEMORY_REVISION_VIEW_CONTENT_DIFF[ARTIFACT: %s",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_MEMORY_REVISION_VIEW_CONTENT_DIFF",
       "context": "'AGENT_MEMORY_REVISION_VIEW_CONTENT_DIFF",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_MEMORY_REVISION_VIEW_UNSPECIFIED",
-      "context": "AGENT_MEMORY_REVISION_VIEW_UNSPECIFIED--- Cell %s (index %d) Status: %s ---",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -55296,36 +55428,6 @@
       "category": "agent_mode",
       "value": "AGENT_MEMORY_VIEW_BASIC",
       "context": "AGENT_MEMORY_VIEW_BASIC",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_MEMORY_VIEW_BASICTRUST_CLASS_UNSPE",
-      "context": "AGENT_MEMORY_VIEW_BASICTRUST_CLASS_UNSPE",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -55505,7 +55607,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_MEMORY_VIEW_UNSPECIFIEDfailed",
-      "context": "AGENT_MEMORY_VIEW_UNSPECIFIEDfailed to convert step outputmarshal generic result structfailed to create worktree: %wmodel_router_advisor_protocolDocumentOptions.ContentLayers",
+      "context": "AGENT_MEMORY_VIEW_UNSPECIFIEDfailed to create worktree: %wmodel_router_advisor_protocolDocumentOptions.ContentLayers",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61835,6 +61937,36 @@
     {
       "category": "agent_mode",
       "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LlmMonitorConfig).GetTrafficStreamSelfid",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
       "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*AcsvMonitorConfig).Reset",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -64026,126 +64158,6 @@
       "category": "agent_mode",
       "value": "agent_monitoring",
       "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*ToolSafetyConfig).GetAllowedToolPrefixes",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_monitoring",
-      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*ToolSafetyConfig).GetDeniedTools",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_monitoring",
-      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*ToolSafetyConfig).GetDeniedCommandPatterns",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_monitoring",
-      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*ToolSafetyConfig).GetDeniedToolPrefixes",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_monitoring",
-      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*ToolSafetyConfig).GetDeniedGcloudAccountDomains",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -74369,6 +74381,8 @@
     "https://131002.net/siphash/siphash24.c",
     "http://www.netlib.org/fp/",
     "https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=%scontext",
-    "https://cdnjs.cloudflare.com"
+    "https://cdnjs.cloudflare.com",
+    "https://aistudio.google.com/docs/billing#tier-spend-capsduration",
+    "https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=%splugins"
   ]
 }
