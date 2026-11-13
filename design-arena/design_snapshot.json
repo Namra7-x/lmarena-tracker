@@ -243,7 +243,7 @@
     "qwen3-tts": {
       "displayName": "Qwen3 TTS Flash",
       "provider": "alibaba",
-      "active": true,
+      "active": false,
       "openSource": true,
       "router": false,
       "vision": false,
@@ -7839,14 +7839,6 @@
         "video"
       ],
       "arenas": {
-        "models": [
-          "3d",
-          "dataviz",
-          "gamedev",
-          "svg",
-          "uicomponent",
-          "website"
-        ],
         "agents": [
           "agentic_gamedev",
           "agon_dataviz",
@@ -10090,7 +10082,7 @@
     "new-mexico": {
       "displayName": "Ling-3.1-flash",
       "provider": "antgroup",
-      "active": true,
+      "active": false,
       "openSource": true,
       "router": false,
       "vision": false,
@@ -11004,7 +10996,7 @@
     "ideogram-vector-1": {
       "displayName": "Ideogram Vector",
       "provider": "ideogram",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
