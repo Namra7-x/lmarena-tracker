@@ -5502,7 +5502,7 @@
       },
       "facebook/free-range-gaussians": {
         "createdAt": "2026-10-28T17:46:29.000Z",
-        "lastModified": "2026-10-30T17:24:26.000Z",
+        "lastModified": "2026-11-13T17:19:50.000Z",
         "gated": true,
         "pipeline_tag": "image-to-3d",
         "numParameters": null
@@ -22535,7 +22535,7 @@
     "spaces": {
       "nvidia/rfd4-proteina-zerogpu": {
         "createdAt": "2026-10-06T15:33:36.000Z",
-        "lastModified": "2026-11-12T11:15:33.000Z",
+        "lastModified": "2026-11-13T13:56:17.000Z",
         "sdk": null
       },
       "nvidia/simready-central": {
@@ -22922,12 +22922,17 @@
         "createdAt": "2026-06-05T00:50:51.000Z",
         "lastModified": "2026-11-13T06:48:00.000Z",
         "sdk": null
+      },
+      "nvidia/dvlt": {
+        "createdAt": "2026-11-07T11:14:43.000Z",
+        "lastModified": "2026-11-08T09:50:28.000Z",
+        "sdk": null
       }
     },
     "collections": {
       "nvidia/nemotron-labs-dory-6ad144360f3f993c43a2f66d": {
         "title": "Nemotron Labs Dory",
-        "lastUpdated": "2026-10-20T13:09:31.859Z",
+        "lastUpdated": "2026-11-13T08:29:31.311Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16",
@@ -22938,7 +22943,7 @@
       },
       "nvidia/nemotron-35-transcribe-6ae0df1dd041d0ef9f1a69ff": {
         "title": "Nemotron 3.5 Transcribe ",
-        "lastUpdated": "2026-11-05T19:03:26.537Z",
+        "lastUpdated": "2026-11-13T08:29:31.312Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
@@ -22949,7 +22954,7 @@
       },
       "nvidia/cosmos3-69ab2f273c55ae147e43c342": {
         "title": "Cosmos3",
-        "lastUpdated": "2026-10-20T13:09:31.912Z",
+        "lastUpdated": "2026-11-13T08:29:31.502Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos3-Super",
@@ -22960,7 +22965,7 @@
       },
       "nvidia/nemotron-pre-training-datasets-689d9de36f84279d83786b35": {
         "title": "Nemotron-Pre-Training-Datasets",
-        "lastUpdated": "2026-10-30T06:25:42.166Z",
+        "lastUpdated": "2026-11-13T08:29:31.517Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Pretraining-Indic-CC-v1",
@@ -22971,7 +22976,7 @@
       },
       "nvidia/flora-6ad6a8986320a55467825cf5": {
         "title": "Flora",
-        "lastUpdated": "2026-10-20T16:05:12.697Z",
+        "lastUpdated": "2026-11-13T08:29:31.311Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/Flora-Captioner",
@@ -22981,7 +22986,7 @@
       },
       "nvidia/local-ai-optimized-checkpoints-6ad2a5823f5a7563a800ba56": {
         "title": "Local AI Optimized Checkpoints ",
-        "lastUpdated": "2026-10-20T13:09:31.856Z",
+        "lastUpdated": "2026-11-13T08:29:31.307Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/GLM-5.3-Flash-FP4-Local",
@@ -22990,7 +22995,7 @@
       },
       "nvidia/ardy-6a4d8e6b5d083f6eefaf7181": {
         "title": "ARDY",
-        "lastUpdated": "2026-10-21T21:34:37.152Z",
+        "lastUpdated": "2026-11-13T08:29:31.404Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/ARDY-SOMA-RP-30FPS-Horizon60",
@@ -23001,7 +23006,7 @@
       },
       "nvidia/re-use-6a3d20eb15c02e9d78e83297": {
         "title": "RE-USE",
-        "lastUpdated": "2026-10-23T02:44:15.363Z",
+        "lastUpdated": "2026-11-13T08:29:31.409Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Real-time_RE-USE",
@@ -23012,7 +23017,7 @@
       },
       "nvidia/kimodo-v1-69b856b1012570d46787a64b": {
         "title": "Kimodo-v1",
-        "lastUpdated": "2026-10-21T21:34:05.390Z",
+        "lastUpdated": "2026-11-13T08:29:31.499Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Kimodo",
@@ -23023,7 +23028,7 @@
       },
       "nvidia/nemotron-speech-6946215f3183fe85883afff8": {
         "title": "Nemotron Speech",
-        "lastUpdated": "2026-11-05T19:02:36.474Z",
+        "lastUpdated": "2026-11-13T08:29:31.503Z",
         "itemCount": 4,
         "itemIds": [
           "6ae0df1dd041d0ef9f1a69ff",
@@ -23034,7 +23039,7 @@
       },
       "nvidia/nemotron-post-training-datasets-6939b7b93382bac738eebd17": {
         "title": "Nemotron Post-Training Datasets",
-        "lastUpdated": "2026-10-20T13:09:31.915Z",
+        "lastUpdated": "2026-11-13T08:29:31.526Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-RL-Instruction-Following-Structured-Outputs-v2",
@@ -23045,7 +23050,7 @@
       },
       "nvidia/nvidia-nemotron-v3-69388dda16167bb1607171ea": {
         "title": "NVIDIA Nemotron v3",
-        "lastUpdated": "2026-10-23T18:10:48.768Z",
+        "lastUpdated": "2026-11-13T08:29:31.370Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-Base-BF16",
@@ -23056,7 +23061,7 @@
       },
       "nvidia/nemotron-retriever-68f01e412f2dc5a5db5f30ed": {
         "title": "Nemotron Retriever",
-        "lastUpdated": "2026-10-20T13:47:42.613Z",
+        "lastUpdated": "2026-11-13T08:29:31.344Z",
         "itemCount": 4,
         "itemIds": [
           "6ad7600edafb5238011cd717",
@@ -23078,7 +23083,7 @@
       },
       "nvidia/parakeet-asr-659711f49d1469e51546e021": {
         "title": "Parakeet ASR",
-        "lastUpdated": "2026-10-20T13:09:32.103Z",
+        "lastUpdated": "2026-11-13T08:29:31.643Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/parakeet-rnnt-1.1b",
@@ -23089,7 +23094,7 @@
       },
       "nvidia/nemotron-35-retriever-6ad7600edafb5238011cd717": {
         "title": "Nemotron 3.5 Retriever",
-        "lastUpdated": "2026-10-20T13:47:18.258Z",
+        "lastUpdated": "2026-11-13T08:29:31.314Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-3.5-Embed-1B-BF16",
@@ -23111,7 +23116,7 @@
       },
       "nvidia/cosmos3-examples-6a7b2b4c27ed0983ccbd64e4": {
         "title": "Cosmos3-Examples",
-        "lastUpdated": "2026-11-10T05:12:51.730Z",
+        "lastUpdated": "2026-11-13T08:29:31.369Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos3-Nano-Sim-Auto",
@@ -23122,7 +23127,7 @@
       },
       "nvidia/nemotron-code-and-swe-69eab93422e8a265d5b67f08": {
         "title": "Nemotron Code & SWE",
-        "lastUpdated": "2026-10-20T13:09:31.917Z",
+        "lastUpdated": "2026-11-13T08:29:31.476Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-SFT-Competitive-Programming-v2",
@@ -23133,7 +23138,7 @@
       },
       "nvidia/nemotron-math-and-reasoning-69eab92cd443d697062e598c": {
         "title": "Nemotron Math & Reasoning",
-        "lastUpdated": "2026-10-20T13:09:31.909Z",
+        "lastUpdated": "2026-11-13T08:29:31.476Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Math-v2",
@@ -23144,7 +23149,7 @@
       },
       "nvidia/nemotron-ocr-and-object-detection-696a60a6e8359277ca6a86ea": {
         "title": "Nemotron OCR and Object Detection",
-        "lastUpdated": "2026-10-20T13:09:31.908Z",
+        "lastUpdated": "2026-11-13T08:29:31.502Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/nemotron-ocr-v2",
@@ -23155,7 +23160,7 @@
       },
       "nvidia/nemotron-personas-68d550835d13d8028eccc340": {
         "title": "Nemotron-Personas",
-        "lastUpdated": "2026-10-20T16:29:14.251Z",
+        "lastUpdated": "2026-11-13T08:29:31.520Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Personas-USA",
@@ -23177,7 +23182,7 @@
       },
       "nvidia/llama-nemotron-embed-and-rerank-6ad7646fc2ef0bea9155d9b0": {
         "title": "Llama Nemotron Embed & Rerank",
-        "lastUpdated": "2026-10-20T13:09:31.895Z",
+        "lastUpdated": "2026-11-13T08:29:31.467Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/llama-nemotron-embed-1b-v2",
@@ -23188,7 +23193,7 @@
       },
       "nvidia/vomp-6ace8838b808fb60e9b747a0": {
         "title": "VoMP",
-        "lastUpdated": "2026-10-20T13:09:31.860Z",
+        "lastUpdated": "2026-11-13T08:29:31.306Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/PhysicalAI-Robotics-VoMP-Demo",
@@ -23199,7 +23204,7 @@
       },
       "nvidia/ai-for-media-6aa0784a263c9dcc678f3730": {
         "title": "AI for Media",
-        "lastUpdated": "2026-10-20T13:09:31.862Z",
+        "lastUpdated": "2026-11-13T08:29:31.334Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/NVIDIA-NemotronLabs-AI-for-Media-Sports-Tennis",
@@ -23208,7 +23213,7 @@
       },
       "nvidia/nemotron-labs-imo-2026-6a99ba6b551fb0f6ee96adbc": {
         "title": "Nemotron Labs IMO 2026",
-        "lastUpdated": "2026-10-20T13:09:31.863Z",
+        "lastUpdated": "2026-11-13T08:29:31.337Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-3-Labs-Ultra-Math-SFT",
@@ -23219,7 +23224,7 @@
       },
       "nvidia/nvidia-aerial-6a85fcbb92fd6a88037033e2": {
         "title": "NVIDIA Aerial",
-        "lastUpdated": "2026-11-11T01:52:04.737Z",
+        "lastUpdated": "2026-11-13T08:29:31.368Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/aerial-isac-srs-iq",
@@ -23228,7 +23233,7 @@
       },
       "nvidia/video-to-data-6a7d0c3a2c249938d7d22a74": {
         "title": "Video to Data",
-        "lastUpdated": "2026-10-20T13:09:31.864Z",
+        "lastUpdated": "2026-11-13T08:29:31.363Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/video-to-data-robot-dexterity-task-library-and-dataset",
@@ -23239,7 +23244,7 @@
       },
       "nvidia/cosmos3-datasets-6a64c8ee013ecb27fa2295f3": {
         "title": "Cosmos3-Datasets",
-        "lastUpdated": "2026-10-20T13:09:31.872Z",
+        "lastUpdated": "2026-11-13T08:29:31.409Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos3-Driving-Simulation-Evaluation",
@@ -23250,7 +23255,7 @@
       },
       "nvidia/jepa-dna-6a58f4ff298ad79f521ca617": {
         "title": "JEPA-DNA",
-        "lastUpdated": "2026-10-20T13:09:31.874Z",
+        "lastUpdated": "2026-11-13T08:29:31.387Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/NV-JEPA-DNA-DNABERT2",
@@ -23260,7 +23265,7 @@
       },
       "nvidia/nemotron-3-embed-6a505e4790dd5bd7c4183a90": {
         "title": "Nemotron 3 Embed",
-        "lastUpdated": "2026-10-20T13:09:31.875Z",
+        "lastUpdated": "2026-11-13T08:29:31.409Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/Nemotron-3-Embed-1B-NVFP4",
@@ -23270,7 +23275,7 @@
       },
       "nvidia/nemotron-labs-audex-6a4bd62dff80e9c7f8d1146c": {
         "title": "Nemotron-Labs-Audex",
-        "lastUpdated": "2026-10-20T13:09:31.884Z",
+        "lastUpdated": "2026-11-13T08:29:31.399Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Labs-Audex",
@@ -23281,7 +23286,7 @@
       },
       "nvidia/privasis-6a265ff88107326d934f2a52": {
         "title": "Privasis",
-        "lastUpdated": "2026-10-20T13:09:31.892Z",
+        "lastUpdated": "2026-11-13T08:29:31.419Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Privasis-Zero",
@@ -23292,7 +23297,7 @@
       },
       "nvidia/nvidia-omnidreams-6a1df5215b595c508843590c": {
         "title": "NVIDIA OmniDreams",
-        "lastUpdated": "2026-10-20T13:09:31.912Z",
+        "lastUpdated": "2026-11-13T08:29:31.436Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/omni-dreams-models",
@@ -23302,7 +23307,7 @@
       },
       "nvidia/open-swe-collections-6a18d60bb974a76b6911fce0": {
         "title": "Open-SWE-Collections",
-        "lastUpdated": "2026-10-20T13:09:31.897Z",
+        "lastUpdated": "2026-11-13T08:29:31.431Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/Open-SWE-Traces",
@@ -23311,7 +23316,7 @@
       },
       "nvidia/nemotron-labs-elastic-69fe7055c82c1759338e712d": {
         "title": "Nemotron-Labs-Elastic",
-        "lastUpdated": "2026-10-20T13:09:31.906Z",
+        "lastUpdated": "2026-11-13T08:29:31.448Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-Labs-3-Elastic-30B-A3B-NVFP4",
@@ -23321,7 +23326,7 @@
       },
       "nvidia/efficient-dlm-69fe6cd1cd1582fbe01758cd": {
         "title": "Efficient-DLM",
-        "lastUpdated": "2026-10-20T13:09:31.898Z",
+        "lastUpdated": "2026-11-13T08:29:31.461Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/Efficient-DLM-4B",
@@ -23330,7 +23335,7 @@
       },
       "nvidia/anyflow-69f44e7e68511dd66c649ca0": {
         "title": "AnyFlow",
-        "lastUpdated": "2026-10-20T13:09:31.904Z",
+        "lastUpdated": "2026-11-13T08:29:31.462Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/AnyFlow-FAR-Wan2.1-1.3B-Diffusers",
@@ -23341,7 +23346,7 @@
       },
       "nvidia/nemotron-supervised-fine-tuning-69eab9824c9120a3a3b1e25e": {
         "title": "Nemotron Supervised Fine-Tuning",
-        "lastUpdated": "2026-10-20T13:09:31.898Z",
+        "lastUpdated": "2026-11-13T08:29:31.461Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-SFT-Agentic-v2",
@@ -23352,7 +23357,7 @@
       },
       "nvidia/nemotron-vision-language-69eab94536d0e3895514682e": {
         "title": "Nemotron Vision-Language",
-        "lastUpdated": "2026-10-20T13:09:31.908Z",
+        "lastUpdated": "2026-11-13T08:29:31.468Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/Llama-Nemotron-VLM-Dataset-v1",
@@ -23362,7 +23367,7 @@
       },
       "nvidia/nemotron-agentic-and-tool-use-69eab941262bacbd1cf720d5": {
         "title": "Nemotron Agentic & Tool-Use",
-        "lastUpdated": "2026-10-20T13:09:31.923Z",
+        "lastUpdated": "2026-11-13T08:29:31.472Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-SFT-Agentic-v2",
@@ -23373,7 +23378,7 @@
       },
       "nvidia/nemotron-safety-and-content-moderation-69eab93d8fee42bcba96d813": {
         "title": "Nemotron Safety & Content Moderation",
-        "lastUpdated": "2026-10-20T13:09:31.899Z",
+        "lastUpdated": "2026-11-13T08:29:31.475Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-SFT-Safety-v1",
@@ -23384,7 +23389,7 @@
       },
       "nvidia/nemotron-chat-and-instruction-following-69eab9393bd475f6259f42de": {
         "title": "Nemotron Chat & Instruction Following",
-        "lastUpdated": "2026-10-20T13:09:31.904Z",
+        "lastUpdated": "2026-11-13T08:29:31.488Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-SFT-Instruction-Following-Chat-v2",
@@ -23395,7 +23400,7 @@
       },
       "nvidia/nemotron-reward-modeling-69eab9284c9120a3a3b1d67b": {
         "title": "Nemotron Reward Modeling",
-        "lastUpdated": "2026-10-20T13:09:31.934Z",
+        "lastUpdated": "2026-11-13T08:29:31.496Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/HelpSteer",
@@ -23406,7 +23411,7 @@
       },
       "nvidia/swe-zero-to-swe-hero-69e17daecc8fb2e676ddfbca": {
         "title": "swe-zero-to-swe-hero",
-        "lastUpdated": "2026-10-20T13:09:31.903Z",
+        "lastUpdated": "2026-11-13T08:29:31.451Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/SWE-Zero-openhands-trajectories",
@@ -23416,7 +23421,7 @@
       },
       "nvidia/nemotron-labs-twotower-69d99d280ac86247aa5c1a42": {
         "title": "Nemotron-Labs-TwoTower",
-        "lastUpdated": "2026-10-20T13:09:31.903Z",
+        "lastUpdated": "2026-11-13T08:29:31.487Z",
         "itemCount": 1,
         "itemIds": [
           "nvidia/Nemotron-Labs-TwoTower-30B-A3B-Base-BF16"
@@ -23424,7 +23429,7 @@
       },
       "nvidia/nvidia-ising-69d6af997e0be2332a7aa502": {
         "title": "NVIDIA Ising",
-        "lastUpdated": "2026-10-20T13:09:31.928Z",
+        "lastUpdated": "2026-11-13T08:29:31.498Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Ising-Calibration-1.5-31B-BF16",
@@ -23435,7 +23440,7 @@
       },
       "nvidia/nvidia-egm-69ce5e70d69c080943fd0737": {
         "title": "NVIDIA EGM",
-        "lastUpdated": "2026-10-20T13:09:31.919Z",
+        "lastUpdated": "2026-11-13T08:29:31.485Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/EGM-4B",
@@ -23446,7 +23451,7 @@
       },
       "nvidia/pixeldit-69cadf9b031782cfe27c60b0": {
         "title": "PixelDiT",
-        "lastUpdated": "2026-10-20T13:09:31.905Z",
+        "lastUpdated": "2026-11-13T08:29:31.489Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/PixelDiT-1300M-1024px",
@@ -23456,7 +23461,7 @@
       },
       "nvidia/nvpanoptix-3d-69c0cf7a05a4f1fa9458807f": {
         "title": "NvPanoptix-3D",
-        "lastUpdated": "2026-10-20T13:09:31.905Z",
+        "lastUpdated": "2026-11-13T08:29:31.492Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/nvpanoptix-3d-v1.1-front3d",
@@ -23466,7 +23471,7 @@
       },
       "nvidia/nemotron-cascade-2-69bc77e8afee1d8ecb312652": {
         "title": "Nemotron-Cascade 2",
-        "lastUpdated": "2026-10-20T13:09:31.908Z",
+        "lastUpdated": "2026-11-13T08:29:31.496Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Cascade-2-30B-A3B",
@@ -23477,7 +23482,7 @@
       },
       "nvidia/bionemo-design-69b6ed8cf99cb25115b89c61": {
         "title": "BioNeMo - Design",
-        "lastUpdated": "2026-10-20T13:09:31.907Z",
+        "lastUpdated": "2026-11-13T08:29:31.495Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/RFD4-Proteina",
@@ -23488,7 +23493,7 @@
       },
       "nvidia/gr00t-n17-69b046996d177c507de07375": {
         "title": "GR00T-N1.7",
-        "lastUpdated": "2026-10-20T13:09:31.924Z",
+        "lastUpdated": "2026-11-13T08:29:31.501Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/GR00T-N1.7-3B",
@@ -23499,7 +23504,7 @@
       },
       "nvidia/gr00t-n16-69b04580fdd63f8070a67d6c": {
         "title": "GR00T-N1.6",
-        "lastUpdated": "2026-10-20T13:09:31.906Z",
+        "lastUpdated": "2026-11-13T08:29:31.494Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/GR00T-N1.6-3B",
@@ -23510,7 +23515,7 @@
       },
       "nvidia/medtech-open-models-69ad22014dc143297f506915": {
         "title": "MedTech Open Models",
-        "lastUpdated": "2026-10-20T13:09:31.915Z",
+        "lastUpdated": "2026-11-13T08:29:31.499Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/GR00T-H",
@@ -23521,7 +23526,7 @@
       },
       "nvidia/nemotron-terminal-6994e243e413ac89df407838": {
         "title": "Nemotron-Terminal",
-        "lastUpdated": "2026-10-20T13:09:31.915Z",
+        "lastUpdated": "2026-11-13T08:29:31.499Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Terminal-8B",
@@ -23532,7 +23537,7 @@
       },
       "nvidia/nemotron-colembed-v2-696a5ef86bcc1d5a26fe9478": {
         "title": "Nemotron ColEmbed V2",
-        "lastUpdated": "2026-10-20T13:09:31.922Z",
+        "lastUpdated": "2026-11-13T08:29:31.501Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/nemotron-colembed-vl-8b-v2",
@@ -23542,7 +23547,7 @@
       },
       "nvidia/llama-embed-nemotron-8b-6969ff568028fccdc561e02d": {
         "title": "Llama-Embed-Nemotron-8B",
-        "lastUpdated": "2026-10-20T13:09:31.923Z",
+        "lastUpdated": "2026-11-13T08:29:31.524Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/llama-embed-nemotron-8b",
@@ -23552,7 +23557,7 @@
       },
       "nvidia/steering-reasoning-vlas-696713681e70b2a201c25011": {
         "title": "Steering Reasoning VLAs",
-        "lastUpdated": "2026-10-20T13:09:31.920Z",
+        "lastUpdated": "2026-11-13T08:29:31.503Z",
         "itemCount": 2,
         "itemIds": [
           "2510.16281",
@@ -23561,7 +23566,7 @@
       },
       "nvidia/earth-2-69611f0c00600e42ae37a79c": {
         "title": "Earth-2",
-        "lastUpdated": "2026-10-27T16:14:13.037Z",
+        "lastUpdated": "2026-11-13T08:29:31.506Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/stormcast-v1-era5-hrrr",
@@ -23572,7 +23577,7 @@
       },
       "nvidia/nemotron-flash-695d53ec733eb16588de500c": {
         "title": "Nemotron-Flash",
-        "lastUpdated": "2026-10-20T13:09:31.918Z",
+        "lastUpdated": "2026-11-13T08:29:31.509Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Flash-1B",
@@ -23583,7 +23588,7 @@
       },
       "nvidia/cosmos2-695bfd7ae487e36a640025e8": {
         "title": "Cosmos2",
-        "lastUpdated": "2026-10-20T13:09:31.918Z",
+        "lastUpdated": "2026-11-13T08:29:31.511Z",
         "itemCount": 4,
         "itemIds": [
           "68bb63255f2fc206c5e5b346",
@@ -23594,7 +23599,7 @@
       },
       "nvidia/nemotron-v3-pre-training-69401eecd9c3e9aae0c6e7dd": {
         "title": "Nemotron v3 Pre-Training",
-        "lastUpdated": "2026-10-20T13:09:32.128Z",
+        "lastUpdated": "2026-11-13T08:29:31.743Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Pretraining-Dataset-sample",
@@ -23605,7 +23610,7 @@
       },
       "nvidia/cosmos-policy-693cb280b2cbe196d99fdb1f": {
         "title": "Cosmos Policy",
-        "lastUpdated": "2026-10-20T13:09:31.984Z",
+        "lastUpdated": "2026-11-13T08:29:31.511Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/ALOHA-Cosmos-Policy",
@@ -23616,7 +23621,7 @@
       },
       "nvidia/nemotron-cascade-69371e2569dc604a4037853d": {
         "title": "Nemotron-Cascade",
-        "lastUpdated": "2026-10-20T13:09:31.921Z",
+        "lastUpdated": "2026-11-13T08:29:31.513Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Cascade-8B",
@@ -23627,7 +23632,7 @@
       },
       "nvidia/kvzap-692fde07820ca7509dd12b07": {
         "title": "KVzap",
-        "lastUpdated": "2026-10-20T13:09:31.912Z",
+        "lastUpdated": "2026-11-13T08:29:31.536Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/KVzap-mlp-Llama-3.1-8B-Instruct",
@@ -23638,7 +23643,7 @@
       },
       "nvidia/alpamayo-69211e045315109326d23aed": {
         "title": "Alpamayo",
-        "lastUpdated": "2026-10-20T13:09:31.932Z",
+        "lastUpdated": "2026-11-13T08:29:31.513Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Alpamayo-R1-10B",
@@ -23649,7 +23654,7 @@
       },
       "nvidia/nemotron-labs-diffusion-69178a112323ec582be3c7bb": {
         "title": "Nemotron-Labs-Diffusion",
-        "lastUpdated": "2026-10-20T13:09:31.893Z",
+        "lastUpdated": "2026-11-13T08:29:31.444Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Labs-Diffusion-8B",
@@ -23660,7 +23665,7 @@
       },
       "nvidia/physicsnemo-690e45b7a451bbbbaac8bb47": {
         "title": "PhysicsNeMo",
-        "lastUpdated": "2026-10-20T13:09:31.965Z",
+        "lastUpdated": "2026-11-13T08:29:31.522Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/drivaerml-aero-surrogates-demo",
@@ -23671,7 +23676,7 @@
       },
       "nvidia/reward-models-10-2025-6902acacc5e1ae5dd70662c4": {
         "title": "Reward Models 10-2025",
-        "lastUpdated": "2026-10-20T13:09:31.939Z",
+        "lastUpdated": "2026-11-13T08:29:31.517Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Llama-3.3-Nemotron-70B-Reward-Principle",
@@ -23682,7 +23687,7 @@
       },
       "nvidia/chronoedit-6900e149c1bfb7baddd3476d": {
         "title": "ChronoEdit",
-        "lastUpdated": "2026-10-20T13:09:31.934Z",
+        "lastUpdated": "2026-11-13T08:29:31.522Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/ChronoEdit-14B-Diffusers",
@@ -23693,7 +23698,7 @@
       },
       "nvidia/cosmos-drive-dreams-68f5ea17febabd25282767fd": {
         "title": "Cosmos-Drive-Dreams ",
-        "lastUpdated": "2026-10-20T13:09:31.930Z",
+        "lastUpdated": "2026-11-13T08:29:31.521Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos-Transfer2.5-2B",
@@ -23704,7 +23709,7 @@
       },
       "nvidia/bionemo-optimize-68eec357253466270778d163": {
         "title": "BioNeMo - Optimize",
-        "lastUpdated": "2026-10-20T13:09:31.926Z",
+        "lastUpdated": "2026-11-13T08:29:31.542Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NV-ReaSyn-AR-166M-v2",
@@ -23715,7 +23720,7 @@
       },
       "nvidia/bionemo-understand-68eec2dc2b7cbcd3a4602558": {
         "title": "BioNeMo - Understand",
-        "lastUpdated": "2026-10-20T13:09:31.943Z",
+        "lastUpdated": "2026-11-13T08:29:31.522Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NV-CodonFM-Encodon-1B-v1",
@@ -23726,7 +23731,7 @@
       },
       "nvidia/clara-medical-68eeb8b2361bb16ca4ad2fb3": {
         "title": "Clara Medical",
-        "lastUpdated": "2026-10-20T13:09:31.922Z",
+        "lastUpdated": "2026-11-13T08:29:31.518Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NV-Reason-CXR-3B",
@@ -23737,7 +23742,7 @@
       },
       "nvidia/speculative-decoding-modules-68d727fcdc3051419f6b3dc9": {
         "title": "Speculative Decoding Modules",
-        "lastUpdated": "2026-10-20T13:09:31.942Z",
+        "lastUpdated": "2026-11-13T08:29:31.507Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4-DFlash",
@@ -23748,7 +23753,7 @@
       },
       "nvidia/lyra-68d2e01dc524a2015b97ab0e": {
         "title": "Lyra",
-        "lastUpdated": "2026-10-20T13:09:31.911Z",
+        "lastUpdated": "2026-11-13T08:29:31.482Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Lyra-2.0",
@@ -23759,7 +23764,7 @@
       },
       "nvidia/nemo-gym-68d1e0902765fbacc937bb4f": {
         "title": "NeMo Gym",
-        "lastUpdated": "2026-10-20T13:09:31.931Z",
+        "lastUpdated": "2026-11-13T08:29:31.517Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-RL-knowledge-web_search-mcqa",
@@ -23770,7 +23775,7 @@
       },
       "nvidia/cosmos-predict25-68bb63255f2fc206c5e5b346": {
         "title": "Cosmos-Predict2.5",
-        "lastUpdated": "2026-10-20T13:09:31.948Z",
+        "lastUpdated": "2026-11-13T08:29:31.523Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/Cosmos-Predict2.5-2B",
@@ -23779,7 +23784,7 @@
       },
       "nvidia/cosmos-reason2-68aea5fb79df8d1e51dcc250": {
         "title": "Cosmos-Reason2",
-        "lastUpdated": "2026-10-20T13:09:31.932Z",
+        "lastUpdated": "2026-11-13T08:29:31.543Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/Cosmos-Reason2-2B",
@@ -23789,7 +23794,7 @@
       },
       "nvidia/reasoning-efficiency-research-68a8ea0ffe21f3fc46e1da0f": {
         "title": "Reasoning Efficiency Research",
-        "lastUpdated": "2026-10-20T13:09:31.949Z",
+        "lastUpdated": "2026-11-13T08:29:31.524Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/DLER-Llama-Nemotron-8B-Merge-Research",
@@ -23799,7 +23804,7 @@
       },
       "nvidia/nvidia-nemotron-v2-689f6d6e6ead8e77dd641615": {
         "title": "NVIDIA Nemotron V2",
-        "lastUpdated": "2026-10-20T13:09:31.917Z",
+        "lastUpdated": "2026-11-13T08:29:31.519Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-Nano-12B-v2",
@@ -23810,7 +23815,7 @@
       },
       "nvidia/vipe-689a9fb1b7fe5ac5c4a13a26": {
         "title": "ViPE",
-        "lastUpdated": "2026-10-20T13:09:31.939Z",
+        "lastUpdated": "2026-11-13T08:29:31.550Z",
         "itemCount": 4,
         "itemIds": [
           "2508.10934",
@@ -23821,7 +23826,7 @@
       },
       "nvidia/openreasoning-nemotron-687730dae0170059860f1f01": {
         "title": "OpenReasoning-Nemotron",
-        "lastUpdated": "2026-10-20T13:09:31.936Z",
+        "lastUpdated": "2026-11-13T08:29:31.536Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/OpenReasoning-Nemotron-1.5B",
@@ -23832,7 +23837,7 @@
       },
       "nvidia/bionemo-686d3faf75aa1edde8c118d9": {
         "title": "BioNeMo",
-        "lastUpdated": "2026-10-20T13:09:31.929Z",
+        "lastUpdated": "2026-11-13T08:29:31.525Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/esm2_uniref_pretraining_data",
@@ -23843,7 +23848,7 @@
       },
       "nvidia/audio2face-3d-6865d22d6daec4ac85887b17": {
         "title": "Audio2Face-3D",
-        "lastUpdated": "2026-10-20T13:09:31.971Z",
+        "lastUpdated": "2026-11-13T08:29:31.537Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Audio2Face-3D-v3.0",
@@ -23854,7 +23859,7 @@
       },
       "nvidia/cosmos-transfer25-6864569b8acaf966a107bfe3": {
         "title": "Cosmos-Transfer2.5",
-        "lastUpdated": "2026-10-20T13:09:31.951Z",
+        "lastUpdated": "2026-11-13T08:29:31.547Z",
         "itemCount": 1,
         "itemIds": [
           "nvidia/Cosmos-Transfer2.5-2B"
@@ -23862,7 +23867,7 @@
       },
       "nvidia/gen3c-683f3f9540a8f9c98cf46a8d": {
         "title": "GEN3C",
-        "lastUpdated": "2026-10-20T13:09:31.939Z",
+        "lastUpdated": "2026-11-13T08:29:31.530Z",
         "itemCount": 3,
         "itemIds": [
           "nvidia/GEN3C-Cosmos-7B",
@@ -23872,7 +23877,7 @@
       },
       "nvidia/reward-models-06-2025-68377c5955575f71fcc7a2a3": {
         "title": "Reward Models 06-2025",
-        "lastUpdated": "2026-10-20T13:09:31.952Z",
+        "lastUpdated": "2026-11-13T08:29:31.552Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Llama-3_3-Nemotron-Super-49B-GenRM",
@@ -23883,7 +23888,7 @@
       },
       "nvidia/cosmos-embed1-6833be2c9575cb89d6901504": {
         "title": "Cosmos-Embed1",
-        "lastUpdated": "2026-10-20T13:09:32.043Z",
+        "lastUpdated": "2026-11-13T08:29:31.529Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos-Embed1-224p",
@@ -23894,7 +23899,7 @@
       },
       "nvidia/acereason-682f4e1261dc22f697fd1485": {
         "title": "AceReason",
-        "lastUpdated": "2026-10-20T13:09:31.953Z",
+        "lastUpdated": "2026-11-13T08:29:31.533Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/AceReason-Nemotron-14B",
@@ -23905,7 +23910,7 @@
       },
       "nvidia/ps3-scaling-vision-pre-training-to-4k-resolution-682d0535b61c07afd45242e9": {
         "title": "PS3: Scaling Vision Pre-Training to 4K Resolution",
-        "lastUpdated": "2026-10-20T13:09:32.133Z",
+        "lastUpdated": "2026-11-13T08:29:31.736Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/PS3-1.5K-SigLIP2",
@@ -23916,7 +23921,7 @@
       },
       "nvidia/opencodereasoning-ii-68168f37cd7c6beb1e3f92e7": {
         "title": "OpenCodeReasoning-II",
-        "lastUpdated": "2026-10-20T13:09:31.989Z",
+        "lastUpdated": "2026-11-13T08:29:31.548Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/OpenCodeReasoning-2",
@@ -23925,7 +23930,7 @@
       },
       "nvidia/acemath-rl-68096f6200323efc4388067a": {
         "title": "AceMath-RL",
-        "lastUpdated": "2026-10-20T13:09:31.952Z",
+        "lastUpdated": "2026-11-13T08:29:31.534Z",
         "itemCount": 1,
         "itemIds": [
           "nvidia/AceMath-RL-Nemotron-7B"
@@ -23933,7 +23938,7 @@
       },
       "nvidia/describe-anything-680825bb8f5e41ff0785834c": {
         "title": "Describe Anything",
-        "lastUpdated": "2026-10-20T13:09:31.954Z",
+        "lastUpdated": "2026-11-13T08:29:31.531Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/describe-anything-model-demo",
@@ -23944,7 +23949,7 @@
       },
       "nvidia/openmathreasoning-68072c0154a5099573d2e730": {
         "title": "OpenMathReasoning",
-        "lastUpdated": "2026-10-20T13:09:31.982Z",
+        "lastUpdated": "2026-11-13T08:29:31.557Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/OpenMathReasoning",
@@ -23955,7 +23960,7 @@
       },
       "nvidia/cosmos-predict2-68028efc052239369a0f2959": {
         "title": "Cosmos-Predict2",
-        "lastUpdated": "2026-10-20T13:09:31.933Z",
+        "lastUpdated": "2026-11-13T08:29:31.530Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Cosmos-Predict2-0.6B-Text2Image",
@@ -23966,7 +23971,7 @@
       },
       "nvidia/nemotron-h-67fd3d7ca332cdf1eb5a24bb": {
         "title": "Nemotron-H",
-        "lastUpdated": "2026-10-20T13:09:31.958Z",
+        "lastUpdated": "2026-11-13T08:29:31.535Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-H-47B-Reasoning-128K",
@@ -23977,7 +23982,7 @@
       },
       "nvidia/opencodereasoning-67ec462892673a326c0696c1": {
         "title": "OpenCodeReasoning",
-        "lastUpdated": "2026-10-20T13:09:31.937Z",
+        "lastUpdated": "2026-11-13T08:29:31.550Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/OpenCodeReasoning",
@@ -23988,7 +23993,7 @@
       },
       "nvidia/inference-optimized-checkpoints-with-model-optimizer-66aa84f7966b3150262481a4": {
         "title": "Inference Optimized Checkpoints (with Model Optimizer)",
-        "lastUpdated": "2026-11-11T14:44:27.149Z",
+        "lastUpdated": "2026-11-13T08:29:31.446Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4",
@@ -23999,7 +24004,7 @@
       },
       "nvidia/scoring-verifiers-67ec0b680a585d6967015a5f": {
         "title": "Scoring Verifiers",
-        "lastUpdated": "2026-10-20T13:09:31.949Z",
+        "lastUpdated": "2026-11-13T08:29:31.537Z",
         "itemCount": 2,
         "itemIds": [
           "nvidia/Scoring-Verifiers",
