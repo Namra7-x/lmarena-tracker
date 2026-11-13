@@ -1,17 +1,17 @@
 {
   "componentId": "opencode-cli",
-  "version": "2.2.7",
-  "alertedVersion": "2.2.7",
-  "releaseId": "@opencode/cli@2.2.7",
+  "version": "2.3.0",
+  "alertedVersion": "2.3.0",
+  "releaseId": "@opencode/cli@2.3.0",
   "channel": "v2",
-  "identityFingerprint": "dabc9ece6003a9103ee9f634e60675152ad868ec888e1904b8e98cf132abb41d",
+  "identityFingerprint": "e25802bce5c741e16ba666cfeb8178e7c9941682e50107236d16ff0974e870a3",
   "diagnosticFingerprint": null,
-  "scanId": "OC-20261110-001",
+  "scanId": "OC-20261113-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-10T10:33:57.478Z",
+  "lastSuccessfulScan": "2026-11-13T08:55:08.374Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "d38e77aff25263fed6d78ff92e1977274b26e9efbbeefa93d3dcdf99d07658d1",
-  "lastTestAlertVersion": "2.2.7",
+  "lastAlertDigest": "a9ff6ea25903d46d1404271d63906ada44e3d4731aa8d6a9c12e405e0ce20120",
+  "lastTestAlertVersion": "2.3.0",
   "analyzerStatus": {
     "acornAst": "completed",
     "goReSym": "skipped",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 1045,
-    "peakMemoryMb": 26
+    "executionTimeMs": 884,
+    "peakMemoryMb": 18
   },
   "hotSignals": [],
   "recentSignals": [],
@@ -203,7 +203,20 @@
     "\"@opencode/cli-linux-x64\": \"2.2.7\",",
     "\"@opencode/cli-linux-arm64\": \"2.2.7\",",
     "\"@opencode/cli-linux-x64-baseline-musl\": \"2.2.7\",",
-    "\"@opencode/cli-darwin-x64-baseline\": \"2.2.7\""
+    "\"@opencode/cli-darwin-x64-baseline\": \"2.2.7\"",
+    "\"version\": \"2.3.0\",",
+    "\"@opencode/cli-darwin-x64\": \"2.3.0\",",
+    "\"@opencode/cli-darwin-x64-baseline\": \"2.3.0\",",
+    "\"@opencode/cli-linux-x64\": \"2.3.0\",",
+    "\"@opencode/cli-darwin-arm64\": \"2.3.0\",",
+    "\"@opencode/cli-windows-arm64\": \"2.3.0\",",
+    "\"@opencode/cli-windows-x64\": \"2.3.0\",",
+    "\"@opencode/cli-linux-arm64\": \"2.3.0\",",
+    "\"@opencode/cli-linux-x64-musl\": \"2.3.0\",",
+    "\"@opencode/cli-linux-x64-baseline-musl\": \"2.3.0\",",
+    "\"@opencode/cli-windows-x64-baseline\": \"2.3.0\",",
+    "\"@opencode/cli-linux-arm64-musl\": \"2.3.0\",",
+    "\"@opencode/cli-linux-x64-baseline\": \"2.3.0\""
   ],
   "historicalSeenUrls": []
 }
