@@ -5502,7 +5502,7 @@
       },
       "facebook/free-range-gaussians": {
         "createdAt": "2026-10-28T17:46:29.000Z",
-        "lastModified": "2026-11-13T17:19:50.000Z",
+        "lastModified": "2026-11-13T18:14:59.000Z",
         "gated": true,
         "pipeline_tag": "image-to-3d",
         "numParameters": null
@@ -6041,7 +6041,7 @@
       },
       "facebook/pixio-vitl16": {
         "createdAt": "2025-12-15T23:39:02.000Z",
-        "lastModified": "2025-12-26T16:46:47.000Z",
+        "lastModified": null,
         "gated": true,
         "pipeline_tag": "image-feature-extraction",
         "numParameters": null
@@ -8995,7 +8995,7 @@
       },
       "facebook/stereo_crossinjection": {
         "createdAt": "2026-10-28T12:11:58.000Z",
-        "lastModified": "2026-11-03T14:50:44.000Z",
+        "lastModified": "2026-11-15T18:14:49.000Z",
         "gated": true,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
@@ -10461,6 +10461,11 @@
       "mistralai/Voxtral-Mini-Realtime": {
         "createdAt": "2026-02-04T14:59:39.000Z",
         "lastModified": "2026-02-17T18:39:22.000Z",
+        "sdk": null
+      },
+      "mistralai/ml4-cat-vision": {
+        "createdAt": "2026-10-22T21:52:24.000Z",
+        "lastModified": "2026-11-12T16:07:10.000Z",
         "sdk": null
       }
     },
@@ -18540,7 +18545,7 @@
       },
       "microsoft/mage-6a447824394d0ca3ecbead21": {
         "title": "Mage",
-        "lastUpdated": "2026-07-26T06:08:03.205Z",
+        "lastUpdated": "2026-11-14T05:17:44.961Z",
         "itemCount": 2,
         "itemIds": [
           "microsoft/Mage-VL",
@@ -18914,7 +18919,7 @@
       },
       "nvidia/Nemotron-3.5-Parse": {
         "createdAt": "2026-09-03T06:29:29.000Z",
-        "lastModified": "2026-11-06T22:57:31.000Z",
+        "lastModified": "2026-11-14T04:33:01.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -18998,28 +19003,28 @@
       },
       "nvidia/RFD4-Proteina": {
         "createdAt": "2026-10-06T05:00:39.000Z",
-        "lastModified": "2026-10-30T19:47:32.000Z",
+        "lastModified": "2026-11-13T17:59:12.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
       },
       "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-NVFP4": {
         "createdAt": "2026-10-16T18:30:41.000Z",
-        "lastModified": "2026-10-30T16:26:51.000Z",
+        "lastModified": "2026-11-13T17:32:15.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-MXFP8": {
         "createdAt": "2026-10-16T18:26:53.000Z",
-        "lastModified": "2026-10-30T16:26:36.000Z",
+        "lastModified": "2026-11-13T17:32:31.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16": {
         "createdAt": "2026-10-16T18:25:29.000Z",
-        "lastModified": "2026-10-30T16:25:53.000Z",
+        "lastModified": "2026-11-13T17:31:29.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -19159,7 +19164,7 @@
       },
       "nvidia/RFD4-Proteina-Diffusers": {
         "createdAt": "2026-10-15T03:07:08.000Z",
-        "lastModified": "2026-10-20T22:38:21.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -19565,7 +19570,7 @@
       },
       "nvidia/healda-v2": {
         "createdAt": "2026-09-09T16:13:55.000Z",
-        "lastModified": "2026-10-20T22:50:44.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -20258,7 +20263,7 @@
       },
       "nvidia/dvlt": {
         "createdAt": "2026-05-29T19:43:40.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-13T17:26:31.000Z",
         "gated": false,
         "pipeline_tag": "image-to-3d",
         "numParameters": null
@@ -20643,7 +20648,7 @@
       },
       "nvidia/nemotron-labs-audio-visual-flamingo-hf": {
         "createdAt": "2026-04-15T19:00:34.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-15T16:58:20.000Z",
         "gated": false,
         "pipeline_tag": "video-text-to-text",
         "numParameters": null
@@ -22535,7 +22540,7 @@
     "spaces": {
       "nvidia/rfd4-proteina-zerogpu": {
         "createdAt": "2026-10-06T15:33:36.000Z",
-        "lastModified": "2026-11-13T13:56:17.000Z",
+        "lastModified": "2026-11-15T21:34:39.000Z",
         "sdk": null
       },
       "nvidia/simready-central": {
@@ -22925,7 +22930,7 @@
       },
       "nvidia/dvlt": {
         "createdAt": "2026-11-07T11:14:43.000Z",
-        "lastModified": "2026-11-08T09:50:28.000Z",
+        "lastModified": "2026-11-13T22:44:48.000Z",
         "sdk": null
       }
     },
@@ -29181,14 +29186,14 @@
       },
       "LiquidAI/d1-Omni-2B": {
         "createdAt": "2026-10-24T19:30:58.000Z",
-        "lastModified": "2026-11-03T07:42:25.000Z",
+        "lastModified": "2026-11-14T08:49:46.000Z",
         "gated": false,
         "pipeline_tag": "audio-text-to-text",
         "numParameters": null
       },
       "LiquidAI/d1-2B": {
         "createdAt": "2026-10-24T19:30:34.000Z",
-        "lastModified": "2026-11-03T07:42:05.000Z",
+        "lastModified": "2026-11-14T08:49:46.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
