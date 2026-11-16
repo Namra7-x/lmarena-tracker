@@ -8359,23 +8359,6 @@
         ]
       }
     },
-    "qwen-image-3": {
-      "displayName": "Qwen Image 3 Pro",
-      "provider": "alibaba",
-      "active": true,
-      "openSource": false,
-      "router": false,
-      "vision": false,
-      "inputModalities": [],
-      "arenas": {
-        "models": [
-          "graphicdesign",
-          "image",
-          "imagetoimage",
-          "logo"
-        ]
-      }
-    },
     "claude-opus-5": {
       "displayName": "Claude Opus 5",
       "provider": "anthropic",
@@ -13081,9 +13064,6 @@
       "text.input": 0.75,
       "text.output": 3.75,
       "text.cachedInput": 0.075
-    },
-    "qwen-image-3": {
-      "image.perImage": 0.075
     },
     "claude-opus-5": {
       "text.input": 5,
