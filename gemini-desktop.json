@@ -1,30 +1,30 @@
 {
   "componentId": "gemini-desktop",
-  "version": "build-71e6253-6aa1e4d0",
-  "alertedVersion": "build-71e6253-6aa1e4d0",
-  "releaseId": "gemini-desktop-build-71e6253-6aa1e4d0",
+  "version": "build-7104777-05ca0b27",
+  "alertedVersion": "build-7104777-05ca0b27",
+  "releaseId": "gemini-desktop-build-7104777-05ca0b27",
   "channel": "stable",
-  "identityFingerprint": "a2721d7b05b311719e3d8fcd98bfe4eb3b51513037915196f1999fa4c103531f",
+  "identityFingerprint": "4dc676d42ec1c253c6c04d7443ea98c31c29a0ee273d050b88695cfe27947dc1",
   "diagnosticFingerprint": null,
-  "scanId": "GD-20261110-001",
+  "scanId": "GD-20261116-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-10T18:21:18.228Z",
+  "lastSuccessfulScan": "2026-11-16T15:21:12.065Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "3eee8302e5c56c917a466a0df305eb682dd3e091a7a6ea5c4f4568b3e87d566c",
-  "lastTestAlertVersion": "build-71e6253-6aa1e4d0",
+  "lastAlertDigest": "4a1c0838ba0ddd25fc3b1f7065ac95a26edbb3568f64e6096dcab0ab9ea7a4a1",
+  "lastTestAlertVersion": "build-7104777-05ca0b27",
   "analyzerStatus": {
     "acornAst": "skipped",
     "goReSym": "skipped",
     "sourceMap": "skipped",
-    "sevenZip": "skipped",
+    "sevenZip": "completed",
     "asar": "skipped",
     "tar": "skipped",
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 20678,
-    "peakMemoryMb": 19
+    "executionTimeMs": 11767,
+    "peakMemoryMb": 11
   },
   "hotSignals": [],
   "recentSignals": [],
@@ -10030,5 +10030,23 @@
     "..\\..\\third_party\\boringssl\\src\\crypto\\evp\\evp_ctx.cc",
     "..\\..\\mojo\\public\\cpp\\bindings\\connection_group_ref.cc"
   ],
-  "historicalSeenUrls": []
+  "historicalSeenUrls": [
+    "http://support.google.com/installer/",
+    "https://clients2.google.com/cr/report",
+    "https://dl.google.com/update2/installers/icons/",
+    "https://play.googleapis.com/log",
+    "https://crashpad.chromium.org/",
+    "https://crashpad.chromium.org/bug/new",
+    "http://www.years",
+    "http://www.interpretation",
+    "https://www.recent",
+    "http://www.wencodeURIComponent",
+    "http://www.icon",
+    "http://www.hortcut",
+    "http://www.text",
+    "http://www.style",
+    "http://www.language",
+    "http://ocsp.digicert.com",
+    "http://www.digicert.com/CPS0"
+  ]
 }
