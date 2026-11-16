@@ -10815,7 +10815,7 @@
       },
       "google/diffusiongemma-26B-A4B-it": {
         "createdAt": "2026-06-09T12:40:12.000Z",
-        "lastModified": "2026-07-15T16:35:45.000Z",
+        "lastModified": "2026-11-16T10:03:36.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -19150,7 +19150,7 @@
       },
       "nvidia/RFD4-Proteina-prep": {
         "createdAt": "2026-10-15T15:57:21.000Z",
-        "lastModified": "2026-10-20T22:55:24.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -19416,7 +19416,7 @@
       },
       "nvidia/Nemotron-3.5-Embed-1B-NVFP4": {
         "createdAt": "2026-10-07T15:16:20.000Z",
-        "lastModified": "2026-10-21T10:48:29.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "visual-document-retrieval",
         "numParameters": null
@@ -22535,17 +22535,31 @@
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-3B-instruct": {
+        "createdAt": "2026-10-05T02:23:42.000Z",
+        "lastModified": "2026-11-16T17:01:40.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-3B": {
+        "createdAt": "2026-10-05T02:22:52.000Z",
+        "lastModified": "2026-11-16T17:01:19.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
       }
     },
     "spaces": {
       "nvidia/rfd4-proteina-zerogpu": {
         "createdAt": "2026-10-06T15:33:36.000Z",
-        "lastModified": "2026-11-15T21:34:39.000Z",
+        "lastModified": "2026-11-16T11:43:56.000Z",
         "sdk": null
       },
       "nvidia/simready-central": {
         "createdAt": "2026-09-28T14:52:11.000Z",
-        "lastModified": "2026-11-12T22:24:41.000Z",
+        "lastModified": "2026-11-16T13:40:25.000Z",
         "sdk": null
       },
       "nvidia/AlpasimE2EClosedLoopChallenge2026": {
@@ -25981,7 +25995,7 @@
       },
       "MiniMaxAI/MiniMax-H3-Image": {
         "createdAt": "2026-11-03T06:34:36.000Z",
-        "lastModified": "2026-11-12T01:52:59.000Z",
+        "lastModified": "2026-11-16T10:00:08.000Z",
         "gated": false,
         "pipeline_tag": "text-to-image",
         "numParameters": null
@@ -28551,7 +28565,7 @@
       },
       "baidu/Unlimited-OCR-2": {
         "createdAt": "2026-10-26T03:57:46.000Z",
-        "lastModified": "2026-11-02T06:55:38.000Z",
+        "lastModified": "2026-11-16T05:30:59.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
