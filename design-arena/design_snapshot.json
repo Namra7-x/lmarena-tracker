@@ -11106,8 +11106,27 @@
         "text"
       ],
       "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
         "agents": [
-          "agon_slides"
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
         ]
       }
     },
@@ -11714,7 +11733,6 @@
     "pacheights": "pacheights",
     "calfhollow": "calfhollow",
     "utah": "utah",
-    "washington": "washington",
     "alabama": "alabama",
     "montana": "montana",
     "arizona": "arizona",
@@ -13579,6 +13597,11 @@
       "text.input": 0.1,
       "text.output": 0.5,
       "text.cachedInput": 0.004
+    },
+    "washington": {
+      "text.input": 1.5,
+      "text.output": 4.5,
+      "text.cachedInput": 0.075
     },
     "hy4": {
       "text.input": 0.834,
