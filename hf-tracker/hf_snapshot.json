@@ -19157,7 +19157,7 @@
       },
       "nvidia/Nemotron-3.5-Rerank-8B-BF16": {
         "createdAt": "2026-10-15T08:42:42.000Z",
-        "lastModified": "2026-10-21T11:00:51.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-ranking",
         "numParameters": null
@@ -19178,7 +19178,7 @@
       },
       "nvidia/GR00T-N1.7-AppleToPlate-cosine40k-checkpoint-15000": {
         "createdAt": "2026-10-13T20:23:12.000Z",
-        "lastModified": "2026-10-22T13:29:57.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -19234,14 +19234,14 @@
       },
       "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16": {
         "createdAt": "2026-10-12T15:32:06.000Z",
-        "lastModified": "2026-10-22T17:24:14.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
       },
       "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-Base-BF16": {
         "createdAt": "2026-10-12T15:31:49.000Z",
-        "lastModified": "2026-10-22T17:24:12.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -19423,14 +19423,14 @@
       },
       "nvidia/Nemotron-3.5-Embed-8B-BF16": {
         "createdAt": "2026-10-07T13:12:32.000Z",
-        "lastModified": "2026-10-21T10:52:40.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "visual-document-retrieval",
         "numParameters": null
       },
       "nvidia/Nemotron-3.5-Embed-1B-BF16": {
         "createdAt": "2026-10-07T10:46:18.000Z",
-        "lastModified": "2026-10-21T11:02:23.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "visual-document-retrieval",
         "numParameters": null
@@ -19626,7 +19626,7 @@
       },
       "nvidia/NVIDIA-NemotronLabs-RE-USE-laughter": {
         "createdAt": "2026-09-01T07:42:16.000Z",
-        "lastModified": "2026-10-22T21:41:07.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "audio-to-audio",
         "numParameters": null
@@ -19794,7 +19794,7 @@
       },
       "nvidia/NVIDIA-NemotronLabs-RE-USE": {
         "createdAt": "2026-07-22T12:52:19.000Z",
-        "lastModified": "2026-10-22T21:41:39.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "audio-to-audio",
         "numParameters": null
@@ -20214,7 +20214,7 @@
       },
       "nvidia/ArtiFixer": {
         "createdAt": "2026-06-04T06:03:25.000Z",
-        "lastModified": "2026-10-22T07:11:58.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -20473,14 +20473,14 @@
       },
       "nvidia/Wan2.2-T2V-A14B-Diffusers-FP8": {
         "createdAt": "2026-05-13T07:48:25.000Z",
-        "lastModified": "2026-10-23T00:43:15.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-to-video",
         "numParameters": null
       },
       "nvidia/Wan2.2-T2V-A14B-Diffusers-NVFP4": {
         "createdAt": "2026-05-13T07:46:03.000Z",
-        "lastModified": "2026-10-23T00:42:57.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-to-video",
         "numParameters": null
@@ -20956,7 +20956,7 @@
       },
       "nvidia/RE-USE": {
         "createdAt": "2026-03-17T07:15:50.000Z",
-        "lastModified": "2026-10-23T02:48:35.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "audio-to-audio",
         "numParameters": null
@@ -22549,6 +22549,90 @@
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-spec-3B": {
+        "createdAt": "2026-11-09T21:55:08.000Z",
+        "lastModified": "2026-11-12T20:59:58.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-8B-nfe16": {
+        "createdAt": "2026-11-09T06:36:32.000Z",
+        "lastModified": "2026-11-12T20:59:57.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-8B-nfe8": {
+        "createdAt": "2026-11-09T05:56:33.000Z",
+        "lastModified": "2026-11-12T20:59:55.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-8B-nfe4": {
+        "createdAt": "2026-11-09T05:47:59.000Z",
+        "lastModified": "2026-11-12T20:59:53.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-8B-nfe2": {
+        "createdAt": "2026-11-09T02:46:21.000Z",
+        "lastModified": "2026-11-12T20:59:52.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-3B-nfe8": {
+        "createdAt": "2026-11-09T02:18:27.000Z",
+        "lastModified": "2026-11-12T20:59:49.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-spec-8B": {
+        "createdAt": "2026-11-09T01:40:38.000Z",
+        "lastModified": "2026-11-12T21:00:00.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-3B-nfe16": {
+        "createdAt": "2026-11-09T01:36:34.000Z",
+        "lastModified": "2026-11-12T20:59:50.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-3B-nfe4": {
+        "createdAt": "2026-11-09T01:35:53.000Z",
+        "lastModified": "2026-11-12T20:59:48.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-distill-3B-nfe2": {
+        "createdAt": "2026-11-09T01:33:52.000Z",
+        "lastModified": "2026-11-12T20:59:46.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-8B-instruct": {
+        "createdAt": "2026-10-05T02:24:03.000Z",
+        "lastModified": "2026-11-16T17:02:31.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Sigma-8B": {
+        "createdAt": "2026-10-05T02:23:12.000Z",
+        "lastModified": "2026-11-16T17:02:06.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
       }
     },
     "spaces": {
@@ -24028,6 +24112,17 @@
         "itemIds": [
           "nvidia/Scoring-Verifiers",
           "2502.13820"
+        ]
+      },
+      "nvidia/nemotron-labs-sigma-6aed16ae59cfa91daa36c53b": {
+        "title": "Nemotron-Labs-Sigma",
+        "lastUpdated": "2026-11-16T17:32:03.476Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Nemotron-Labs-Sigma-3B",
+          "nvidia/Nemotron-Labs-Sigma-3B-instruct",
+          "nvidia/Nemotron-Labs-Sigma-8B",
+          "nvidia/Nemotron-Labs-Sigma-8B-instruct"
         ]
       }
     }
