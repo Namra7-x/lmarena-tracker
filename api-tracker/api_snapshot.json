@@ -1,7 +1,7 @@
 {
   "totalGroups": 86,
   "totalModels": 188,
-  "lastUpdated": "2026-11-16T09:02:37.127Z",
+  "lastUpdated": "2026-11-16T09:22:38.142Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -30,10 +30,10 @@
       "modelInfo": {
         "contextWindow": 1000000,
         "maxInputTokens": 991808,
-        "maxOutputTokens": 262114,
+        "maxOutputTokens": 131072,
         "maxReasoningTokens": 262144,
         "reasoningMaxInputTokens": 983616,
-        "reasoningMaxOutputTokens": 262114
+        "reasoningMaxOutputTokens": 262144
       },
       "inferenceMetadata": {
         "requestModality": [
@@ -85,8 +85,8 @@
           "maxInputTokens": 991808,
           "maxReasoningTokens": 262144,
           "reasoningMaxInputTokens": 983616,
-          "maxOutputTokens": 262114,
-          "reasoningMaxOutputTokens": 262114
+          "maxOutputTokens": 131072,
+          "reasoningMaxOutputTokens": 262144
         },
         "provider": "qwen",
         "permissions": {
@@ -116,7 +116,7 @@
         "activationStatus": 0,
         "versionTag": "MAJOR",
         "shortDescription": "Qwen4-Max is the next-generation flagship multimodal model in the Qwen family, combining text generation, image and video understanding, and deep reasoning. It is designed for coding, office productivity, frontend design, and complex agentic tasks. With support for web search, tool calling, and structured outputs, along with compatibility with the OpenAI and Anthropic APIs, it enables developers to build intelligent applications capable of multimodal understanding and task execution.",
-        "maxOutputTokens": 262114,
+        "maxOutputTokens": 131072,
         "latestOnlineAt": "2026-11-16T02:00:00.000+00:00",
         "tags": [],
         "license": {},
@@ -8064,7 +8064,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
+            "announceUrl": "https://www.aliyun.com/notice/118728",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -8146,7 +8146,7 @@
         "experienceUpcoming": false,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": true,
+        "deploy": false,
         "sellingByQpm": false
       },
       "rawItem": {
@@ -8198,7 +8198,7 @@
           "experienceUpcoming": false,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": true,
+          "deploy": false,
           "sellingByQpm": false
         },
         "model": "qwen3.5-plus-2026-02-15",
@@ -8222,7 +8222,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
+            "announceUrl": "https://www.aliyun.com/notice/118728",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -8298,19 +8298,15 @@
         "app": false,
         "dpo": false,
         "inference": true,
-        "workflow": false,
         "selfServiceLimitIncrease": true,
         "cpt": false,
         "experience": true,
         "displayQpmLimit": true,
         "deploy": false,
         "sellingByQpm": false,
-        "workflowText": false,
         "experienceV2": false,
         "eval": false,
-        "experienceUpcoming": false,
-        "appV2": false,
-        "appV1": false
+        "experienceUpcoming": false
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -8356,19 +8352,15 @@
           "app": false,
           "dpo": false,
           "inference": true,
-          "workflow": false,
           "selfServiceLimitIncrease": true,
           "cpt": false,
           "experience": true,
           "displayQpmLimit": true,
           "deploy": false,
           "sellingByQpm": false,
-          "workflowText": false,
           "experienceV2": false,
           "eval": false,
-          "experienceUpcoming": false,
-          "appV2": false,
-          "appV1": false
+          "experienceUpcoming": false
         },
         "model": "qwen3.5-flash",
         "serviceSites": [
@@ -10513,116 +10505,6 @@
       },
       "limits": {}
     },
-    "qwen-image-2.0-pro": {
-      "modelId": "qwen-image-2.0-pro",
-      "name": "Qwen-Image-2.0-Pro",
-      "modelAlias": "qwen-image-2.0-pro",
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Visual",
-      "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-      "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-      "updateAt": "2026-04-22T16:00:00.000+00:00",
-      "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
-      "collectionTag": null,
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "IG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image"
-        ],
-        "responseModality": [
-          "Image"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro.md",
-      "supports": {
-        "sft": true,
-        "fineTune": true,
-        "experienceV2": true,
-        "inference": true,
-        "experience": true,
-        "displayQpmLimit": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Image"
-          ],
-          "request_modality": [
-            "Text",
-            "Image"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-04-22T16:00:00.000+00:00",
-        "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-        "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": true,
-          "fineTune": true,
-          "experienceV2": true,
-          "inference": true,
-          "experience": true,
-          "displayQpmLimit": true
-        },
-        "model": "qwen-image-2.0-pro",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "IG"
-        ],
-        "activationStatus": 0,
-        "modelAlias": "qwen-image-2.0-pro",
-        "versionTag": "MAJOR",
-        "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-        "equivalentSnapshot": "qwen-image-2.0-pro-2026-04-22",
-        "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
-        "tags": [],
-        "license": {},
-        "trainingTypes": {
-          "sft": [
-            "lora"
-          ]
-        },
-        "inferenceProvider": "bailian",
-        "name": "Qwen-Image-2.0-Pro",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-        "needApply": false,
-        "category": "Visual"
-      },
-      "pricing": {
-        "Image Generation": "$0.075Per image"
-      },
-      "limits": {}
-    },
     "qwen-image-2.0": {
       "modelId": "qwen-image-2.0",
       "name": "Qwen-Image-2.0",
@@ -10730,6 +10612,116 @@
       },
       "pricing": {
         "Image Generation": "$0.035Per image"
+      },
+      "limits": {}
+    },
+    "qwen-image-2.0-pro": {
+      "modelId": "qwen-image-2.0-pro",
+      "name": "Qwen-Image-2.0-Pro",
+      "modelAlias": "qwen-image-2.0-pro",
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Visual",
+      "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+      "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+      "updateAt": "2026-04-22T16:00:00.000+00:00",
+      "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "IG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Image"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro.md",
+      "supports": {
+        "sft": true,
+        "fineTune": true,
+        "experienceV2": true,
+        "inference": true,
+        "experience": true,
+        "displayQpmLimit": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Image"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-04-22T16:00:00.000+00:00",
+        "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+        "aliyunRecommend": false,
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": true,
+          "fineTune": true,
+          "experienceV2": true,
+          "inference": true,
+          "experience": true,
+          "displayQpmLimit": true
+        },
+        "model": "qwen-image-2.0-pro",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "IG"
+        ],
+        "activationStatus": 0,
+        "modelAlias": "qwen-image-2.0-pro",
+        "versionTag": "MAJOR",
+        "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+        "equivalentSnapshot": "qwen-image-2.0-pro-2026-04-22",
+        "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
+        "tags": [],
+        "license": {},
+        "trainingTypes": {
+          "sft": [
+            "lora"
+          ]
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Image-2.0-Pro",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+        "needApply": false,
+        "category": "Visual"
+      },
+      "pricing": {
+        "Image Generation": "$0.075Per image"
       },
       "limits": {}
     },
