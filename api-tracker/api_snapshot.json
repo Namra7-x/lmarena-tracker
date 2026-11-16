@@ -1,7 +1,7 @@
 {
   "totalGroups": 85,
   "totalModels": 187,
-  "lastUpdated": "2026-11-16T01:55:01.006Z",
+  "lastUpdated": "2026-11-16T08:23:35.777Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -1922,9 +1922,9 @@
         "contextWindow": 262144,
         "maxInputTokens": 245760,
         "maxOutputTokens": 16384,
-        "maxReasoningTokens": 262144,
-        "reasoningMaxInputTokens": 983616,
-        "reasoningMaxOutputTokens": 131072
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
       },
       "inferenceMetadata": {
         "requestModality": [
@@ -1970,10 +1970,7 @@
         "modelInfo": {
           "contextWindow": 262144,
           "maxInputTokens": 245760,
-          "maxReasoningTokens": 262144,
-          "reasoningMaxInputTokens": 983616,
-          "maxOutputTokens": 16384,
-          "reasoningMaxOutputTokens": 131072
+          "maxOutputTokens": 16384
         },
         "provider": "qwen",
         "permissions": {
@@ -2038,9 +2035,9 @@
         "contextWindow": 262144,
         "maxInputTokens": 245760,
         "maxOutputTokens": 16384,
-        "maxReasoningTokens": 2048,
-        "reasoningMaxInputTokens": 245760,
-        "reasoningMaxOutputTokens": 16384
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
       },
       "inferenceMetadata": {
         "requestModality": [
@@ -2087,10 +2084,7 @@
         "modelInfo": {
           "contextWindow": 262144,
           "maxInputTokens": 245760,
-          "maxReasoningTokens": 2048,
-          "reasoningMaxInputTokens": 245760,
-          "maxOutputTokens": 16384,
-          "reasoningMaxOutputTokens": 16384
+          "maxOutputTokens": 16384
         },
         "provider": "qwen",
         "permissions": {
@@ -7910,7 +7904,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
+            "announceUrl": "https://www.aliyun.com/notice/118728",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -8070,7 +8064,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.aliyun.com/notice/118728",
+            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -8304,15 +8298,19 @@
         "app": false,
         "dpo": false,
         "inference": true,
+        "workflow": false,
         "selfServiceLimitIncrease": true,
         "cpt": false,
         "experience": true,
         "displayQpmLimit": true,
         "deploy": false,
         "sellingByQpm": false,
+        "workflowText": false,
         "experienceV2": false,
         "eval": false,
-        "experienceUpcoming": false
+        "experienceUpcoming": false,
+        "appV2": false,
+        "appV1": false
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -8358,15 +8356,19 @@
           "app": false,
           "dpo": false,
           "inference": true,
+          "workflow": false,
           "selfServiceLimitIncrease": true,
           "cpt": false,
           "experience": true,
           "displayQpmLimit": true,
           "deploy": false,
           "sellingByQpm": false,
+          "workflowText": false,
           "experienceV2": false,
           "eval": false,
-          "experienceUpcoming": false
+          "experienceUpcoming": false,
+          "appV2": false,
+          "appV1": false
         },
         "model": "qwen3.5-flash",
         "serviceSites": [
@@ -9137,166 +9139,6 @@
         "RPMRequests Per Minute": "60"
       }
     },
-    "qwen3.5-27b": {
-      "modelId": "qwen3.5-27b",
-      "name": "Qwen3.5-27B",
-      "modelAlias": null,
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Cost-optimized",
-      "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
-      "shortDescription": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
-      "updateAt": "2026-02-23T12:34:42.000+00:00",
-      "latestOnlineAt": "2026-02-23T12:34:42.000+00:00",
-      "collectionTag": "qwen3.5",
-      "features": [
-        "fine-tuning",
-        "function-calling",
-        "model-experience",
-        "prefix-completion",
-        "structured-outputs",
-        "web-search"
-      ],
-      "capabilities": [
-        "Reasoning",
-        "TG",
-        "VU"
-      ],
-      "modelInfo": {
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "maxOutputTokens": 65536,
-        "maxReasoningTokens": 81920,
-        "reasoningMaxInputTokens": 258048,
-        "reasoningMaxOutputTokens": 65536
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image",
-          "Video"
-        ],
-        "responseModality": [
-          "Text"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-27b",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-27b.md",
-      "supports": {
-        "sft": true,
-        "fineTune": true,
-        "app": false,
-        "dpo": false,
-        "inference": true,
-        "cpt": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": true,
-        "sellingByQpm": false,
-        "experienceV2": false,
-        "eval": false,
-        "experienceUpcoming": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Text"
-          ],
-          "request_modality": [
-            "Text",
-            "Image",
-            "Video"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-02-23T12:34:42.000+00:00",
-        "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
-        "aliyunRecommend": false,
-        "collectionTag": "qwen3.5",
-        "features": [
-          "model-experience",
-          "function-calling",
-          "structured-outputs",
-          "web-search",
-          "prefix-completion",
-          "fine-tuning"
-        ],
-        "modelInfo": {
-          "contextWindow": 262144,
-          "maxInputTokens": 260096,
-          "maxReasoningTokens": 81920,
-          "reasoningMaxInputTokens": 258048,
-          "maxOutputTokens": 65536,
-          "reasoningMaxOutputTokens": 65536
-        },
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": true,
-          "fineTune": true,
-          "app": false,
-          "dpo": false,
-          "inference": true,
-          "cpt": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": true,
-          "sellingByQpm": false,
-          "experienceV2": false,
-          "eval": false,
-          "experienceUpcoming": false
-        },
-        "model": "qwen3.5-27b",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "Reasoning",
-          "VU",
-          "TG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "SNAPSHOT",
-        "shortDescription": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
-        "maxOutputTokens": 65536,
-        "latestOnlineAt": "2026-02-23T12:34:42.000+00:00",
-        "tags": [],
-        "license": {},
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "trainingTypes": {
-          "sft": [
-            "lora",
-            "full"
-          ]
-        },
-        "inferenceProvider": "bailian",
-        "name": "Qwen3.5-27B",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-        "needApply": false,
-        "category": "Cost-optimized"
-      },
-      "pricing": {
-        "Input": "$0.3Per 1M tokens",
-        "Output": "$2.4Per 1M tokens"
-      },
-      "limits": {
-        "Max Input": "260K",
-        "Max Output": "65K",
-        "Max Input (Thinking)": "258K",
-        "Max Output (Thinking)": "65K",
-        "Context": "262K",
-        "Max Reasoning": "81K",
-        "TPMTokens Per Minute": "1M",
-        "RPMRequests Per Minute": "600"
-      }
-    },
     "qwen3.5-397b-a17b": {
       "modelId": "qwen3.5-397b-a17b",
       "name": "Qwen3.5-397B-A17B",
@@ -9428,7 +9270,7 @@
         "maxInputTokens": 260096,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
+            "announceUrl": "https://www.aliyun.com/notice/118728",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -9600,6 +9442,166 @@
         "Context": "262K",
         "Max Reasoning": "81K",
         "TPMTokens Per Minute": "5M",
+        "RPMRequests Per Minute": "600"
+      }
+    },
+    "qwen3.5-27b": {
+      "modelId": "qwen3.5-27b",
+      "name": "Qwen3.5-27B",
+      "modelAlias": null,
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Cost-optimized",
+      "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
+      "shortDescription": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
+      "updateAt": "2026-02-23T12:34:42.000+00:00",
+      "latestOnlineAt": "2026-02-23T12:34:42.000+00:00",
+      "collectionTag": "qwen3.5",
+      "features": [
+        "fine-tuning",
+        "function-calling",
+        "model-experience",
+        "prefix-completion",
+        "structured-outputs",
+        "web-search"
+      ],
+      "capabilities": [
+        "Reasoning",
+        "TG",
+        "VU"
+      ],
+      "modelInfo": {
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "maxOutputTokens": 65536,
+        "maxReasoningTokens": 81920,
+        "reasoningMaxInputTokens": 258048,
+        "reasoningMaxOutputTokens": 65536
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image",
+          "Video"
+        ],
+        "responseModality": [
+          "Text"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-27b",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-27b.md",
+      "supports": {
+        "sft": true,
+        "fineTune": true,
+        "app": false,
+        "dpo": false,
+        "inference": true,
+        "cpt": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": true,
+        "sellingByQpm": false,
+        "experienceV2": false,
+        "eval": false,
+        "experienceUpcoming": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text"
+          ],
+          "request_modality": [
+            "Text",
+            "Image",
+            "Video"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-02-23T12:34:42.000+00:00",
+        "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
+        "aliyunRecommend": false,
+        "collectionTag": "qwen3.5",
+        "features": [
+          "model-experience",
+          "function-calling",
+          "structured-outputs",
+          "web-search",
+          "prefix-completion",
+          "fine-tuning"
+        ],
+        "modelInfo": {
+          "contextWindow": 262144,
+          "maxInputTokens": 260096,
+          "maxReasoningTokens": 81920,
+          "reasoningMaxInputTokens": 258048,
+          "maxOutputTokens": 65536,
+          "reasoningMaxOutputTokens": 65536
+        },
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": true,
+          "fineTune": true,
+          "app": false,
+          "dpo": false,
+          "inference": true,
+          "cpt": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": true,
+          "sellingByQpm": false,
+          "experienceV2": false,
+          "eval": false,
+          "experienceUpcoming": false
+        },
+        "model": "qwen3.5-27b",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "Reasoning",
+          "VU",
+          "TG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "SNAPSHOT",
+        "shortDescription": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
+        "maxOutputTokens": 65536,
+        "latestOnlineAt": "2026-02-23T12:34:42.000+00:00",
+        "tags": [],
+        "license": {},
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "trainingTypes": {
+          "sft": [
+            "lora",
+            "full"
+          ]
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen3.5-27B",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+        "needApply": false,
+        "category": "Cost-optimized"
+      },
+      "pricing": {
+        "Input": "$0.3Per 1M tokens",
+        "Output": "$2.4Per 1M tokens"
+      },
+      "limits": {
+        "Max Input": "260K",
+        "Max Output": "65K",
+        "Max Input (Thinking)": "258K",
+        "Max Output (Thinking)": "65K",
+        "Context": "262K",
+        "Max Reasoning": "81K",
+        "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
       }
     },
@@ -10511,116 +10513,6 @@
       },
       "limits": {}
     },
-    "qwen-image-2.0": {
-      "modelId": "qwen-image-2.0",
-      "name": "Qwen-Image-2.0",
-      "modelAlias": "qwen-image-2.0",
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Visual",
-      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-      "updateAt": "2026-03-03T11:31:36.000+00:00",
-      "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
-      "collectionTag": null,
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "IG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image"
-        ],
-        "responseModality": [
-          "Image"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0.md",
-      "supports": {
-        "sft": true,
-        "fineTune": true,
-        "experienceV2": true,
-        "inference": true,
-        "experience": true,
-        "displayQpmLimit": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Image"
-          ],
-          "request_modality": [
-            "Text",
-            "Image"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-03-03T11:31:36.000+00:00",
-        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-        "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": true,
-          "fineTune": true,
-          "experienceV2": true,
-          "inference": true,
-          "experience": true,
-          "displayQpmLimit": true
-        },
-        "model": "qwen-image-2.0",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "IG"
-        ],
-        "activationStatus": 0,
-        "modelAlias": "qwen-image-2.0",
-        "versionTag": "MAJOR",
-        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-        "equivalentSnapshot": "qwen-image-2.0-2026-03-03",
-        "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
-        "tags": [],
-        "license": {},
-        "trainingTypes": {
-          "sft": [
-            "lora"
-          ]
-        },
-        "inferenceProvider": "bailian",
-        "name": "Qwen-Image-2.0",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-        "needApply": false,
-        "category": "Visual"
-      },
-      "pricing": {
-        "Image Generation": "$0.035Per image"
-      },
-      "limits": {}
-    },
     "qwen-image-2.0-pro": {
       "modelId": "qwen-image-2.0-pro",
       "name": "Qwen-Image-2.0-Pro",
@@ -10728,6 +10620,116 @@
       },
       "pricing": {
         "Image Generation": "$0.075Per image"
+      },
+      "limits": {}
+    },
+    "qwen-image-2.0": {
+      "modelId": "qwen-image-2.0",
+      "name": "Qwen-Image-2.0",
+      "modelAlias": "qwen-image-2.0",
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Visual",
+      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+      "updateAt": "2026-03-03T11:31:36.000+00:00",
+      "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "IG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Image"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0.md",
+      "supports": {
+        "sft": true,
+        "fineTune": true,
+        "experienceV2": true,
+        "inference": true,
+        "experience": true,
+        "displayQpmLimit": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Image"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-03-03T11:31:36.000+00:00",
+        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+        "aliyunRecommend": false,
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": true,
+          "fineTune": true,
+          "experienceV2": true,
+          "inference": true,
+          "experience": true,
+          "displayQpmLimit": true
+        },
+        "model": "qwen-image-2.0",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "IG"
+        ],
+        "activationStatus": 0,
+        "modelAlias": "qwen-image-2.0",
+        "versionTag": "MAJOR",
+        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+        "equivalentSnapshot": "qwen-image-2.0-2026-03-03",
+        "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
+        "tags": [],
+        "license": {},
+        "trainingTypes": {
+          "sft": [
+            "lora"
+          ]
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Image-2.0",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+        "needApply": false,
+        "category": "Visual"
+      },
+      "pricing": {
+        "Image Generation": "$0.035Per image"
       },
       "limits": {}
     },
@@ -10847,106 +10849,6 @@
       },
       "limits": {}
     },
-    "qwen-image-2.0-pro-2026-03-03": {
-      "modelId": "qwen-image-2.0-pro-2026-03-03",
-      "name": "Qwen-Image-2.0-Pro-2026-03-03",
-      "modelAlias": "qwen-image-2.0-pro-0303",
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Visual",
-      "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
-      "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
-      "updateAt": "2026-03-03T11:32:19.000+00:00",
-      "latestOnlineAt": "2026-03-03T11:32:19.000+00:00",
-      "collectionTag": null,
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "IG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image"
-        ],
-        "responseModality": [
-          "Image"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro-2026-03-03",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro-2026-03-03.md",
-      "supports": {
-        "experienceV2": false,
-        "inference": true,
-        "experience": true,
-        "displayQpmLimit": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Image"
-          ],
-          "request_modality": [
-            "Text",
-            "Image"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-03-03T11:32:19.000+00:00",
-        "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
-        "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "experienceV2": false,
-          "inference": true,
-          "experience": true,
-          "displayQpmLimit": true
-        },
-        "model": "qwen-image-2.0-pro-2026-03-03",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "IG"
-        ],
-        "activationStatus": 0,
-        "modelAlias": "qwen-image-2.0-pro-0303",
-        "versionTag": "SNAPSHOT",
-        "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
-        "latestOnlineAt": "2026-03-03T11:32:19.000+00:00",
-        "tags": [],
-        "license": {},
-        "inferenceProvider": "bailian",
-        "name": "Qwen-Image-2.0-Pro-2026-03-03",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-        "needApply": false,
-        "category": "Visual"
-      },
-      "pricing": {
-        "Image Generation": "$0.075Per image"
-      },
-      "limits": {}
-    },
     "qwen-image-2.0-pro-2026-04-22": {
       "modelId": "qwen-image-2.0-pro-2026-04-22",
       "name": "Qwen-Image-2.0-Pro-2026-04-22",
@@ -11054,6 +10956,106 @@
         "license": {},
         "inferenceProvider": "bailian",
         "name": "Qwen-Image-2.0-Pro-2026-04-22",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+        "needApply": false,
+        "category": "Visual"
+      },
+      "pricing": {
+        "Image Generation": "$0.075Per image"
+      },
+      "limits": {}
+    },
+    "qwen-image-2.0-pro-2026-03-03": {
+      "modelId": "qwen-image-2.0-pro-2026-03-03",
+      "name": "Qwen-Image-2.0-Pro-2026-03-03",
+      "modelAlias": "qwen-image-2.0-pro-0303",
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Visual",
+      "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
+      "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
+      "updateAt": "2026-03-03T11:32:19.000+00:00",
+      "latestOnlineAt": "2026-03-03T11:32:19.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "IG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Image"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro-2026-03-03",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro-2026-03-03.md",
+      "supports": {
+        "experienceV2": false,
+        "inference": true,
+        "experience": true,
+        "displayQpmLimit": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Image"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-03-03T11:32:19.000+00:00",
+        "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
+        "aliyunRecommend": false,
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "experienceV2": false,
+          "inference": true,
+          "experience": true,
+          "displayQpmLimit": true
+        },
+        "model": "qwen-image-2.0-pro-2026-03-03",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "IG"
+        ],
+        "activationStatus": 0,
+        "modelAlias": "qwen-image-2.0-pro-0303",
+        "versionTag": "SNAPSHOT",
+        "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026.",
+        "latestOnlineAt": "2026-03-03T11:32:19.000+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Image-2.0-Pro-2026-03-03",
         "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
         "needApply": false,
         "category": "Visual"
@@ -12362,130 +12364,6 @@
       },
       "limits": {}
     },
-    "wan2.6-i2v": {
-      "modelId": "wan2.6-i2v",
-      "name": "Wan2.6-I2V",
-      "modelAlias": null,
-      "provider": "wan",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-      "category": "Wan",
-      "description": "Wan2.6-I2V, intelligent shot scheduling enables multi‑camera storytelling, delivers higher‑quality voice generation, supports stable multi‑speaker dialogue with more natural and realistic vocal timbres, and supports generation of clips up to 15 seconds in length.",
-      "shortDescription": "Latest-generation image-to-video model",
-      "updateAt": "2025-12-03T13:03:01.000+00:00",
-      "latestOnlineAt": "2025-12-03T13:03:01.000+00:00",
-      "collectionTag": "wan2.6",
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "VG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Image",
-          "Text",
-          "Audio"
-        ],
-        "responseModality": [
-          "Video",
-          "Audio"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/legacy-image-to-video-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-i2v",
-      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-i2v.md",
-      "supports": {
-        "sft": false,
-        "fineTune": true,
-        "app": false,
-        "dpo": false,
-        "inference": true,
-        "cpt": false,
-        "checkpointImport": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": false,
-        "sellingByQpm": false,
-        "tokenizer": false,
-        "experienceV2": false,
-        "eval": false,
-        "experienceUpcoming": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Video",
-            "Audio"
-          ],
-          "request_modality": [
-            "Image",
-            "Text",
-            "Audio"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2025-12-03T13:03:01.000+00:00",
-        "description": "Wan2.6-I2V, intelligent shot scheduling enables multi‑camera storytelling, delivers higher‑quality voice generation, supports stable multi‑speaker dialogue with more natural and realistic vocal timbres, and supports generation of clips up to 15 seconds in length.",
-        "aliyunRecommend": false,
-        "collectionTag": "wan2.6",
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "wan",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "fineTune": true,
-          "app": false,
-          "dpo": false,
-          "inference": true,
-          "cpt": false,
-          "checkpointImport": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": false,
-          "sellingByQpm": false,
-          "tokenizer": false,
-          "experienceV2": false,
-          "eval": false,
-          "experienceUpcoming": false
-        },
-        "model": "wan2.6-i2v",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "VG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "MAJOR",
-        "shortDescription": "Latest-generation image-to-video model",
-        "latestOnlineAt": "2025-12-03T13:03:01.000+00:00",
-        "tags": [],
-        "license": {},
-        "inferenceProvider": "bailian",
-        "name": "Wan2.6-I2V",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/legacy-image-to-video-api-reference",
-        "needApply": false,
-        "category": "Wan"
-      },
-      "pricing": {},
-      "limits": {}
-    },
     "wan2.6-i2v-flash": {
       "modelId": "wan2.6-i2v-flash",
       "name": "wan2.6-I2V-flash",
@@ -12613,6 +12491,130 @@
         "Video Generation(720P no audio)": "$0.025Per second",
         "Video Generation(1080P no audio)": "$0.0375Per second"
       },
+      "limits": {}
+    },
+    "wan2.6-i2v": {
+      "modelId": "wan2.6-i2v",
+      "name": "Wan2.6-I2V",
+      "modelAlias": null,
+      "provider": "wan",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+      "category": "Wan",
+      "description": "Wan2.6-I2V, intelligent shot scheduling enables multi‑camera storytelling, delivers higher‑quality voice generation, supports stable multi‑speaker dialogue with more natural and realistic vocal timbres, and supports generation of clips up to 15 seconds in length.",
+      "shortDescription": "Latest-generation image-to-video model",
+      "updateAt": "2025-12-03T13:03:01.000+00:00",
+      "latestOnlineAt": "2025-12-03T13:03:01.000+00:00",
+      "collectionTag": "wan2.6",
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "VG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Image",
+          "Text",
+          "Audio"
+        ],
+        "responseModality": [
+          "Video",
+          "Audio"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/legacy-image-to-video-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-i2v",
+      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-i2v.md",
+      "supports": {
+        "sft": false,
+        "fineTune": true,
+        "app": false,
+        "dpo": false,
+        "inference": true,
+        "cpt": false,
+        "checkpointImport": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": false,
+        "sellingByQpm": false,
+        "tokenizer": false,
+        "experienceV2": false,
+        "eval": false,
+        "experienceUpcoming": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Video",
+            "Audio"
+          ],
+          "request_modality": [
+            "Image",
+            "Text",
+            "Audio"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2025-12-03T13:03:01.000+00:00",
+        "description": "Wan2.6-I2V, intelligent shot scheduling enables multi‑camera storytelling, delivers higher‑quality voice generation, supports stable multi‑speaker dialogue with more natural and realistic vocal timbres, and supports generation of clips up to 15 seconds in length.",
+        "aliyunRecommend": false,
+        "collectionTag": "wan2.6",
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "wan",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "fineTune": true,
+          "app": false,
+          "dpo": false,
+          "inference": true,
+          "cpt": false,
+          "checkpointImport": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": false,
+          "sellingByQpm": false,
+          "tokenizer": false,
+          "experienceV2": false,
+          "eval": false,
+          "experienceUpcoming": false
+        },
+        "model": "wan2.6-i2v",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "VG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "Latest-generation image-to-video model",
+        "latestOnlineAt": "2025-12-03T13:03:01.000+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "Wan2.6-I2V",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/legacy-image-to-video-api-reference",
+        "needApply": false,
+        "category": "Wan"
+      },
+      "pricing": {},
       "limits": {}
     },
     "wan2.2-kf2v-flash": {
@@ -13935,6 +13937,129 @@
       },
       "limits": {}
     },
+    "wan2.6-r2v": {
+      "modelId": "wan2.6-r2v",
+      "name": "Wan2.6-R2V",
+      "modelAlias": null,
+      "provider": "wan",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+      "category": "Wan",
+      "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
+      "shortDescription": "New reference-to-video model",
+      "updateAt": "2025-12-15T16:08:49.000+00:00",
+      "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
+      "collectionTag": "wan2.6",
+      "features": [],
+      "capabilities": [
+        "VG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Image",
+          "Video",
+          "Text"
+        ],
+        "responseModality": [
+          "Video",
+          "Audio"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-r2v",
+      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-r2v.md",
+      "supports": {
+        "sft": false,
+        "fineTune": false,
+        "app": false,
+        "dpo": false,
+        "inference": true,
+        "cpt": false,
+        "checkpointImport": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": false,
+        "sellingByQpm": false,
+        "tokenizer": false,
+        "experienceV2": false,
+        "eval": false,
+        "experienceUpcoming": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Video",
+            "Audio"
+          ],
+          "request_modality": [
+            "Image",
+            "Video",
+            "Text"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2025-12-15T16:08:49.000+00:00",
+        "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
+        "aliyunRecommend": false,
+        "collectionTag": "wan2.6",
+        "features": [],
+        "modelInfo": {},
+        "provider": "wan",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "fineTune": false,
+          "app": false,
+          "dpo": false,
+          "inference": true,
+          "cpt": false,
+          "checkpointImport": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": false,
+          "sellingByQpm": false,
+          "tokenizer": false,
+          "experienceV2": false,
+          "eval": false,
+          "experienceUpcoming": false
+        },
+        "model": "wan2.6-r2v",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "VG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "New reference-to-video model",
+        "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "Wan2.6-R2V",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
+        "needApply": false,
+        "category": "Wan"
+      },
+      "pricing": {
+        "Video Generation(720P)": "$0.1Per second",
+        "Video Generation(1080P)": "$0.15Per second"
+      },
+      "limits": {}
+    },
     "wan2.7-r2v": {
       "modelId": "wan2.7-r2v",
       "name": "Wan2.7-R2V",
@@ -14175,129 +14300,6 @@
         "Video Generation(1080P)": "$0.075Per second",
         "Video Generation(720P no audio)": "$0.025Per second",
         "Video Generation(1080P no audio)": "$0.0375Per second"
-      },
-      "limits": {}
-    },
-    "wan2.6-r2v": {
-      "modelId": "wan2.6-r2v",
-      "name": "Wan2.6-R2V",
-      "modelAlias": null,
-      "provider": "wan",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-      "category": "Wan",
-      "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
-      "shortDescription": "New reference-to-video model",
-      "updateAt": "2025-12-15T16:08:49.000+00:00",
-      "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
-      "collectionTag": "wan2.6",
-      "features": [],
-      "capabilities": [
-        "VG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Image",
-          "Video",
-          "Text"
-        ],
-        "responseModality": [
-          "Video",
-          "Audio"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-r2v",
-      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-r2v.md",
-      "supports": {
-        "sft": false,
-        "fineTune": false,
-        "app": false,
-        "dpo": false,
-        "inference": true,
-        "cpt": false,
-        "checkpointImport": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": false,
-        "sellingByQpm": false,
-        "tokenizer": false,
-        "experienceV2": false,
-        "eval": false,
-        "experienceUpcoming": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Video",
-            "Audio"
-          ],
-          "request_modality": [
-            "Image",
-            "Video",
-            "Text"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2025-12-15T16:08:49.000+00:00",
-        "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
-        "aliyunRecommend": false,
-        "collectionTag": "wan2.6",
-        "features": [],
-        "modelInfo": {},
-        "provider": "wan",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "fineTune": false,
-          "app": false,
-          "dpo": false,
-          "inference": true,
-          "cpt": false,
-          "checkpointImport": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": false,
-          "sellingByQpm": false,
-          "tokenizer": false,
-          "experienceV2": false,
-          "eval": false,
-          "experienceUpcoming": false
-        },
-        "model": "wan2.6-r2v",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "VG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "MAJOR",
-        "shortDescription": "New reference-to-video model",
-        "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
-        "tags": [],
-        "license": {},
-        "inferenceProvider": "bailian",
-        "name": "Wan2.6-R2V",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
-        "needApply": false,
-        "category": "Wan"
-      },
-      "pricing": {
-        "Video Generation(720P)": "$0.1Per second",
-        "Video Generation(1080P)": "$0.15Per second"
       },
       "limits": {}
     },
