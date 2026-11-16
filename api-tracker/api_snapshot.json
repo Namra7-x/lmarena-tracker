@@ -1,7 +1,7 @@
 {
-  "totalGroups": 85,
-  "totalModels": 187,
-  "lastUpdated": "2026-11-16T08:23:35.777Z",
+  "totalGroups": 86,
+  "totalModels": 188,
+  "lastUpdated": "2026-11-16T08:47:38.745Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -22370,6 +22370,136 @@
       "pricing": {
         "Video Generation(std)": "$0.1Per second"
       },
+      "limits": {}
+    },
+    "mindlab/macaron-v1.1-coding-venti": {
+      "modelId": "mindlab/macaron-v1.1-coding-venti",
+      "name": "mindlab/macaron-v1.1-coding-venti",
+      "modelAlias": null,
+      "provider": "mindlab",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN01Vb108v1sm7WPhaZ45_!!6000000005808-55-tps-40-40.svg",
+      "category": "Third-party",
+      "description": "Deeply optimized for Coding scenarios, balancing inference speed and code quality to efficiently handle complex development tasks.",
+      "shortDescription": "Deeply optimized for Coding scenarios, balancing inference speed and code quality to efficiently handle complex development tasks.",
+      "updateAt": "2026-10-15T02:22:33.000+00:00",
+      "latestOnlineAt": "2026-10-15T02:22:33.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "cache",
+        "function-calling",
+        "prefix-completion",
+        "structured-outputs"
+      ],
+      "capabilities": [
+        "Reasoning",
+        "TG",
+        "VU"
+      ],
+      "modelInfo": {
+        "contextWindow": 1048576,
+        "maxInputTokens": 1048576,
+        "maxOutputTokens": 131072,
+        "maxReasoningTokens": 131072,
+        "reasoningMaxInputTokens": 1048576,
+        "reasoningMaxOutputTokens": 131072
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Text"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/mindlab",
+      "modelPortalUrl": "https://www.qwencloud.com/models/mindlab/macaron-v1.1-coding-venti",
+      "markdownUrl": "https://www.qwencloud.com/models/mindlab/macaron-v1.1-coding-venti.md",
+      "supports": {
+        "sft": false,
+        "dpo": false,
+        "eval": false,
+        "inference": true,
+        "cpt": false,
+        "experienceUpcoming": false,
+        "experience": false,
+        "displayQpmLimit": true,
+        "deploy": false,
+        "sellingByQpm": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 1,
+        "updateAt": "2026-10-15T02:22:33.000+00:00",
+        "description": "Deeply optimized for Coding scenarios, balancing inference speed and code quality to efficiently handle complex development tasks.",
+        "aliyunRecommend": false,
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "prefix-completion",
+          "cache"
+        ],
+        "modelInfo": {
+          "contextWindow": 1048576,
+          "maxInputTokens": 1048576,
+          "maxReasoningTokens": 131072,
+          "reasoningMaxInputTokens": 1048576,
+          "maxOutputTokens": 131072,
+          "reasoningMaxOutputTokens": 131072
+        },
+        "provider": "mindlab",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "APPLY",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN01Vb108v1sm7WPhaZ45_!!6000000005808-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "dpo": false,
+          "eval": false,
+          "inference": true,
+          "cpt": false,
+          "experienceUpcoming": false,
+          "experience": false,
+          "displayQpmLimit": true,
+          "deploy": false,
+          "sellingByQpm": false
+        },
+        "model": "mindlab/macaron-v1.1-coding-venti",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "TG",
+          "Reasoning",
+          "VU"
+        ],
+        "activationStatus": 1,
+        "modelAlias": "",
+        "versionTag": "MAJOR",
+        "shortDescription": "Deeply optimized for Coding scenarios, balancing inference speed and code quality to efficiently handle complex development tasks.",
+        "maxOutputTokens": 131072,
+        "latestOnlineAt": "2026-10-15T02:22:33.000+00:00",
+        "tags": [],
+        "license": {},
+        "contextWindow": 1048576,
+        "maxInputTokens": 1048576,
+        "inferenceProvider": "mindlab",
+        "name": "mindlab/macaron-v1.1-coding-venti",
+        "needApply": true,
+        "category": "Third-party",
+        "applyStatus": 1
+      },
+      "pricing": {},
       "limits": {}
     },
     "vidu/vidu-image_reference2image": {
