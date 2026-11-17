@@ -1,17 +1,17 @@
 {
   "componentId": "antigravity-cli",
-  "version": "1.5.9",
-  "alertedVersion": "1.5.9",
-  "releaseId": "antigravity-cli@1.5.9",
+  "version": "1.5.10",
+  "alertedVersion": "1.5.10",
+  "releaseId": "antigravity-cli@1.5.10",
   "channel": "stable",
-  "identityFingerprint": "a297d671c0c958412354c40a30c6522736ca86ed7a0d8bc186120c4ca1678615",
+  "identityFingerprint": "0202e745177244b222e8e7c07fe2ddc22dd4bc1b35208ab5494dec59a36095cf",
   "diagnosticFingerprint": null,
-  "scanId": "AC-20261114-001",
+  "scanId": "AC-20261117-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-14T05:41:06.841Z",
+  "lastSuccessfulScan": "2026-11-17T05:42:18.236Z",
   "lastFailureTime": null,
-  "lastAlertDigest": "00027d61ce762bb306df52279652c1ba961ad4ecc9ed64bef7a7ee7e7cf1ab92",
-  "lastTestAlertVersion": "1.5.9",
+  "lastAlertDigest": "9f246f0751b8f1f57378bf3c7d54ea052302e56db63cf3877b79a0daf82a1cb6",
+  "lastTestAlertVersion": "1.5.10",
   "analyzerStatus": {
     "acornAst": "skipped",
     "goReSym": "failed",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "completed"
   },
   "benchmark": {
-    "executionTimeMs": 33035,
-    "peakMemoryMb": 156
+    "executionTimeMs": 27138,
+    "peakMemoryMb": 148
   },
   "hotSignals": [
     {
@@ -314,7 +314,7 @@
     {
       "category": "model_id",
       "value": "gemini-3.1-flash-lite-preview",
-      "context": "googlesql.use_field_defaultsagent: extension unsupportedprotoverifier.mutation_rulesandroid.telemetry.pitot.dispANONYMIZATION_METHOD_UNKNOWNCONFIDENTIALITY_CONFIDENTIALCONFIDENTIALITY_NEED_TO_KNOWIDEN",
+      "context": "gemini-3.1-flash-lite-preview",
       "hasDormantMarker": true,
       "dormantMarker": "preview",
       "activationStatus": "CONFIGURED",
@@ -345,9 +345,7 @@
         }
       ],
       "occurrences": 1,
-      "contexts": [
-        "googlesql.use_field_defaultsagent: extension unsupportedprotoverifier.mutation_rulesandroid.telemetry.pitot.dispANONYMIZATION_METHOD_UNKNOWNCONFIDENTIALITY_CONFIDENTIALCONFIDENTIALITY_NEED_TO_KNOWIDEN"
-      ],
+      "contexts": [],
       "locations": [],
       "platforms": [
         "all"
@@ -431,6 +429,49 @@
       "occurrences": 1,
       "contexts": [
         "gemini-3.1-pro-preview-customtoolsgrpc: message too large (%d bytes)invalid client interceptor type %T(?:^|[^a-z0-9.-])(?:[a-z0-9-]+\\.)*expected an RSA public key, got %TTLS_ECDHE_RSA_WITH_AES_128_CBC"
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-api",
+      "context": "/google.cloud.aiplatform.master.PredictionService/ListMaasModels/google.cloud.aiplatform.master.PredictionService/DeleteResponse/google.internal.cloud.code.v1internal.CloudCode/ListExperimentshttps://",
+      "hasDormantMarker": true,
+      "dormantMarker": "internal",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (internal) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (internal) in context",
+          "points": 15
+        }
+      ],
+      "occurrences": 2,
+      "contexts": [
+        "/google.cloud.aiplatform.master.PredictionService/ListMaasModels/google.cloud.aiplatform.master.PredictionService/DeleteResponse/google.internal.cloud.code.v1internal.CloudCode/ListExperimentshttps://",
+        "gemini-api:/models/snowballGemini for Google 3.1 FlashSetBrowserJsExecutionPolicyAckAgentCoordinationMentionPERMISSION_GRANT_LIST_ALLOWDIFF_TYPE_TMP_SUPERCOMPLETEmarshal protobuf status: %vperformance"
       ],
       "locations": [],
       "platforms": [
@@ -525,7 +566,7 @@
     {
       "category": "model_id",
       "value": "intdeep-research-max-preview-04-2026",
-      "context": "xy-existence.comadvance the read cursor of %q: %wfailed to parse string as big.Intdeep-research-max-preview-04-2026",
+      "context": "xy-existence.comfailed to parse string as big.Intdeep-research-max-preview-04-2026",
       "hasDormantMarker": true,
       "dormantMarker": "preview",
       "activationStatus": "CONFIGURED",
@@ -557,7 +598,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "xy-existence.comadvance the read cursor of %q: %wfailed to parse string as big.Intdeep-research-max-preview-04-2026"
+        "xy-existence.comfailed to parse string as big.Intdeep-research-max-preview-04-2026"
       ],
       "locations": [],
       "platforms": [
@@ -933,6 +974,44 @@
     },
     {
       "category": "model_id",
+      "value": "agent-instruct",
+      "context": "7. RESPECT USER-AUTHORIZED CONFIGURATION UPDATES: When the User Original Intent directs the agent to update infrastructure, authentication, firewall, mail relay, database, container, CI, environment (",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [
+        "7. RESPECT USER-AUTHORIZED CONFIGURATION UPDATES: When the User Original Intent directs the agent to update infrastructure, authentication, firewall, mail relay, database, container, CI, environment ("
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "agy-sobi-pro",
       "context": "agy-sobi-pro",
       "hasDormantMarker": false,
@@ -1048,7 +1127,7 @@
     {
       "category": "model_id",
       "value": "always-pro",
-      "context": "approval before running (`always-pro",
+      "context": "always-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -1074,7 +1153,7 @@
           "points": 25
         }
       ],
-      "occurrences": 4,
+      "occurrences": 5,
       "contexts": [
         "approval before running (`always-pro",
         "- Fixed subagent tasks unexpectedly prompting for tool approval in always-pro",
@@ -1119,6 +1198,42 @@
         "5. **Anti-Pro",
         "1. **Anti-Pro"
       ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "ard-dataw32-selection-exists-pw32-set-clip",
+      "context": "ard-dataw32-selection-exists-pw32-set-clip",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [],
       "locations": [],
       "platforms": [
         "all"
@@ -1352,7 +1467,7 @@
     {
       "category": "model_id",
       "value": "browserresultin-pro",
-      "context": "CONNECTOR_TRIGGER_STATE_FAILEDcrypto/rand: argument to Int is <= 0%w: result is %T, want BrowserResultin-pro",
+      "context": "CONNECTOR_TRIGGER_STATE_FAILEDcrypto/rand: argument to Int is <= 0mcp(chrome_devtools/evaluate_script)%w: result is %T, want BrowserResultin-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -1380,7 +1495,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "CONNECTOR_TRIGGER_STATE_FAILEDcrypto/rand: argument to Int is <= 0%w: result is %T, want BrowserResultin-pro"
+        "CONNECTOR_TRIGGER_STATE_FAILEDcrypto/rand: argument to Int is <= 0mcp(chrome_devtools/evaluate_script)%w: result is %T, want BrowserResultin-pro"
       ],
       "locations": [],
       "platforms": [
@@ -1643,44 +1758,6 @@
       "occurrences": 1,
       "contexts": [
         "mpt-available\\?|struct:exn:fail:contract:blame|procedure-reduce-keyword-arity|struct:wrapped-extra-arg-arrow|continuation-mark-set-&gt;context|struct:exn:fail:syntax:unbound|use-user-specific-search-p"
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "builddemo-pro",
-      "context": "AGENT_PAUSEDax_set_valueROOT_DELETED.env.stagingcitibank.comcoinbase.comdiscover.comfidelity.comhdfcbank.comsquareup.comvanguard.comzellepay.comdashlane.comlastpass.comnordpass.complugins.json/google/",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [
-        "AGENT_PAUSEDax_set_valueROOT_DELETED.env.stagingcitibank.comcoinbase.comdiscover.comfidelity.comhdfcbank.comsquareup.comvanguard.comzellepay.comdashlane.comlastpass.comnordpass.complugins.json/google/"
       ],
       "locations": [],
       "platforms": [
@@ -2140,45 +2217,6 @@
     },
     {
       "category": "model_id",
-      "value": "claude-1",
-      "context": "\"checkpoint-variant\": \"claude-1",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 2,
-      "contexts": [
-        "\"checkpoint-variant\": \"claude-1",
-        "EXPERIMENT_CHECKPOINTER/claude-1"
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "claude-4.5-opusupdates",
       "context": "claude-4.5-opusupdates[%d]: %vTab.BuildPromptganpati-onpiperprintacsessionsquery_snapshotscolumn_metadatabypass_blockoutremove_push_defrole_assignmentJJ_EDITOR=false#!/bin/sh",
       "hasDormantMarker": false,
@@ -2435,44 +2473,6 @@
       "occurrences": 1,
       "contexts": [
         "claude-opus-4-6@default"
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-opus-4-8",
-      "context": "claude-opus-4-8@defaultRenewTriggerCredentialsListPluginInstallationsGetVoiceTrajectoryDebugDeleteVoiceTrajectoriesListEnvironmentSidecarsRunVersionControlActionListAgentRemoteSessionsSetCustomization",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [
-        "claude-opus-4-8@defaultRenewTriggerCredentialsListPluginInstallationsGetVoiceTrajectoryDebugDeleteVoiceTrajectoriesListEnvironmentSidecarsRunVersionControlActionListAgentRemoteSessionsSetCustomization"
       ],
       "locations": [],
       "platforms": [
@@ -2740,7 +2740,7 @@
     {
       "category": "model_id",
       "value": "claude-sonnet-4",
-      "context": "tool_outputsearchDirectoryPermit %s on %sgenerateContent<tool_code>\\s*$claude-sonnet-4",
+      "context": "claude-sonnet-4",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -2768,7 +2768,6 @@
       ],
       "occurrences": 2,
       "contexts": [
-        "tool_outputsearchDirectoryPermit %s on %sgenerateContent<tool_code>\\s*$claude-sonnet-4",
         "claude-sonnet-4@20250514"
       ],
       "locations": [],
@@ -2847,6 +2846,44 @@
       "occurrences": 1,
       "contexts": [
         "claude-sonnet-4-6@defaultvideo/videoframe/jpeg2000application/x-python-code"
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-sonnet-5-5",
+      "context": "Show help for subcommandscontext deadline exceededno hex data for %x stringAgent for the ACP session--is_google3_workspace=%tGemini 4 Hydrogen (XHigh)Gemini 3.8 Flash (Medium)Gemini 3.7 Flash (Medium)",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [
+        "Show help for subcommandscontext deadline exceededno hex data for %x stringAgent for the ACP session--is_google3_workspace=%tGemini 4 Hydrogen (XHigh)Gemini 3.8 Flash (Medium)Gemini 3.7 Flash (Medium)"
       ],
       "locations": [],
       "platforms": [
@@ -3000,7 +3037,7 @@
     {
       "category": "model_id",
       "value": "code-pro",
-      "context": "window: %qcomputer_viewerchat.google.comcorp.google.comdocs.google.comkeep.google.commail.google.commeet.google.com.env.productioncommbank.com.aumerrilledge.comsantander.co.uknot an artifactAuditLogVe",
+      "context": "window: %qcomputer_viewerchat.google.comcorp.google.comdocs.google.comkeep.google.commail.google.commeet.google.com.env.productioncommbank.com.aumerrilledge.comsantander.co.uknot an artifactenter_plan",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -3028,7 +3065,7 @@
       ],
       "occurrences": 5,
       "contexts": [
-        "window: %qcomputer_viewerchat.google.comcorp.google.comdocs.google.comkeep.google.commail.google.commeet.google.com.env.productioncommbank.com.aumerrilledge.comsantander.co.uknot an artifactAuditLogVe",
+        "window: %qcomputer_viewerchat.google.comcorp.google.comdocs.google.comkeep.google.commail.google.commeet.google.com.env.productioncommbank.com.aumerrilledge.comsantander.co.uknot an artifactenter_plan",
         "## Local Code-Pro",
         "## Code-Pro"
       ],
@@ -3423,7 +3460,7 @@
     {
       "category": "model_id",
       "value": "control-pro",
-      "context": "ber of bundle %qjetski-shared-beyond-session-idset up telemetry error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: ",
+      "context": "ode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for mcpretroactive_migration_attemptedremote-control-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -3451,7 +3488,7 @@
       ],
       "occurrences": 1,
       "contexts": [
-        "ber of bundle %qjetski-shared-beyond-session-idset up telemetry error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins:"
+        "ode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for mcpretroactive_migration_attemptedremote-control-pro"
       ],
       "locations": [],
       "platforms": [
@@ -3648,6 +3685,44 @@
     },
     {
       "category": "model_id",
+      "value": "defaultssend-subagent-initial-pro",
+      "context": "d to parse query: %vSERVER_AUTHORIZATION_ENABLED_ASK_TO_USEagent %q is a reserved or built-in namefailed to resolve requirements txt pathCreateCustomizationFile: skipped %s: %vFailed to read workflow ",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ],
+      "occurrences": 1,
+      "contexts": [
+        "d to parse query: %vSERVER_AUTHORIZATION_ENABLED_ASK_TO_USEagent %q is a reserved or built-in namefailed to resolve requirements txt pathCreateCustomizationFile: skipped %s: %vFailed to read workflow"
+      ],
+      "locations": [],
+      "platforms": [
+        "all"
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "delaybackground-clip",
       "context": "lightsteeelbluemediumslatebluemediumturquoisemediumvioletredanimation-delaybackground-clip",
       "hasDormantMarker": false,
@@ -3792,82 +3867,6 @@
       "occurrences": 1,
       "contexts": [
         "DEVICE_BOOTdelete-refsno-pro"
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "dgcp-ge-plus",
-      "context": "gemini-3.1-ultra/.user_uploaded/mock-marketplaceuser@example.commock-terminal-%dgcp-ge-plus-tierTab.RefreshCachetoo many deletedblaze-for-agent",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [
-        "gemini-3.1-ultra/.user_uploaded/mock-marketplaceuser@example.commock-terminal-%dgcp-ge-plus-tierTab.RefreshCachetoo many deletedblaze-for-agent"
-      ],
-      "locations": [],
-      "platforms": [
-        "all"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "direction-pro",
-      "context": "Direction-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ],
-      "occurrences": 1,
-      "contexts": [
-        "Direction-pro"
       ],
       "locations": [],
       "platforms": [
@@ -4117,7 +4116,7 @@
     {
       "category": "model_id",
       "value": "gemini-3.1-flash-lite-preview",
-      "context": "googlesql.use_field_defaultsagent: extension unsupportedprotoverifier.mutation_rulesandroid.telemetry.pitot.dispANONYMIZATION_METHOD_UNKNOWNCONFIDENTIALITY_CONFIDENTIALCONFIDENTIALITY_NEED_TO_KNOWIDEN",
+      "context": "gemini-3.1-flash-lite-preview",
       "hasDormantMarker": true,
       "dormantMarker": "preview",
       "activationStatus": "CONFIGURED",
@@ -4218,6 +4217,40 @@
     },
     {
       "category": "model_id",
+      "value": "gemini-api",
+      "context": "/google.cloud.aiplatform.master.PredictionService/ListMaasModels/google.cloud.aiplatform.master.PredictionService/DeleteResponse/google.internal.cloud.code.v1internal.CloudCode/ListExperimentshttps://",
+      "hasDormantMarker": true,
+      "dormantMarker": "internal",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts); Dormant marker (internal) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        },
+        {
+          "rule": "Dormant marker (internal) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "get-callback-pro",
       "context": "XML-ENTITY-EXPANSION-LIMIT|GET-TYPE-BY-NAMESPACE-NAME|LOGIN-EXPIRATION-TIMESTAMP|DEFINE-USER-EVENT-MANAGER|PERSISTENT-CACHE-DISABLED|SERVER-CONNECTION-CONTEXT|GET-CALLBACK-PRO",
       "hasDormantMarker": true,
@@ -4287,7 +4320,7 @@
     {
       "category": "model_id",
       "value": "intdeep-research-max-preview-04-2026",
-      "context": "xy-existence.comadvance the read cursor of %q: %wfailed to parse string as big.Intdeep-research-max-preview-04-2026",
+      "context": "xy-existence.comfailed to parse string as big.Intdeep-research-max-preview-04-2026",
       "hasDormantMarker": true,
       "dormantMarker": "preview",
       "activationStatus": "CONFIGURED",
@@ -4484,40 +4517,6 @@
         },
         {
           "rule": "Dormant marker (hidden) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "ENABLE_EMAIL_SIGNUPEXPERIMENTAL",
-      "context": "ENABLE_EMAIL_SIGNUPEXPERIMENTAL. Number of open connections.grpc: unmarshalling service config %s: %vmldsa: internal error: unknown parameterstls: internal error: unsupported key (%T)tls: handshake ha",
-      "hasDormantMarker": true,
-      "dormantMarker": "internal",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 55,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: feature_flag (+15 pts); Dormant marker (internal) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: feature_flag",
-          "points": 15
-        },
-        {
-          "rule": "Dormant marker (internal) in context",
           "points": 15
         }
       ]
@@ -5646,10 +5645,10 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_code",
-      "context": "googlesql.use_field_defaultsagent: extension unsupportedprotoverifier.mutation_rulesandroid.telemetry.pitot.dispANONYMIZATION_METHOD_UNKNOWNCONFIDENTIALITY_CONFIDENTIALCONFIDENTIALITY_NEED_TO_KNOWIDEN",
+      "value": "tool_callide",
+      "context": "%d %sin review  posted last postby or to InstMatchInstRune1[:alnum:][:alpha:][:ascii:][:blank:][:cntrl:][:digit:][:graph:][:lower:][:print:][:punct:][:space:][:upper:][:^word:]tool_callide-toolsNotebo",
       "hasDormantMarker": true,
-      "dormantMarker": "preview",
+      "dormantMarker": "alpha",
       "activationStatus": "CONFIGURED",
       "filePath": "",
       "artifactClass": "delta",
@@ -5658,7 +5657,7 @@
       "score": 54,
       "tier": "EARLY SIGNAL",
       "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts); Dormant marker (preview) in context (+15 pts)",
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts); Dormant marker (alpha) in context (+15 pts)",
       "breakdown": [
         {
           "rule": "New in exact diff",
@@ -5673,7 +5672,7 @@
           "points": 14
         },
         {
-          "rule": "Dormant marker (preview) in context",
+          "rule": "Dormant marker (alpha) in context",
           "points": 15
         }
       ]
@@ -5748,6 +5747,40 @@
     },
     {
       "category": "capability",
+      "value": "google_search_result",
+      "context": "- Prefer invoking the target binary directly rather than through wrapper or eval binaries (A JJ share starts on the parent of your working-copy change, so brief it to `jj new <change>` to stack on you",
+      "hasDormantMarker": true,
+      "dormantMarker": "hidden",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: capability (+14 pts); Dormant marker (hidden) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: capability",
+          "points": 14
+        },
+        {
+          "rule": "Dormant marker (hidden) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "capability",
       "value": "search_web",
       "context": "third_party/oneharness/internal/tools/search_web.go",
       "hasDormantMarker": true,
@@ -5773,74 +5806,6 @@
         {
           "rule": "Category: capability",
           "points": 14
-        },
-        {
-          "rule": "Dormant marker (internal) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "vATTRIBUTION_STATUS_NONPERMISSIVEMODEL_PRICING_TYPE_STATIC_CREDITCONTEXT_SNIPPET_TYPE_UNSPECIFIEDARTIFACT_REVIEW_MODE_UNSPECIFIEDCASCADE_WEB_SEARCH_",
-      "context": "nednon-Go code disabled sigaltstackruntime: newstack called from g=runtime: stack split at bad timepanic while printing panic value: day-of-year does not match dayinvalid value for setting %q: %ssync:",
-      "hasDormantMarker": true,
-      "dormantMarker": "disabled",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 54,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: capability (+14 pts); Dormant marker (disabled) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: capability",
-          "points": 14
-        },
-        {
-          "rule": "Dormant marker (disabled) in context",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "ENABLE_EMAIL_SIGNUPEXPERIMENTAL",
-      "context": "ENABLE_EMAIL_SIGNUPEXPERIMENTAL. Number of open connections.grpc: unmarshalling service config %s: %vmldsa: internal error: unknown parameterstls: internal error: unsupported key (%T)tls: handshake ha",
-      "hasDormantMarker": true,
-      "dormantMarker": "internal",
-      "activationStatus": "CONFIGURED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 52,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: env var / plan / entitlement (+12 pts); Dormant marker (internal) in context (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: env var / plan / entitlement",
-          "points": 12
         },
         {
           "rule": "Dormant marker (internal) in context",
@@ -5886,6 +5851,40 @@
       "category": "ui_string",
       "value": "backed by concrete test output on the final diff",
       "context": "a `0`-edit review pass backed by concrete test output on the final diff, your",
+      "hasDormantMarker": true,
+      "dormantMarker": "dark_ui_copy",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 52,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: UI feature string (+12 pts); Dormant marker (dark_ui_copy) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: UI feature string",
+          "points": 12
+        },
+        {
+          "rule": "Dormant marker (dark_ui_copy) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "ui_string",
+      "value": "backed by physical memory",
+      "context": "not been. This metric is the runtime's estimate of free address space that is backed by physical memory.`kill` ends a worker PERMANENTLY and deletes its own workspace, so land its work first (uploaded",
       "hasDormantMarker": true,
       "dormantMarker": "dark_ui_copy",
       "activationStatus": "CONFIGURED",
@@ -6020,8 +6019,8 @@
     },
     {
       "category": "ui_string",
-      "value": "Built on Nov 13 2026 20",
-      "context": "Built on Nov 13 2026 20:30:34 (1794630634)",
+      "value": "Built on Nov 16 2026 19",
+      "context": "Built on Nov 16 2026 19:00:54 (1794884454)",
       "hasDormantMarker": true,
       "dormantMarker": "dark_ui_copy",
       "activationStatus": "CONFIGURED",
@@ -6260,6 +6259,40 @@
       "category": "ui_string",
       "value": "experience with the team.Transition failed",
       "context": "cess language server.keyringAuth: context cancelled, skipping keyring authkeyringAuth: no email claim stored for WIF credentialUse /feedback to share your experience with the team.Transition failed: F",
+      "hasDormantMarker": true,
+      "dormantMarker": "dark_ui_copy",
+      "activationStatus": "CONFIGURED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 52,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: UI feature string (+12 pts); Dormant marker (dark_ui_copy) in context (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: UI feature string",
+          "points": 12
+        },
+        {
+          "rule": "Dormant marker (dark_ui_copy) in context",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "ui_string",
+      "value": "GITRecordSearchRecordMQueryJoinWaitlist",
+      "context": "ad_behaviorOUT_OF_RANGEPDF DocumentMCP ResourceBrowser PageBrowser TextConversation*Viewed %s *Parent AgentListTriggersGetRepoInfosListGobReposGetChangelogListLicensesStartCascadeGetAllSkillsGetMcpPro",
       "hasDormantMarker": true,
       "dormantMarker": "dark_ui_copy",
       "activationStatus": "CONFIGURED",
@@ -6616,6 +6649,36 @@
     },
     {
       "category": "model_id",
+      "value": "agent-instruct",
+      "context": "7. RESPECT USER-AUTHORIZED CONFIGURATION UPDATES: When the User Original Intent directs the agent to update infrastructure, authentication, firewall, mail relay, database, container, CI, environment (",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "agy-sobi-pro",
       "context": "agy-sobi-pro",
       "hasDormantMarker": false,
@@ -6738,6 +6801,36 @@
       "category": "model_id",
       "value": "already-pro",
       "context": "- **Reuse**: `[REUSE] Cited already-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "always-pro",
+      "context": "always-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -6918,6 +7011,36 @@
       "category": "model_id",
       "value": "anti-pro",
       "context": "1. **Anti-Pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "ard-dataw32-selection-exists-pw32-set-clip",
+      "context": "ard-dataw32-selection-exists-pw32-set-clip",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -7157,7 +7280,7 @@
     {
       "category": "model_id",
       "value": "browserresultin-pro",
-      "context": "CONNECTOR_TRIGGER_STATE_FAILEDcrypto/rand: argument to Int is <= 0%w: result is %T, want BrowserResultin-pro",
+      "context": "CONNECTOR_TRIGGER_STATE_FAILEDcrypto/rand: argument to Int is <= 0mcp(chrome_devtools/evaluate_script)%w: result is %T, want BrowserResultin-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -7368,36 +7491,6 @@
       "category": "model_id",
       "value": "build-val-first-pro",
       "context": "mpt-available\\?|struct:exn:fail:contract:blame|procedure-reduce-keyword-arity|struct:wrapped-extra-arg-arrow|continuation-mark-set-&gt;context|struct:exn:fail:syntax:unbound|use-user-specific-search-p",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "builddemo-pro",
-      "context": "AGENT_PAUSEDax_set_valueROOT_DELETED.env.stagingcitibank.comcoinbase.comdiscover.comfidelity.comhdfcbank.comsquareup.comvanguard.comzellepay.comdashlane.comlastpass.comnordpass.complugins.json/google/",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -7876,66 +7969,6 @@
     },
     {
       "category": "model_id",
-      "value": "claude-1",
-      "context": "\"checkpoint-variant\": \"claude-1",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-1",
-      "context": "EXPERIMENT_CHECKPOINTER/claude-1",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "claude-4.5-opusupdates",
       "context": "claude-4.5-opusupdates[%d]: %vTab.BuildPromptganpati-onpiperprintacsessionsquery_snapshotscolumn_metadatabypass_blockoutremove_push_defrole_assignmentJJ_EDITOR=false#!/bin/sh",
       "hasDormantMarker": false,
@@ -8118,36 +8151,6 @@
       "category": "model_id",
       "value": "claude-opus-4-6",
       "context": "claude-opus-4-6@default",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-opus-4-8",
-      "context": "claude-opus-4-8@defaultRenewTriggerCredentialsListPluginInstallationsGetVoiceTrajectoryDebugDeleteVoiceTrajectoriesListEnvironmentSidecarsRunVersionControlActionListAgentRemoteSessionsSetCustomization",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -8387,7 +8390,7 @@
     {
       "category": "model_id",
       "value": "claude-sonnet-4",
-      "context": "tool_outputsearchDirectoryPermit %s on %sgenerateContent<tool_code>\\s*$claude-sonnet-4",
+      "context": "claude-sonnet-4",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -8508,6 +8511,36 @@
       "category": "model_id",
       "value": "claude-sonnet-4-6",
       "context": "claude-sonnet-4-6@defaultvideo/videoframe/jpeg2000application/x-python-code",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-sonnet-5-5",
+      "context": "Show help for subcommandscontext deadline exceededno hex data for %x stringAgent for the ACP session--is_google3_workspace=%tGemini 4 Hydrogen (XHigh)Gemini 3.8 Flash (Medium)Gemini 3.7 Flash (Medium)",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -8657,7 +8690,7 @@
     {
       "category": "model_id",
       "value": "code-pro",
-      "context": "window: %qcomputer_viewerchat.google.comcorp.google.comdocs.google.comkeep.google.commail.google.commeet.google.com.env.productioncommbank.com.aumerrilledge.comsantander.co.uknot an artifactAuditLogVe",
+      "context": "window: %qcomputer_viewerchat.google.comcorp.google.comdocs.google.comkeep.google.commail.google.commeet.google.com.env.productioncommbank.com.aumerrilledge.comsantander.co.uknot an artifactenter_plan",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9197,7 +9230,7 @@
     {
       "category": "model_id",
       "value": "control-pro",
-      "context": "ber of bundle %qjetski-shared-beyond-session-idset up telemetry error reporter[LS] Closed Stream: %s, err: %vdark-launch-aicode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: ",
+      "context": "ode-quota-statusJETSKI_DEV_FORCE_ADMIN_CONTROLSfailed to populate builtins: %vwatch plugin enablement for mcpretroactive_migration_attemptedremote-control-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9348,6 +9381,36 @@
       "category": "model_id",
       "value": "datum-intern-lite",
       "context": "string-normalize-nfd|datum-intern-lite",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "defaultssend-subagent-initial-pro",
+      "context": "d to parse query: %vSERVER_AUTHORIZATION_ENABLED_ASK_TO_USEagent %q is a reserved or built-in namefailed to resolve requirements txt pathCreateCustomizationFile: skipped %s: %vFailed to read workflow ",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9556,38 +9619,8 @@
     },
     {
       "category": "model_id",
-      "value": "disable-teamwork-forced-flash",
-      "context": "\"disable-teamwork-forced-flash-model\": true,",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "dockerenvjson-schemanew-pro",
-      "context": "/?#@\\%protocol: ld #hatypeld #rxhashjneq %s,%djset %s,%dPLAIN_TEXTtail3Statetail2Statetail1Stateu32e0Stateu32edStateSOFT_QUOTAABI_X86_64MINI_TRACE<no-value>\\{[a-z]+\\}PERCENTAGEstringcharNOT_COARSE/.do",
+      "context": "/?#@\\%protocol: ld #hatypeld #rxhashjneq %s,%djset %s,%dPLAIN_TEXTtail3Statetail2Statetail1Stateu32e0Stateu32edStateSOFT_QUOTAVERSION_OFSYMLINK_TOis_taintedABI_X86_64MINI_TRACE<no-value>\\{[a-z]+\\}PERC",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9618,96 +9651,6 @@
       "category": "model_id",
       "value": "elementsimple-condition-format-controlinternal-default-pro",
       "context": "missing field %s for join tableALTER TABLE `%v` RENAME TO `%v`%s: failed to compile rules: %wcould not find <config> elementsimple-condition-format-controlinternal-default-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "enable-plugin-context-pro",
-      "context": "\"enable-plugin-context-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "enable-pro",
-      "context": "\"enable-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "enable-pseudo-pro",
-      "context": "\"enable-pseudo-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -9858,36 +9801,6 @@
       "category": "model_id",
       "value": "event-pro",
       "context": "ADD-CALC-COLUMN|MIN-HEIGHT-PIXE|FULL-WIDTH-PIXE|GRID-FACTOR-HOR|MIN-WIDTH-CHARS|BORDER-RIGHT-CH|CURRENT-ENVIRON|MIN-WIDTH-PIXEL|LIKE-SEQUENTIAL|MOVE-AFTER-TAB-|CURRENT-CHANGED|WRITE-XMLSCHEMA|GET-BINA",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "exists-pw32-set-clip",
-      "context": "exists-pw32-set-clip",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10187,7 +10100,7 @@
     {
       "category": "model_id",
       "value": "foundenable-fork-pro",
-      "context": "MCP_JSsender_window_id_gracedisplayed_conversation^[a-z][a-z0-9_]{0,31}$application/grpc+protoempty outbound messagepayload is %q, want %shello is required (%s)ACTUATOR_NOT_CONNECTEDgzip: invalid chec",
+      "context": "ral-pathspecsload_source_latency_msfailed to parse URI %qcannot end battle modeload_winner_latency_msconversation not foundenable-fork-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10218,6 +10131,36 @@
       "category": "model_id",
       "value": "foundx-forwarded-pro",
       "context": "agent_evalrsi_lean_di_riskymock-plugin-cloudno fixture loaded{\"type\":\"object\"}/summaries-updateRecordRPCMetadatagcp-ge-ultra-tiergcp-standard-tierupdate_trajectorypackage-lock.jsonMODULE.bazel.lock/va",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "frame-total-colsget-pos-pro",
+      "context": "frame-total-colsget-pos-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10397,7 +10340,7 @@
     {
       "category": "model_id",
       "value": "gemini-2.5-flashgrpc.lb.localityconnection",
-      "context": "gemini-2.5-flashgrpc.lb.localityconnection resetDeepInvestigatorfeatured_pluginsTASK_UNSPECIFIEDAPPLICATION_JSONIMAGE_SIZE_ONE_KIMAGE_SIZE_TWO_Kinvalid type: %T\"ALREADY_EXISTS\"DeadlineExceededPermissi",
+      "context": "gemini-2.5-flashgrpc.lb.localityconnection resetswarm_read_boardswarm_board_headswarm_wait_checkswarm_park_guardDeepInvestigatorfeatured_pluginssecret not foundTASK_UNSPECIFIEDAPPLICATION_JSONIMAGE_SI",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10456,8 +10399,8 @@
     },
     {
       "category": "model_id",
-      "value": "gemini-2.5-pro-windsurf-debuglistagentcoordinationmessages",
-      "context": "gemini-2.5-pro-windsurf-debugListAgentCoordinationMessages",
+      "value": "gemini-2.5-pro-windsurf",
+      "context": "gemini-2.5-pro-windsurf",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10486,8 +10429,8 @@
     },
     {
       "category": "model_id",
-      "value": "gemini-2.5-pro-windsurfgenerate_commit_message",
-      "context": "gemini-2.5-pro-windsurfgenerate_commit_message",
+      "value": "gemini-2.5-pro-windsurf-debuglistagentcoordinationmessages",
+      "context": "gemini-2.5-pro-windsurf-debugListAgentCoordinationMessages",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10877,7 +10820,7 @@
     {
       "category": "model_id",
       "value": "gemini-3.5-flash-lite",
-      "context": "ENT=1stdiorpc: %s: empty responseRELEVANCE_REASON_UNSPECIFIEDDESCRIPTION_TYPE_UNSPECIFIEDno handler registered for %sBUDGET_SCOPE_FORWARD_LOOKINGFailed to prune trajectoriesMIGRATION_STATUS_UNSPECIFIE",
+      "context": "RELEVANCE_REASON_UNSPECIFIEDDESCRIPTION_TYPE_UNSPECIFIEDno handler registered for %sBUDGET_SCOPE_FORWARD_LOOKINGFailed to prune trajectoriesMIGRATION_STATUS_UNSPECIFIEDstate store: cannot watch %sno m",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -10907,7 +10850,7 @@
     {
       "category": "model_id",
       "value": "gemini-3.5-flash-lite",
-      "context": "7/train/00000, predicted by gemini_eval with instruction.txt and models/gemini-3.5-flash-lite on 2026-10-2",
+      "context": "7/train/00000: its 639 examples with a non-empty target, predicted with the seeds 7 and 8, and 2,444 of its 7,361 examples with an empty target, predicted with the seed 7; predicted by gemini_eval wit",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -11177,7 +11120,7 @@
     {
       "category": "model_id",
       "value": "gemini-3.7-flash-tieredgrpc.lb.backend_servicelatest",
-      "context": "gemini-3.7-flash-tieredgrpc.lb.backend_servicelatest balancer error: AGY_LLM_GATEWAY_API_KEYAGY_LLM_GATEWAY_HEADERSdelete-generic-passwordRESPONSE_STYLE_BALANCEDRESPONSE_STYLE_CREATIVEHARM_CATEGORY_J",
+      "context": "gemini-3.7-flash-tieredgrpc.lb.backend_servicelatest balancer error: AGY_LLM_GATEWAY_API_KEYAGY_LLM_GATEWAY_HEADERSdelete-generic-passwordRESPONSE_STYLE_BALANCEDRESPONSE_STYLE_CREATIVEHARM_CATEGORY_JA",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -11238,6 +11181,36 @@
       "category": "model_id",
       "value": "gemini-3.8-flash-high",
       "context": "gemini-3.8-flash-high",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-3.8-flash-high",
+      "context": "ords.agentapi new-conversation --model=gemini-3.8-flash-high \"Run a complex refactor\"crypto/rand: blocked for 60 seconds waiting to read random data from the kernel",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -11566,6 +11539,36 @@
     },
     {
       "category": "model_id",
+      "value": "gemini-4-hydrogen",
+      "context": "3; labeled by models/gemini-4-hydrogen",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "gemini-4-hydrogen-high",
       "context": "gemini-4-hydrogen-high",
       "hasDormantMarker": false,
@@ -11687,7 +11690,7 @@
     {
       "category": "model_id",
       "value": "gemini-api",
-      "context": "gemini-api:/models/snowballGemini for Google 3.1 FlashSetBrowserJsExecutionPolicyAckAgentCoordinationMentionPERMISSION_GRANT_LIST_ALLOWDIFF_TYPE_TMP_SUPERCOMPLETEperformance_analyze_insight",
+      "context": "gemini-api:/models/snowballGemini for Google 3.1 FlashSetBrowserJsExecutionPolicyAckAgentCoordinationMentionPERMISSION_GRANT_LIST_ALLOWDIFF_TYPE_TMP_SUPERCOMPLETEmarshal protobuf status: %vperformance",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -11716,8 +11719,8 @@
     },
     {
       "category": "model_id",
-      "value": "gemini-api",
-      "context": "ful for detecting slow cleanups holding up the queue.model name %q does not look like a custom model URL. Expected format: gemini-api://<base_url>/models/<model_name>, blade:<base_url>/models/<model_n",
+      "value": "gemini-api-key",
+      "context": "ication required\" after `agy acp --login` when `settings.json` names an auth method that has no credential (such as `gemini-api-key` without `GEMINI_API_KEY`), because the CLI now falls back to your s",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -11807,7 +11810,7 @@
     {
       "category": "model_id",
       "value": "gemini-dir--add-dir",
-      "context": "Examples:mcp removemcp enableUpdate CLIrefresh-%s(BADINDEX)%!(NOVERB)0123456789/dev/stdininvalid FDempty pathcreatetemp[^a-z0-9-]logged outinitializeLogged in. thinking)gemini-dir--add-dir=targetFilea",
+      "context": "Examples:mcp removemcp enableUpdate CLIrefresh-%s(BADINDEX)%!(NOVERB)0123456789/dev/stdininvalid FDempty pathcreatetempLogged in.gemini-dir--add-dir=checkpointaicode_403diff_countdiffs_json[REDACTED]c",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -11986,8 +11989,8 @@
     },
     {
       "category": "model_id",
-      "value": "gemini-for-google-2",
-      "context": "gemini-for-google-2",
+      "value": "gemini-flash-worker-agygenerate_commit_message",
+      "context": "gemini-flash-worker-agygenerate_commit_message",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12016,8 +12019,8 @@
     },
     {
       "category": "model_id",
-      "value": "gemini-for-google-3.1-flashchannel",
-      "context": "gemini-for-google-3.1-flashChannel authority set to %qoriginal dial target is: %qlistenerAddressForServeHTTPAGY_LLM_GATEWAY_CLIENT_CERTsecret not found in keyringinvalid UTF-8 in string: %qinsufficien",
+      "value": "gemini-for-google-2",
+      "context": "gemini-for-google-2",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12106,8 +12109,98 @@
     },
     {
       "category": "model_id",
+      "value": "gemini-pro-orchestrator",
+      "context": "gemini-pro-orchestrator",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-pro-orchestrator-argonmodel",
+      "context": "gemini-pro-orchestrator-argonmodel alias %q resolved to %qfailed to get model infos: %vskipping hooks.json at %s: %vfailed to create conversationStreamAgentStateUpdates errormessage authentication fai",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-pro-orchestrator-g1-pro",
+      "context": "non-func type 227373675443232059478759765625expected element name after </Optional free-form answer to: gemini-pro-orchestrator-g1-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "gemini-v4",
-      "context": "%q is empty: %wunsupported inline data MIME type %q: %worionfire;/aistudio/gemini-v4",
+      "context": "AGENT_PRIMARILYCORTEX_TRAJECTORY_SOURCE_EXPLAIN_PROBLEMCORTEX_STEP_TYPE_CLOUD_SQL_UPDATE_SCHEMAimage header format %q does not match %sinvalid or corrupt %s: missing %s headerbuild struct from JSON ar",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12347,7 +12440,7 @@
     {
       "category": "model_id",
       "value": "gpt-oss-120",
-      "context": "RecordCodeTrackerUpdatesValidateRegistrationCodeRegisterHybridDeploymentUploadPerformanceProfileNested channel(id:%d) %sMalformed method name %qAGY_LLM_GATEWAY_TIER_PROASPECT_RATIO_UNSPECIFIEDHARM_SEV",
+      "context": "JECTLINT_DIFF_TYPE_UNCHANGEDTOKEN_SOURCE_UNSPECIFIEDCONTEXT_TYPE_UNSPECIFIEDRESOLUTION_POLICY_IGNORESENSITIVITY_TRACKING_OFFSENSITIVITY_TRACKING_LOGEXECUTION_STATUS_SUCCESSEXECUTION_STATUS_FAILURECORT",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12377,37 +12470,7 @@
     {
       "category": "model_id",
       "value": "gpt-oss-20",
-      "context": "AILBREAKENVIRONMENT_UNSPECIFIEDunsupported certificateno application protocolech accept confirmationCLIENT_TRAFFIC_SECRET_0SERVER_TRAFFIC_SECRET_0tls: invalid PSK binderQUICEncryptionLevel(%v)invalid ",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "grok-freeddnsfreebox-osascoli-picenogatachikawakayamadridvagsoyerxn--9",
-      "context": "grok-freeddnsfreebox-osascoli-picenogatachikawakayamadridvagsoyerxn--90",
+      "context": "MEMORYCHAT_INTENT_UNSPECIFIED%w: parse mime type: %vopenai/gpt-oss-20",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12468,6 +12531,36 @@
       "category": "model_id",
       "value": "haskellhaskell-lite",
       "context": "sublime_sessionsource.jest.snaptext.html.djangoJupyter NotebookIPython Notebooksource.kakscriptsource.pcb.boardsource.kickstarttext.html.smartytext.html.liquidsource.litcoffeeLiterate Haskellhaskell-l",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "help-slash-commandenable-pro",
+      "context": "AGENT_BEHAVIOR_AUTONOMOUStrajectory not registeredCONVERSATION_WIDTH_NARROWenable-help-slash-commandenable-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12766,6 +12859,36 @@
     },
     {
       "category": "model_id",
+      "value": "ing-logical-pro",
+      "context": "ing-logical-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "init-busdefault-boundpdelete-overlaydelete-pro",
       "context": "byte-to-stringcategory-tablechar-to-stringcolor-distancecompute-motioncurrent-buffercurrent-columndbus--init-busdefault-boundpdelete-overlaydelete-pro",
       "hasDormantMarker": false,
@@ -12796,8 +12919,38 @@
     },
     {
       "category": "model_id",
+      "value": "instfaildefault-cli-pro",
+      "context": "2 15:04:0514901161193847656257450580596923828125unexpected InstFaildefault-cli-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
       "value": "iokit-get-pro",
-      "context": "Use %s through your Gemini subscription.[Auth Error] Failed to select license %s (Project: %s): %vCan't find your subscription? Enter a Google Cloud projectCould not confirm the MCP servers of plugin ",
+      "context": "cannot create empty commit: clean working treecan't use wildcard together with hash refspecs^[0-9]*(?:<<<|<<-?|<>|<&|<|>>|>\\||>&|>|&>>|&>)Failed to clean up partial battle clone %s: %vfork step index ",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -12857,7 +13010,7 @@
     {
       "category": "model_id",
       "value": "java-pro",
-      "context": ": %sCryptEncoderSHA384: %sCryptEncoderSHA512: %smalformed json tag: %sunrecognized level: %qmarshaling message: %winvalid header line %qwrite data to conn: %winvalid RPC version %vTODO: HorizontalTabS",
+      "context": ": %sunrecognized level: %qmarshaling message: %winvalid header line %qwrite data to conn: %winvalid RPC version %vTODO: HorizontalTabSetTODO: PushKeyboardModeTODO: NamedColorCursor(<^\\s*; |End Functio",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13007,37 +13160,7 @@
     {
       "category": "model_id",
       "value": "jetski-voice-pro",
-      "context": "ECIFIEDlisting the server's catalog plugins: %wfailed to build generate content requestbrowser sandbox: failed to remove %s: %vExplore other marketplace customizationsaudiotranscribe: TokenSource is r",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "jetski-voice-pro",
-      "context": "Dropping an ingress message on session %s: reassembly manager is nil%s Rejecting chunk 0 on session %s: session reassembly limit %d reached%s Ignoring authorized_key signaling message with empty WebCr",
+      "context": "ins: %wfailed to build generate content requestfailed to parse existing user config: %wbrowser sandbox: failed to remove %s: %vExplore other marketplace customizationsaudiotranscribe: TokenSource is r",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13097,7 +13220,37 @@
     {
       "category": "model_id",
       "value": "just-pro",
-      "context": "(?i)\\bcrontab\\s+(?:-r|-e|-i|[^-\\s])|\\bsystemctl\\s+(?:enable|disable|mask|unmask|daemon-reload|edit)\\b|\\blaunchctl\\s+(?:load|unload|remove|bootstrap|bootout|enable|disable)\\b|\\bschtasks\\s+/(?:create|de",
+      "context": "The <|cursor|> in the just-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "keychain-pro",
+      "context": "dSidecarEventListTriggerOptionsRecordChatFeedbackDiscardFileChangesDumpFlightRecorderGetCascadeMemoriesGetContribVariantsCancelCascadeStepsWarmUpAgentProcessGetMcpServerStatesDisconnectMcpOAuthSetBase",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -13608,6 +13761,36 @@
       "category": "model_id",
       "value": "moz-range-pro",
       "context": ".slider::-moz-range-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "mptcustomthemeseedslighttool-output-max-bytesbattle-mode-max",
+      "context": "mptcustomThemeSeedsLighttool-output-max-bytesbattle-mode-max-turnssonar-monitors-configinvalid page token %qduplicate_marketplaceplugin has no versionwriting read set fileloading proto file %sx-goog-r",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -14746,36 +14929,6 @@
     },
     {
       "category": "model_id",
-      "value": "productivity-pro",
-      "context": "antigravity-plugins-partners/plugin/mobbin\\\"\\n      ]\\n    },{\\n      \\\"id\\\": \\\"productivity-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "push-pro",
       "context": "Push-pro",
       "hasDormantMarker": false,
@@ -14806,8 +14959,8 @@
     },
     {
       "category": "model_id",
-      "value": "qdisable-teamwork-forced-flash",
-      "context": "TOOL_CALL_PROPOSALCORTEX_STEP_TYPE_LIST_BROWSER_PAGESCORTEX_STEP_TYPE_BROWSER_MOVE_MOUSECORTEX_STEP_TYPE_BROWSER_MOUSE_DOWNInvalid or missing state parameter.not supported for this conversation%s has ",
+      "value": "qenable-browser-subagent-high",
+      "context": "AGENT_REMOTE_SESSION_DELIVERY_STATE_PENDING/google.longrunning.Operations/GetOperationno candidates returned from GenerateContentprotocol error: timeout has invalid unit %qenable-browser-subagent-high",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -14836,8 +14989,8 @@
     },
     {
       "category": "model_id",
-      "value": "qrequest-reviewalways-pro",
-      "context": "ENABLE_HUBlegacy-cleanupGEMINI_API_KEY--settings: %w127.0.0.1:4713.WithoutCancel.WithDeadline( (core dumped)session/updateagent-platformoauth-personalThinking LevelMissing paramsFiles named %qrequest-",
+      "value": "quota-pro",
+      "context": "-quota-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15166,68 +15319,8 @@
     },
     {
       "category": "model_id",
-      "value": "retriedenable-help-slash-commandenable-pro",
-      "context": "MCP_TOOLCORTEX_STEP_TYPE_CRITIQUECORTEX_STEP_TYPE_FINDINGSconversation_summaries.dbfailed to get model infosCloud projects: %d listedlisting cloud plugins: %wpayload cannot be retriedenable-help-slash",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "retry-max",
-      "context": "A-Z]{16}\\n+|(?:[.!?])\\s+--fail-with-body--retry-max-time--no-directories-executionpolicy is a directory;script_execution/.config/gcloud//var/spool/cron//systemd/system/c:\\program filesc:/program files",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "riptiontext-pro",
-      "context": "riptiontext-pro",
+      "context": "A-Z]{16}\\n+|(?:[.!?])\\s+--fail-with-body--retry-max-time--no-directories-executionpolicy is a directory;script_execution/.config/gcloud//var/spool/cron//systemd/system/c:\\program files.m2/settings.xml",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15258,6 +15351,36 @@
       "category": "model_id",
       "value": "root-pro",
       "context": "Root-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "rpc-sandbox-pro",
+      "context": "rshal ice_config: %w%s Sleep interrupted: %vno valid OAuth token: %wempty OAuth token for %sasJson: invalid JSON: %v^[a-z0-9]+(-[a-z0-9]+)*$missing agent in requestInvalid rule trigger: %v@\\[([^\\]]*)\\",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15376,66 +15499,6 @@
     },
     {
       "category": "model_id",
-      "value": "sem-pro",
-      "context": "sem-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "send-subagent-initial-pro",
-      "context": "\"send-subagent-initial-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "set-pro",
       "context": "ATTR-SPAC|DELETE-CHARA|SYSTEM-ALERT|INHERIT-BGCO|SIDE-LABEL-H|BORDER-BOTTO|NO-LOOKAHEAD|SET-PRO",
       "hasDormantMarker": false,
@@ -15467,7 +15530,7 @@
     {
       "category": "model_id",
       "value": "show-pro",
-      "context": "[step %d] %s %sdon't do it yetdon't implement\"(\\\\.|[^\"\\\\])*\"'(\\\\.|[^'\\\\])*'authorized_keys--convert-links--show-pro",
+      "context": "[step %d] %s %s:/program files$env:systemrootapi.netlify.comupload.pypi.orgapi.mailgun.netdon't do it yetdon't implement\"(\\\\.|[^\"\\\\])*\"'(\\\\.|[^'\\\\])*'[^A-Za-z0-9._-]authorized_keys--convert-links--sho",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15497,7 +15560,7 @@
     {
       "category": "model_id",
       "value": "sice-lite",
-      "context": "open: %wstat: %w--attach--method--header%s/%s#%dtask_altFinalizefrontierSnapshotpre_tooldeadlinebalancedholdconn%w: (%s)pranswerrtx_ssrcsendrecvsendonlyrecvonlyinactive%s %d %drtcp-mux%d %s %sice-lite",
+      "context": "bazeliskyamllintprogramsProgramsprofilesreleasesPackagesPIP_CERTwait: %w/Library.Default.Regexesbalancedholdconn%w: (%s)pranswerrtx_ssrcsendrecvsendonlyrecvonlyinactive%s %d %drtcp-mux%d %s %sice-lite",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -15648,6 +15711,36 @@
       "category": "model_id",
       "value": "start-pro",
       "context": "including ANY execution of a local script file (.py, .sh, .bash, .js, .mjs, .ts, .ps1, .rb, .pl, .php, whether invoked directly or wrapped in bash -c, sh -c, wsl, cmd /c, powershell, Start-Pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "start-pro",
+      "context": "- Launching an installed application, or a program the agent built, to run or test it (start, Start-Pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -16546,36 +16639,6 @@
     },
     {
       "category": "model_id",
-      "value": "syntax-high",
-      "context": "# http://go/g3doc-markdown#syntax-high",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "syntax-local-lift-pro",
       "context": "perty|struct:arrow-contract-info|variable-reference-&gt;phase|set-some-basic-contracts!|current-load/use-compiled|use-collection-link-paths|make-resolved-module-path|string-&gt;unreadable-symbol|synta",
       "hasDormantMarker": false,
@@ -17026,8 +17089,8 @@
     },
     {
       "category": "model_id",
-      "value": "tool-output-max",
-      "context": "\"tool-output-max-bytes\": 10240,",
+      "value": "tool-pro",
+      "context": "all-filepathcrates.iotest-pathjoin-path--globoff--include--http1.1--referer--request--timeout--package--requirejson.tool-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17357,7 +17420,37 @@
     {
       "category": "model_id",
       "value": "venable-retroactive-pro",
-      "context": "ot supported on this platformCog is not supported on this platformfailed to get local path for repo: %vfailed to get local path for worktreefailed to get local path for git repo[LS] loaded generated m",
+      "context": "tside repository root %sFig is not supported on this platformCog is not supported on this platformfailed to get local path for repo: %vfailed to get local path for worktreefailed to get local path for",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": true,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: model id",
+          "points": 25
+        }
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "vhttp_method_deletenon-mini",
+      "context": "lityembedContentConfigresponseJsonSchemablockingConfidenceimageOutputOptionsbytesBase64EncodedaudioTranscriptioncontrolImageConfigsubjectImageConfigresponseTokenCountthoughtsTokenCountcacheTokensDetai",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17446,38 +17539,8 @@
     },
     {
       "category": "model_id",
-      "value": "vjetski-generative-ui-pro",
-      "context": "ENABLE_GATEWAY_AUTHUse a custom AI API GatewayMissing authorization code.language server unavailableAppDataDir must not be zerokeybindings path is not setmarshal protobuf status: %vjetski-generative-u",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "wagy_llm_gateway_urldefault-cli-pro",
-      "context": "%shttp://localhost:%dFailed to prune: %vreflect.Value.IsNilreflect.Value.Floatbad unicode format bad flag syntax: %sstarting worker: %wAGY_LLM_GATEWAY_URLdefault-cli-pro",
+      "value": "win-pro",
+      "context": "AGENT_REMOTE_SESSION_DELIVERY_STATE_DELIVERED/google.longrunning.Operations/ListOperationsfinal message has protocol-specific flags: %wgRPC-Web protocol error: trailers invalid: %win-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -17836,36 +17899,6 @@
     },
     {
       "category": "model_id",
-      "value": "wsend-subagent-initial-pro",
-      "context": "non-map type277555756156289135105907917022705078125INTERACTIVE_CASCADE_EDIT_IMPORTANCE_LOWEXECUTION_ASYNC_LEVEL_EXECUTOR_BLOCKINGRECORDING_GENERATION_STATUS_UNSPECIFIEDEPHEMERAL_MESSAGE_PERSISTENCE_LE",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "xml-suppress-namespace-pro",
       "context": "<rule pattern=\"(?i)(^|(?&lt;=[^\\w\\-]))(XML-SUPPRESS-NAMESPACE-PRO",
       "hasDormantMarker": false,
@@ -17898,36 +17931,6 @@
       "category": "model_id",
       "value": "xxx_hidden_externaltraceid-pro",
       "context": "xxx_hidden_ExternalTraceId-pro",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": true,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: model id (+25 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: model id",
-          "points": 25
-        }
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "zoho-pro",
-      "context": "ins-partners/plugin/zoho-pro",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -18046,218 +18049,8 @@
     },
     {
       "category": "experiment",
-      "value": "EXPERIMENT_CHE",
-      "context": "EXPERIMENT_CHE",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
       "value": "EXPERIMENT_CHECKPOINTER",
       "context": "EXPERIMENT_CHECKPOINTER",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SINGLE_PROMPT\\\",\\n    \\\"max_token_lim",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SINGLE_PROMPT\\\",\\n    \\\"max_token_limit\\\": \\\"128000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n    \\\"max_overhead_ratio\\\": \\\"0.15\\\",",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_UNSPECIFIED\\\",\\n    \\\"max_token_limit\\\": \\\"80000\\\",\\n    \\\"token_t",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_SAME_MODEL\\\",\\n    \\\"max_token_limit\\\": \\\"256000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n    \\\"max_overhead_ratio\\\": \\\"0.15\\\",\\n ",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER\": \"{\\n    \\\"strategy\\\": \\\"CHECKPOINT_STRATEGY_UNSPECIFIED\\\",\\n    \\\"max_token_limit\\\": \\\"160000\\\",\\n    \\\"token_threshold\\\": \\\"50000\\\",\\n    \\\"max_overhead_ratio\\\": \\\"0.15\\\",\\n",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: experiment (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: experiment",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_CHECKPOINTER",
-      "context": "EXPERIMENT_CHECKPOINTER/claude-1",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -21167,7 +20960,7 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_8KB_DEFAULT_HEADER_LIST_SIZE",
-      "context": "ENABLE_8KB_DEFAULT_HEADER_LIST_SIZE will be enabled by default, enforcing this limit.ssh",
+      "context": "ENABLE_8KB_DEFAULT_HEADER_LIST_SIZE will be enabled by default, enforcing this limit.(?i)^(?:&\\s*)?(?:\"(?:[^\"]*[\\\\/])?(?:flutter|dart)(?:\\.bat|\\.exe)?\"|'(?:[^']*[\\\\/])?(?:flutter|dart)(?:\\.bat|\\.exe)?",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -23777,7 +23570,7 @@
     {
       "category": "feature_flag",
       "value": "enable_errorenvironment",
-      "context": "enable_errorenvironment variableEnable an MCP serverinvalid %s format %qciphertext too shorttype not a pointer: $HOME is not definedsysctl kern.hostnameflag: help requestedMethod not found: %sUnknown ",
+      "context": "enable_errorenvironment variableEnable an MCP serverinvalid %s format %qciphertext too shorttype not a pointer: $HOME is not definedsysctl kern.hostnameflag: help requestedis_google3_workspace--use_st",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -24496,36 +24289,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "ENABLE_GATEWAY_AUTHUse",
-      "context": "ENABLE_GATEWAY_AUTHUse a custom AI API GatewayMissing authorization code.language server unavailableAppDataDir must not be zerokeybindings path is not setmarshal protobuf status: %vjetski-generative-u",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: feature_flag (+15 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: feature_flag",
-          "points": 15
-        }
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_gdbjit_default_",
       "context": "enable_gdbjit_default_",
       "hasDormantMarker": false,
@@ -24707,7 +24470,7 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_HUBlegacy",
-      "context": "ENABLE_HUBlegacy-cleanupGEMINI_API_KEY--settings: %w127.0.0.1:4713.WithoutCancel.WithDeadline( (core dumped)session/updateagent-platformoauth-personalThinking LevelMissing paramsFiles named %qrequest-",
+      "context": "ENABLE_HUBlegacy-cleanupGEMINI_API_KEY--settings: %w127.0.0.1:4713.WithoutCancel.WithDeadline( (core dumped)oauth-personaloffline_access",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -26447,7 +26210,7 @@
     {
       "category": "feature_flag",
       "value": "enable_multidexinvoker",
-      "context": "_retrolambda_output_jar_strip_resource_classes_use_mips_abi_hardfloatandroid_sdk_build_toolsdefault_shlib_extensionextra_system_frameworksgenerated_resource_dirsinvoker.additional_apksinvoker.bundled_",
+      "context": "_build_toolsdefault_shlib_extensionextra_system_frameworksgenerated_resource_dirsinvoker.additional_apksinvoker.bundled_srcjarsinvoker.emma_instrumentinvoker.enable_multidexinvoker.generated_filesinvo",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -30647,6 +30410,36 @@
     {
       "category": "feature_flag",
       "value": "enable_terminal_sandbox",
+      "context": "profilealloc called without a P or outside bootstrappingdetected possible issues with cleanups and/or finalizersin gcMark expecting to see gcphase as _GCmarkterminationsemaphore wake of synctest gorou",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: feature_flag (+15 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: feature_flag",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_terminal_sandbox",
       "context": "enable_terminal_sandbox",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -32027,7 +31820,7 @@
     {
       "category": "feature_flag",
       "value": "gate_reviewerteamwork_leandocs",
-      "context": "rercomputer_callfollowup_taskfile_citationdaybreak_bluelast_messagesreinforcementRESPONSE_SENTTYPE_SFIXED32TYPE_SFIXED64page.goBack()page.reload()page.mouse.upsetInputFilestextContent()allInnerTextsbo",
+      "context": "/debug/eventsHTTP_IN_QUERYinvalid ASN.1MLKEM768-P256shared_secretDeriveKeyPairempty integerunsupported: RoundingMode(ACTION_STATUSSTATUS_FAILEDfilter methodbad IFD entrysample formatextra samplesSegme",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -33467,7 +33260,7 @@
     {
       "category": "feature_flag",
       "value": "isGatewayEnabled",
-      "context": "google3/third_party/jetski/cli/acp/acpauth/acpauth.(*Manager).isGatewayEnabled",
+      "context": "google3/third_party/jetski/cli/acp/auth/auth.(*Manager).isGatewayEnabled",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -36346,36 +36139,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "AGENT_APICORTEX_STEP",
-      "context": "AGENT_APICORTEX_STEP",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "agent_attributes",
       "context": "agent_attributes",
       "hasDormantMarker": false,
@@ -36497,36 +36260,6 @@
     {
       "category": "agent_mode",
       "value": "agent_authored",
-      "context": "agent_authored/working_dir/.cache/pipfile does not exist: %sSAMPLING_STRATEGY_FLOOROTHER_RUNTIME_EXCEPTIONbad number of TTC fontsFailed to format entry:Failed to write to log:Word_Break=ExtendNumLetCh",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_authored",
       "context": "agent_authored\": true | false",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -36557,7 +36290,7 @@
     {
       "category": "agent_mode",
       "value": "agent_authored",
-      "context": "agent_authored=%t is_scaled_communication=%t)disallowed protected authentication host %q in %q: agent cannot open or act on identity provider sign-in pages; ask the user to sign in directlyhook %q: ol",
+      "context": "agent_authored=%t is_scaled_communication=%t)di",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -36916,6 +36649,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "agent_authored_n",
+      "context": "agent_authored_n",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "agent_auto_invoke",
       "context": "agent_auto_invoke",
       "hasDormantMarker": false,
@@ -37246,6 +37009,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "AGENT_BEHAVIOR_AUTONOMOUStrajectory",
+      "context": "AGENT_BEHAVIOR_AUTONOMOUStrajectory not registeredCONVERSATION_WIDTH_NARROWenable-help-slash-commandenable-pro",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "AGENT_BEHAVIOR_INTERACTIVE",
       "context": "AGENT_BEHAVIOR_INTERACTIVE",
       "hasDormantMarker": false,
@@ -37277,7 +37070,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_BEHAVIOR_INTERACTIVEtiered",
-      "context": "AGENT_BEHAVIOR_INTERACTIVEtiered model config is nilCONVERSATION_WIDTH_DEFAULTARTIFACT_WIDTH_UNSPECIFIEDCONTRAST_LEVEL_UNSPECIFIEDPRODUCT_SKIN_NON_TECHNICALMIGRATION_STATUS_COMPLETEDlatest_browser_ste",
+      "context": "AGENT_BEHAVIOR_INTERACTIVEtiered model config is nilsnapshot trajectory %s: %wCONVERSATION_WIDTH_DEFAULTARTIFACT_WIDTH_UNSPECIFIEDCONTRAST_LEVEL_UNSPECIFIEDPRODUCT_SKIN_NON_TECHNICALMIGRATION_STATUS_C",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37337,7 +37130,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_BEHAVIOR_MINIMALunknown",
-      "context": "AGENT_BEHAVIOR_MINIMALunknown model tier: %qTHEME_MODE_UNSPECIFIEDARTIFACT_WIDTH_DEFAULTCONTRAST_LEVEL_DEFAULTPRODUCT_SKIN_DEVELOPERGenerateContent failedduplicate_id_collisionunsupported_url_schemefa",
+      "context": "AGENT_BEHAVIOR_MINIMALunknown model tier: %qload trajectory %s: %wTHEME_MODE_UNSPECIFIEDARTIFACT_WIDTH_DEFAULTCONTRAST_LEVEL_DEFAULTPRODUCT_SKIN_DEVELOPERGenerateContent failedjetski-autonomous-modeen",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37577,7 +37370,7 @@
     {
       "category": "agent_mode",
       "value": "agent_browser_tools",
-      "context": "agent_browser_tools,omitempty\" reflect:\"unexport\"(",
+      "context": "agent_browser_tools,omitempty\" reflect:\"unexport\"8",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -37938,36 +37731,6 @@
       "category": "agent_mode",
       "value": "agent_chat",
       "context": "agent_chat,omitempty",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_CHAT",
-      "context": "```Selection:AGENT_CHAT",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -39527,7 +39290,7 @@
     {
       "category": "agent_mode",
       "value": "agent_coordinationdecoding",
-      "context": "agent_coordinationdecoding response: %wmock-audio-session-%dlocal_fire_departmentinvalid page_token %qno project with id %qTEST_",
+      "context": "agent_coordinationdecoding response: %wmock-",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -40186,36 +39949,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "AGENT_DUMMYCORTEX_STEP",
-      "context": "AGENT_DUMMYCORTEX_STEP",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "agent_efficiency",
       "context": "google3/third_party/jetski/cortex/core/contrib/variants/agent_efficiency/agentefficiency.FastBatchPromptOnlyVariant",
       "hasDormantMarker": false,
@@ -40367,36 +40100,6 @@
     {
       "category": "agent_mode",
       "value": "agent_effort",
-      "context": "agent_effort/google/src/headSIDE_UNSPECIFIEDinvalid dns nameRCodeFormatErrorunpacking headerpacking QuestionSOAResource.MBoxmessage mismatchProxy-ConnectionWww-Authenticatequoted-printable()<>@,;:\\\"/[",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_effort",
       "context": "agent_effort",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -40428,6 +40131,36 @@
       "category": "agent_mode",
       "value": "agent_effort",
       "context": "agent_effort>Schedule a one-shot timer or a recurring cron job that sends notifications in the background.",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_effortgc",
+      "context": "agent_effortgc.autoPackLimit(no prior steps)args=<malformed>Please try againdelete_knowledgebrowser_mouse_upms-playwright-gocredentials.tomlgithub_api_token/tmp/.X11-unix/X/var/db/timezonenecp-client-",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -40697,7 +40430,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_ENVIRONMENT_BACKGROUND_WORKTREEsyncing",
-      "context": "AGENT_ENVIRONMENT_BACKGROUND_WORKTREEsyncing the server accounts of %s: %w## Browser Step History (append-only)featured_cfg:empty_customization_ids:marketplace name %q is not kebab-casearchive unpacks",
+      "context": "AGENT_ENVIRONMENT_BACKGROUND_WORKTREEsyncing the server accounts of %s: %wVertex AI location requires",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -40787,7 +40520,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_ENVIRONMENT_UNSPECIFIEDFailed",
-      "context": "AGENT_ENVIRONMENT_UNSPECIFIEDFailed to truncate prompt: %sstepcompactor.frame_text_fileStepHeader: step %d not foundfailed to marshal plugin.jsonfeatured_cfg:missing_card_id:archive %q returned status",
+      "context": "AGENT_ENVIRONMENT_UNSPECIFIEDFailed to truncate prompt: %sinternal API timeout (%v): %winvalid Vertex AI location %qnative-swarm-channels-spannerenable-agent-plugins-spec-1-1",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -41027,7 +40760,7 @@
     {
       "category": "agent_mode",
       "value": "AGENT_EXTRAchroot",
-      "context": "AGENT_EXTRAchroot boundary crosseddsa: mismatching valuesno certificate provided[handshake:%s] %s -> %sUnknown MessageType: %dsdp: invalid port value%w -- out of range `%v`%s ssrc=%d index=%d: %vrtcp:",
+      "context": "AGENT_EXTRAchroot boundary crosseddsa: mismatching valuesJETSKI_SWARM_NODE_LABELanother language server, and swarm_wait for it1 message from %s (#%d)Native swarm worker %q.no certificate provided[hand",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54587,36 +54320,6 @@
     {
       "category": "agent_mode",
       "value": "agent_go_proto",
-      "context": "=*func(context.Context, string) (*agent_go_proto.Agent, error)",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_go_proto",
       "context": ">*func() *agent_go_proto.AgentMemoryProvenance_ExecutionContext",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -54796,8 +54499,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_guard",
-      "context": "agent_guard@@ -%d,%d +%d,%d @@res_nsearch failureinvalid MAC addresscriterion too shorthttp: Server closedIf-Unmodified-Sincehost/path missing /multipart/form-dataContent-Length: 0",
+      "value": "agent_guard_hook",
+      "context": "agent_guard_hook.go",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -54826,8 +54529,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_guard_hook",
-      "context": "agent_guard_hook.go",
+      "value": "agent_guardchrome",
+      "context": "agent_guardchrome-devtools-mcp--viewport=1280x720ACTUATOR_NO_PENDING events to Clearcut--include-untrackedempty worktree listinvalid object namefinalize_latency_msnum_file_edit_stepssdk process is dea",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -55097,36 +54800,6 @@
     {
       "category": "agent_mode",
       "value": "agent_interaction",
-      "context": "a auth callback (mode=%s -> %s)[CLIAuthProvider] UpdateEndpointURL: preserving custom endpoint %q[CLIAuthProvider] UpdateEndpointURL called with CLOUD_CODE_URL: %qKeyring LoadToken timed out after %v,",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_interaction",
       "context": "agent_interaction",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -55188,66 +54861,6 @@
       "category": "agent_mode",
       "value": "agent_interaction",
       "context": "AgentInteractionJprotobuf:\"bytes,42,opt,name=agent_interaction,json=agentInteraction,oneof\"",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_interaction_timeout_seconds",
-      "context": "agent_interaction_timeout_seconds\": 60",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_interaction_timeout_secondsFailed",
-      "context": "agent_interaction_timeout_secondsFailed to save the credential user scope: %vexa.language_server_pb.LanguageServerServiceencoding alphabet contains newline characterencoding alphabet includes duplicat",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56177,7 +55790,37 @@
     {
       "category": "agent_mode",
       "value": "AGENT_MEMORY_VIEW_FULLagent",
-      "context": "AGENT_MEMORY_VIEW_FULLagent (action message)reading file timed outShowing lines %d to %dsql: no Rows availableCryptEncoderSHA256",
+      "context": "AGENT_MEMORY_VIEW_FULLagent (action message)Path must not be emptyreading file timed outShowing lines %d to %dsql: no Rows availableCryptEncoderSHA256: %sCryptEncoderSHA384: %sCryptEncoderSHA512: %sma",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_VIEW_UNSPECIFIED",
+      "context": "AGENT_MEMORY_VIEW_UNSPECIFIED/SendEnvironmentIceCandidatesfailed to create worktree: %wmodel_router_advisor_protocol%s is a directory, not a fileDocumentOptions.ContentLayers",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56208,36 +55851,6 @@
       "category": "agent_mode",
       "value": "AGENT_MEMORY_VIEW_UNSPECIFIED",
       "context": "AGENT_MEMORY_VIEW_UNSPECIFIED",
-      "hasDormantMarker": false,
-      "dormantMarker": null,
-      "activationStatus": "REFERENCED",
-      "filePath": "",
-      "artifactClass": "delta",
-      "status": "accepted",
-      "rejectionReason": null,
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "isMajorEarlySignal": false,
-      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
-      "breakdown": [
-        {
-          "rule": "New in exact diff",
-          "points": 10
-        },
-        {
-          "rule": "First-ever appearance in history",
-          "points": 15
-        },
-        {
-          "rule": "Category: agent_mode",
-          "points": 14
-        }
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_MEMORY_VIEW_UNSPECIFIEDfailed",
-      "context": "AGENT_MEMORY_VIEW_UNSPECIFIEDfailed to create worktree: %wmodel_router_advisor_protocolDocumentOptions.ContentLayers",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56416,8 +56029,8 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_messages_bytesmismatching",
-      "context": "agent_messages_bytesmismatching end group markerprovided bad location %s: %vcapture_browser_console_logsconnect to escape server: %wusage: escape PROG [ARGS...](%s %s (ipc-posix-name %q",
+      "value": "agent_messages_bytesdnsmessage",
+      "context": "agent_messages_bytesdnsmessage.Resource{Header: dnsmessage.MXResource{Pref: dnsmessage.PTRResource{PTR: multipart: message too largemultipart: boundary is emptytext/plain; charset=utf-16",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -56686,6 +56299,36 @@
     },
     {
       "category": "agent_mode",
+      "value": "AGENT_MODE_ACCEPT_EDITS",
+      "context": "AGENT_MODE_ACCEPT_EDITS",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
       "value": "AGENT_MODE_BOTH_AGENTS",
       "context": "AGENT_MODE_BOTH_AGENTS",
       "hasDormantMarker": false,
@@ -56718,6 +56361,36 @@
       "category": "agent_mode",
       "value": "AGENT_MODE_BOTH_AGENTSBROWSER_",
       "context": "AGENT_MODE_BOTH_AGENTSBROWSER_",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_DEFAULT",
+      "context": "AGENT_MODE_DEFAULT",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -57768,6 +57441,36 @@
       "category": "agent_mode",
       "value": "agent_monitoring",
       "context": "2N.gdm.security.agi_control.agent_monitoring.monitors.GuardianAgentMonitorConfigH",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "2R.gdm.security.agi_control.agent_monitoring.monitors.TruncatedToolCallMonitorConfigH",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -61187,6 +60890,36 @@
     {
       "category": "agent_mode",
       "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*MonitorConfig).GetTruncatedToolCallConfig",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
       "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*MonitorConfig).GetDependencyConfig",
       "hasDormantMarker": false,
       "dormantMarker": null,
@@ -62567,7 +62300,67 @@
     {
       "category": "agent_mode",
       "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LlmMonitorConfig).GetTruncationRiskFragments",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
       "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LlmMonitorConfig).GetTrafficStreamSelfid",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LlmMonitorConfig).GetTemperature",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -63108,6 +62901,36 @@
       "category": "agent_mode",
       "value": "agent_monitoring",
       "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*AcsvMonitorConfig).GetQuotaSubBuckets",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*AcsvMonitorConfig).GetTemperature",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -64158,6 +63981,186 @@
       "category": "agent_mode",
       "value": "agent_monitoring",
       "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LogprobMonitorConfig).GetMaxPromptTokens",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LogprobMonitorConfig).GetStepsToConsider",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LogprobMonitorConfig).GetQuotaBucketKey",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LogprobMonitorConfig).GetOptions",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LogprobMonitorConfig).GetPermutationDebias",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LogprobMonitorConfig).GetPlattScaleA",
+      "hasDormantMarker": false,
+      "dormantMarker": null,
+      "activationStatus": "REFERENCED",
+      "filePath": "",
+      "artifactClass": "delta",
+      "status": "accepted",
+      "rejectionReason": null,
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "isMajorEarlySignal": false,
+      "confidenceExplanation": "New in exact diff (+10 pts); First-ever appearance in history (+15 pts); Category: agent_mode (+14 pts)",
+      "breakdown": [
+        {
+          "rule": "New in exact diff",
+          "points": 10
+        },
+        {
+          "rule": "First-ever appearance in history",
+          "points": 15
+        },
+        {
+          "rule": "Category: agent_mode",
+          "points": 14
+        }
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "context": "google3/gdm/security/agi_control/agent_monitoring/monitors/monitor_config_go_proto.(*LogprobMonitorConfig).GetPlattInterceptB",
       "hasDormantMarker": false,
       "dormantMarker": null,
       "activationStatus": "REFERENCED",
@@ -74387,6 +74390,10 @@
     "https://www.google.com/it",
     "https://antigravity.google/auth-success?app=%sFailed",
     "https://oauth2.googleapis.com/token",
-    "https://accounts.google.com/o/oauth2/v2/auth?client_id=mock-client&redirect_uri=http%3A%2F%2Flocalhost%3A43123%2Fauth%2Fcallback&state=mock-stateMaps"
+    "https://accounts.google.com/o/oauth2/v2/auth?client_id=mock-client&redirect_uri=http%3A%2F%2Flocalhost%3A43123%2Fauth%2Fcallback&state=mock-stateMaps",
+    "https://www.googleapis.com/auth/cloud-platformhttps://www.googleapis.com/auth/userinfo.emailtelemetry",
+    "https://safebrowsing.googleapis.com/v5/urls:search?urls=%ssynthesized",
+    "https://antigravity.google/g1-activity?utm_source=antigravity&utm_medium=web&utm_campaign=argon_settings_page_ai_credits_activity_page%sincludeServerSideToolInvocations",
+    "https://www.googleapis.com/auth/userinfo.profilefailed"
   ]
 }
