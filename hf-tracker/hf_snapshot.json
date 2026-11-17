@@ -9009,7 +9009,7 @@
       },
       "facebook/meta-encoder-v1": {
         "createdAt": "2026-11-12T02:00:27.000Z",
-        "lastModified": "2026-11-12T04:50:40.000Z",
+        "lastModified": "2026-11-17T01:57:25.000Z",
         "gated": false,
         "pipeline_tag": "feature-extraction",
         "numParameters": null
@@ -19227,7 +19227,7 @@
       },
       "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-NVFP4": {
         "createdAt": "2026-10-12T15:32:30.000Z",
-        "lastModified": "2026-11-10T19:42:38.000Z",
+        "lastModified": "2026-11-16T18:34:42.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -19297,7 +19297,7 @@
       },
       "nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16": {
         "createdAt": "2026-10-09T12:45:14.000Z",
-        "lastModified": "2026-10-23T11:14:26.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -20648,7 +20648,7 @@
       },
       "nvidia/nemotron-labs-audio-visual-flamingo-hf": {
         "createdAt": "2026-04-15T19:00:34.000Z",
-        "lastModified": "2026-11-15T16:58:20.000Z",
+        "lastModified": "2026-11-16T22:12:37.000Z",
         "gated": false,
         "pipeline_tag": "video-text-to-text",
         "numParameters": null
@@ -22633,6 +22633,13 @@
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
+      },
+      "nvidia/Qwen3.8-Flash-Next-NVFP4-QAD": {
+        "createdAt": "2026-11-17T09:32:35.000Z",
+        "lastModified": "2026-11-17T10:40:08.000Z",
+        "gated": false,
+        "pipeline_tag": "image-text-to-text",
+        "numParameters": null
       }
     },
     "spaces": {
@@ -22668,7 +22675,7 @@
       },
       "nvidia/nemotron-transcribe": {
         "createdAt": "2026-10-08T21:35:22.000Z",
-        "lastModified": "2026-11-10T23:32:38.000Z",
+        "lastModified": "2026-11-17T03:55:38.000Z",
         "sdk": null
       },
       "nvidia/Granary-HiFi": {
@@ -23618,13 +23625,13 @@
       },
       "nvidia/medtech-open-models-69ad22014dc143297f506915": {
         "title": "MedTech Open Models",
-        "lastUpdated": "2026-11-13T08:29:31.499Z",
+        "lastUpdated": "2026-11-17T01:32:45.155Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/GR00T-H",
+          "nvidia/GR00T-H-N1.7",
           "nvidia/Cosmos-H-Surgical-Simulator",
-          "nvidia/Cosmos-H-Surgical",
-          "nvidia/nv-reason-cxr"
+          "nvidia/Cosmos3-H-Dreams"
         ]
       },
       "nvidia/nemotron-terminal-6994e243e413ac89df407838": {
@@ -23746,7 +23753,7 @@
       },
       "nvidia/alpamayo-69211e045315109326d23aed": {
         "title": "Alpamayo",
-        "lastUpdated": "2026-11-13T08:29:31.513Z",
+        "lastUpdated": "2026-11-16T21:22:58.408Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Alpamayo-R1-10B",
@@ -24116,7 +24123,7 @@
       },
       "nvidia/nemotron-labs-sigma-6aed16ae59cfa91daa36c53b": {
         "title": "Nemotron-Labs-Sigma",
-        "lastUpdated": "2026-11-16T17:32:03.476Z",
+        "lastUpdated": "2026-11-16T18:08:47.607Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Labs-Sigma-3B",
@@ -29043,7 +29050,7 @@
     "models": {
       "LiquidAI/LFM2.5-24B-A2B-GGUF": {
         "createdAt": "2026-10-09T18:03:23.000Z",
-        "lastModified": "2026-11-06T03:22:24.000Z",
+        "lastModified": "2026-11-17T10:06:30.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -35640,7 +35647,7 @@
       },
       "allenai/tmax-27b": {
         "createdAt": "2026-06-21T21:48:19.000Z",
-        "lastModified": "2026-06-23T03:28:36.000Z",
+        "lastModified": "2026-11-16T22:03:30.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -35717,7 +35724,7 @@
       },
       "allenai/tmax-9b": {
         "createdAt": "2026-06-17T00:53:00.000Z",
-        "lastModified": "2026-06-23T03:28:34.000Z",
+        "lastModified": "2026-11-16T22:03:17.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -35766,7 +35773,7 @@
       },
       "allenai/MolmoAct2-LIBERO-LeRobot": {
         "createdAt": "2026-05-14T04:18:31.000Z",
-        "lastModified": "2026-05-24T00:37:04.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -35829,7 +35836,7 @@
       },
       "allenai/MolmoAct2-DROID": {
         "createdAt": "2026-05-04T17:08:15.000Z",
-        "lastModified": "2026-05-23T01:28:50.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -36431,7 +36438,7 @@
       },
       "allenai/SERA-8B": {
         "createdAt": "2026-01-27T19:01:59.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-16T22:02:50.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -36452,7 +36459,7 @@
       },
       "allenai/SERA-32B": {
         "createdAt": "2026-01-27T05:29:32.000Z",
-        "lastModified": "2026-06-25T21:44:14.000Z",
+        "lastModified": "2026-11-16T22:02:33.000Z",
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -36774,7 +36781,7 @@
       },
       "allenai/olmOCR-2-7B-1025": {
         "createdAt": "2025-10-06T21:16:59.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-16T22:02:19.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
