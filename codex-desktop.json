@@ -1,7 +1,7 @@
 {
   "componentId": "codex-desktop",
   "version": "build-20261113-020149",
-  "alertedVersion": "build-20261113-020149",
+  "alertedVersion": "build-20261117-220416",
   "releaseId": "codex-desktop-build-20261113-020149",
   "channel": "prod",
   "identityFingerprint": "56782b92c533652e029ed566a5414a4118499b78cc7d55a56cfa60c219acf64c",
@@ -223839,12 +223839,24 @@
   },
   "schemaVersion": 2,
   "deliveredVersion": "build-20261113-020149",
-  "observedVersion": "build-20261113-020149",
+  "observedVersion": "build-20261117-220416",
   "scannedVersion": "build-20261113-020149",
   "releaseKey": "76e83bb9e470a2efc15430c25e48dbc9",
   "versionScheme": "build",
-  "lastDeliveryStatus": "DELIVERED",
-  "pendingDelivery": null,
+  "lastDeliveryStatus": "ALERT_SENT",
+  "pendingDelivery": {
+    "scanId": "CD-20261117-003",
+    "version": "build-20261117-220416",
+    "releaseKey": "c9d67c473331551e118147d0cc67295c",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 325,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-17T22:31:36.865Z",
+    "updatedAt": "2026-11-17T22:31:36.865Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CD-20261117-002",
