@@ -396,7 +396,7 @@ export function extractSignalsFromAst(code, filePath = '') {
 
       if (MODEL_PROPERTY_NAMES.has(keyName)) {
         const modelVal = foldBinaryExpression(node.value) || (node.value.type === 'Literal' ? node.value.value : null);
-        if (modelVal && typeof modelVal === 'string') {
+        if (modelVal && typeof modelVal === 'string' && isValidModelIdentifier(modelVal, { isModelProperty: true, isStructuralCatalog: true })) {
           addFinding(CATEGORIES.MODEL_ID, modelVal, node.value, `Property(${keyName})`, {
             discoveryMethod: 'ast_property_model',
             activationStatus: ACTIVATION_STATUS.CONFIGURED,
@@ -404,7 +404,7 @@ export function extractSignalsFromAst(code, filePath = '') {
         } else if (node.value && node.value.type === 'ArrayExpression' && Array.isArray(node.value.elements)) {
           for (const el of node.value.elements) {
             const elVal = foldBinaryExpression(el) || (el?.type === 'Literal' ? el.value : null);
-            if (elVal && typeof elVal === 'string') {
+            if (elVal && typeof elVal === 'string' && isValidModelIdentifier(elVal, { isModelProperty: true, isStructuralCatalog: true })) {
               addFinding(CATEGORIES.MODEL_ID, elVal, el, `PropertyArray(${keyName})`, {
                 discoveryMethod: 'ast_property_model_array',
                 activationStatus: ACTIVATION_STATUS.CONFIGURED,
@@ -434,7 +434,7 @@ export function extractSignalsFromAst(code, filePath = '') {
 
         if (hasAnchor && !isUiList(vals)) {
           for (const item of strItems) {
-            if (isValidModelIdentifier(item.val)) {
+            if (isValidModelIdentifier(item.val, { isPeerArray: true, isStructuralCatalog: true })) {
               addFinding(CATEGORIES.MODEL_ID, item.val, item.node, 'ArrayPeerCollection', {
                 discoveryMethod: 'ast_array_peer_cluster',
                 activationStatus: ACTIVATION_STATUS.CONFIGURED,
@@ -470,7 +470,7 @@ export function extractSignalsFromAst(code, filePath = '') {
         const cVal = foldBinaryExpression(cs.test) || (cs.test.type === 'Literal' && typeof cs.test.value === 'string' ? cs.test.value : null);
         if (!cVal || typeof cVal !== 'string') continue;
 
-        if (isModelDisc && isValidModelIdentifier(cVal)) {
+        if (isModelDisc && isValidModelIdentifier(cVal, { isStructuralCatalog: true })) {
           addFinding(CATEGORIES.MODEL_ID, cVal, cs.test, `SwitchCase(${discName})`, {
             discoveryMethod: 'ast_switch_case_model',
             activationStatus: ACTIVATION_STATUS.REFERENCED,
@@ -539,7 +539,7 @@ export function extractSignalsFromAst(code, filePath = '') {
         const idProp = propMap.get('id') || propMap.get('name') || propMap.get('model') || propMap.get('slug') || propMap.get('model_id');
         if (idProp) {
           const mVal = foldBinaryExpression(idProp.value) || (idProp.value?.type === 'Literal' && typeof idProp.value.value === 'string' ? idProp.value.value : null);
-          if (mVal && isValidModelIdentifier(mVal)) {
+          if (mVal && isValidModelIdentifier(mVal, { isStructuralCatalog: true })) {
             // Extract reasoning effort if configured
             const effortProp = propMap.get('reasoning_effort') || propMap.get('thinking_effort') || propMap.get('effort_level') || propMap.get('effort');
             const effortVal = effortProp ? (foldBinaryExpression(effortProp.value) || (effortProp.value?.type === 'Literal' ? effortProp.value.value : null)) : null;
@@ -604,6 +604,14 @@ export function extractSignalsFromAst(code, filePath = '') {
             outputPrice: Number.isFinite(outputPrice) ? outputPrice : null,
           },
         });
+
+        if (modelLabel !== 'unknown' && isValidModelIdentifier(modelLabel, { isStructuralCatalog: true })) {
+          addFinding(CATEGORIES.MODEL_ID, modelLabel, modelProp || node, 'PricingCatalogModel', {
+            discoveryMethod: 'ast_pricing_catalog_model',
+            activationStatus: ACTIVATION_STATUS.CONFIGURED,
+            related: { inputPrice, outputPrice },
+          });
+        }
       }
 
       // D. Search & Grounding Capabilities (e.g. { web_search: true, search_grounding: ... })
@@ -661,7 +669,7 @@ export function extractSignalsFromAst(code, filePath = '') {
       // Model slots in variables
       if (MODEL_PROPERTY_NAMES.has(varName) || /_model$|^model_|_model_|^default_model|^chat_model/i.test(varName)) {
         const val = foldBinaryExpression(node.init) || (node.init.type === 'Literal' ? node.init.value : null);
-        if (val && typeof val === 'string' && isValidModelIdentifier(val)) {
+        if (val && typeof val === 'string' && isValidModelIdentifier(val, { isModelProperty: true, isStructuralCatalog: true })) {
           addFinding(CATEGORIES.MODEL_ID, val, node.init, `Variable(${node.id.name})`, {
             discoveryMethod: 'ast_variable_model',
             activationStatus: ACTIVATION_STATUS.CONFIGURED,
@@ -674,7 +682,7 @@ export function extractSignalsFromAst(code, filePath = '') {
         if (/models?|engines?|catalog(?:ue)?/i.test(varName)) {
           for (const el of node.init.elements) {
             const elVal = foldBinaryExpression(el) || (el?.type === 'Literal' ? el.value : null);
-            if (elVal && typeof elVal === 'string' && isValidModelIdentifier(elVal)) {
+            if (elVal && typeof elVal === 'string' && isValidModelIdentifier(elVal, { isModelProperty: true, isStructuralCatalog: true })) {
               addFinding(CATEGORIES.MODEL_ID, elVal, el, `ModelArray(${node.id.name})`, {
                 discoveryMethod: 'ast_variable_array_model',
                 activationStatus: ACTIVATION_STATUS.CONFIGURED,

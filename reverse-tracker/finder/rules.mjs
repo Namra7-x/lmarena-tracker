@@ -70,21 +70,61 @@ const NON_MODEL_COMMON_TERMS = new Set([
  * Validates whether a candidate string is a genuine AI model identifier.
  * Rejects dates, timestamps, SVG coordinates, CSS classes, encodings, AWS regions,
  * and generic programming/system tokens.
+ *
+ * When options.isStructuralCatalog, options.isPeerArray, or options.isModelProperty is true,
+ * dynamically accepts arbitrary lab codenames, frontier series, and unannounced models
+ * (e.g. 'Hydrogen', 'Argon', 'Krypton', 'Fable', 'Terra', 'Jupiter 6.1', 'Onion Alpha').
  */
-export function isValidModelIdentifier(val) {
+export function isValidModelIdentifier(val, options = {}) {
   if (!val || typeof val !== 'string') return false;
   const str = val.trim();
   const len = str.length;
 
+  const isStructural = Boolean(
+    options.isStructuralCatalog ||
+    options.isPeerArray ||
+    options.isModelProperty ||
+    options.isConfigObject
+  );
+
   // 1. Length bounds (e.g. "o1" to "deep-research-pro-preview-12-2025")
   if (len < 2 || len > 70) return false;
 
-  // 2. Must start with an ASCII letter (e.g. 'gemini', 'claude', 'o1')
+  // 2. Reject binary control characters or Unicode replacement characters
+  if (/[\x00-\x1F\x7F-\x9F\uFFFD]/.test(str)) return false;
+
+  const lower = str.toLowerCase();
+  if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
+
+  const noiseCheck = evaluateNoise(str);
+  if (noiseCheck.isNoise && noiseCheck.reason !== 'too_short') return false;
+
+  // 3. Structural validation mode (AST catalogs, AI parameters, peer arrays, property slots):
+  // Dynamically accepts frontier codenames without hardcoding
+  if (isStructural) {
+    if (!/^[a-zA-Z0-9]/.test(str)) return false;
+    if (!/^[a-zA-Z0-9_\-\.\:\/ ]+$/.test(str)) return false;
+    if (str.includes('  ')) return false;
+    // Reject programming primitives, keywords, and CSS style tokens
+    const PROGRAMMING_KEYWORDS = new Set([
+      'string', 'number', 'boolean', 'object', 'function', 'symbol', 'any', 'void',
+      'unknown', 'never', 'null', 'undefined', 'true', 'false', 'default', 'return',
+      'import', 'export', 'const', 'let', 'var', 'class', 'interface', 'type',
+      'width', 'height', 'top', 'bottom', 'left', 'right', 'center', 'auto',
+      'inherit', 'initial', 'none', 'normal', 'bold', 'italic', 'flex', 'grid', 'hidden'
+    ]);
+    if (PROGRAMMING_KEYWORDS.has(lower)) return false;
+    if (/\.(?:png|jpg|jpeg|gif|svg|webp|ico|css|scss|html|txt|log|lock|map)$/i.test(str)) return false;
+    return true;
+  }
+
+  // 4. Raw String validation mode (matches in unparsed binary strings / source text):
+  // Must start with an ASCII letter (e.g. 'gemini', 'claude', 'o1')
   // Strictly rejects dates ('01-02', '1970-01-01'), SVG ('1h-9', '43l7-4.4', '58-4.2'),
   // compiler symbols ('_call...'), and encodings starting with digits ('8859-1')
   if (!/^[a-zA-Z]/.test(str)) return false;
 
-  // 3. Must only contain valid identifier characters (supports single spaces for multi-word lab codenames like 'Onion Alpha' or 'Tell Me News')
+  // Must only contain valid identifier characters
   if (!/^[a-zA-Z0-9_\-\.\:\/ ]+$/.test(str)) return false;
   if (str.includes('  ')) return false;
   const words = str.split(' ');
@@ -93,52 +133,43 @@ export function isValidModelIdentifier(val) {
     if (!w || !/^[a-zA-Z0-9]/.test(w)) return false;
   }
 
-  // 4. Case-insensitive exact match in non-model common terms
-  const lower = str.toLowerCase();
-  if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
-
-  // 4b. Reject any noise (W3C CSS properties, SPDX licenses, media/archive extensions)
-  const noiseCheck = evaluateNoise(str);
-  if (noiseCheck.isNoise && noiseCheck.reason !== 'too_short') return false;
-
-  // 5. Date & Time format layouts (e.g. "02-jan-0", "02-jan-200", "2006-01-02", "jan-2024")
+  // Date & Time format layouts (e.g. "02-jan-0", "02-jan-200", "2006-01-02", "jan-2024")
   if (/^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[-_]\d+$/i.test(str)) return false;
   if (/^\d{1,2}[-_](?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(str)) return false;
   if (/^(?:mon|tue|wed|thu|fri|sat|sun)[-_]/i.test(str)) return false;
   if (/^(?:19|20)\d{2}[-_]\d{1,2}(?:[-_]\d{1,2})?$/.test(str)) return false;
 
-  // 6. SVG / Canvas path coordinates & commands (e.g. "1h-9", "43l7-4.4", "58-4.2", "4v-2")
+  // SVG / Canvas path coordinates & commands (e.g. "1h-9", "43l7-4.4", "58-4.2", "4v-2")
   if (/[0-9]+[hvlzsqta][0-9.-]/i.test(str)) return false;
   if (/^[a-z]?[0-9]+-[0-9.]+$/i.test(str)) return false;
 
-  // 7. Character encodings, protocols & crypto standards (e.g. "utf-8", "utf-16", "iso-8859-1", "sha-256")
+  // Character encodings, protocols & crypto standards (e.g. "utf-8", "utf-16", "iso-8859-1", "sha-256")
   if (/^(?:utf|ucs|iso|windows|cp|koi8|ascii|ansi|ebcdic|shift[-_]jis|euc)[-_]/i.test(str)) return false;
   if (/^(?:sha|md5|hmac|blake|aes|des|rsa|ecdsa|chacha|tls|ssl|rfc|fips|csa)[-_0-9]/i.test(str)) return false;
 
-  // 8. Cloud regions & network zones (e.g. "ap-southeast-2", "us-west-1", "eu-central-1")
+  // Cloud regions & network zones (e.g. "ap-southeast-2", "us-west-1", "eu-central-1")
   if (/^(?:us|eu|ap|sa|ca|me|af|cn|gov|asia)-(?:central|east|west|north|south|northeast|northwest|southeast|southwest)-\d+$/i.test(str)) return false;
 
-  // 9. Regex character ranges / tokens (e.g. "za-z0-9", "a-z0-9")
+  // Regex character ranges / tokens (e.g. "za-z0-9", "a-z0-9")
   if (/^[a-z]{1,2}-[a-z0-9]{1,2}(?:-[a-z0-9]{1,2})+$/i.test(str)) return false;
 
-  // 10. CSS / UI classes (e.g. "o2-card", "o2-btn", "o2-border", "o2-ring", "o2-muted")
+  // CSS / UI classes (e.g. "o2-card", "o2-btn", "o2-border", "o2-ring", "o2-muted")
   if (/^(?:o[1-9]|v[0-9]|col|row|flex|grid|p|m|px|py|bg|text|border|ring|shadow)-[a-z0-9_-]+$/i.test(str)) {
     if (/(?:card|btn|button|input|modal|badge|alert|text|bg|border|ring|muted|container|header|footer|row|col|flex|grid|icon|avatar|tooltip|switch|nav|sidebar|tab|label|select|checkbox|radio|wrapper|item|body|group|content|inner|outer|divider|spacer|overlay|backdrop|popup|dropdown|dialog|panel|list|tile|thumb|track|handle|knob|slot|viewport|pane|window)/i.test(str)) {
       return false;
     }
   }
 
-  // 11. OpenAI Reasoning series constraint (o1, o3, o4...)
+  // OpenAI Reasoning series constraint (o1, o3, o4...)
   if (/^o[1-9]/i.test(str)) {
-    // Only o1 and o3 can be bare 2-character identifiers; o2, o4..o9 MUST have a hyphen and model suffix
     if (/^o[24-9]$/i.test(str)) return false;
     if (!/^o[1-9](?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|reasoning|\d{4}-\d{2}-\d{2}))*$/i.test(str)) {
       return false;
     }
   }
 
-  // 12. Generic prefix and code token checks
-  if (/\.(?:rs|ts|js|jsx|tsx|go|py|c|cpp|h|json|toml|yaml|yml|md|txt|lock)$/i.test(str)) return false;
+  // Generic prefix and code token checks
+  if (/\.(?:rs|ts|js|jsx|tsx|go|py|c|cpp|h|json|toml|yaml|yml|md|txt|lock|png|jpg|svg)$/i.test(str)) return false;
   if (str.includes('/src/') || str.includes('crates.io') || str.includes('.cargo') || str.includes('node_modules')) return false;
 
   // Reject non-model software tokens
@@ -146,8 +177,8 @@ export function isValidModelIdentifier(val) {
   if (/-(?:cli|desktop|app|extension|server|package|sdk|api|web|ui|docs|install|setup|helper|service|config|build|binary|version|release|update|updater|download|installer|launcher|runtime|toolchain|workspace|editor|ide)$/i.test(str)) return false;
   // Product/feature phrases are not model IDs: codex-in-chatgpt, x-for-y.
   if (/-(?:in|on|for|with|and|to|from|of)-[a-z0-9]/i.test(str)) return false;
-  // Common build-tool / language prefixes with a model-ish suffix (vite-plus).
-  if (/^(?:vite|webpack|rollup|esbuild|next|react|vue|angular|svelte|node|npm|pnpm|yarn|bun|deno|docker|git|http|https|json|yaml|toml|xml|css|html|sql|api|sdk|cli|tui|vscode|electron|tauri|rust|cargo|python|pip|java|kotlin|swift|xcode)-/i.test(str)) {
+  // Common build-tool / library prefixes with a model-ish suffix (vite-plus, ajv-pro).
+  if (/^(?:ajv|axum|serde|tokio|tracing|vite|webpack|rollup|esbuild|next|react|vue|angular|svelte|node|npm|pnpm|yarn|bun|deno|docker|git|http|https|json|yaml|toml|xml|css|html|sql|api|sdk|cli|tui|vscode|electron|tauri|rust|cargo|python|pip|java|kotlin|swift|xcode)-/i.test(str)) {
     return false;
   }
 
@@ -164,17 +195,17 @@ export function isValidModelIdentifier(val) {
     if (!providerSlashMatch) return false;
   }
 
-  // Generic prefix check: if suffix is one of the generic code words (pro, base, code, agent, low),
+  // Generic prefix check: if suffix is one of the generic code words (pro, base, code, agent, low, max, plus),
   // ensure the prefix is not a 2-letter word or standard programming word
-  if (/-(?:pro|base|code|agent|low)$/i.test(str)) {
+  if (/-(?:pro|base|code|agent|low|max|plus)$/i.test(str)) {
     const fullStem = str.slice(0, str.lastIndexOf('-')).toLowerCase();
     if (fullStem.length <= 2) return false;
-    if (['connect', 'oauth', 'mcp', 'client', 'tool-in', 'cross', 'chisel', 'stream', 'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp', 'exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi'].some((w) => fullStem.includes(w))) {
+    if (['ajv', 'connect', 'oauth', 'mcp', 'client', 'tool-in', 'cross', 'chisel', 'stream', 'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp', 'exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi', 'table', 'btn', 'button', 'input', 'card', 'box'].some((w) => fullStem.includes(w))) {
       return false;
     }
   }
 
-  // 13. Package semver check: strings formatted like "<name>-<version>" (e.g. "axum-0.8", "hyper-1.8", "box-0.8")
+  // Package semver check: strings formatted like "<name>-<version>" (e.g. "axum-0.8", "hyper-1.8", "box-0.8")
   // are software crate/package dependencies unless they match a known model provider or end with an AI tier suffix.
   if (/^[a-zA-Z][a-zA-Z0-9_]{1,30}-[0-9]+(?:\.[0-9]+)+(?:-[0-9a-zA-Z._-]+)?$/i.test(str)) {
     const isKnownProvider = /^(?:gpt|claude|gemini|o[1-9]|deepseek|llama|qwen|mistral|kimi|lyria|imagen|chinchilla|devin|cursor|codex|whisper|sora|sonnet|opus|haiku|mythos|fable|swe)-/i.test(str);
@@ -200,8 +231,15 @@ export function isValidFeatureFlag(val) {
   const lower = str.toLowerCase();
   if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
   if (evaluateNoise(str).isNoise) return false;
-  // Reject UI DOM properties mistaken as feature flags
+
+  // Reject UI DOM properties and CSS selectors
   if (/^preview_(?:id|width|height|style|dom|element|view|node|ptr|item|modal|close|closed)/i.test(str)) return false;
+  if (/^(?:flex|grid|items|justify|content|bg|text|border|font|shadow|rounded|p|m|px|py|gap)-[a-z0-9_-]+$/i.test(str)) return false;
+  if (/^(?:aria|data)-[a-z0-9_-]+$/i.test(str)) return false;
+  if (/^(?:onClick|onBlur|onChange|onFocus|onKeyDown|onKeyUp|onSubmit|onMouseDown|onMouseUp|className|style)$/i.test(str)) return false;
+  if (/\.(?:js|mjs|cjs|ts|tsx|jsx|json|css|scss|html|png|jpg|svg)$/i.test(str)) return false;
+  if (/^(?:application|text|multipart|image|audio|video)\/[a-z0-9_-]+$/i.test(str)) return false;
+
   return true;
 }
 
@@ -400,12 +438,13 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
   // 1. Models
   for (const candidate of textCandidates) {
     for (const pat of MODEL_PATTERNS) {
+      const isSlot = /(?:model|model_slug|model_id|model_name|default_model|defaultModel|fallbackModel|reasoningModel|evalModel|chat_model|active_model|primary_model|subagent_model|selected_model)\s*[:=]/i.test(pat.source);
       const globalPat = new RegExp(pat.source, pat.flags.includes('g') ? pat.flags : pat.flags + 'g');
       let m;
       while ((m = globalPat.exec(candidate)) !== null) {
         if (m && m[1]) {
           const val = m[1].toLowerCase().trim();
-          if (isValidModelIdentifier(val)) {
+          if (isValidModelIdentifier(val, { isModelProperty: isSlot })) {
             findings.push({
               category: CATEGORIES.MODEL_ID,
               value: val,

@@ -678,10 +678,17 @@ export async function performScan(componentId, options = {}) {
   const newUrls = currentUrls.filter((item) => addedUrlSet.has(item.url));
   console.log(`   Endpoints discovered: ${currentUrls.length} (${newUrls.length} new)`);
 
-  // STEP 4: text signal matching across the full current set. This is what
-  // makes persistent/removed signals real instead of "only new strings".
+  // STEP 4: Delta-First signal matching.
+  // We scan raw text patterns ONLY on newly introduced or reintroduced strings (or all strings on first run / fullScan).
+  // Unchanged persistent strings do not need to be re-scanned for raw text patterns;
+  // their signals are preserved from the baseline without noise or re-alert spam.
+  const isFirstBaselineRun = previousStrings.length === 0;
+  const stringsToScan = (isFirstBaselineRun || (isTestRun && stringDiff.added.length === 0) || options.fullScan)
+    ? currentCleanStrings
+    : [...stringDiff.added, ...stringDiff.reintroduced];
+
   const textFindings = [];
-  for (const value of currentCleanStrings) {
+  for (const value of stringsToScan) {
     if (value.length > MAX_STRING_LENGTH) continue;
     const meta = collector.stringMeta.get(value);
     const platform = meta?.platforms?.values().next().value || 'all';
@@ -694,13 +701,37 @@ export async function performScan(componentId, options = {}) {
     }
   }
 
-  const allFindings = dedupeRawFindings([...textFindings, ...directFindings]);
-  const previousFindings = dedupeRawFindings([...(baseline.recentSignals || []), ...(baseline.hotSignals || [])]);
+  // Load previous baseline signals
+  const previousFindings = dedupeRawFindings([
+    ...(baseline.recentSignals || []),
+    ...(baseline.hotSignals || []),
+    ...(baseline.knownSignals ? Object.values(baseline.knownSignals) : []),
+  ]);
+
+  // Track historical finding keys
   const historicalFindingValues = new Set([
     ...stringHistory,
     ...(baseline.historicalSeenHashes || []),
+    ...previousFindings.map((f) => `${f.category || ''}:${f.value || ''}`),
+    ...previousFindings.map((f) => f.value),
   ]);
-  const diffResults = computeExactDiff(previousFindings, allFindings, historicalFindingValues);
+
+  // Identify previously known signals that remain active in the release
+  const currentStringLookup = new Set(currentCleanStrings);
+  const activePreviousFindings = [];
+  for (const prev of previousFindings) {
+    const isStillActive = currentStringLookup.has(prev.value) ||
+      (prev.context && currentStringLookup.has(prev.context)) ||
+      (prev.origin === 'ast' && !stringDiff.removed.includes(prev.value)) ||
+      prev.category === 'model_id' || prev.category === 'pricing';
+    if (isStillActive) {
+      activePreviousFindings.push({ ...prev, diffStatus: 'persistent' });
+    }
+  }
+
+  const allCandidateFindings = dedupeRawFindings([...textFindings, ...directFindings, ...activePreviousFindings]);
+  const diffResults = computeExactDiff(previousFindings, allCandidateFindings, historicalFindingValues);
+  const allFindings = allCandidateFindings;
 
   // STEP 5: score and rank.
   const keyOf = (finding) => `${finding.category}:${finding.value}`;
@@ -912,11 +943,28 @@ export async function performScan(componentId, options = {}) {
   const updatedHistoricalStrings = mergeStringSets(
     baseline.historicalSeenHashes || [],
     currentCleanStrings,
-  ).slice(0, 10000);
+  ).slice(0, 500000);
   const updatedHistoricalUrls = mergeStringSets(
     baseline.historicalSeenUrls || [],
     currentUrlValues,
-  ).slice(0, 5000);
+  ).slice(0, 100000);
+
+  const updatedKnownSignals = { ...(baseline.knownSignals || {}) };
+  for (const f of dedupedFindings) {
+    if (f.category && f.value) {
+      const k = `${f.category}:${f.value.toLowerCase()}`;
+      updatedKnownSignals[k] = {
+        category: f.category,
+        value: f.value,
+        score: f.score,
+        tier: f.tier,
+        activationStatus: f.activationStatus,
+        filePath: f.filePath,
+        context: f.context ? f.context.slice(0, 200) : '',
+        firstSeenVersion: updatedKnownSignals[k]?.firstSeenVersion || candidate.version,
+      };
+    }
+  }
 
   const releaseHistory = canAdvance
     ? [{
@@ -969,7 +1017,8 @@ export async function performScan(componentId, options = {}) {
     }),
     releaseHistory,
     hotSignals: canAdvance ? majorSignals.slice(0, 100) : (baseline.hotSignals || []),
-    recentSignals: canAdvance ? dedupedFindings.slice(0, 5000) : (baseline.recentSignals || []),
+    recentSignals: canAdvance ? dedupedFindings.slice(0, 10000) : (baseline.recentSignals || []),
+    knownSignals: canAdvance ? updatedKnownSignals : (baseline.knownSignals || {}),
     historicalSeenHashes: canAdvance ? updatedHistoricalStrings : (baseline.historicalSeenHashes || []),
     historicalSeenUrls: canAdvance ? updatedHistoricalUrls : (baseline.historicalSeenUrls || []),
     stringBaseline: canAdvance ? encodeStringSet(currentCleanStrings) : baseline.stringBaseline || encodeStringSet(previousStrings),

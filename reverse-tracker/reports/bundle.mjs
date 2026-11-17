@@ -11,6 +11,60 @@ import { isHumanReadableString } from '../finder/noise.mjs';
 import { deduplicateFindings } from '../finder/scorer.mjs';
 
 /**
+ * Universal ASCII Table Renderer
+ * Generates clean, robust, perfectly-aligned Unicode box-drawing tables.
+ */
+export function renderAsciiTable(headers, rows, maxColWidths = {}) {
+  if (!headers || headers.length === 0) return '';
+  const colWidths = headers.map((h, i) => {
+    const maxValLen = rows.reduce((max, row) => Math.max(max, String(row[i] == null ? '' : row[i]).length), 0);
+    const maxAllowed = maxColWidths[i] || 55;
+    return Math.min(Math.max(h.length, maxValLen), maxAllowed);
+  });
+
+  const pad = (val, len) => {
+    const s = String(val == null ? '' : val);
+    if (s.length > len) {
+      return len > 3 ? s.slice(0, len - 1) + '…' : s.slice(0, len);
+    }
+    return s + ' '.repeat(len - s.length);
+  };
+
+  const topBorder = '┌' + colWidths.map((w) => '─'.repeat(w + 2)).join('┬') + '┐';
+  const midBorder = '├' + colWidths.map((w) => '─'.repeat(w + 2)).join('┼') + '┤';
+  const botBorder = '└' + colWidths.map((w) => '─'.repeat(w + 2)).join('┴') + '┘';
+
+  const headerLine = '│ ' + headers.map((h, i) => pad(h, colWidths[i])).join(' │ ') + ' │';
+
+  const rowLines = rows.map((row) => {
+    return '│ ' + headers.map((_, i) => pad(row[i], colWidths[i])).join(' │ ') + ' │';
+  });
+
+  return [topBorder, headerLine, midBorder, ...rowLines, botBorder].join('\n');
+}
+
+/**
+ * Universal ASCII Box Renderer
+ * Wraps summary text in a clean decorative frame.
+ */
+export function renderAsciiBox(lines, title = '') {
+  const contentWidth = Math.max(
+    title ? title.length + 4 : 0,
+    ...lines.map((l) => l.length)
+  );
+  const width = Math.min(Math.max(contentWidth, 68), 96);
+  const top = title
+    ? `┌─ ${title} ${'─'.repeat(Math.max(0, width - title.length - 4))}┐`
+    : `┌${'─'.repeat(width + 2)}┐`;
+  const bot = `└${'─'.repeat(width + 2)}┘`;
+  const body = lines.map((l) => {
+    const truncated = l.length > width ? l.slice(0, width - 1) + '…' : l;
+    return `│ ${truncated}${' '.repeat(Math.max(0, width - truncated.length))} │`;
+  });
+  return [top, ...body, bot].join('\n');
+}
+
+/**
  * Generate all report files for a scan.
  *
  * @param {string} outputDir
@@ -77,13 +131,56 @@ export function generateReportBundle(outputDir, scanData) {
     tierGroups['TIER 6: 📋 OTHER REVERSE-ENGINEERING SIGNALS'] = otherLeaks;
   }
 
-  let leaksContent = `======================================================================\n`;
+  const newSignals = validLeaks.filter((f) => f.diffStatus === 'NEW' || f.diffStatus === 'REINTRODUCED');
+  const persistentSignals = validLeaks.filter((f) => f.diffStatus === 'PERSISTENT' || f.diffStatus === 'CHANGED');
+
+  let leaksContent = renderAsciiBox([
+    `Component: ${componentId} (${family || 'unknown'})`,
+    `Version:   ${oldVersion} ➔ ${version}`,
+    `Scan ID:   ${scanId}`,
+    `Timestamp: ${new Date().toISOString()}`,
+    `Leaks in Delta: ${newSignals.length}  |  Total Tracked Signals: ${validLeaks.length}`,
+  ], '🚨 LEAKS & EARLY SIGNALS REPORT') + '\n\n';
+
+  leaksContent += `======================================================================\n`;
   leaksContent += `LEAKS & EARLY SIGNALS REPORT\n`;
   leaksContent += `Component: ${componentId}\n`;
   leaksContent += `Version:   ${version}\n`;
   leaksContent += `Scan ID:   ${scanId}\n`;
   leaksContent += `Total Leaks Found: ${validLeaks.length}\n`;
   leaksContent += `======================================================================\n\n`;
+
+  // SECTION 1: VERIFIED NEW LEAKS IN DELTA (ASCII TABLE)
+  leaksContent += `🔥 [SECTION 1: VERIFIED NEW LEAKS IN THIS VERSION (DELTA)] (${newSignals.length})\n`;
+  if (newSignals.length > 0) {
+    const newHeaders = ['STATUS', 'CATEGORY', 'IDENTIFIER', 'SCORE', 'ACTIVATION', 'EVIDENCE / LOCATION'];
+    const newRows = newSignals.map((item) => [
+      item.diffStatus === 'REINTRODUCED' ? '~ REINTRO' : '🔥 NEW',
+      item.category,
+      item.value,
+      `${item.score} pts`,
+      item.activationStatus || 'UNKNOWN',
+      item.context ? item.context.replace(/\r?\n/g, ' ').slice(0, 48) : (item.filePath || 'delta'),
+    ]);
+    leaksContent += renderAsciiTable(newHeaders, newRows, { 0: 10, 1: 18, 2: 32, 3: 10, 4: 12, 5: 50 }) + '\n\n';
+  } else {
+    leaksContent += `No new unannounced leaks or feature flags were introduced in this release delta.\n\n`;
+  }
+
+  // SECTION 2: KNOWN BASELINE SIGNALS (PREVIOUS RELEASES) (ASCII TABLE)
+  if (persistentSignals.length > 0) {
+    leaksContent += `📦 [SECTION 2: KNOWN BASELINE SIGNALS (PREVIOUS RELEASES)] (${persistentSignals.length})\n`;
+    const baseHeaders = ['STATUS', 'CATEGORY', 'IDENTIFIER', 'SCORE', 'ACTIVATION', 'LOCATION'];
+    const baseRows = persistentSignals.map((item) => [
+      'PERSISTENT',
+      item.category,
+      item.value,
+      `${item.score} pts`,
+      item.activationStatus || 'UNKNOWN',
+      item.filePath ? item.filePath.slice(0, 45) : 'baseline',
+    ]);
+    leaksContent += renderAsciiTable(baseHeaders, baseRows, { 0: 12, 1: 18, 2: 32, 3: 10, 4: 12, 5: 48 }) + '\n\n';
+  }
 
   if (validLeaks.length === 0) {
     leaksContent += `No high-confidence early leaks detected in this release.\n`;
@@ -127,7 +224,22 @@ export function generateReportBundle(outputDir, scanData) {
   // -------------------------------------------------------------
   // 2. `diff.txt`: Version delta, byte sizes, string counts
   // -------------------------------------------------------------
-  let diffContent = `======================================================================\n`;
+  const stringCounts = stringDiff?.counts || null;
+  const totalCleanStr = stringCounts ? stringCounts.current : totalExtractedStrings;
+  const newCleanStr = stringCounts ? stringCounts.added : newFindings.length;
+  const remCleanStr = stringCounts ? stringCounts.removed : removedFindings.length;
+  const perCleanStr = stringCounts ? stringCounts.persistent : persistentFindings.length;
+  const reiCleanStr = stringCounts ? stringCounts.reintroduced : reintroducedFindings.length;
+
+  let diffContent = renderAsciiBox([
+    `Component: ${componentId} (${family || 'unknown'})`,
+    `Release:   ${oldVersion} -> ${version}`,
+    `Scan ID:   ${scanId}`,
+    `Timestamp: ${new Date().toISOString()}`,
+    `Delta Additions: +${newCleanStr} clean strings  |  Delta Removals: -${remCleanStr} clean strings`,
+  ], '📊 VERSION DELTA & STRUCTURAL DIFF') + '\n\n';
+
+  diffContent += `======================================================================\n`;
   diffContent += `VERSION DELTA & STRUCTURAL DIFF\n`;
   diffContent += `Component: ${componentId}\n`;
   diffContent += `Family:    ${family || 'unknown'}\n`;
@@ -138,6 +250,14 @@ export function generateReportBundle(outputDir, scanData) {
 
   if (artifactInventory.length > 0) {
     diffContent += `📦 ARTIFACT INVENTORY:\n`;
+    const artHeaders = ['TARGET', 'FORMAT', 'SIZE', 'SHA256 CHECKSUM'];
+    const artRows = artifactInventory.map((art) => [
+      art.target || 'target',
+      art.format || 'bin',
+      art.size ? (art.size / (1024 * 1024)).toFixed(2) + ' MB' : 'unknown',
+      art.sha256 ? String(art.sha256).slice(0, 16) + '…' : 'unknown',
+    ]);
+    diffContent += renderAsciiTable(artHeaders, artRows, { 0: 20, 1: 10, 2: 12, 3: 20 }) + '\n\n';
     for (const art of artifactInventory) {
       const sizeMb = art.size ? (art.size / (1024 * 1024)).toFixed(2) + ' MB' : 'unknown';
       diffContent += `  • ${art.target || 'target'} (${art.format || 'bin'}): ${sizeMb}\n`;
@@ -145,13 +265,23 @@ export function generateReportBundle(outputDir, scanData) {
     diffContent += `\n`;
   }
 
-  const stringCounts = stringDiff?.counts || null;
   diffContent += `📊 STRING DELTA METRICS:\n`;
-  diffContent += `  • Total Clean Strings:            ${stringCounts ? stringCounts.current : totalExtractedStrings}\n`;
-  diffContent += `  • Newly Introduced Strings:       ${stringCounts ? stringCounts.added : newFindings.length}\n`;
-  diffContent += `  • Deprecated / Removed Strings:   ${stringCounts ? stringCounts.removed : removedFindings.length}\n`;
-  diffContent += `  • Persistent Strings:             ${stringCounts ? stringCounts.persistent : persistentFindings.length}\n`;
-  diffContent += `  • Reintroduced Strings:           ${stringCounts ? stringCounts.reintroduced : reintroducedFindings.length}\n`;
+  const metricHeaders = ['METRIC DESCRIPTION', 'COUNT'];
+  const metricRows = [
+    ['Total Clean Strings Analyzed', String(totalCleanStr)],
+    ['Newly Introduced Strings (Delta)', `+${newCleanStr}`],
+    ['Deprecated / Removed Strings', `-${remCleanStr}`],
+    ['Persistent Unchanged Strings', String(perCleanStr)],
+    ['Reintroduced Historical Strings', String(reiCleanStr)],
+    ['Signal Ratio (New / Persistent / Removed)', `${newFindings.length} / ${persistentFindings.length} / ${removedFindings.length}`],
+  ];
+  diffContent += renderAsciiTable(metricHeaders, metricRows, { 0: 45, 1: 15 }) + '\n\n';
+
+  diffContent += `  • Total Clean Strings:            ${totalCleanStr}\n`;
+  diffContent += `  • Newly Introduced Strings:       ${newCleanStr}\n`;
+  diffContent += `  • Deprecated / Removed Strings:   ${remCleanStr}\n`;
+  diffContent += `  • Persistent Strings:             ${perCleanStr}\n`;
+  diffContent += `  • Reintroduced Strings:           ${reiCleanStr}\n`;
   diffContent += `  • Signal New / Persistent / Removed: ${newFindings.length} / ${persistentFindings.length} / ${removedFindings.length}\n\n`;
 
   const macOnly = platformAsymmetry.macOnly || [];
@@ -389,7 +519,14 @@ export function generateReportBundle(outputDir, scanData) {
     urlsByCategory[cat].push(item);
   }
 
-  let urlsContent = `======================================================================\n`;
+  let urlsContent = renderAsciiBox([
+    `Component: ${componentId}`,
+    `Version:   ${version}`,
+    `Scan ID:   ${scanId}`,
+    `Total Discovered Endpoints: ${urlsInventory.length}  |  New Endpoints: ${newUrls.length}`,
+  ], '🌐 APPLICATION ENDPOINTS & ROUTES INVENTORY') + '\n\n';
+
+  urlsContent += `======================================================================\n`;
   urlsContent += `APPLICATION ENDPOINTS & ROUTES INVENTORY\n`;
   urlsContent += `Component: ${componentId}\n`;
   urlsContent += `Version:   ${version}\n`;
@@ -400,6 +537,13 @@ export function generateReportBundle(outputDir, scanData) {
 
   if (newUrls.length > 0) {
     urlsContent += `🔥 [NEWLY INTRODUCED ENDPOINTS IN THIS RELEASE] (${newUrls.length})\n`;
+    const newEpHeaders = ['STATUS', 'CATEGORY', 'ENDPOINT URL'];
+    const newEpRows = newUrls.map((nu) => [
+      '🔥 NEW',
+      typeof nu === 'string' ? 'NEW' : (nu.category || 'NEW'),
+      typeof nu === 'string' ? nu : nu.url,
+    ]);
+    urlsContent += renderAsciiTable(newEpHeaders, newEpRows, { 0: 10, 1: 25, 2: 60 }) + '\n';
     urlsContent += `----------------------------------------------------------------------\n`;
     for (const nu of newUrls) {
       const uStr = typeof nu === 'string' ? nu : nu.url;
@@ -428,13 +572,48 @@ export function generateReportBundle(outputDir, scanData) {
   // -------------------------------------------------------------
   const modelFindings = validLeaks.filter((f) => f.category === 'model_id');
   const pricingFindings = validLeaks.filter((f) => f.category === 'pricing');
-  let modelsContent = `======================================================================\n`;
+
+  let modelsContent = renderAsciiBox([
+    `Component: ${componentId}`,
+    `Version:   ${version}`,
+    `Scan ID:   ${scanId}`,
+    `Extracted Models: ${modelFindings.length}  |  Pricing Tables: ${pricingFindings.length}`,
+  ], '🤖 MODELS & PRICING TABLE INVENTORY') + '\n\n';
+
+  modelsContent += `======================================================================\n`;
   modelsContent += `MODELS & PRICING TABLE INVENTORY\n`;
   modelsContent += `Component: ${componentId}\n`;
   modelsContent += `Version:   ${version}\n`;
   modelsContent += `Scan ID:   ${scanId}\n`;
   modelsContent += `Models: ${modelFindings.length} · Pricing rows: ${pricingFindings.length}\n`;
   modelsContent += `======================================================================\n\n`;
+
+  if (modelFindings.length > 0) {
+    modelsContent += `🤖 [MODEL CATALOG TABLE] (${modelFindings.length})\n`;
+    const modelHeaders = ['MODEL IDENTIFIER', 'STATUS', 'SCORE', 'TIER', 'ACTIVATION', 'ORIGIN'];
+    const modelRows = modelFindings.map((m) => [
+      m.value,
+      m.diffStatus === 'NEW' ? '🔥 NEW' : (m.diffStatus || 'ACTIVE'),
+      `${m.score || 0} pts`,
+      m.tier || 'SIGNAL',
+      m.activationStatus || 'UNKNOWN',
+      m.discoveryMethod || m.origin || 'ast',
+    ]);
+    modelsContent += renderAsciiTable(modelHeaders, modelRows, { 0: 30, 1: 10, 2: 10, 3: 16, 4: 12, 5: 22 }) + '\n\n';
+  }
+
+  if (pricingFindings.length > 0) {
+    modelsContent += `💵 [PRICING RATES TABLE] (${pricingFindings.length})\n`;
+    const priceHeaders = ['MODEL / TIER', 'INPUT PRICE/1M', 'OUTPUT PRICE/1M', 'STATUS', 'SOURCE VALUE'];
+    const priceRows = pricingFindings.map((p) => [
+      p.model || p.value.split('|')[0].trim(),
+      p.inputPrice != null ? `$${p.inputPrice}` : (p.related?.inputPrice != null ? `$${p.related.inputPrice}` : '?'),
+      p.outputPrice != null ? `$${p.outputPrice}` : (p.related?.outputPrice != null ? `$${p.related.outputPrice}` : '?'),
+      p.diffStatus === 'NEW' ? '🔥 NEW' : (p.diffStatus || 'ACTIVE'),
+      p.value,
+    ]);
+    modelsContent += renderAsciiTable(priceHeaders, priceRows, { 0: 24, 1: 15, 2: 15, 3: 10, 4: 40 }) + '\n\n';
+  }
 
   modelsContent += `🤖 [MODELS & CODENAMES] (${modelFindings.length})\n`;
   modelsContent += `----------------------------------------------------------------------\n`;
