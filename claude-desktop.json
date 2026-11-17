@@ -1,7 +1,7 @@
 {
   "componentId": "claude-desktop",
   "version": "build-20261105-192827",
-  "alertedVersion": "build-20261105-192827",
+  "alertedVersion": "build-20261105-192829",
   "releaseId": "claude-desktop-build-20261105-192827",
   "channel": "stable",
   "identityFingerprint": "f8b66c7cdad49d68129e3928bcd9e1f2612185cda0de682bce2cbbac48cff147",
@@ -6412,12 +6412,24 @@
   },
   "schemaVersion": 2,
   "deliveredVersion": "build-20261105-192827",
-  "observedVersion": "build-20261105-192827",
+  "observedVersion": "build-20261105-192829",
   "scannedVersion": "build-20261105-192827",
   "releaseKey": "9cd680bbad41b09a563f38a1867f9a58",
   "versionScheme": "build",
-  "lastDeliveryStatus": "DELIVERED",
-  "pendingDelivery": null,
+  "lastDeliveryStatus": "ALERT_SENT",
+  "pendingDelivery": {
+    "scanId": "CA-20261117-002",
+    "version": "build-20261105-192829",
+    "releaseKey": "a76ee92fcf08a2cceae38f9bbae52864",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 48,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-17T16:18:44.981Z",
+    "updatedAt": "2026-11-17T16:18:44.981Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CA-20261117-001",
