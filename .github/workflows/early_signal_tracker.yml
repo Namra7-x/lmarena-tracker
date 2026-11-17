@@ -25,7 +25,7 @@ permissions:
 jobs:
   scan-family:
     name: Track ${{ matrix.family }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ai-tracker-${{ matrix.family }}
@@ -43,14 +43,14 @@ jobs:
 
     steps:
       - name: Checkout Code Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: main
           fetch-depth: 1
           show-progress: false
 
       - name: Checkout State Branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         continue-on-error: true
         with:
           ref: state/${{ matrix.family }}
@@ -64,7 +64,7 @@ jobs:
           ls -la state/ 2>/dev/null || true
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: 'npm'
@@ -83,7 +83,7 @@ jobs:
 
       - name: Cache GoReSym Binary
         id: cache-goresym
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /usr/local/bin/GoReSym
           key: goresym-v3.4.1-linux-x64
@@ -180,7 +180,7 @@ jobs:
 
       - name: Upload Scan Evidence Artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: reports-${{ matrix.family }}
           path: reports/
