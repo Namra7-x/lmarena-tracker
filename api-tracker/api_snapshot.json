@@ -1,7 +1,7 @@
 {
   "totalGroups": 86,
   "totalModels": 190,
-  "lastUpdated": "2026-11-17T02:08:42.934Z",
+  "lastUpdated": "2026-11-17T06:13:48.667Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -2037,9 +2037,9 @@
         "contextWindow": 262144,
         "maxInputTokens": 245760,
         "maxOutputTokens": 16384,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
+        "maxReasoningTokens": 16384,
+        "reasoningMaxInputTokens": 245760,
+        "reasoningMaxOutputTokens": 16384
       },
       "inferenceMetadata": {
         "requestModality": [
@@ -2086,7 +2086,10 @@
         "modelInfo": {
           "contextWindow": 262144,
           "maxInputTokens": 245760,
-          "maxOutputTokens": 16384
+          "maxReasoningTokens": 16384,
+          "reasoningMaxInputTokens": 245760,
+          "maxOutputTokens": 16384,
+          "reasoningMaxOutputTokens": 16384
         },
         "provider": "qwen",
         "permissions": {
