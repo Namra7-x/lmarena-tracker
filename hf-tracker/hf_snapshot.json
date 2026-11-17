@@ -23182,7 +23182,7 @@
       },
       "nvidia/llama-nemotron-67d92346030a2691293f200b": {
         "title": "Llama Nemotron",
-        "lastUpdated": "2026-10-20T13:09:31.928Z",
+        "lastUpdated": "2026-11-13T08:29:31.522Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Llama-3_3-Nemotron-Super-49B-v1_5",
@@ -23281,7 +23281,7 @@
       },
       "nvidia/physical-ai-67c643edbb024053dcbcd6d8": {
         "title": "Physical AI",
-        "lastUpdated": "2026-10-20T13:09:32.070Z",
+        "lastUpdated": "2026-11-13T08:29:31.541Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/PhysicalAI-Autonomous-Vehicles-NuRec",
@@ -24130,6 +24130,202 @@
           "nvidia/Nemotron-Labs-Sigma-3B-instruct",
           "nvidia/Nemotron-Labs-Sigma-8B",
           "nvidia/Nemotron-Labs-Sigma-8B-instruct"
+        ]
+      },
+      "nvidia/llama-nemotron-feedback-edit-inference-time-scaling-67d921d861f369297a46bb08": {
+        "title": "Llama Nemotron Feedback-Edit Inference-Time Scaling",
+        "lastUpdated": "2026-11-13T08:29:31.549Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Llama-3.3-Nemotron-70B-Feedback",
+          "nvidia/Llama-3.3-Nemotron-70B-Edit",
+          "nvidia/Llama-3.3-Nemotron-70B-Select",
+          "nvidia/HelpSteer3"
+        ]
+      },
+      "nvidia/cosmos-reason1-67c9e926206426008f1da1b7": {
+        "title": "Cosmos-Reason1",
+        "lastUpdated": "2026-11-13T08:29:31.535Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Cosmos-Reason1-7B",
+          "nvidia/Cosmos-Reason1-RL-Dataset",
+          "nvidia/Cosmos-Reason1-Benchmark",
+          "nvidia/Cosmos-Reason1-SFT-Dataset"
+        ]
+      },
+      "nvidia/cosmos-transfer1-67c9d328196453be6e568d3e": {
+        "title": "Cosmos-Transfer1",
+        "lastUpdated": "2026-11-13T08:29:31.534Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Cosmos-Transfer1-7B",
+          "nvidia/Cosmos-Transfer1-7B-Sample-AV",
+          "nvidia/Cosmos-Transfer1-7B-Sample-AV-Data-Example",
+          "nvidia/Cosmos-Transfer1-7B-4KUpscaler"
+        ]
+      },
+      "nvidia/cosmos-predict1-67c9d1b97678dbf7669c89a7": {
+        "title": "Cosmos-Predict1",
+        "lastUpdated": "2026-11-13T08:29:31.546Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Cosmos-Predict1-4B",
+          "nvidia/Cosmos-Predict1-5B-Video2World",
+          "nvidia/Cosmos-Predict1-7B-Text2World",
+          "nvidia/Cosmos-Predict1-7B-Video2World"
+        ]
+      },
+      "nvidia/nemotron-ultralong-67c773cfe53a9a518841fbbe": {
+        "title": "Nemotron-UltraLong",
+        "lastUpdated": "2026-11-13T08:29:31.541Z",
+        "itemCount": 3,
+        "itemIds": [
+          "nvidia/Llama-3.1-Nemotron-8B-UltraLong-1M-Instruct",
+          "nvidia/Llama-3.1-Nemotron-8B-UltraLong-4M-Instruct",
+          "nvidia/Llama-3.1-Nemotron-8B-UltraLong-2M-Instruct"
+        ]
+      },
+      "nvidia/nvila-speech-audio-setups-67bca44a373e04e5e20a80b5": {
+        "title": "NVILA-Speech-Audio-Setups",
+        "lastUpdated": "2026-11-13T08:29:31.534Z",
+        "itemCount": 0,
+        "itemIds": []
+      },
+      "nvidia/qlip-67a478054fce07a7be99d5cd": {
+        "title": "QLIP",
+        "lastUpdated": "2026-11-13T08:29:31.600Z",
+        "itemCount": 3,
+        "itemIds": [
+          "nvidia/QLIP-L-14-392",
+          "nvidia/QLIP-B-8-256",
+          "nvidia/QLIP-B-16-256"
+        ]
+      },
+      "nvidia/dmc-678941faad6b9dba60f06e42": {
+        "title": "DMC",
+        "lastUpdated": "2026-11-13T08:29:31.594Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Llama-2-7B-DMC-4x",
+          "nvidia/Llama-2-7B-DMC-8x",
+          "nvidia/Llama-2-13B-DMC-4x",
+          "nvidia/Llama-2-13B-DMC-8x"
+        ]
+      },
+      "nvidia/acemath-678917d12f09885479d549fe": {
+        "title": "AceMath",
+        "lastUpdated": "2026-11-13T08:29:31.576Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/AceMath-1.5B-Instruct",
+          "nvidia/AceMath-7B-Instruct",
+          "nvidia/AceMath-72B-Instruct",
+          "nvidia/AceMath-7B-RM"
+        ]
+      },
+      "nvidia/nemoguard-678170a7888b11b28838198c": {
+        "title": "NemoGuard",
+        "lastUpdated": "2026-11-13T08:29:31.612Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Aegis-AI-Content-Safety-Dataset-2.0",
+          "nvidia/llama-3.1-nemoguard-8b-topic-control",
+          "nvidia/llama-3.1-nemoguard-8b-content-safety",
+          "nvidia/CantTalkAboutThis-Topic-Control-Dataset"
+        ]
+      },
+      "nvidia/eagle-6764ba887fa1ef387f7df067": {
+        "title": "Eagle",
+        "lastUpdated": "2026-11-13T08:29:31.576Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Eagle2-1B",
+          "nvidia/Eagle2-2B",
+          "nvidia/Eagle2-9B",
+          "nvidia/Eagle2-Demo"
+        ]
+      },
+      "nvidia/cosmos-preidct1-6751e884dc10e013a0a0d8e6": {
+        "title": "Cosmos-Preidct1",
+        "lastUpdated": "2026-11-13T08:29:31.589Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Cosmos-1.0-Guardrail",
+          "nvidia/Cosmos-1.0-Autoregressive-4B",
+          "nvidia/Cosmos-1.0-Autoregressive-5B-Video2World",
+          "nvidia/Cosmos-1.0-Autoregressive-12B"
+        ]
+      },
+      "nvidia/nemo-audio-codecs-674f57ab6cb1324f997b5d5b": {
+        "title": "NeMo Audio Codecs",
+        "lastUpdated": "2026-11-13T08:29:31.577Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/nemo-nano-codec-22khz-1.89kbps-21.5fps",
+          "nvidia/low-frame-rate-speech-codec-22khz",
+          "nvidia/nemo-nano-codec-22khz-1.78kbps-12.5fps",
+          "nvidia/nemo-nano-codec-22khz-0.6kbps-12.5fps"
+        ]
+      },
+      "nvidia/hymba-673c35516c12c4b98b5e845f": {
+        "title": "Hymba",
+        "lastUpdated": "2026-11-13T08:29:31.587Z",
+        "itemCount": 3,
+        "itemIds": [
+          "nvidia/Hymba-1.5B-Instruct",
+          "nvidia/Hymba-1.5B-Base",
+          "2411.13676"
+        ]
+      },
+      "nvidia/optimized-onnx-models-for-nvidia-rtx-gpus-67373fe7c006ebc1df310613": {
+        "title": "Optimized ONNX models for NVIDIA RTX GPUs",
+        "lastUpdated": "2026-11-13T08:29:31.581Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Gemma-2b-it-ONNX-INT4",
+          "nvidia/Meta-Llama-3.1-8B-Instruct-ONNX-INT4",
+          "nvidia/Meta-Llama-3.2-3B-Instruct-ONNX-INT4",
+          "nvidia/Mistral-7B-Instruct-v0.3-ONNX-INT4"
+        ]
+      },
+      "nvidia/cosmos-tokenizer1-672b93023add81b66a8ff8e6": {
+        "title": "Cosmos-Tokenizer1",
+        "lastUpdated": "2026-11-13T08:29:31.536Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Cosmos-0.1-Tokenizer-CI8x8",
+          "nvidia/Cosmos-0.1-Tokenizer-CI16x16",
+          "nvidia/Cosmos-0.1-Tokenizer-DI8x8",
+          "nvidia/Cosmos-0.1-Tokenizer-DI16x16"
+        ]
+      },
+      "nvidia/riva-67201aa7c7b8c87bbcc76b83": {
+        "title": "Riva",
+        "lastUpdated": "2026-11-13T08:29:31.634Z",
+        "itemCount": 0,
+        "itemIds": []
+      },
+      "nvidia/llama-31-nemotron-70b-670e93cd366feea16abc13d8": {
+        "title": "Llama-3.1-Nemotron-70B",
+        "lastUpdated": "2026-11-13T08:29:31.544Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
+          "nvidia/Llama-3.1-Nemotron-70B-Reward-HF",
+          "nvidia/HelpSteer2",
+          "2410.01257"
+        ]
+      },
+      "nvidia/openmath-2-66fb142317d86400783d2c7b": {
+        "title": "OpenMath-2",
+        "lastUpdated": "2026-11-13T08:29:31.632Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/OpenMath2-Llama3.1-8B",
+          "nvidia/OpenMath2-Llama3.1-70B",
+          "nvidia/OpenMathInstruct-2",
+          "nvidia/OpenMath2-Llama3.1-8B-nemo"
         ]
       }
     }
@@ -29050,7 +29246,7 @@
     "models": {
       "LiquidAI/LFM2.5-24B-A2B-GGUF": {
         "createdAt": "2026-10-09T18:03:23.000Z",
-        "lastModified": "2026-11-17T10:06:30.000Z",
+        "lastModified": "2026-11-17T10:47:24.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
