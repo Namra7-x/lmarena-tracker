@@ -146,6 +146,7 @@ export async function detectChanges(familyId = null, options = {}) {
         pending &&
         (pending.releaseKey === releaseKey || pending.version === candidate.version) &&
         pending.status !== 'DELIVERED' &&
+        (pending.failedFiles?.length > 0 || !pending.completionSent || pending.status === 'DELIVERY_FAILED' || pending.status === 'COMPLETION_FAILED' || pending.status === 'ALERTED') &&
         pending.alertSent !== false
       );
       const legacyResume = Boolean(
@@ -153,11 +154,14 @@ export async function detectChanges(familyId = null, options = {}) {
         baseline?.deliveredVersion !== candidate.version
       );
       // Older state files can claim COMPLETE/PARTIAL without a delivery ledger.
-      // Recover the missing reports without sending another version alert.
+      // Recover the missing reports without sending another version alert, but NEVER loop if
+      // this version was already scanned or delivered.
       const incompleteSameVersion = Boolean(
         baseline &&
         ['PARTIAL', 'FAILED'].includes(baseline.coverageState) &&
         baseline.version === candidate.version &&
+        baseline.scannedVersion !== candidate.version &&
+        baseline.deliveredVersion !== candidate.version &&
         !pending
       );
 
@@ -176,6 +180,21 @@ export async function detectChanges(familyId = null, options = {}) {
       }
 
       if (pendingResume || legacyResume) {
+        const deliveriesForVersion = (baseline?.deliveryLedger || []).filter(
+          (entry) => entry.version === candidate.version && (entry.deliveredFiles?.length || 0) > 0,
+        ).length;
+
+        if (deliveriesForVersion >= 2) {
+          console.log(`  ✓ ${compId}: Version ${candidate.version} already delivered ${deliveriesForVersion} times. Settling pending delivery.`);
+          saveComponentState(stateDir, compId, {
+            ...baseline,
+            pendingDelivery: null,
+            deliveredVersion: candidate.version,
+            version: candidate.version,
+          });
+          continue;
+        }
+
         console.log(`  ↻ ${compId}: Resuming delivery for ${candidate.version} (${pending?.status || 'ALERTED_NOT_DELIVERED'}) without a duplicate alert.`);
         changes.push({
           componentId: compId,

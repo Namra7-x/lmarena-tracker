@@ -54,6 +54,13 @@ const MAX_BINARY_SCAN_BYTES = Number.parseInt(process.env.MAX_BINARY_SCAN_BYTES 
 const MAX_STRING_LENGTH = 4000;
 
 function sleep(ms) {
+  if (
+    process.env.NODE_ENV === 'test' ||
+    process.env.FAST_TIMERS === 'true' ||
+    process.env.DISABLE_STATE_CHECKPOINT === 'true'
+  ) {
+    return new Promise((resolve) => setTimeout(resolve, Math.min(ms, 5)));
+  }
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

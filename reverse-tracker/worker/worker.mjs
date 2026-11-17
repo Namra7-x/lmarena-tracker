@@ -96,7 +96,7 @@ async function triggerRepositoryDispatch(githubToken, family, componentId, versi
       'User-Agent': 'Cloudflare-Worker',
     },
     body: JSON.stringify({
-      event_type: 'tracker',
+      event_type: 'early_signal_tracker',
       client_payload: {
         family,
         componentId,
