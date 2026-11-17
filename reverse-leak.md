@@ -32,9 +32,9 @@ Whenever an AI vendor releases a new version or artifact update, the tracker:
 | **Google** | `gemini-desktop` | Desktop App | `gemini.google/download/{mac,windows}/` (302 redirects) | macOS, Windows |
 | **Google** | `antigravity-desktop` | Desktop App | Cloud Run updater API (`antigravity-hub-auto-updater...`) | macOS, Windows |
 | **Google** | `antigravity-cli` | CLI | Cloud Run manifests (`antigravity-cli-auto-updater...`) | macOS, Windows, Linux |
-| **Cursor** | `cursor-desktop` | Desktop App | ToDesktop feeds (`download.todesktop.com/...`) | macOS, Windows |
+| **Cursor** | `cursor-desktop` | Desktop App | Official download API (`cursor.com/api/download`) | macOS, Windows, Linux |
 | **Cursor** | `cursor-cli` | CLI | `cursor.com/install` & `downloads.cursor.com/lab/...` | macOS, Windows, Linux |
-| **Devin** | `devin-desktop` | Desktop App | Homebrew cask -> `windsurf-stable.codeiumdata.com` | macOS, Windows |
+| **Devin** | `devin-desktop` | Desktop App | Official redirect API (`windsurf.com/api/windsurf/download-redirect`) -> `windsurf-stable.codeiumdata.com` | macOS, Windows, Linux |
 | **Devin** | `devin-cli` | CLI | Static manifest `static.devin.ai/cli/current/...` | macOS, Windows, Linux |
 | **Other** | `opencode-cli` | CLI | npm `@opencode/cli` (v2 channel) | macOS, Windows, Linux |
 | **Other** | `droid-cli` | CLI | npm `droid` & `downloads.factory.ai/factory-cli/...` | macOS, Windows, Linux |
@@ -45,7 +45,7 @@ Whenever an AI vendor releases a new version or artifact update, the tracker:
 
 ```mermaid
 flowchart TD
-    A["1. Discovery Adapter (npm, ToDesktop, Cloud Run, Brew)"] --> B{"Identity Fingerprint Changed?"}
+    A["1. Discovery Adapter (npm, official APIs, Cloud Run, CDN redirects)"] --> B{"Identity Fingerprint Changed?"}
     B -- No / Diagnostic Drift --> C["🛑 STOP (Silent Exit, 0 Messages)"]
     B -- Yes (Version Bump / Byte Change) --> D["2. Send Immediate Telegram Alert"]
     D --> E["3. Secure Download & Multi-Encoding Extraction"]

@@ -26,13 +26,42 @@ import { extractSourceMap, extractInlineSourceMaps } from './sourcemap.mjs';
 const MAX_TOTAL_EXTRACTED_BYTES = 1024 * 1024 * 1024; // 1 GB safe expansion cap
 const MAX_FILE_COUNT = 10000;
 const MAX_ARCHIVE_DEPTH = 3;
-const MAX_SINGLE_FILE_BYTES = 100 * 1024 * 1024; // 100MB per file cap to protect V8 heap
+const SEVEN_ZIP_TIMEOUT_MS = Number.parseInt(process.env.SEVENZIP_TIMEOUT_MS || '180000', 10);
+// Keep the full-extraction fallback bounded, but allow the ~200 MB Windows
+// installers to recover when a selective pass does not match their layout.
+const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = 260 * 1024 * 1024;
+// Large ZIP/TAR packages (desktop app bundles) can expand past the built-in
+// safe memory limit. Prefer selective 7-Zip extraction, then fall back to the
+// in-process readers when the tool is unavailable.
+const SEVEN_ZIP_PREFERRED_BYTES = 100 * 1024 * 1024;
+
+// Files that actually contain feature/model/endpoint evidence. Extracting only
+// these from a 900 MB DMG is dramatically faster than unpacking the whole app.
+const SEVEN_ZIP_INCLUDE_PATTERNS = [
+  '*.asar',
+  '*.asar.unpacked/*',
+  '*.js',
+  '*.mjs',
+  '*.cjs',
+  '*.json',
+  '*.plist',
+  '*.map',
+  '*.wasm',
+  '*.exe',
+  '*.node',
+  '*.yml',
+  '*.yaml',
+  '*.txt',
+  '*.html',
+  '*.css',
+  '*.md',
+];
 
 /**
  * Check if 7z or 7za CLI is available on the host system.
  */
 function findSevenZipCommand() {
-  for (const cmd of ['7z', '7za']) {
+  for (const cmd of ['7z', '7za', '7zz']) {
     try {
       const res = spawnSync(cmd, ['-h'], { encoding: 'utf8', timeout: 2000 });
       if (res.status === 0 || res.stdout?.includes('7-Zip') || res.stderr?.includes('7-Zip')) {
@@ -43,6 +72,68 @@ function findSevenZipCommand() {
     }
   }
   return null;
+}
+
+let gnuTarCommandCache;
+
+/**
+ * GNU tar is available on the Ubuntu runners and can stream a large .tar.gz
+ * while extracting only the evidence patterns. 7-Zip handles .tar.gz as two
+ * nested layers, so using it directly on a tarball can silently extract only
+ * the inner .tar file.
+ */
+function findGnuTarCommand() {
+  if (gnuTarCommandCache !== undefined) return gnuTarCommandCache;
+  try {
+    const res = spawnSync('tar', ['--version'], { encoding: 'utf8', timeout: 2000 });
+    gnuTarCommandCache = res.status === 0 && /GNU tar/i.test(`${res.stdout || ''}${res.stderr || ''}`)
+      ? 'tar'
+      : null;
+  } catch {
+    gnuTarCommandCache = null;
+  }
+  return gnuTarCommandCache;
+}
+
+function extractWithGnuTar(buffer, filename, cmd, gzipped) {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tar-extract-'));
+  const tmpInput = path.join(tmpDir, filename || 'archive.tar.gz');
+  const tmpOut = path.join(tmpDir, 'out');
+  fs.mkdirSync(tmpOut, { recursive: true });
+
+  try {
+    fs.writeFileSync(tmpInput, buffer);
+    const args = [
+      gzipped ? '-xzf' : '-xf',
+      tmpInput,
+      '-C',
+      tmpOut,
+      '--wildcards',
+      '--no-anchored',
+      ...SEVEN_ZIP_INCLUDE_PATTERNS,
+    ];
+    const proc = spawnSync(cmd, args, {
+      timeout: SEVEN_ZIP_TIMEOUT_MS,
+      maxBuffer: 50 * 1024 * 1024,
+    });
+
+    // GNU tar exits non-zero when one of several patterns is absent, even
+    // though the other patterns were extracted successfully. Trust the output
+    // directory over the aggregate exit code.
+    const walked = walkExtractedFiles(tmpOut);
+    const interrupted = Boolean(proc.error || proc.signal);
+    if (walked.files.length > 0) {
+      return { success: true, files: walked.files, truncated: walked.truncated || interrupted };
+    }
+    if (proc.status !== 0 || interrupted) return { success: false, files: [], truncated: false };
+    return { success: true, files: [], truncated: false };
+  } finally {
+    try {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    } catch {
+      // ignore cleanup errors
+    }
+  }
 }
 
 /**
@@ -94,7 +185,75 @@ export function getFilePriority(filePath, buffer = null) {
 /**
  * Extract an installer or complex archive using 7-Zip.
  */
-function extractWithSevenZip(buffer, filename, cmd) {
+function evidencePriority(relPath) {
+  const lower = String(relPath).toLowerCase();
+  // Electron app bundles are the highest-value evidence and are often stored
+  // next to hundreds of MB of native libraries. Read them first so a size cap
+  // can never skip app.asar in favour of a vendor .dylib.
+  if (lower.endsWith('.asar') || lower.includes('.asar.unpacked/')) return 0;
+  return getFilePriority(lower) + 1;
+}
+
+function walkExtractedFiles(dir) {
+  const entries = [];
+
+  function collect(currentDir, prefix = '') {
+    if (!fs.existsSync(currentDir)) return;
+    for (const entry of fs.readdirSync(currentDir, { withFileTypes: true })) {
+      const fullPath = path.join(currentDir, entry.name);
+      const relPath = prefix ? `${prefix}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) {
+        collect(fullPath, relPath);
+      } else if (entry.isFile()) {
+        try {
+          entries.push({
+            path: relPath,
+            fullPath,
+            size: fs.statSync(fullPath).size,
+          });
+        } catch {
+          // A file can disappear if 7-Zip is still finishing; ignore it.
+        }
+      }
+    }
+  }
+
+  collect(dir);
+  entries.sort((a, b) => {
+    const priority = evidencePriority(a.path) - evidencePriority(b.path);
+    if (priority !== 0) return priority;
+    if (a.size !== b.size) return a.size - b.size;
+    return a.path.localeCompare(b.path);
+  });
+
+  const files = [];
+  let totalBytes = 0;
+  let truncated = false;
+  for (const entry of entries) {
+    if (files.length >= MAX_FILE_COUNT) {
+      truncated = true;
+      break;
+    }
+    if (totalBytes + entry.size > MAX_TOTAL_EXTRACTED_BYTES) {
+      truncated = true;
+      continue;
+    }
+    try {
+      files.push({
+        path: entry.path,
+        buffer: fs.readFileSync(entry.fullPath),
+        size: entry.size,
+      });
+      totalBytes += entry.size;
+    } catch {
+      truncated = true;
+    }
+  }
+
+  return { files, truncated };
+}
+
+function runSevenZip(buffer, filename, cmd, args) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), '7z-extract-'));
   const tmpInput = path.join(tmpDir, filename || 'archive.bin');
   const tmpOut = path.join(tmpDir, 'out');
@@ -102,43 +261,17 @@ function extractWithSevenZip(buffer, filename, cmd) {
 
   try {
     fs.writeFileSync(tmpInput, buffer);
-    const proc = spawnSync(cmd, ['x', '-y', `-o${tmpOut}`, tmpInput], {
-      timeout: 30000,
+    const proc = spawnSync(cmd, [...args, `-o${tmpOut}`, tmpInput], {
+      timeout: SEVEN_ZIP_TIMEOUT_MS,
       maxBuffer: 50 * 1024 * 1024,
     });
 
     if (proc.status !== 0) {
-      return { success: false, files: [] };
+      return { success: false, files: [], truncated: false };
     }
 
-    const files = [];
-    let totalBytes = 0;
-
-    function walkDir(dir, prefix = '') {
-      if (!fs.existsSync(dir) || files.length >= MAX_FILE_COUNT) return;
-      const entries = fs.readdirSync(dir, { withFileTypes: true });
-      for (const entry of entries) {
-        if (files.length >= MAX_FILE_COUNT) break;
-        const fullPath = path.join(dir, entry.name);
-        const relPath = prefix ? `${prefix}/${entry.name}` : entry.name;
-        if (entry.isDirectory()) {
-          walkDir(fullPath, relPath);
-        } else if (entry.isFile()) {
-          const stat = fs.statSync(fullPath);
-          if (totalBytes + stat.size <= MAX_TOTAL_EXTRACTED_BYTES) {
-            files.push({
-              path: relPath,
-              buffer: fs.readFileSync(fullPath),
-              size: stat.size,
-            });
-            totalBytes += stat.size;
-          }
-        }
-      }
-    }
-
-    walkDir(tmpOut);
-    return { success: true, files };
+    const walked = walkExtractedFiles(tmpOut);
+    return { success: true, files: walked.files, truncated: walked.truncated };
   } finally {
     try {
       fs.rmSync(tmpDir, { recursive: true, force: true });
@@ -146,6 +279,36 @@ function extractWithSevenZip(buffer, filename, cmd) {
       // ignore cleanup errors
     }
   }
+}
+
+/**
+ * Extract an installer or complex archive using 7-Zip.
+ * First pass uses an include list so DMGs do not unpack their entire payload.
+ * A full extraction is only attempted for smaller installers if the selective
+ * pass finds nothing.
+ */
+function extractWithSevenZip(buffer, filename, cmd) {
+  const includeArgs = [
+    'x',
+    '-y',
+    '-bso0',
+    '-bsp0',
+    ...SEVEN_ZIP_INCLUDE_PATTERNS.map((pattern) => `-ir!${pattern}`),
+  ];
+
+  let result = runSevenZip(buffer, filename, cmd, includeArgs);
+  if (result.success && result.files.length > 0) {
+    return result;
+  }
+
+  if (buffer.length <= SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES) {
+    result = runSevenZip(buffer, filename, cmd, ['x', '-y', '-bso0', '-bsp0']);
+    if (result.success && result.files.length > 0) {
+      return result;
+    }
+  }
+
+  return { success: false, files: [], truncated: false };
 }
 
 /**
@@ -171,31 +334,125 @@ export function extractArtifact(buffer, format, target, artifactUrl = '') {
   try {
     let rawFiles = [];
     const sevenZipCmd = findSevenZipCommand();
+    const filename = artifactUrl.split('/').pop() || `artifact-${target}.${format}`;
 
     // 1. Genuine format detection using magic bytes & format strings
     if (isAsar(buffer) || format === 'asar') {
-      status.analyzers.asar = 'completed';
       rawFiles = extractAsar(buffer);
+      status.analyzers.asar = rawFiles.length > 0 ? 'completed' : 'failed';
     } else if (isTarGz(buffer) || format === 'tgz' || format === 'tar' || format === 'tar.gz') {
-      status.analyzers.tar = 'completed';
-      rawFiles = extractTar(buffer);
+      let tarError = null;
+      const gzipped = isGzip(buffer) || format === 'tgz' || format === 'tar.gz';
+      const gnuTarCmd = findGnuTarCommand();
+
+      // Large tarballs are streamed with GNU tar so the vendor runtime is
+      // never fully materialized in memory. The built-in reader remains the
+      // portable fallback for small packages and Windows development.
+      if (gnuTarCmd && buffer.length > SEVEN_ZIP_PREFERRED_BYTES) {
+        const res = extractWithGnuTar(buffer, filename, gnuTarCmd, gzipped);
+        if (res.success && res.files.length > 0) {
+          status.analyzers.tar = 'completed';
+          rawFiles = res.files;
+          if (res.truncated) {
+            status.coverageState = 'PARTIAL';
+            status.error = 'tar extraction exceeded safety caps; some files were not analyzed';
+          }
+        }
+      }
+
+      if (rawFiles.length === 0) {
+        try {
+          rawFiles = extractTar(buffer);
+          status.analyzers.tar = rawFiles.length > 0 ? 'completed' : 'failed';
+        } catch (err) {
+          tarError = err;
+          status.analyzers.tar = 'failed';
+        }
+      }
+      if (rawFiles.length === 0 && tarError) {
+        status.coverageState = 'PARTIAL';
+        status.error = `TAR extraction failed: ${tarError.message}`;
+      }
     } else if (isZip(buffer) || format === 'zip' || format === 'nupkg' || format === 'appx') {
-      status.analyzers.zip = 'completed';
-      rawFiles = extractZip(buffer);
-    } else if ((isNsisInstaller(buffer) || format === 'exe' || format === 'dmg') && sevenZipCmd) {
-      // Use 7-Zip for complex installers and DMGs
-      const filename = artifactUrl.split('/').pop() || `artifact-${target}.${format}`;
-      const res = extractWithSevenZip(buffer, filename, sevenZipCmd);
-      if (res.success && res.files.length > 0) {
-        status.analyzers.sevenZip = 'completed';
-        rawFiles = res.files;
-      } else {
+      let usedSevenZip = false;
+      let zipError = null;
+
+      // Desktop ZIP bundles are often >100 MB compressed and expand past the
+      // built-in reader's 1 GB guard. Selective 7-Zip avoids decoding the whole
+      // vendor runtime and still recovers app.asar/JS/config evidence.
+      if (sevenZipCmd && buffer.length > SEVEN_ZIP_PREFERRED_BYTES) {
+        const res = extractWithSevenZip(buffer, filename, sevenZipCmd);
+        if (res.success && res.files.length > 0) {
+          usedSevenZip = true;
+          status.analyzers.zip = 'completed';
+          status.analyzers.sevenZip = 'completed';
+          rawFiles = res.files;
+          if (res.truncated) {
+            status.coverageState = 'PARTIAL';
+            status.error = '7-Zip extraction exceeded safety caps; some files were not analyzed';
+          }
+        }
+      }
+
+      if (rawFiles.length === 0) {
+        try {
+          rawFiles = extractZip(buffer);
+          status.analyzers.zip = rawFiles.length > 0 ? 'completed' : 'failed';
+        } catch (err) {
+          zipError = err;
+          status.analyzers.zip = 'failed';
+        }
+      }
+
+      // The built-in ZIP reader does not support every streaming/data-descriptor
+      // archive. Fall back to 7-Zip rather than silently believing an empty ZIP.
+      if (rawFiles.length === 0 && sevenZipCmd && !usedSevenZip) {
+        const res = extractWithSevenZip(buffer, filename, sevenZipCmd);
+        if (res.success && res.files.length > 0) {
+          status.analyzers.zip = 'completed';
+          status.analyzers.sevenZip = 'completed';
+          rawFiles = res.files;
+          if (res.truncated) {
+            status.coverageState = 'PARTIAL';
+            status.error = '7-Zip extraction exceeded safety caps; some files were not analyzed';
+          }
+        }
+      }
+      if (rawFiles.length === 0 && zipError) {
+        status.coverageState = 'PARTIAL';
+        status.error = `ZIP extraction failed: ${zipError.message}`;
+      }
+    } else if (isNsisInstaller(buffer) || format === 'exe' || format === 'dmg' || format === 'pkg' || format === 'msi' || format === 'appimage') {
+      if (!sevenZipCmd) {
+        // A DMG/NSIS installer cannot be meaningfully unpacked by the raw
+        // fallback. Treat it as partial rather than falsely claiming COMPLETE.
         status.analyzers.sevenZip = 'failed';
+        status.coverageState = 'PARTIAL';
+        status.error = '7-Zip is required for this installer format but was not found';
         rawFiles = [{ path: filename, buffer, size: buffer.length }];
+      } else {
+        // Use 7-Zip for complex installers and DMGs
+        const res = extractWithSevenZip(buffer, filename, sevenZipCmd);
+        if (res.success && res.files.length > 0) {
+          status.analyzers.sevenZip = 'completed';
+          rawFiles = res.files;
+          if (res.truncated) {
+            status.coverageState = 'PARTIAL';
+            status.error = '7-Zip extraction exceeded safety caps; some files were not analyzed';
+          }
+        } else {
+          status.analyzers.sevenZip = 'failed';
+          status.coverageState = 'PARTIAL';
+          rawFiles = [{ path: filename, buffer, size: buffer.length }];
+        }
       }
     } else {
       // Single binary / raw file
-      const filename = artifactUrl.split('/').pop() || `artifact-${target}.${format}`;
+      rawFiles = [{ path: filename, buffer, size: buffer.length }];
+    }
+
+    if (rawFiles.length === 0 && !isAsar(buffer) && format !== 'binary') {
+      status.coverageState = 'PARTIAL';
       rawFiles = [{ path: filename, buffer, size: buffer.length }];
     }
 
@@ -246,10 +503,34 @@ export function extractArtifact(buffer, format, target, artifactUrl = '') {
       }
     }
 
+    // The app.asar.unpacked files can be reached both from the raw archive
+    // listing and from the nested ASAR branch. Deduplicate by path so every
+    // file is scanned exactly once.
+    const uniqueFiles = new Map();
+    for (const file of extractedFiles) {
+      const key = `${file.path}:${file.buffer?.length || 0}`;
+      if (!uniqueFiles.has(key)) uniqueFiles.set(key, file);
+    }
+    extractedFiles.length = 0;
+    extractedFiles.push(...uniqueFiles.values());
+
     status.analyzedFiles = extractedFiles.length;
+
+    // Coverage is not "we downloaded the artifact". It is "we actually
+    // recovered analyzable files from it". An ASAR/DMG that yields nothing is
+    // a partial extraction even though the HTTP download succeeded.
+    if (extractedFiles.length === 0) {
+      status.coverageState = 'PARTIAL';
+    }
+    if (Object.values(status.analyzers).includes('failed')) {
+      status.coverageState = 'PARTIAL';
+    }
   } catch (err) {
     status.coverageState = 'PARTIAL';
     status.error = err.message;
+    if (format === 'asar' || isAsar(buffer)) status.analyzers.asar = 'failed';
+    else if (format === 'tgz' || format === 'tar' || format === 'tar.gz') status.analyzers.tar = 'failed';
+    else if (format === 'zip' || format === 'nupkg' || format === 'appx') status.analyzers.zip = 'failed';
 
     // Fallback: raw multi-encoding string scan directly on buffer
     extractedFiles.push({

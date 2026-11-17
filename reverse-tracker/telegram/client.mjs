@@ -6,6 +6,106 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+const TELEGRAM_TEXT_LIMIT = 4096;
+const TELEGRAM_SAFE_TEXT_LIMIT = 3900;
+const TELEGRAM_DOCUMENT_LIMIT = 50 * 1024 * 1024;
+
+/**
+ * Split long HTML text at line boundaries so a large report summary is sent as
+ * multiple complete messages instead of being silently cut off at 4096 chars.
+ */
+function balanceTelegramChunks(rawChunks) {
+  const result = [];
+  let carry = [];
+
+  for (const rawChunk of rawChunks) {
+    const text = `${carry.map((tag) => tag.open).join('')}${rawChunk}`;
+    const stack = [...carry];
+
+    // Track simple Telegram HTML tags so a split does not leave an unclosed
+    // <b>/<code>/<blockquote> in one message and a stray closer in the next.
+    const tagRegex = /<(\/?)([a-z][a-z0-9-]*)([^>]*)>/gi;
+    let match;
+    while ((match = tagRegex.exec(rawChunk)) !== null) {
+      const [, closing, name, attrs] = match;
+      const lowerName = name.toLowerCase();
+      if (['br', 'hr'].includes(lowerName)) continue;
+      if (closing) {
+        for (let i = stack.length - 1; i >= 0; i--) {
+          if (stack[i].name === lowerName) {
+            stack.splice(i, 1);
+            break;
+          }
+        }
+      } else {
+        stack.push({ name: lowerName, open: `<${lowerName}${attrs}>` });
+      }
+    }
+
+    const closers = [...stack].reverse().map((tag) => `</${tag.name}>`).join('');
+    result.push(`${text}${closers}`);
+    carry = stack;
+  }
+
+  return result;
+}
+
+function safeLineCut(line, start, limit) {
+  let cut = start + limit;
+  if (cut >= line.length) return line.length;
+
+  // Do not cut in the middle of an HTML tag or entity. A split there makes
+  // Telegram reject the whole message (or display a broken entity/tag).
+  const lastOpen = line.lastIndexOf('<', cut - 1);
+  const lastClose = line.lastIndexOf('>', cut - 1);
+  if (lastOpen > lastClose && cut - lastOpen < 512) cut = lastOpen;
+  const lastAmp = line.lastIndexOf('&', cut - 1);
+  const lastSemi = line.lastIndexOf(';', cut - 1);
+  if (lastAmp > lastSemi && cut - lastAmp <= 12) cut = lastAmp;
+
+  // Prefer a word boundary when one is reasonably close; URLs remain intact
+  // because they have no spaces and simply use the tag-safe cut above.
+  const space = line.lastIndexOf(' ', cut - 1);
+  if (space > start + Math.floor(limit * 0.6)) cut = space + 1;
+
+  return Math.max(start + 1, cut);
+}
+
+export function splitTelegramText(text, limit = TELEGRAM_SAFE_TEXT_LIMIT) {
+  const value = String(text || '');
+  if (value.length <= limit) return [value];
+
+  // balanceTelegramChunks may prepend open tags and append closers to every
+  // piece. Reserve room for that framing so a split full of <b>/<code> tags
+  // still lands below Telegram's hard 4,096-character limit.
+  const workingLimit = Math.max(256, limit - 256);
+  const rawChunks = [];
+  let current = '';
+  for (const line of value.split('\n')) {
+    if (line.length > workingLimit) {
+      if (current) {
+        rawChunks.push(current);
+        current = '';
+      }
+      let offset = 0;
+      while (offset < line.length) {
+        const end = safeLineCut(line, offset, workingLimit);
+        rawChunks.push(line.slice(offset, end));
+        offset = end;
+      }
+      continue;
+    }
+    if (current && current.length + line.length + 1 > workingLimit) {
+      rawChunks.push(current);
+      current = line;
+    } else {
+      current = current ? `${current}\n${line}` : line;
+    }
+  }
+  if (current) rawChunks.push(current);
+  return balanceTelegramChunks(rawChunks.filter((chunk) => chunk.length > 0));
+}
+
 export class TelegramClient {
   constructor(token, chatId, family = null, componentId = null) {
     this.family = family;
@@ -174,45 +274,57 @@ export class TelegramClient {
     }
 
     const threadId = options.topicId || options.message_thread_id;
+    const chunks = splitTelegramText(htmlText);
+    const results = [];
 
-    const payload = {
-      chat_id: this.chatId,
-      text: htmlText.slice(0, 4096),
-      parse_mode: 'HTML',
-      disable_notification: Boolean(options.silent),
-      reply_to_message_id: options.replyToMessageId || undefined,
-      message_thread_id: threadId || undefined,
-    };
+    for (const chunk of chunks) {
+      const payload = {
+        chat_id: this.chatId,
+        text: chunk,
+        parse_mode: 'HTML',
+        disable_notification: Boolean(options.silent),
+        reply_to_message_id: options.replyToMessageId || undefined,
+        message_thread_id: threadId || undefined,
+      };
 
-    try {
-      return await this.requestWithRetry('sendMessage', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-    } catch (err) {
-      // Fallback: if HTML parsing failed (400 Bad Request or parse entities), retry as plain text
-      if (err.message && (err.message.includes('400') || err.message.includes('parse entities') || err.message.includes("can't parse"))) {
-        console.warn('Telegram HTML parse failed, falling back to plain text...');
-        const plainPayload = {
-          ...payload,
-          parse_mode: undefined,
-          text: htmlText.replace(/<[^>]+>/g, '').slice(0, 4096),
-        };
-        try {
-          return await this.requestWithRetry('sendMessage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(plainPayload),
-          });
-        } catch (plainErr) {
-          console.error(`Telegram sendMessage failed in plain text fallback: ${plainErr.message}`);
-          return { ok: false, error: plainErr.message };
+      try {
+        results.push(await this.requestWithRetry('sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }));
+      } catch (err) {
+        // Fallback: if HTML parsing failed (400 Bad Request or parse entities), retry as plain text
+        if (err.message && (err.message.includes('400') || err.message.includes('parse entities') || err.message.includes("can't parse"))) {
+          console.warn('Telegram HTML parse failed, falling back to plain text...');
+          const plainPayload = {
+            ...payload,
+            parse_mode: undefined,
+            text: chunk.replace(/<[^>]+>/g, '').slice(0, TELEGRAM_TEXT_LIMIT),
+          };
+          try {
+            results.push(await this.requestWithRetry('sendMessage', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(plainPayload),
+            }));
+            continue;
+          } catch (plainErr) {
+            console.error(`Telegram sendMessage failed in plain text fallback: ${plainErr.message}`);
+            return { ok: false, error: plainErr.message };
+          }
         }
+        console.error(`Telegram sendMessage error: ${err.message}`);
+        return { ok: false, error: err.message };
       }
-      console.error(`Telegram sendMessage error: ${err.message}`);
-      return { ok: false, error: err.message };
     }
+
+    const last = results[results.length - 1];
+    return {
+      ok: true,
+      result: last?.result,
+      messages: results.map((item) => item?.result),
+    };
   }
 
   /**
@@ -227,7 +339,9 @@ export class TelegramClient {
     const payload = {
       chat_id: this.chatId,
       message_id: messageId,
-      text: newHtmlText.slice(0, 4096),
+      text: newHtmlText.length > TELEGRAM_TEXT_LIMIT
+        ? `${newHtmlText.slice(0, TELEGRAM_TEXT_LIMIT - 20)}\n…`
+        : newHtmlText,
       parse_mode: 'HTML',
     };
 
@@ -253,6 +367,16 @@ export class TelegramClient {
     }
 
     const filename = path.basename(filePath);
+    if (!fs.existsSync(filePath)) {
+      return { ok: false, error: `File does not exist: ${filePath}` };
+    }
+    const stat = fs.statSync(filePath);
+    if (stat.size > TELEGRAM_DOCUMENT_LIMIT) {
+      return {
+        ok: false,
+        error: `File ${filename} is ${stat.size} bytes, above Telegram's 50 MB bot upload limit`,
+      };
+    }
     const fileBytes = fs.readFileSync(filePath);
     const threadId = options.topicId || options.message_thread_id;
 
@@ -306,6 +430,9 @@ export class TelegramClient {
           const retryAfter = (data.parameters?.retry_after || 5) * 1000;
           console.warn(`Telegram 429 rate limited. Retrying after ${retryAfter}ms...`);
           await new Promise((r) => setTimeout(r, retryAfter));
+          if (attempt >= maxRetries) {
+            throw new Error(`Telegram ${endpoint} rate limited after ${maxRetries} attempts`);
+          }
           continue;
         }
 
@@ -314,7 +441,11 @@ export class TelegramClient {
           throw new Error(`Telegram ${endpoint} failed HTTP ${res.status}: ${errText}`);
         }
 
-        return await res.json();
+        const data = await res.json();
+        if (data && data.ok === false) {
+          throw new Error(`Telegram ${endpoint} rejected request: ${data.description || 'unknown error'}`);
+        }
+        return data;
       } catch (err) {
         if (attempt >= maxRetries) throw err;
         await new Promise((r) => setTimeout(r, 1000 * attempt));

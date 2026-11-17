@@ -196,17 +196,18 @@ export function isHumanReadableString(value) {
   const trimmed = value.trim();
   const len = trimmed.length;
 
-  // 1. Length bounds: readable strings must be at least 4 chars and at most 1000 chars
-  if (len < 4 || len > 1000) return false;
+  // 1. Length bounds: UI copy and release prose can be long; keep a hard cap
+  // that still prevents multi-megabyte minified blobs from entering reports.
+  if (len < 4 || len > 4000) return false;
 
   // 2. Control characters & unprintable bytes: strictly rejected (\x00-\x1F, \x7F-\x9F, \uFFFD)
   if (/[\x00-\x1F\x7F-\x9F\uFFFD]/.test(trimmed)) return false;
 
-  // 3. Must contain letters or digits
-  if (!/[a-zA-Z0-9]/.test(trimmed)) return false;
+  // 3. Must contain letters or digits (Unicode letters are valid human text).
+  if (!/[a-zA-Z0-9\p{L}\p{N}]/u.test(trimmed)) return false;
 
   // 4. Alphanumeric density: at least 45% alphanumeric (or at least 3 letters/digits for short tokens)
-  const alphanumericCount = (trimmed.match(/[a-zA-Z0-9]/g) || []).length;
+  const alphanumericCount = (trimmed.match(/[a-zA-Z0-9\p{L}\p{N}]/gu) || []).length;
   if (alphanumericCount < 3) return false;
   if (alphanumericCount / len < 0.45 && len >= 6) return false;
 
@@ -216,8 +217,10 @@ export function isHumanReadableString(value) {
   // 6. Compiler mangling & binary symbol noise
   if (/^(\?\?|\?_|\$|\.L|__imp_|__libc_|_ZTV|_ZTI|__gxx)/.test(trimmed)) return false;
 
-  // 7. High entropy random hashes / base64 noise
-  if (!trimmed.includes(' ') && len >= 24) {
+  // 7. High entropy random hashes / base64 noise. Only apply this to ASCII
+  // blobs: CJK and other non-Latin UI copy legitimately has no spaces and a
+  // high character entropy, and must not be discarded as binary noise.
+  if (!trimmed.includes(' ') && len >= 24 && /^[\x20-\x7E]+$/.test(trimmed)) {
     const entropy = computeShannonEntropy(trimmed);
     if (entropy > 4.65) return false;
   }

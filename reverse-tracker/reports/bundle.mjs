@@ -27,6 +27,7 @@ export function generateReportBundle(outputDir, scanData) {
     oldVersion = 'unknown',
     family = '',
     diffResults = {},
+    stringDiff = null,
     scoredFindings = [],
     platformAsymmetry = {},
     coverage = {},
@@ -34,6 +35,9 @@ export function generateReportBundle(outputDir, scanData) {
     artifactInventory = [],
     unknownCandidates = [],
     artifactSha256 = null,
+    analyzerStatus = null,
+    delivery = null,
+    versionScheme = null,
   } = scanData;
 
   const {
@@ -61,7 +65,17 @@ export function generateReportBundle(outputDir, scanData) {
     'TIER 2: 🚩 FEATURE GATES, EXPERIMENTS & ROLLOUTS': validLeaks.filter((f) => ['feature_flag', 'experiment', 'env_var', 'plan_entitlement', 'platform_entitlement'].includes(f.category)),
     'TIER 3: 🛠️ AGENT CAPABILITIES, MCP TOOLS & DARK UI': validLeaks.filter((f) => ['agent_mode', 'capability', 'hidden_command', 'ui_string'].includes(f.category)),
     'TIER 4: 🌐 INTERNAL ENDPOINTS & RPC ROUTES': validLeaks.filter((f) => ['endpoint_domain', 'internal_function'].includes(f.category)),
+    'TIER 5: 💵 MODEL & PRICING TABLES': validLeaks.filter((f) => f.category === 'pricing'),
   };
+  const groupedCategories = new Set([
+    'model_id', 'feature_flag', 'experiment', 'env_var', 'plan_entitlement',
+    'platform_entitlement', 'agent_mode', 'capability', 'hidden_command',
+    'ui_string', 'endpoint_domain', 'internal_function', 'pricing',
+  ]);
+  const otherLeaks = validLeaks.filter((f) => !groupedCategories.has(f.category));
+  if (otherLeaks.length > 0) {
+    tierGroups['TIER 6: 📋 OTHER REVERSE-ENGINEERING SIGNALS'] = otherLeaks;
+  }
 
   let leaksContent = `======================================================================\n`;
   leaksContent += `LEAKS & EARLY SIGNALS REPORT\n`;
@@ -82,8 +96,9 @@ export function generateReportBundle(outputDir, scanData) {
         const badge = item.isMajorEarlySignal ? '🔥 MAJOR EARLY SIGNAL' : item.tier;
         const plat = (item.platforms || []).join(', ') || 'all';
         const status = item.activationStatus || 'UNKNOWN';
+        const diffTag = ` [${item.diffStatus || 'UNKNOWN'}]`;
         const occStr = item.occurrences > 1 ? ` (${item.occurrences}x)` : '';
-        leaksContent += `• [${badge}] (${item.score} pts) [${item.category}] [Status: ${status}]${occStr}\n`;
+        leaksContent += `• [${badge}] (${item.score} pts) [${item.category}] [Status: ${status}]${diffTag}${occStr}\n`;
         leaksContent += `  Finding:   ${item.value}\n`;
         if (item.discoveryMethod && item.discoveryMethod !== 'heuristic') {
           leaksContent += `  Discovery: ${item.discoveryMethod}\n`;
@@ -130,11 +145,14 @@ export function generateReportBundle(outputDir, scanData) {
     diffContent += `\n`;
   }
 
+  const stringCounts = stringDiff?.counts || null;
   diffContent += `📊 STRING DELTA METRICS:\n`;
-  diffContent += `  • Total Extracted Strings:       ${totalExtractedStrings}\n`;
-  diffContent += `  • Newly Introduced Strings:      ${newFindings.length}\n`;
-  diffContent += `  • Deprecated / Removed Strings:  ${removedFindings.length}\n`;
-  diffContent += `  • Persistent Strings:            ${persistentFindings.length}\n\n`;
+  diffContent += `  • Total Clean Strings:            ${stringCounts ? stringCounts.current : totalExtractedStrings}\n`;
+  diffContent += `  • Newly Introduced Strings:       ${stringCounts ? stringCounts.added : newFindings.length}\n`;
+  diffContent += `  • Deprecated / Removed Strings:   ${stringCounts ? stringCounts.removed : removedFindings.length}\n`;
+  diffContent += `  • Persistent Strings:             ${stringCounts ? stringCounts.persistent : persistentFindings.length}\n`;
+  diffContent += `  • Reintroduced Strings:           ${stringCounts ? stringCounts.reintroduced : reintroducedFindings.length}\n`;
+  diffContent += `  • Signal New / Persistent / Removed: ${newFindings.length} / ${persistentFindings.length} / ${removedFindings.length}\n\n`;
 
   const macOnly = platformAsymmetry.macOnly || [];
   const winOnly = platformAsymmetry.winOnly || [];
@@ -169,18 +187,22 @@ export function generateReportBundle(outputDir, scanData) {
   // -------------------------------------------------------------
   // 3. `strings.txt`: Clean, newly added strings (100% human-readable & sorted)
   // -------------------------------------------------------------
+  const stringSource = Array.isArray(stringDiff?.added)
+    ? stringDiff.added
+    : newFindings.map((f) => (typeof f === 'string' ? f : f.value)).filter(Boolean);
   const uniqueCleanNewStrings = Array.from(
-    new Set(
-      newFindings
-        .map((f) => (typeof f === 'string' ? f : f.value))
-        .filter(Boolean)
-        .filter(isHumanReadableString)
-    )
+    new Set(stringSource.filter(isHumanReadableString))
   ).sort();
 
   let stringsContent = `# Newly Introduced Strings in ${componentId} (${version})\n`;
-  stringsContent += `# Total Count: ${uniqueCleanNewStrings.length}\n\n`;
-  stringsContent += uniqueCleanNewStrings.join('\n') + '\n';
+  stringsContent += `# Total Count: ${uniqueCleanNewStrings.length}\n`;
+  if (stringCounts) {
+    stringsContent += `# Removed: ${stringCounts.removed} · Persistent: ${stringCounts.persistent} · Reintroduced: ${stringCounts.reintroduced}\n`;
+  }
+  stringsContent += '\n';
+  stringsContent += uniqueCleanNewStrings.length > 0
+    ? uniqueCleanNewStrings.join('\n') + '\n'
+    : 'No new human-readable strings were introduced in this release.\n';
 
   const stringsFilePath = path.join(outputDir, 'strings.txt');
   fs.writeFileSync(stringsFilePath, stringsContent, 'utf8');
@@ -214,8 +236,10 @@ export function generateReportBundle(outputDir, scanData) {
   }).join('\n\n');
   fs.writeFileSync(path.join(outputDir, '3-by-category.txt'), file3Content || 'No categorized findings.', 'utf8');
 
-  const allNewLines = newFindings.map((f) => `${f.category || 'raw'}\t${f.value}\t${f.filePath || ''}`).join('\n');
-  fs.writeFileSync(path.join(outputDir, '4-all-new-strings.txt.gz'), zlib.gzipSync(Buffer.from(allNewLines, 'utf8')));
+  const newStringLines = Array.isArray(stringDiff?.added)
+    ? stringDiff.added.map((value) => `raw\t${value}\t`)
+    : newFindings.map((f) => `${f.category || 'raw'}\t${f.value}\t${f.filePath || ''}`);
+  fs.writeFileSync(path.join(outputDir, '4-all-new-strings.txt.gz'), zlib.gzipSync(Buffer.from(newStringLines.join('\n'), 'utf8')));
 
   const file5Content = [
     `=== macOS ONLY (${macOnly.length}) ===`,
@@ -226,8 +250,10 @@ export function generateReportBundle(outputDir, scanData) {
   ].join('\n');
   fs.writeFileSync(path.join(outputDir, '5-platform-only.txt'), file5Content, 'utf8');
 
-  const removedLines = removedFindings.map((f) => `${f.category || 'raw'}\t${f.value}\t${f.filePath || ''}`).join('\n');
-  fs.writeFileSync(path.join(outputDir, '6-removed.txt.gz'), zlib.gzipSync(Buffer.from(removedLines, 'utf8')));
+  const removedLines = Array.isArray(stringDiff?.removed)
+    ? stringDiff.removed.map((value) => `raw\t${value}\t`)
+    : removedFindings.map((f) => `${f.category || 'raw'}\t${f.value}\t${f.filePath || ''}`);
+  fs.writeFileSync(path.join(outputDir, '6-removed.txt.gz'), zlib.gzipSync(Buffer.from(removedLines.join('\n'), 'utf8')));
 
   // Manifest metadata
   const manifestData = {
@@ -312,17 +338,33 @@ export function generateReportBundle(outputDir, scanData) {
   );
 
   // Mandatory Count Check verification (Section 8.1)
+  const checkTotal = stringCounts ? stringCounts.current : totalExtractedStrings;
+  const checkNew = stringCounts ? stringCounts.added : newFindings.length;
+  const checkPersistent = stringCounts ? stringCounts.persistent : persistentFindings.length;
   const countCheckPassed = (
-    totalExtractedStrings >= (newFindings.length + persistentFindings.length) &&
-    scoredFindings.length >= 0
+    checkTotal >= (checkNew + checkPersistent) &&
+    validLeaks.length <= scoredFindings.length
   );
 
-  const macOk = coverage.macOk !== false ? '✓' : '✗';
-  const winOk = coverage.winOk !== false ? '✓' : '✗';
+  const expectedPlatforms = Array.isArray(coverage.expectedPlatforms) ? coverage.expectedPlatforms : [];
+  const platformStatus = expectedPlatforms.includes('all')
+    ? 'all platforms'
+    : expectedPlatforms.length > 0
+      ? [
+          expectedPlatforms.includes('darwin') ? `macOS ${coverage.macOk !== false ? '✓' : '✗'}` : null,
+          expectedPlatforms.includes('win32') ? `Windows ${coverage.winOk !== false ? '✓' : '✗'}` : null,
+          expectedPlatforms.includes('linux') ? `Linux ${coverage.linuxOk !== false ? '✓' : '✗'}` : null,
+        ].filter(Boolean).join(' · ')
+      : `macOS ${coverage.macOk !== false ? '✓' : '✗'} Windows ${coverage.winOk !== false ? '✓' : '✗'}`;
+  const checkReintroduced = stringCounts ? stringCounts.reintroduced : reintroducedFindings.length;
+  const listedLeaks = validLeaks.length;
+  const listedOk = listedLeaks <= scoredFindings.length;
   const countCheckText = [
-    `Extracted ${totalExtractedStrings} = New ${newFindings.length} + Persistent ${persistentFindings.length}`,
-    `Listed in files ${scoredFindings.length} / ${scoredFindings.length} ✓`,
-    `Coverage ${coverage.percentage || 100}% (macOS ${macOk} Windows ${winOk})`,
+    `Extracted ${checkTotal} = New ${checkNew} + Persistent ${checkPersistent} + Reintroduced ${checkReintroduced}`,
+    `Listed in files ${listedLeaks} / ${scoredFindings.length}${listedOk ? ' ✓' : ' ⚠️'}`,
+    `Coverage ${coverage.percentage ?? 100}% (${platformStatus})`,
+    `Signals: +${newFindings.length} / *${persistentFindings.length} / -${removedFindings.length} / ~${reintroducedFindings.length}`,
+    `Artifacts: ${coverage.downloadedArtifacts ?? '?'}/${coverage.expectedArtifacts ?? '?'} · Analyzer: ${coverage.coverageState || 'UNKNOWN'}`,
   ].join('\n');
 
   // -------------------------------------------------------------
@@ -381,26 +423,125 @@ export function generateReportBundle(outputDir, scanData) {
   const urlsFilePath = path.join(outputDir, 'urls.txt');
   fs.writeFileSync(urlsFilePath, urlsContent, 'utf8');
 
-  // Telegram attachments: exactly the clean requested files
+  // -------------------------------------------------------------
+  // 5. `models-and-pricing.txt`: model catalog + pricing tables
+  // -------------------------------------------------------------
+  const modelFindings = validLeaks.filter((f) => f.category === 'model_id');
+  const pricingFindings = validLeaks.filter((f) => f.category === 'pricing');
+  let modelsContent = `======================================================================\n`;
+  modelsContent += `MODELS & PRICING TABLE INVENTORY\n`;
+  modelsContent += `Component: ${componentId}\n`;
+  modelsContent += `Version:   ${version}\n`;
+  modelsContent += `Scan ID:   ${scanId}\n`;
+  modelsContent += `Models: ${modelFindings.length} · Pricing rows: ${pricingFindings.length}\n`;
+  modelsContent += `======================================================================\n\n`;
+
+  modelsContent += `🤖 [MODELS & CODENAMES] (${modelFindings.length})\n`;
+  modelsContent += `----------------------------------------------------------------------\n`;
+  if (modelFindings.length === 0) {
+    modelsContent += `No model identifiers were extracted in this release.\n`;
+  } else {
+    for (const item of modelFindings) {
+      modelsContent += `• ${item.value} [${item.tier || 'UNSCORED'}] (${item.score || 0} pts) ${item.activationStatus || ''}\n`;
+      if (item.filePath) modelsContent += `  File: ${item.filePath}\n`;
+      if (item.context) modelsContent += `  Context: ${String(item.context).replace(/\r?\n/g, ' ').slice(0, 300)}\n`;
+    }
+  }
+
+  modelsContent += `\n💵 [PRICING TABLES & RATES] (${pricingFindings.length})\n`;
+  modelsContent += `----------------------------------------------------------------------\n`;
+  if (pricingFindings.length === 0) {
+    modelsContent += `No pricing or model-catalog table entries were extracted in this release.\n`;
+  } else {
+    for (const item of pricingFindings) {
+      modelsContent += `• ${item.value}\n`;
+      if (item.filePath) modelsContent += `  File: ${item.filePath}\n`;
+      if (item.context) modelsContent += `  Context: ${String(item.context).replace(/\r?\n/g, ' ').slice(0, 300)}\n`;
+    }
+  }
+  const modelsFilePath = path.join(outputDir, 'models-and-pricing.txt');
+  fs.writeFileSync(modelsFilePath, modelsContent, 'utf8');
+
+  // -------------------------------------------------------------
+  // 6. `scan-summary.txt`: human-readable run summary
+  // -------------------------------------------------------------
+  const coverageState = coverage.coverageState || 'UNKNOWN';
+  const analyzerLines = analyzerStatus && typeof analyzerStatus === 'object'
+    ? Object.entries(analyzerStatus).map(([name, value]) => `  • ${name}: ${value}`).join('\n')
+    : '  • no analyzer status recorded';
+  const artifactLines = artifactInventory.length > 0
+    ? artifactInventory.map((art) => {
+        const sizeMb = art.size ? `${(art.size / (1024 * 1024)).toFixed(2)} MB` : 'unknown size';
+        const sha = art.sha256 ? ` · sha256 ${String(art.sha256).slice(0, 16)}…` : '';
+        return `  • ${art.target || 'target'} (${art.format || 'bin'}) · ${sizeMb}${sha}`;
+      }).join('\n')
+    : '  • no artifacts recorded';
+  const deliveryStatusText = delivery
+    ? `${delivery.status || 'UNKNOWN'} · ${delivery.deliveredFiles?.length || 0} delivered · ${delivery.failedFiles?.length || 0} failed`
+    : 'not attempted yet';
+
+  let summaryContent = `======================================================================\n`;
+  summaryContent += `SCAN SUMMARY\n`;
+  summaryContent += `Component: ${componentId}\n`;
+  summaryContent += `Family:    ${family || 'unknown'}\n`;
+  summaryContent += `Version:   ${oldVersion} -> ${version}\n`;
+  summaryContent += `Scheme:    ${versionScheme || 'unknown'}\n`;
+  summaryContent += `Scan ID:   ${scanId}\n`;
+  summaryContent += `Timestamp: ${new Date().toISOString()}\n`;
+  summaryContent += `======================================================================\n\n`;
+  summaryContent += `🧭 COVERAGE\n`;
+  summaryContent += `  • State: ${coverageState}\n`;
+  summaryContent += `  • Artifacts: ${coverage.downloadedArtifacts ?? '?'} downloaded / ${coverage.expectedArtifacts ?? '?'} expected\n`;
+  summaryContent += `  • Files analyzed: ${coverage.analyzedFiles ?? '?'}\n`;
+  summaryContent += `  • Coverage percentage: ${coverage.percentage ?? '?'}%\n`;
+  const platformSummary = expectedPlatforms.includes('all')
+    ? 'all platforms'
+    : expectedPlatforms.length > 0
+      ? [
+          expectedPlatforms.includes('darwin') ? `macOS: ${coverage.macOk === false ? 'missing' : 'ok'}` : null,
+          expectedPlatforms.includes('win32') ? `Windows: ${coverage.winOk === false ? 'missing' : 'ok'}` : null,
+          expectedPlatforms.includes('linux') ? `Linux: ${coverage.linuxOk === false ? 'missing' : 'ok'}` : null,
+        ].filter(Boolean).join(' · ')
+      : `macOS: ${coverage.macOk === false ? 'missing' : 'ok'} · Windows: ${coverage.winOk === false ? 'missing' : 'ok'}`;
+  summaryContent += `  • Platforms: ${platformSummary}\n\n`;
+  summaryContent += `🧪 ANALYZERS\n${analyzerLines}\n\n`;
+  summaryContent += `📦 ARTIFACTS\n${artifactLines}\n\n`;
+  summaryContent += `📊 COUNTS\n`;
+  summaryContent += `  • Total clean strings: ${stringCounts ? stringCounts.current : totalExtractedStrings}\n`;
+  summaryContent += `  • New strings: ${stringCounts ? stringCounts.added : uniqueCleanNewStrings.length}\n`;
+  summaryContent += `  • Removed strings: ${stringCounts ? stringCounts.removed : removedFindings.length}\n`;
+  summaryContent += `  • Reintroduced strings: ${stringCounts ? stringCounts.reintroduced : reintroducedFindings.length}\n`;
+  summaryContent += `  • Leaks: ${validLeaks.length}\n`;
+  summaryContent += `  • Endpoints: ${urlsInventory.length} (new: ${newUrls.length})\n\n`;
+  summaryContent += `🚚 DELIVERY\n  • ${deliveryStatusText}\n\n`;
+  summaryContent += `🔥 TOP SIGNALS\n`;
+  if (validLeaks.length === 0) {
+    summaryContent += `  • No high-confidence early leaks detected.\n`;
+  } else {
+    for (const item of validLeaks.slice(0, 15)) {
+      summaryContent += `  • [${item.category}] ${item.value} (${item.score} pts)\n`;
+    }
+  }
+  const summaryFilePath = path.join(outputDir, 'scan-summary.txt');
+  fs.writeFileSync(summaryFilePath, summaryContent, 'utf8');
+
+  // Telegram attachments: always the complete, fixed report set. Empty reports
+  // are still useful because they prove the scan ran and shows zero results.
   const telegramFiles = [];
-  if (validLeaks.length > 0 && fs.existsSync(leaksFilePath)) {
-    telegramFiles.push(leaksFilePath);
-  }
-  if (fs.existsSync(diffFilePath)) {
-    telegramFiles.push(diffFilePath);
-  }
-  if (uniqueCleanNewStrings.length > 0) {
+  if (fs.existsSync(leaksFilePath)) telegramFiles.push(leaksFilePath);
+  if (fs.existsSync(diffFilePath)) telegramFiles.push(diffFilePath);
+  if (fs.existsSync(stringsFilePath)) {
     const stringSize = fs.statSync(stringsFilePath).size;
     // If strings file is > 1MB, send the .gz version
     if (stringSize > 1024 * 1024 && fs.existsSync(stringsGzPath)) {
       telegramFiles.push(stringsGzPath);
-    } else if (fs.existsSync(stringsFilePath)) {
+    } else {
       telegramFiles.push(stringsFilePath);
     }
   }
-  if (urlsInventory.length > 0 && fs.existsSync(urlsFilePath)) {
-    telegramFiles.push(urlsFilePath);
-  }
+  if (fs.existsSync(urlsFilePath)) telegramFiles.push(urlsFilePath);
+  if (fs.existsSync(modelsFilePath)) telegramFiles.push(modelsFilePath);
+  if (fs.existsSync(summaryFilePath)) telegramFiles.push(summaryFilePath);
 
   return {
     files: [
@@ -414,6 +555,8 @@ export function generateReportBundle(outputDir, scanData) {
       diffFilePath,
       stringsFilePath,
       urlsFilePath,
+      modelsFilePath,
+      summaryFilePath,
     ],
     telegramFiles,
     countCheck: {
@@ -424,5 +567,7 @@ export function generateReportBundle(outputDir, scanData) {
     newStringsCount: uniqueCleanNewStrings.length,
     urlsCount: urlsInventory.length,
     newUrlsCount: newUrls.length,
+    modelCount: modelFindings.length,
+    pricingCount: pricingFindings.length,
   };
 }

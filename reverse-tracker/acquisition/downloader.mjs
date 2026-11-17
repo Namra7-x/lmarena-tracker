@@ -98,6 +98,7 @@ export async function downloadArtifact(artifact, options = {}) {
         size: buffer.length,
         target,
         url,
+        format: artifact.format || artifact.type || 'binary',
         cached: isCached,
         verified: Boolean(expectedChecksum),
       };

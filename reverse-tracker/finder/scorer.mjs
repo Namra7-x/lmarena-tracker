@@ -84,6 +84,10 @@ export function scoreFinding(finding, context = {}) {
       score += 12;
       breakdown.push({ rule: 'Category: UI feature string', points: 12 });
       break;
+    case CATEGORIES.PRICING:
+      score += 18;
+      breakdown.push({ rule: 'Category: pricing / model catalog table', points: 18 });
+      break;
     case CATEGORIES.ENV_VAR:
     case CATEGORIES.PLATFORM_ENTITLEMENT:
     case CATEGORIES.PLAN_ENTITLEMENT:
@@ -181,7 +185,8 @@ export function scoreFinding(finding, context = {}) {
         finding.category === CATEGORIES.HIDDEN_COMMAND ||
         finding.category === CATEGORIES.ENDPOINT_DOMAIN ||
         finding.category === CATEGORIES.AGENT_MODE ||
-        finding.category === CATEGORIES.CAPABILITY)) ||
+        finding.category === CATEGORIES.CAPABILITY ||
+        finding.category === CATEGORIES.PRICING)) ||
       (finding.category === CATEGORIES.MODEL_ID && score >= 50));
 
   const activationStatus = finding.activationStatus || 'UNKNOWN';

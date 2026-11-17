@@ -24,13 +24,16 @@ export async function fetchOpenCodeCli() {
   const verData = data.versions?.[latest];
   const tarball = verData?.dist?.tarball;
   const integrity = verData?.dist?.integrity || verData?.dist?.shasum;
+  if (!tarball) throw new Error(`No tarball found for @opencode/cli@${latest}`);
 
-  if (tarball) assertUrlAllowed(tarball);
+  assertUrlAllowed(tarball);
 
   return {
     componentId: 'opencode-cli',
     family: 'other',
     version: latest,
+    stableVersion: latest,
+    versionScheme: 'semver',
     releaseId: `@opencode/cli@${latest}`,
     channel: 'v2',
     artifacts: [
@@ -81,8 +84,10 @@ export async function fetchDroidCli() {
     },
     {
       target: 'win32-x64',
+      // This is a standalone PE binary, not an NSIS installer. Treating it as
+      // an installer would make the scan depend on 7-Zip unnecessarily.
       url: `${base}/${version}/windows/x64/droid.exe`,
-      format: 'exe',
+      format: 'binary',
       type: 'binary',
       checksumUrl: `${base}/${version}/windows/x64/droid.exe.sha256`,
     },
@@ -104,6 +109,8 @@ export async function fetchDroidCli() {
     componentId: 'droid-cli',
     family: 'other',
     version,
+    stableVersion: version,
+    versionScheme: 'semver',
     releaseId: `droid@${version}`,
     channel: 'stable',
     artifacts,

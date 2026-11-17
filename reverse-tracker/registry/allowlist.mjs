@@ -43,6 +43,7 @@ export const ALLOWED_DOMAINS = new Set([
   'cli.devin.ai',
   'static.devin.ai',
   'windsurf-stable.codeiumdata.com',
+  'windsurf.com',
   'formulae.brew.sh',
 
   // Other (Factory / OpenCode)

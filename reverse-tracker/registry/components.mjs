@@ -133,9 +133,9 @@ export const COMPONENTS = {
     family: 'cursor',
     scanPrefix: 'CR',
     type: 'desktop',
-    primaryTargets: ['darwin-arm64', 'win32-x64'],
+    primaryTargets: ['darwin-arm64', 'darwin-x64', 'win32-x64', 'win32-arm64', 'linux-x64'],
     sources: [
-      { type: 'todesktop_feed', url: 'https://download.todesktop.com/230313mzl4w4u92' },
+      { type: 'official_download_api', url: 'https://cursor.com/api/download?platform={platform}&releaseTrack=stable' },
     ],
   },
   'cursor-cli': {

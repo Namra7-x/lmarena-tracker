@@ -27,6 +27,7 @@ export const CATEGORIES = {
   INTERNAL_FUNCTION: 'internal_function',
   PLAN_ENTITLEMENT: 'plan_entitlement',
   PLATFORM_ENTITLEMENT: 'platform_entitlement',
+  PRICING: 'pricing',
 };
 
 export const SUBSCRIPTION_PLANS = new Set([
@@ -142,6 +143,13 @@ export function isValidModelIdentifier(val) {
 
   // Reject non-model software tokens
   if (/-(?:token|session|rs|lib|crate|client|manifest|plugin|header|footer|cache|mutex|lock|protocol|proto|schema)$/i.test(str)) return false;
+  if (/-(?:cli|desktop|app|extension|server|package|sdk|api|web|ui|docs|install|setup|helper|service|config|build|binary|version|release|update|updater|download|installer|launcher|runtime|toolchain|workspace|editor|ide)$/i.test(str)) return false;
+  // Product/feature phrases are not model IDs: codex-in-chatgpt, x-for-y.
+  if (/-(?:in|on|for|with|and|to|from|of)-[a-z0-9]/i.test(str)) return false;
+  // Common build-tool / language prefixes with a model-ish suffix (vite-plus).
+  if (/^(?:vite|webpack|rollup|esbuild|next|react|vue|angular|svelte|node|npm|pnpm|yarn|bun|deno|docker|git|http|https|json|yaml|toml|xml|css|html|sql|api|sdk|cli|tui|vscode|electron|tauri|rust|cargo|python|pip|java|kotlin|swift|xcode)-/i.test(str)) {
+    return false;
+  }
 
   // Reject UI preview features
   if (['browser-preview', 'tab-preview', 'window-preview', 'screen-preview', 'page-preview'].includes(lower)) return false;
@@ -269,6 +277,10 @@ const FLAG_PATTERNS = [
   /["']([a-zA-Z0-9_.-]+(?:Experiment|FeatureFlag|RolloutGate|FeatureGate))["']/,
   // CamelCase boolean toggles
   /\b(is[A-Z][a-zA-Z0-9]{3,40}(?:Enabled|Allowed|Active|Supported))\b/,
+  // Modern config toggles (enableNew..., canUse..., shouldShow..., allow...)
+  /\b((?:enable|feature|experiment|rollout|gate|toggle|should|canUse|allow|use|show)[A-Z][a-zA-Z0-9]{3,50})\b/,
+  // Flag definition objects with a defaultValue
+  /["']([a-zA-Z0-9_.-]{3,80})["']\s*:\s*\{[^{}]{0,200}?["']?(?:defaultValue|default_value|enabled|isEnabled)["']?\s*:/i,
 ];
 
 // 3. Hidden CLI Commands & Switches
@@ -306,6 +318,10 @@ const ENV_VAR_PATTERNS = [
   /\b(ENABLE_[A-Z0-9_]{3,40})\b/,
   /\b(FEATURE_[A-Z0-9_]{3,40})\b/,
   /\b(EXPERIMENT_[A-Z0-9_]{3,40})\b/,
+  /\b(NEXT_PUBLIC_[A-Z0-9_]{3,60})\b/,
+  /\b(VITE_[A-Z0-9_]{3,60})\b/,
+  /\b(REACT_APP_[A-Z0-9_]{3,60})\b/,
+  /\b(EXPO_PUBLIC_[A-Z0-9_]{3,60})\b/,
 ];
 
 // 7. Dark UI Copy & Natural Language Announcements (models, capabilities, and preview banners)
@@ -341,6 +357,21 @@ const PLAN_PATTERNS = [
   /\b((?:is_?|has_?)(?:pro|plus|max|ultra|enterprise|team|staff)_?(?:user|subscriber|access|entitled|tier)?)\b/i,
   /["']?\b((?:Available|Unlock|Exclusive|Reserved)\s+(?:only\s+)?(?:to|for)\s+(?:pro|plus|max|ultra|team|enterprise|subscribers)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
 ];
+
+// 10. Pricing & Model Catalog Tables
+const PRICING_PATTERNS = [
+  /(?:input|output|prompt|completion|context)[ _-]?(?:price|cost|rate|pricing)[^0-9$]{0,24}\$?\s*([0-9]+(?:\.[0-9]+)?)/i,
+  /\$\s?([0-9]+(?:\.[0-9]+)?)\s*(?:\/|per)\s*(?:1m|1 million|million)\s*(?:input |output |prompt |completion )?tokens?/i,
+  /(?:price|cost)[ _-]?(?:per|for)[ _-]?(?:1m|million)[^0-9$]{0,24}\$?\s*([0-9]+(?:\.[0-9]+)?)/i,
+  /\b([0-9]+(?:\.[0-9]+)?)\s*(?:usd|dollars?)\s*(?:\/|per)\s*(?:1m|million)\s*tokens?/i,
+];
+
+// JSON/config object tables. Captures the model label and input/output rates
+// even when minified onto one line, which is how Electron app catalogs ship.
+const MODEL_PRICING_OBJECT_PATTERN = /\{[^{}]{0,2500}\}/g;
+const MODEL_LABEL_PATTERN = /(?:model|model_id|modelId|model_name|modelName|slug|name|id)["']?\s*:\s*["']([a-zA-Z0-9_\-\.\/: ]{2,90})["']/i;
+const INPUT_PRICE_PATTERN = /(?:input|prompt|input_price|inputPrice|input_cost|inputCost)[^0-9$]{0,30}\$?\s*([0-9]+(?:\.[0-9]+)?)/i;
+const OUTPUT_PRICE_PATTERN = /(?:output|completion|output_price|outputPrice|output_cost|outputCost)[^0-9$]{0,30}\$?\s*([0-9]+(?:\.[0-9]+)?)/i;
 
 /**
  * Scan a text/string line and match potential signals.
@@ -554,6 +585,72 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     }
   }
 
+  // 10. Pricing / model catalog tables
+  const pricingSeen = new Set();
+  const looksLikeJsonObject = /^\s*\{/.test(text);
+  for (const pat of PRICING_PATTERNS) {
+    if (looksLikeJsonObject) break;
+    const m = text.match(pat);
+    if (m && m[1]) {
+      const value = m[0].trim().replace(/\s+/g, ' ').slice(0, 180);
+      const key = `pricing:${value}`;
+      if (!pricingSeen.has(key)) {
+        pricingSeen.add(key);
+        findings.push({
+          category: CATEGORIES.PRICING,
+          value,
+          pricingValue: Number.parseFloat(m[1]),
+          context: text.slice(0, 300),
+          hasDormantMarker: Boolean(matchedMarker),
+          dormantMarker: matchedMarker,
+          activationStatus: ACTIVATION_STATUS.CONFIGURED,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
+    }
+  }
+
+  // Minified JSON model tables: { "model": "x", "input": 1.5, "output": 6 }
+  MODEL_PRICING_OBJECT_PATTERN.lastIndex = 0;
+  let objectMatch;
+  while ((objectMatch = MODEL_PRICING_OBJECT_PATTERN.exec(text)) !== null) {
+    const objectText = objectMatch[0];
+    if (!/(?:model|model_id|model_name|slug|name|id)["']?\s*:/i.test(objectText)) continue;
+    if (!/(?:input|prompt|output|completion)/i.test(objectText)) continue;
+
+    const modelMatch = objectText.match(MODEL_LABEL_PATTERN);
+    const inputMatch = objectText.match(INPUT_PRICE_PATTERN);
+    const outputMatch = objectText.match(OUTPUT_PRICE_PATTERN);
+    if (!inputMatch && !outputMatch) continue;
+
+    const model = modelMatch ? modelMatch[1] : 'unknown';
+    const input = inputMatch ? inputMatch[1] : '?';
+    const output = outputMatch ? outputMatch[1] : '?';
+    const value = `${model} | input $${input}/1M | output $${output}/1M`;
+    const key = `pricing:${value}`;
+    if (!pricingSeen.has(key)) {
+      pricingSeen.add(key);
+      findings.push({
+        category: CATEGORIES.PRICING,
+        value,
+        model,
+        inputPrice: inputMatch ? Number.parseFloat(input) : null,
+        outputPrice: outputMatch ? Number.parseFloat(output) : null,
+        context: text.slice(0, 300),
+        hasDormantMarker: Boolean(matchedMarker),
+        dormantMarker: matchedMarker,
+        activationStatus: ACTIVATION_STATUS.CONFIGURED,
+        filePath,
+        artifactClass,
+        status: 'accepted',
+        rejectionReason: null,
+      });
+    }
+  }
+
   // Filter out strict sub-segments when a longer parent model identifier is present
   const modelValues = new Set(findings.filter((f) => f.category === CATEGORIES.MODEL_ID).map((f) => f.value));
   const filteredFindings = findings.filter((f) => {
@@ -578,4 +675,111 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
   }
 
   return uniqueFindings;
+}
+
+const JSON_MODEL_KEYS = ['model', 'model_id', 'modelId', 'model_name', 'modelName', 'slug', 'id'];
+const JSON_INPUT_KEYS = ['input', 'input_price', 'inputPrice', 'input_cost', 'inputCost', 'prompt', 'prompt_price', 'promptPrice'];
+const JSON_OUTPUT_KEYS = ['output', 'output_price', 'outputPrice', 'output_cost', 'outputCost', 'completion', 'completion_price', 'completionPrice'];
+
+function priceNumber(value) {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (typeof value === 'string') {
+    const match = value.replace(/,/g, '').match(/-?\d+(?:\.\d+)?/);
+    if (match) return Number.parseFloat(match[0]);
+  }
+  return null;
+}
+
+function readPrice(object, direction, keys) {
+  if (!object || typeof object !== 'object') return null;
+  for (const key of keys) {
+    const value = priceNumber(object[key]);
+    if (value !== null) return value;
+  }
+  // Nested pricing blocks such as pricing: { input: 3, output: 15 }.
+  for (const nestedKey of ['pricing', 'price', 'prices', 'cost', 'rates', 'billing']) {
+    const nested = object[nestedKey];
+    if (!nested || typeof nested !== 'object') continue;
+    for (const key of keys) {
+      const value = priceNumber(nested[key]);
+      if (value !== null) return value;
+    }
+  }
+  // Generic keys such as input_price_per_million_tokens.
+  const directionPattern = direction === 'input' ? /(?:input|prompt)/i : /(?:output|completion)/i;
+  for (const [key, rawValue] of Object.entries(object)) {
+    if (!/(?:price|cost|rate|pricing)/i.test(key) || !directionPattern.test(key)) continue;
+    const value = priceNumber(rawValue);
+    if (value !== null) return value;
+  }
+  return null;
+}
+
+/**
+ * Extract model pricing rows from pretty-printed JSON catalogs. The normal
+ * line matcher handles minified one-line objects; this walker handles the
+ * multi-line config files that modern desktop apps and SDKs ship.
+ */
+export function extractJsonPricingFindings(text, filePath = '', artifactClass = 'json') {
+  if (!text || typeof text !== 'string' || text.length > 12 * 1024 * 1024) return [];
+  let parsed;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    return [];
+  }
+
+  const findings = [];
+  const seen = new Set();
+  const visit = (value, depth = 0) => {
+    if (!value || typeof value !== 'object' || depth > 12) return;
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item, depth + 1);
+      return;
+    }
+
+    let model = null;
+    let modelKey = null;
+    for (const key of JSON_MODEL_KEYS) {
+      const candidate = value[key];
+      if (typeof candidate === 'string' && candidate.trim().length >= 2 && candidate.trim().length <= 90) {
+        model = candidate.trim();
+        modelKey = key;
+        break;
+      }
+    }
+    if (model && (modelKey === 'id' || modelKey === 'slug') && !isValidModelIdentifier(model)) {
+      model = null;
+    }
+    const inputPrice = readPrice(value, 'input', JSON_INPUT_KEYS);
+    const outputPrice = readPrice(value, 'output', JSON_OUTPUT_KEYS);
+    if (model && (inputPrice !== null || outputPrice !== null)) {
+      const input = inputPrice === null ? '?' : String(inputPrice);
+      const output = outputPrice === null ? '?' : String(outputPrice);
+      const findingValue = `${model} | input $${input}/1M | output $${output}/1M`;
+      if (!seen.has(findingValue)) {
+        seen.add(findingValue);
+        findings.push({
+          category: CATEGORIES.PRICING,
+          value: findingValue,
+          model,
+          pricingValue: inputPrice,
+          related: { inputPrice, outputPrice },
+          context: JSON.stringify(value).slice(0, 300),
+          hasDormantMarker: false,
+          dormantMarker: null,
+          activationStatus: ACTIVATION_STATUS.CONFIGURED,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
+    }
+
+    for (const child of Object.values(value)) visit(child, depth + 1);
+  };
+
+  visit(parsed);
+  return findings;
 }

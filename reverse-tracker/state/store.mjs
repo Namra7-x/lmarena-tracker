@@ -9,6 +9,13 @@ import path from 'node:path';
 const MAX_RECENT_SIGNALS = 5000;
 const MAX_HISTORICAL_HASHES = 10000;
 const MAX_HISTORICAL_URLS = 5000;
+const MAX_DELIVERY_LEDGER = 50;
+const MAX_RELEASE_HISTORY = 100;
+const STATE_SCHEMA_VERSION = 2;
+
+function boundArray(value, limit) {
+  return Array.isArray(value) ? value.slice(0, limit) : [];
+}
 
 /**
  * Load compact state for a component.
@@ -34,31 +41,53 @@ export function saveComponentState(stateDir, componentId, newState) {
   const filePath = path.join(stateDir, `${componentId}.json`);
   const tmpFilePath = path.join(stateDir, `${componentId}.json.tmp.${Date.now()}`);
 
-  // Bound collections to prevent unbounded memory growth in CI state branches
-  const recentSignals = (newState.recentSignals || []).slice(0, MAX_RECENT_SIGNALS);
-  const historicalSeenHashes = (newState.historicalSeenHashes || []).slice(0, MAX_HISTORICAL_HASHES);
-  const historicalSeenUrls = (newState.historicalSeenUrls || []).slice(0, MAX_HISTORICAL_URLS);
+  // Bound legacy collections to prevent unbounded memory growth in CI state branches.
+  const recentSignals = boundArray(newState.recentSignals, MAX_RECENT_SIGNALS);
+  const historicalSeenHashes = boundArray(newState.historicalSeenHashes, MAX_HISTORICAL_HASHES);
+  const historicalSeenUrls = boundArray(newState.historicalSeenUrls, MAX_HISTORICAL_URLS);
 
   const compactState = {
+    ...newState,
+    schemaVersion: STATE_SCHEMA_VERSION,
     componentId,
     version: newState.version,
-    alertedVersion: newState.alertedVersion || newState.version || null,
+    alertedVersion: Object.prototype.hasOwnProperty.call(newState, 'alertedVersion')
+      ? newState.alertedVersion
+      : (newState.version || null),
+    observedVersion: Object.prototype.hasOwnProperty.call(newState, 'observedVersion')
+      ? newState.observedVersion
+      : (newState.version || null),
+    scannedVersion: newState.scannedVersion || null,
+    deliveredVersion: newState.deliveredVersion || null,
     releaseId: newState.releaseId,
+    releaseKey: newState.releaseKey || null,
     channel: newState.channel || 'stable',
+    versionScheme: newState.versionScheme || null,
     identityFingerprint: newState.identityFingerprint,
     diagnosticFingerprint: newState.diagnosticFingerprint || null,
     scanId: newState.scanId,
     coverageState: newState.coverageState || 'COMPLETE',
-    lastSuccessfulScan: newState.coverageState === 'COMPLETE' ? (newState.lastSuccessfulScan || new Date().toISOString()) : undefined,
+    // This timestamp means a complete scan was fully delivered. Never invent it
+    // merely because extraction reached COMPLETE while report delivery failed.
+    lastSuccessfulScan: newState.lastSuccessfulScan || null,
     lastFailureTime: newState.lastFailureTime || null,
+    lastDeliveryStatus: newState.lastDeliveryStatus || null,
     lastAlertDigest: newState.lastAlertDigest || null,
     lastTestAlertVersion: newState.lastTestAlertVersion || null,
     analyzerStatus: newState.analyzerStatus || null,
     benchmark: newState.benchmark || null,
-    hotSignals: newState.hotSignals || [],
+    hotSignals: boundArray(newState.hotSignals, 100),
     recentSignals,
     historicalSeenHashes,
     historicalSeenUrls,
+    pendingDelivery: newState.pendingDelivery || null,
+    deliveryLedger: boundArray(newState.deliveryLedger, MAX_DELIVERY_LEDGER),
+    releaseHistory: boundArray(newState.releaseHistory, MAX_RELEASE_HISTORY),
+    stringBaseline: newState.stringBaseline || null,
+    stringHistory: newState.stringHistory || null,
+    urlBaseline: newState.urlBaseline || null,
+    urlHistory: newState.urlHistory || null,
+    lastCoverageGaps: boundArray(newState.lastCoverageGaps, 100),
   };
 
   // Atomic write: write to unique temporary file then atomically replace target
@@ -72,6 +101,14 @@ export function saveComponentState(stateDir, componentId, newState) {
   }
 
   return compactState;
+}
+
+/**
+ * Append a delivery ledger entry and keep the newest N entries.
+ */
+export function appendDeliveryLedger(state, entry) {
+  const ledger = Array.isArray(state?.deliveryLedger) ? state.deliveryLedger : [];
+  return [entry, ...ledger].slice(0, MAX_DELIVERY_LEDGER);
 }
 
 /**

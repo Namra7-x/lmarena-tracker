@@ -505,6 +505,12 @@ export function extractSignalsFromAst(code, filePath = '') {
         propMap.set(k, p);
       }
 
+      const propLiteral = (prop) => {
+        if (!prop) return null;
+        if (prop.value?.type === 'Literal') return prop.value.value;
+        return foldBinaryExpression(prop.value);
+      };
+
       // A. Hidden CLI Command Detection
       const hiddenProp = propMap.get('hidden');
       if (hiddenProp) {
@@ -560,6 +566,44 @@ export function extractSignalsFromAst(code, filePath = '') {
             activationStatus: ACTIVATION_STATUS.CONFIGURED,
           });
         }
+      }
+
+      // C2. Pricing / Model Catalog Tables
+      let inputProp = propMap.get('input_price') || propMap.get('inputprice') || propMap.get('input_cost') || propMap.get('inputcost') || propMap.get('input') || propMap.get('prompt_price') || propMap.get('prompt');
+      let outputProp = propMap.get('output_price') || propMap.get('outputprice') || propMap.get('output_cost') || propMap.get('outputcost') || propMap.get('output') || propMap.get('completion_price') || propMap.get('completion');
+      const pricingProp = propMap.get('pricing') || propMap.get('price') || propMap.get('cost');
+
+      // Also support nested { model, pricing: { input, output } } objects.
+      if (pricingProp?.value?.type === 'ObjectExpression') {
+        const nested = new Map();
+        for (const p of pricingProp.value.properties || []) {
+          if (!p.key) continue;
+          nested.set((p.key.name || p.key.value || '').toString().toLowerCase(), p);
+        }
+        inputProp = inputProp || nested.get('input') || nested.get('input_price') || nested.get('prompt');
+        outputProp = outputProp || nested.get('output') || nested.get('output_price') || nested.get('completion');
+      }
+
+      const inputValue = propLiteral(inputProp);
+      const outputValue = propLiteral(outputProp);
+      const inputPrice = typeof inputValue === 'number' ? inputValue : Number.parseFloat(inputValue);
+      const outputPrice = typeof outputValue === 'number' ? outputValue : Number.parseFloat(outputValue);
+
+      if (Number.isFinite(inputPrice) || Number.isFinite(outputPrice)) {
+        const modelProp = propMap.get('model') || propMap.get('model_id') || propMap.get('modelid') || propMap.get('model_name') || propMap.get('name') || propMap.get('id') || propMap.get('slug');
+        const modelVal = propLiteral(modelProp);
+        const modelLabel = typeof modelVal === 'string' && modelVal.trim() ? modelVal.trim() : 'unknown';
+        const value = `${modelLabel} | input $${Number.isFinite(inputPrice) ? inputPrice : '?'}/1M | output $${Number.isFinite(outputPrice) ? outputPrice : '?'}/1M`;
+
+        addFinding(CATEGORIES.PRICING, value, node, 'PricingObject', {
+          discoveryMethod: 'ast_pricing_object',
+          activationStatus: ACTIVATION_STATUS.CONFIGURED,
+          related: {
+            model: modelLabel,
+            inputPrice: Number.isFinite(inputPrice) ? inputPrice : null,
+            outputPrice: Number.isFinite(outputPrice) ? outputPrice : null,
+          },
+        });
       }
 
       // D. Search & Grounding Capabilities (e.g. { web_search: true, search_grounding: ... })

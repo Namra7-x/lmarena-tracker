@@ -140,7 +140,7 @@ export function extractStrings(buffer, options = {}) {
 
   function addResult(val, encoding, offset) {
     if (!val || val.length < minLen || val.length > maxLen) return;
-    if (!/[a-zA-Z0-9]/.test(val)) return;
+    if (!/[a-zA-Z0-9\p{L}\p{N}]/u.test(val)) return;
 
     // Reject control characters or unprintable byte sequences
     if (/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F\uFFFD]/.test(val)) return;
@@ -150,7 +150,7 @@ export function extractStrings(buffer, options = {}) {
     for (const line of lines) {
       const clean = line.trim();
       if (clean.length < minLen || clean.length > maxLen) continue;
-      if (!/[a-zA-Z0-9]/.test(clean)) continue;
+      if (!/[a-zA-Z0-9\p{L}\p{N}]/u.test(clean)) continue;
 
       const tokens = unpackGluedTokens(clean);
       for (const tok of tokens) {
@@ -166,6 +166,12 @@ export function extractStrings(buffer, options = {}) {
   const CHUNK_SIZE = 16 * 1024 * 1024; // 16 MB chunks
   const OVERLAP = 4096; // 4 KB overlap to prevent cutting strings across chunk boundaries
   const totalLen = buffer.length;
+  const scanMax = Math.min(Math.max(maxLen, 4), 65536);
+  const utf16ScanMax = Math.min(scanMax * 2, 131072);
+  const asciiRegex = new RegExp(`[\\x20-\\x7E\\t\\r\\n]{4,${scanMax}}`, 'g');
+  const utf8Regex = new RegExp(`(?:[\\x20-\\x7E\\t\\r\\n]|[\\xC2-\\xF4][\\x80-\\xBF]{1,3}){4,${scanMax}}`, 'g');
+  const u16leRegex = new RegExp(`(?:[\\x20-\\x7E\\t\\r\\n]\\x00){4,${utf16ScanMax}}`, 'g');
+  const u16beRegex = new RegExp(`(?:\\x00[\\x20-\\x7E\\t\\r\\n]){4,${utf16ScanMax}}`, 'g');
 
   for (let offset = 0; offset < totalLen; offset += CHUNK_SIZE - OVERLAP) {
     if (results.length >= maxStrings) break;
@@ -174,21 +180,30 @@ export function extractStrings(buffer, options = {}) {
     const chunkStr = chunkBuf.toString('latin1'); // Instant O(1) buffer mapping in V8
 
     // 1. ASCII & UTF-8 scan (printable ASCII range \x20-\x7E, \t, \r, \n)
-    const asciiRegex = /[\x20-\x7E\t\r\n]{4,2048}/g;
     let m;
     while ((m = asciiRegex.exec(chunkStr)) !== null) {
       addResult(m[0].trim(), 'utf8', offset + m.index);
     }
 
-    // 2. UTF-16LE scan ([char, 0x00]{4,1024})
-    const u16leRegex = /(?:[\x20-\x7E\t\r\n]\x00){4,1024}/g;
+    // 1b. UTF-8 multibyte scan. The latin1 view keeps the scanner O(1) in
+    // memory, but also lets us match multi-byte UTF-8 sequences and decode
+    // only the matched slice. This is how non-English UI strings, model names,
+    // and localized release copy are recovered from binaries.
+    if (options.includeUnicode !== false) {
+      while ((m = utf8Regex.exec(chunkStr)) !== null) {
+        if (!/[\x80-\xFF]/.test(m[0])) continue;
+        const decoded = Buffer.from(m[0], 'latin1').toString('utf8').trim();
+        addResult(decoded, 'utf8-multibyte', offset + m.index);
+      }
+    }
+
+    // 2. UTF-16LE scan ([char, 0x00]{4,4096})
     while ((m = u16leRegex.exec(chunkStr)) !== null) {
       const decoded = Buffer.from(m[0], 'latin1').toString('utf16le').trim();
       addResult(decoded, 'utf16le', offset + m.index);
     }
 
-    // 3. UTF-16BE scan ([0x00, char]{4,1024})
-    const u16beRegex = /(?:\x00[\x20-\x7E\t\r\n]){4,1024}/g;
+    // 3. UTF-16BE scan ([0x00, char]{4,4096})
     while ((m = u16beRegex.exec(chunkStr)) !== null) {
       const sliceBuf = Buffer.from(m[0], 'latin1');
       sliceBuf.swap16();

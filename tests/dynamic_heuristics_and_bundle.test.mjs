@@ -102,11 +102,14 @@ test('generateReportBundle produces clean leaks.txt, diff.txt, strings.txt and s
   assert.ok(diffContent.includes('0.165.0 -> 0.166.0'));
   assert.ok(diffContent.includes('15000000') || diffContent.includes('MB'));
 
-  // Telegram files should only have the 3 clean files
-  assert.equal(bundle.telegramFiles.length, 3);
+  // Telegram delivery is a fixed report set: empty reports are still sent.
+  assert.equal(bundle.telegramFiles.length, 6);
   assert.ok(bundle.telegramFiles.some(f => f.endsWith('leaks.txt')));
   assert.ok(bundle.telegramFiles.some(f => f.endsWith('diff.txt')));
   assert.ok(bundle.telegramFiles.some(f => f.endsWith('strings.txt')));
+  assert.ok(bundle.telegramFiles.some(f => f.endsWith('urls.txt')));
+  assert.ok(bundle.telegramFiles.some(f => f.endsWith('models-and-pricing.txt')));
+  assert.ok(bundle.telegramFiles.some(f => f.endsWith('scan-summary.txt')));
 
   // Cleanup
   fs.rmSync(tmpDir, { recursive: true, force: true });

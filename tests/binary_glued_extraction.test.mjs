@@ -108,11 +108,33 @@ test('zero-hardcoding dynamic extraction catches arbitrary unseen lab models and
   assert.ok(vals.has('supernova-preview'), 'Must dynamically unpack supernova-preview');
 });
 
-test('fetchDevinDesktop points to direct native archive URLs (.zip and .tar.gz)', async () => {
+test('fetchDevinDesktop resolves direct native installer URLs from the official redirect API', async (t) => {
+  const originalFetch = globalThis.fetch;
+  const locations = {
+    'darwin-arm64-dmg': 'https://windsurf-stable.codeiumdata.com/darwin-arm64-dmg/stable/abc1234/Devin-darwin-arm64-3.13.4.dmg',
+    'darwin-x64-dmg': 'https://windsurf-stable.codeiumdata.com/darwin-x64-dmg/stable/abc1234/Devin-darwin-x64-3.13.4.dmg',
+    'win32-x64': 'https://windsurf-stable.codeiumdata.com/win32-x64/stable/abc1234/DevinSetup-x64-3.13.4.exe',
+    'win32-arm64': 'https://windsurf-stable.codeiumdata.com/win32-arm64/stable/abc1234/DevinSetup-arm64-3.13.4.exe',
+    'linux-x64': 'https://windsurf-stable.codeiumdata.com/linux-x64/stable/abc1234/Devin-linux-x64-3.13.4.tar.gz',
+  };
+
+  globalThis.fetch = async (url) => {
+    const build = new URL(url).searchParams.get('build');
+    const location = locations[build];
+    assert.ok(location, `Unexpected Devin build ${build}`);
+    return new Response(null, { status: 307, headers: { location } });
+  };
+  t.after(() => {
+    globalThis.fetch = originalFetch;
+  });
+
   const desktop = await fetchDevinDesktop();
-  assert.ok(desktop.artifacts.length >= 4, 'Must provide desktop artifacts');
+  assert.equal(desktop.version, '3.13.4');
+  assert.equal(desktop.artifacts.length, 5, 'Must provide all desktop artifacts');
+  assert.match(desktop.version, /^\d+\.\d+\.\d+$/, 'Version must be semver');
   for (const art of desktop.artifacts) {
-    assert.ok(art.format === 'zip' || art.format === 'tgz', `Format must be zip or tgz, got ${art.format}`);
-    assert.ok(art.url.endsWith('.zip') || art.url.endsWith('.tar.gz'), `URL must be archive, got ${art.url}`);
+    assert.ok(art.url.startsWith('https://windsurf-stable.codeiumdata.com/'), `Must use official CDN, got ${art.url}`);
+    assert.ok(['dmg', 'exe', 'zip', 'tgz'].includes(art.format), `Unexpected format ${art.format}`);
+    assert.ok(/\.(?:dmg|exe|zip|tar\.gz)$/.test(art.url), `URL must be a native package, got ${art.url}`);
   }
 });

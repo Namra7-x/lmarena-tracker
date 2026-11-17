@@ -24,8 +24,9 @@ export async function fetchCodexCli() {
   const verData = data.versions?.[latest];
   const tarball = verData?.dist?.tarball;
   const integrity = verData?.dist?.integrity || verData?.dist?.shasum;
+  if (!tarball) throw new Error(`No tarball found for @openai/codex@${latest}`);
 
-  if (tarball) assertUrlAllowed(tarball);
+  assertUrlAllowed(tarball);
 
   return {
     componentId: 'codex-cli',
@@ -48,6 +49,22 @@ export async function fetchCodexCli() {
   };
 }
 
+function parseBuildStamp(lastModified) {
+  if (!lastModified) return null;
+  const date = new Date(lastModified);
+  if (Number.isNaN(date.getTime())) return null;
+  const pad = (n) => String(n).padStart(2, '0');
+  return [
+    date.getUTCFullYear(),
+    pad(date.getUTCMonth() + 1),
+    pad(date.getUTCDate()),
+    '-',
+    pad(date.getUTCHours()),
+    pad(date.getUTCMinutes()),
+    pad(date.getUTCSeconds()),
+  ].join('');
+}
+
 export async function fetchCodexDesktop() {
   const dmgUrl = 'https://persistent.oaistatic.com/codex-app-prod/Codex.dmg';
   assertUrlAllowed(dmgUrl);
@@ -65,21 +82,27 @@ export async function fetchCodexDesktop() {
   const etag = res.headers.get('etag')?.replace(/"/g, '') || null;
   const lastModified = res.headers.get('last-modified') || null;
   const contentLength = res.headers.get('content-length') || null;
+  const stamp = parseBuildStamp(lastModified);
 
-  // Derive version/identifier from etag or last modified
-  const normalizedVersion = etag ? `etag-${etag.slice(0, 16)}` : `build-${lastModified || 'unknown'}`;
+  // Last-Modified is the stable release identity. ETag alternates between
+  // CDN replicas on this endpoint and must never be used as a version.
+  const normalizedVersion = stamp
+    ? `build-${stamp}`
+    : (contentLength ? `build-size-${contentLength}` : 'build-unknown');
 
   return {
     componentId: 'codex-desktop',
     family: 'openai',
     version: normalizedVersion,
+    stableVersion: normalizedVersion,
+    versionScheme: 'build',
     releaseId: `codex-desktop-${normalizedVersion}`,
     channel: 'prod',
     artifacts: [
       {
         target: 'darwin-universal',
         url: dmgUrl,
-        checksum: etag ? `etag:${etag}` : null,
+        checksum: lastModified && contentLength ? `build:${lastModified}:${contentLength}` : null,
         format: 'dmg',
         type: 'dmg',
         contentLength,
@@ -88,6 +111,7 @@ export async function fetchCodexDesktop() {
     metadata: {
       lastModified,
       etag,
+      contentLength,
     },
   };
 }
