@@ -1,7 +1,7 @@
 {
   "componentId": "gemini-desktop",
   "version": "build-20261117-003238",
-  "alertedVersion": "build-20261117-003238",
+  "alertedVersion": "build-20261117-201850",
   "releaseId": "gemini-desktop-build-20261117-003238",
   "channel": "stable",
   "identityFingerprint": "03b32eacad33e1f9df78b1d293167ffab4cb9d42f29e892a61c7d33c93ee605b",
@@ -12377,12 +12377,24 @@
   },
   "schemaVersion": 2,
   "deliveredVersion": "build-20261117-003238",
-  "observedVersion": "build-20261117-003238",
+  "observedVersion": "build-20261117-201850",
   "scannedVersion": "build-20261117-003238",
   "releaseKey": "413bdf51cf2f0d2827dba09733021bcd",
   "versionScheme": "build",
-  "lastDeliveryStatus": "DELIVERED",
-  "pendingDelivery": null,
+  "lastDeliveryStatus": "ALERT_SENT",
+  "pendingDelivery": {
+    "scanId": "GD-20261117-002",
+    "version": "build-20261117-201850",
+    "releaseKey": "df07218757d238f81f01fbe0c7c2e5be",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 123,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-17T20:19:28.285Z",
+    "updatedAt": "2026-11-17T20:19:28.285Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "GD-20261117-001",
