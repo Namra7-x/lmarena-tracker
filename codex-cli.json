@@ -1,7 +1,7 @@
 {
   "componentId": "codex-cli",
   "version": "0.169.0",
-  "alertedVersion": "0.169.0",
+  "alertedVersion": "0.169.1",
   "releaseId": "@openai/codex@0.169.0",
   "channel": "stable",
   "identityFingerprint": "55dbf9bbdf772d5c60fd19c293dbc9c8ad54b3bee1d7e24714b8101f036babee",
@@ -330,13 +330,25 @@
   },
   "schemaVersion": 2,
   "deliveredVersion": "0.169.0",
-  "observedVersion": "0.169.0",
+  "observedVersion": "0.169.1",
   "scannedVersion": "0.169.0",
   "releaseKey": "a243b9a5989bcd4ab369082642043bab",
   "versionScheme": null,
   "lastSuccessfulScan": "2026-11-17T07:09:14.487Z",
-  "lastDeliveryStatus": "DELIVERED",
-  "pendingDelivery": null,
+  "lastDeliveryStatus": "ALERT_SENT",
+  "pendingDelivery": {
+    "scanId": "CX-20261117-002",
+    "version": "0.169.1",
+    "releaseKey": "0470163067ae7831707e2be2c9a69959",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 317,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-17T22:27:23.159Z",
+    "updatedAt": "2026-11-17T22:27:23.160Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CX-20261117-001",
