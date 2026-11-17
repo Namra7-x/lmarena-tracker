@@ -6,14 +6,26 @@
   "channel": "stable",
   "identityFingerprint": "391635c08c59c28b940857a1d1a728f3e4b28b9ec6d95fde297ed27a894c3829",
   "diagnosticFingerprint": null,
-  "scanId": "INIT-CURSOR",
-  "coverageState": "COMPLETE",
+  "scanId": "CR-20261117-002",
+  "coverageState": "PARTIAL",
   "lastSuccessfulScan": "2026-11-05T11:42:03.221Z",
-  "lastFailureTime": null,
+  "lastFailureTime": "2026-11-17T07:14:44.406Z",
   "lastAlertDigest": null,
   "lastTestAlertVersion": "0.45.14",
-  "analyzerStatus": null,
-  "benchmark": null,
+  "analyzerStatus": {
+    "acornAst": "completed",
+    "goReSym": "skipped",
+    "sourceMap": "skipped",
+    "sevenZip": "completed",
+    "asar": "completed",
+    "tar": "skipped",
+    "zip": "skipped",
+    "multiEncodingScanner": "skipped"
+  },
+  "benchmark": {
+    "executionTimeMs": 28159,
+    "peakMemoryMb": 154
+  },
   "hotSignals": [],
   "recentSignals": [],
   "historicalSeenHashes": [],
@@ -45,24 +57,59 @@
   "schemaVersion": 2,
   "deliveredVersion": "0.45.14",
   "observedVersion": "3.30.14",
-  "scannedVersion": null,
-  "releaseKey": null,
-  "versionScheme": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "scannedVersion": "3.30.14",
+  "releaseKey": "341a369fff95d6120c3e628d09be457e",
+  "versionScheme": "semver",
+  "lastDeliveryStatus": "PARTIAL",
   "pendingDelivery": {
-    "scanId": "CR-20261117-001",
+    "scanId": "CR-20261117-002",
     "version": "3.30.14",
     "releaseKey": "341a369fff95d6120c3e628d09be457e",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 65,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
+    "coverageState": "PARTIAL",
     "createdAt": "2026-11-17T07:09:09.801Z",
-    "updatedAt": "2026-11-17T07:09:09.801Z"
+    "updatedAt": "2026-11-17T07:14:44.406Z"
   },
-  "deliveryLedger": [],
+  "deliveryLedger": [
+    {
+      "scanId": "CR-20261117-002",
+      "version": "3.30.14",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-17T07:14:44.406Z"
+    }
+  ],
   "releaseHistory": [],
-  "lastCoverageGaps": []
+  "lastCoverageGaps": [
+    "darwin-arm64: extraction partial (7-Zip extraction exceeded safety caps; some files were not analyzed)",
+    "linux-x64: extraction partial (7-Zip extraction exceeded safety caps; some files were not analyzed)"
+  ]
 }
