@@ -11502,6 +11502,40 @@
           "nativeapps"
         ]
       }
+    },
+    "mai-image-2.7": {
+      "displayName": "MAI-Image-2.7",
+      "provider": "microsoft",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      }
+    },
+    "mai-image-2.7-flash": {
+      "displayName": "MAI-Image-2.7 Flash",
+      "provider": "microsoft",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "graphicdesign",
+          "image",
+          "imagetoimage",
+          "logo"
+        ]
+      }
     }
   },
   "providers": {
@@ -13779,6 +13813,12 @@
       "text.output": 10,
       "text.cachedInput": 0.1,
       "text.cacheWrite": 2.5
+    },
+    "mai-image-2.7": {
+      "image.perImage": 0.035
+    },
+    "mai-image-2.7-flash": {
+      "image.perImage": 0.01
     }
   }
 }
