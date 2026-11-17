@@ -1,7 +1,7 @@
 {
   "totalGroups": 86,
   "totalModels": 190,
-  "lastUpdated": "2026-11-17T06:13:48.667Z",
+  "lastUpdated": "2026-11-17T12:55:44.946Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -490,7 +490,7 @@
         "autoTPM": true,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": true
+        "deploy": false
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -539,7 +539,7 @@
           "autoTPM": true,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": true
+          "deploy": false
         },
         "model": "qwen3.8-flash",
         "serviceSites": [
@@ -2541,7 +2541,7 @@
       "supports": {
         "fineTune": false,
         "experienceV2": true,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "autoTPM": true,
         "displayQpmLimit": true,
@@ -2585,7 +2585,7 @@
         "supports": {
           "fineTune": false,
           "experienceV2": true,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "autoTPM": true,
           "displayQpmLimit": true,
@@ -2679,7 +2679,7 @@
       "supports": {
         "fineTune": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "autoTPM": true,
         "experience": true,
@@ -2725,7 +2725,7 @@
         "supports": {
           "fineTune": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "autoTPM": true,
           "experience": true,
@@ -3206,7 +3206,7 @@
         "autoTPM": true,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": false
+        "deploy": true
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -3256,7 +3256,7 @@
           "autoTPM": true,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": false
+          "deploy": true
         },
         "model": "qwen3.8-27b",
         "serviceSites": [
@@ -3280,8 +3280,7 @@
           "sft": [
             "full",
             "lora"
-          ],
-          "dpo": []
+          ]
         },
         "inferenceProvider": "bailian",
         "name": "Qwen3.8-27B",
@@ -8070,7 +8069,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.aliyun.com/notice/118728",
+            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -8152,7 +8151,7 @@
         "experienceUpcoming": false,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": true,
+        "deploy": false,
         "sellingByQpm": false
       },
       "rawItem": {
@@ -8204,7 +8203,7 @@
           "experienceUpcoming": false,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": true,
+          "deploy": false,
           "sellingByQpm": false
         },
         "model": "qwen3.5-plus-2026-02-15",
@@ -8228,7 +8227,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
+            "announceUrl": "https://www.aliyun.com/notice/118728",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -8304,19 +8303,15 @@
         "app": false,
         "dpo": false,
         "inference": true,
-        "workflow": false,
         "selfServiceLimitIncrease": true,
         "cpt": false,
         "experience": true,
         "displayQpmLimit": true,
         "deploy": false,
         "sellingByQpm": false,
-        "workflowText": false,
         "experienceV2": false,
         "eval": false,
-        "experienceUpcoming": false,
-        "appV2": false,
-        "appV1": false
+        "experienceUpcoming": false
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -8362,19 +8357,15 @@
           "app": false,
           "dpo": false,
           "inference": true,
-          "workflow": false,
           "selfServiceLimitIncrease": true,
           "cpt": false,
           "experience": true,
           "displayQpmLimit": true,
           "deploy": false,
           "sellingByQpm": false,
-          "workflowText": false,
           "experienceV2": false,
           "eval": false,
-          "experienceUpcoming": false,
-          "appV2": false,
-          "appV1": false
+          "experienceUpcoming": false
         },
         "model": "qwen3.5-flash",
         "serviceSites": [
@@ -13943,129 +13934,6 @@
       },
       "limits": {}
     },
-    "wan2.6-r2v": {
-      "modelId": "wan2.6-r2v",
-      "name": "Wan2.6-R2V",
-      "modelAlias": null,
-      "provider": "wan",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-      "category": "Wan",
-      "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
-      "shortDescription": "New reference-to-video model",
-      "updateAt": "2025-12-15T16:08:49.000+00:00",
-      "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
-      "collectionTag": "wan2.6",
-      "features": [],
-      "capabilities": [
-        "VG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Image",
-          "Video",
-          "Text"
-        ],
-        "responseModality": [
-          "Video",
-          "Audio"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-r2v",
-      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-r2v.md",
-      "supports": {
-        "sft": false,
-        "fineTune": false,
-        "app": false,
-        "dpo": false,
-        "inference": true,
-        "cpt": false,
-        "checkpointImport": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": false,
-        "sellingByQpm": false,
-        "tokenizer": false,
-        "experienceV2": false,
-        "eval": false,
-        "experienceUpcoming": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Video",
-            "Audio"
-          ],
-          "request_modality": [
-            "Image",
-            "Video",
-            "Text"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2025-12-15T16:08:49.000+00:00",
-        "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
-        "aliyunRecommend": false,
-        "collectionTag": "wan2.6",
-        "features": [],
-        "modelInfo": {},
-        "provider": "wan",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "fineTune": false,
-          "app": false,
-          "dpo": false,
-          "inference": true,
-          "cpt": false,
-          "checkpointImport": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": false,
-          "sellingByQpm": false,
-          "tokenizer": false,
-          "experienceV2": false,
-          "eval": false,
-          "experienceUpcoming": false
-        },
-        "model": "wan2.6-r2v",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "VG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "MAJOR",
-        "shortDescription": "New reference-to-video model",
-        "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
-        "tags": [],
-        "license": {},
-        "inferenceProvider": "bailian",
-        "name": "Wan2.6-R2V",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
-        "needApply": false,
-        "category": "Wan"
-      },
-      "pricing": {
-        "Video Generation(720P)": "$0.1Per second",
-        "Video Generation(1080P)": "$0.15Per second"
-      },
-      "limits": {}
-    },
     "wan2.7-r2v": {
       "modelId": "wan2.7-r2v",
       "name": "Wan2.7-R2V",
@@ -14306,6 +14174,129 @@
         "Video Generation(1080P)": "$0.075Per second",
         "Video Generation(720P no audio)": "$0.025Per second",
         "Video Generation(1080P no audio)": "$0.0375Per second"
+      },
+      "limits": {}
+    },
+    "wan2.6-r2v": {
+      "modelId": "wan2.6-r2v",
+      "name": "Wan2.6-R2V",
+      "modelAlias": null,
+      "provider": "wan",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+      "category": "Wan",
+      "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
+      "shortDescription": "New reference-to-video model",
+      "updateAt": "2025-12-15T16:08:49.000+00:00",
+      "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
+      "collectionTag": "wan2.6",
+      "features": [],
+      "capabilities": [
+        "VG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Image",
+          "Video",
+          "Text"
+        ],
+        "responseModality": [
+          "Video",
+          "Audio"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-r2v",
+      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-r2v.md",
+      "supports": {
+        "sft": false,
+        "fineTune": false,
+        "app": false,
+        "dpo": false,
+        "inference": true,
+        "cpt": false,
+        "checkpointImport": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": false,
+        "sellingByQpm": false,
+        "tokenizer": false,
+        "experienceV2": false,
+        "eval": false,
+        "experienceUpcoming": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Video",
+            "Audio"
+          ],
+          "request_modality": [
+            "Image",
+            "Video",
+            "Text"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2025-12-15T16:08:49.000+00:00",
+        "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
+        "aliyunRecommend": false,
+        "collectionTag": "wan2.6",
+        "features": [],
+        "modelInfo": {},
+        "provider": "wan",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "fineTune": false,
+          "app": false,
+          "dpo": false,
+          "inference": true,
+          "cpt": false,
+          "checkpointImport": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": false,
+          "sellingByQpm": false,
+          "tokenizer": false,
+          "experienceV2": false,
+          "eval": false,
+          "experienceUpcoming": false
+        },
+        "model": "wan2.6-r2v",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "VG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "New reference-to-video model",
+        "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "Wan2.6-R2V",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
+        "needApply": false,
+        "category": "Wan"
+      },
+      "pricing": {
+        "Video Generation(720P)": "$0.1Per second",
+        "Video Generation(1080P)": "$0.15Per second"
       },
       "limits": {}
     },
@@ -16770,7 +16761,7 @@
         "checkpointImport": false,
         "experience": false,
         "displayQpmLimit": true,
-        "deploy": true,
+        "deploy": false,
         "sellingByQpm": false,
         "tokenizer": false,
         "experienceV2": false,
@@ -16816,7 +16807,7 @@
           "checkpointImport": false,
           "experience": false,
           "displayQpmLimit": true,
-          "deploy": true,
+          "deploy": false,
           "sellingByQpm": false,
           "tokenizer": false,
           "experienceV2": false,
@@ -19313,7 +19304,7 @@
       "supports": {
         "fineTune": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "autoTPM": true,
         "experience": true,
@@ -19357,7 +19348,7 @@
         "supports": {
           "fineTune": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "autoTPM": true,
           "experience": true,
@@ -24161,7 +24152,9 @@
       "updateAt": "2025-08-25T06:26:36.000+00:00",
       "latestOnlineAt": "2025-08-25T06:26:36.000+00:00",
       "collectionTag": "qwen3.7",
-      "features": [],
+      "features": [
+        "model-experience"
+      ],
       "capabilities": [
         "TR"
       ],
@@ -24192,12 +24185,12 @@
         "selfServiceLimitIncrease": true,
         "cpt": false,
         "checkpointImport": false,
-        "experience": false,
+        "experience": true,
         "displayQpmLimit": true,
         "deploy": false,
         "sellingByQpm": false,
         "tokenizer": false,
-        "experienceV2": false,
+        "experienceV2": true,
         "eval": false,
         "experienceUpcoming": false
       },
@@ -24214,7 +24207,9 @@
         "updateAt": "2025-08-25T06:26:36.000+00:00",
         "description": "The General Text Vector V4 version is a multi-language  text vector model developed by the Tongyi Lab based on Qwen3. Compared to the V3 version, it significantly improves performance in text retrieval, clustering, and classification tasks. It achieves a 15% to 40% improvement in evaluation tasks such as MTEB multilingual, Chinese-English, and code retrieval. Additionally, it supports user-defined vector dimensions ranging from 64 to 2048.",
         "aliyunRecommend": false,
-        "features": [],
+        "features": [
+          "model-experience"
+        ],
         "modelInfo": {},
         "provider": "qwen-domain-model",
         "permissions": {
@@ -24231,12 +24226,12 @@
           "selfServiceLimitIncrease": true,
           "cpt": false,
           "checkpointImport": false,
-          "experience": false,
+          "experience": true,
           "displayQpmLimit": true,
           "deploy": false,
           "sellingByQpm": false,
           "tokenizer": false,
-          "experienceV2": false,
+          "experienceV2": true,
           "eval": false,
           "experienceUpcoming": false
         },
