@@ -8,7 +8,7 @@ on:
       - 'reverse-tracker/**'
       - '.github/workflows/early_signal_tracker.yml'
   repository_dispatch:
-    types: [early_signal_tracker]
+    types: [tracker, early_signal_tracker]
   workflow_dispatch:
     inputs:
       test_run:
@@ -17,7 +17,7 @@ on:
         type: boolean
         default: true
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/1 * * * *'
 
 permissions:
   contents: write
@@ -29,7 +29,7 @@ jobs:
     timeout-minutes: 10
     concurrency:
       group: ai-tracker-${{ matrix.family }}
-      cancel-in-progress: false
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:
