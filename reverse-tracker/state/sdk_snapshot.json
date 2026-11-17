@@ -114,7 +114,7 @@
     "family": "anthropic"
   },
   "openai": {
-    "version": "7.57.0",
+    "version": "7.58.0",
     "models": [
       "chatgpt-4o-latest",
       "chatgpt-image-latest",
@@ -219,6 +219,9 @@
       "gpt-6-sol",
       "gpt-6.1-sol",
       "gpt-6.1-terra",
+      "gpt-6.2-astra",
+      "gpt-6.2-astra-law",
+      "gpt-6.2-sol",
       "gpt-audio-1.5",
       "gpt-audio-mini",
       "gpt-audio-mini-2025-10-06",
@@ -292,8 +295,8 @@
     "toolDefinitions": [
       "tools"
     ],
-    "lastUpdated": "2026-11-13T21:32:15.113Z",
-    "shasum": "d32f410236adc656550bc0a52936e4255930cf1b",
+    "lastUpdated": "2026-11-17T18:31:36.251Z",
+    "shasum": "40f3c85d440596a87d26ea4dea2a0196c9cedc91",
     "displayName": "OpenAI Python/TS SDK",
     "family": "openai"
   },
