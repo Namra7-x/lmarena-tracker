@@ -5635,7 +5635,7 @@
       },
       "facebook/boxer": {
         "createdAt": "2026-03-27T21:08:45.000Z",
-        "lastModified": "2026-07-01T19:47:38.000Z",
+        "lastModified": "2026-11-17T20:50:35.000Z",
         "gated": false,
         "pipeline_tag": "object-detection",
         "numParameters": null
@@ -25354,14 +25354,14 @@
       },
       "apple/TiC-CLIP-basic-sequential": {
         "createdAt": "2024-06-05T17:22:32.000Z",
-        "lastModified": "2025-02-24T22:50:27.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "zero-shot-image-classification",
         "numParameters": null
       },
       "apple/TiC-CLIP-basic-oracle": {
         "createdAt": "2024-06-05T17:21:31.000Z",
-        "lastModified": "2025-02-24T22:50:14.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "zero-shot-image-classification",
         "numParameters": null
@@ -25707,6 +25707,20 @@
         "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-classification",
+        "numParameters": null
+      },
+      "apple/FastFrames-S": {
+        "createdAt": "2026-11-16T17:21:25.000Z",
+        "lastModified": "2026-11-17T21:20:23.000Z",
+        "gated": false,
+        "pipeline_tag": "text-to-video",
+        "numParameters": null
+      },
+      "apple/FastFrames-L": {
+        "createdAt": "2026-11-16T17:21:04.000Z",
+        "lastModified": "2026-11-17T21:20:44.000Z",
+        "gated": false,
+        "pipeline_tag": "text-to-video",
         "numParameters": null
       }
     },
