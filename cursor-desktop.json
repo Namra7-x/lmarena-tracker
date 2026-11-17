@@ -6,10 +6,10 @@
   "channel": "stable",
   "identityFingerprint": "391635c08c59c28b940857a1d1a728f3e4b28b9ec6d95fde297ed27a894c3829",
   "diagnosticFingerprint": null,
-  "scanId": "CR-20261117-009",
+  "scanId": "CR-20261117-010",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": "2026-11-05T11:42:03.221Z",
-  "lastFailureTime": "2026-11-17T07:25:28.397Z",
+  "lastFailureTime": "2026-11-17T07:26:36.414Z",
   "lastAlertDigest": null,
   "lastTestAlertVersion": "0.45.14",
   "analyzerStatus": {
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "skipped"
   },
   "benchmark": {
-    "executionTimeMs": 25413,
-    "peakMemoryMb": 153
+    "executionTimeMs": 31617,
+    "peakMemoryMb": 171
   },
   "hotSignals": [],
   "recentSignals": [],
@@ -62,7 +62,7 @@
   "versionScheme": "semver",
   "lastDeliveryStatus": "PARTIAL",
   "pendingDelivery": {
-    "scanId": "CR-20261117-009",
+    "scanId": "CR-20261117-010",
     "version": "3.30.14",
     "releaseKey": "341a369fff95d6120c3e628d09be457e",
     "status": "PARTIAL",
@@ -87,9 +87,25 @@
     "failedFiles": [],
     "coverageState": "PARTIAL",
     "createdAt": "2026-11-17T07:09:09.801Z",
-    "updatedAt": "2026-11-17T07:25:28.397Z"
+    "updatedAt": "2026-11-17T07:26:36.414Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "CR-20261117-010",
+      "version": "3.30.14",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-17T07:26:36.414Z"
+    },
     {
       "scanId": "CR-20261117-009",
       "version": "3.30.14",
