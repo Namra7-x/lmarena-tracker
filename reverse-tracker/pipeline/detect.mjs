@@ -203,6 +203,7 @@ export async function detectChanges(familyId = null, options = {}) {
           baseline,
           classification,
           resume: true,
+          skipAlert: true,
         });
         continue;
       }
