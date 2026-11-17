@@ -1,14 +1,14 @@
 {
   "componentId": "claude-desktop",
-  "version": "build-20261105-192827",
+  "version": "build-20261105-192829",
   "alertedVersion": "build-20261105-192829",
-  "releaseId": "claude-desktop-build-20261105-192827",
+  "releaseId": "claude-desktop-build-20261105-192829",
   "channel": "stable",
-  "identityFingerprint": "f8b66c7cdad49d68129e3928bcd9e1f2612185cda0de682bce2cbbac48cff147",
-  "diagnosticFingerprint": "c592a43483a0756a3aa6ab15f195b4f933bc25d985cb62412ad07d8bd6a6c599",
-  "scanId": "CA-20261117-001",
+  "identityFingerprint": "fa799128160c35884e8401b7eaec4bb556f26bf9b4a5145c1461c7bf63ff12d7",
+  "diagnosticFingerprint": null,
+  "scanId": "CA-20261117-002",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-17T07:09:20.176Z",
+  "lastSuccessfulScan": "2026-11-17T16:18:57.264Z",
   "lastFailureTime": null,
   "lastAlertDigest": null,
   "lastTestAlertVersion": "build-4e1a4dd989dbc487",
@@ -23,8 +23,8 @@
     "multiEncodingScanner": "skipped"
   },
   "benchmark": {
-    "executionTimeMs": 4822,
-    "peakMemoryMb": 13
+    "executionTimeMs": 6004,
+    "peakMemoryMb": 11
   },
   "hotSignals": [],
   "recentSignals": [],
@@ -6411,26 +6411,30 @@
     "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
   },
   "schemaVersion": 2,
-  "deliveredVersion": "build-20261105-192827",
+  "deliveredVersion": "build-20261105-192829",
   "observedVersion": "build-20261105-192829",
-  "scannedVersion": "build-20261105-192827",
-  "releaseKey": "9cd680bbad41b09a563f38a1867f9a58",
+  "scannedVersion": "build-20261105-192829",
+  "releaseKey": "a76ee92fcf08a2cceae38f9bbae52864",
   "versionScheme": "build",
-  "lastDeliveryStatus": "ALERT_SENT",
-  "pendingDelivery": {
-    "scanId": "CA-20261117-002",
-    "version": "build-20261105-192829",
-    "releaseKey": "a76ee92fcf08a2cceae38f9bbae52864",
-    "status": "ALERTED",
-    "alertSent": true,
-    "alertMessageId": 48,
-    "expectedFiles": [],
-    "deliveredFiles": [],
-    "failedFiles": [],
-    "createdAt": "2026-11-17T16:18:44.981Z",
-    "updatedAt": "2026-11-17T16:18:44.981Z"
-  },
+  "lastDeliveryStatus": "DELIVERED",
+  "pendingDelivery": null,
   "deliveryLedger": [
+    {
+      "scanId": "CA-20261117-002",
+      "version": "build-20261105-192829",
+      "status": "DELIVERED",
+      "coverageState": "COMPLETE",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-17T16:18:57.264Z"
+    },
     {
       "scanId": "CA-20261117-001",
       "version": "build-20261105-192827",
@@ -6450,6 +6454,16 @@
   ],
   "releaseHistory": [
     {
+      "version": "build-20261105-192829",
+      "releaseKey": "a76ee92fcf08a2cceae38f9bbae52864",
+      "scanId": "CA-20261117-002",
+      "scannedAt": "2026-11-17T16:18:57.264Z",
+      "deliveredAt": "2026-11-17T16:18:57.264Z",
+      "artifactSha256": "68adbb2e192235ea27f8383fe27193d6acc800bb24149a76b16ba70bda47ae26",
+      "stringCount": 15,
+      "urlCount": 0
+    },
+    {
       "version": "build-20261105-192827",
       "releaseKey": "9cd680bbad41b09a563f38a1867f9a58",
       "scanId": "CA-20261117-001",
@@ -6460,5 +6474,6 @@
       "urlCount": 0
     }
   ],
-  "lastCoverageGaps": []
+  "lastCoverageGaps": [],
+  "knownSignals": {}
 }
