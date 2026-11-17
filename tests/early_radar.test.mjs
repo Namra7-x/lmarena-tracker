@@ -16,7 +16,7 @@ import {
   buildSdkCommitEmbed,
   buildRadarShowcaseEmbeds,
 } from '../early-radar/discord.mjs';
-import { extractEscapedJson } from '../early-radar/sources/artificial_analysis.mjs';
+import { extractEscapedJson, fetchEncryptedManifest, fetchArtificialAnalysisModels } from '../early-radar/sources/artificial_analysis.mjs';
 
 describe('Early Radar Configuration', () => {
   it('should define all required endpoints and colors', () => {
@@ -195,5 +195,13 @@ describe('Artificial Analysis Models & Benchmarks Separation', () => {
     assert.equal(models.has('hle-diamond'), false, 'Benchmark must NOT be in models Map');
     assert.equal(models.has('livecodebench'), false, 'Benchmark must NOT be in models Map');
     assert.equal(models.has('anthropic'), false, 'Creator must NOT be in models Map');
+  });
+
+  it('should dynamically recover and decrypt the deploy-ahead internal manifest', async () => {
+    const manifest = await fetchEncryptedManifest();
+    assert.ok(Array.isArray(manifest), 'Encrypted manifest must be an array');
+    assert.ok(manifest.length > 500, `Expected > 500 records in manifest, got ${manifest.length}`);
+    const slugs = new Set(manifest.map((r) => r.modelSlug || r.slug).filter(Boolean));
+    assert.ok(slugs.size > 200, `Expected > 200 unique model slugs in manifest, got ${slugs.size}`);
   });
 });
