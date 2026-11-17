@@ -760,7 +760,7 @@ function readPrice(object, direction, keys) {
  * multi-line config files that modern desktop apps and SDKs ship.
  */
 export function extractJsonPricingFindings(text, filePath = '', artifactClass = 'json') {
-  if (!text || typeof text !== 'string' || text.length > 12 * 1024 * 1024) return [];
+  if (!text || typeof text !== 'string') return [];
   let parsed;
   try {
     parsed = JSON.parse(text);

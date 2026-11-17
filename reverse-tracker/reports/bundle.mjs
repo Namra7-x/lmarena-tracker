@@ -697,7 +697,7 @@ export function generateReportBundle(outputDir, scanData) {
   if (validLeaks.length === 0) {
     summaryContent += `  • No high-confidence early leaks detected.\n`;
   } else {
-    for (const item of validLeaks.slice(0, 15)) {
+    for (const item of validLeaks) {
       summaryContent += `  • [${item.category}] ${item.value} (${item.score} pts)\n`;
     }
   }

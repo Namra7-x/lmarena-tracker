@@ -6,8 +6,8 @@
 import zlib from 'node:zlib';
 import path from 'node:path';
 
-const MAX_FILE_COUNT = 10000;
-const MAX_EXPANDED_BYTES = 1024 * 1024 * 1024; // 1GB safe expansion limit
+const MAX_FILE_COUNT = Infinity;
+const MAX_EXPANDED_BYTES = Infinity;
 const MAX_COMPRESSION_RATIO = 100; // Bomb guard: abort if uncompressed / compressed > 100
 
 // Mach-O Universal & Single-arch signatures (including byte-swapped LE/BE)
@@ -149,7 +149,8 @@ export function extractTar(buffer) {
   // Check if gzipped (magic 0x1F 0x8B)
   if (buffer.length >= 2 && buffer[0] === 0x1f && buffer[1] === 0x8b) {
     try {
-      tarBuf = zlib.gunzipSync(buffer, { maxOutputLength: MAX_EXPANDED_BYTES });
+      const gunzipOpts = Number.isFinite(MAX_EXPANDED_BYTES) ? { maxOutputLength: MAX_EXPANDED_BYTES } : {};
+      tarBuf = zlib.gunzipSync(buffer, gunzipOpts);
       if (tarBuf.length / Math.max(buffer.length, 1) > MAX_COMPRESSION_RATIO && tarBuf.length > 50 * 1024 * 1024) {
         throw new Error(`Suspicious compression ratio (${(tarBuf.length / buffer.length).toFixed(1)}x) exceeds limit of ${MAX_COMPRESSION_RATIO}x`);
       }
@@ -193,13 +194,13 @@ export function extractTar(buffer) {
         continue;
       }
 
-      if (files.length >= MAX_FILE_COUNT) {
+      if (Number.isFinite(MAX_FILE_COUNT) && files.length >= MAX_FILE_COUNT) {
         console.warn(`Max file count (${MAX_FILE_COUNT}) reached. Stopping tar extraction.`);
         break;
       }
 
       totalBytes += size;
-      if (totalBytes > MAX_EXPANDED_BYTES) {
+      if (Number.isFinite(MAX_EXPANDED_BYTES) && totalBytes > MAX_EXPANDED_BYTES) {
         throw new Error(`Tar extraction exceeded max safe expansion limit (${MAX_EXPANDED_BYTES} bytes).`);
       }
 
@@ -247,7 +248,7 @@ export function extractZip(buffer) {
     if (dataEnd > buffer.length) break;
 
     if (isSafeRelativePath(fileName) && !fileName.endsWith('/') && !isIgnoredAsset(fileName)) {
-      if (files.length >= MAX_FILE_COUNT) break;
+      if (Number.isFinite(MAX_FILE_COUNT) && files.length >= MAX_FILE_COUNT) break;
 
       // Check compression ratio bomb guard for non-trivial file entries
       if (compressedSize > 0 && (uncompressedSize / compressedSize) > MAX_COMPRESSION_RATIO && uncompressedSize > 10 * 1024 * 1024) {
@@ -257,7 +258,7 @@ export function extractZip(buffer) {
       }
 
       totalBytes += uncompressedSize;
-      if (totalBytes > MAX_EXPANDED_BYTES) {
+      if (Number.isFinite(MAX_EXPANDED_BYTES) && totalBytes > MAX_EXPANDED_BYTES) {
         throw new Error(`Zip extraction exceeded max safe expansion limit (${MAX_EXPANDED_BYTES} bytes).`);
       }
 
@@ -270,7 +271,8 @@ export function extractZip(buffer) {
       } else if (compressionMethod === 8) {
         // Deflated
         try {
-          uncompressedData = zlib.inflateRawSync(compressedData, { maxOutputLength: MAX_EXPANDED_BYTES });
+          const inflateOpts = Number.isFinite(MAX_EXPANDED_BYTES) ? { maxOutputLength: MAX_EXPANDED_BYTES } : {};
+          uncompressedData = zlib.inflateRawSync(compressedData, inflateOpts);
         } catch (err) {
           uncompressedData = null;
         }

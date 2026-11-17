@@ -23,8 +23,8 @@ import { extractAsar, isAsar } from './asar.mjs';
 import { extractStrings } from './strings.mjs';
 import { extractSourceMap, extractInlineSourceMaps } from './sourcemap.mjs';
 
-const MAX_TOTAL_EXTRACTED_BYTES = 1024 * 1024 * 1024; // 1 GB safe expansion cap
-const MAX_FILE_COUNT = 10000;
+const MAX_TOTAL_EXTRACTED_BYTES = Infinity;
+const MAX_FILE_COUNT = Infinity;
 const MAX_ARCHIVE_DEPTH = 3;
 const SEVEN_ZIP_TIMEOUT_MS = Number.parseInt(process.env.SEVENZIP_TIMEOUT_MS || '180000', 10);
 // Keep the full-extraction fallback bounded, but allow the ~200 MB Windows

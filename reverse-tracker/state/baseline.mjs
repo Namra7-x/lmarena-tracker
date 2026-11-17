@@ -10,22 +10,22 @@
 import crypto from 'node:crypto';
 import zlib from 'node:zlib';
 
-const MAX_BASELINE_STRINGS = 500000;
-const MAX_BASELINE_URLS = 100000;
+const MAX_BASELINE_STRINGS = Infinity;
+const MAX_BASELINE_URLS = Infinity;
 
-function normalizeValues(values, limit) {
+function normalizeValues(values, limit = Infinity) {
   const seen = new Set();
   for (const value of values || []) {
     if (typeof value !== 'string') continue;
     const clean = value.trim();
     if (!clean) continue;
     seen.add(clean);
-    if (seen.size >= limit) break;
+    if (Number.isFinite(limit) && seen.size >= limit) break;
   }
   return Array.from(seen).sort();
 }
 
-export function encodeStringSet(values = [], limit = MAX_BASELINE_STRINGS) {
+export function encodeStringSet(values = [], limit = Infinity) {
   const unique = normalizeValues(values, limit);
   const raw = Buffer.from(unique.join('\n'), 'utf8');
   return {
@@ -53,8 +53,8 @@ export function decodeStringSet(encoded, fallback = []) {
   return Array.isArray(fallback) ? fallback : [];
 }
 
-export function encodeUrlSet(values = []) {
-  return encodeStringSet(values, MAX_BASELINE_URLS);
+export function encodeUrlSet(values = [], limit = Infinity) {
+  return encodeStringSet(values, limit);
 }
 
 export function decodeUrlSet(encoded, fallback = []) {

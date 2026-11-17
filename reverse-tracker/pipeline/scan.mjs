@@ -189,9 +189,9 @@ function addTextLines(collector, text, platform, filePath, source = 'text', isSo
  * all model IDs, flags, and human copy in that line, so fall back to the
  * multi-encoding string scanner for those files only.
  */
-function addStringsFromOverlongText(collector, text, buffer, platform, filePath, source = 'text', maxStrings = 200000) {
+function addStringsFromOverlongText(collector, text, buffer, platform, filePath, source = 'text') {
   if (!text || !hasOverlongLine(text)) return;
-  for (const item of extractStrings(buffer, { maxStrings, includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
+  for (const item of extractStrings(buffer, { includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
     if (item.value.length >= 4 && item.value.length <= MAX_STRING_LENGTH) {
       collector.add(item.value, platform, filePath, source);
     }
@@ -265,7 +265,7 @@ function dedupeRawFindings(findings) {
     if (finding.sourceMapAgreement) existing.sourceMapAgreement = true;
     if (finding.related) existing.related = { ...(existing.related || {}), ...finding.related };
   }
-  return Array.from(map.values()).slice(0, 50000);
+  return Array.from(map.values());
 }
 
 function buildCoverage({ selectedArtifacts, acquired, extractionGaps, platformsWithFiles, analyzedFileCount, stringCount, analyzerStatus }) {
@@ -552,29 +552,23 @@ export async function performScan(componentId, options = {}) {
 
         // Text/config files: keep every line, including minified JSON tables.
         if (file.priority === 1) {
-          if (file.buffer.length <= 20 * 1024 * 1024) {
-            const text = file.buffer.toString('utf8');
-            addTextLines(collector, text, platform, file.path, 'text');
-            addStringsFromOverlongText(collector, text, file.buffer, platform, file.path, 'text');
-            if (/\.json$/i.test(file.path)) {
-              for (const finding of extractJsonPricingFindings(text, file.path, 'json')) {
-                finding.platforms = [platform];
-                finding.artifactSha256 = dl.sha256;
-                directFindings.push(finding);
-                collector.add(finding.value, platform, file.path, 'ast');
-              }
-            }
-          } else {
-            for (const s of extractStrings(file.buffer, { maxStrings: 300000, includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
-              collector.add(s.value, platform, file.path, 'text-binary');
+          const text = file.buffer.toString('utf8');
+          addTextLines(collector, text, platform, file.path, 'text');
+          addStringsFromOverlongText(collector, text, file.buffer, platform, file.path, 'text');
+          if (/\.json$/i.test(file.path)) {
+            for (const finding of extractJsonPricingFindings(text, file.path, 'json')) {
+              finding.platforms = [platform];
+              finding.artifactSha256 = dl.sha256;
+              directFindings.push(finding);
+              collector.add(finding.value, platform, file.path, 'ast');
             }
           }
         }
 
         // Binary / executable files: multi-encoding string scanner.
-        if (file.priority === 2 && file.buffer.length <= MAX_BINARY_SCAN_BYTES) {
+        if (file.priority === 2) {
           binaryFilesScanned++;
-          for (const s of extractStrings(file.buffer, { maxStrings: 400000, includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
+          for (const s of extractStrings(file.buffer, { includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
             if (isHumanReadableString(s.value)) {
               collector.add(s.value, platform, file.path, 'binary');
             }
@@ -590,7 +584,7 @@ export async function performScan(componentId, options = {}) {
         }
 
         // JavaScript AST.
-        if (/\.(?:js|mjs|cjs)$/i.test(file.path) && file.buffer.length <= 30 * 1024 * 1024) {
+        if (/\.(?:js|mjs|cjs)$/i.test(file.path)) {
           try {
             const jsCode = file.buffer.toString('utf8');
             const extracted = extractSignalsFromAst(jsCode, file.path);
@@ -943,11 +937,11 @@ export async function performScan(componentId, options = {}) {
   const updatedHistoricalStrings = mergeStringSets(
     baseline.historicalSeenHashes || [],
     currentCleanStrings,
-  ).slice(0, 500000);
+  );
   const updatedHistoricalUrls = mergeStringSets(
     baseline.historicalSeenUrls || [],
     currentUrlValues,
-  ).slice(0, 100000);
+  );
 
   const updatedKnownSignals = { ...(baseline.knownSignals || {}) };
   for (const f of dedupedFindings) {
@@ -1016,8 +1010,8 @@ export async function performScan(componentId, options = {}) {
       at: scannedAt,
     }),
     releaseHistory,
-    hotSignals: canAdvance ? majorSignals.slice(0, 100) : (baseline.hotSignals || []),
-    recentSignals: canAdvance ? dedupedFindings.slice(0, 10000) : (baseline.recentSignals || []),
+    hotSignals: canAdvance ? majorSignals : (baseline.hotSignals || []),
+    recentSignals: canAdvance ? dedupedFindings : (baseline.recentSignals || []),
     knownSignals: canAdvance ? updatedKnownSignals : (baseline.knownSignals || {}),
     historicalSeenHashes: canAdvance ? updatedHistoricalStrings : (baseline.historicalSeenHashes || []),
     historicalSeenUrls: canAdvance ? updatedHistoricalUrls : (baseline.historicalSeenUrls || []),

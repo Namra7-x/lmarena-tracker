@@ -134,7 +134,7 @@ export function extractStrings(buffer, options = {}) {
 
   const minLen = options.minLength || MIN_STRING_LEN;
   const maxLen = options.maxLength || MAX_STRING_LEN;
-  const maxStrings = options.maxStrings || 500000; // High limit to ensure complete coverage without early cutoff
+  const maxStrings = options.maxStrings ?? Infinity; // Default: UNLIMITED (100% complete buffer scan)
   const results = [];
   const seen = new Set();
 
@@ -155,7 +155,7 @@ export function extractStrings(buffer, options = {}) {
       const tokens = unpackGluedTokens(clean);
       for (const tok of tokens) {
         if (tok.length >= minLen && !seen.has(tok)) {
-          if (results.length >= maxStrings) return;
+          if (Number.isFinite(maxStrings) && results.length >= maxStrings) return;
           seen.add(tok);
           results.push({ value: tok, encoding, offset, length: tok.length });
         }
@@ -174,7 +174,7 @@ export function extractStrings(buffer, options = {}) {
   const u16beRegex = new RegExp(`(?:\\x00[\\x20-\\x7E\\t\\r\\n]){4,${utf16ScanMax}}`, 'g');
 
   for (let offset = 0; offset < totalLen; offset += CHUNK_SIZE - OVERLAP) {
-    if (results.length >= maxStrings) break;
+    if (Number.isFinite(maxStrings) && results.length >= maxStrings) break;
     const chunkEnd = Math.min(totalLen, offset + CHUNK_SIZE);
     const chunkBuf = buffer.subarray(offset, chunkEnd);
     const chunkStr = chunkBuf.toString('latin1'); // Instant O(1) buffer mapping in V8
