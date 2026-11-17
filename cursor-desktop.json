@@ -1,6 +1,6 @@
 {
   "componentId": "cursor-desktop",
-  "version": "0.45.14",
+  "version": "3.30.14",
   "alertedVersion": "3.30.14",
   "releaseId": "cursor-desktop@0.45.14",
   "channel": "stable",
@@ -55,40 +55,13 @@
     "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
   },
   "schemaVersion": 2,
-  "deliveredVersion": "0.45.14",
+  "deliveredVersion": "3.30.14",
   "observedVersion": "3.30.14",
   "scannedVersion": "3.30.14",
   "releaseKey": "341a369fff95d6120c3e628d09be457e",
   "versionScheme": "semver",
   "lastDeliveryStatus": "PARTIAL",
-  "pendingDelivery": {
-    "scanId": "CR-20261117-013",
-    "version": "3.30.14",
-    "releaseKey": "341a369fff95d6120c3e628d09be457e",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 65,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "failedFiles": [],
-    "coverageState": "PARTIAL",
-    "createdAt": "2026-11-17T07:09:09.801Z",
-    "updatedAt": "2026-11-17T07:41:53.835Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
     {
       "scanId": "CR-20261117-013",
