@@ -11,7 +11,7 @@ on:
         default: false
         type: boolean
   repository_dispatch:
-    types: [tracker, api_tracker, qwen_tracker]
+    types: [api_tracker, qwen_tracker]
 
 permissions:
   contents: write

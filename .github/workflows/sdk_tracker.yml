@@ -11,7 +11,7 @@ on:
         default: false
         type: boolean
   repository_dispatch:
-    types: [tracker, sdk_tracker]
+    types: [sdk_tracker]
 
 permissions:
   contents: write

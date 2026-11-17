@@ -8,7 +8,7 @@ on:
       - 'reverse-tracker/**'
       - '.github/workflows/early_signal_tracker.yml'
   repository_dispatch:
-    types: [tracker, early_signal_tracker]
+    types: [early_signal_tracker]
   workflow_dispatch:
     inputs:
       test_run:
