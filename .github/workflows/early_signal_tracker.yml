@@ -27,7 +27,6 @@ jobs:
     name: Track ${{ matrix.family }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    if: github.event.client_payload.family == null || github.event.client_payload.family == '' || github.event.client_payload.family == matrix.family
     concurrency:
       group: ai-tracker-${{ matrix.family }}
       cancel-in-progress: false
@@ -135,6 +134,12 @@ jobs:
           TELEGRAM_TOPIC_OPENCODE: ${{ secrets.TELEGRAM_TOPIC_OPENCODE }}
           TELEGRAM_TOPIC_OTHER: ${{ secrets.TELEGRAM_TOPIC_OTHER || secrets.TELEGRAM_TOPIC_OPENCODE }}
         run: |
+          TARGET_FAMILY="${{ github.event.client_payload.family }}"
+          if [ -n "$TARGET_FAMILY" ] && [ "$TARGET_FAMILY" != "${{ matrix.family }}" ]; then
+            echo "⏭️ Skipping ${{ matrix.family }}: dispatch targeted $TARGET_FAMILY"
+            exit 0
+          fi
+
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.test_run }}" = "true" ]; then
             echo "🧪 Workflow dispatch manual test requested for family: ${{ matrix.family }}..."
             node reverse-tracker/cli.mjs test-run --family=${{ matrix.family }} --bypass-dedup
