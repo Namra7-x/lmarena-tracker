@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import { detectChanges } from '../reverse-tracker/pipeline/detect.mjs';
-import { performScan } from '../reverse-tracker/pipeline/scan.mjs';
+import { performScan, selectArtifacts } from '../reverse-tracker/pipeline/scan.mjs';
 import { loadComponentState } from '../reverse-tracker/state/store.mjs';
 
 // These tests intentionally inject a downloader/extractor so they never touch
@@ -340,4 +340,33 @@ test('failed acquisition keeps the alert checkpoint and resumes without alerting
   } finally {
     cleanup(root);
   }
+});
+
+test('selectArtifacts prioritizes Linux tarball for desktop apps and dedupes CLI architectures', () => {
+  const desktopCandidate = {
+    artifacts: [
+      { target: 'darwin-arm64', url: 'https://example.com/Devin-darwin-arm64.dmg' },
+      { target: 'darwin-x64', url: 'https://example.com/Devin-darwin-x64.dmg' },
+      { target: 'win32-x64', url: 'https://example.com/DevinSetup-x64.exe' },
+      { target: 'win32-arm64', url: 'https://example.com/DevinSetup-arm64.exe' },
+      { target: 'linux-x64', url: 'https://example.com/Devin-linux-x64.tar.gz' },
+    ],
+  };
+  const selectedDesktop = selectArtifacts(desktopCandidate, { type: 'desktop' });
+  assert.equal(selectedDesktop.length, 1);
+  assert.equal(selectedDesktop[0].target, 'linux-x64');
+
+  const cliCandidate = {
+    artifacts: [
+      { target: 'darwin-arm64', url: 'https://example.com/cli-darwin-arm64' },
+      { target: 'darwin-x64', url: 'https://example.com/cli-darwin-x64' },
+      { target: 'win32-x64', url: 'https://example.com/cli-win32-x64.exe' },
+      { target: 'linux-x64', url: 'https://example.com/cli-linux-x64' },
+      { target: 'linux-arm64', url: 'https://example.com/cli-linux-arm64' },
+    ],
+  };
+  const selectedCli = selectArtifacts(cliCandidate, { type: 'cli' });
+  assert.equal(selectedCli.length, 3);
+  const targets = selectedCli.map((a) => a.target).sort();
+  assert.deepEqual(targets, ['darwin-arm64', 'linux-x64', 'win32-x64']);
 });

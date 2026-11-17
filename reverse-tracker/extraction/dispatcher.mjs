@@ -27,19 +27,25 @@ const MAX_TOTAL_EXTRACTED_BYTES = Infinity;
 const MAX_FILE_COUNT = Infinity;
 const MAX_ARCHIVE_DEPTH = 3;
 const SEVEN_ZIP_TIMEOUT_MS = Number.parseInt(process.env.SEVENZIP_TIMEOUT_MS || '180000', 10);
-// Keep the full-extraction fallback bounded, but allow the ~200 MB Windows
-// installers to recover when a selective pass does not match their layout.
-const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = 260 * 1024 * 1024;
+// No cutoff limits: full extraction fallback is completely uncapped so large
+// desktop packages and installers recover when selective extraction does not match.
+const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = Infinity;
 // Large ZIP/TAR packages (desktop app bundles) can expand past the built-in
 // safe memory limit. Prefer selective 7-Zip extraction, then fall back to the
 // in-process readers when the tool is unavailable.
 const SEVEN_ZIP_PREFERRED_BYTES = 100 * 1024 * 1024;
 
 // Files that actually contain feature/model/endpoint evidence. Extracting only
-// these from a 900 MB DMG is dramatically faster than unpacking the whole app.
+// these from large installers is dramatically faster than unpacking unused assets.
 const SEVEN_ZIP_INCLUDE_PATTERNS = [
   '*.asar',
   '*.asar.unpacked/*',
+  '*.hfs',
+  '*.pkg',
+  '*.app/*',
+  '*.tar',
+  '*.tar.gz',
+  '*.tgz',
   '*.js',
   '*.mjs',
   '*.cjs',
@@ -469,10 +475,11 @@ export function extractArtifact(buffer, format, target, artifactUrl = '') {
     // 3. Process files, unpacking nested asar archives if present
     for (const f of rawFiles) {
       // Archive depth check: count occurrences of archive extensions in path
-      const depthMatches = (f.path.match(/\.(?:asar|zip|tar|tgz|gz|nupkg)/gi) || []).length;
-      const isNestedArchive = f.path.endsWith('.asar') || isAsar(f.buffer);
+      const depthMatches = (f.path.match(/\.(?:asar|zip|tar|tgz|gz|nupkg|hfs)/gi) || []).length;
+      const isNestedAsar = f.path.endsWith('.asar') || isAsar(f.buffer);
+      const isNestedHfs = (f.path.endsWith('.hfs') || f.path.includes('.hfs')) && sevenZipCmd;
 
-      if (isNestedArchive && depthMatches <= MAX_ARCHIVE_DEPTH) {
+      if (isNestedAsar && depthMatches <= MAX_ARCHIVE_DEPTH) {
         try {
           const asarFiles = extractAsar(f.buffer);
           status.analyzers.asar = 'completed';
@@ -495,6 +502,39 @@ export function extractArtifact(buffer, format, target, artifactUrl = '') {
           status.failedFiles++;
           status.analyzers.asar = 'failed';
           f.priority = 2;
+          extractedFiles.push(f);
+        }
+      } else if (isNestedHfs && depthMatches <= MAX_ARCHIVE_DEPTH) {
+        try {
+          const hfsRes = extractWithSevenZip(f.buffer, path.basename(f.path), sevenZipCmd);
+          if (hfsRes.success && hfsRes.files.length > 0) {
+            for (const hf of hfsRes.files) {
+              hf.path = `${f.path}/${hf.path}`;
+              if (hf.path.endsWith('.asar') || isAsar(hf.buffer)) {
+                try {
+                  const nestedAsar = extractAsar(hf.buffer);
+                  status.analyzers.asar = 'completed';
+                  for (const naf of nestedAsar) {
+                    naf.path = `${hf.path}/${naf.path}`;
+                    naf.priority = getFilePriority(naf.path, naf.buffer);
+                    extractedFiles.push(naf);
+                  }
+                  status.discoveredFiles += nestedAsar.length;
+                } catch {
+                  extractedFiles.push(hf);
+                }
+              } else {
+                hf.priority = getFilePriority(hf.path, hf.buffer);
+                extractedFiles.push(hf);
+              }
+            }
+            status.discoveredFiles += hfsRes.files.length;
+          } else {
+            f.priority = getFilePriority(f.path, f.buffer);
+            extractedFiles.push(f);
+          }
+        } catch {
+          f.priority = getFilePriority(f.path, f.buffer);
           extractedFiles.push(f);
         }
       } else {

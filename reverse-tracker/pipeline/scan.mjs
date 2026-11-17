@@ -102,13 +102,25 @@ function nextScanId(componentId, baseline) {
 }
 
 /**
- * Desktop apps ship every architecture. Downloading all of them is wasteful;
- * pick one artifact per OS (prefer arm64 for macOS) and keep all CLI artifacts,
- * which are small. This is what makes the scan fit inside the 10-minute job.
+ * Select the optimal target artifacts to download and scan.
+ * For desktop apps (Electron), all model IDs, feature gates, dark UI, and RPC routes
+ * reside in resources/app.asar which is identical across platforms. Prefer the Linux
+ * archive (.tar.gz) which GNU tar unpacks in seconds without DMG/NSIS overhead.
+ * For CLI apps, deduplicate redundant CPU architectures per OS platform.
  */
 export function selectArtifacts(candidate, component) {
   const artifacts = Array.isArray(candidate.artifacts) ? candidate.artifacts : [];
-  if (component?.type !== 'desktop') return artifacts;
+  if (artifacts.length === 0) return [];
+
+  if (component?.type === 'desktop') {
+    const tarball = artifacts.find((a) => /\.(?:tar\.gz|tgz|tar|zip|appimage)$/i.test(a.url || a.target));
+    if (tarball) return [tarball];
+
+    const exe = artifacts.find((a) => /\.(?:exe|msi)$/i.test(a.url || a.target));
+    if (exe) return [exe];
+
+    return [artifacts[0]];
+  }
 
   const byPlatform = new Map();
   for (const artifact of artifacts) {
@@ -118,9 +130,14 @@ export function selectArtifacts(candidate, component) {
       byPlatform.set(platform, artifact);
       continue;
     }
+    const isDarwin = platform === 'darwin';
     const artifactIsArm = /arm64|aarch64|universal/.test(String(artifact.target).toLowerCase());
     const existingIsArm = /arm64|aarch64|universal/.test(String(existing.target).toLowerCase());
-    if (artifactIsArm && !existingIsArm) byPlatform.set(platform, artifact);
+    if (isDarwin && artifactIsArm && !existingIsArm) {
+      byPlatform.set(platform, artifact);
+    } else if (!isDarwin && !artifactIsArm && existingIsArm) {
+      byPlatform.set(platform, artifact);
+    }
   }
   return Array.from(byPlatform.values());
 }
@@ -387,7 +404,6 @@ export async function performScan(componentId, options = {}) {
     throw new Error(`No downloadable artifacts discovered for ${componentId} ${candidate.version}`);
   }
 
-  const scanId = nextScanId(componentId, baseline);
   const releaseKey = computeReleaseKey(componentId, candidate);
   const pending = baseline.pendingDelivery;
   const samePending = Boolean(
@@ -396,6 +412,7 @@ export async function performScan(componentId, options = {}) {
     pending.status !== 'DELIVERED' &&
     pending.alertSent !== false
   );
+  const scanId = samePending && pending.scanId ? pending.scanId : nextScanId(componentId, baseline);
   const alreadyAlerted = baseline.alertedVersion === candidate.version || samePending;
 
   if (
