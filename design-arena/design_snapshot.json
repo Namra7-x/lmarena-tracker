@@ -2096,7 +2096,7 @@
     "hume_octave": {
       "displayName": "Hume Octave 2",
       "provider": "hume",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -4579,7 +4579,7 @@
     "prism": {
       "displayName": "Arrow-1.0",
       "provider": "quiver",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -6541,7 +6541,7 @@
     "arrow-1.1": {
       "displayName": "Arrow 1.1",
       "provider": "quiver",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -6555,7 +6555,7 @@
     "arrow-1.1-max": {
       "displayName": "Arrow 1.1 Max",
       "provider": "quiver",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -7597,7 +7597,7 @@
     "cosmos-3-super": {
       "displayName": "Cosmos 3 Super",
       "provider": "nvidia",
-      "active": true,
+      "active": false,
       "openSource": true,
       "router": false,
       "vision": false,
@@ -7749,7 +7749,7 @@
     "hithink-speech-2-6": {
       "displayName": "Speech 2.6",
       "provider": "hithink",
-      "active": true,
+      "active": false,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -11381,6 +11381,45 @@
         ]
       }
     },
+    "gemini-4-neon": {
+      "displayName": "Gemini 4 Neon",
+      "provider": "google",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "audio",
+        "file",
+        "image",
+        "text",
+        "video"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      }
+    },
     "wyoming": {
       "displayName": "Recraft V4.1 Flash V2",
       "provider": "recraft",
@@ -13839,6 +13878,11 @@
       "text.input": 1.5,
       "text.output": 7.5,
       "text.cachedInput": 0.075
+    },
+    "gemini-4-neon": {
+      "text.input": 3,
+      "text.output": 15,
+      "text.cachedInput": 0.15
     },
     "wyoming": {
       "image.perImage": 0.007
