@@ -16,6 +16,11 @@ on:
         required: false
         type: boolean
         default: true
+      family:
+        description: 'Optional target family (e.g. openai, anthropic, google, cursor, devin, other)'
+        required: false
+        type: string
+        default: ''
   schedule:
     - cron: '*/1 * * * *'
 
@@ -23,23 +28,13 @@ permissions:
   contents: write
 
 jobs:
-  scan-family:
-    name: Track ${{ matrix.family }} (macOS)
+  track-signals:
+    name: Track Signals (macOS)
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 5
     concurrency:
-      group: ai-tracker-${{ matrix.family }}
+      group: reverse-tracker
       cancel-in-progress: false
-    strategy:
-      fail-fast: false
-      matrix:
-        family:
-          - openai
-          - anthropic
-          - google
-          - cursor
-          - devin
-          - other
 
     steps:
       - name: Checkout Code Repository
@@ -53,14 +48,14 @@ jobs:
         uses: actions/checkout@v5
         continue-on-error: true
         with:
-          ref: state/${{ matrix.family }}
+          ref: state/all
           path: state
           fetch-depth: 1
 
       - name: Ensure State Directory Exists
         run: |
           mkdir -p state
-          echo "Current state files for ${{ matrix.family }}:"
+          echo "Current state files:"
           ls -la state/ 2>/dev/null || true
 
       - name: Set up Node.js
@@ -79,30 +74,6 @@ jobs:
             sudo apt-get update -qq && sudo apt-get install -qq -y --no-install-recommends p7zip-full
           else
             echo "✅ 7-Zip CLI is available"
-          fi
-
-      - name: Cache GoReSym Binary
-        id: cache-goresym
-        uses: actions/cache@v5
-        with:
-          path: /usr/local/bin/GoReSym
-          key: goresym-v3.4.1-linux-x64
-
-      - name: Install GoReSym (If not cached)
-        if: steps.cache-goresym.outputs.cache-hit != 'true'
-        continue-on-error: true
-        run: |
-          GORESYM_URL="https://github.com/mandiant/GoReSym/releases/download/v3.4.1/GoReSym-linux.zip"
-          GORESYM_SHA256="a557124857f95a589f8ce3525119c2d18c7c7fc7c4225c92ff94e3effb38748d"
-          curl -sSL --retry 3 --retry-delay 2 "$GORESYM_URL" -o /tmp/GoReSym.zip || true
-          if [ -f /tmp/GoReSym.zip ] && echo "$GORESYM_SHA256  /tmp/GoReSym.zip" | sha256sum -c - >/dev/null 2>&1; then
-            sudo unzip -o /tmp/GoReSym.zip -d /usr/local/bin/
-            sudo chmod +x /usr/local/bin/GoReSym
-            rm -f /tmp/GoReSym.zip
-            echo "✅ GoReSym installed and verified"
-          else
-            echo "⚠️ GoReSym unavailable or checksum error; tracker will use native string extraction fallback."
-            rm -f /tmp/GoReSym.zip
           fi
 
       - name: Run Tracker Detection & Deep Scan
@@ -134,17 +105,20 @@ jobs:
           TELEGRAM_TOPIC_OPENCODE: ${{ secrets.TELEGRAM_TOPIC_OPENCODE }}
           TELEGRAM_TOPIC_OTHER: ${{ secrets.TELEGRAM_TOPIC_OTHER || secrets.TELEGRAM_TOPIC_OPENCODE }}
         run: |
-          TARGET_FAMILY="${{ github.event.client_payload.family }}"
-          if [ -n "$TARGET_FAMILY" ] && [ "$TARGET_FAMILY" != "${{ matrix.family }}" ]; then
-            echo "⏭️ Skipping ${{ matrix.family }}: dispatch targeted $TARGET_FAMILY"
-            exit 0
-          fi
-
+          TARGET_FAMILY="${{ github.event.inputs.family || github.event.client_payload.family }}"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.test_run }}" = "true" ]; then
-            echo "🧪 Workflow dispatch manual test requested for family: ${{ matrix.family }}..."
-            node reverse-tracker/cli.mjs test-run --family=${{ matrix.family }} --bypass-dedup
+            echo "🧪 Workflow dispatch manual test requested..."
+            if [ -n "$TARGET_FAMILY" ]; then
+              node reverse-tracker/cli.mjs test-run --family=$TARGET_FAMILY --bypass-dedup
+            else
+              node reverse-tracker/cli.mjs test-run --bypass-dedup
+            fi
+          elif [ -n "$TARGET_FAMILY" ]; then
+            echo "🎯 Targeted dispatch scan for family: $TARGET_FAMILY..."
+            node reverse-tracker/cli.mjs run --family=$TARGET_FAMILY
           else
-            node reverse-tracker/cli.mjs run --family=${{ matrix.family }}
+            echo "⚡ Unified scan across all components..."
+            node reverse-tracker/cli.mjs run
           fi
 
       - name: Persist State to State Branch
@@ -162,15 +136,15 @@ jobs:
 
           if ! git diff --cached --quiet; then
             echo "State changes detected. Committing..."
-            git commit -m "Update compact state for ${{ matrix.family }} (macOS) [skip ci]"
+            git commit -m "Update compact state for all components (macOS) [skip ci]"
             for attempt in 1 2 3; do
               echo "Pushing state (attempt $attempt)..."
-              if git push origin HEAD:refs/heads/state/${{ matrix.family }}; then
-                echo "Successfully pushed state/${{ matrix.family }}"
+              if git push origin HEAD:refs/heads/state/all; then
+                echo "Successfully pushed state/all"
                 break
               else
                 echo "Push failed, pulling remote changes..."
-                git pull --rebase origin state/${{ matrix.family }} || true
+                git pull --rebase origin state/all || true
                 sleep 2
               fi
             done
@@ -182,7 +156,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: reports-${{ matrix.family }}
+          name: reports-macos
           path: reports/
           if-no-files-found: ignore
           retention-days: 14

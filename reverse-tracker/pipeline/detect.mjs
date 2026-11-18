@@ -125,7 +125,7 @@ export async function detectChanges(familyId = null, options = {}) {
   const changes = [];
   const firstRuns = [];
 
-  for (const compId of componentsToCheck) {
+  await Promise.all(componentsToCheck.map(async (compId) => {
     try {
       const loaded = loadComponentState(stateDir, compId);
       const migration = migrateLegacyBaseline(loaded);
@@ -176,7 +176,7 @@ export async function detectChanges(familyId = null, options = {}) {
           resume: true,
           skipAlert: true,
         });
-        continue;
+        return;
       }
 
       if (pendingResume || legacyResume) {
@@ -192,7 +192,7 @@ export async function detectChanges(familyId = null, options = {}) {
             deliveredVersion: candidate.version,
             version: candidate.version,
           });
-          continue;
+          return;
         }
 
         console.log(`  ↻ ${compId}: Resuming delivery for ${candidate.version} (${pending?.status || 'ALERTED_NOT_DELIVERED'}) without a duplicate alert.`);
@@ -205,14 +205,14 @@ export async function detectChanges(familyId = null, options = {}) {
           resume: true,
           skipAlert: true,
         });
-        continue;
+        return;
       }
 
       if (classification.changeType === CHANGE_TYPE.FIRST_RUN) {
         console.log(`  🆕 ${compId}: First run detected (${candidate.version}). Initializing baseline silently.`);
         saveComponentState(stateDir, compId, initializeBaseline(compId, candidate));
         firstRuns.push({ componentId: compId, version: candidate.version });
-        continue;
+        return;
       }
 
       if (classification.changeType === CHANGE_TYPE.NO_CHANGE || classification.changeType === CHANGE_TYPE.DIAGNOSTIC_DRIFT) {
@@ -223,7 +223,7 @@ export async function detectChanges(familyId = null, options = {}) {
             diagnosticFingerprint: classification.diagnosticFingerprint,
           });
         }
-        continue;
+        return;
       }
 
       if (baseline?.alertedVersion === candidate.version) {
@@ -244,7 +244,7 @@ export async function detectChanges(familyId = null, options = {}) {
             resume: true,
           });
         }
-        continue;
+        return;
       }
 
       // A same-version artifact/commit flap is a CDN/replica change, not a new
@@ -256,7 +256,7 @@ export async function detectChanges(familyId = null, options = {}) {
       ) {
         console.log(`  🔄 ${compId}: Same version ${candidate.version} with changed artifact identity; syncing silently.`);
         silentSyncBaseline(stateDir, compId, baseline, candidate, classification);
-        continue;
+        return;
       }
 
       console.log(`  🚨 ${compId}: ${classification.changeType} -> ${classification.reason}`);
@@ -271,7 +271,7 @@ export async function detectChanges(familyId = null, options = {}) {
     } catch (err) {
       console.error(`  ✗ Error checking ${compId}: ${err.message}`);
     }
-  }
+  }));
 
   if (firstRuns.length > 0) {
     console.log(`📡 Baseline calibrated silently for ${firstRuns.length} component(s). Zero messages sent.`);
