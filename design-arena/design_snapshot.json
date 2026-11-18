@@ -9367,9 +9367,11 @@
       "active": true,
       "openSource": false,
       "router": false,
-      "vision": false,
+      "vision": true,
       "inputModalities": [
-        "text"
+        "image",
+        "text",
+        "video"
       ],
       "arenas": {
         "models": [
@@ -10801,8 +10803,9 @@
       "active": true,
       "openSource": true,
       "router": false,
-      "vision": false,
+      "vision": true,
       "inputModalities": [
+        "image",
         "text"
       ],
       "arenas": {
