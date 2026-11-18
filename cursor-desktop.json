@@ -1,31 +1,27 @@
 {
+  "schemaVersion": 2,
   "componentId": "cursor-desktop",
   "version": "3.30.14",
-  "alertedVersion": "3.30.14",
+  "observedVersion": "3.30.14",
+  "scannedVersion": null,
+  "deliveredVersion": null,
+  "alertedVersion": null,
   "releaseId": "cursor-desktop@3.30.14-5f54c8173e55",
+  "releaseKey": "341a369fff95d6120c3e628d09be457e",
   "channel": "stable",
+  "versionScheme": "semver",
   "identityFingerprint": "94b973196a6f77693e5f5c868b1c896da23c93664d1f29c89c009ede989b141a",
   "diagnosticFingerprint": "5c94008864fc49e2ddb908932f003ac774ba40351b2f7e197da2dd4bb0632c07",
-  "scanId": "CR-20261117-013",
-  "coverageState": "PARTIAL",
-  "lastSuccessfulScan": "2026-11-05T11:42:03.221Z",
-  "lastFailureTime": "2026-11-17T07:41:53.835Z",
-  "lastAlertDigest": null,
-  "lastTestAlertVersion": "0.45.14",
-  "analyzerStatus": {
-    "acornAst": "completed",
-    "goReSym": "skipped",
-    "sourceMap": "skipped",
-    "sevenZip": "completed",
-    "asar": "completed",
-    "tar": "skipped",
-    "zip": "skipped",
-    "multiEncodingScanner": "skipped"
-  },
-  "benchmark": {
-    "executionTimeMs": 26023,
-    "peakMemoryMb": 155
-  },
+  "scanId": "CR-20261118-001",
+  "coverageState": "BASELINE_ONLY",
+  "lastSuccessfulScan": null,
+  "lastFailureTime": null,
+  "lastDeliveryStatus": null,
+  "lastTestAlertVersion": null,
+  "analyzerStatus": null,
+  "pendingDelivery": null,
+  "deliveryLedger": [],
+  "releaseHistory": [],
   "hotSignals": [],
   "recentSignals": [],
   "historicalSeenHashes": [],
@@ -54,211 +50,7 @@
     "count": 0,
     "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
   },
-  "schemaVersion": 2,
-  "deliveredVersion": "3.30.14",
-  "observedVersion": "3.30.14",
-  "scannedVersion": "3.30.14",
-  "releaseKey": "341a369fff95d6120c3e628d09be457e",
-  "versionScheme": "semver",
-  "lastDeliveryStatus": "PARTIAL",
-  "pendingDelivery": null,
-  "deliveryLedger": [
-    {
-      "scanId": "CR-20261117-013",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:41:53.835Z"
-    },
-    {
-      "scanId": "CR-20261117-012",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:38:38.750Z"
-    },
-    {
-      "scanId": "CR-20261117-011",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:37:34.704Z"
-    },
-    {
-      "scanId": "CR-20261117-010",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:26:36.414Z"
-    },
-    {
-      "scanId": "CR-20261117-009",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:25:28.397Z"
-    },
-    {
-      "scanId": "CR-20261117-008",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:24:36.736Z"
-    },
-    {
-      "scanId": "CR-20261117-007",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:22:42.456Z"
-    },
-    {
-      "scanId": "CR-20261117-006",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:21:37.427Z"
-    },
-    {
-      "scanId": "CR-20261117-005",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:20:40.692Z"
-    },
-    {
-      "scanId": "CR-20261117-004",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:19:44.177Z"
-    },
-    {
-      "scanId": "CR-20261117-003",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:15:38.250Z"
-    },
-    {
-      "scanId": "CR-20261117-002",
-      "version": "3.30.14",
-      "status": "PARTIAL",
-      "coverageState": "PARTIAL",
-      "deliveredFiles": [
-        "leaks.txt",
-        "diff.txt",
-        "strings.txt.gz",
-        "urls.txt",
-        "models-and-pricing.txt",
-        "scan-summary.txt"
-      ],
-      "failedFiles": [],
-      "at": "2026-11-17T07:14:44.406Z"
-    }
-  ],
-  "releaseHistory": [],
-  "lastCoverageGaps": [
-    "darwin-arm64: extraction partial (7-Zip extraction exceeded safety caps; some files were not analyzed)",
-    "linux-x64: extraction partial (7-Zip extraction exceeded safety caps; some files were not analyzed)"
-  ]
+  "lastCoverageGaps": [],
+  "lastAlertDigest": null,
+  "benchmark": null
 }
