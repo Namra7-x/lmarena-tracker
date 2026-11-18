@@ -1,7 +1,7 @@
 {
   "componentId": "cursor-cli",
   "version": "2026.11.13-eacade1",
-  "alertedVersion": "2026.11.13-eacade1",
+  "alertedVersion": "2026.11.17-f532c45",
   "releaseId": "cursor-cli@2026.11.13-eacade1",
   "channel": "stable",
   "identityFingerprint": "6ccf912e07edf7fd07f2cf0f3d0205eabec32d41af83270722c3ed607251d14d",
@@ -65836,13 +65836,25 @@
   },
   "schemaVersion": 2,
   "deliveredVersion": "2026.11.13-eacade1",
-  "observedVersion": "2026.11.13-eacade1",
+  "observedVersion": "2026.11.17-f532c45",
   "scannedVersion": "2026.11.13-eacade1",
   "releaseKey": "76e8eb11cae5ba94a585e72bb0e2de34",
   "versionScheme": "build",
   "lastSuccessfulScan": "2026-11-17T07:43:53.267Z",
-  "lastDeliveryStatus": "DELIVERED",
-  "pendingDelivery": null,
+  "lastDeliveryStatus": "ALERT_SENT",
+  "pendingDelivery": {
+    "scanId": "CL-20261118-001",
+    "version": "2026.11.17-f532c45",
+    "releaseKey": "aa6017cf54e6f8d686693f16d82814ae",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 247,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-18T00:54:28.269Z",
+    "updatedAt": "2026-11-18T00:54:28.269Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CL-20261117-002",
