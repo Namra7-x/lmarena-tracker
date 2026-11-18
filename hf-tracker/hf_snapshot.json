@@ -15473,14 +15473,14 @@
       },
       "microsoft/Dayhoff-170M-UR90-HL-8000": {
         "createdAt": "2026-04-02T01:37:33.000Z",
-        "lastModified": "2026-04-02T01:37:42.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "microsoft/Dayhoff-170M-UR90-HL-6000": {
         "createdAt": "2026-04-02T01:36:59.000Z",
-        "lastModified": "2026-04-02T01:37:13.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -18346,6 +18346,20 @@
         "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
+        "numParameters": null
+      },
+      "microsoft/Aion-1.0-Instruct-2.3B-ONNX-WebGPU": {
+        "createdAt": "2026-11-18T17:08:25.000Z",
+        "lastModified": "2026-11-18T17:14:58.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
+        "numParameters": null
+      },
+      "microsoft/Aion-1.0-Instruct-2.3B": {
+        "createdAt": "2026-11-18T17:05:50.000Z",
+        "lastModified": "2026-11-18T17:05:51.000Z",
+        "gated": false,
+        "pipeline_tag": "text-generation",
         "numParameters": null
       }
     },
@@ -25815,7 +25829,7 @@
       },
       "apple/depthpro-models-66fee63b2f0dc1b231375ca6": {
         "title": "DepthPro Models",
-        "lastUpdated": "2026-11-04T23:50:18.506Z",
+        "lastUpdated": "2026-11-18T16:24:54.206Z",
         "itemCount": 3,
         "itemIds": [
           "apple/DepthPro-hf",
@@ -26382,7 +26396,7 @@
       },
       "MiniMaxAI/ecosystem": {
         "createdAt": "2026-11-17T05:55:26.000Z",
-        "lastModified": "2026-11-18T12:36:03.000Z",
+        "lastModified": "2026-11-18T13:35:18.000Z",
         "sdk": null
       }
     },
