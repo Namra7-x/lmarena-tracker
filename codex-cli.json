@@ -5,25 +5,25 @@
   "releaseId": "@openai/codex@0.169.1",
   "channel": "stable",
   "identityFingerprint": "360188bd995ed645ea70bae828f29d0d99ab1dcd972f57ef0d310b2e2071925a",
-  "diagnosticFingerprint": "44a78f53fe64cb4616fabc8ad848db291086d80540699d107881dbee99a8ca59",
-  "scanId": "CX-20261117-002",
-  "coverageState": "COMPLETE",
-  "lastFailureTime": null,
+  "diagnosticFingerprint": null,
+  "scanId": "CX-20261118-001",
+  "coverageState": "FAILED",
+  "lastFailureTime": "2026-11-18T03:47:04.971Z",
   "lastAlertDigest": "9b461550432d24a317777a9aaf4c535a83dd67740406239be0e00f1f9dd4b41d",
   "lastTestAlertVersion": "0.169.0",
   "analyzerStatus": {
-    "acornAst": "completed",
+    "acornAst": "skipped",
     "goReSym": "skipped",
     "sourceMap": "skipped",
     "sevenZip": "skipped",
     "asar": "skipped",
-    "tar": "completed",
+    "tar": "skipped",
     "zip": "skipped",
     "multiEncodingScanner": "skipped"
   },
   "benchmark": {
-    "executionTimeMs": 2093,
-    "peakMemoryMb": 218
+    "executionTimeMs": 1946,
+    "peakMemoryMb": 145
   },
   "hotSignals": [],
   "recentSignals": [],
@@ -338,25 +338,56 @@
   "schemaVersion": 2,
   "deliveredVersion": "0.169.1",
   "observedVersion": "0.170.0",
-  "scannedVersion": "0.169.1",
+  "scannedVersion": "0.170.0",
   "releaseKey": "0470163067ae7831707e2be2c9a69959",
   "versionScheme": null,
   "lastSuccessfulScan": "2026-11-17T22:27:30.576Z",
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastDeliveryStatus": "PARTIAL",
   "pendingDelivery": {
     "scanId": "CX-20261118-001",
     "version": "0.170.0",
     "releaseKey": "56d797b274376928871b4c027d33b0a5",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 328,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-18T03:46:57.149Z",
-    "updatedAt": "2026-11-18T03:46:57.150Z"
+    "coverageState": "FAILED",
+    "createdAt": "2026-11-18T03:47:04.971Z",
+    "updatedAt": "2026-11-18T03:47:04.971Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "CX-20261118-001",
+      "version": "0.170.0",
+      "status": "PARTIAL",
+      "coverageState": "FAILED",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-18T03:47:04.971Z"
+    },
     {
       "scanId": "CX-20261117-002",
       "version": "0.169.1",
@@ -412,6 +443,8 @@
       "urlCount": 9
     }
   ],
-  "lastCoverageGaps": [],
+  "lastCoverageGaps": [
+    "all: Failed to download https://registry.npmjs.org/@openai/codex/-/codex-0.170.0.tgz: HTTP 404 client error downloading https://registry.npmjs.org/@openai/codex/-/codex-0.170.0.tgz"
+  ],
   "knownSignals": {}
 }
