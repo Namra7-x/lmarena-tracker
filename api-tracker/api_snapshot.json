@@ -1,7 +1,7 @@
 {
   "totalGroups": 86,
   "totalModels": 190,
-  "lastUpdated": "2026-11-17T12:55:44.946Z",
+  "lastUpdated": "2026-11-18T07:26:00.057Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -277,7 +277,9 @@
         "Input": "$2Per 1M tokens",
         "Output": "$6Per 1M tokens",
         "Input(Implicit Cache)": "$0.25Per 1M tokens",
-        "Explicit Cache Creation": "$2.5Per 1M tokens",
+        "Input(Batch File)": "$1Per 1M tokens",
+        "Output(Batch File)": "$3Per 1M tokens",
+        "5-Minute Explicit Cache Creation": "$2.5Per 1M tokens",
         "Explicit Cache Read": "$0.17Per 1M tokens"
       },
       "limits": {
@@ -287,8 +289,9 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "262K",
-        "TPMTokens Per Minute": "2M"
-      }
+        "TPMTokens Per Minute": "2000000"
+      },
+      "markdownOverview": "2.4-trillion-parameter MoE flagship delivering a comprehensive leap in coding and professional work. Autonomously codes and delivers complete projects spanning 10+ days. Handles hundreds of specialized tasks across legal, financial, design, and other professional domains, producing production-grade results end-to-end in a single conversation. Native visual understanding runs through the full cycle of planning, execution, and verification, enabling deep semantic analysis of ultra-long documents and extended video content. In long-horizon tasks, plans autonomously, iterates through closed feedback loops, and continuously evolves."
     },
     "qwen3.8-max-0902": {
       "modelId": "qwen3.8-max-0902",
@@ -434,7 +437,8 @@
         "Context": "1M",
         "Max Reasoning": "262K",
         "TPMTokens Per Minute": "1M"
-      }
+      },
+      "markdownOverview": "Qwen3.8-Max-0902（alias qwen3.8-max-2026-09-02）is an upgraded snapshot of qwen3.8-max. Coding capability breaks new ground, handling more complex engineering-scale projects and long-horizon autonomous development. Collaborative agent performance is significantly enhanced, with greater composure in multi-tool orchestration and end-to-end task delivery. Native vision understanding is refined across chart reasoning, document parsing, and multimodal perception — sharper and more reliable. Retains the 1M context window, thinking mode, and full tool ecosystem, evolving at a higher level of intelligence."
     },
     "qwen3.8-flash": {
       "modelId": "qwen3.8-flash",
@@ -569,7 +573,7 @@
         "Input": "$0.15Per 1M tokens",
         "Output": "$0.47Per 1M tokens",
         "Input(Implicit Cache)": "$0.016Per 1M tokens",
-        "Explicit Cache Creation": "$0.2Per 1M tokens",
+        "5-Minute Explicit Cache Creation": "$0.2Per 1M tokens",
         "Explicit Cache Read": "$0.016Per 1M tokens"
       },
       "limits": {
@@ -579,8 +583,9 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "262K",
-        "TPMTokens Per Minute": "2M"
-      }
+        "TPMTokens Per Minute": "2500000"
+      },
+      "markdownOverview": "Qwen3.8-Flash is the latest multimodal model from the Qwen family, combining powerful reasoning and generation with remarkable speed. It natively supports a million-token context window, allowing it to process lengthy documents, entire codebases, and complex conversations in a single pass. It shines in coding assistance, agentic workflows, and visual understanding — whether it's fixing code autonomously, operating desktop applications, or analyzing charts and long videos. Fully compatible with both OpenAI and Anthropic API protocols, it integrates seamlessly with popular developer tools like Claude Code and Codex, making it easy to build high-concurrency applications and intelligent workflows. With strong performance and highly competitive inference costs, Qwen3.8-Flash is an ideal choice for developers and businesses seeking the best of both worlds in AI applications."
     },
     "qwen3.8-omni-flash": {
       "modelId": "qwen3.8-omni-flash",
@@ -720,7 +725,8 @@
         "Context": "1M",
         "Max Reasoning": "262K",
         "TPMTokens Per Minute": "2M"
-      }
+      },
+      "markdownOverview": "Qwen’s next-generation native omni-modal model supports context lengths of up to 1M tokens and natively accepts text, image, audio, and video inputs. Built on the Qwen3.8-Flash-Next architecture, it is designed for agentic capabilities in real-world productivity scenarios. In addition to coding, knowledge work, GUI interaction, and other agentic tasks, it delivers significant performance gains in workflows that require integrated processing of text, images, audio, and video, including video editing, music video creation, film and video production and narration, multimedia summarization, and audio-video dialogue. It supports two-channel and four-channel spatial audio understanding and is compatible with both the DashScope and OpenAI protocols. We recommend installing the companion Qwen-MM-Plugins to help agent frameworks access its native multimodal capabilities."
     },
     "qwen3.8-omni-flash-realtime": {
       "modelId": "qwen3.8-omni-flash-realtime",
@@ -839,7 +845,8 @@
         "Output: Text&Audio (Output text is not charged)": "$1.87Per 1M tokens",
         "input：Text/Image/Video": "$0.23Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen3.8-Omni-Flash-Realtime enables full-duplex audio-video interaction through multiple realtime protocols and is designed for smart devices, robotics, and interactive agents. It supports multichannel audio input and various channel layouts. Video representations can be configured from fine-grained to aggregated modes based on the desired balance between accuracy and computational cost. The model supports audio input in over 60 languages and speech output in over 30 languages. Its tool capabilities include function calling and MCP service integration, with a complete event flow covering tool discovery, invocation approval, and tool-result continuation. While delivering fast realtime responses, it can orchestrate complex business logic and work with hundreds of tools, while also offering expressive and diverse voice generation."
     },
     "decision-model-preview": {
       "modelId": "decision-model-preview",
@@ -948,7 +955,8 @@
         "Context": "65K",
         "TPMTokens Per Minute": "2M",
         "RPMRequests Per Minute": "1K"
-      }
+      },
+      "markdownOverview": "A structured decision model designed for high-frequency business decisions. It performs classification, yes-or-no decisions, and scoring in parallel based on text or business context, returning probability distributions and confidence scores for scenarios such as ticket routing, content moderation, agent routing, and result validation."
     },
     "qwen-audio-3.1-tts-plus": {
       "modelId": "qwen-audio-3.1-tts-plus",
@@ -1046,7 +1054,8 @@
       "pricing": {
         "TTS": "$0.3Per 10,000 characters"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.1-TTS-Plus is a text-to-speech large model built for high-quality speech synthesis scenarios, supporting multiple minority languages and Chinese dialects. The model delivers authentic dialect pronunciation and features free-style instruction-following along with fine-grained tag-based control, enabling more precise manipulation of emotion, tone, persona, speaking rate, volume, and synthesis style. In voice cloning scenarios, the model exhibits enhanced robustness under complex acoustic conditions such as noise and reverberation, with further improvements in audio quality, clarity, resolution, and overall expressiveness. The Plus version places greater emphasis on synthesis fidelity and nuanced expression, making it ideal for professional use cases that demand higher audio quality, naturalness, and expressiveness — including content creation, audiobooks, film and television dubbing, brand voice design, and other premium speech services."
     },
     "qwen-audio-3.1-tts-flash": {
       "modelId": "qwen-audio-3.1-tts-flash",
@@ -1148,7 +1157,8 @@
         "Input": "$0.23Per 1M tokens",
         "Output": "$1.87Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.1-TTS-Flash is a high-performance text-to-speech large model designed for real-time interactive scenarios, supporting multiple languages and dialects. The model features free-style instruction-following capability and fine-grained tag-based control, enabling flexible manipulation of emotion, tone, persona, speaking rate, volume, and other expressive attributes. In voice cloning scenarios, the model demonstrates enhanced robustness under complex acoustic conditions such as noise and reverberation, with improved audio quality, clarity, and overall expressiveness. The Flash version focuses on optimizing the real-time synthesis experience, making it well suited for low-latency interactive use cases including voice assistants, live conversations, and intelligent customer service."
     },
     "qwen-audio-3.1-asr-flash": {
       "modelId": "qwen-audio-3.1-asr-flash",
@@ -1250,7 +1260,8 @@
         "Input": "$0.15Per 1M tokens",
         "Output": "$0.47Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.1-ASR-Flash is a large-scale model supporting efficient short speech recognition, designed for high-quality, multilingual, and cultural content transcription scenarios. The model supports multilingual and multi-regional Chinese dialect recognition, and is optimized for the rhythm, cadence, and classical Chinese expression of ancient Chinese poetry. It features context enhancement, punctuation prediction, and text normalization capabilities. This version also supports controllable ASR/AST output for multiple dialects. It includes native transcription and polishing capabilities, as well as industrial-grade multi-person dialogue role-based transcription capabilities."
     },
     "qwen-audio-3.1-asr-flash-streaming": {
       "modelId": "qwen-audio-3.1-asr-flash-streaming",
@@ -1350,7 +1361,8 @@
         "Input": "$0.93Per 1M tokens",
         "Output": "$0.7Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.1-ASR-Flash-Streaming is an end-to-end real-time speech recognition model designed for scenarios such as real-time conferencing, live subtitles, and intelligent interaction. It features low latency and high accuracy in streaming speech transcription. The model supports multilingual and multi-regional Chinese dialect recognition, seamless switching between Chinese and English, hot word and context enhancement, punctuation prediction, and text normalization. It also exhibits strong noise robustness and can adapt to complex acoustic environments. Furthermore, this version supports controllable ASR/AST output for multiple dialects."
     },
     "qwen-audio-3.1-asr-flash-filetrans": {
       "modelId": "qwen-audio-3.1-asr-flash-filetrans",
@@ -1452,7 +1464,8 @@
         "Input": "$0.15Per 1M tokens",
         "Output": "$0.47Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.1-ASR-Flash-Filetrans is an end-to-end offline speech recognition model designed for scenarios such as meeting transcription, content production, and call analysis. It supports multilingual and multi-regional Chinese dialect recognition. The model features high-precision transcription, hot word and context enhancement, speaker separation, punctuation prediction, and text normalization capabilities. It maintains stable performance even in complex noisy environments, making it the preferred choice for long audio transcription. This version also supports controllable ASR/AST output for multiple dialects."
     },
     "qwen-audio-3.1-tts-next": {
       "modelId": "qwen-audio-3.1-tts-next",
@@ -1556,7 +1569,8 @@
         "Input": "$0.93Per 1M tokens",
         "Output": "$1.87Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.1-TTS-Next is an AudioGen model designed for unified audio generation. Going beyond conventional TTS systems that focus solely on speech synthesis, it can generate complete audio content in a single pass from inputs such as text, timestamps, and reference audio, seamlessly combining speech, sound effects, ambient sounds, background music, and more. The model supports a wide range of tasks, including multilingual TTS, single-speaker speech, multi-speaker dialogue, podcasts, cinematic soundscapes, music generation, ambient audio, and sound effects. Its key strengths include more natural and expressive speech, consistent voice identity, flexible timing control, and high-quality music and soundscape generation. These capabilities make it well suited for content creation, short-form video, podcasts, film and television production, game audio, and other professional audio creation scenarios."
     },
     "qwen-audio-3.1-asr-flash-message": {
       "modelId": "qwen-audio-3.1-asr-flash-message",
@@ -1656,7 +1670,8 @@
         "Input": "$0.93Per 1M tokens",
         "Output": "$0.7Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.1-ASR-Flash-Message is a highly accurate, flexible, and multilingual speech recognition model based on a large language model, featuring long-context capabilities. It not only supports the seamless transcription of ultra-long audio but also allows users to specify multiple languages ​​and specialized industry vocabulary. By integrating two distinct mechanisms for weighting custom keywords, the model achieves precise alignment in complex and specialized scenarios, significantly enhancing speech recognition accuracy in specific domains."
     },
     "wan3.0-video-prime": {
       "modelId": "wan3.0-video-prime",
@@ -1778,7 +1793,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.28Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan3.0-Video-Prime is the high-speed video generation model of Wan3.0, with capabilities aligned to the standard version of Wan3.0-Video. It supports four-modal all-in-one reference and generates videos of up to 30 seconds, delivering an immersive audiovisual experience with significantly faster end-to-end generation."
     },
     "wan3.0-video": {
       "modelId": "wan3.0-video",
@@ -1899,7 +1915,8 @@
         "Video Generation(720P)30% off": "$0.1$0.07",
         "Video Generation(1080P)30% off": "$0.2$0.14"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan3.0-Video is an all-in-one video generation model unified support for multiple creative capabilities, including reference, editing, replication, and driving. It generates videos up to 30 seconds with omni-modal reference, and can parse files, web pages and complex images. With production-grade character consistency and lifelike visuals and sound, it delivers an immersive audiovisual experience."
     },
     "qwen-audio-3.1-realtime-flash": {
       "modelId": "qwen-audio-3.1-realtime-flash",
@@ -2011,8 +2028,23 @@
         "needApply": false,
         "category": "Audio"
       },
-      "pricing": {},
-      "limits": {}
+      "pricing": {
+        "Input: Audio": "$0.93Per 1M tokens",
+        "Input: Text": "$0.23Per 1M tokens",
+        "Output: Text": "$0.7Per 1M tokens",
+        "Output: Text&Audio (Output text is not charged)": "$1.87Per 1M tokens"
+      },
+      "limits": {
+        "Max Input": "245K",
+        "Max Output": "16K",
+        "Max Input (Thinking)": "983K",
+        "Max Output (Thinking)": "131K",
+        "Context": "262K",
+        "Max Reasoning": "262K",
+        "TPMTokens Per Minute": "100000",
+        "RPMRequests Per Minute": "60"
+      },
+      "markdownOverview": "Qwen-Audio-3.1-Realtime is a next-generation real-time, full-duplex speech model with enhanced spoken-language reasoning, multi-turn instruction following, empathetic communication, and role-playing capabilities, balancing intelligent responses with a natural conversational rhythm. Improved noise rejection, understanding of multi-party conversations, and real-time contextual understanding allow the model to handle interruptions, wait for users to finish speaking, and take turns more naturally in real-world settings. The model supports multilingual conversations and intelligent tool use, connecting to knowledge bases and business systems while naturally integrating task results into the conversation. With stronger safeguards for refusing unsafe requests and enforcing safety boundaries, it delivers more intelligent, natural, and reliable interactions across customer service, workplace collaboration, and voice-based companionship."
     },
     "qwen-audio-3.1-realtime-plus": {
       "modelId": "qwen-audio-3.1-realtime-plus",
@@ -2145,7 +2177,8 @@
         "Max Reasoning": "2K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen-Audio-3.1-Realtime is a next-generation real-time, full-duplex speech model with enhanced spoken-language reasoning, multi-turn instruction following, empathetic communication, and role-playing capabilities, balancing intelligent responses with a natural conversational rhythm. Improved noise rejection, understanding of multi-party conversations, and real-time contextual understanding allow the model to handle interruptions, wait for users to finish speaking, and take turns more naturally in real-world settings. The model supports multilingual conversations and intelligent tool use, connecting to knowledge bases and business systems while naturally integrating task results into the conversation. With stronger safeguards for refusing unsafe requests and enforcing safety boundaries, it delivers more intelligent, natural, and reliable interactions across customer service, workplace collaboration, and voice-based companionship."
     },
     "qwen-image-3.0": {
       "modelId": "qwen-image-3.0",
@@ -2252,7 +2285,8 @@
         "1K Image Output": "$0.03Per image",
         "2K Image Output": "$0.03Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Accurate Prompt Understanding: Supports up to 4.5k token inputs, accurately interpreting complex text-and-image prompts and generating dense layouts in one pass. Reliable Text Rendering: Delivers crisp 10px text across 12 languages and 20+ fonts, making infographics and interfaces ready to use. Efficient Batch Production: Scales everyday tasks like posters, web pages, and UI screens with better cost efficiency, keeping creative output sustainable. Qwen-Image-3.0 Standard is built not just for visual quality, but for smooth, reliable daily creation—turning image generation into sustainable content productivity."
     },
     "qwen-image-3.0-pro": {
       "modelId": "qwen-image-3.0-pro",
@@ -2371,7 +2405,8 @@
         "1K Image Output": "$0.04Per image",
         "2K Image Output": "$0.075Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Rich content: Supports input of up to 4.5k tokens and dense information layout with images-within-images, enabling complex layouts like newspapers, storyboards, menus, and exam papers to be generated in a single pass. Authentic detail: Supports precise rendering of text as small as 10px, and vividly reproduces fine details such as micro-expressions, pores, and individual strands of hair—approaching the quality of real photography. Deep knowledge: Supports native rendering of 12 languages and various fonts, realistic simulation of mainstream interfaces such as web pages, games, and live streams, fully incorporating external knowledge. Qwen-Image-3.0-Pro isn't just pursuing \"good looks\"—it's pursuing \"usefulness\", making image generation a truly deployable productivity tool."
     },
     "qwen3.8-livetranslate-flash-realtime": {
       "modelId": "qwen3.8-livetranslate-flash-realtime",
@@ -2493,7 +2528,8 @@
         "Context": "53K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "10"
-      }
+      },
+      "markdownOverview": "The real-time version of Qwen3.8-LiveTranslate-Flash, which is a high-precision, highly responsive, and robust multilingual simultaneous audio and video interpretation model. Leveraging Qwen-Omni's powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3.8-LiveTranslate-Flash offers both offline and real-time audio and video translation capabilities. It can understand 60 languages and speak 29 languages."
     },
     "kimi-k3.1-pro": {
       "modelId": "kimi-k3.1-pro",
@@ -2543,7 +2579,7 @@
         "experienceV2": true,
         "eval": true,
         "inference": true,
-        "autoTPM": true,
+        "autoTPM": false,
         "displayQpmLimit": true,
         "deploy": false
       },
@@ -2587,7 +2623,7 @@
           "experienceV2": true,
           "eval": true,
           "inference": true,
-          "autoTPM": true,
+          "autoTPM": false,
           "displayQpmLimit": true,
           "deploy": false
         },
@@ -2769,8 +2805,9 @@
         "Max Output (Thinking)": "1M",
         "Context": "1M",
         "Max Reasoning": "1M",
-        "TPMTokens Per Minute": "1M"
-      }
+        "TPMTokens Per Minute": "1200000"
+      },
+      "markdownOverview": "Kimi-K3 is Moonshot AI’s most capable flagship model to date, featuring 2.8 trillion parameters. Built on the KDA hybrid linear attention mechanism (Kimi Delta Attention) and Attention Residuals, it natively supports visual understanding and offers a 1-million-token context window. As the world's first open-source model at the 3-trillion-parameter scale, it is designed for frontier intelligence scenarios such as long-horizon programming, knowledge work, and reasoning."
     },
     "kimi-k2.7-code": {
       "modelId": "kimi-k2.7-code",
@@ -2903,9 +2940,10 @@
         "Max Input": "229K",
         "Max Output": "16K",
         "Context": "262K",
-        "TPMTokens Per Minute": "1M",
+        "TPMTokens Per Minute": "1000000",
         "RPMRequests Per Minute": "500"
-      }
+      },
+      "markdownOverview": "kimi-k2.7-code is Kimi's most intelligent coding model to date. It follows instructions more reliably over long contexts and completes programming tasks with higher success rates. It supports text, image, and video inputs, along with thinking mode, conversation, and agent tasks."
     },
     "qwen-audio-3.0-asr-flash": {
       "modelId": "qwen-audio-3.0-asr-flash",
@@ -3017,7 +3055,8 @@
       "pricing": {
         "Audio Duration": "$0.000035Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The Bailing ASR version, updated in June 2026, fully supports the seven major dialect systems of traditional Chinese (Mandarin/Wu/Xiang/Gan/Hakka/Min/Yue) and is compatible with over 20 regional Mandarin accents. It features specific optimizations for the rhythm, meter, and literary expression characteristics of classical Chinese poetry, improving the accuracy of poetry recognition and making it suitable for cultural heritage, educational explanations, and audiobooks. Improved punctuation prediction and text normalization capabilities make the output text more consistent with written expression habits; numbers, dates, and amounts are automatically converted to standard formats, enhancing readability and professionalism. The language support has been expanded to include English, Japanese, Korean, Vietnamese, Thai, Indonesian, Malay, Filipino, Hindi, Arabic, French, German, Spanish, Portuguese, Russian, Italian, Dutch, Swedish, Danish, Finnish, Norwegian, Greek, Polish, Czech, Hungarian, Romanian, Bulgarian, Croatian, and Slovak, totaling 30 languages. It supports contextualization capabilities and can transcribe audio up to 5 minutes in length."
     },
     "qwen3.8-2.4t-a95b": {
       "modelId": "qwen3.8-2.4t-a95b",
@@ -3138,7 +3177,7 @@
         "Input": "$2Per 1M tokens",
         "Output": "$6Per 1M tokens",
         "Input(Implicit Cache)": "$0.25Per 1M tokens",
-        "Explicit Cache Creation": "$2.5Per 1M tokens",
+        "5-Minute Explicit Cache Creation": "$2.5Per 1M tokens",
         "Explicit Cache Read": "$0.17Per 1M tokens"
       },
       "limits": {
@@ -3148,8 +3187,9 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "131K",
-        "TPMTokens Per Minute": "5M"
-      }
+        "TPMTokens Per Minute": "5000000"
+      },
+      "markdownOverview": "Qwen3.8-2.4T-A95B is the open-source release of Qwen's latest flagship, launched August 2026. Its sparse MoE architecture holds 2.4T total parameters with ~95B activated per step, paired with hybrid attention and a 1M token context window. Key benchmarks: GPQA Diamond 92.6, PaperBench 93.0, OSWorld 86.1, BabyVision 82.0. Ranked 4th on CodeArena."
     },
     "qwen3.8-27b": {
       "modelId": "qwen3.8-27b",
@@ -3206,7 +3246,7 @@
         "autoTPM": true,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": true
+        "deploy": false
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -3256,7 +3296,7 @@
           "autoTPM": true,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": true
+          "deploy": false
         },
         "model": "qwen3.8-27b",
         "serviceSites": [
@@ -3280,7 +3320,8 @@
           "sft": [
             "full",
             "lora"
-          ]
+          ],
+          "dpo": []
         },
         "inferenceProvider": "bailian",
         "name": "Qwen3.8-27B",
@@ -3291,7 +3332,7 @@
         "Input": "$0.5Per 1M tokens",
         "Output": "$3Per 1M tokens",
         "Input(Implicit Cache)": "$0.1Per 1M tokens",
-        "Explicit Cache Creation": "$0.625Per 1M tokens",
+        "5-Minute Explicit Cache Creation": "$0.625Per 1M tokens",
         "Explicit Cache Read": "$0.05Per 1M tokens"
       },
       "limits": {
@@ -3301,8 +3342,9 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "262K",
-        "TPMTokens Per Minute": "5M"
-      }
+        "TPMTokens Per Minute": "5000000"
+      },
+      "markdownOverview": "The Qwen3.8 27B native vision-language dense model builds upon the 3.6-27B version, with key improvements in coding and office productivity capabilities across both text and visual modalities. It enables more reliable end-to-end completion of complex tasks, delivering consistently trustworthy results."
     },
     "qwen-audio-3.0-realtime-plus": {
       "modelId": "qwen-audio-3.0-realtime-plus",
@@ -3438,7 +3480,8 @@
         "Context": "65K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen-Audio-3.0-Realtime-Plus is a next-generation, real-time, full-duplex speech foundation model that has topped global authoritative benchmarks, ranking first overall in the \"Speech-to-Speech\" category on Artificial Analysis—a leading independent evaluation platform. This end-to-end model balances high-level intelligence with the natural pacing of full-duplex conversation, ensuring seamless, fluid real-time interaction without compromising speech reasoning capabilities. Through engineering optimizations such as parallel inference and omnidirectional streaming, it minimizes end-to-end response latency, delivering a conversational experience that is both fast and intelligent. The Plus Edition places greater emphasis on high-quality, in-depth interaction."
     },
     "qwen-audio-3.0-realtime-flash": {
       "modelId": "qwen-audio-3.0-realtime-flash",
@@ -3574,7 +3617,8 @@
         "Context": "65K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen-Audio-3.0-Realtime-Flashis a next-generation, real-time, full-duplex speech foundation model that has topped global authoritative benchmarks, ranking first overall in the \"Speech-to-Speech\" category on Artificial Analysis—a leading independent evaluation platform. This end-to-end model balances high-level intelligence with the natural pacing of full-duplex conversation, ensuring seamless, fluid real-time interaction without compromising speech reasoning capabilities. Through engineering optimizations such as parallel inference and omnidirectional streaming, it minimizes end-to-end response latency, delivering a conversational experience that is both fast and intelligent. The Flash Edition places greater emphasis on ultra-fast responsiveness."
     },
     "happyhorse-1.1-t2v": {
       "modelId": "happyhorse-1.1-t2v",
@@ -3689,7 +3733,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.18Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyHorse-1.1-T2V supports Text-to-Video generation with improved semantic understanding, cinematic shot control, and dynamic motion rendering. It more accurately captures creative intent, producing high-quality videos with smoother motion, richer details, stronger visual consistency, and more natural character actions, scene atmosphere, and physical dynamics."
     },
     "happyhorse-1.1-i2v": {
       "modelId": "happyhorse-1.1-i2v",
@@ -3813,7 +3858,8 @@
         "Concurrency": "5concurrent",
         "Async Queue Limit": "500tasks",
         "RPMRequests Per Minute": "300"
-      }
+      },
+      "markdownOverview": "HappyHorse-1.1-I2V supports Image-to-Video generation with improved visual quality, dynamic performance, and cross-clip consistency. It more accurately understands the input image and preserves creative intent, delivering significant improvements in skin texture realism, character ID consistency across clips, motion smoothness, text rendering stability, and audio-visual synchronization, producing high-quality videos with greater realism, richer details, and stronger overall consistency."
     },
     "happyhorse-1.1-r2v": {
       "modelId": "happyhorse-1.1-r2v",
@@ -3930,7 +3976,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.18Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyHorse-1.1-R2V supports Reference-to-Video generation with significantly improved stability in subject, scene style, and visual consistency. With support for up to 9 reference images, it can more accurately understand and preserve creative intent, delivering stronger controllability and expressiveness across characters, scenes, styles, and cinematic motion."
     },
     "qwen-audio-3.0-tts-plus": {
       "modelId": "qwen-audio-3.0-tts-plus",
@@ -4044,7 +4091,8 @@
       "pricing": {
         "TTS": "$0.2Per 10,000 characters"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.0-TTS-Plus is a high-performance speech synthesis model from Tongyi Labs, designed for high-quality speech generation scenarios. Compared with the previous version, it supports more low-resource languages and Chinese dialects, significantly improves dialect authenticity, and enhances free-style instruction following and fine-grained tag control for more accurate control over emotion, tone, character, speaking rate, volume, and synthesis style. It is also more robust under noisy and reverberant acoustic conditions, with further improvements in audio quality, clarity, resolution, and overall expressiveness. The Plus version focuses more on synthesis quality and detailed expressiveness, making it suitable for professional scenarios with higher requirements for audio quality, naturalness, and expressiveness, such as content creation, audiobooks, film and video dubbing, brand voice design, and premium speech services."
     },
     "qwen-audio-3.0-tts-flash": {
       "modelId": "qwen-audio-3.0-tts-flash",
@@ -4158,7 +4206,8 @@
       "pricing": {
         "TTS": "$0.15Per 10,000 characters"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Audio-3.0-TTS-Flash is a high-performance speech synthesis model , optimized for real-time interactive scenarios. Compared with the previous version, it supports more low-resource languages and Chinese dialects, improves dialect authenticity, and enhances free-style instruction following and fine-grained tag control for more flexible control over emotion, tone, character, speaking rate, volume, and expressive style. It is also more robust under noisy and reverberant acoustic conditions, with improved audio quality, clarity, and overall expressiveness. The Flash version focuses on real-time synthesis, making it suitable for voice assistants, real-time dialogue, intelligent customer service, and other low-latency interactive applications."
     },
     "happyhorse-1.0-t2v": {
       "modelId": "happyhorse-1.0-t2v",
@@ -4272,7 +4321,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.24Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyHorse-1.0-T2V supports text-to-video generation, featuring highly realistic dynamic rendering. It accurately comprehends text semantics to produce high-quality videos that are fluid, natural, and rich in detail."
     },
     "happyhorse-1.0-i2v": {
       "modelId": "happyhorse-1.0-i2v",
@@ -4388,7 +4438,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.24Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyHorse-1.0-I2V enables image-to-video generation, featuring highly realistic dynamic rendering. It accurately comprehends both text and image semantics to produce high-quality videos that are fluid, natural, and rich in detail."
     },
     "happyhorse-1.0-r2v": {
       "modelId": "happyhorse-1.0-r2v",
@@ -4502,7 +4553,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.24Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyHorse-1.0-R2V supports Reference-to-Video generation, offering enhanced stability in subject and scene referencing. Capable of processing up to 9 reference images, it precisely preserves creative intent to deliver superior performance."
     },
     "happyhorse-1.0-video-edit": {
       "modelId": "happyhorse-1.0-video-edit",
@@ -4618,7 +4670,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.24Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyHorse-1.0-V2V supports advanced video editing through natural language instructions. It allows for local or global editing of video elements using up to 5 reference images, precisely preserving original motion dynamics to achieve superior expressiveness."
     },
     "qwen3.7-plus": {
       "modelId": "qwen3.7-plus",
@@ -5069,7 +5122,7 @@
         "Input": "$2.5Per 1M tokens",
         "Output": "$7.5Per 1M tokens",
         "Input(Implicit Cache)": "$0.5Per 1M tokens",
-        "Explicit Cache Creation": "$3.125Per 1M tokens",
+        "5-Minute Explicit Cache Creation": "$3.125Per 1M tokens",
         "Explicit Cache Read": "$0.25Per 1M tokens"
       },
       "limits": {
@@ -5078,9 +5131,10 @@
         "Max Input (Thinking)": "983K",
         "Max Output (Thinking)": "131K",
         "Context": "1M",
-        "TPMTokens Per Minute": "1M",
+        "TPMTokens Per Minute": "1000000",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The Max model, the largest and most capable in the Qwen3.7 series, currently offers a pure‑text‑only interface for public experimentation. Qwen3.7 is a next‑generation flagship model designed for the agent‑centric era, with its core strengths lying in the breadth and depth of its agent‑level capabilities: it excels at programming, office and productivity tasks, and long‑term autonomous execution."
     },
     "qwen3.7-max-2026-06-08": {
       "modelId": "qwen3.7-max-2026-06-08",
@@ -5232,7 +5286,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The Max model, the largest and most capable in the Qwen3.7 series, has added visual‑modal understanding compared to the May 20 snapshot, enabling it to perceive real‑world scenes and supporting multimodal interactive hybrid agent capabilities. This version is based on a snapshot taken on June 8, 2026."
     },
     "qwen3.7-max-2026-05-20": {
       "modelId": "qwen3.7-max-2026-05-20",
@@ -5377,7 +5432,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The Max model, the largest and most capable in the Qwen3.7 series, currently offers a pure‑text‑only interface for public experimentation. Qwen3.7 is a next‑generation flagship model designed for the agent‑centric era, with its core strengths lying in the breadth and depth of its agent‑level capabilities: it excels at programming, office and productivity tasks, and long‑term autonomous execution.This version is a snapshot as of May 20, 2026."
     },
     "qwen3.7-max-2026-05-17": {
       "modelId": "qwen3.7-max-2026-05-17",
@@ -5520,7 +5576,8 @@
         "Max Reasoning": "262K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The early version of the Max model in the Qwen3.7 series supports only the reasoning mode and makes its plain-text capabilities available for experimentation. Qwen3.7 is a next‑generation flagship model designed for the agent‑centric era, with major improvements in coding and agent‑level capabilities. This release is a snapshot as of May 17, 2026."
     },
     "qwen3.7-max-preview": {
       "modelId": "qwen3.7-max-preview",
@@ -5661,7 +5718,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The Max model, the largest and most capable variant in the Qwen3.7 series, is available as a preview and supports only thinking mode, offering a pure text‑only interface for experimentation. It is primarily optimized for general‑purpose conversational use cases, such as knowledge‑based question answering, instruction following, and creative writing."
     },
     "qwen3.7-flash": {
       "modelId": "qwen3.7-flash",
@@ -5804,7 +5862,7 @@
         "Input": "$0.03Per 1M tokens",
         "Output": "$0.13Per 1M tokens",
         "Input(Implicit Cache)": "$0.006Per 1M tokens",
-        "Explicit Cache Creation": "$0.038Per 1M tokens",
+        "5-Minute Explicit Cache Creation": "$0.038Per 1M tokens",
         "Explicit Cache Read": "$0.003Per 1M tokens"
       },
       "limits": {
@@ -5813,9 +5871,10 @@
         "Max Input (Thinking)": "983K",
         "Max Output (Thinking)": "131K",
         "Context": "1M",
-        "TPMTokens Per Minute": "5M",
-        "RPMRequests Per Minute": "15K"
-      }
+        "TPMTokens Per Minute": "5000000",
+        "RPMRequests Per Minute": "15000"
+      },
+      "markdownOverview": "The Qwen3.7 native vision-language Flash model series delivers a comprehensive upgrade over 3.6-Flash in multimodal understanding and agent execution. This model particularly excels in enhanced multimodal foundations with stronger universal object recognition, further improved real-world perception and spatial intelligence, significantly upgraded multimodal agent capabilities for Search Agent and CI Agent scenarios with more stable end-to-end task execution, as well as optimized multimodal coding for a smoother vibe coding experience."
     },
     "qwen3.7-flash-2026-07-15": {
       "modelId": "qwen3.7-flash-2026-07-15",
@@ -5971,7 +6030,8 @@
         "Max Reasoning": "262K",
         "TPMTokens Per Minute": "5M",
         "RPMRequests Per Minute": "15K"
-      }
+      },
+      "markdownOverview": "The Qwen3.7 native vision-language Flash model series delivers a comprehensive upgrade over 3.6-Flash in multimodal understanding and agent execution. This model particularly excels in enhanced multimodal foundations with stronger universal object recognition, further improved real-world perception and spatial intelligence, significantly upgraded multimodal agent capabilities for Search Agent and CI Agent scenarios with more stable end-to-end task execution, as well as optimized multimodal coding for a smoother vibe coding experience. This version is a snapshot from July 15, 2026."
     },
     "happyoyster-1.0-adventure": {
       "modelId": "happyoyster-1.0-adventure",
@@ -6074,7 +6134,8 @@
         "World Creation": "$0.0077Per voice",
         "World Experience (480P)": "$0.0308Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyOyster Adventure is an open-world model featuring real-time interaction and explorability. It generates immersive environments from multimodal (text/image) inputs, enabling seamless exploration through real-time interaction, navigation, and camera control."
     },
     "happyoyster-1.0-directing": {
       "modelId": "happyoyster-1.0-directing",
@@ -6180,7 +6241,8 @@
         "World Experience (480P)": "$0.0539Per second",
         "World Experience (720P)": "$0.0858Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "HappyOyster Directing is an open-world model featuring real-time interaction and immersive narrative generation. It creates world environments from multimodal (text/image) inputs, enabling continuous, text-driven real-time world evolution at any moment."
     },
     "qwen3.6-plus": {
       "modelId": "qwen3.6-plus",
@@ -6484,7 +6546,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The Qwen3.6 native vision-language Plus series models demonstrate exceptional performance on par with the current state-of-the-art models, with a significant improvement in overall results compared to the 3.5 series. The models have been markedly enhanced in code-related capabilities such as agentic coding, front-end programming, and Vibe coding, as well as in multi-modal general object recognition, OCR, and object localization.This version is a snapshot as of April 2, 2026."
     },
     "qwen3.6-flash": {
       "modelId": "qwen3.6-flash",
@@ -6786,7 +6849,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The Qwen3.6 native vision-language Flash model series delivers a significant performance boost over the 3.5-Flash version. This model particularly excels in agentic coding capabilities, substantially outperforming its predecessor on multiple code-agent benchmarks, as well as in mathematical and code reasoning. In terms of vision, it features markedly improved spatial intelligence, with especially notable enhancements in object localization and object detection.This release is based on a snapshot taken on April 16, 2026."
     },
     "qwen3.6-35b-a3b": {
       "modelId": "qwen3.6-35b-a3b",
@@ -6935,7 +6999,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The Qwen3.6 35B-A3B native vision-language model is built on a hybrid architecture that integrates linear attention mechanisms with a sparse mixture-of-experts framework, achieving higher inference efficiency. Compared with the 3.5-35B-A3B, this model demonstrates significantly improved agentic coding capabilities, mathematical and code reasoning abilities, spatial intelligence, as well as object localization and object detection performance."
     },
     "qwen3.6-27b": {
       "modelId": "qwen3.6-27b",
@@ -7091,7 +7156,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The Qwen3.6 27B native vision-language dense model builds upon the 3.5-27B version, with key improvements in agentic coding capabilities and enhanced STEM reasoning and inference skills. In the vision modality, it demonstrates significant advances in spatial intelligence, object localization, and detection, while video understanding, document OCR, and visual agent capabilities continue to improve steadily."
     },
     "deepseek-v4.1-flash-1017": {
       "modelId": "deepseek-v4.1-flash-1017",
@@ -7274,7 +7340,7 @@
       "supports": {
         "fineTune": false,
         "experienceV2": true,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "autoTPM": true,
         "experience": false,
@@ -7319,7 +7385,7 @@
         "supports": {
           "fineTune": false,
           "experienceV2": true,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "autoTPM": true,
           "experience": false,
@@ -7353,7 +7419,7 @@
       "pricing": {
         "Input": "$0.15Per 1M tokens",
         "Output": "$0.6Per 1M tokens",
-        "Input(Implicit Cache)": "$0.015Per 1M tokens"
+        "Input(Implicit Cache)": "$0.003Per 1M tokens"
       },
       "limits": {
         "Max Input": "1M",
@@ -7362,8 +7428,9 @@
         "Max Output (Thinking)": "393K",
         "Context": "1M",
         "Max Reasoning": "393K",
-        "TPMTokens Per Minute": "1M"
-      }
+        "TPMTokens Per Minute": "1200000"
+      },
+      "markdownOverview": "DeepSeek-V4.1-Flash is the lightweight flagship of DeepSeek's new architecture family, packing 552B total MoE parameters to deliver flagship-surpassing intelligence across key benchmarks, including out-performing DeepSeek-V4-Pro. It adopts a Causal Encoder-Decoder asymmetric design with 8B active parameters for input and 16B for output, and offers native multimodal visual understanding. KV Cache usage is cut to one-quarter of the previous generation's HBM and one-eighth of its SSD storage, dramatically lowering costs for long-context and agentic workloads. With a 1M-token context window and up to 384K-token maximum output, it balances high throughput, low latency, and exceptional cost efficiency."
     },
     "deepseek-v4-pro-0813": {
       "modelId": "deepseek-v4-pro-0813",
@@ -7410,7 +7477,7 @@
       "supports": {
         "fineTune": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "autoTPM": true,
         "experience": true,
@@ -7455,7 +7522,7 @@
         "supports": {
           "fineTune": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "autoTPM": true,
           "experience": true,
@@ -7497,8 +7564,9 @@
         "Max Output (Thinking)": "393K",
         "Context": "1M",
         "Max Reasoning": "393K",
-        "TPMTokens Per Minute": "1M"
-      }
+        "TPMTokens Per Minute": "1200000"
+      },
+      "markdownOverview": "A flagship Mixture-of-Experts (MoE) large language model with 1.6 trillion total parameters and 49 billion activated parameters. It natively supports context windows of up to 1 million tokens. Trained on extensive high-quality data, the model delivers strong performance in mathematical and logical reasoning, complex reasoning, professional code generation, and in-depth long-document analysis, and is suitable for demanding scenarios such as advanced scientific research, complex enterprise workflows, and sophisticated agentic applications."
     },
     "deepseek-v4-pro": {
       "modelId": "deepseek-v4-pro",
@@ -7546,7 +7614,7 @@
         "sft": false,
         "dpo": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "cpt": false,
         "experienceUpcoming": false,
@@ -7591,7 +7659,7 @@
           "sft": false,
           "dpo": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "cpt": false,
           "experienceUpcoming": false,
@@ -7634,7 +7702,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "10K"
-      }
+      },
+      "markdownOverview": "A flagship MoE large model with 1.6 trillion parameters and 49 billion activated parameters, natively supporting context lengths of up to one million tokens. Trained on a vast corpus of high-quality data, it excels in advanced mathematical reasoning, complex logical inference, specialized coding, and deep analysis of long-form text, making it well-suited for demanding applications such as cutting-edge research, sophisticated office workflows, and advanced AI agents."
     },
     "deepseek-v4-flash-0731": {
       "modelId": "deepseek-v4-flash-0731",
@@ -7682,7 +7751,7 @@
         "sft": false,
         "dpo": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "cpt": false,
         "experienceUpcoming": false,
@@ -7727,7 +7796,7 @@
           "sft": false,
           "dpo": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "cpt": false,
           "experienceUpcoming": false,
@@ -7771,7 +7840,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "15K"
-      }
+      },
+      "markdownOverview": "A highly efficient, lightweight MoE model with 284 billion parameters in total and 13 billion activated parameters, natively supporting context windows of up to one million tokens. It offers fast inference speed, low latency, and cost-effective invocation, delivering well-balanced overall performance. Designed for high-concurrency, lightweight workloads, it is ideally suited for common, essential use cases such as everyday dialogue, content creation, basic RAG applications, and batch text processing."
     },
     "qwen3.5-plus": {
       "modelId": "qwen3.5-plus",
@@ -7909,7 +7979,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
+            "announceUrl": "https://www.aliyun.com/notice/118728",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -7934,7 +8004,8 @@
         "Max Reasoning": "81K",
         "TPMTokens Per Minute": "5M",
         "RPMRequests Per Minute": "15K"
-      }
+      },
+      "markdownOverview": "The Qwen3.5 native vision-language series Plus models are built on a hybrid architecture that integrates linear attention mechanisms with sparse mixture-of-experts models, achieving higher inference efficiency. In a variety of task evaluations, the 3.5 series consistently demonstrates performance on par with state-of-the-art leading models. Compared to the 3 series, these models show a leap forward in both pure-text and multimodal capabilities."
     },
     "qwen3.5-plus-2026-04-20": {
       "modelId": "qwen3.5-plus-2026-04-20",
@@ -8093,7 +8164,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The Qwen3.5 native vision-language series Plus model has seen a substantial improvement in agentic coding capabilities compared to the February 15th snapshot. Inference speed has also been significantly enhanced, while its knowledge retention, reasoning ability, and long-context processing remain at a high level, making it well-suited for complex agent-based tasks. It is ideal for applications such as coding agents, production workflows, and high-throughput scenarios. This version is based on a snapshot taken on April 20, 2026."
     },
     "qwen3.5-plus-2026-02-15": {
       "modelId": "qwen3.5-plus-2026-02-15",
@@ -8151,7 +8223,7 @@
         "experienceUpcoming": false,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": false,
+        "deploy": true,
         "sellingByQpm": false
       },
       "rawItem": {
@@ -8203,7 +8275,7 @@
           "experienceUpcoming": false,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": false,
+          "deploy": true,
           "sellingByQpm": false
         },
         "model": "qwen3.5-plus-2026-02-15",
@@ -8227,7 +8299,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.aliyun.com/notice/118728",
+            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -8250,7 +8322,8 @@
         "Max Reasoning": "81K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The Qwen3.5 native vision-language series Plus models are built on a hybrid architecture that integrates linear attention mechanisms with sparse mixture-of-experts models, achieving higher inference efficiency. In a variety of task evaluations, the 3.5 series consistently demonstrates performance on par with state-of-the-art leading models. Compared to the 3 series, these models show a leap forward in both pure-text and multimodal capabilities.This version is a snapshot as of February 15, 2026."
     },
     "qwen3.5-flash": {
       "modelId": "qwen3.5-flash",
@@ -8704,7 +8777,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a fully evolved version of Qwen3-Omni, it supports audio input in 60+ languages, voice output in 30+ languages, and controllable voice dialogue, WebSearch and complex FunctionCall invocation, and has intelligent semantic interruption interaction capabilities. It is widely used in scenarios such as text creation, voice assistants, and multimedia analysis, providing a natural and smooth multimodal interactive experience."
     },
     "qwen3.5-omni-plus-realtime-2026-03-15": {
       "modelId": "qwen3.5-omni-plus-realtime-2026-03-15",
@@ -8847,7 +8921,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a fully evolved version of Qwen3-Omni, it supports audio input in 60+ languages, voice output in 30+ languages, and controllable voice dialogue, WebSearch and complex FunctionCall invocation, and has intelligent semantic interruption interaction capabilities. It is widely used in scenarios such as text creation, voice assistants, and multimedia analysis, providing a natural and smooth multimodal interactive experience.This version is a snapshot from March 15, 2026."
     },
     "qwen3.5-omni-flash-realtime": {
       "modelId": "qwen3.5-omni-flash-realtime",
@@ -8991,7 +9066,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a fully evolved version of Qwen3-Omni, it supports audio input in 60+ languages, voice output in 30+ languages, and controllable voice dialogue, WebSearch and complex FunctionCall invocation, and has intelligent semantic interruption interaction capabilities. It is widely used in scenarios such as text creation, voice assistants, and multimedia analysis, providing a natural and smooth multimodal interactive experience."
     },
     "qwen3.5-omni-flash-realtime-2026-03-15": {
       "modelId": "qwen3.5-omni-flash-realtime-2026-03-15",
@@ -9134,7 +9210,159 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a fully evolved version of Qwen3-Omni, it supports audio input in 60+ languages, voice output in 30+ languages, and controllable voice dialogue, WebSearch and complex FunctionCall invocation, and has intelligent semantic interruption interaction capabilities. It is widely used in scenarios such as text creation, voice assistants, and multimedia analysis, providing a natural and smooth multimodal interactive experience.This version is a snapshot from March 15, 2026."
+    },
+    "qwen3.5-35b-a3b": {
+      "modelId": "qwen3.5-35b-a3b",
+      "name": "Qwen3.5-35B-A3B",
+      "modelAlias": null,
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Cost-optimized",
+      "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
+      "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
+      "updateAt": "2026-02-23T12:34:33.000+00:00",
+      "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
+      "collectionTag": "qwen3.5",
+      "features": [
+        "function-calling",
+        "model-experience",
+        "prefix-completion",
+        "structured-outputs",
+        "web-search"
+      ],
+      "capabilities": [
+        "Reasoning",
+        "TG",
+        "VU"
+      ],
+      "modelInfo": {
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "maxOutputTokens": 65536,
+        "maxReasoningTokens": 81920,
+        "reasoningMaxInputTokens": 258048,
+        "reasoningMaxOutputTokens": 65536
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image",
+          "Video"
+        ],
+        "responseModality": [
+          "Text"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b.md",
+      "supports": {
+        "sft": false,
+        "app": false,
+        "dpo": false,
+        "experienceV2": false,
+        "eval": false,
+        "inference": true,
+        "cpt": false,
+        "experienceUpcoming": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": true,
+        "sellingByQpm": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text"
+          ],
+          "request_modality": [
+            "Text",
+            "Image",
+            "Video"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-02-23T12:34:33.000+00:00",
+        "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
+        "aliyunRecommend": false,
+        "collectionTag": "qwen3.5",
+        "features": [
+          "model-experience",
+          "function-calling",
+          "structured-outputs",
+          "web-search",
+          "prefix-completion"
+        ],
+        "modelInfo": {
+          "contextWindow": 262144,
+          "maxInputTokens": 260096,
+          "maxReasoningTokens": 81920,
+          "reasoningMaxInputTokens": 258048,
+          "maxOutputTokens": 65536,
+          "reasoningMaxOutputTokens": 65536
+        },
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "app": false,
+          "dpo": false,
+          "experienceV2": false,
+          "eval": false,
+          "inference": true,
+          "cpt": false,
+          "experienceUpcoming": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": true,
+          "sellingByQpm": false
+        },
+        "model": "qwen3.5-35b-a3b",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "Reasoning",
+          "VU",
+          "TG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "SNAPSHOT",
+        "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
+        "maxOutputTokens": 65536,
+        "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
+        "tags": [],
+        "license": {},
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "inferenceProvider": "bailian",
+        "name": "Qwen3.5-35B-A3B",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+        "needApply": false,
+        "category": "Cost-optimized"
+      },
+      "pricing": {
+        "Input": "$0.25Per 1M tokens",
+        "Output": "$2Per 1M tokens"
+      },
+      "limits": {
+        "Max Input": "260K",
+        "Max Output": "65K",
+        "Max Input (Thinking)": "258K",
+        "Max Output (Thinking)": "65K",
+        "Context": "262K",
+        "Max Reasoning": "81K",
+        "TPMTokens Per Minute": "5M",
+        "RPMRequests Per Minute": "600"
+      },
+      "markdownOverview": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B."
     },
     "qwen3.5-27b": {
       "modelId": "qwen3.5-27b",
@@ -9294,7 +9522,8 @@
         "Max Reasoning": "81K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B."
     },
     "qwen3.5-397b-a17b": {
       "modelId": "qwen3.5-397b-a17b",
@@ -9450,157 +9679,8 @@
         "Max Reasoning": "81K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
-    },
-    "qwen3.5-35b-a3b": {
-      "modelId": "qwen3.5-35b-a3b",
-      "name": "Qwen3.5-35B-A3B",
-      "modelAlias": null,
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Cost-optimized",
-      "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-      "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-      "updateAt": "2026-02-23T12:34:33.000+00:00",
-      "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
-      "collectionTag": "qwen3.5",
-      "features": [
-        "function-calling",
-        "model-experience",
-        "prefix-completion",
-        "structured-outputs",
-        "web-search"
-      ],
-      "capabilities": [
-        "Reasoning",
-        "TG",
-        "VU"
-      ],
-      "modelInfo": {
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "maxOutputTokens": 65536,
-        "maxReasoningTokens": 81920,
-        "reasoningMaxInputTokens": 258048,
-        "reasoningMaxOutputTokens": 65536
       },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image",
-          "Video"
-        ],
-        "responseModality": [
-          "Text"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b.md",
-      "supports": {
-        "sft": false,
-        "app": false,
-        "dpo": false,
-        "experienceV2": false,
-        "eval": false,
-        "inference": true,
-        "cpt": false,
-        "experienceUpcoming": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": true,
-        "sellingByQpm": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Text"
-          ],
-          "request_modality": [
-            "Text",
-            "Image",
-            "Video"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-02-23T12:34:33.000+00:00",
-        "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-        "aliyunRecommend": false,
-        "collectionTag": "qwen3.5",
-        "features": [
-          "model-experience",
-          "function-calling",
-          "structured-outputs",
-          "web-search",
-          "prefix-completion"
-        ],
-        "modelInfo": {
-          "contextWindow": 262144,
-          "maxInputTokens": 260096,
-          "maxReasoningTokens": 81920,
-          "reasoningMaxInputTokens": 258048,
-          "maxOutputTokens": 65536,
-          "reasoningMaxOutputTokens": 65536
-        },
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "app": false,
-          "dpo": false,
-          "experienceV2": false,
-          "eval": false,
-          "inference": true,
-          "cpt": false,
-          "experienceUpcoming": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": true,
-          "sellingByQpm": false
-        },
-        "model": "qwen3.5-35b-a3b",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "Reasoning",
-          "VU",
-          "TG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "SNAPSHOT",
-        "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-        "maxOutputTokens": 65536,
-        "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
-        "tags": [],
-        "license": {},
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "inferenceProvider": "bailian",
-        "name": "Qwen3.5-35B-A3B",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-        "needApply": false,
-        "category": "Cost-optimized"
-      },
-      "pricing": {
-        "Input": "$0.25Per 1M tokens",
-        "Output": "$2Per 1M tokens"
-      },
-      "limits": {
-        "Max Input": "260K",
-        "Max Output": "65K",
-        "Max Input (Thinking)": "258K",
-        "Max Output (Thinking)": "65K",
-        "Context": "262K",
-        "Max Reasoning": "81K",
-        "TPMTokens Per Minute": "5M",
-        "RPMRequests Per Minute": "600"
-      }
+      "markdownOverview": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent."
     },
     "qwen3.5-122b-a10b": {
       "modelId": "qwen3.5-122b-a10b",
@@ -9750,7 +9830,8 @@
         "Max Reasoning": "81K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B."
     },
     "qwen-audio-3.0-asr-flash-filetrans": {
       "modelId": "qwen-audio-3.0-asr-flash-filetrans",
@@ -9862,7 +9943,8 @@
       "pricing": {
         "Audio Duration": "$0.000035Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "qwen-audio-3.0-asr-flash-filetrans is a high-performance transcription model designed specifically for non-real-time, full-segment audio and video files. It not only integrates context enhancement capabilities but also enhances the recognition accuracy of trending words in vertical industries, making it ideal for short video subtitles, customer service quality inspection, and financial dual-recording scenarios."
     },
     "qwen-audio-3.0-asr-flash-streaming": {
       "modelId": "qwen-audio-3.0-asr-flash-streaming",
@@ -9970,7 +10052,8 @@
       "pricing": {
         "Audio Duration": "$0.00009Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "qwen-audio-3.0-asr-flash-streaming is a flagship speech recognition model developed by Tongyi Labs specifically for low-latency, high-concurrency real-time interactive scenarios. It not only achieves an extremely smooth \"speak and hear\" experience but also deeply integrates context (enhanced context) capabilities. Furthermore, it has undergone in-depth reinforcement training for specialized industry vocabulary, making it the top choice for building applications such as real-time conference interpretation, intelligent customer service agent assistance, and voice assistants."
     },
     "fun-asr-realtime": {
       "modelId": "fun-asr-realtime",
@@ -10083,7 +10166,8 @@
         "category": "Audio"
       },
       "pricing": {},
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "This is the real-time version of Tongyi Lab's next-generation end-to-end speech recognition model, based on leading proprietary speech technology, and boasts exceptional contextual awareness and high-precision speech transcription capabilities. Based on an end-to-end architecture, Fun-ASR integrates innovative RAG technology, supporting multi-dimensional features such as large-scale hotword customization, automatic filtering of sensitive and modal particles, ITN normalization, and punctuation prediction, significantly improving overall recognition accuracy and contextual relevance. Furthermore, Fun-ASR supports flexible switching between Chinese and English, covers multiple regional dialects, and boasts enhanced noise robustness, adapting to diverse and complex environments."
     },
     "fun-asr": {
       "modelId": "fun-asr",
@@ -10199,7 +10283,8 @@
       "pricing": {
         "Audio Duration": "$0.000035Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The Fun ASR version, updated in April 2026, fully supports the seven major dialect systems of traditional Chinese (Mandarin/Wu/Xiang/Gan/Hakka/Min/Yue) and is compatible with over 20 regional Mandarin accents. It features specific optimizations for the rhythm, meter, and literary expression characteristics of classical Chinese poetry, improving the accuracy of poetry recognition and making it suitable for cultural heritage, educational explanations, and audiobooks. Improved punctuation prediction and text normalization capabilities make the output text more consistent with written expression habits; numbers, dates, and amounts are automatically converted to standard formats, enhancing readability and professionalism. The language support has been expanded to include English, Japanese, Korean, Vietnamese, Thai, Indonesian, Malay, Filipino, Hindi, Arabic, French, German, Spanish, Portuguese, Russian, Italian, Dutch, Swedish, Danish, Finnish, Norwegian, Greek, Polish, Czech, Hungarian, Romanian, Bulgarian, Croatian, and Slovak, totaling 30 languages. This version is equivalent to the snapshot released on November 7, 2025."
     },
     "fun-asr-flash-2026-06-15": {
       "modelId": "fun-asr-flash-2026-06-15",
@@ -10306,7 +10391,8 @@
       "pricing": {
         "Audio Duration": "$0.000035Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The Bailing ASR version, updated in June 2026, fully supports the seven major dialect systems of traditional Chinese (Mandarin/Wu/Xiang/Gan/Hakka/Min/Yue) and is compatible with over 20 regional Mandarin accents. It features specific optimizations for the rhythm, meter, and literary expression characteristics of classical Chinese poetry, improving the accuracy of poetry recognition and making it suitable for cultural heritage, educational explanations, and audiobooks. Improved punctuation prediction and text normalization capabilities make the output text more consistent with written expression habits; numbers, dates, and amounts are automatically converted to standard formats, enhancing readability and professionalism. The language support has been expanded to include English, Japanese, Korean, Vietnamese, Thai, Indonesian, Malay, Filipino, Hindi, Arabic, French, German, Spanish, Portuguese, Russian, Italian, Dutch, Swedish, Danish, Finnish, Norwegian, Greek, Polish, Czech, Hungarian, Romanian, Bulgarian, Croatian, and Slovak, totaling 30 languages. It supports contextualization capabilities and can transcribe audio up to 5 minutes in length."
     },
     "qwen-image-2.1-pro": {
       "modelId": "qwen-image-2.1-pro",
@@ -10508,7 +10594,121 @@
       "pricing": {
         "Image Generation": "$0.016Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen-Image-2.1-Turbo is the most balanced and cost-effective open-source image generation model currently available in the Qwen-Image series. Qwen-Image-2.1 offers four key strengths: Compact Model, Strong Performance, Exceptional Value. Native Transparency, Unified Generation and Editing. Versatile Editing: Multiple References, Local Control, Fidelity, and Comprehensive Capabilities. Realistic Textures, Elegant Typography, and Beautiful Portraits."
+    },
+    "qwen-image-2.0": {
+      "modelId": "qwen-image-2.0",
+      "name": "Qwen-Image-2.0",
+      "modelAlias": "qwen-image-2.0",
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Visual",
+      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+      "updateAt": "2026-03-03T11:31:36.000+00:00",
+      "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "IG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Image"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0.md",
+      "supports": {
+        "sft": true,
+        "fineTune": true,
+        "experienceV2": true,
+        "eval": true,
+        "inference": true,
+        "experience": true,
+        "displayQpmLimit": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Image"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-03-03T11:31:36.000+00:00",
+        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+        "aliyunRecommend": false,
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": true,
+          "fineTune": true,
+          "experienceV2": true,
+          "eval": true,
+          "inference": true,
+          "experience": true,
+          "displayQpmLimit": true
+        },
+        "model": "qwen-image-2.0",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "IG"
+        ],
+        "activationStatus": 0,
+        "modelAlias": "qwen-image-2.0",
+        "versionTag": "MAJOR",
+        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+        "equivalentSnapshot": "qwen-image-2.0-2026-03-03",
+        "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
+        "tags": [],
+        "license": {},
+        "trainingTypes": {
+          "sft": [
+            "lora"
+          ]
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Image-2.0",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+        "needApply": false,
+        "category": "Visual"
+      },
+      "pricing": {
+        "Image Generation": "$0.035Per image"
+      },
+      "limits": {},
+      "markdownOverview": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality."
     },
     "qwen-image-2.0-pro": {
       "modelId": "qwen-image-2.0-pro",
@@ -10618,117 +10818,8 @@
       "pricing": {
         "Image Generation": "$0.075Per image"
       },
-      "limits": {}
-    },
-    "qwen-image-2.0": {
-      "modelId": "qwen-image-2.0",
-      "name": "Qwen-Image-2.0",
-      "modelAlias": "qwen-image-2.0",
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Visual",
-      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-      "updateAt": "2026-03-03T11:31:36.000+00:00",
-      "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
-      "collectionTag": null,
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "IG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image"
-        ],
-        "responseModality": [
-          "Image"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0.md",
-      "supports": {
-        "sft": true,
-        "fineTune": true,
-        "experienceV2": true,
-        "inference": true,
-        "experience": true,
-        "displayQpmLimit": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Image"
-          ],
-          "request_modality": [
-            "Text",
-            "Image"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-03-03T11:31:36.000+00:00",
-        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-        "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": true,
-          "fineTune": true,
-          "experienceV2": true,
-          "inference": true,
-          "experience": true,
-          "displayQpmLimit": true
-        },
-        "model": "qwen-image-2.0",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "IG"
-        ],
-        "activationStatus": 0,
-        "modelAlias": "qwen-image-2.0",
-        "versionTag": "MAJOR",
-        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-        "equivalentSnapshot": "qwen-image-2.0-2026-03-03",
-        "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
-        "tags": [],
-        "license": {},
-        "trainingTypes": {
-          "sft": [
-            "lora"
-          ]
-        },
-        "inferenceProvider": "bailian",
-        "name": "Qwen-Image-2.0",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-        "needApply": false,
-        "category": "Visual"
-      },
-      "pricing": {
-        "Image Generation": "$0.035Per image"
-      },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series."
     },
     "qwen-image-2.0-pro-2026-06-22": {
       "modelId": "qwen-image-2.0-pro-2026-06-22",
@@ -10844,7 +10935,109 @@
       "pricing": {
         "Image Generation": "$0.075Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The Qwen-Image-2.0 series full-fledged model integrates image generation and editing; it boasts more professional text rendering capabilities with 1k token command support, more delicate and realistic textures, meticulous depiction of realistic scenes, and stronger semantic adherence. The full-fledged version possesses the strongest text rendering capabilities and realistic textures in the 2.0 series."
+    },
+    "qwen-image-2.0-2026-03-03": {
+      "modelId": "qwen-image-2.0-2026-03-03",
+      "name": "Qwen-Image-2.0-2026-03-03",
+      "modelAlias": "qwen-image-2.0-0303",
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Visual",
+      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
+      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
+      "updateAt": "2026-03-03T11:32:11.000+00:00",
+      "latestOnlineAt": "2026-03-03T11:32:11.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "IG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Image"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-2026-03-03",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-2026-03-03.md",
+      "supports": {
+        "experienceV2": false,
+        "inference": true,
+        "experience": true,
+        "displayQpmLimit": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Image"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-03-03T11:32:11.000+00:00",
+        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
+        "aliyunRecommend": false,
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "experienceV2": false,
+          "inference": true,
+          "experience": true,
+          "displayQpmLimit": true
+        },
+        "model": "qwen-image-2.0-2026-03-03",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "IG"
+        ],
+        "activationStatus": 0,
+        "modelAlias": "qwen-image-2.0-0303",
+        "versionTag": "SNAPSHOT",
+        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
+        "latestOnlineAt": "2026-03-03T11:32:11.000+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Image-2.0-2026-03-03",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+        "needApply": false,
+        "category": "Visual"
+      },
+      "pricing": {
+        "Image Generation": "$0.035Per image"
+      },
+      "limits": {},
+      "markdownOverview": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026."
     },
     "qwen-image-2.0-pro-2026-04-22": {
       "modelId": "qwen-image-2.0-pro-2026-04-22",
@@ -10960,7 +11153,8 @@
       "pricing": {
         "Image Generation": "$0.075Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The full-capacity Qwen-Image-2.0 model integrates image generation and image editing. Compared with the March 3 snapshot, this version features a significant improvement in visual quality, particularly in textural details, lighting and shadows, and material rendering. It also supports multilingual in-image text generation and delivers a more balanced performance across various artistic styles. This release is based on a snapshot taken on April 22, 2026."
     },
     "qwen-image-2.0-pro-2026-03-03": {
       "modelId": "qwen-image-2.0-pro-2026-03-03",
@@ -11060,107 +11254,8 @@
       "pricing": {
         "Image Generation": "$0.075Per image"
       },
-      "limits": {}
-    },
-    "qwen-image-2.0-2026-03-03": {
-      "modelId": "qwen-image-2.0-2026-03-03",
-      "name": "Qwen-Image-2.0-2026-03-03",
-      "modelAlias": "qwen-image-2.0-0303",
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Visual",
-      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
-      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
-      "updateAt": "2026-03-03T11:32:11.000+00:00",
-      "latestOnlineAt": "2026-03-03T11:32:11.000+00:00",
-      "collectionTag": null,
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "IG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image"
-        ],
-        "responseModality": [
-          "Image"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-2026-03-03",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-2026-03-03.md",
-      "supports": {
-        "experienceV2": false,
-        "inference": true,
-        "experience": true,
-        "displayQpmLimit": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Image"
-          ],
-          "request_modality": [
-            "Text",
-            "Image"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-03-03T11:32:11.000+00:00",
-        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
-        "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "experienceV2": false,
-          "inference": true,
-          "experience": true,
-          "displayQpmLimit": true
-        },
-        "model": "qwen-image-2.0-2026-03-03",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "IG"
-        ],
-        "activationStatus": 0,
-        "modelAlias": "qwen-image-2.0-0303",
-        "versionTag": "SNAPSHOT",
-        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.This version is a snapshot as of March 3, 2026.",
-        "latestOnlineAt": "2026-03-03T11:32:11.000+00:00",
-        "tags": [],
-        "license": {},
-        "inferenceProvider": "bailian",
-        "name": "Qwen-Image-2.0-2026-03-03",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-        "needApply": false,
-        "category": "Visual"
-      },
-      "pricing": {
-        "Image Generation": "$0.035Per image"
-      },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.This version is a snapshot as of March 3, 2026."
     },
     "qwen3.5-omni-flash": {
       "modelId": "qwen3.5-omni-flash",
@@ -11302,7 +11397,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a comprehensive evolution of Qwen 3-Omni, it supports over 10 hours of audio understanding and over 400 seconds of 720P (1 FPS) audio-visual understanding and dialogue. It further expands the language range, supporting audio input in 60+ languages and speech output in 30+ languages. It also possesses powerful structured audio-visual understanding capabilities and is widely used in text creation, voice assistants, multimedia analysis, and other scenarios, providing a natural and fluent multimodal understanding and interactive experience."
     },
     "qwen3.5-omni-flash-2026-03-15": {
       "modelId": "qwen3.5-omni-flash-2026-03-15",
@@ -11443,7 +11539,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a comprehensive evolution of Qwen 3-Omni, it supports over 10 hours of audio understanding and over 400 seconds of 720P (1 FPS) audio-visual understanding and dialogue. It further expands the language range, supporting audio input in 60+ languages and speech output in 30+ languages. It also possesses powerful structured audio-visual understanding capabilities and is widely used in text creation, voice assistants, multimedia analysis, and other scenarios, providing a natural and fluent multimodal understanding and interactive experience.This version is a snapshot from March 15, 2026."
     },
     "qwen3.5-omni-plus": {
       "modelId": "qwen3.5-omni-plus",
@@ -11587,7 +11684,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a comprehensive evolution of Qwen 3-Omni, it supports over 10 hours of audio understanding and over 400 seconds of 720P (1 FPS) audio-visual understanding and dialogue. It further expands the language range, supporting audio input in 60+ languages and speech output in 30+ languages. It also possesses powerful structured audio-visual understanding capabilities and is widely used in text creation, voice assistants, multimedia analysis, and other scenarios, providing a natural and fluent multimodal understanding and interactive experience."
     },
     "qwen3.5-omni-plus-2026-03-15": {
       "modelId": "qwen3.5-omni-plus-2026-03-15",
@@ -11728,116 +11826,8 @@
         "Context": "262K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
-    },
-    "cosyvoice-v3-plus": {
-      "modelId": "cosyvoice-v3-plus",
-      "name": "CosyVoice-v3-plus",
-      "modelAlias": null,
-      "provider": "qwen-domain-model",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-      "category": "Audio",
-      "description": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
-      "shortDescription": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
-      "updateAt": "2026-02-10T03:09:57.000+00:00",
-      "latestOnlineAt": "2026-02-10T03:09:57.000+00:00",
-      "collectionTag": null,
-      "features": [],
-      "capabilities": [
-        "TTS"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
       },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text"
-        ],
-        "responseModality": [
-          "Audio"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/cosyvoice-large-model-for-speech-synthesis",
-      "modelPortalUrl": "https://www.qwencloud.com/models/cosyvoice-v3-plus",
-      "markdownUrl": "https://www.qwencloud.com/models/cosyvoice-v3-plus.md",
-      "supports": {
-        "sft": false,
-        "app": false,
-        "dpo": false,
-        "experienceV2": false,
-        "eval": false,
-        "inference": true,
-        "cpt": false,
-        "experienceUpcoming": false,
-        "experience": false,
-        "displayQpmLimit": true,
-        "deploy": false,
-        "sellingByQpm": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Audio"
-          ],
-          "request_modality": [
-            "Text"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-02-10T03:09:57.000+00:00",
-        "description": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
-        "aliyunRecommend": false,
-        "features": [],
-        "modelInfo": {},
-        "provider": "qwen-domain-model",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "app": false,
-          "dpo": false,
-          "experienceV2": false,
-          "eval": false,
-          "inference": true,
-          "cpt": false,
-          "experienceUpcoming": false,
-          "experience": false,
-          "displayQpmLimit": true,
-          "deploy": false,
-          "sellingByQpm": false
-        },
-        "model": "cosyvoice-v3-plus",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "TTS"
-        ],
-        "activationStatus": 0,
-        "versionTag": "MAJOR",
-        "shortDescription": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
-        "latestOnlineAt": "2026-02-10T03:09:57.000+00:00",
-        "tags": [],
-        "license": {},
-        "inferenceProvider": "bailian",
-        "name": "CosyVoice-v3-plus",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/cosyvoice-large-model-for-speech-synthesis",
-        "needApply": false,
-        "category": "Audio"
-      },
-      "pricing": {
-        "TTS": "$0.26Per 10,000 characters"
-      },
-      "limits": {}
+      "markdownOverview": "Qwen 3.5-Omni is the latest generation of Qwen's multimodal large model, supporting text, image, audio, and audio-visual understanding and interaction. As a comprehensive evolution of Qwen 3-Omni, it supports over 10 hours of audio understanding and over 400 seconds of 720P (1 FPS) audio-visual understanding and dialogue. It further expands the language range, supporting audio input in 60+ languages and speech output in 30+ languages. It also possesses powerful structured audio-visual understanding capabilities and is widely used in text creation, voice assistants, multimedia analysis, and other scenarios, providing a natural and fluent multimodal understanding and interactive experience.This version is a snapshot from March 15, 2026."
     },
     "cosyvoice-v3-flash": {
       "modelId": "cosyvoice-v3-flash",
@@ -11946,7 +11936,118 @@
       "pricing": {
         "TTS": "$0.13Per 10,000 characters"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Synthesis Capabilities: CosyVoice-v3-Flash is the latest high-performance speech synthesis model in the CosyVoice series from Tongyi Labs, offering improved naturalness, timbre, prosody, and emotional expressiveness compared to previous versions. This model supports real-time streaming text-to-speech synthesis. Cloning Capabilities: CosyVoice-v3-Flash is also the latest speech cloning model in the CosyVoice series from Tongyi Labs. Compared to previous versions, it improves pronunciation accuracy and timbre similarity, and adds support for more less commonly spoken languages ​​(German, Spanish, French, Italian, Russian). It can quickly generate highly similar and naturally sounding custom voices from just 5-20 seconds of reference audio."
+    },
+    "cosyvoice-v3-plus": {
+      "modelId": "cosyvoice-v3-plus",
+      "name": "CosyVoice-v3-plus",
+      "modelAlias": null,
+      "provider": "qwen-domain-model",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+      "category": "Audio",
+      "description": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
+      "shortDescription": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
+      "updateAt": "2026-02-10T03:09:57.000+00:00",
+      "latestOnlineAt": "2026-02-10T03:09:57.000+00:00",
+      "collectionTag": null,
+      "features": [],
+      "capabilities": [
+        "TTS"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text"
+        ],
+        "responseModality": [
+          "Audio"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/cosyvoice-large-model-for-speech-synthesis",
+      "modelPortalUrl": "https://www.qwencloud.com/models/cosyvoice-v3-plus",
+      "markdownUrl": "https://www.qwencloud.com/models/cosyvoice-v3-plus.md",
+      "supports": {
+        "sft": false,
+        "app": false,
+        "dpo": false,
+        "experienceV2": false,
+        "eval": false,
+        "inference": true,
+        "cpt": false,
+        "experienceUpcoming": false,
+        "experience": false,
+        "displayQpmLimit": true,
+        "deploy": false,
+        "sellingByQpm": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Audio"
+          ],
+          "request_modality": [
+            "Text"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-02-10T03:09:57.000+00:00",
+        "description": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
+        "aliyunRecommend": false,
+        "features": [],
+        "modelInfo": {},
+        "provider": "qwen-domain-model",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "app": false,
+          "dpo": false,
+          "experienceV2": false,
+          "eval": false,
+          "inference": true,
+          "cpt": false,
+          "experienceUpcoming": false,
+          "experience": false,
+          "displayQpmLimit": true,
+          "deploy": false,
+          "sellingByQpm": false
+        },
+        "model": "cosyvoice-v3-plus",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "TTS"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice.\n\nSynthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis.",
+        "latestOnlineAt": "2026-02-10T03:09:57.000+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "CosyVoice-v3-plus",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/cosyvoice-large-model-for-speech-synthesis",
+        "needApply": false,
+        "category": "Audio"
+      },
+      "pricing": {
+        "TTS": "$0.26Per 10,000 characters"
+      },
+      "limits": {},
+      "markdownOverview": "Cloning capability: CosyVoice-v3-plus is the latest large voice cloning model in the CosyVoice series from Tongyi Lab. It offers superior sound quality and cloning fidelity, ideal for professional scenarios. With just 5-20 seconds of reference audio, it can rapidly generate a highly similar and natural-sounding custom voice. Synthesis capability: CosyVoice-v3-plus is the latest large speech synthesis model in the CosyVoice series from Tongyi Lab. It features enhanced sound quality and expressiveness, ideal for professional scenarios. The model supports real-time, streaming text-to-speech synthesis."
     },
     "z-image-turbo": {
       "modelId": "z-image-turbo",
@@ -12068,7 +12169,8 @@
         "Image Generation (Standard)": "$0.015Per image",
         "Image Generation (Thinking)": "$0.03Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Z-Image-Turbo is a highly efficient image-generation model that has topped the Artificial Analysis benchmark as the world’s No. 1 open-source text-to-image model. With just 6 billion parameters and an 8-step inference process, it generates photo-realistic images comparable to those produced by large-scale commercial models, while excelling in bilingual Chinese–English text rendering, complex semantic understanding, and diverse thematic generation."
     },
     "qwen3-vl-plus": {
       "modelId": "qwen3-vl-plus",
@@ -12359,7 +12461,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 image to video, performance fully reimagined. Delivering nuanced and organic emotional depth in narrative arcs and visceral, bone-crunching impact in action sequences. Enhanced by rhythmic cinematic cuts for unparalleled storytelling power."
     },
     "wan2.6-i2v-flash": {
       "modelId": "wan2.6-i2v-flash",
@@ -12488,7 +12591,8 @@
         "Video Generation(720P no audio)": "$0.025Per second",
         "Video Generation(1080P no audio)": "$0.0375Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.6 image to video flash, faster and more cost-effective generation. Intelligent shot scheduling enables multi‑camera storytelling, supports stable multi‑speaker dialogue with more natural and realistic vocal timbres, and supports generation of clips up to 15 seconds in length."
     },
     "wan2.6-i2v": {
       "modelId": "wan2.6-i2v",
@@ -12612,7 +12716,8 @@
         "category": "Wan"
       },
       "pricing": {},
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.6-I2V, intelligent shot scheduling enables multi‑camera storytelling, delivers higher‑quality voice generation, supports stable multi‑speaker dialogue with more natural and realistic vocal timbres, and supports generation of clips up to 15 seconds in length."
     },
     "wan2.2-kf2v-flash": {
       "modelId": "wan2.2-kf2v-flash",
@@ -12732,7 +12837,8 @@
         "Video Generation(720P)": "$0.036Per second",
         "Video Generation(1080P)": "$0.07Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The all-new Wan2.2 First and Last Frame to video model is here. We’ve optimized motion stability and success rates, enhanced prompt adherence, and enabled seamless transitions between two images."
     },
     "wan2.7-i2v-2026-04-25": {
       "modelId": "wan2.7-i2v-2026-04-25",
@@ -12849,7 +12955,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 image to video, performance fully reimagined. Delivering nuanced and organic emotional depth in narrative arcs and visceral, bone-crunching impact in action sequences. Enhanced by rhythmic cinematic cuts for unparalleled storytelling power.This version is a snapshot as of April 25, 2026."
     },
     "wan2.5-i2v-preview": {
       "modelId": "wan2.5-i2v-preview",
@@ -12977,7 +13084,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The upgraded Wan2.5 Preview image to video model, newly upgraded model architecture supports synchronized audio generation with visuals, enables 10-second long video generation, and offers enhanced instruction adherence, improved motion capabilities, and superior image quality."
     },
     "wan2.2-i2v-flash": {
       "modelId": "wan2.2-i2v-flash",
@@ -13100,7 +13208,8 @@
         "Video Generation(480P)": "$0.015Per second",
         "Video Generation(720P)": "$0.036Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The upgraded Wan 2.2 image to video Flash model, delivers faster speed with optimized stability, more powerful prompt following, improved consistency for text, portraits, and products, and precise shot control."
     },
     "wan2.2-i2v-plus": {
       "modelId": "wan2.2-i2v-plus",
@@ -13223,7 +13332,8 @@
         "Video Generation(480P)": "$0.02Per second",
         "Video Generation(1080P)": "$0.1Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The upgraded Wan 2.2 Plus image to video model, delivers higher quality results with optimized stability, more powerful prompt following, improved consistency for text, portraits, and products, and precise shot control."
     },
     "wan2.1-i2v-turbo": {
       "modelId": "wan2.1-i2v-turbo",
@@ -13340,7 +13450,8 @@
       "pricing": {
         "Video Generation(std)": "$0.036Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1 image to video Turbo version, make the static image generated video. Support for large and complex movements, adherence to physical laws, artistic styles, and visual quality of movies. The ability to follow instructions is further improved, and generation more fast."
     },
     "wan2.1-i2v-plus": {
       "modelId": "wan2.1-i2v-plus",
@@ -13457,7 +13568,8 @@
       "pricing": {
         "Video Generation(std)": "$0.1Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1 image to video Plus version, make the static image generated video. Support for large and complex movements, adherence to physical laws, artistic styles, and visual quality of movies. The ability to follow instructions is further improved, and better video quality."
     },
     "wan2.2-animate-move": {
       "modelId": "wan2.2-animate-move",
@@ -13577,7 +13689,8 @@
         "Video Generation(std)": "$0.12Per second",
         "Video Generation(pro)": "$0.18Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "wan2.2-animate-move is a character animation generation model. Users simply upload a character photo and a reference performance video, and the model transfers the expressions and actions from the video onto the character in the image, producing a high-fidelity animated video."
     },
     "wan2.2-animate-mix": {
       "modelId": "wan2.2-animate-mix",
@@ -13696,7 +13809,8 @@
         "Video Generation(std)": "$0.18Per second",
         "Video Generation(pro)": "$0.26Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "wan2.2-animate-mix is a character replacement model product. By uploading a character photo and a performance video, users can accurately replace the character in the original video with the character from the photo, while completely preserving environmental details such as the scene, lighting, and color tone of the original video."
     },
     "wan2.1-kf2v-plus": {
       "modelId": "wan2.1-kf2v-plus",
@@ -13812,7 +13926,8 @@
       "pricing": {
         "Video Generation(std)": "$0.1Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1 start and end frames to video Plus version, generate a smooth transition video for two images. Support for large and complex movements, adherence to physical laws, rich artistic styles, and visual quality at the film and television level. The ability to follow instructions is further enhanced, resulting in richer details in the generated video."
     },
     "wan2.7-r2v-2026-06-12": {
       "modelId": "wan2.7-r2v-2026-06-12",
@@ -13932,7 +14047,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 reference to video, enhanced consistency & performance. Delivering superior stability for characters, props, and scenes. Supports hybrid referencing of up to 5 mixed image/video inputs and audio timbre cloning. Together with core engine upgrades, it achieves unprecedented cinematic expressive power. This version is a snapshot as of June 12, 2026."
     },
     "wan2.7-r2v": {
       "modelId": "wan2.7-r2v",
@@ -14051,7 +14167,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 reference to video, enhanced consistency & performance. Delivering superior stability for characters, props, and scenes. Supports hybrid referencing of up to 5 mixed image/video inputs and audio timbre cloning. Together with core engine upgrades, it achieves unprecedented cinematic expressive power."
     },
     "wan2.6-r2v-flash": {
       "modelId": "wan2.6-r2v-flash",
@@ -14175,7 +14292,8 @@
         "Video Generation(720P no audio)": "$0.025Per second",
         "Video Generation(1080P no audio)": "$0.0375Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.6 reference to video flash, faster and more cost-effective generation. Supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances."
     },
     "wan2.6-r2v": {
       "modelId": "wan2.6-r2v",
@@ -14298,7 +14416,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details."
     },
     "wan2.7-t2v": {
       "modelId": "wan2.7-t2v",
@@ -14413,7 +14532,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 text to video, performance fully reimagined. Delivering nuanced and organic emotional depth in narrative arcs and visceral, bone-crunching impact in action sequences. Enhanced by rhythmic cinematic cuts for unparalleled storytelling power."
     },
     "wan2.6-t2v": {
       "modelId": "wan2.6-t2v",
@@ -14535,7 +14655,8 @@
         "category": "Wan"
       },
       "pricing": {},
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.6 text to video, Intelligent shot scheduling supports multi-shot storytelling, generating multi-shot narrative videos with consistent subjects, scenes, and atmosphere, with a maximum duration of 15 seconds. It delivers better instruction following, and improved visual fidelity."
     },
     "wan2.7-t2v-2026-06-12": {
       "modelId": "wan2.7-t2v-2026-06-12",
@@ -14651,7 +14772,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 text to video, performance fully reimagined. Delivering nuanced and organic emotional depth in narrative arcs and visceral, bone-crunching impact in action sequences. Enhanced by rhythmic cinematic cuts for unparalleled storytelling power.This version is a snapshot as of June 12, 2026."
     },
     "wan2.7-t2v-2026-04-25": {
       "modelId": "wan2.7-t2v-2026-04-25",
@@ -14766,7 +14888,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 text to video, performance fully reimagined. Delivering nuanced and organic emotional depth in narrative arcs and visceral, bone-crunching impact in action sequences. Enhanced by rhythmic cinematic cuts for unparalleled storytelling power.This version is a snapshot as of April 25, 2026."
     },
     "wan2.5-t2v-preview": {
       "modelId": "wan2.5-t2v-preview",
@@ -14892,7 +15015,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The upgraded Wan2.5 Preview text to video model, newly upgraded model architecture supports synchronized audio generation with visuals, enables 10-second long video generation, and offers enhanced instruction adherence, improved motion capabilities, and superior image quality."
     },
     "wan2.2-t2v-plus": {
       "modelId": "wan2.2-t2v-plus",
@@ -15013,7 +15137,8 @@
         "Video Generation(480P)": "$0.02Per second",
         "Video Generation(1080P)": "$0.1Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The upgraded Wan 2.2 Plus text to video model, delivers higher quality results with stable sweeping complex movements, cinematic vision control, more powerful prompt following, and realistic world recreation."
     },
     "wan2.1-t2v-plus": {
       "modelId": "wan2.1-t2v-plus",
@@ -15128,7 +15253,8 @@
       "pricing": {
         "Video Generation(720P)": "$0.1Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1 text to video Plus version, one sentence generated video. Support for large and complex movements, adherence to physical laws, artistic styles, and visual quality of movies. The ability to follow instructions is further improved, and better video quality."
     },
     "wan2.1-t2v-turbo": {
       "modelId": "wan2.1-t2v-turbo",
@@ -15244,7 +15370,8 @@
         "Video Generation(480P)": "$0.036Per second",
         "Video Generation(720P)": "$0.036Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1 text to video Turbo version, one sentence generated video. Support for large and complex movements, adherence to physical laws, artistic styles, and visual quality of movies. The ability to follow instructions is further improved, and the generation speed is faster."
     },
     "wan2.7-videoedit": {
       "modelId": "wan2.7-videoedit",
@@ -15361,7 +15488,8 @@
         "Video Generation(720P)": "$0.1Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 video edit, supports both localized and global editing with prompt. Seamlessly replace elements using image references and replicate complex dynamic processes, including motion, special effects, and camera movements."
     },
     "wan2.6-t2i": {
       "modelId": "wan2.6-t2i",
@@ -15481,7 +15609,8 @@
       "pricing": {
         "Image Generation": "$0.03Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.6 text to image, Upgraded visual quality, aesthetics, and instruction-following deliver precise style control, realistic portraits, long-text understanding, and broad historical/cultural IP coverage, enabling high-quality, highly expressive visual generation."
     },
     "wan2.5-t2i-preview": {
       "modelId": "wan2.5-t2i-preview",
@@ -15601,7 +15730,8 @@
       "pricing": {
         "Image Generation": "$0.03Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The upgraded Wan2.5 Preview text to image model, newly upgraded model architecture significantly enhances visual aesthetics, design sensibility, and realistic texture. It excels in precise instruction adherence, generates text proficiently in English, Chinese, and less common languages, and supports the generation of complex structured long texts, charts, and architectural diagrams."
     },
     "wan2.2-t2i-plus": {
       "modelId": "wan2.2-t2i-plus",
@@ -15721,7 +15851,8 @@
       "pricing": {
         "Image Generation": "$0.05Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Newly upgraded Wan 2.2 Text-to-Image offers richer visual details. Fully upgraded creativity, stability, and photorealism, stronger instruction following, and native support for multiple styles. Supports up to 2 MP generation and smart prompt rewriting."
     },
     "wan2.2-t2i-flash": {
       "modelId": "wan2.2-t2i-flash",
@@ -15841,7 +15972,8 @@
       "pricing": {
         "Image Generation": "$0.025Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Newly upgraded Wan 2.2 Text-to-Image offers faster generation speed. Fully upgraded creativity, stability, and photorealism, stronger instruction following, and native support for multiple styles. Supports up to 2 MP generation and smart prompt rewriting."
     },
     "wan2.1-t2i-plus": {
       "modelId": "wan2.1-t2i-plus",
@@ -15960,7 +16092,8 @@
       "pricing": {
         "Image Generation": "$0.05Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1 Text-to-Image Plus version, Generate more image details. Upgraded in image beauty, realism, and artistry. Stronger semantic understanding ability, rich style generalization ability, supports up to 2 million pixel generation, supports smart prompt rewriting."
     },
     "wan2.1-t2i-turbo": {
       "modelId": "wan2.1-t2i-turbo",
@@ -16079,7 +16212,8 @@
       "pricing": {
         "Image Generation": "$0.025Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1 Text-to-Image Turbo version, faster generation speed. Upgraded in image beauty, realism, and artistry. Stronger semantic understanding ability, rich style generalization ability, supports up to 2 million pixel generation, supports smart prompt rewriting."
     },
     "wan2.7-image": {
       "modelId": "wan2.7-image",
@@ -16202,7 +16336,8 @@
       "pricing": {
         "Image Generation": "$0.03Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7 – image generation and editing，supports text to image, text/image to sequential images, image editing, multi-image reference generation, and interactive editing. Delivers enhanced performance in text rendering, subject consistency, and complex instruction following."
     },
     "wan2.7-image-pro": {
       "modelId": "wan2.7-image-pro",
@@ -16325,7 +16460,8 @@
       "pricing": {
         "Image Generation": "$0.075Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.7–image-pro，supports text to image, text/image to sequential images, image editing, multi-image reference generation, and interactive editing. Delivers enhanced performance in text rendering, subject consistency, and complex instruction following."
     },
     "wan2.6-image": {
       "modelId": "wan2.6-image",
@@ -16445,7 +16581,8 @@
       "pricing": {
         "Image Generation": "$0.03Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.6 Image, An all-round image generation model that supports joint text–image reasoning, multi-image creative fusion, commercial-grade consistency, aesthetic style transfer, and precise control of framing and lighting, significantly enhancing consistency, controllability, and expressiveness in image generation."
     },
     "wan2.5-i2i-preview": {
       "modelId": "wan2.5-i2i-preview",
@@ -16565,7 +16702,8 @@
       "pricing": {
         "Image Generation": "$0.03Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The upgraded Wan2.5 Preview image edit model, newly upgraded model architecture supports rich image editing capabilities via instruction control, with enhanced instruction adherence. It also enables multi-image reference generation with high consistency and demonstrates excellent text generation performance."
     },
     "qwen3-omni-flash-realtime-2025-09-15": {
       "modelId": "qwen3-omni-flash-realtime-2025-09-15",
@@ -16708,7 +16846,8 @@
         "Context": "64K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The real-time version of the Qwen3-Omni-Flash multimodal large-scale model, based on the Thinker–Talker Mixed Expert (MoE) architecture, supports efficient understanding and speech generation of text, images, audio, and video. It can interact with text in 119 languages ​​and speech in 20 languages, generating human-like speech for precise cross-lingual communication. The model boasts powerful command-following and system prompt customization capabilities, flexibly adapting to conversational styles and character settings. It is widely used in scenarios such as text creation, voice assistants, and multimedia analysis, providing a natural and smooth multimodal interaction experience."
     },
     "qwen3-omni-flash": {
       "modelId": "qwen3-omni-flash",
@@ -16761,7 +16900,7 @@
         "checkpointImport": false,
         "experience": false,
         "displayQpmLimit": true,
-        "deploy": false,
+        "deploy": true,
         "sellingByQpm": false,
         "tokenizer": false,
         "experienceV2": false,
@@ -16807,7 +16946,7 @@
           "checkpointImport": false,
           "experience": false,
           "displayQpmLimit": true,
-          "deploy": false,
+          "deploy": true,
           "sellingByQpm": false,
           "tokenizer": false,
           "experienceV2": false,
@@ -16848,7 +16987,8 @@
         "Output: Text (in thinking mode, when input contains only text)": "$1.66Per 1M tokens",
         "Output: Text (in thinking mode, when the input contains images/audio/video)": "$3.06Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen3-Omni-Flash multimodal large-scale model, based on the Thinker–Talker Mixed Expert (MoE) architecture, supports efficient understanding and speech generation of text, images, audio, and video. It can interact with text in 119 languages ​​and speech in 20 languages, generating human-like speech for precise cross-lingual communication. The model boasts powerful command-following and system prompt customization capabilities, flexibly adapting to conversational styles and character settings. It is widely used in scenarios such as text creation, voice assistants, and multimedia analysis, providing a natural and smooth multimodal interaction experience."
     },
     "qwen-plus-2025-12-01": {
       "modelId": "qwen-plus-2025-12-01",
@@ -17312,7 +17452,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "Balanced model in the Qwen series, balancing inference quality and speed between Qwen-Max and Qwen-Turbo, suitable for medium-complexity tasks. This model is dynamically updated; model updates are not announced in advance."
     },
     "qwen-plus-2025-07-14": {
       "modelId": "qwen-plus-2025-07-14",
@@ -17457,7 +17598,8 @@
         "Context": "131K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The Plus model of the Qwen3 Series, achieving effective integration of thinking mode and non-thinking mode, allows switching modes during conversations. This is a snapshot from July 14, 2025. Compared to the previous version, there has been a significant improvement in both Chinese and English capabilities under non-thinking mode, with enhanced tool-calling abilities."
     },
     "qwen-plus-2025-04-28": {
       "modelId": "qwen-plus-2025-04-28",
@@ -17603,7 +17745,8 @@
         "Context": "131K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "The Plus model of the Qwen3 series, effectively integrates thinking mode and non-thinking mode, allowing for mode switching during conversations. Its reasoning capabilities significantly surpass those of QwQ, and its general capabilities notably exceed those of Qwen2.5-Plus, reaching the SOTA level in the same scale within the industry. This model is the snapshot from April 28, 2025."
     },
     "qwen-plus-2025-01-25": {
       "modelId": "qwen-plus-2025-01-25",
@@ -17745,7 +17888,8 @@
         "Context": "131K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "A balanced model in the Qwen series, with inference effectiveness and speed between Qwen-Max and Qwen-Turbo, making it suitable for moderately complex tasks. Compared to Qwen-Plus-2025-0112, there is a comprehensive upgrade in both Chinese and English capabilities. Notably, there are significant improvements in coding ability, logical reasoning, and multilingual support. The response style has been significantly adjusted to align with human preferences, especially for objective queries such as mathematics, logical reasoning, and knowledge-based questions—both the level of detail in responses and the clarity of formatting have improved noticeably. Additionally, targeted enhancements have been made in creative writing, JSON format compliance, and role-playing abilities. This version is expected to be maintained until one month before the next snapshot release."
     },
     "qwen3-livetranslate-flash-2025-12-01": {
       "modelId": "qwen3-livetranslate-flash-2025-12-01",
@@ -17880,7 +18024,8 @@
         "Context": "53K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "100"
-      }
+      },
+      "markdownOverview": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects. This version is a snapshot from December 1, 2025."
     },
     "qwen3-livetranslate-flash": {
       "modelId": "qwen3-livetranslate-flash",
@@ -18015,7 +18160,8 @@
         "Context": "53K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "100"
-      }
+      },
+      "markdownOverview": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects."
     },
     "qwen-flash": {
       "modelId": "qwen-flash",
@@ -18160,16 +18306,17 @@
         "Input(Implicit Cache)": "$0.01Per 1M tokens",
         "Input(Batch File)": "$0.025Per 1M tokens",
         "Output(Batch File)": "$0.2Per 1M tokens",
-        "Explicit Cache Creation": "$0.063Per 1M tokens",
+        "5-Minute Explicit Cache Creation": "$0.063Per 1M tokens",
         "Explicit Cache Read": "$0.005Per 1M tokens"
       },
       "limits": {
         "Max Input": "995K",
         "Max Output": "32K",
         "Context": "1M",
-        "TPMTokens Per Minute": "5M",
+        "TPMTokens Per Minute": "5000000",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "Qwen3 series Flash model, integrates thinking and non-thinking modes and can switch modes during dialogue. Excels at complex thinking tasks; instruction following and text understanding significantly improved. Supports 1 M context length, and uses tiered pricing."
     },
     "qwen-flash-2025-07-28": {
       "modelId": "qwen-flash-2025-07-28",
@@ -18312,7 +18459,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "5M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "Qwen3 series Flash model, integrates thinking and non-thinking modes and can switch modes during dialogue. Excels at complex thinking tasks; instruction following and text understanding significantly improved. Supports 1 M context length, and uses tiered pricing. This is a snapshot from 28 July, 2025."
     },
     "qwen-max": {
       "modelId": "qwen-max",
@@ -18463,7 +18611,8 @@
         "Context": "32K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "An ultra-large language model with hundreds of billions of parameters of the Qwen2.5 series. It supports inputs in multiple languages, such as Chinese and English. With the model's continuous upgrades, Qwen-Max will be updated periodically. If you wish to use a fixed version, use the snapshot version instead."
     },
     "qwen3-coder-flash": {
       "modelId": "qwen3-coder-flash",
@@ -18605,7 +18754,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "5M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "Qwen3-based code generation model that inherits the coding agent ability of Qwen3-Coder-Plus, supports multi-turn tool interaction, focuses on optimizing repository-level understanding and increasing tool-calling stability."
     },
     "qwen3-coder-flash-2025-07-28": {
       "modelId": "qwen3-coder-flash-2025-07-28",
@@ -18742,7 +18892,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "5M",
         "RPMRequests Per Minute": "600"
-      }
+      },
+      "markdownOverview": "Qwen3-based code generation model that inherits the coding agent ability of Qwen3-Coder-Plus, supports multi-turn tool interaction, focuses on optimizing repository-level understanding and increasing tool-calling stability. This is a snapshot from 28 July, 2025."
     },
     "qwen-mt-image-2.0": {
       "modelId": "qwen-mt-image-2.0",
@@ -18850,7 +19001,8 @@
       "pricing": {
         "Image Generation": "$0.0006Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "An advanced image translation engine supporting 55 source languages. It delivers pixel-perfect replication of the original layout and typography. Gain full control over professional content with custom terminology and sensitive word filtering, ensuring a flexible, accurate, and high-performance image localization service."
     },
     "qwen-mt-plus": {
       "modelId": "qwen-mt-plus",
@@ -18983,7 +19135,8 @@
         "Context": "4K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen-MT-Plus is a flagship multilingual large language model specializing in translation. Being part of the Qwen model series, it supports translation between 92 languages and significantly outperforms traditional translation models in contextual understanding, terminology intervention, format preservation, and domain-specific tasks, and thereby delivers more natural and accurate translations."
     },
     "qwen-mt-flash": {
       "modelId": "qwen-mt-flash",
@@ -19116,7 +19269,8 @@
         "Context": "16K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen-MT-Flash, a large language model from the Qwen series, has been fully upgraded with the Qwen3 architecture for significantly enhanced performance and translation quality. It provides rapid, cost-effective translation across 92 languages, while supporting advanced features such as terminology intervention, format preservation, and domain-specific adaptation. It is the ideal choice for applications requiring a powerful balance of speed, quality, and cost."
     },
     "glm-5.2-fast-preview": {
       "modelId": "glm-5.2-fast-preview",
@@ -19258,7 +19412,8 @@
         "Context": "1M",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "5K"
-      }
+      },
+      "markdownOverview": "GLM-5.2-Fast-Preview is the high-speed variant of Zhipu AI&#39;s GLM-5.2, with 1M context and capabilities on par with the standard version. Inference-optimized to deliver 1.5–2× the output TPS, it fits latency-sensitive use cases such as real-time chat, multi-turn agents, and streaming code generation."
     },
     "glm-5.3": {
       "modelId": "glm-5.3",
@@ -19390,8 +19545,9 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "131K",
-        "TPMTokens Per Minute": "5M"
-      }
+        "TPMTokens Per Minute": "5000000"
+      },
+      "markdownOverview": "GLM-5.3 is Z.ai's latest flagship large language model, delivering state-of-the-art coding and agentic performance among open-source models, with a 50% improvement over its predecessor on Z.ai Code Bench and end-to-end delivery of production-grade results. It demonstrates emergent cybersecurity capability, achieving the best result to date on the CyberGym vulnerability discovery benchmark. With a 1M-token context window, 128K-token maximum output, and three reasoning effort levels, GLM-5.3 excels at long-horizon, complex tasks."
     },
     "glm-5.2": {
       "modelId": "glm-5.2",
@@ -19439,7 +19595,7 @@
       "supports": {
         "app": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "experience": true,
         "displayQpmLimit": true,
@@ -19484,7 +19640,7 @@
         "supports": {
           "app": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "experience": true,
           "displayQpmLimit": true,
@@ -19526,9 +19682,10 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "131K",
-        "TPMTokens Per Minute": "1M",
+        "TPMTokens Per Minute": "1000000",
         "RPMRequests Per Minute": "500"
-      }
+      },
+      "markdownOverview": "GLM-5.2 is the latest flagship model from Zhipu AI, designed for long-horizon tasks with support for an ultra-long 1M context window. It features powerful logical reasoning, long-text comprehension, and code generation capabilities, balancing performance with inference efficiency. It excels across multi-task benchmarks and is well-suited for intelligent interaction, enterprise applications, and development assistance scenarios."
     },
     "glm-5.1": {
       "modelId": "glm-5.1",
@@ -19575,7 +19732,7 @@
         "sft": false,
         "dpo": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "cpt": false,
         "experienceUpcoming": false,
@@ -19622,7 +19779,7 @@
           "sft": false,
           "dpo": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "cpt": false,
           "experienceUpcoming": false,
@@ -19667,7 +19824,8 @@
         "Context": "202K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "500"
-      }
+      },
+      "markdownOverview": "GLM-5.1 is a model developed by Zhipu AI, specifically designed for long-horizon tasks. It has 744 billion parameters, supports an ultra-long context of 200k tokens, and can generate up to 128k tokens in a single response. GLM-5.1 excels in logical reasoning, long-text understanding, and code generation, while balancing performance with inference efficiency. It delivers outstanding results across multiple multi-task benchmarks and is well-suited for applications such as intelligent human-computer interaction, enterprise solutions, and developer assistance."
     },
     "glm-5.3-prime": {
       "modelId": "glm-5.3-prime",
@@ -19800,8 +19958,9 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "131K",
-        "TPMTokens Per Minute": "2M"
-      }
+        "TPMTokens Per Minute": "2000000"
+      },
+      "markdownOverview": "GLM-5.3-Prime is the high-speed variant of GLM-5.3, inheriting its full capabilities while achieving 1.5–2× the output TPS through inference acceleration. It delivers state-of-the-art coding and agentic performance among open-source models, supports 1M context and 128K output tokens, and can produce production-grade results end-to-end — along with emergent cybersecurity capabilities such as vulnerability discovery. Designed for latency-sensitive scenarios including real-time conversation, multi-turn agent orchestration, and streaming code generation."
     },
     "qwen3.5-livetranslate-flash-realtime": {
       "modelId": "qwen3.5-livetranslate-flash-realtime",
@@ -19936,7 +20095,8 @@
         "Context": "53K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "10"
-      }
+      },
+      "markdownOverview": "The real-time version of Qwen3.5-LiveTranslate-Flash, which is a high-precision, highly responsive, and robust multilingual simultaneous audio and video interpretation model. Leveraging Qwen3.5-Omni's powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3.5-LiveTranslate-Flash offers both offline and real-time audio and video translation capabilities. It can understand 60 languages ​​and speak 29 languages."
     },
     "qwen3.5-livetranslate-flash-realtime-2026-05-19": {
       "modelId": "qwen3.5-livetranslate-flash-realtime-2026-05-19",
@@ -20071,7 +20231,8 @@
         "Context": "53K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "10"
-      }
+      },
+      "markdownOverview": "The real-time version of Qwen3.5-LiveTranslate-Flash, which is a high-precision, highly responsive, and robust multilingual simultaneous audio and video interpretation model. Leveraging Qwen3.5-Omni's powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3.5-LiveTranslate-Flash offers both offline and real-time audio and video translation capabilities. It can understand 60 languages ​​and speak 29 languages."
     },
     "tongyi-embedding-vision-flash": {
       "modelId": "tongyi-embedding-vision-flash",
@@ -20185,7 +20346,8 @@
         "Image Input": "$0.03Per 1M tokens",
         "Text Input": "$0.09Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Embedding-Vision is a vision-centric multimodal embedding model powered by an LLM, featuring outstanding domain-specific performance and high cost-effectiveness in various domains (e.g., e-commerce, photo galleries, security, autonomous driving). With support for text, image, and video, it is applicable to downstream retrieval tasks, including text-to-image, image-to-image, text-to-video and video-to-video."
     },
     "tongyi-embedding-vision-plus": {
       "modelId": "tongyi-embedding-vision-plus",
@@ -20299,7 +20461,8 @@
         "Image Input": "$0.09Per 1M tokens",
         "Text Input": "$0.09Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Embedding-Vision is a vision-centric multimodal embedding model powered by an LLM, featuring outstanding domain-specific performance and high cost-effectiveness in various domains (e.g., e-commerce, photo galleries, security, autonomous driving). With support for text, image, and video, it is applicable to downstream retrieval tasks, including text-to-image, image-to-image, text-to-video and video-to-video."
     },
     "kimi/kimi-k3": {
       "modelId": "kimi/kimi-k3",
@@ -20447,7 +20610,8 @@
         "Max Reasoning": "1M",
         "TPMTokens Per Minute": "3M",
         "RPMRequests Per Minute": "500"
-      }
+      },
+      "markdownOverview": "Kimi K3 is Kimi's most capable flagship model to date, featuring 2.8 trillion parameters and built upon the Kimi Delta Attention (KDA) hybrid linear attention mechanism and Attention Residuals technology. It natively supports visual understanding and offers a context window of up to 1 million tokens. As the world's first open-source model at the 3-trillion-parameter scale, it is specifically designed for cutting-edge intelligent applications such as long-horizon programming, knowledge work, and reasoning."
     },
     "qwen-mt-lite": {
       "modelId": "qwen-mt-lite",
@@ -20580,7 +20744,8 @@
         "Context": "16K",
         "TPMTokens Per Minute": "100K",
         "RPMRequests Per Minute": "60"
-      }
+      },
+      "markdownOverview": "Qwen-MT-Lite is a large language model of the Qwen model series that specializes in multi-lingual translation. It provides high-quality and rapid translation services across 32 languages at a cost-effective price. It offers features such as terminology intervention, format preservation, and domain-specific translation to cater to the diverse needs of various applications, ensuring both efficiency and performance."
     },
     "pixverse/pixverse-v6-t2v": {
       "modelId": "pixverse/pixverse-v6-t2v",
@@ -20695,7 +20860,8 @@
         "Video Generation(720P no audio)": "$0.04Per second",
         "Video Generation(1080P no audio)": "$0.08Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "V6 is PixVerse’s new model launched in late March 2026. The T2V (Text-to-Video) model enables precise prompt control over video content, accurately reproducing professional cinematography. Camera movements including push, pull, pan, tilt, dolly, and follow shots are smooth and natural, with accurate and controllable perspective transitions. It supports 15-second long videos, direct video+audio generation, and multiple languages."
     },
     "pixverse/pixverse-v6-r2v": {
       "modelId": "pixverse/pixverse-v6-r2v",
@@ -20812,7 +20978,8 @@
         "Video Generation(720P no audio)": "$0.04Per second",
         "Video Generation(1080P no audio)": "$0.08Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "V6 is PixVerse’s new model launched in late March 2026. The R2V (Multi-Subject Reference-to-Video) model ranks 2nd globally. It takes 2–7 input images and intelligently fuses multiple subjects, making it ideal for complex medium and wide shots. It combines the prompt control of T2V with the high consistency preservation of IT2V, plus stronger emotional expression and smoother high-speed motion. It supports 15-second long videos, direct video+audio generation, and multiple languages. It enables one-click generation for e-commerce product close-ups, commercials, and C4D-style product structure visualization."
     },
     "pixverse/pixverse-v6-kf2v": {
       "modelId": "pixverse/pixverse-v6-kf2v",
@@ -20929,7 +21096,8 @@
         "Video Generation(720P no audio)": "$0.04Per second",
         "Video Generation(1080P no audio)": "$0.08Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "V6 is PixVerse’s new model launched in late March 2026. The KF2V (Key Frame-to-Video) model smoothly connects any two images, creating natural video transitions. It supports 15-second long videos, direct video+audio generation, and multiple languages."
     },
     "pixverse/pixverse-v6-it2v": {
       "modelId": "pixverse/pixverse-v6-it2v",
@@ -21046,7 +21214,8 @@
         "Video Generation(720P no audio)": "$0.04Per second",
         "Video Generation(1080P no audio)": "$0.08Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "V6 is PixVerse’s new model launched in late March 2026. The IT2V (Image-to-Video) model ranks 2nd globally. In addition to the prompt control capabilities of T2V, it highly preserves the reference image’s color, saturation, scene composition, and character features. It delivers stronger expression of character emotions and high-speed motion. It supports 15-second long videos, direct video+audio generation, and multiple languages. It enables one-click generation for e-commerce product close-ups, commercials, and C4D-style product structure visualization."
     },
     "ZHIPU/GLM-5.3": {
       "modelId": "ZHIPU/GLM-5.3",
@@ -21186,9 +21355,10 @@
         "Max Output (Thinking)": "131K",
         "Context": "1M",
         "Max Reasoning": "131K",
-        "TPMTokens Per Minute": "3M",
+        "TPMTokens Per Minute": "3000000",
         "RPMRequests Per Minute": "200"
-      }
+      },
+      "markdownOverview": "GLM-5.3 is Zhipu AI’s most powerful model for programming capabilities to date, demonstrating a 50% improvement over GLM-5.2 in internal subjective evaluations. In terms of cybersecurity, GLM-5.3 performs on par with Mythos 5 in tasks such as white-box code review and vulnerability discovery, showcasing its strong potential for cybersecurity defense scenarios."
     },
     "ZHIPU/GLM-5.2": {
       "modelId": "ZHIPU/GLM-5.2",
@@ -21330,7 +21500,8 @@
         "Max Reasoning": "131K",
         "TPMTokens Per Minute": "3M",
         "RPMRequests Per Minute": "200"
-      }
+      },
+      "markdownOverview": "Direct from Zhipu AI. GLM-5.2 supports a truly usable 1M context window and maintains its leading position in long-context tasks."
     },
     "qwen3-rerank": {
       "modelId": "qwen3-rerank",
@@ -21456,7 +21627,8 @@
         "Context": "32K",
         "TPMTokens Per Minute": "5B",
         "RPMRequests Per Minute": "5K"
-      }
+      },
+      "markdownOverview": "A text-ranking model trained on the Qwen LLM foundation performs relevance ranking for input queries and candidate documents. It supports over 100 languages and long-text inputs, and is suitable for applications such as text retrieval and RAG. Its performance is aligned with the open-source Qwen3-Rerank series models."
     },
     "qwen-vl-ocr": {
       "modelId": "qwen-vl-ocr",
@@ -21596,9 +21768,10 @@
         "Max Input": "30K",
         "Max Output": "8K",
         "Context": "38K",
-        "TPMTokens Per Minute": "6M",
-        "RPMRequests Per Minute": "600"
-      }
+        "TPMTokens Per Minute": "30000000",
+        "RPMRequests Per Minute": "60000"
+      },
+      "markdownOverview": "Qwen-VL\\_OCR is an OCR model trained based on Qwen-VL. It aggregates various image-text recognition, parsing, and processing tasks through a unified model approach, offering powerful image-text recognition capabilities."
     },
     "qwen-vl-ocr-2025-11-20": {
       "modelId": "qwen-vl-ocr-2025-11-20",
@@ -21733,7 +21906,8 @@
         "Context": "38K",
         "TPMTokens Per Minute": "6M",
         "RPMRequests Per Minute": "1K"
-      }
+      },
+      "markdownOverview": "This model is a snapshot version from November 20, 2025, and is based on the latest Qwen-VL3 architecture with a comprehensive upgrade. It features significant improvements in document parsing and text localization capabilities, as well as substantial reductions in end-to-end latency and illusions."
     },
     "qwen-flash-character": {
       "modelId": "qwen-flash-character",
@@ -21869,7 +22043,8 @@
         "Context": "8K",
         "TPMTokens Per Minute": "500K",
         "RPMRequests Per Minute": "120"
-      }
+      },
+      "markdownOverview": "The Qwen Role-Playing Model Series is specifically optimized for muti-language anthropomorphic interaction scenarios. It demonstrates advanced capabilities in character consistency maintenance, context-aware dialogue progression, and empathetic engagement, enabling precise personalized character embodiment. This version significantly enhances Japanese linguistic localization (including dialects and honorifics), human-like role-playing authenticity, narrative coherence control, and scenario-based cognitive intelligence."
     },
     "voice-enrollment": {
       "modelId": "voice-enrollment",
@@ -21976,7 +22151,8 @@
       "pricing": {
         "Voice Enrollment And Design": "FreePer voice"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The large-scale model voice replication service utilizes advanced large-scale model technology for feature extraction, enabling voice replication without a training process. Only a very short audio clip is required to quickly generate a highly similar and naturally sounding custom voice. The large-scale model voice design uses the FunAudioGen-VD model, supporting voice creation via text prompts. It is not limited by any audio quality; based on the target scene's requirements for timbre, tone, intonation, speech rate, emotion, and other expressive aspects, high-quality speech can be generated. It highly replicates the performance level of professional voice actors."
     },
     "qwen-plus-character": {
       "modelId": "qwen-plus-character",
@@ -22118,7 +22294,8 @@
         "Context": "32K",
         "TPMTokens Per Minute": "500K",
         "RPMRequests Per Minute": "120"
-      }
+      },
+      "markdownOverview": "The role-playing model of the Qwen series. This is a dynamically updated version, and notifications will be provided in advance for any model updates. It is suitable for anthropomorphic role-playing and has optimized capabilities in following predefined character instructions, advancing conversations, and demonstrating active listening and empathy. Additionally, it supports the deep restoration of personalized characters."
     },
     "qwen-plus-character-ja": {
       "modelId": "qwen-plus-character-ja",
@@ -22248,7 +22425,8 @@
         "Context": "8K",
         "TPMTokens Per Minute": "500K",
         "RPMRequests Per Minute": "120"
-      }
+      },
+      "markdownOverview": "The Qwen Role-Playing Model Series is specifically optimized for Japanese anthropomorphic interaction scenarios. It demonstrates advanced capabilities in character consistency maintenance, context-aware dialogue progression, and empathetic engagement, enabling precise personalized character embodiment. This version significantly enhances Japanese linguistic localization (including dialects and honorifics), human-like role-playing authenticity, narrative coherence control, and scenario-based cognitive intelligence."
     },
     "wan2.1-vace-plus": {
       "modelId": "wan2.1-vace-plus",
@@ -22367,7 +22545,8 @@
       "pricing": {
         "Video Generation(std)": "$0.1Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Wan2.1-VACE-Plus All-in-One Video Creation and Editing model.It supports local editing, video repainting, background outpainting, duration extension, image reference, and other video editing and generation tasks, and supports multimodal conditional control through text, images, and videos."
     },
     "mindlab/macaron-v1-tall": {
       "modelId": "mindlab/macaron-v1-tall",
@@ -22865,7 +23044,8 @@
         "Image Generation (2K)": "$0.16Per image",
         "Image Generation (4K)": "$0.24Per image"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Input 0-14 reference images or text descriptions. Supports raw reference images, raw text images, and image editing. Offers accurate rendering of Chinese and English text, pixel-level reproduction of UI/chart design details, suitable for creating posters, infographics, etc."
     },
     "qwen3-tts-flash-realtime": {
       "modelId": "qwen3-tts-flash-realtime",
@@ -22983,7 +23163,8 @@
       "pricing": {
         "TTS": "$0.13Per 10,000 characters"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The Qwen3-TTS-Flash-Realtime model is Tongyi's latest real-time speech synthesis foundation model, featuring 17 expressive voices while delivering low-latency, high-stability audio synthesis. It supports multilingual and dialect outputs with consistent voice characteristics across languages. Trained on extensive datasets, the system autonomously adjusts vocal tones based on text semantics and demonstrates robust capabilities for complex content synthesis."
     },
     "qwen3-tts-flash": {
       "modelId": "qwen3-tts-flash",
@@ -23101,7 +23282,8 @@
       "pricing": {
         "TTS": "$0.1Per 10,000 characters"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The Qwen3-TTS-Flash is Tongyi's latest offline text-to-speech foundation model, featuring 17 expressive voices while enabling low-latency, high-stability audio synthesis. It supports multilingual and dialect outputs with consistent voice characteristics across languages. Trained on massive datasets, the system automatically adjusts vocal tones based on text semantics and demonstrates robust capabilities for synthesizing complex content. This model is provided as a snapshot version."
     },
     "qwen3-asr-flash-filetrans": {
       "modelId": "qwen3-asr-flash-filetrans",
@@ -23217,7 +23399,8 @@
       "pricing": {
         "Audio Duration": "$0.000035Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The large file transcription version of Qwen3-ASR-Flash. Qwen3-ASR-Flash is a highly accurate, intelligent, and robust multilingual speech recognition model based on a large language model. Leveraging a powerful foundational model, massive amounts of text and multimodal data, and tens of millions of hours of audio data, Qwen3-ASR-Flash achieves high-precision speech recognition. It can automatically determine the language and accurately recognize speech in multiple languages, ensuring precise transcription even in complex audio environments."
     },
     "qwen3-asr-flash-realtime": {
       "modelId": "qwen3-asr-flash-realtime",
@@ -23336,7 +23519,8 @@
       "pricing": {
         "Audio Duration": "$0.00009Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The real-time version of Qwen3-ASR-Flash is a highly accurate, intelligent, and robust multilingual speech recognition model based on a large language model. Leveraging a powerful foundational model, massive amounts of text and multimodal data, and tens of millions of hours of audio data, Qwen3-ASR-Flash achieves highly accurate speech recognition, automatically determining the language and accurately identifying speech in Multiple languages, while ensuring precise transcription even in complex audio environments."
     },
     "qwen3-asr-flash": {
       "modelId": "qwen3-asr-flash",
@@ -23454,7 +23638,8 @@
       "pricing": {
         "Audio Duration": "$0.000035Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Qwen3-ASR-Flash is a highly accurate, intelligent, and robust multilingual speech recognition model based on a large language model. Leveraging a powerful foundational model, massive amounts of text and multimodal data, and tens of millions of hours of audio data, Qwen3-ASR-Flash achieves high-precision speech recognition. It can automatically determine the language and accurately recognize speech in multiple languages, ensuring precise transcription even in complex audio environments."
     },
     "qwen-voice-enrollment": {
       "modelId": "qwen-voice-enrollment",
@@ -23575,7 +23760,8 @@
       "pricing": {
         "TTS": "$0.01Per voice"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The Qwen Voice-Enrollment model is a series of voice replication models from the qwen speech model. It can quickly replicate highly similar voices using audio of only 5 seconds or more. When used in conjunction with the qwen3-tts-vc-realtime model, it can replicate a person's voice with high fidelity and output speech in 10 languages. Furthermore, the synthesized audio can adaptively adjust its tone according to the text and has good processing capabilities for complex text synthesis."
     },
     "vidu/viduq3-ad_reference2video": {
       "modelId": "vidu/viduq3-ad_reference2video",
@@ -23687,7 +23873,8 @@
         "Video Generation(720P)": "$0.125Per second",
         "Video Generation(1080P)": "$0.15Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "ViduQ3-Ad is a dedicated model for the advertising industry, highlighting three key capabilities: \"marketing-grade cuts + intelligent camera movement + direct audio output.\" Upload a product image to generate a 16-second ad video, lowering the barrier to entry and production costs for ad videos."
     },
     "vidu/viduq3-mix_reference2video": {
       "modelId": "vidu/viduq3-mix_reference2video",
@@ -23799,7 +23986,8 @@
         "Video Generation(720P)": "$0.12Per second",
         "Video Generation(1080P)": "$0.145Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Input 1-7 reference images and text descriptions to generate a video. The ViduQ3-mix boasts high-quality image quality and excellent balance. ViduQ3's reference-generated videos are designed for dramas, allowing for seamless integration of sound and visuals: 6 major effects (particles/fluid/dynamics/camera movement/transitions/lighting), 5 major sound effects (environment/dynamics/atmosphere/foley/emotion), and 4 major scenes (short dramas/anime/films/commercials) are fully integrated, easily handling diverse creative needs such as short dramas, anime, and commercials."
     },
     "vidu/viduq3-drama_reference2video": {
       "modelId": "vidu/viduq3-drama_reference2video",
@@ -23911,7 +24099,8 @@
         "Video Generation(720P)": "$0.14Per second",
         "Video Generation(1080P)": "$0.14Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "ViduQ3-Drama is a dedicated model for producing high-quality dramas/AI comics, featuring a comprehensive upgrade across four dimensions: consistency, motion effects, detailed aesthetics, and cost-effectiveness. It can plan one minute of content at a time, resulting in more stable effects, more realistic emotions, and stronger dynamics."
     },
     "vidu/viduq2-pro-fast_img2video": {
       "modelId": "vidu/viduq2-pro-fast_img2video",
@@ -24023,7 +24212,8 @@
         "Video Generation(720P)": "$0.016Per second",
         "Video Generation(1080P)": "$0.032Per second"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "Input an image and text description to generate a video. ViduQ2-Pro-fast boasts a rock-bottom price, stable performance, and a generation speed 2-3 times faster than the turbo version. ViduQ2 image-generated video is the world's first \"everything can be referenced\" video model. It supports references in six dimensions: effects, expressions, textures, motion, characters, and scenes, enabling comprehensive editing evolution. Through controllable addition, deletion, and modification, it achieves refined video editing, a production-grade creation engine specifically designed for animation, short dramas, and film production."
     },
     "qwen3.7-text-embedding": {
       "modelId": "qwen3.7-text-embedding",
@@ -24138,7 +24328,8 @@
         "Context": "131K",
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "2K"
-      }
+      },
+      "markdownOverview": "This is a multilingual unified text vector model trained by Tongyi Lab based on Qwen3.7. Compared to text-embedding-v4, it has significantly improved performance in text retrieval, clustering, and classification. It achieves a 20% improvement on evaluation tasks such as MTEB multilingual, Chinese-English, and code retrieval. It supports user-defined vector dimensions ranging from 256 to 2560."
     },
     "text-embedding-v4": {
       "modelId": "text-embedding-v4",
@@ -24371,7 +24562,8 @@
         "Embedding(Batch File)": "$0.035Per 1M tokens",
         "Text Input": "$0.07Per 1M tokens"
       },
-      "limits": {}
+      "limits": {},
+      "markdownOverview": "The general text vectorization model is a multilingual unified text vectorization model developed by Tongyi Lab based on the large language model (LLM) foundation. This model is designed for multiple mainstream languages worldwide and provides advanced vectorization services to help developers convert text data into high-quality vector data."
     }
   }
 }

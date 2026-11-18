@@ -1,4 +1,4 @@
-name: Early Feature & Signal Tracker
+name: Reverse Signal Tracker (macOS)
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - main
     paths:
       - 'reverse-tracker/**'
-      - '.github/workflows/early_signal_tracker.yml'
+      - '.github/workflows/reverse_tracker.yml'
   repository_dispatch:
-    types: [tracker, early_signal_tracker]
+    types: [tracker, reverse_tracker, early_signal_tracker]
   workflow_dispatch:
     inputs:
       test_run:
@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   scan-family:
-    name: Track ${{ matrix.family }}
+    name: Track ${{ matrix.family }} (macOS)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
@@ -162,7 +162,7 @@ jobs:
 
           if ! git diff --cached --quiet; then
             echo "State changes detected. Committing..."
-            git commit -m "Update compact state for ${{ matrix.family }} [skip ci]"
+            git commit -m "Update compact state for ${{ matrix.family }} (macOS) [skip ci]"
             for attempt in 1 2 3; do
               echo "Pushing state (attempt $attempt)..."
               if git push origin HEAD:refs/heads/state/${{ matrix.family }}; then

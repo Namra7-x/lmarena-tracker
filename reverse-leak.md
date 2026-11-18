@@ -144,7 +144,7 @@ node reverse-tracker/cli.mjs run --family=google
 
 ## 7. GitHub Actions Workflow Configuration
 
-- **Workflow File**: [`.github/workflows/early_signal_tracker.yml`](file:///D:/lmarena-tracker/.github/workflows/early_signal_tracker.yml)
+- **Workflow File**: [`.github/workflows/reverse_tracker.yml`](file:///D:/lmarena-tracker/.github/workflows/reverse_tracker.yml)
 - **Triggers**:
   - `workflow_dispatch`: Manual execution from GitHub Actions web UI.
   - `repository_dispatch`: Triggered via webhook or Cloudflare Worker.

@@ -102,44 +102,33 @@ function nextScanId(componentId, baseline) {
 }
 
 /**
- * Select the optimal target artifacts to download and scan.
- * For desktop apps (Electron), all model IDs, feature gates, dark UI, and RPC routes
- * reside in resources/app.asar which is identical across platforms. Prefer the Linux
- * archive (.tar.gz) which GNU tar unpacks in seconds without DMG/NSIS overhead.
- * For CLI apps, deduplicate redundant CPU architectures per OS platform.
+ * Select the optimal target artifact to download and scan.
+ * macOS-Only Strategy:
+ * macOS is the primary target for all AI models, experimental features, and dark UI.
+ * Single target selection cuts download bandwidth by 75% and ensures blazing fast execution.
  */
 export function selectArtifacts(candidate, component) {
   const artifacts = Array.isArray(candidate.artifacts) ? candidate.artifacts : [];
   if (artifacts.length === 0) return [];
 
-  if (component?.type === 'desktop') {
-    const tarball = artifacts.find((a) => /\.(?:tar\.gz|tgz|tar|zip|appimage)$/i.test(a.url || a.target));
-    if (tarball) return [tarball];
+  // 1. Look for darwin-arm64 (Apple Silicon / M-series - primary macOS target)
+  const darwinArm = artifacts.find((a) =>
+    /darwin.*(?:arm64|aarch64|universal)|mac.*(?:arm64|universal)/i.test(`${a.target || ''} ${a.url || ''}`)
+  );
+  if (darwinArm) return [darwinArm];
 
-    const exe = artifacts.find((a) => /\.(?:exe|msi)$/i.test(a.url || a.target));
-    if (exe) return [exe];
+  // 2. Look for general darwin / macOS (e.g. darwin-x64, mac-x64, Codex.dmg)
+  const darwin = artifacts.find((a) =>
+    /darwin|mac|\.dmg/i.test(`${a.target || ''} ${a.url || ''}`)
+  );
+  if (darwin) return [darwin];
 
-    return [artifacts[0]];
-  }
+  // 3. For platform-agnostic npm packages (e.g. codex-cli, claude-code with target: 'all' or .tgz)
+  const universal = artifacts.find((a) => a.target === 'all' || /\.(?:tgz|tar\.gz)$/i.test(a.url || ''));
+  if (universal) return [universal];
 
-  const byPlatform = new Map();
-  for (const artifact of artifacts) {
-    const platform = platformFromTarget(artifact.target);
-    const existing = byPlatform.get(platform);
-    if (!existing) {
-      byPlatform.set(platform, artifact);
-      continue;
-    }
-    const isDarwin = platform === 'darwin';
-    const artifactIsArm = /arm64|aarch64|universal/.test(String(artifact.target).toLowerCase());
-    const existingIsArm = /arm64|aarch64|universal/.test(String(existing.target).toLowerCase());
-    if (isDarwin && artifactIsArm && !existingIsArm) {
-      byPlatform.set(platform, artifact);
-    } else if (!isDarwin && !artifactIsArm && existingIsArm) {
-      byPlatform.set(platform, artifact);
-    }
-  }
-  return Array.from(byPlatform.values());
+  // 4. Fallback if a component has no macOS build
+  return [artifacts[0]];
 }
 
 function mergeAnalyzerStatus(target, source) {

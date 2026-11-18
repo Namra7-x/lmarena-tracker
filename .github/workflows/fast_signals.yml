@@ -1,35 +1,30 @@
-name: Official AI SDK Tracker
+name: Fast Signals Tracker
 
 on:
   schedule:
     - cron: '*/1 * * * *'
-  workflow_dispatch:
-    inputs:
-      force_alert:
-        description: 'Send real live alert card with diff document right now'
-        required: false
-        default: false
-        type: boolean
   repository_dispatch:
-    types: [tracker, sdk_tracker]
+    types: [tracker, fast_signals, api_tracker, qwen_tracker, early_radar, radar, hf_tracker, sdk_tracker]
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: ai-sdk-tracker
+  group: fast-signals
   cancel-in-progress: true
 
 jobs:
-  track-sdks:
+  run-fast-signals:
+    name: Fast Signals (API, Radar, HF, SDK, DesignArena)
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 3
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Code Repository
         uses: actions/checkout@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
           fetch-depth: 1
           show-progress: false
 
@@ -37,13 +32,19 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
-          cache: 'npm'
 
-      - name: Install Node.js Dependencies
+      - name: Install Node Dependencies
         run: npm ci --prefer-offline --no-audit
 
-      - name: Run Official SDK Tracker & Reverser
+      - name: Run All Fast Signals
         env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          API_DISCORD_WEBHOOK_URL: ${{ secrets.API_DISCORD_WEBHOOK_URL }}
+          API_TRACKER_DISCORD_WEBHOOK_URL: ${{ secrets.API_TRACKER_DISCORD_WEBHOOK_URL }}
+          QWEN_DISCORD_WEBHOOK_URL: ${{ secrets.QWEN_DISCORD_WEBHOOK_URL }}
+          EARLY_RADAR_DISCORD_WEBHOOK_URL: ${{ secrets.EARLY_RADAR_DISCORD_WEBHOOK_URL }}
+          RADAR_DISCORD_WEBHOOK_URL: ${{ secrets.RADAR_DISCORD_WEBHOOK_URL }}
+          HF_DISCORD_WEBHOOK_URL: ${{ secrets.HF_DISCORD_WEBHOOK_URL }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_TOKEN_CLAUDE: ${{ secrets.TELEGRAM_TOKEN_CLAUDE }}
@@ -61,28 +62,24 @@ jobs:
           TELEGRAM_TOKEN_GOOGLE: ${{ secrets.TELEGRAM_TOKEN_GOOGLE }}
           TELEGRAM_CHAT_ID_GEMINI: ${{ secrets.TELEGRAM_CHAT_ID_GEMINI }}
           TELEGRAM_CHAT_ID_GOOGLE: ${{ secrets.TELEGRAM_CHAT_ID_GOOGLE }}
+          TELEGRAM_TOPIC_GEMINI: ${{ secrets.TELEGRAM_TOPIC_GEMINI }}
           TELEGRAM_TOPIC_GOOGLE: ${{ secrets.TELEGRAM_TOPIC_GOOGLE }}
-          FORCE_ALERT: ${{ inputs.force_alert == true && '1' || '0' }}
-        run: node reverse-tracker/cli.mjs sdk
+        run: node fast-signals/runner.mjs
 
-      - name: Commit and Push Snapshot (Only if changes detected)
+      - name: Commit and Push Snapshots
+        if: always()
         run: |
-          if [ -n "$(git status --porcelain reverse-tracker/state/sdk_snapshot.json)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add reverse-tracker/state/sdk_snapshot.json
-            git commit -m "Update official SDK snapshot [skip ci]"
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git add api-tracker/api_snapshot.json early-radar/radar_snapshot.json hf-tracker/hf_snapshot.json reverse-tracker/state/sdk_snapshot.json design-arena/design_snapshot.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            echo "Snapshot changes detected. Committing..."
+            git commit -m "Update fast signals snapshots [skip ci]"
             for attempt in 1 2 3; do
-              echo "Pushing SDK snapshot (attempt $attempt)..."
               if git pull --rebase origin main && git push origin main; then
-                echo "Successfully updated SDK snapshot"
-                exit 0
+                echo "Successfully pushed snapshot updates."
+                break
               fi
-              echo "Concurrent push detected. Retrying in 2s..."
               sleep 2
             done
-            echo "Contention high. Snapshot will automatically sync on next run."
-            exit 0
-          else
-            echo "Zero changes detected. No commit needed."
           fi

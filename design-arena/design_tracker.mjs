@@ -309,7 +309,7 @@ async function notifyDiscord(msg) {
   }
 }
 
-async function main() {
+export async function runDesignTracker() {
   const old = loadSnapshot();
   let data;
   try {
@@ -343,9 +343,11 @@ async function main() {
   console.log('DesignArena snapshot updated.');
 }
 
-main().catch((err) => {
-  console.warn('[DesignArena] Unexpected error during scan:', err.message);
-  // Graceful exit 0 ensures scheduled GitHub Action never fails on transient network drops
-  process.exit(0);
-});
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  runDesignTracker().catch((err) => {
+    console.warn('[DesignArena] Unexpected error during scan:', err.message);
+    // Graceful exit 0 ensures scheduled GitHub Action never fails on transient network drops
+    process.exit(0);
+  });
+}
 

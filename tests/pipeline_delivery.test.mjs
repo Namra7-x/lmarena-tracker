@@ -342,7 +342,7 @@ test('failed acquisition keeps the alert checkpoint and resumes without alerting
   }
 });
 
-test('selectArtifacts prioritizes Linux tarball for desktop apps and dedupes CLI architectures', () => {
+test('selectArtifacts prioritizes macOS Apple Silicon across desktop and CLI components', () => {
   const desktopCandidate = {
     artifacts: [
       { target: 'darwin-arm64', url: 'https://example.com/Devin-darwin-arm64.dmg' },
@@ -354,7 +354,7 @@ test('selectArtifacts prioritizes Linux tarball for desktop apps and dedupes CLI
   };
   const selectedDesktop = selectArtifacts(desktopCandidate, { type: 'desktop' });
   assert.equal(selectedDesktop.length, 1);
-  assert.equal(selectedDesktop[0].target, 'linux-x64');
+  assert.equal(selectedDesktop[0].target, 'darwin-arm64');
 
   const cliCandidate = {
     artifacts: [
@@ -366,7 +366,15 @@ test('selectArtifacts prioritizes Linux tarball for desktop apps and dedupes CLI
     ],
   };
   const selectedCli = selectArtifacts(cliCandidate, { type: 'cli' });
-  assert.equal(selectedCli.length, 3);
-  const targets = selectedCli.map((a) => a.target).sort();
-  assert.deepEqual(targets, ['darwin-arm64', 'linux-x64', 'win32-x64']);
+  assert.equal(selectedCli.length, 1);
+  assert.equal(selectedCli[0].target, 'darwin-arm64');
+
+  const universalCandidate = {
+    artifacts: [
+      { target: 'all', url: 'https://registry.npmjs.org/@openai/codex/-/codex-0.1.0.tgz' },
+    ],
+  };
+  const selectedUniversal = selectArtifacts(universalCandidate, { type: 'cli' });
+  assert.equal(selectedUniversal.length, 1);
+  assert.equal(selectedUniversal[0].target, 'all');
 });

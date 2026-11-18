@@ -13,7 +13,7 @@ import { sendDiscordAlerts } from './discord.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SNAPSHOT_FILE = path.join(__dirname, 'hf_snapshot.json');
 
-async function main() {
+export async function runHfTracker() {
   console.log(`[HF Tracker] Starting scan across ${TRACKED_ORG_IDS.length} frontier AI labs...`);
   const startTime = Date.now();
 
@@ -133,7 +133,9 @@ async function main() {
   console.log(`[HF Tracker] Snapshot updated. Completed in ${((Date.now() - startTime) / 1000).toFixed(2)}s.`);
 }
 
-main().catch((err) => {
-  console.warn('[HF Tracker] Transient execution error:', err.message);
-  process.exit(0);
-});
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  runHfTracker().catch((err) => {
+    console.warn('[HF Tracker] Transient execution error:', err.message);
+    process.exit(0);
+  });
+}
