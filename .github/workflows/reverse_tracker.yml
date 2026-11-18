@@ -31,7 +31,7 @@ jobs:
   track-signals:
     name: Track Signals (macOS)
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 10
     concurrency:
       group: reverse-tracker
       cancel-in-progress: false
@@ -51,6 +51,7 @@ jobs:
           ref: state/all
           path: state
           fetch-depth: 1
+          show-progress: false
 
       - name: Ensure State Directory Exists
         run: |

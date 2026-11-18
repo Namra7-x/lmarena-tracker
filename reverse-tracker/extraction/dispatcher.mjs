@@ -27,7 +27,7 @@ const MAX_TOTAL_EXTRACTED_BYTES = 500 * 1024 * 1024; // 500 MB total safety limi
 const MAX_SINGLE_FILE_BYTES = 250 * 1024 * 1024; // 250 MB max per single file
 const MAX_FILE_COUNT = 5000;
 const MAX_ARCHIVE_DEPTH = 3;
-const SEVEN_ZIP_TIMEOUT_MS = Number.parseInt(process.env.SEVENZIP_TIMEOUT_MS || '180000', 10);
+const SEVEN_ZIP_TIMEOUT_MS = Number.parseInt(process.env.SEVENZIP_TIMEOUT_MS || '60000', 10);
 // Small installer limit for uncompressed fallback: full uncompressed fallback
 // is capped at 50MB to prevent multi-gigabyte DMGs from running out of memory.
 const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = 50 * 1024 * 1024;
@@ -282,7 +282,8 @@ function unpackNestedDiskImagesOnDisk(dir, cmd) {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isFile() && RAW_DISK_IMAGE_REGEX.test(entry.name)) {
-      const nestedOut = path.join(dir, `${entry.name}-extracted`);
+      const safeName = entry.name.replace(/[^a-zA-Z0-9]/g, '_');
+      const nestedOut = path.join(dir, `extracted_disk_${safeName}`);
       fs.mkdirSync(nestedOut, { recursive: true });
       const includeArgs = [
         'x',
@@ -527,7 +528,7 @@ export function extractArtifact(buffer, format, target, artifactUrl = '') {
       // Archive depth check: count occurrences of archive extensions in path
       const depthMatches = (f.path.match(/\.(?:asar|zip|tar|tgz|gz|nupkg|hfs)/gi) || []).length;
       const isNestedAsar = f.path.endsWith('.asar') || isAsar(f.buffer);
-      const isNestedHfs = (f.path.endsWith('.hfs') || f.path.includes('.hfs')) && sevenZipCmd;
+      const isNestedHfs = RAW_DISK_IMAGE_REGEX.test(path.basename(f.path)) && sevenZipCmd;
 
       if (isNestedAsar && depthMatches <= MAX_ARCHIVE_DEPTH) {
         try {
