@@ -525,6 +525,7 @@ export async function performScan(componentId, options = {}) {
 
       console.log(`   Extracting ${artifact.target}...`);
       const { files, status: extractStatus } = extract(dl.buffer, artifact.format, artifact.target, artifact.url);
+      dl.buffer = null; // Release downloaded compressed artifact buffer immediately to avoid runner OOM
       if (extractStatus?.analyzers) mergeAnalyzerStatus(analyzerStatus, extractStatus.analyzers);
       if (extractStatus?.coverageState === 'PARTIAL') {
         extractionGaps.push(`${artifact.target}: extraction partial${extractStatus.error ? ` (${extractStatus.error})` : ''}`);

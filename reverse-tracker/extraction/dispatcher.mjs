@@ -23,26 +23,32 @@ import { extractAsar, isAsar } from './asar.mjs';
 import { extractStrings } from './strings.mjs';
 import { extractSourceMap, extractInlineSourceMaps } from './sourcemap.mjs';
 
-const MAX_TOTAL_EXTRACTED_BYTES = Infinity;
-const MAX_FILE_COUNT = Infinity;
+const MAX_TOTAL_EXTRACTED_BYTES = 500 * 1024 * 1024; // 500 MB total safety limit
+const MAX_SINGLE_FILE_BYTES = 250 * 1024 * 1024; // 250 MB max per single file
+const MAX_FILE_COUNT = 5000;
 const MAX_ARCHIVE_DEPTH = 3;
 const SEVEN_ZIP_TIMEOUT_MS = Number.parseInt(process.env.SEVENZIP_TIMEOUT_MS || '180000', 10);
-// No cutoff limits: full extraction fallback is completely uncapped so large
-// desktop packages and installers recover when selective extraction does not match.
-const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = Infinity;
+// Small installer limit for uncompressed fallback: full uncompressed fallback
+// is capped at 50MB to prevent multi-gigabyte DMGs from running out of memory.
+const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = 50 * 1024 * 1024;
 // Large ZIP/TAR packages (desktop app bundles) can expand past the built-in
 // safe memory limit. Prefer selective 7-Zip extraction, then fall back to the
 // in-process readers when the tool is unavailable.
 const SEVEN_ZIP_PREFERRED_BYTES = 100 * 1024 * 1024;
+
+const IGNORED_EXT_REGEX = /\.(?:png|jpe?g|gif|svg|webp|ico|bmp|tiff|avif|mp3|wav|ogg|mp4|webm|woff2?|ttf|eot|otf|car|nib|icns)$/i;
+const RAW_DISK_IMAGE_REGEX = /\.(?:hfs|dd|iso|raw|img)$/i;
 
 // Files that actually contain feature/model/endpoint evidence. Extracting only
 // these from large installers is dramatically faster than unpacking unused assets.
 const SEVEN_ZIP_INCLUDE_PATTERNS = [
   '*.asar',
   '*.asar.unpacked/*',
+  '*/MacOS/*',
+  '*MacOS*',
+  '*.plist',
   '*.hfs',
   '*.pkg',
-  '*.app/*',
   '*.tar',
   '*.tar.gz',
   '*.tgz',
@@ -50,7 +56,6 @@ const SEVEN_ZIP_INCLUDE_PATTERNS = [
   '*.mjs',
   '*.cjs',
   '*.json',
-  '*.plist',
   '*.map',
   '*.wasm',
   '*.exe',
@@ -236,6 +241,13 @@ function walkExtractedFiles(dir) {
   let totalBytes = 0;
   let truncated = false;
   for (const entry of entries) {
+    if (IGNORED_EXT_REGEX.test(entry.path) || RAW_DISK_IMAGE_REGEX.test(entry.path)) {
+      continue;
+    }
+    if (entry.size > MAX_SINGLE_FILE_BYTES) {
+      truncated = true;
+      continue;
+    }
     if (files.length >= MAX_FILE_COUNT) {
       truncated = true;
       break;
@@ -259,6 +271,42 @@ function walkExtractedFiles(dir) {
   return { files, truncated };
 }
 
+/**
+ * Automatically unpacks nested .hfs or raw disk partition images directly on disk
+ * using 7-Zip, then purges the multi-gigabyte raw image so it is never loaded into
+ * Node.js heap memory.
+ */
+function unpackNestedDiskImagesOnDisk(dir, cmd) {
+  if (!fs.existsSync(dir)) return;
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isFile() && RAW_DISK_IMAGE_REGEX.test(entry.name)) {
+      const nestedOut = path.join(dir, `${entry.name}-extracted`);
+      fs.mkdirSync(nestedOut, { recursive: true });
+      const includeArgs = [
+        'x',
+        '-y',
+        '-bso0',
+        '-bsp0',
+        ...SEVEN_ZIP_INCLUDE_PATTERNS.map((pattern) => `-ir!${pattern}`),
+      ];
+      spawnSync(cmd, [...includeArgs, `-o${nestedOut}`, fullPath], {
+        timeout: SEVEN_ZIP_TIMEOUT_MS,
+        maxBuffer: 50 * 1024 * 1024,
+      });
+      try {
+        fs.unlinkSync(fullPath);
+      } catch {
+        // ignore
+      }
+      unpackNestedDiskImagesOnDisk(nestedOut, cmd);
+    } else if (entry.isDirectory()) {
+      unpackNestedDiskImagesOnDisk(fullPath, cmd);
+    }
+  }
+}
+
 function runSevenZip(buffer, filename, cmd, args) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), '7z-extract-'));
   const tmpInput = path.join(tmpDir, filename || 'archive.bin');
@@ -275,6 +323,8 @@ function runSevenZip(buffer, filename, cmd, args) {
     if (proc.status !== 0) {
       return { success: false, files: [], truncated: false };
     }
+
+    unpackNestedDiskImagesOnDisk(tmpOut, cmd);
 
     const walked = walkExtractedFiles(tmpOut);
     return { success: true, files: walked.files, truncated: walked.truncated };
@@ -505,6 +555,7 @@ export function extractArtifact(buffer, format, target, artifactUrl = '') {
           extractedFiles.push(f);
         }
       } else if (isNestedHfs && depthMatches <= MAX_ARCHIVE_DEPTH) {
+        if (!f.buffer) continue;
         try {
           const hfsRes = extractWithSevenZip(f.buffer, path.basename(f.path), sevenZipCmd);
           if (hfsRes.success && hfsRes.files.length > 0) {
