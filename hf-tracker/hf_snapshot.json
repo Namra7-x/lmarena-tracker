@@ -21147,7 +21147,7 @@
       },
       "nvidia/Cosmos-Embed1-448p-anomaly-detection": {
         "createdAt": "2026-03-10T00:33:17.000Z",
-        "lastModified": "2026-10-23T16:01:45.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "video-classification",
         "numParameters": null
@@ -22691,6 +22691,13 @@
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
+      },
+      "nvidia/C-RADIOv4-H-AV": {
+        "createdAt": "2026-10-28T15:40:27.000Z",
+        "lastModified": "2026-11-03T19:24:59.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
       }
     },
     "spaces": {
@@ -24159,7 +24166,7 @@
       },
       "nvidia/inference-optimized-checkpoints-with-model-optimizer-66aa84f7966b3150262481a4": {
         "title": "Inference Optimized Checkpoints (with Model Optimizer)",
-        "lastUpdated": "2026-11-13T08:29:31.446Z",
+        "lastUpdated": "2026-11-19T02:07:29.644Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4",
@@ -26223,7 +26230,7 @@
       },
       "MiniMaxAI/MiniMax-M3": {
         "createdAt": "2026-06-02T07:49:31.000Z",
-        "lastModified": "2026-10-26T07:08:14.000Z",
+        "lastModified": "2026-11-19T11:38:05.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -26237,21 +26244,21 @@
       },
       "MiniMaxAI/MiniMax-M2.1": {
         "createdAt": "2025-12-20T05:45:05.000Z",
-        "lastModified": "2026-10-26T07:08:12.000Z",
+        "lastModified": "2026-11-19T11:38:28.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "MiniMaxAI/MiniMax-M2.5": {
         "createdAt": "2026-02-12T06:05:24.000Z",
-        "lastModified": "2026-10-26T07:08:12.000Z",
+        "lastModified": "2026-11-19T11:38:17.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "MiniMaxAI/MiniMax-M2": {
         "createdAt": "2025-10-22T13:45:10.000Z",
-        "lastModified": "2026-10-26T07:08:10.000Z",
+        "lastModified": "2026-11-19T11:38:46.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -26412,7 +26419,7 @@
       },
       "MiniMaxAI/ecosystem": {
         "createdAt": "2026-11-17T05:55:26.000Z",
-        "lastModified": "2026-11-19T00:36:11.000Z",
+        "lastModified": "2026-11-19T11:35:37.000Z",
         "sdk": null
       }
     },
@@ -32632,7 +32639,7 @@
       },
       "black-forest-labs/flux-3-image-klein-base": {
         "createdAt": "2026-10-13T10:19:46.000Z",
-        "lastModified": "2026-11-02T23:49:06.000Z",
+        "lastModified": "2026-11-19T10:24:32.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
