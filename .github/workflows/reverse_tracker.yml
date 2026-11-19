@@ -22,7 +22,7 @@ on:
         type: string
         default: ''
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/1 * * * *'
 
 permissions:
   contents: write

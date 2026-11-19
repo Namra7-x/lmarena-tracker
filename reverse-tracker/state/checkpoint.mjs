@@ -48,13 +48,15 @@ export function checkpointState(stateDir, family, message = 'Checkpoint tracker 
 
     git(['commit', '-m', `${message} [skip ci]`, '--no-verify'], stateDir);
 
+    const targetBranch = process.env.STATE_BRANCH || 'state/all';
+
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
-        git(['push', 'origin', `HEAD:refs/heads/state/${family}`], stateDir);
+        git(['push', 'origin', `HEAD:refs/heads/${targetBranch}`], stateDir);
         return { committed: true, pushed: true, attempt };
       } catch {
         try {
-          git(['pull', '--rebase', 'origin', `state/${family}`], stateDir);
+          git(['pull', '--rebase', 'origin', targetBranch], stateDir);
         } catch {
           // If rebase fails, the final workflow persistence step can still try.
         }
