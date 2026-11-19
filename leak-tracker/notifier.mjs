@@ -47,7 +47,7 @@ export async function sendDiscordWebhook(channelType, payload) {
 }
 
 // ==========================================
-// CHANNEL 1: Early Model Tracker Embeds
+// CHANNEL 1: Early Model Tracker / Qwen Embeds
 // ==========================================
 
 export function buildGcpSkuEmbed(skus) {
@@ -104,7 +104,7 @@ export function buildAzureFoundryEmbed(models) {
   };
 }
 
-export function buildAwsBedrockPricingEmbed(newProducts, version) {
+export function buildAwsBedrockMasterEmbed(newProducts, version) {
   const count = newProducts.length;
   const fields = newProducts.slice(0, 8).map((p) => ({
     name: `🏷️ ${p.modelName} (\`${p.sku}\`)`,
@@ -115,18 +115,18 @@ export function buildAwsBedrockPricingEmbed(newProducts, version) {
   if (count > 8) {
     fields.push({
       name: '➕ More Bedrock Products',
-      value: `*...and ${count - 8} more models detected in AWS Bedrock pricing index.*`,
+      value: `*...and ${count - 8} more models detected in AWS Bedrock master pricing index.*`,
       inline: false,
     });
   }
 
   return {
-    title: `🟧 AWS Bedrock Pricing — New Model Pricing Line Detected (${count})`,
-    description: `AWS published pricing metadata for **${count} new product(s)** in feed version \`${version}\`.`,
+    title: `🟧 AWS Bedrock (Master) — New Model Pricing Detected (${count})`,
+    description: `AWS published pricing metadata for **${count} new model product(s)** (Grok, Kimi, MiniMax, Nemotron, Nova) in feed version \`${version}\`.`,
     url: 'https://aws.amazon.com/bedrock/pricing/',
     color: LEAK_CONFIG.colors.aws,
     fields,
-    footer: { text: 'Source: AWS Bedrock Foundation Models Pricing Index • Early Model Tracker' },
+    footer: { text: 'Source: AWS Bedrock Master Pricing Index • Early Model Tracker' },
     timestamp: new Date().toISOString(),
   };
 }
@@ -134,7 +134,7 @@ export function buildAwsBedrockPricingEmbed(newProducts, version) {
 export function buildAzureRetailPricesEmbed(skus) {
   const count = skus.length;
   const fields = skus.slice(0, 8).map((s) => ({
-    name: `🏷️ ${s.productName} — ${s.skuName}`,
+    name: `🏷️ [${s.feedName || 'Retail'}] ${s.productName} — ${s.skuName}`,
     value: `**Retail Price:** \`$${s.retailPrice} / ${s.unitOfMeasure}\`${s.effectiveStartDate ? `\n**Effective Date:** \`${s.effectiveStartDate}\`` : ''}`,
     inline: false,
   }));
@@ -149,11 +149,47 @@ export function buildAzureRetailPricesEmbed(skus) {
 
   return {
     title: `🔷 Azure Retail Prices — New AI Model SKU Listed (${count})`,
-    description: `Microsoft listed **${count} new retail price line(s)** under Foundry Models.`,
+    description: `Microsoft listed **${count} new retail price line(s)** across Foundry Models, Azure OpenAI, and AI+ML feeds.`,
     url: 'https://azure.microsoft.com/en-us/pricing/details/cognitive-services/',
     color: LEAK_CONFIG.colors.azure,
     fields,
     footer: { text: 'Source: Azure Retail Prices API • Early Model Tracker' },
+    timestamp: new Date().toISOString(),
+  };
+}
+
+export function buildGoogleVertexPricingEmbed(newModels) {
+  return {
+    title: `☁️ Google Vertex AI Pricing Table — Pre-Staged Model(s) Detected (${newModels.length})`,
+    description: `Google's official Vertex AI pricing web page HTML has pre-staged table anchor links for unannounced models:`,
+    url: 'https://cloud.google.com/vertex-ai/generative-ai/pricing',
+    color: LEAK_CONFIG.colors.google,
+    fields: [
+      {
+        name: 'Detected Models in Web HTML Table',
+        value: newModels.map((m) => `• \`${m}\``).join('\n'),
+        inline: false,
+      },
+    ],
+    footer: { text: 'Source: cloud.google.com/vertex-ai/generative-ai/pricing • Early Model Tracker' },
+    timestamp: new Date().toISOString(),
+  };
+}
+
+export function buildAwsOffersIndexEmbed(newOffers) {
+  return {
+    title: `🟧 AWS Pricing Index — New Service Offer Code Registered (${newOffers.length})`,
+    description: `AWS added **${newOffers.length} new service offer code(s)** to the global pricing index:`,
+    url: 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/index.json',
+    color: LEAK_CONFIG.colors.aws,
+    fields: [
+      {
+        name: 'New Service Offer Codes',
+        value: newOffers.map((o) => `• \`${o}\``).join('\n'),
+        inline: false,
+      },
+    ],
+    footer: { text: 'Source: AWS Global Pricing Index • Early Model Tracker' },
     timestamp: new Date().toISOString(),
   };
 }
@@ -178,8 +214,44 @@ export function buildJumpstartProprietaryEmbed(models) {
 }
 
 // ==========================================
-// CHANNEL 2: GitHub Commits / Analysis Embeds
+// CHANNEL 2: GitHub Commits & Analysis Embeds
 // ==========================================
+
+export function buildAnthropicPythonSdkEmbed(newModels) {
+  return {
+    title: `⚡ Anthropic Python SDK — New Model Type Union(s) Detected (${newModels.length})`,
+    description: `Anthropic engineers updated the literal model type union in \`anthropic-sdk-python\` before public announcement:`,
+    url: 'https://github.com/anthropics/anthropic-sdk-python/blob/main/src/anthropic/types/model.py',
+    color: LEAK_CONFIG.colors.anthropic,
+    fields: [
+      {
+        name: '🔥 New Model Identifiers in SDK Type Union',
+        value: newModels.map((m) => `• \`${m}\``).join('\n'),
+        inline: false,
+      },
+    ],
+    footer: { text: 'Source: anthropics/anthropic-sdk-python (model.py) • GitHub Commits & Analysis' },
+    timestamp: new Date().toISOString(),
+  };
+}
+
+export function buildGoogleGenaiPythonEmbed(newModels) {
+  return {
+    title: `🔷 Google GenAI Python SDK — New Model Identifier(s) Detected (${newModels.length})`,
+    description: `Google pushed new model type definitions to \`google-genai\` Python SDK:`,
+    url: 'https://github.com/googleapis/python-genai/blob/main/google/genai/types.py',
+    color: LEAK_CONFIG.colors.google,
+    fields: [
+      {
+        name: 'New Model Identifiers in SDK Types',
+        value: newModels.map((m) => `• \`${m}\``).join('\n'),
+        inline: false,
+      },
+    ],
+    footer: { text: 'Source: googleapis/python-genai (types.py) • GitHub Commits & Analysis' },
+    timestamp: new Date().toISOString(),
+  };
+}
 
 export function buildOpenaiCodexEmbed(models) {
   const count = models.length;

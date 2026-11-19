@@ -101,10 +101,11 @@ export async function fetchAzureFoundryModels() {
 }
 
 /**
- * 3. AWS Bedrock Pricing Feed Fetcher
+ * 3. AWS Bedrock Master Pricing Feed Fetcher (AmazonBedrock/current/index.json)
+ * Leaks: Grok 4.7, Kimi K2/K3, MiniMax M2.5, Nemotron 3 Super, Nova 2.0
  */
-export async function fetchAwsBedrockPricing() {
-  const res = await fetchSafe(LEAK_CONFIG.endpoints.awsBedrockPricing);
+export async function fetchAwsBedrockMaster() {
+  const res = await fetchSafe(LEAK_CONFIG.endpoints.awsBedrockMaster);
   const data = await res.json();
 
   const version = data.version || 'unknown';
@@ -133,25 +134,32 @@ export async function fetchAwsBedrockPricing() {
 }
 
 /**
- * 4. Azure Retail Prices (Foundry Models) Fetcher
+ * 4. Azure Retail Prices (Foundry Models, Azure OpenAI, AI+ML Master)
  */
-export async function fetchAzureRetailPrices() {
-  const res = await fetchSafe(LEAK_CONFIG.endpoints.azureRetailPrices);
-  const data = await res.json();
-
-  const items = data.Items || [];
+export async function fetchAzureRetailFeeds() {
   const uniqueSkus = new Map();
 
-  for (const item of items) {
-    const key = `${item.productName}::${item.skuName}`;
-    if (!uniqueSkus.has(key)) {
-      uniqueSkus.set(key, {
-        productName: item.productName,
-        skuName: item.skuName,
-        retailPrice: item.retailPrice,
-        unitOfMeasure: item.unitOfMeasure,
-        effectiveStartDate: item.effectiveStartDate,
-      });
+  for (const feed of LEAK_CONFIG.endpoints.azureRetailFeeds) {
+    try {
+      const res = await fetchSafe(feed.url);
+      const data = await res.json();
+      const items = data.Items || [];
+
+      for (const item of items) {
+        const key = `${item.productName}::${item.skuName}`;
+        if (!uniqueSkus.has(key)) {
+          uniqueSkus.set(key, {
+            productName: item.productName,
+            skuName: item.skuName,
+            retailPrice: item.retailPrice,
+            unitOfMeasure: item.unitOfMeasure,
+            effectiveStartDate: item.effectiveStartDate,
+            feedName: feed.name,
+          });
+        }
+      }
+    } catch (err) {
+      console.warn(`[Leak Tracker] Azure Retail feed '${feed.name}' failed:`, err.message);
     }
   }
 
@@ -159,7 +167,50 @@ export async function fetchAzureRetailPrices() {
 }
 
 /**
- * 5. AWS JumpStart Proprietary SDKs Manifest Fetcher
+ * 5. Google Vertex AI Pricing Table HTML Fetcher
+ * Leaks pre-staged models: gemini-4-argon, gemini-3.8-flash, gemini-omni, gemini-3.5-transcribe
+ */
+export async function fetchGoogleVertexPricingHtml() {
+  const res = await fetchSafe(LEAK_CONFIG.endpoints.googleVertexPricingHtml);
+  const html = await res.text();
+
+  const foundModels = new Set();
+  const rawMatches = html.matchAll(/gemini-[a-zA-Z0-9.-]+/gi);
+
+  for (const m of rawMatches) {
+    let clean = m[0].replace(/[.,;:()]+$/, '').toLowerCase();
+    // Filter out generic prose, documentation slugs, or CSS classes
+    if (
+      clean.length > 7 &&
+      clean.length < 50 &&
+      !clean.includes('is-billed') &&
+      !clean.includes('to-calculate')
+    ) {
+      foundModels.add(clean);
+    }
+  }
+
+  return Array.from(foundModels).sort();
+}
+
+/**
+ * 6. AWS Generic Offers Index Fetcher
+ */
+export async function fetchAwsOffersIndex() {
+  const res = await fetchSafe(LEAK_CONFIG.endpoints.awsOffersIndex);
+  const data = await res.json();
+
+  const offers = data.offers || {};
+  const offerCodes = Object.keys(offers).sort();
+
+  return {
+    publicationDate: data.publicationDate || null,
+    offerCodes,
+  };
+}
+
+/**
+ * 7. AWS JumpStart Proprietary SDKs Manifest Fetcher
  */
 export async function fetchJumpstartProprietary() {
   const res = await fetchSafe(LEAK_CONFIG.endpoints.jumpstartProprietary);
@@ -176,7 +227,41 @@ export async function fetchJumpstartProprietary() {
 }
 
 /**
- * 6. OpenAI Codex Models Fetcher
+ * 8. Anthropic Python SDK Model Type Unions (anthropic-sdk-python/model.py)
+ * Prime leak for: claude-mythos-preview, claude-mythos-5, claude-fable-5-1, etc.
+ */
+export async function fetchAnthropicPythonSdkModel() {
+  const res = await fetchSafe(LEAK_CONFIG.endpoints.anthropicPythonSdkModel);
+  const text = await res.text();
+
+  const models = new Set();
+  const literalMatches = text.matchAll(/["'](claude-[a-z0-9.-]+)["']/g);
+  for (const m of literalMatches) {
+    models.add(m[1]);
+  }
+
+  return Array.from(models).sort();
+}
+
+/**
+ * 9. Google GenAI Python SDK Types (python-genai/types.py)
+ * Leaks: gemini-3.8-flash, gemini-3-pro-preview
+ */
+export async function fetchGoogleGenaiPythonTypes() {
+  const res = await fetchSafe(LEAK_CONFIG.endpoints.googleGenaiPythonTypes);
+  const text = await res.text();
+
+  const models = new Set();
+  const matches = text.matchAll(/["'](gemini-[a-z0-9.-]+)["']/gi);
+  for (const m of matches) {
+    models.add(m[1].toLowerCase());
+  }
+
+  return Array.from(models).sort();
+}
+
+/**
+ * 10. OpenAI Codex Models Fetcher
  */
 export async function fetchOpenaiCodexModels() {
   const res = await fetchSafe(LEAK_CONFIG.endpoints.openaiCodexModels);
@@ -193,7 +278,7 @@ export async function fetchOpenaiCodexModels() {
 }
 
 /**
- * 7. OpenAI OpenAPI Commits Atom Fetcher
+ * 11. OpenAI OpenAPI Commits Atom Fetcher
  */
 export async function fetchOpenaiCommits() {
   const res = await fetchSafe(LEAK_CONFIG.endpoints.openaiCommitsAtom);
@@ -220,7 +305,7 @@ export async function fetchOpenaiCommits() {
 }
 
 /**
- * 8. OpenAI OpenAPI Specification Model Enums Fetcher
+ * 12. OpenAI OpenAPI Specification Model Enums Fetcher
  */
 export async function fetchOpenaiOpenapiYaml() {
   const res = await fetchSafe(LEAK_CONFIG.endpoints.openaiOpenapiYaml);
@@ -229,7 +314,6 @@ export async function fetchOpenaiOpenapiYaml() {
   const versionMatch = text.match(/version:\s*([^\s\n]+)/);
   const version = versionMatch ? versionMatch[1] : 'unknown';
 
-  // Extract model enum strings (e.g. gpt-4o, gpt-6...)
   const modelEnums = new Set();
   const enumMatches = text.matchAll(/-\s*["']?(gpt-[^"'\s\n]+|o1-[^"'\s\n]+|o3-[^"'\s\n]+|chatgpt-[^"'\s\n]+)["']?/g);
   for (const m of enumMatches) {
