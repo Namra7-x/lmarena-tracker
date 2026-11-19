@@ -19117,7 +19117,7 @@
       },
       "nvidia/InternVideo2-CLIP-anomaly-detection": {
         "createdAt": "2026-10-22T18:23:57.000Z",
-        "lastModified": "2026-10-23T17:38:28.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -22043,7 +22043,7 @@
       },
       "nvidia/Riva-Translate-4B-Instruct-v1.1": {
         "createdAt": "2025-11-05T06:13:48.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-19T22:50:26.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -25396,7 +25396,7 @@
       },
       "apple/TiC-CLIP-bestpool-cumulative": {
         "createdAt": "2024-06-05T17:24:33.000Z",
-        "lastModified": "2025-02-24T22:50:39.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "zero-shot-image-classification",
         "numParameters": null
@@ -25771,6 +25771,13 @@
         "gated": false,
         "pipeline_tag": "text-to-video",
         "numParameters": null
+      },
+      "apple/DepthPro2": {
+        "createdAt": "2026-11-03T16:55:03.000Z",
+        "lastModified": "2026-11-19T19:40:58.000Z",
+        "gated": false,
+        "pipeline_tag": "depth-estimation",
+        "numParameters": null
       }
     },
     "spaces": {
@@ -25860,11 +25867,12 @@
       "apple/depthpro-models-66fee63b2f0dc1b231375ca6": {
         "title": "DepthPro Models",
         "lastUpdated": "2026-11-18T16:24:54.206Z",
-        "itemCount": 3,
+        "itemCount": 4,
         "itemIds": [
           "apple/DepthPro-hf",
           "apple/DepthPro",
-          "apple/DepthPro-mixin"
+          "apple/DepthPro-mixin",
+          "apple/DepthPro2"
         ]
       },
       "apple/core-ml-segment-anything-2-66e4571a7234dc2560c3db26": {
