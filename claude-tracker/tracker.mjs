@@ -162,20 +162,7 @@ export async function runClaudeCatalogTracker(options = {}) {
       createdAt: new Date().toISOString(),
     });
   } else if (diff.versionChanged) {
-    console.log(`[Claude Catalog] Catalog version incremented (v${diff.previousVersion} → v${diff.currentVersion}) with 0 model/spec changes. Updating snapshot silently (no alert sent).`);
-    saveSnapshot({
-      version: currentCatalog.version,
-      issuedAt: currentCatalog.issuedAt,
-      expiresAt: currentCatalog.expiresAt,
-      keyId: currentCatalog.keyId,
-      surfaces: currentCatalog.surfaces,
-      surfaceDefaults: currentCatalog.surfaceDefaults,
-      providerAliases: currentCatalog.providerAliases,
-      modelsById: currentCatalog.modelsById,
-      models: currentCatalog.models,
-      totalModels: currentCatalog.totalModels,
-      lastUpdated: new Date().toISOString(),
-    });
+    console.log(`[Claude Catalog] Catalog version incremented (v${diff.previousVersion} → v${diff.currentVersion}) with 0 model/spec changes. Snapshot untouched (zero git commit bloat).`);
   } else {
     console.log(`[Claude Catalog] 0 changes. Catalog v${currentCatalog.version} is up-to-date. (took ${((Date.now() - startTime) / 1000).toFixed(2)}s).`);
   }
