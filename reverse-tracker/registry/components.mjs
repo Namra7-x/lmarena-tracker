@@ -88,9 +88,7 @@ export const COMPONENTS = {
     type: 'desktop',
     primaryTargets: ['darwin-arm64', 'darwin-x64', 'win32-x64'],
     sources: [
-      { type: 'direct_url', os: 'darwin', arch: 'arm64', url: 'https://downloads.claude.ai/claude-science/latest/mac-arm64.dmg' },
-      { type: 'direct_url', os: 'darwin', arch: 'x64', url: 'https://downloads.claude.ai/claude-science/latest/mac-x64.dmg' },
-      { type: 'direct_url', os: 'win32', arch: 'x64', url: 'https://downloads.claude.ai/claude-science/latest/windows-x64.exe' },
+      { type: 'manifest', url: 'https://downloads.claude.ai/releases/darwin/universal/RELEASES.json' },
     ],
   },
   'gemini-desktop': {

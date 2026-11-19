@@ -37,12 +37,14 @@ export const ALLOWED_DOMAINS = new Set([
   'cursor.com',
   'downloads.cursor.com',
   'download.todesktop.com',
+  'api2.cursor.sh',
 
   // Devin / Windsurf
   'devin.ai',
   'cli.devin.ai',
   'static.devin.ai',
   'windsurf-stable.codeiumdata.com',
+  'windsurf-stable.codeium.com',
   'windsurf.com',
   'formulae.brew.sh',
 
