@@ -11622,6 +11622,34 @@
           "website"
         ]
       }
+    },
+    "gpt-6.2-astra-max": {
+      "displayName": "GPT-6.2 Astra (max)",
+      "provider": "openai",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "agents": [
+          "agentic_3d",
+          "agentic_gamedev",
+          "agon_blender",
+          "agon_dataviz",
+          "agon_godot",
+          "agon_slides",
+          "agon_slides_html",
+          "agon_webapps",
+          "fullstack",
+          "fullstack_gamedev",
+          "mobileapps",
+          "nativeapps"
+        ]
+      }
     }
   },
   "providers": {
@@ -13920,6 +13948,12 @@
     "hy4-flash-direct": {
       "text.input": 0.07,
       "text.output": 0.281
+    },
+    "gpt-6.2-astra-max": {
+      "text.input": 8,
+      "text.output": 40,
+      "text.cachedInput": 0.4,
+      "text.cacheWrite": 10
     }
   }
 }
