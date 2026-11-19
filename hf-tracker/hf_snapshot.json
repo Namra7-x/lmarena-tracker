@@ -25382,14 +25382,14 @@
       },
       "apple/TiC-CLIP-bestpool-sequential": {
         "createdAt": "2024-06-05T17:27:34.000Z",
-        "lastModified": "2025-02-24T22:51:05.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "zero-shot-image-classification",
         "numParameters": null
       },
       "apple/TiC-CLIP-bestpool-oracle": {
         "createdAt": "2024-06-05T17:26:33.000Z",
-        "lastModified": "2025-02-24T22:50:52.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "zero-shot-image-classification",
         "numParameters": null
@@ -25732,7 +25732,7 @@
       },
       "apple/deeplabv3-mobilevit-small": {
         "createdAt": "2022-05-30T12:49:24.000Z",
-        "lastModified": "2025-02-27T18:12:41.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-segmentation",
         "numParameters": null
@@ -25775,6 +25775,27 @@
       "apple/DepthPro2": {
         "createdAt": "2026-11-03T16:55:03.000Z",
         "lastModified": "2026-11-19T19:40:58.000Z",
+        "gated": false,
+        "pipeline_tag": "depth-estimation",
+        "numParameters": null
+      },
+      "apple/DepthPro2-focal": {
+        "createdAt": "2026-11-19T18:02:39.000Z",
+        "lastModified": "2026-11-19T20:45:40.000Z",
+        "gated": false,
+        "pipeline_tag": "depth-estimation",
+        "numParameters": null
+      },
+      "apple/DepthPro2-coreml": {
+        "createdAt": "2026-11-09T23:49:42.000Z",
+        "lastModified": "2026-11-18T07:16:46.000Z",
+        "gated": false,
+        "pipeline_tag": "depth-estimation",
+        "numParameters": null
+      },
+      "apple/DepthPro2-B": {
+        "createdAt": "2026-11-05T01:27:32.000Z",
+        "lastModified": "2026-11-19T20:40:40.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
