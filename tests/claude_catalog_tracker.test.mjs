@@ -173,6 +173,29 @@ describe('Claude Model Catalog Diff Engine', () => {
     assert.equal(diff.newModels.length, 0);
   });
 
+  it('should suppress alerts when only catalog version increments (5410 -> 5411) without model changes', () => {
+    const previous = extractCatalogData(mockRawCatalog);
+
+    // Pure version bump (e.g. 5394 -> 5395 or 5410 -> 5411) with identical models and specs
+    const updatedRaw = JSON.parse(JSON.stringify(mockRawCatalog));
+    updatedRaw.version = 5411;
+
+    const current = extractCatalogData(updatedRaw);
+    const diff = computeCatalogDiff(current, previous);
+
+    assert.equal(diff.isFirstRun, false);
+    // Crucial check: hasChanges MUST be false so zero noise/alerts are triggered!
+    assert.equal(diff.hasChanges, false);
+    assert.equal(diff.versionChanged, true);
+    assert.equal(diff.previousVersion, 5394);
+    assert.equal(diff.currentVersion, 5411);
+    assert.equal(diff.newModels.length, 0);
+    assert.equal(diff.removedModels.length, 0);
+    assert.equal(diff.specChanges.length, 0);
+    assert.equal(diff.surfaceDefaultChanges.length, 0);
+    assert.equal(diff.aliasTargetChanges.length, 0);
+  });
+
   it('should detect new model addition and version bump', () => {
     const previous = extractCatalogData(mockRawCatalog);
 
@@ -291,8 +314,13 @@ describe('Claude Model Catalog Notifier & Formatters', () => {
     const embed = buildClaudeDiscordEmbed(diff, catalog);
 
     assert.ok(embed.title.includes('New Model'));
+    assert.ok(!embed.title.includes('→'), 'Embed title should not contain version transition arrow noise');
     assert.equal(embed.color, 0xd97706);
     assert.ok(embed.fields.length >= 6);
+
+    const versionField = embed.fields.find((f) => f.name.includes('Catalog Version'));
+    assert.ok(versionField.value.includes('`v5394`'));
+    assert.ok(!versionField.value.includes('→'), 'Catalog Version field should not contain version transition arrows');
 
     for (const f of embed.fields) {
       assert.ok(f.name.length <= 256, `Field name too long: ${f.name}`);
@@ -327,6 +355,7 @@ describe('Claude Model Catalog Notifier & Formatters', () => {
     assert.ok(text.length < 4000, `Telegram text length (${text.length}) exceeds 4000 limit`);
     assert.ok(text.includes('<b>CLAUDE MODEL CATALOG'));
     assert.ok(text.includes('claude-opus-5-5'));
+    assert.ok(!text.match(/v\d+\s*→\s*v\d+/), 'Telegram summary should not include catalog version transition arrow noise');
     assert.ok(text.includes('downloads.claude.ai/model-catalog/v1/catalog.json'));
     // Ensure tags are balanced
     assert.equal((text.match(/<b>/g) || []).length, (text.match(/<\/b>/g) || []).length);

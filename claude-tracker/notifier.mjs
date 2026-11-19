@@ -17,18 +17,23 @@ function escapeHtml(str) {
  * Builds a sleek Discord embed matching the early-radar SDK commit channel aesthetic.
  */
 export function buildClaudeDiscordEmbed(diff, catalog) {
-  const versionHeader = diff.previousVersion && diff.previousVersion !== diff.currentVersion
-    ? `v${diff.previousVersion} → v${diff.currentVersion}`
-    : `v${diff.currentVersion}`;
-
-  const title = diff.newModels.length > 0
-    ? `⚡ Claude Model Catalog | ${diff.newModels.length} New Model(s) Discovered!`
-    : `⚡ Claude Model Catalog | Catalog Update (${versionHeader})`;
+  let title;
+  if (diff.newModels.length > 0) {
+    title = `⚡ Claude Model Catalog | ${diff.newModels.length} New Model(s) Discovered!`;
+  } else if (diff.specChanges.length > 0) {
+    title = `⚡ Claude Model Catalog | Model Spec Upgrades & Capabilities`;
+  } else if (diff.surfaceDefaultChanges.length > 0) {
+    title = `⚡ Claude Model Catalog | Surface Default Routing Shift`;
+  } else if (diff.aliasTargetChanges.length > 0) {
+    title = `⚡ Claude Model Catalog | Provider Alias Target Shift`;
+  } else {
+    title = `⚡ Claude Model Catalog | Model Catalog Update`;
+  }
 
   const fields = [
     {
       name: '📋 Catalog Version',
-      value: `**${versionHeader}** (${catalog.totalModels} total models)`,
+      value: `\`v${catalog.version}\` (${catalog.totalModels} total models)`,
       inline: true,
     },
     {
@@ -152,17 +157,13 @@ export function buildClaudeDiscordEmbed(diff, catalog) {
  * Formats a high-impact, clean HTML message for Telegram (< 4000 chars).
  */
 export function formatClaudeTelegramSummary(diff, catalog) {
-  const versionHeader = diff.previousVersion && diff.previousVersion !== diff.currentVersion
-    ? `v${diff.previousVersion} → v${diff.currentVersion}`
-    : `v${diff.currentVersion}`;
-
   const header = diff.newModels.length > 0
     ? `🚨 <b>CLAUDE MODEL CATALOG: NEW MODEL DISCOVERED!</b>`
-    : `⚡ <b>CLAUDE MODEL CATALOG UPDATE (${versionHeader})</b>`;
+    : `⚡ <b>CLAUDE MODEL CATALOG: MODEL SPEC & ROUTING UPDATE</b>`;
 
   const lines = [
     header,
-    `<blockquote><b>Catalog Version:</b> ${versionHeader} (${catalog.totalModels} models)</blockquote>`,
+    `<blockquote><b>Catalog Version:</b> <code>v${catalog.version}</code> (${catalog.totalModels} models)</blockquote>`,
     `<b>Issued:</b> <code>${escapeHtml(catalog.issuedAt || 'N/A')}</code>`,
     `<b>Endpoint:</b> <code>downloads.claude.ai/model-catalog/v1/catalog.json</code>`,
     '',

@@ -184,8 +184,9 @@ export function computeCatalogDiff(current, previous = null) {
     }
   }
 
+  // Alert trigger condition: substantive model, spec, surface default, or provider alias changes ONLY.
+  // Version bumps alone (e.g. 5410 -> 5411) without model changes are completely suppressed to eliminate noise.
   const hasChanges =
-    versionChanged ||
     newModels.length > 0 ||
     removedModels.length > 0 ||
     specChanges.length > 0 ||
