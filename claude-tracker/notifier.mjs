@@ -4,7 +4,6 @@
  */
 
 import { CLAUDE_CONFIG } from './config.mjs';
-import { TelegramClient } from '../reverse-tracker/telegram/client.mjs';
 
 function escapeHtml(str) {
   if (!str) return '';
@@ -267,10 +266,11 @@ async function sendDiscordWebhook(url, embed) {
 }
 
 /**
- * Dispatches alerts to both Discord (GitHub commits channel) and Telegram (Claude/Anthropic topic).
+ * Dispatches alerts exclusively to Discord (the exact GitHub commits / Early Signal Radar channel).
+ * Telegram delivery is completely disabled.
  */
 export async function sendCatalogAlerts(diff, catalog, options = {}) {
-  const results = { discord: false, telegram: false, errors: [] };
+  const results = { discord: false, errors: [] };
 
   // 1. Resolve Discord Webhook
   let webhookUrl = options.webhookUrl || null;
@@ -284,37 +284,19 @@ export async function sendCatalogAlerts(diff, catalog, options = {}) {
     }
   }
 
-  // 2. Deliver to Discord
+  // 2. Deliver to Discord exclusively
   if (webhookUrl) {
     try {
       const embed = buildClaudeDiscordEmbed(diff, catalog);
       await sendDiscordWebhook(webhookUrl, embed);
       results.discord = true;
-      console.log(`[Claude Catalog] ✓ Alert embed delivered to Discord (${CLAUDE_CONFIG.webhookEnvVars[0] || 'webhook'}).`);
+      console.log(`[Claude Catalog] ✓ Alert embed delivered exclusively to Discord (${CLAUDE_CONFIG.webhookEnvVars[0] || 'webhook'}).`);
     } catch (err) {
       results.errors.push(`Discord error: ${err.message}`);
       console.warn(`[Claude Catalog] ⚠️ Discord delivery warning: ${err.message}`);
     }
   } else {
     console.log(`[Claude Catalog] Notice: No Discord webhook configured. Skipping Discord.`);
-  }
-
-  // 3. Deliver to Telegram
-  const tgClient = new TelegramClient(null, null, CLAUDE_CONFIG.family, CLAUDE_CONFIG.componentId);
-  const topicId = tgClient.getTopicId(CLAUDE_CONFIG.family, CLAUDE_CONFIG.componentId);
-
-  if (tgClient.isConfigured() || options.forceAlert) {
-    try {
-      const summaryText = formatClaudeTelegramSummary(diff, catalog);
-      await tgClient.sendMessage(summaryText, { topicId });
-      results.telegram = true;
-      console.log(`[Claude Catalog] ✓ Alert message delivered to Telegram (family: ${CLAUDE_CONFIG.family}, topic: ${topicId || 'main'}).`);
-    } catch (err) {
-      results.errors.push(`Telegram error: ${err.message}`);
-      console.warn(`[Claude Catalog] ⚠️ Telegram delivery warning: ${err.message}`);
-    }
-  } else {
-    console.log(`[Claude Catalog] Notice: Telegram not configured for ${CLAUDE_CONFIG.family}. Skipping Telegram.`);
   }
 
   return results;

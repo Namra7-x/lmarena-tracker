@@ -25,8 +25,4 @@ export const CLAUDE_CONFIG = {
     'RADAR_DISCORD_WEBHOOK_URL',
     'DISCORD_WEBHOOK_URL',
   ],
-
-  // Telegram Family and Component Identifier
-  family: 'anthropic',
-  componentId: 'claude-catalog',
 };

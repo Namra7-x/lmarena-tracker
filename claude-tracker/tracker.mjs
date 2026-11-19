@@ -128,7 +128,7 @@ export async function runClaudeCatalogTracker(options = {}) {
       ...options,
       forceAlert: isForceAlert,
     });
-    alertsSent = deliveryRes.discord || deliveryRes.telegram;
+    alertsSent = Boolean(deliveryRes.discord);
 
     if (!isForceAlert) {
       saveSnapshot({
