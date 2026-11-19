@@ -25543,21 +25543,21 @@
       },
       "apple/AIM-3B": {
         "createdAt": "2024-01-19T09:11:29.000Z",
-        "lastModified": "2025-02-28T18:31:01.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-classification",
         "numParameters": null
       },
       "apple/AIM-1B": {
         "createdAt": "2024-01-19T09:11:11.000Z",
-        "lastModified": "2025-02-28T18:31:01.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-classification",
         "numParameters": null
       },
       "apple/AIM-600M": {
         "createdAt": "2024-01-19T09:10:48.000Z",
-        "lastModified": "2025-02-28T18:31:00.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-classification",
         "numParameters": null
@@ -25796,6 +25796,27 @@
       "apple/DepthPro2-B": {
         "createdAt": "2026-11-05T01:27:32.000Z",
         "lastModified": "2026-11-19T20:40:40.000Z",
+        "gated": false,
+        "pipeline_tag": "depth-estimation",
+        "numParameters": null
+      },
+      "apple/DepthPro2-H": {
+        "createdAt": "2026-11-05T01:28:00.000Z",
+        "lastModified": "2026-11-19T20:41:00.000Z",
+        "gated": false,
+        "pipeline_tag": "depth-estimation",
+        "numParameters": null
+      },
+      "apple/DepthPro2-L": {
+        "createdAt": "2026-11-05T01:27:47.000Z",
+        "lastModified": "2026-11-19T20:40:48.000Z",
+        "gated": false,
+        "pipeline_tag": "depth-estimation",
+        "numParameters": null
+      },
+      "apple/DepthPro2-S": {
+        "createdAt": "2026-11-05T01:27:02.000Z",
+        "lastModified": "2026-11-19T20:40:35.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
