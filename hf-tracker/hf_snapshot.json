@@ -19488,7 +19488,7 @@
       },
       "nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16": {
         "createdAt": "2026-10-05T04:25:48.000Z",
-        "lastModified": "2026-10-23T17:12:03.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -22694,9 +22694,16 @@
       },
       "nvidia/C-RADIOv4-H-AV": {
         "createdAt": "2026-10-28T15:40:27.000Z",
-        "lastModified": "2026-11-03T19:24:59.000Z",
+        "lastModified": "2026-11-19T15:10:47.000Z",
         "gated": false,
         "pipeline_tag": null,
+        "numParameters": null
+      },
+      "nvidia/parakeet-tdt-0.6b-v2": {
+        "createdAt": "2025-04-15T19:31:12.000Z",
+        "lastModified": "2026-11-19T22:38:38.000Z",
+        "gated": false,
+        "pipeline_tag": "automatic-speech-recognition",
         "numParameters": null
       }
     },
@@ -32632,7 +32639,7 @@
       },
       "black-forest-labs/flux-3-image-klein-comfy": {
         "createdAt": "2026-10-14T12:00:13.000Z",
-        "lastModified": "2026-11-02T23:49:46.000Z",
+        "lastModified": "2026-11-19T14:15:46.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
@@ -32646,28 +32653,28 @@
       },
       "black-forest-labs/flux-3-image-klein": {
         "createdAt": "2026-10-13T10:58:40.000Z",
-        "lastModified": "2026-11-02T23:49:00.000Z",
+        "lastModified": "2026-11-19T14:15:56.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
       },
       "black-forest-labs/flux-3-action-so101": {
         "createdAt": "2026-09-22T10:39:06.000Z",
-        "lastModified": "2026-10-30T17:37:54.000Z",
+        "lastModified": "2026-11-19T14:15:32.000Z",
         "gated": true,
         "pipeline_tag": "robotics",
         "numParameters": null
       },
       "black-forest-labs/flux-3-action-droid": {
         "createdAt": "2026-09-22T10:39:28.000Z",
-        "lastModified": "2026-10-14T08:41:15.000Z",
+        "lastModified": "2026-11-19T14:15:13.000Z",
         "gated": true,
         "pipeline_tag": "robotics",
         "numParameters": null
       },
       "black-forest-labs/flux-3-action-base": {
         "createdAt": "2026-09-22T10:36:43.000Z",
-        "lastModified": "2026-10-14T08:40:03.000Z",
+        "lastModified": "2026-11-19T14:15:39.000Z",
         "gated": true,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -32681,7 +32688,7 @@
       },
       "black-forest-labs/FLUX.2-klein-9b-kv": {
         "createdAt": "2026-03-09T17:39:05.000Z",
-        "lastModified": "2026-03-12T16:13:40.000Z",
+        "lastModified": "2026-11-19T14:16:26.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
@@ -32709,14 +32716,14 @@
       },
       "black-forest-labs/FLUX.2-klein-base-9b-fp8": {
         "createdAt": "2026-01-14T22:32:42.000Z",
-        "lastModified": "2026-02-24T00:47:48.000Z",
+        "lastModified": "2026-11-19T14:16:52.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.2-klein-9b-fp8": {
         "createdAt": "2026-01-14T22:32:43.000Z",
-        "lastModified": "2026-02-24T00:46:17.000Z",
+        "lastModified": "2026-11-19T14:17:05.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
@@ -32737,14 +32744,14 @@
       },
       "black-forest-labs/FLUX.2-klein-base-9b-nvfp4": {
         "createdAt": "2026-01-14T22:32:42.000Z",
-        "lastModified": "2026-02-24T00:38:27.000Z",
+        "lastModified": "2026-11-19T14:16:34.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.2-klein-9b-nvfp4": {
         "createdAt": "2026-01-14T22:32:44.000Z",
-        "lastModified": "2026-02-24T00:35:38.000Z",
+        "lastModified": "2026-11-19T14:16:46.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
@@ -32758,7 +32765,7 @@
       },
       "black-forest-labs/FLUX.2-klein-base-9B": {
         "createdAt": "2026-01-14T13:40:35.000Z",
-        "lastModified": "2026-02-24T00:19:46.000Z",
+        "lastModified": "2026-11-19T14:17:10.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
@@ -32772,14 +32779,14 @@
       },
       "black-forest-labs/FLUX.2-klein-9B": {
         "createdAt": "2026-01-14T13:24:26.000Z",
-        "lastModified": "2026-02-24T00:17:09.000Z",
+        "lastModified": "2026-11-19T14:18:16.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.2-dev": {
         "createdAt": "2025-11-22T15:07:08.000Z",
-        "lastModified": "2026-02-17T15:56:06.000Z",
+        "lastModified": "2026-11-19T14:20:59.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
@@ -32793,126 +32800,126 @@
       },
       "black-forest-labs/FLUX.1-dev-NVFP4": {
         "createdAt": "2026-01-01T15:05:22.000Z",
-        "lastModified": "2026-01-01T15:42:10.000Z",
+        "lastModified": "2026-11-19T14:23:41.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Kontext-dev-NVFP4": {
         "createdAt": "2026-01-01T15:09:54.000Z",
-        "lastModified": "2026-01-01T15:41:49.000Z",
+        "lastModified": "2026-11-19T14:23:45.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-dev-FP8": {
         "createdAt": "2026-01-01T15:08:52.000Z",
-        "lastModified": "2026-01-01T15:41:40.000Z",
+        "lastModified": "2026-11-19T14:23:31.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Krea-dev": {
         "createdAt": "2025-07-07T10:39:11.000Z",
-        "lastModified": "2025-07-31T14:33:39.000Z",
+        "lastModified": "2026-11-19T14:40:40.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Kontext-dev-onnx": {
         "createdAt": "2025-06-25T04:46:38.000Z",
-        "lastModified": "2025-08-25T15:35:39.000Z",
+        "lastModified": "2026-11-19T14:24:24.000Z",
         "gated": true,
         "pipeline_tag": null,
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Kontext-dev": {
         "createdAt": "2025-05-28T22:23:43.000Z",
-        "lastModified": "2026-01-01T15:35:36.000Z",
+        "lastModified": "2026-11-19T14:40:47.000Z",
         "gated": true,
         "pipeline_tag": "image-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Depth-dev-onnx": {
         "createdAt": "2025-01-28T00:16:53.000Z",
-        "lastModified": "2025-06-27T16:28:59.000Z",
+        "lastModified": "2026-11-19T14:24:02.000Z",
         "gated": true,
         "pipeline_tag": null,
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Canny-dev-onnx": {
         "createdAt": "2025-01-28T00:16:13.000Z",
-        "lastModified": "2025-06-27T16:29:24.000Z",
+        "lastModified": "2026-11-19T14:24:14.000Z",
         "gated": true,
         "pipeline_tag": null,
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-schnell-onnx": {
         "createdAt": "2025-01-28T00:14:17.000Z",
-        "lastModified": "2025-03-14T02:12:37.000Z",
+        "lastModified": "2026-11-19T14:49:41.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-dev-onnx": {
         "createdAt": "2025-01-18T01:59:38.000Z",
-        "lastModified": "2025-06-27T16:28:27.000Z",
+        "lastModified": "2026-11-19T14:24:32.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Depth-dev-lora": {
         "createdAt": "2024-11-20T19:47:40.000Z",
-        "lastModified": "2025-06-27T16:25:44.000Z",
+        "lastModified": "2026-11-19T14:39:52.000Z",
         "gated": true,
         "pipeline_tag": null,
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Canny-dev-lora": {
         "createdAt": "2024-11-20T19:47:28.000Z",
-        "lastModified": "2025-06-27T16:26:06.000Z",
+        "lastModified": "2026-11-19T14:40:01.000Z",
         "gated": true,
         "pipeline_tag": null,
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Depth-dev": {
         "createdAt": "2024-11-20T19:47:13.000Z",
-        "lastModified": "2025-06-27T16:24:46.000Z",
+        "lastModified": "2026-11-19T14:40:10.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Canny-dev": {
         "createdAt": "2024-11-20T19:46:58.000Z",
-        "lastModified": "2025-06-27T16:25:19.000Z",
+        "lastModified": "2026-11-19T14:40:19.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Redux-dev": {
         "createdAt": "2024-11-20T19:46:40.000Z",
-        "lastModified": "2025-06-27T16:24:18.000Z",
+        "lastModified": "2026-11-19T14:40:33.000Z",
         "gated": true,
         "pipeline_tag": null,
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-Fill-dev": {
         "createdAt": "2024-11-20T19:45:33.000Z",
-        "lastModified": "2025-06-27T16:23:07.000Z",
+        "lastModified": "2026-11-19T14:40:54.000Z",
         "gated": true,
         "pipeline_tag": null,
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-dev": {
         "createdAt": "2024-07-31T21:13:44.000Z",
-        "lastModified": "2025-06-27T16:22:19.000Z",
+        "lastModified": "2026-11-19T14:41:01.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
       },
       "black-forest-labs/FLUX.1-schnell": {
         "createdAt": "2024-07-31T19:58:05.000Z",
-        "lastModified": "2024-08-16T14:37:56.000Z",
+        "lastModified": "2026-11-19T14:49:47.000Z",
         "gated": true,
         "pipeline_tag": "text-to-image",
         "numParameters": null
