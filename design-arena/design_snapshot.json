@@ -10034,6 +10034,21 @@
         ]
       }
     },
+    "ideogram-4.6-high": {
+      "displayName": "Ideogram 4.6 (High)",
+      "provider": "ideogram",
+      "active": true,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [],
+      "arenas": {
+        "models": [
+          "image",
+          "imagetoimage"
+        ]
+      }
+    },
     "flux-3-image": {
       "displayName": "FLUX 3 Image",
       "provider": "black_forest_labs",
@@ -13645,6 +13660,10 @@
     },
     "ladybug": {
       "image.perImage": 0.008
+    },
+    "ideogram-4.6-high": {
+      "image.perImage": 0.1,
+      "image.perImageEdit": 0.22
     },
     "flux-3-image": {
       "image.perImage": 0.048
