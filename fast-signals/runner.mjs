@@ -10,10 +10,11 @@ import { runRadar } from '../early-radar/radar.mjs';
 import { runHfTracker } from '../hf-tracker/tracker.mjs';
 import { runSdkTracker } from '../reverse-tracker/sdk/tracker.mjs';
 import { runDesignTracker } from '../design-arena/design_tracker.mjs';
+import { runClaudeCatalogTracker } from '../claude-tracker/tracker.mjs';
 
 export async function runAllFastSignals(options = {}) {
   const startTime = Date.now();
-  console.log('⚡ [Fast Signals] Starting parallel scan across all 5 lightweight monitors...');
+  console.log('⚡ [Fast Signals] Starting parallel scan across all 6 lightweight monitors...');
 
   const tasks = [
     { name: 'API Signal Tracker', fn: () => runApiTracker(options) },
@@ -21,6 +22,7 @@ export async function runAllFastSignals(options = {}) {
     { name: 'Hugging Face Tracker', fn: () => runHfTracker(options) },
     { name: 'Official AI SDK Tracker', fn: () => runSdkTracker(options) },
     { name: 'DesignArena Tracker', fn: () => runDesignTracker(options) },
+    { name: 'Claude Model Catalog Tracker', fn: () => runClaudeCatalogTracker(options) },
   ];
 
   const results = await Promise.allSettled(

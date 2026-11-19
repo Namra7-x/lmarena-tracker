@@ -10,7 +10,8 @@
     "tracker:sdk": "node reverse-tracker/cli.mjs sdk",
     "tracker:detect": "node reverse-tracker/cli.mjs detect",
     "tracker:scan": "node reverse-tracker/cli.mjs scan",
-    "tracker:run": "node reverse-tracker/cli.mjs run"
+    "tracker:run": "node reverse-tracker/cli.mjs run",
+    "tracker:claude": "node claude-tracker/tracker.mjs"
   },
   "keywords": [
     "ai",
