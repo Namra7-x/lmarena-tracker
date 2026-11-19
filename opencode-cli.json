@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "componentId": "opencode-cli",
   "version": "2.3.0",
   "alertedVersion": "2.3.0",
@@ -218,18 +219,56 @@
     "\"@opencode/cli-linux-arm64-musl\": \"2.3.0\",",
     "\"@opencode/cli-linux-x64-baseline\": \"2.3.0\""
   ],
+=======
+  "schemaVersion": 2,
+  "componentId": "opencode-cli",
+  "version": "2.3.2",
+  "observedVersion": "2.3.2",
+  "scannedVersion": null,
+  "deliveredVersion": null,
+  "alertedVersion": null,
+  "releaseId": "@opencode/cli@2.3.2",
+  "releaseKey": "415f2f81c522d21836eae2ce39139112",
+  "channel": "v2",
+  "versionScheme": "semver",
+  "identityFingerprint": "a7558723808eb8fa409013ff7cb91367c21bc83b3b5a38d463a2ae8629798b7a",
+  "diagnosticFingerprint": "57f967aedf829a5899c1cb68f1638ca142d58655f9d6c731605d19acfb924879",
+  "scanId": "OC-20261118-001",
+  "coverageState": "BASELINE_ONLY",
+  "lastSuccessfulScan": null,
+  "lastFailureTime": null,
+  "lastDeliveryStatus": null,
+  "lastTestAlertVersion": null,
+  "analyzerStatus": null,
+  "pendingDelivery": null,
+  "deliveryLedger": [],
+  "releaseHistory": [],
+  "hotSignals": [],
+  "recentSignals": [],
+  "historicalSeenHashes": [],
+>>>>>>> 479453c (Update compact state for all components (macOS) [skip ci])
   "historicalSeenUrls": [],
   "stringBaseline": {
     "schema": 2,
     "encoding": "gzip+base64",
+<<<<<<< HEAD
     "count": 188,
     "data": "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"
+=======
+    "count": 0,
+    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
+>>>>>>> 479453c (Update compact state for all components (macOS) [skip ci])
   },
   "stringHistory": {
     "schema": 2,
     "encoding": "gzip+base64",
+<<<<<<< HEAD
     "count": 188,
     "data": "H4sIAAAAAAACA7VZW3PbuBV+5684QT0JOaUo28nGHXW03qyTTL3dJB4nO/vgdSOYPDIRgwALgJY0iv57BwBJkTZta6ftSyIAB9+54FxpMhqxayEVjnSqWGk0iQMyGnF5zfEW+RSVksrvCTnS9Bb9olQ4Z0v7+ydZokhlhuOUs1FG1YKJEVXF61dkAuQwOUxe70Z2tAvZy2T/QbLlLiyXuzBc7shudEU1ciZwJ773qI/IzsSDgnAmquWTth6gOtqB6imOo6LSfDe2PdKjXUkfEWC5g8LLHdRd7qDsjs/8MPHR7sRWjKdpd7P8gzeO/uSNJ2zTF2Y3uqPdAAc5L5jI5EI/6faDdEc70T3Kd7kT1+VOPJe7ctzFAx8jP/oz5LUw3iBxQHxSsr+Y0IZybn9ylqLQ7saH0y9+R1SuIghauP0eP3vQrO1hMr5iYtzsJLjELsXhAySWwjApKH+LJYoMRcpQkwmsA1JKbRoBJ0CEzBCScWc3Kb5pEhCFpdTMSLXy95rC5xZmVTrxrpmx8lSK16u/5saUejIeXzOTV1dJKosxFbKgfJXKrZD2XkBuUWkmRe+x7uwd3durzb5g4uUhCYj1jeAvz8aVVs4OKG7B6hS8CN9k2ejLqkQYfcDiCtVbnDPBrF2AXLzl/LQopTIhITeoBPKXh0nGOSHRJZTVFWcpaEMNSwGXBpWAKyk5nOozJVPUWqr3SE2l8EyhRmFCJgzcPYv+TmD0kRYI/6xZ+KUuaYrwu1UBRmdU6y+5qqLJ5GH0V/vRiyBJktB6TcJEyqsMdTgb7a1LTs1cqmIz2ltbzd+oNN/MIjiGi0uYwAUZjeZSpUguo9hCiLJItPXL8CCKg/EYzmh6Q68RCiroNSoNN4glUAGSZ6igwYeyplvkKMDk9oJJcyauoX4gYBqENLBCA9KTKLxm2qiVY/S7jyU4OLDHb84/vH4FKRWgDeMcVOWvLF+/gismqFpBJawAWFScumdrOQtq2C2CFAhzyrhOuvApFVYKXdKFAFEWLzQkaZGBzlkBGVOYGr6KQUtQWGn0gGUBJ7+egsmpsZJoMDnT4J3eoVsKhd8wNRpoa4urinEDc6mACmlyVHBy9lsMukpzoBpccuipgZlT8KPMMIZKcNQa3PNkjssiZ2kOC1nxDDTjKAxfQR2YTtBS4S2TlQaFHKnGGtzpgAvgtBJpjsqBNYy8Qi1/KVpTuTeI4aoycHb+6eTd58+fzr+evn338cvp+9N35/XLWJ/TjkUutbEaJsEELmZ7a5sRN64UzWJo173qOIvBrgeOZ5dDKHbhDh661dl7nPGjKEOH/Vv2RxNPwTHUiT447oh8V9EnBWv1G0J52FLD+I+i2MNmKzgGpj9UmodRMNtb2+fc/LS3zjq14cJuXm5mcTB7TxnHDIxs/e5TieLEpm34olY2TVSUb93SJgAPqpOClqFLURFMf4RfPn/6mGijmLhm85Xfj5JvkomQgFRAok0yi4M0ZzyrE1/iovbzSqShoeoazc8uE8QujTV14DKGdZBKoSXHxI1eofvXSyRSlHN45zaOwR0kBWptw3UCn504nj6KHIoBqtIcpvXCWg2m8OnKxnpygysddi0VJXMmso6WLiOjyPTvzOT3MjL12TjqgNsngWnNdDoFV8Pg+XN4pqvSliT95nZ5GDZXUlkUVGR3RKoT0C9aiuSKCTg+hvUmuti/rG91RYYpdMmHegN/v7nrcqRUK3fR5EnGlNUynDOOv53/+kWeUZOHzNXPpEBDk0rxVsc20Uy3tcPpWfdSTtet9j6uwPvy8vWrnisvX79yRaxRy6eiaX/VaOdKa2u3JnZhCmuLM/GGjn1SnjSM3dqvCGwupE6saGF0aU3SrhrMsrDsal9FcWur6VdcYmrtdLx1AyLKYpRylnzTxJXi9s4SU2u9+EEUX7RFWZBGaVmZsjIwhVChrrhJtMlkZeD7dyAkSoxiRRglRv4qF6hOqMZW3s6zw9THY0mVxnCuE4U0e884umBzz+wis338GEh9PfmmpSBRDKQy87+R6A66VQemoPDfFVOYKNSS32LYZJpxF2XW3m09A9bgW+cJtD00uC55Ak23DK7dm3RcyL1UA7J9re1OzaeWCqaQKqQGz/36nvO25NbAlno4Ke1IRniWkftJC1z7y8T1pDYlbHZlTPRKp4Z7UGshki/aSE7o7fLw6/42MT6NZ72tMvSKo0P8KM+UtOFtkUcfpTgVBhVNbZvltk58FiJx3RN1WPmNNii1rFSKPm8/nAKObTHzpDX0xsbGDCbQ2+2BnrSpsJ/P/FTxucv4+LhJnDVCt5w0ea1x1Y7P38mrFzXIZfNOBosSpjDXSXGT2cWd8JE6MUWZMRXaeGlEG9W1crQNnqZnfiIs2wjbRl9SX62BbJc3dYUlUVhymmI49mP63ti+nE16jqlhosIgleXKW6EjtVUk9sPg10JmFUdNYpdeYyBXLiK7z+qUaGFqK9YrX+UDTHMJhMCPzw/r364iT6A37r7Q0Jk8G09aUD9HqEok/1uE7u8vtsGXaVop7QeLGsOPGvW4C1QhZEzbQMl6UOf1uNJMAgNSSAUKm70FM3mLiqIHuGQGDv4PuP+lnneSVdwIasedsK71bRoBOYcLUtoSpHPk3H+rAFIudN797f5vqchlBOsuoHUfC+VKuzvTSZoXMhvoCffl0Q8/RI5Clqs2aLynxr2Id1SciZvHKYqbjKltRDd9T4/O5nGF1pzsFidgVIU2jdvQLbyQLpjuEcV+zuvdqEQr0x1ZKpG69+nEmZfa2aQ5rZ+ynuDrnrR7Xrf93b2CMtHf6bdP3ZOB0O4e9/vV7sktKjZvBLcnbA7hM5ukIjC5kgs3rbqADmfNfAGZRB+3pZK3LEOgzZcA6yGDjbUHrrP0fWzSYjfx1PLIMOXW6xsepMaa2yaNaaM7rhINSF2XEgs1l5XIgBpoSlojmOtynzU9fgQKTaUEzCnX6Aj6zMgYTTqmvLQzXz3gk6i9Zh1n4FbPcxpbD3rG8+d3HqaBdleaNtOK6yQktsPs7u4PqdAlsBLeu3VA7mvQdgXOOL7LG8DuNw91d9io2D9sMIbOmq6jOW3baGoq7UTYj6CtkA9S3BPvEWM25d1evT9oD7hT3S3bb2h76/r2JgZclpjaYWp4Xo8C38j22jyYK1n4aj5x+1/rWYM01PMezXx7IHsHcntg82H3yK7bw3W/uYZNl9L3Ex3a3hTZp7UfkgOfoAJRFhf7l3Ew9MzBw4PlduzrjtbdYWvoS9exfWpl6uHtzfkHEgXbkY2Z8CAK6ucPmx/j8F/f/9CR7b3DP/T3vWjMEoPa3OviyNhCjdOyYmIuSWeOqpEu7GdZm31jSJKkmZ8vkznjBlXnW8OAJzUYs731wHS46e6iUvXurD8tbj8oE/dnpRbUu3q92LaLveLY6VGj4W6xAegHlX2fffs2j021TQYJuglEm4zJCRD/J3kSB67iBndDKjCsQFmZCRz8sL8fb5cv991SrWAd1K7zD5Y1ZTpYQ8tA5KjsnzjgHhls4mADqf0CDvXXJFi3O51fm2ADcybcF7N1sIl66v8HnwuZllggAAA="
+=======
+    "count": 0,
+    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
+>>>>>>> 479453c (Update compact state for all components (macOS) [skip ci])
   },
   "urlBaseline": {
     "schema": 2,
@@ -243,6 +282,7 @@
     "count": 0,
     "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
   },
+<<<<<<< HEAD
   "schemaVersion": 2,
   "deliveredVersion": "2.3.0",
   "observedVersion": "2.3.0",
@@ -254,4 +294,9 @@
   "deliveryLedger": [],
   "releaseHistory": [],
   "lastCoverageGaps": []
+=======
+  "lastCoverageGaps": [],
+  "lastAlertDigest": null,
+  "benchmark": null
+>>>>>>> 479453c (Update compact state for all components (macOS) [skip ci])
 }
