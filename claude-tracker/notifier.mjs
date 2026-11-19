@@ -245,12 +245,12 @@ export function formatClaudeTelegramSummary(diff, catalog) {
 }
 
 /**
- * Sends embeds to Discord via webhook.
+ * Sends embeds to Discord via webhook matching Early Signal Radar branding.
  */
 async function sendDiscordWebhook(url, embed) {
   const body = {
-    username: 'Claude Catalog Radar',
-    avatar_url: 'https://cdn.oaistatic.com/_next/static/media/apple-touch-icon.82af6fe1.png',
+    username: 'Early Signal Radar',
+    avatar_url: 'https://raw.githubusercontent.com/google/material-design-icons/master/png/action/bolt/materialicons/48dp/2x/baseline_bolt_black_48dp.png',
     embeds: [embed],
   };
 

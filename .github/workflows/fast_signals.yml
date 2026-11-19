@@ -1,6 +1,14 @@
 name: Fast Signals Tracker
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'claude-tracker/**'
+      - 'early-radar/**'
+      - 'fast-signals/**'
+      - '.github/workflows/fast_signals.yml'
   schedule:
     - cron: '*/1 * * * *'
   repository_dispatch:

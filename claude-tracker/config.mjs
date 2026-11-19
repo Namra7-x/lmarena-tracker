@@ -19,11 +19,10 @@ export const CLAUDE_CONFIG = {
   // Brand color for embeds (Anthropic Terracotta / Amber)
   color: 0xd97706,
 
-  // Webhook Environment Variables for Discord (same channel that receives SDK commits)
+  // Webhook Environment Variables for Discord (exact channel where GitHub commits and Artificial Analysis messages appear)
   webhookEnvVars: [
     'EARLY_RADAR_DISCORD_WEBHOOK_URL',
     'RADAR_DISCORD_WEBHOOK_URL',
-    'HF_DISCORD_WEBHOOK_URL',
     'DISCORD_WEBHOOK_URL',
   ],
 
