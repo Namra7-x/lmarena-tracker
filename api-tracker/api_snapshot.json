@@ -1,7 +1,7 @@
 {
   "totalGroups": 86,
-  "totalModels": 190,
-  "lastUpdated": "2026-11-19T02:51:03.780Z",
+  "totalModels": 191,
+  "lastUpdated": "2026-11-19T14:06:06.614Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -56,7 +56,7 @@
         "tokenMetering": true,
         "autoTPM": true,
         "displayQpmLimit": true,
-        "deploy": false
+        "deploy": true
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -104,7 +104,7 @@
           "tokenMetering": true,
           "autoTPM": true,
           "displayQpmLimit": true,
-          "deploy": false
+          "deploy": true
         },
         "model": "qwen4-max",
         "serviceSites": [
@@ -492,7 +492,7 @@
         "autoTPM": true,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": true
+        "deploy": false
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -541,7 +541,7 @@
           "autoTPM": true,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": true
+          "deploy": false
         },
         "model": "qwen3.8-flash",
         "serviceSites": [
@@ -2204,7 +2204,7 @@
       "supports": {
         "fineTune": false,
         "experienceV2": true,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "experience": true,
         "displayQpmLimit": true,
@@ -2238,7 +2238,7 @@
         "supports": {
           "fineTune": false,
           "experienceV2": true,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "experience": true,
           "displayQpmLimit": true,
@@ -2559,7 +2559,7 @@
         "experienceV2": true,
         "eval": true,
         "inference": true,
-        "autoTPM": false,
+        "autoTPM": true,
         "displayQpmLimit": true,
         "deploy": false
       },
@@ -2603,7 +2603,7 @@
           "experienceV2": true,
           "eval": true,
           "inference": true,
-          "autoTPM": false,
+          "autoTPM": true,
           "displayQpmLimit": true,
           "deploy": false
         },
@@ -2647,6 +2647,132 @@
         "TPMTokens Per Minute": "1200000",
         "RPMRequests Per Minute": "10000"
       }
+    },
+    "kimi-k3.1-pro-prime": {
+      "modelId": "kimi-k3.1-pro-prime",
+      "name": "Kimi-K3.1-Pro-Prime",
+      "modelAlias": null,
+      "provider": "moonshot-ai",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i1/O1CN01odQyLr1kyTGwe0817_!!6000000004752-55-tps-40-40.svg",
+      "category": "Third-party",
+      "description": "Kimi-K3.1-Pro-Prime is the high-speed version of Kimi-K3.1-Pro (the Prime fast lane). Model capability is fully identical to Kimi-K3.1-Pro — same model weights, supporting a 1-million-token context window with native vision understanding (text and image input, text output), delivering the same level of performance across code, 3D creation, financial research, and long-horizon Agent tasks (Terminal-Bench 4.0 score of 65.7%, current best result of 64.4 on OfficeQA Pro v2, and a statement-level hallucination rate of 8.3%).",
+      "shortDescription": "Kimi-K3.1-Pro-Prime is the high-speed version of Kimi-K3.1-Pro (the Prime fast lane). Model capability is fully identical to Kimi-K3.1-Pro — same model weights, supporting a 1-million-token context window with native vision understanding (text and image input, text output), delivering the same level of performance across code, 3D creation, financial research, and long-horizon Agent tasks (Terminal-Bench 4.0 score of 65.7%, current best result of 64.4 on OfficeQA Pro v2, and a statement-level hallucination rate of 8.3%).",
+      "updateAt": "2026-11-19T14:05:09.117+00:00",
+      "latestOnlineAt": "2026-11-19T14:05:09.117+00:00",
+      "collectionTag": null,
+      "features": [
+        "cache",
+        "function-calling",
+        "structured-outputs",
+        "web-search"
+      ],
+      "capabilities": [
+        "Reasoning",
+        "TG",
+        "VU"
+      ],
+      "modelInfo": {
+        "contextWindow": 1048576,
+        "maxInputTokens": 1048576,
+        "maxOutputTokens": 1048576,
+        "maxReasoningTokens": 1048576,
+        "reasoningMaxInputTokens": 1048576,
+        "reasoningMaxOutputTokens": 1048576
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Text"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/kimi-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/kimi-k3.1-pro-prime",
+      "markdownUrl": "https://www.qwencloud.com/models/kimi-k3.1-pro-prime.md",
+      "supports": {
+        "fineTune": false,
+        "experienceV2": false,
+        "eval": false,
+        "inference": true,
+        "tokenMetering": true,
+        "autoTPM": true,
+        "displayQpmLimit": true,
+        "deploy": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-11-19T14:05:09.117+00:00",
+        "description": "Kimi-K3.1-Pro-Prime is the high-speed version of Kimi-K3.1-Pro (the Prime fast lane). Model capability is fully identical to Kimi-K3.1-Pro — same model weights, supporting a 1-million-token context window with native vision understanding (text and image input, text output), delivering the same level of performance across code, 3D creation, financial research, and long-horizon Agent tasks (Terminal-Bench 4.0 score of 65.7%, current best result of 64.4 on OfficeQA Pro v2, and a statement-level hallucination rate of 8.3%).",
+        "aliyunRecommend": false,
+        "features": [
+          "cache",
+          "function-calling",
+          "structured-outputs",
+          "web-search"
+        ],
+        "modelInfo": {
+          "contextWindow": 1048576,
+          "maxInputTokens": 1048576,
+          "maxReasoningTokens": 1048576,
+          "reasoningMaxInputTokens": 1048576,
+          "maxOutputTokens": 1048576,
+          "reasoningMaxOutputTokens": 1048576
+        },
+        "provider": "moonshot-ai",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i1/O1CN01odQyLr1kyTGwe0817_!!6000000004752-55-tps-40-40.svg",
+        "supports": {
+          "fineTune": false,
+          "experienceV2": false,
+          "eval": false,
+          "inference": true,
+          "tokenMetering": true,
+          "autoTPM": true,
+          "displayQpmLimit": true,
+          "deploy": false
+        },
+        "model": "kimi-k3.1-pro-prime",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "TG",
+          "Reasoning",
+          "VU"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "Kimi-K3.1-Pro-Prime is the high-speed version of Kimi-K3.1-Pro (the Prime fast lane). Model capability is fully identical to Kimi-K3.1-Pro — same model weights, supporting a 1-million-token context window with native vision understanding (text and image input, text output), delivering the same level of performance across code, 3D creation, financial research, and long-horizon Agent tasks (Terminal-Bench 4.0 score of 65.7%, current best result of 64.4 on OfficeQA Pro v2, and a statement-level hallucination rate of 8.3%).",
+        "equivalentSnapshot": "",
+        "maxOutputTokens": 1048576,
+        "latestOnlineAt": "2026-11-19T14:05:09.117+00:00",
+        "tags": [],
+        "license": {},
+        "contextWindow": 1048576,
+        "maxInputTokens": 1048576,
+        "inferenceProvider": "bailian",
+        "name": "Kimi-K3.1-Pro-Prime",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/kimi-api",
+        "needApply": false,
+        "category": "Third-party"
+      },
+      "pricing": {},
+      "limits": {}
     },
     "kimi-k3": {
       "modelId": "kimi-k3",
@@ -3222,7 +3348,7 @@
         "autoTPM": true,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": false
+        "deploy": true
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -3272,7 +3398,7 @@
           "autoTPM": true,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": false
+          "deploy": true
         },
         "model": "qwen3.8-27b",
         "serviceSites": [
@@ -3296,8 +3422,7 @@
           "sft": [
             "full",
             "lora"
-          ],
-          "dpo": []
+          ]
         },
         "inferenceProvider": "bailian",
         "name": "Qwen3.8-27B",
@@ -7926,7 +8051,7 @@
         "maxInputTokens": 991808,
         "offlineInfo": {
           "inference": {
-            "announceUrl": "https://www.aliyun.com/notice/118728",
+            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
             "offlineTime": "2027-01-19 10:00:00"
           }
         },
@@ -9309,6 +9434,156 @@
         "RPMRequests Per Minute": "600"
       }
     },
+    "qwen3.5-122b-a10b": {
+      "modelId": "qwen3.5-122b-a10b",
+      "name": "Qwen3.5-122B-A10B",
+      "modelAlias": null,
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Cost-optimized",
+      "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
+      "shortDescription": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
+      "updateAt": "2026-02-23T12:34:19.000+00:00",
+      "latestOnlineAt": "2026-02-23T12:34:19.000+00:00",
+      "collectionTag": "qwen3.5",
+      "features": [
+        "function-calling",
+        "model-experience",
+        "prefix-completion",
+        "structured-outputs",
+        "web-search"
+      ],
+      "capabilities": [
+        "Reasoning",
+        "TG",
+        "VU"
+      ],
+      "modelInfo": {
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "maxOutputTokens": 65536,
+        "maxReasoningTokens": 81920,
+        "reasoningMaxInputTokens": 258048,
+        "reasoningMaxOutputTokens": 65536
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image",
+          "Video"
+        ],
+        "responseModality": [
+          "Text"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-122b-a10b",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-122b-a10b.md",
+      "supports": {
+        "sft": false,
+        "app": false,
+        "dpo": false,
+        "experienceV2": false,
+        "eval": false,
+        "inference": true,
+        "cpt": false,
+        "experienceUpcoming": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": true,
+        "sellingByQpm": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text"
+          ],
+          "request_modality": [
+            "Text",
+            "Image",
+            "Video"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-02-23T12:34:19.000+00:00",
+        "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
+        "aliyunRecommend": false,
+        "collectionTag": "qwen3.5",
+        "features": [
+          "model-experience",
+          "function-calling",
+          "structured-outputs",
+          "web-search",
+          "prefix-completion"
+        ],
+        "modelInfo": {
+          "contextWindow": 262144,
+          "maxInputTokens": 260096,
+          "maxReasoningTokens": 81920,
+          "reasoningMaxInputTokens": 258048,
+          "maxOutputTokens": 65536,
+          "reasoningMaxOutputTokens": 65536
+        },
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "app": false,
+          "dpo": false,
+          "experienceV2": false,
+          "eval": false,
+          "inference": true,
+          "cpt": false,
+          "experienceUpcoming": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": true,
+          "sellingByQpm": false
+        },
+        "model": "qwen3.5-122b-a10b",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "Reasoning",
+          "VU",
+          "TG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "SNAPSHOT",
+        "shortDescription": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
+        "maxOutputTokens": 65536,
+        "latestOnlineAt": "2026-02-23T12:34:19.000+00:00",
+        "tags": [],
+        "license": {},
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "inferenceProvider": "bailian",
+        "name": "Qwen3.5-122B-A10B",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+        "needApply": false,
+        "category": "Cost-optimized"
+      },
+      "pricing": {
+        "Input": "$0.4Per 1M tokens",
+        "Output": "$3.2Per 1M tokens"
+      },
+      "limits": {
+        "Max Input": "260K",
+        "Max Output": "65K",
+        "Max Input (Thinking)": "258K",
+        "Max Output (Thinking)": "65K",
+        "Context": "262K",
+        "Max Reasoning": "81K",
+        "TPMTokens Per Minute": "1M",
+        "RPMRequests Per Minute": "600"
+      }
+    },
     "qwen3.5-35b-a3b": {
       "modelId": "qwen3.5-35b-a3b",
       "name": "Qwen3.5-35B-A3B",
@@ -9607,156 +9882,6 @@
       "pricing": {
         "Input": "$0.3Per 1M tokens",
         "Output": "$2.4Per 1M tokens"
-      },
-      "limits": {
-        "Max Input": "260K",
-        "Max Output": "65K",
-        "Max Input (Thinking)": "258K",
-        "Max Output (Thinking)": "65K",
-        "Context": "262K",
-        "Max Reasoning": "81K",
-        "TPMTokens Per Minute": "1M",
-        "RPMRequests Per Minute": "600"
-      }
-    },
-    "qwen3.5-122b-a10b": {
-      "modelId": "qwen3.5-122b-a10b",
-      "name": "Qwen3.5-122B-A10B",
-      "modelAlias": null,
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Cost-optimized",
-      "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
-      "shortDescription": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
-      "updateAt": "2026-02-23T12:34:19.000+00:00",
-      "latestOnlineAt": "2026-02-23T12:34:19.000+00:00",
-      "collectionTag": "qwen3.5",
-      "features": [
-        "function-calling",
-        "model-experience",
-        "prefix-completion",
-        "structured-outputs",
-        "web-search"
-      ],
-      "capabilities": [
-        "Reasoning",
-        "TG",
-        "VU"
-      ],
-      "modelInfo": {
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "maxOutputTokens": 65536,
-        "maxReasoningTokens": 81920,
-        "reasoningMaxInputTokens": 258048,
-        "reasoningMaxOutputTokens": 65536
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image",
-          "Video"
-        ],
-        "responseModality": [
-          "Text"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-122b-a10b",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-122b-a10b.md",
-      "supports": {
-        "sft": false,
-        "app": false,
-        "dpo": false,
-        "experienceV2": false,
-        "eval": false,
-        "inference": true,
-        "cpt": false,
-        "experienceUpcoming": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": true,
-        "sellingByQpm": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Text"
-          ],
-          "request_modality": [
-            "Text",
-            "Image",
-            "Video"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-02-23T12:34:19.000+00:00",
-        "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
-        "aliyunRecommend": false,
-        "collectionTag": "qwen3.5",
-        "features": [
-          "model-experience",
-          "function-calling",
-          "structured-outputs",
-          "web-search",
-          "prefix-completion"
-        ],
-        "modelInfo": {
-          "contextWindow": 262144,
-          "maxInputTokens": 260096,
-          "maxReasoningTokens": 81920,
-          "reasoningMaxInputTokens": 258048,
-          "maxOutputTokens": 65536,
-          "reasoningMaxOutputTokens": 65536
-        },
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "app": false,
-          "dpo": false,
-          "experienceV2": false,
-          "eval": false,
-          "inference": true,
-          "cpt": false,
-          "experienceUpcoming": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": true,
-          "sellingByQpm": false
-        },
-        "model": "qwen3.5-122b-a10b",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "Reasoning",
-          "VU",
-          "TG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "SNAPSHOT",
-        "shortDescription": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
-        "maxOutputTokens": 65536,
-        "latestOnlineAt": "2026-02-23T12:34:19.000+00:00",
-        "tags": [],
-        "license": {},
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "inferenceProvider": "bailian",
-        "name": "Qwen3.5-122B-A10B",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-        "needApply": false,
-        "category": "Cost-optimized"
-      },
-      "pricing": {
-        "Input": "$0.4Per 1M tokens",
-        "Output": "$3.2Per 1M tokens"
       },
       "limits": {
         "Max Input": "260K",
@@ -10364,7 +10489,7 @@
       "supports": {
         "fineTune": false,
         "experienceV2": true,
-        "eval": false,
+        "eval": true,
         "inference": true,
         "autoTPM": false,
         "displayQpmLimit": true,
@@ -10396,7 +10521,7 @@
         "supports": {
           "fineTune": false,
           "experienceV2": true,
-          "eval": false,
+          "eval": true,
           "inference": true,
           "autoTPM": false,
           "displayQpmLimit": true,
@@ -10569,6 +10694,7 @@
         "sft": true,
         "fineTune": true,
         "experienceV2": true,
+        "eval": true,
         "inference": true,
         "experience": true,
         "displayQpmLimit": true
@@ -10602,6 +10728,7 @@
           "sft": true,
           "fineTune": true,
           "experienceV2": true,
+          "eval": true,
           "inference": true,
           "experience": true,
           "displayQpmLimit": true
@@ -12683,7 +12810,7 @@
         "sellingByQpm": false,
         "tokenizer": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "experienceUpcoming": false
       },
       "rawItem": {
@@ -12724,7 +12851,7 @@
           "sellingByQpm": false,
           "tokenizer": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "experienceUpcoming": false
         },
         "model": "wan2.2-kf2v-flash",
@@ -12924,7 +13051,7 @@
         "sellingByQpm": false,
         "tokenizer": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "experienceUpcoming": false
       },
       "rawItem": {
@@ -12969,7 +13096,7 @@
           "sellingByQpm": false,
           "tokenizer": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "experienceUpcoming": false
         },
         "model": "wan2.5-i2v-preview",
@@ -13050,7 +13177,7 @@
         "sellingByQpm": false,
         "tokenizer": false,
         "experienceV2": false,
-        "eval": false,
+        "eval": true,
         "experienceUpcoming": false
       },
       "rawItem": {
@@ -13093,7 +13220,7 @@
           "sellingByQpm": false,
           "tokenizer": false,
           "experienceV2": false,
-          "eval": false,
+          "eval": true,
           "experienceUpcoming": false
         },
         "model": "wan2.2-i2v-flash",
