@@ -8,6 +8,7 @@ on:
       - 'claude-tracker/**'
       - 'early-radar/**'
       - 'fast-signals/**'
+      - 'leak-tracker/**'
       - '.github/workflows/fast_signals.yml'
   schedule:
     - cron: '*/1 * * * *'
@@ -79,7 +80,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
-          git add api-tracker/api_snapshot.json early-radar/radar_snapshot.json hf-tracker/hf_snapshot.json reverse-tracker/state/sdk_snapshot.json design-arena/design_snapshot.json claude-tracker/claude_catalog_snapshot.json 2>/dev/null || true
+          git add api-tracker/api_snapshot.json early-radar/radar_snapshot.json hf-tracker/hf_snapshot.json reverse-tracker/state/sdk_snapshot.json design-arena/design_snapshot.json claude-tracker/claude_catalog_snapshot.json leak-tracker/leak_tracker_snapshot.json 2>/dev/null || true
           if ! git diff --cached --quiet; then
             echo "Snapshot changes detected. Committing..."
             git commit -m "Update fast signals snapshots [skip ci]"

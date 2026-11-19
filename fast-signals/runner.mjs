@@ -11,10 +11,11 @@ import { runHfTracker } from '../hf-tracker/tracker.mjs';
 import { runSdkTracker } from '../reverse-tracker/sdk/tracker.mjs';
 import { runDesignTracker } from '../design-arena/design_tracker.mjs';
 import { runClaudeCatalogTracker } from '../claude-tracker/tracker.mjs';
+import { runLeakTracker } from '../leak-tracker/tracker.mjs';
 
 export async function runAllFastSignals(options = {}) {
   const startTime = Date.now();
-  console.log('⚡ [Fast Signals] Starting parallel scan across all 6 lightweight monitors...');
+  console.log('⚡ [Fast Signals] Starting parallel scan across all 7 lightweight monitors...');
 
   const tasks = [
     { name: 'API Signal Tracker', fn: () => runApiTracker(options) },
@@ -23,6 +24,7 @@ export async function runAllFastSignals(options = {}) {
     { name: 'Official AI SDK Tracker', fn: () => runSdkTracker(options) },
     { name: 'DesignArena Tracker', fn: () => runDesignTracker(options) },
     { name: 'Claude Model Catalog Tracker', fn: () => runClaudeCatalogTracker(options) },
+    { name: 'Leak & Pre-Release Tracker', fn: () => runLeakTracker(options) },
   ];
 
   const results = await Promise.allSettled(
