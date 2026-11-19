@@ -116,7 +116,7 @@
     "family": "anthropic"
   },
   "openai": {
-    "version": "7.60.0",
+    "version": "7.61.0",
     "models": [
       "chatgpt-4o-latest",
       "chatgpt-image-latest",
@@ -242,6 +242,7 @@
       "gpt-image-2.6-flare",
       "gpt-image-2.6-sunburst",
       "gpt-live-1",
+      "gpt-live-1.1",
       "gpt-live-transcribe",
       "gpt-realtime",
       "gpt-realtime-1.5",
@@ -297,8 +298,8 @@
     "toolDefinitions": [
       "tools"
     ],
-    "lastUpdated": "2026-11-18T16:22:29.376Z",
-    "shasum": "b025a31a6a2beb981adb5e4ca38cf6eac311b8f9",
+    "lastUpdated": "2026-11-19T21:13:02.878Z",
+    "shasum": "ac2a0ebec54f7b4a5a342f302f5a188cb0e458b1",
     "displayName": "OpenAI Python/TS SDK",
     "family": "openai"
   },
