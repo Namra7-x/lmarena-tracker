@@ -15,7 +15,7 @@
   "scanId": "CD-20261119-001",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": null,
-  "lastFailureTime": "2026-11-19T00:36:22.502Z",
+  "lastFailureTime": "2026-11-19T00:38:47.427Z",
   "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
@@ -34,7 +34,7 @@
     "releaseKey": "b7279485a3615ddfe3da9f15ecbd4c01",
     "status": "PARTIAL",
     "alertSent": true,
-    "alertMessageId": 703,
+    "alertMessageId": 711,
     "expectedFiles": [
       "leaks.txt",
       "diff.txt",
@@ -53,8 +53,8 @@
     ],
     "failedFiles": [],
     "coverageState": "PARTIAL",
-    "createdAt": "2026-11-19T00:36:22.502Z",
-    "updatedAt": "2026-11-19T00:36:22.502Z"
+    "createdAt": "2026-11-19T00:38:47.427Z",
+    "updatedAt": "2026-11-19T00:38:47.427Z"
   },
   "deliveryLedger": [
     {
@@ -71,7 +71,7 @@
         "scan-summary.txt"
       ],
       "failedFiles": [],
-      "at": "2026-11-19T00:36:22.502Z"
+      "at": "2026-11-19T00:38:47.427Z"
     }
   ],
   "releaseHistory": [],
@@ -108,8 +108,8 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 34557,
-    "peakMemoryMb": 282
+    "executionTimeMs": 38523,
+    "peakMemoryMb": 298
   },
   "knownSignals": {}
 }
