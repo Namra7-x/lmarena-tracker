@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-19T18:39:22Z",
+    "publicationDate": "2026-11-19T18:51:17Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/90cdd5f36c4600265acba4fb3fe21ac78458d445",
+      "title": "Add email notification channel for hard spend limit alerts",
+      "updated": "2026-11-19T19:08:02Z",
+      "link": "https://github.com/openai/openai-openapi/commit/90cdd5f36c4600265acba4fb3fe21ac78458d445",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/f1a5bf488203fbb5790adc42fca121b73787e539",
       "title": "Update default GPT image model to gpt-image-2.6-sunburst",
       "updated": "2026-11-19T18:29:36Z",
@@ -108664,13 +108671,6 @@
       "title": "Clarify usage of the &#39;n&#39; parameter for completion choices",
       "updated": "2026-11-16T18:15:09Z",
       "link": "https://github.com/openai/openai-openapi/commit/47a18e9eb9cbb1dcf49618fe8cae79afed439e2d",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/311e90695df595313fb52ecb179b9f717ba7d1b2",
-      "title": "Add pause_reason field to schedule objects",
-      "updated": "2026-11-16T15:04:46Z",
-      "link": "https://github.com/openai/openai-openapi/commit/311e90695df595313fb52ecb179b9f717ba7d1b2",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108827,5 +108827,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-19T18:41:12.244Z"
+  "lastScanAt": "2026-11-19T19:09:05.705Z"
 }
