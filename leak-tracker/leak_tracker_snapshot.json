@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-19T22:05:21Z",
+    "publicationDate": "2026-11-19T22:34:21Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/9ad9fe51d1a6531a47e48038d35a28d130d1f557",
+      "title": "Simplify constant &#39;object&#39; fields to use &#39;const&#39; instead of &#39;enum&#39;",
+      "updated": "2026-11-19T23:09:00Z",
+      "link": "https://github.com/openai/openai-openapi/commit/9ad9fe51d1a6531a47e48038d35a28d130d1f557",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/3f2b776659dbc759350126129baa40a16c9e0aaf",
       "title": "Replace enum with const for fixed event type fields",
       "updated": "2026-11-19T22:14:05Z",
@@ -108664,13 +108671,6 @@
       "title": "Clarify idempotency key behavior for message submissions",
       "updated": "2026-11-17T16:31:15Z",
       "link": "https://github.com/openai/openai-openapi/commit/a184156fd57e4eec2ee5c2e7e0b5a0ef182b0558",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/7a212a7e954ef487a2ac35cc4a969d1a50d5d635",
-      "title": "Clarify input audio noise reduction configuration requirements",
-      "updated": "2026-11-17T08:18:12Z",
-      "link": "https://github.com/openai/openai-openapi/commit/7a212a7e954ef487a2ac35cc4a969d1a50d5d635",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108828,5 +108828,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-19T22:14:49.501Z"
+  "lastScanAt": "2026-11-19T23:09:58.295Z"
 }
