@@ -1,6 +1,7 @@
 {
   "schemaVersion": 2,
   "componentId": "droid-cli",
+<<<<<<< HEAD
   "version": "1.14.0",
   "observedVersion": "1.14.0",
   "scannedVersion": null,
@@ -14,6 +15,21 @@
   "diagnosticFingerprint": "ca32f9a0911b973443cce8dc4daa17fda9f633ae4f8a707e4b15c9b4439dac49",
   "scanId": "DR-20261118-001",
   "coverageState": "BASELINE_ONLY",
+=======
+  "version": "1.15.0",
+  "observedVersion": "1.15.0",
+  "scannedVersion": null,
+  "deliveredVersion": "1.15.0",
+  "alertedVersion": "1.15.0",
+  "releaseId": "droid@1.15.0",
+  "releaseKey": "757ba4d5e349765edb41f54e1ab0c622",
+  "channel": "stable",
+  "versionScheme": "semver",
+  "identityFingerprint": "60055cca8ea1e77ad48a27d9722a352c195ed742eb0f1ed553b49f96e61e6a3e",
+  "diagnosticFingerprint": "c0d519a565f56d22370d39f15a5d5bdf1607a71bd46e616d072e450df460fafd",
+  "scanId": "DR-20261118-001",
+  "coverageState": "COMPLETE",
+>>>>>>> c402616 (Update compact state for all components (macOS) [skip ci])
   "lastSuccessfulScan": null,
   "lastFailureTime": null,
   "lastDeliveryStatus": null,

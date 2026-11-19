@@ -1,6 +1,7 @@
 {
   "schemaVersion": 2,
   "componentId": "antigravity-cli",
+<<<<<<< HEAD
   "version": "1.5.11",
   "observedVersion": "1.5.11",
   "scannedVersion": null,
@@ -14,6 +15,21 @@
   "diagnosticFingerprint": "362c2c4f1899ba9820a86befd321bc15e8d1762029e31dc1981bcd47879d74e3",
   "scanId": "AC-20261118-001",
   "coverageState": "BASELINE_ONLY",
+=======
+  "version": "1.5.12",
+  "observedVersion": "1.5.12",
+  "scannedVersion": null,
+  "deliveredVersion": "1.5.12",
+  "alertedVersion": "1.5.12",
+  "releaseId": "antigravity-cli@1.5.12",
+  "releaseKey": "67cf3db2bc2fd850c27d2b1e59fe2c9c",
+  "channel": "stable",
+  "versionScheme": "semver",
+  "identityFingerprint": "3b8f395ded44b33365e7f9987277a6f6307fc0a687c88a587277cc39d413de8c",
+  "diagnosticFingerprint": "362c2c4f1899ba9820a86befd321bc15e8d1762029e31dc1981bcd47879d74e3",
+  "scanId": "AC-20261118-001",
+  "coverageState": "COMPLETE",
+>>>>>>> c402616 (Update compact state for all components (macOS) [skip ci])
   "lastSuccessfulScan": null,
   "lastFailureTime": null,
   "lastDeliveryStatus": null,
