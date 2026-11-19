@@ -1,6 +1,6 @@
 {
   "@anthropic-ai/sdk": {
-    "version": "1.10.0",
+    "version": "1.11.0",
     "models": [
       "claude-3-5-sonnet-20241022",
       "claude-fable-5",
@@ -36,6 +36,7 @@
       "agent.mcp_tool_use",
       "analytics-usage-cost-2026-08-24",
       "cache-diagnosis-2026-04-07",
+      "ce-claude-code-managed-settings-2026-10-06",
       "ce-plugins-2026-09-01",
       "ce-user-management-2026-07-13",
       "claude-haiku-4-5-20251001",
@@ -109,8 +110,8 @@
       "invalid_tool_input",
       "tools"
     ],
-    "lastUpdated": "2026-11-18T07:21:36.968Z",
-    "shasum": "3e05452f789310c4fd709ee2e8b5cbf376ab6844",
+    "lastUpdated": "2026-11-19T19:30:02.764Z",
+    "shasum": "09a1b392a636af81fcca45093c0a2ab4d68799b0",
     "displayName": "Anthropic Claude SDK",
     "family": "anthropic"
   },
