@@ -1424,15 +1424,6 @@
   ],
   "azureFoundryModels": [
     {
-      "name": "sarvamai-sarvam-105b-fp8",
-      "version": "1",
-      "publisher": "Unknown",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-19T09:40:40.2102773+00:00",
-      "displayName": "sarvamai-sarvam-105b-fp8",
-      "registry": "azureml"
-    },
-    {
       "name": "jina-embeddings-v5-omni-small",
       "version": "2",
       "publisher": "Elastic",
@@ -1547,24 +1538,6 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-16T19:45:00.7601782+00:00",
       "displayName": "mai-code-1.1-flash",
-      "registry": "azureml"
-    },
-    {
-      "name": "sarvamai-sarvam-105b",
-      "version": "1",
-      "publisher": "Unknown",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-16T15:36:55.6165879+00:00",
-      "displayName": "sarvamai-sarvam-105b",
-      "registry": "azureml"
-    },
-    {
-      "name": "Qwen-Qwen3.8-27B-FP8",
-      "version": "1",
-      "publisher": "Unknown",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-16T13:18:24.3290408+00:00",
-      "displayName": "Qwen-Qwen3.8-27B-FP8",
       "registry": "azureml"
     },
     {
@@ -1871,6 +1844,33 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T05:27:49.4830286+00:00",
       "displayName": "kev-0.8b-generic-cpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-0.8b-generic-gpu",
+      "version": "1",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T05:27:37.6792969+00:00",
+      "displayName": "kev-0.8b-generic-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-0.8b-cuda-gpu",
+      "version": "1",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T05:27:25.6072216+00:00",
+      "displayName": "kev-0.8b-cuda-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "clm-v0.1-8b-generic-cpu",
+      "version": "1",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T05:27:14.8369343+00:00",
+      "displayName": "clm-v0.1-8b-generic-cpu",
       "registry": "azureml"
     }
   ],
@@ -90945,5 +90945,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-19T17:32:00.434Z"
+  "lastScanAt": "2026-11-19T17:46:58.894Z"
 }
