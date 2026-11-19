@@ -402,7 +402,11 @@ export async function performScan(componentId, options = {}) {
     pending.alertSent !== false
   );
   const scanId = samePending && pending.scanId ? pending.scanId : nextScanId(componentId, baseline);
-  const alreadyAlerted = baseline.alertedVersion === candidate.version || samePending;
+  const alreadyAlerted =
+    baseline.alertedVersion === candidate.version ||
+    baseline.version === candidate.version ||
+    baseline.deliveredVersion === candidate.version ||
+    samePending;
 
   if (
     isTestRun &&

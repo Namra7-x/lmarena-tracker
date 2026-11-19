@@ -6,9 +6,38 @@
  * file is intentionally thin so the workflow commands stay stable.
  */
 
+import path from 'node:path';
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { FAMILIES, COMPONENTS } from './registry/components.mjs';
 import { detectChanges } from './pipeline/detect.mjs';
 import { performScan } from './pipeline/scan.mjs';
+
+function syncComponentStateToRemote(componentId) {
+  if (!process.env.GITHUB_ACTIONS) return;
+  const stateDir = path.resolve(process.cwd(), 'state');
+  const targetFile = `${componentId}.json`;
+  if (!fs.existsSync(path.join(stateDir, targetFile))) return;
+  try {
+    spawnSync('git', ['config', 'user.name', 'early-signal-tracker-bot'], { cwd: stateDir });
+    spawnSync('git', ['config', 'user.email', 'actions@github.com'], { cwd: stateDir });
+    spawnSync('git', ['add', targetFile], { cwd: stateDir });
+    const diff = spawnSync('git', ['diff', '--cached', '--quiet'], { cwd: stateDir });
+    if (diff.status !== 0) {
+      spawnSync('git', ['commit', '-m', `Auto-persist checkpoint for ${componentId} [skip ci]`], { cwd: stateDir });
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        const push = spawnSync('git', ['push', 'origin', 'HEAD:refs/heads/state/all'], { cwd: stateDir });
+        if (push.status === 0) {
+          console.log(`[Auto-Sync] Successfully pushed checkpoint for ${componentId} to state/all.`);
+          break;
+        }
+        spawnSync('git', ['pull', '--rebase', 'origin', 'state/all'], { cwd: stateDir });
+      }
+    }
+  } catch (err) {
+    console.warn(`[Auto-Sync] Warning syncing ${componentId}:`, err.message);
+  }
+}
 
 function parseOption(args, name) {
   const prefix = `--${name}=`;
@@ -124,6 +153,8 @@ async function main() {
         });
       } catch (scanErr) {
         console.error(`✗ Error processing ${change.componentId}: ${scanErr.message}`);
+      } finally {
+        syncComponentStateToRemote(change.componentId);
       }
     }
     return;
