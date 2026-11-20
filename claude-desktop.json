@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "claude-desktop",
   "version": "6.28899.2",
-  "observedVersion": "6.28899.2",
+  "observedVersion": "6.28899.6",
   "scannedVersion": "6.28899.2",
   "deliveredVersion": "6.28899.2",
-  "alertedVersion": "6.28899.2",
+  "alertedVersion": "6.28899.6",
   "releaseId": "claude-desktop@6.28899.2",
   "releaseKey": "b55d47517c6db1151a6603b2d138bcc9",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-20T01:18:04.006Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "DELIVERED",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "completed",
@@ -28,7 +28,19 @@
     "zip": "completed",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "CA-20261120-002",
+    "version": "6.28899.6",
+    "releaseKey": "72f4b8cf235c645b6e1ac0ac6175d7eb",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 680,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-20T23:28:50.118Z",
+    "updatedAt": "2026-11-20T23:28:50.118Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CA-20261120-001",
