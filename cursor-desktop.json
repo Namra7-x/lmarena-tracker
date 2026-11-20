@@ -15,7 +15,7 @@
   "scanId": "CR-20261120-001",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": null,
-  "lastFailureTime": "2026-11-20T00:22:43.559Z",
+  "lastFailureTime": "2026-11-20T00:24:13.916Z",
   "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
@@ -54,9 +54,25 @@
     "failedFiles": [],
     "coverageState": "PARTIAL",
     "createdAt": "2026-11-20T00:22:43.559Z",
-    "updatedAt": "2026-11-20T00:22:43.559Z"
+    "updatedAt": "2026-11-20T00:24:13.916Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "CR-20261120-001",
+      "version": "3.31.11",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-20T00:24:13.916Z"
+    },
     {
       "scanId": "CR-20261120-001",
       "version": "3.31.11",
@@ -108,8 +124,8 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 9788,
-    "peakMemoryMb": 46
+    "executionTimeMs": 6245,
+    "peakMemoryMb": 43
   },
   "knownSignals": {}
 }
