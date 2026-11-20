@@ -3,7 +3,7 @@
   "componentId": "cursor-desktop",
   "version": "3.31.11",
   "observedVersion": "3.31.15",
-  "scannedVersion": "3.31.11",
+  "scannedVersion": "3.31.15",
   "deliveredVersion": "3.31.11",
   "alertedVersion": "3.31.15",
   "releaseId": "cursor-desktop@3.31.11-52fdf018932f",
@@ -11,12 +11,12 @@
   "channel": "stable",
   "versionScheme": "semver",
   "identityFingerprint": "1c8412a17170c9a097b38415d49dfeb5f97851891e1af38d8ffc940301229993",
-  "diagnosticFingerprint": "17cd1a3f8ca6f49a20cbcf90be25f059f811ab85448d9827d7217fd813614bd9",
-  "scanId": "CR-20261120-001",
+  "diagnosticFingerprint": null,
+  "scanId": "CR-20261120-002",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": null,
-  "lastFailureTime": "2026-11-20T00:24:13.916Z",
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-20T23:16:02.012Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "completed",
@@ -32,16 +32,47 @@
     "scanId": "CR-20261120-002",
     "version": "3.31.15",
     "releaseKey": "15d517a177f68ec8237764e772619c5d",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 552,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-20T23:15:46.634Z",
-    "updatedAt": "2026-11-20T23:15:46.634Z"
+    "coverageState": "PARTIAL",
+    "createdAt": "2026-11-20T23:16:02.012Z",
+    "updatedAt": "2026-11-20T23:16:02.012Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "CR-20261120-002",
+      "version": "3.31.15",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-20T23:16:02.012Z"
+    },
     {
       "scanId": "CR-20261120-001",
       "version": "3.31.11",
@@ -109,8 +140,8 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 6245,
-    "peakMemoryMb": 43
+    "executionTimeMs": 9473,
+    "peakMemoryMb": 46
   },
   "knownSignals": {}
 }
