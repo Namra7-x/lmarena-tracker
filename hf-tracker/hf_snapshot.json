@@ -241,7 +241,7 @@
       },
       "Qwen/Qwen3.6-27B": {
         "createdAt": "2026-04-21T07:50:43.000Z",
-        "lastModified": "2026-11-07T04:41:21.000Z",
+        "lastModified": "2026-11-20T06:46:39.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -381,14 +381,14 @@
       },
       "Qwen/Qwen3.5-27B": {
         "createdAt": "2026-02-24T09:41:56.000Z",
-        "lastModified": "2026-04-24T02:54:49.000Z",
+        "lastModified": "2026-11-20T06:46:35.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
       },
       "Qwen/Qwen3.5-35B-A3B": {
         "createdAt": "2026-02-24T09:39:25.000Z",
-        "lastModified": "2026-04-24T02:38:38.000Z",
+        "lastModified": "2026-11-20T06:46:32.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -752,7 +752,7 @@
       },
       "Qwen/Qwen3-VL-8B-Thinking": {
         "createdAt": "2025-10-11T07:24:34.000Z",
-        "lastModified": "2025-11-26T13:18:14.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -787,7 +787,7 @@
       },
       "Qwen/Qwen3-VL-30B-A3B-Instruct-FP8": {
         "createdAt": "2025-10-01T14:49:16.000Z",
-        "lastModified": "2025-11-26T13:18:10.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -2488,7 +2488,7 @@
       },
       "Qwen/Qwen2-VL-2B-Instruct": {
         "createdAt": "2024-08-28T09:02:15.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-20T06:46:42.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -2712,7 +2712,7 @@
       },
       "Qwen/Qwen2-1.5B-Instruct": {
         "createdAt": "2024-06-03T09:08:12.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-20T06:45:50.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -19110,7 +19110,7 @@
       },
       "nvidia/MotionBricks": {
         "createdAt": "2026-10-23T18:49:27.000Z",
-        "lastModified": "2026-10-23T18:49:31.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
@@ -20671,7 +20671,7 @@
       },
       "nvidia/nemotron-labs-audio-visual-flamingo-hf": {
         "createdAt": "2026-04-15T19:00:34.000Z",
-        "lastModified": "2026-11-16T22:12:37.000Z",
+        "lastModified": "2026-11-20T02:17:10.000Z",
         "gated": false,
         "pipeline_tag": "video-text-to-text",
         "numParameters": null
@@ -22687,7 +22687,7 @@
       },
       "nvidia/Qwen3.8-27B-NVFP4-QAD": {
         "createdAt": "2026-10-26T21:18:47.000Z",
-        "lastModified": "2026-11-17T17:40:33.000Z",
+        "lastModified": "2026-11-20T09:19:45.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -22702,6 +22702,13 @@
       "nvidia/parakeet-tdt-0.6b-v2": {
         "createdAt": "2025-04-15T19:31:12.000Z",
         "lastModified": "2026-11-19T22:38:38.000Z",
+        "gated": false,
+        "pipeline_tag": "automatic-speech-recognition",
+        "numParameters": null
+      },
+      "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-GGUF": {
+        "createdAt": "2026-10-21T13:02:18.000Z",
+        "lastModified": "2026-11-20T11:24:56.000Z",
         "gated": false,
         "pipeline_tag": "automatic-speech-recognition",
         "numParameters": null
@@ -24193,7 +24200,7 @@
       },
       "nvidia/nemotron-labs-sigma-6aed16ae59cfa91daa36c53b": {
         "title": "Nemotron-Labs-Sigma",
-        "lastUpdated": "2026-11-16T18:08:47.607Z",
+        "lastUpdated": "2026-11-20T07:20:30.190Z",
         "itemCount": 4,
         "itemIds": [
           "nvidia/Nemotron-Labs-Sigma-3B",
@@ -25767,56 +25774,56 @@
       },
       "apple/FastFrames-L": {
         "createdAt": "2026-11-16T17:21:04.000Z",
-        "lastModified": "2026-11-18T05:29:30.000Z",
+        "lastModified": "2026-11-20T02:22:20.000Z",
         "gated": false,
         "pipeline_tag": "text-to-video",
         "numParameters": null
       },
       "apple/DepthPro2": {
         "createdAt": "2026-11-03T16:55:03.000Z",
-        "lastModified": "2026-11-19T19:40:58.000Z",
+        "lastModified": "2026-11-20T04:51:56.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
       },
       "apple/DepthPro2-focal": {
         "createdAt": "2026-11-19T18:02:39.000Z",
-        "lastModified": "2026-11-19T20:45:40.000Z",
+        "lastModified": "2026-11-20T04:51:25.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
       },
       "apple/DepthPro2-coreml": {
         "createdAt": "2026-11-09T23:49:42.000Z",
-        "lastModified": "2026-11-18T07:16:46.000Z",
+        "lastModified": "2026-11-20T04:50:58.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
       },
       "apple/DepthPro2-B": {
         "createdAt": "2026-11-05T01:27:32.000Z",
-        "lastModified": "2026-11-19T20:40:40.000Z",
+        "lastModified": "2026-11-20T04:50:40.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
       },
       "apple/DepthPro2-H": {
         "createdAt": "2026-11-05T01:28:00.000Z",
-        "lastModified": "2026-11-19T20:41:00.000Z",
+        "lastModified": "2026-11-20T04:50:22.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
       },
       "apple/DepthPro2-L": {
         "createdAt": "2026-11-05T01:27:47.000Z",
-        "lastModified": "2026-11-19T20:40:48.000Z",
+        "lastModified": "2026-11-20T04:50:05.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
       },
       "apple/DepthPro2-S": {
         "createdAt": "2026-11-05T01:27:02.000Z",
-        "lastModified": "2026-11-19T20:40:35.000Z",
+        "lastModified": "2026-11-20T04:49:29.000Z",
         "gated": false,
         "pipeline_tag": "depth-estimation",
         "numParameters": null
@@ -26047,7 +26054,7 @@
       },
       "moonshotai/Kimi-K3": {
         "createdAt": "2026-06-13T06:42:57.000Z",
-        "lastModified": "2026-09-02T02:22:41.000Z",
+        "lastModified": "2026-11-20T02:36:10.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -26068,7 +26075,7 @@
       },
       "moonshotai/Kimi-K2.5": {
         "createdAt": "2026-01-01T06:06:03.000Z",
-        "lastModified": "2026-04-30T03:56:40.000Z",
+        "lastModified": "2026-11-20T02:36:04.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
@@ -26322,7 +26329,7 @@
       },
       "MiniMaxAI/MiniMax-H3": {
         "createdAt": "2026-07-28T10:45:18.000Z",
-        "lastModified": "2026-11-09T23:28:00.000Z",
+        "lastModified": "2026-11-20T08:47:53.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-video",
         "numParameters": null
@@ -26476,7 +26483,7 @@
       },
       "MiniMaxAI/ecosystem": {
         "createdAt": "2026-11-17T05:55:26.000Z",
-        "lastModified": "2026-11-19T11:35:37.000Z",
+        "lastModified": "2026-11-20T08:22:12.000Z",
         "sdk": null
       }
     },
