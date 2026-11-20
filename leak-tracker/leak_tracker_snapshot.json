@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-20T20:36:47Z",
+    "publicationDate": "2026-11-20T21:59:37Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/5532232eae061f5d8096fa347f98beae8b043082",
+      "title": "Simplify spend limit notification channel schema and update description",
+      "updated": "2026-11-20T22:07:23Z",
+      "link": "https://github.com/openai/openai-openapi/commit/5532232eae061f5d8096fa347f98beae8b043082",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/a01e36728330937352bd0ce1375fb2e6f05e40d1",
       "title": "Replace enum with const for project.model_permissions object types",
       "updated": "2026-11-20T21:02:11Z",
@@ -108664,13 +108671,6 @@
       "title": "Use const instead of enum for fixed event type strings",
       "updated": "2026-11-19T00:30:46Z",
       "link": "https://github.com/openai/openai-openapi/commit/fb9033307cee67df9c97f310762d9bf03d1a32ca",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/d4eae433ac22ac1b1f9af8ecfdbd529d6cea082e",
-      "title": "Remove deprecated x-stainless-const attribute from retired models",
-      "updated": "2026-11-18T22:37:40Z",
-      "link": "https://github.com/openai/openai-openapi/commit/d4eae433ac22ac1b1f9af8ecfdbd529d6cea082e",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108828,5 +108828,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-20T21:03:17.804Z"
+  "lastScanAt": "2026-11-20T22:08:24.325Z"
 }
