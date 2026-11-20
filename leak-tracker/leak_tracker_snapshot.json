@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-20T08:34:14Z",
+    "publicationDate": "2026-11-20T17:45:10Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/031dceba2c77266f42048ca75be71349b837f54d",
+      "title": "Add new error type for unavailable audio input",
+      "updated": "2026-11-20T17:45:38Z",
+      "link": "https://github.com/openai/openai-openapi/commit/031dceba2c77266f42048ca75be71349b837f54d",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/b9bd0d941deb65fa7d5ba82930ce4497dace7139",
       "title": "Clarify pagination and size limits in agent session traces listing",
       "updated": "2026-11-20T16:20:54Z",
@@ -108664,13 +108671,6 @@
       "title": "Remove session spending limit features and related events",
       "updated": "2026-11-18T04:02:05Z",
       "link": "https://github.com/openai/openai-openapi/commit/5687cca5dafb31000193b5af8dafb25b5a27f320",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/8758ba36e983d6840b73683c7310dbf5eabe1b15",
-      "title": "Remove deprecated &#39;session_budget_exceeded&#39; error from API responses",
-      "updated": "2026-11-18T00:43:07Z",
-      "link": "https://github.com/openai/openai-openapi/commit/8758ba36e983d6840b73683c7310dbf5eabe1b15",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108828,5 +108828,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-20T16:21:28.294Z"
+  "lastScanAt": "2026-11-20T17:46:26.930Z"
 }
