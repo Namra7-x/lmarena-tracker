@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "componentId": "devin-desktop",
-  "version": "3.14.30825",
+  "version": "3.14.30833",
   "observedVersion": "3.14.30833",
   "scannedVersion": "3.14.30833",
-  "deliveredVersion": "3.14.30825",
+  "deliveredVersion": "3.14.30833",
   "alertedVersion": "3.14.30833",
   "releaseId": "devin-desktop@3.14.30825-7954ab9c3b5442a88c3fbb3734f00609d126382a",
   "releaseKey": "59c6c6b60e959fc23f4b0ad4b5a15ddf",
@@ -28,34 +28,7 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "DD-20261120-001",
-    "version": "3.14.30833",
-    "releaseKey": "daf0f2f9d570e1a9ce73a70752be456e",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 467,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "failedFiles": [],
-    "coverageState": "PARTIAL",
-    "createdAt": "2026-11-20T19:54:06.785Z",
-    "updatedAt": "2026-11-20T19:58:51.108Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
     {
       "scanId": "DD-20261120-001",
