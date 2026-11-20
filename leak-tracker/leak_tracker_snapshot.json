@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-20T05:53:06Z",
+    "publicationDate": "2026-11-20T08:34:14Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/b9bd0d941deb65fa7d5ba82930ce4497dace7139",
+      "title": "Clarify pagination and size limits in agent session traces listing",
+      "updated": "2026-11-20T16:20:54Z",
+      "link": "https://github.com/openai/openai-openapi/commit/b9bd0d941deb65fa7d5ba82930ce4497dace7139",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/76a4810f6cec796923bb6f4cc874237571a6305b",
       "title": "Clarify behavior of &#39;n&#39; parameter in completions API",
       "updated": "2026-11-20T06:20:52Z",
@@ -108664,13 +108671,6 @@
       "title": "Remove deprecated &#39;session_budget_exceeded&#39; error from API responses",
       "updated": "2026-11-18T00:43:07Z",
       "link": "https://github.com/openai/openai-openapi/commit/8758ba36e983d6840b73683c7310dbf5eabe1b15",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/c2c8cb95a33f373cf8d321ee4f458648f2a2a766",
-      "title": "Add omni-moderation-csam-latest model and CSAM moderation response",
-      "updated": "2026-11-18T00:34:33Z",
-      "link": "https://github.com/openai/openai-openapi/commit/c2c8cb95a33f373cf8d321ee4f458648f2a2a766",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108828,5 +108828,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-20T06:21:48.593Z"
+  "lastScanAt": "2026-11-20T16:21:28.294Z"
 }
