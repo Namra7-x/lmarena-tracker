@@ -3,7 +3,7 @@
   "componentId": "codex-desktop",
   "version": "build-20261118-224357",
   "observedVersion": "build-20261120-014816",
-  "scannedVersion": null,
+  "scannedVersion": "build-20261120-014816",
   "deliveredVersion": "build-20261118-224357",
   "alertedVersion": "build-20261120-014816",
   "releaseId": "codex-desktop-build-20261118-224357",
@@ -11,28 +11,69 @@
   "channel": "prod",
   "versionScheme": "build",
   "identityFingerprint": "b3e78d298201fb6e74abc473b0b808189d1e290780e89f83297fb850fd0f0104",
-  "diagnosticFingerprint": "e5f2b999f246df0d05d45d866a6f4de9aee546dfd6ae08ce1ea7006b2eb6a1fe",
-  "scanId": "CD-20261118-001",
-  "coverageState": "COMPLETE",
+  "diagnosticFingerprint": null,
+  "scanId": "CD-20261120-001",
+  "coverageState": "PARTIAL",
   "lastSuccessfulScan": null,
-  "lastFailureTime": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-20T02:45:24.560Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
-  "analyzerStatus": null,
+  "analyzerStatus": {
+    "acornAst": "skipped",
+    "goReSym": "skipped",
+    "sourceMap": "skipped",
+    "sevenZip": "failed",
+    "asar": "skipped",
+    "tar": "skipped",
+    "zip": "skipped",
+    "multiEncodingScanner": "completed"
+  },
   "pendingDelivery": {
     "scanId": "CD-20261120-001",
     "version": "build-20261120-014816",
     "releaseKey": "48d2d45d1c5c5d24131c8f4f72c635c9",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 1131,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-20T02:42:18.894Z",
-    "updatedAt": "2026-11-20T02:42:18.894Z"
+    "coverageState": "PARTIAL",
+    "createdAt": "2026-11-20T02:45:24.560Z",
+    "updatedAt": "2026-11-20T02:45:24.560Z"
   },
-  "deliveryLedger": [],
+  "deliveryLedger": [
+    {
+      "scanId": "CD-20261120-001",
+      "version": "build-20261120-014816",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-20T02:45:24.560Z"
+    }
+  ],
   "releaseHistory": [],
   "hotSignals": [],
   "recentSignals": [],
@@ -62,7 +103,13 @@
     "count": 0,
     "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
   },
-  "lastCoverageGaps": [],
+  "lastCoverageGaps": [
+    "darwin-universal: extraction partial"
+  ],
   "lastAlertDigest": null,
-  "benchmark": null
+  "benchmark": {
+    "executionTimeMs": 161657,
+    "peakMemoryMb": 3122
+  },
+  "knownSignals": {}
 }
