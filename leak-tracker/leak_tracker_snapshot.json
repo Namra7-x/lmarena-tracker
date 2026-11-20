@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-20T01:17:43Z",
+    "publicationDate": "2026-11-20T01:43:18Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/639c561be1c485ea8e1afd287c6669d62ee99e7f",
+      "title": "Use const instead of enum for fixed object type fields",
+      "updated": "2026-11-20T02:22:25Z",
+      "link": "https://github.com/openai/openai-openapi/commit/639c561be1c485ea8e1afd287c6669d62ee99e7f",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/e99195aefbcd2a8480982ffecbf1b6b5bd14df70",
       "title": "Replace enums with const for fixed object type fields",
       "updated": "2026-11-20T01:19:19Z",
@@ -108664,13 +108671,6 @@
       "title": "Add api_key_spend_limit_exceeded error to usage limits",
       "updated": "2026-11-17T21:03:19Z",
       "link": "https://github.com/openai/openai-openapi/commit/b2fe5a5d9eb3a580da5aed1d3ff2a03b3853e4f8",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/d12b9e88e65ed721eacb561f1d17b8a9025f8840",
-      "title": "Add session spending limit control and budget reached status",
-      "updated": "2026-11-17T20:07:09Z",
-      "link": "https://github.com/openai/openai-openapi/commit/d12b9e88e65ed721eacb561f1d17b8a9025f8840",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108828,5 +108828,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-20T01:20:02.248Z"
+  "lastScanAt": "2026-11-20T02:22:55.870Z"
 }
