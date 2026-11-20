@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-19T22:34:21Z",
+    "publicationDate": "2026-11-20T00:00:48Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/b4ed1b2306d3d25de3b70eb2b31655b1f3ecf0a1",
+      "title": "Replace enum with const for fixed object type fields",
+      "updated": "2026-11-20T00:12:28Z",
+      "link": "https://github.com/openai/openai-openapi/commit/b4ed1b2306d3d25de3b70eb2b31655b1f3ecf0a1",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/9ad9fe51d1a6531a47e48038d35a28d130d1f557",
       "title": "Simplify constant &#39;object&#39; fields to use &#39;const&#39; instead of &#39;enum&#39;",
       "updated": "2026-11-19T23:09:00Z",
@@ -108664,13 +108671,6 @@
       "title": "Add background_options parameter for background request execution",
       "updated": "2026-11-17T18:32:49Z",
       "link": "https://github.com/openai/openai-openapi/commit/39ab6158df5bfcc28ab4ca921221eff9e99667ea",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/a184156fd57e4eec2ee5c2e7e0b5a0ef182b0558",
-      "title": "Clarify idempotency key behavior for message submissions",
-      "updated": "2026-11-17T16:31:15Z",
-      "link": "https://github.com/openai/openai-openapi/commit/a184156fd57e4eec2ee5c2e7e0b5a0ef182b0558",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108828,5 +108828,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-19T23:09:58.295Z"
+  "lastScanAt": "2026-11-20T00:12:49.439Z"
 }
