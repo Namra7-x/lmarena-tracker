@@ -11665,6 +11665,27 @@
           "nativeapps"
         ]
       }
+    },
+    "inkling-2-mini": {
+      "displayName": "Inkling 2 Mini",
+      "provider": "thinkingmachines",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "svg",
+          "uicomponent",
+          "website"
+        ]
+      }
     }
   },
   "providers": {
@@ -13974,6 +13995,11 @@
       "text.output": 40,
       "text.cachedInput": 0.4,
       "text.cacheWrite": 10
+    },
+    "inkling-2-mini": {
+      "text.input": 0.15,
+      "text.output": 0.5,
+      "text.cachedInput": 0.015
     }
   }
 }
