@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "gemini-desktop",
   "version": "build-20261119-163238",
-  "observedVersion": "build-20261119-163238",
+  "observedVersion": "build-20261121-154851",
   "scannedVersion": "build-20261119-163238",
   "deliveredVersion": "build-20261119-163238",
-  "alertedVersion": "build-20261119-163238",
+  "alertedVersion": "build-20261121-154851",
   "releaseId": "gemini-desktop-build-20261119-163238",
   "releaseKey": "4a809460bb9d327d265f6d3acd71e67b",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": "2026-11-19T06:35:49.479Z",
   "lastFailureTime": "2026-11-19T16:36:32.452Z",
-  "lastDeliveryStatus": "PARTIAL",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "GD-20261121-001",
+    "version": "build-20261121-154851",
+    "releaseKey": "ab85d4b282b60315b938d8b116ae0c5d",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 800,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-21T15:51:30.946Z",
+    "updatedAt": "2026-11-21T15:51:30.946Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "GD-20261119-002",
