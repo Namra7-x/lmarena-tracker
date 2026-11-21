@@ -11,11 +11,11 @@
   "channel": "stable",
   "versionScheme": "build",
   "identityFingerprint": "77ab51e9cea2e310bd35e52f4b9a70e1eaecd05e9a2ece5d33b50e46e2b10b42",
-  "diagnosticFingerprint": "8ef2f64cb089045bc4e52d34c5d35ee60e7d539373a75f1eb0ba5e1bfc708d07",
+  "diagnosticFingerprint": null,
   "scanId": "GD-20261121-001",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": "2026-11-19T06:35:49.479Z",
-  "lastFailureTime": "2026-11-21T15:53:00.790Z",
+  "lastFailureTime": "2026-11-21T15:55:33.038Z",
   "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
@@ -54,9 +54,25 @@
     "failedFiles": [],
     "coverageState": "PARTIAL",
     "createdAt": "2026-11-21T15:53:00.790Z",
-    "updatedAt": "2026-11-21T15:53:00.790Z"
+    "updatedAt": "2026-11-21T15:55:33.038Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "GD-20261121-001",
+      "version": "build-20261121-154851",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-21T15:55:33.038Z"
+    },
     {
       "scanId": "GD-20261121-001",
       "version": "build-20261121-154851",
@@ -200114,7 +200130,7 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 77826,
+    "executionTimeMs": 64189,
     "peakMemoryMb": 1568
   },
   "knownSignals": {
