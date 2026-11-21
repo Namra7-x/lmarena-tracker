@@ -125,7 +125,7 @@ jobs:
       - name: Persist State to State Branch
         if: always()
         run: |
-          if [ ! -d "state" ] || [ -z "$(ls -A state/*.json 2>/dev/null)" ]; then
+          if [ ! -d "state" ] || [ -z "$(ls -A state/*.json state/*.json.gz 2>/dev/null)" ]; then
             echo "No state files to persist."
             exit 0
           fi
@@ -133,7 +133,7 @@ jobs:
           cd state
           git config user.name "early-signal-tracker-bot"
           git config user.email "actions@github.com"
-          git add *.json
+          git add *.json *.json.gz 2>/dev/null || git add *.json
 
           if ! git diff --cached --quiet; then
             echo "State changes detected. Committing..."

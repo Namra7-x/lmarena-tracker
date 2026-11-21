@@ -20,9 +20,15 @@ export function hashFindingRecord(record) {
  * @param {Array<Object>} previousFindings
  * @param {Array<Object>} candidateFindings
  * @param {Set<string>} historicalSeenHashes - Set of all historically seen finding hashes
+ * @param {Object} masterKnownSignals - Dedicated master known signals dictionary for this product
  * @returns {Object} { newFindings, addedFindings, changedFindings, removedFindings, persistentFindings, reintroducedFindings, counts, byCategory }
  */
-export function computeExactDiff(previousFindings = [], candidateFindings = [], historicalSeenHashes = new Set()) {
+export function computeExactDiff(
+  previousFindings = [],
+  candidateFindings = [],
+  historicalSeenHashes = new Set(),
+  masterKnownSignals = {}
+) {
   const prevMap = new Map();
   for (const f of previousFindings) {
     prevMap.set(hashFindingRecord(f), f);
@@ -40,19 +46,50 @@ export function computeExactDiff(previousFindings = [], candidateFindings = [], 
   const changedFindings = [];
 
   for (const [hash, finding] of candMap.entries()) {
-    if (prevMap.has(hash)) {
-      const prev = prevMap.get(hash);
-      if (prev.context !== finding.context || prev.filePath !== finding.filePath) {
-        changedFindings.push({ ...finding, diffStatus: 'changed', previousContext: prev.context });
+    const rawKey = `${finding.category || ''}:${finding.value || ''}`.toLowerCase();
+    const valKey = String(finding.value || '').toLowerCase();
+    const masterPrev = masterKnownSignals ? (masterKnownSignals[rawKey] || masterKnownSignals[valKey]) : null;
+    const prev = prevMap.get(hash) || masterPrev;
+
+    if (prev) {
+      const statusChanged = Boolean(
+        prev.activationStatus &&
+        finding.activationStatus &&
+        prev.activationStatus !== finding.activationStatus &&
+        prev.activationStatus !== 'UNKNOWN'
+      );
+      const contextChanged = Boolean(
+        prev.context &&
+        finding.context &&
+        prev.context.trim() !== finding.context.trim()
+      );
+      const pathChanged = Boolean(
+        prev.filePath &&
+        finding.filePath &&
+        prev.filePath !== finding.filePath
+      );
+
+      if (statusChanged || contextChanged || pathChanged) {
+        changedFindings.push({
+          ...finding,
+          diffStatus: 'changed',
+          previousContext: prev.context,
+          previousStatus: prev.activationStatus,
+          previousFilePath: prev.filePath,
+        });
       } else {
         persistentFindings.push({ ...finding, diffStatus: 'persistent' });
       }
     } else {
-      if (
+      const isKnownHistorical = (
         historicalSeenHashes.has(hash) ||
         historicalSeenHashes.has(finding.value) ||
-        historicalSeenHashes.has(`${finding.category || ''}:${finding.value || ''}`)
-      ) {
+        historicalSeenHashes.has(`${finding.category || ''}:${finding.value || ''}`) ||
+        historicalSeenHashes.has(rawKey) ||
+        historicalSeenHashes.has(valKey)
+      );
+
+      if (isKnownHistorical) {
         reintroducedFindings.push({ ...finding, diffStatus: 'reintroduced' });
       } else {
         newFindings.push({ ...finding, diffStatus: 'new' });

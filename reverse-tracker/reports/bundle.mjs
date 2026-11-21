@@ -18,7 +18,7 @@ export function renderAsciiTable(headers, rows, maxColWidths = {}) {
   if (!headers || headers.length === 0) return '';
   const colWidths = headers.map((h, i) => {
     const maxValLen = rows.reduce((max, row) => Math.max(max, String(row[i] == null ? '' : row[i]).length), 0);
-    const maxAllowed = maxColWidths[i] || 55;
+    const maxAllowed = maxColWidths[i] || (i === headers.length - 1 ? 160 : 70);
     return Math.min(Math.max(h.length, maxValLen), maxAllowed);
   });
 
@@ -131,8 +131,8 @@ export function generateReportBundle(outputDir, scanData) {
     tierGroups['TIER 6: 📋 OTHER REVERSE-ENGINEERING SIGNALS'] = otherLeaks;
   }
 
-  const newSignals = validLeaks.filter((f) => f.diffStatus === 'NEW' || f.diffStatus === 'REINTRODUCED');
-  const persistentSignals = validLeaks.filter((f) => f.diffStatus === 'PERSISTENT' || f.diffStatus === 'CHANGED');
+  const newSignals = validLeaks.filter((f) => f.diffStatus === 'NEW' || f.diffStatus === 'CHANGED');
+  const persistentSignals = validLeaks.filter((f) => f.diffStatus === 'PERSISTENT' || f.diffStatus === 'REINTRODUCED');
 
   let leaksContent = renderAsciiBox([
     `Component: ${componentId} (${family || 'unknown'})`,
@@ -155,14 +155,14 @@ export function generateReportBundle(outputDir, scanData) {
   if (newSignals.length > 0) {
     const newHeaders = ['STATUS', 'CATEGORY', 'IDENTIFIER', 'SCORE', 'ACTIVATION', 'EVIDENCE / LOCATION'];
     const newRows = newSignals.map((item) => [
-      item.diffStatus === 'REINTRODUCED' ? '~ REINTRO' : '🔥 NEW',
+      item.diffStatus === 'CHANGED' ? '🔄 MODIFIED' : item.diffStatus === 'REINTRODUCED' ? '~ REINTRO' : '🔥 NEW',
       item.category,
       item.value,
       `${item.score} pts`,
       item.activationStatus || 'UNKNOWN',
-      item.context ? item.context.replace(/\r?\n/g, ' ').slice(0, 48) : (item.filePath || 'delta'),
+      item.context ? item.context.replace(/\r?\n/g, ' ') : (item.filePath || 'delta'),
     ]);
-    leaksContent += renderAsciiTable(newHeaders, newRows, { 0: 10, 1: 18, 2: 32, 3: 10, 4: 12, 5: 50 }) + '\n\n';
+    leaksContent += renderAsciiTable(newHeaders, newRows, { 0: 12, 1: 20, 2: 36, 3: 10, 4: 14, 5: 140 }) + '\n\n';
   } else {
     leaksContent += `No new unannounced leaks or feature flags were introduced in this release delta.\n\n`;
   }
@@ -172,14 +172,14 @@ export function generateReportBundle(outputDir, scanData) {
     leaksContent += `📦 [SECTION 2: KNOWN BASELINE SIGNALS (PREVIOUS RELEASES)] (${persistentSignals.length})\n`;
     const baseHeaders = ['STATUS', 'CATEGORY', 'IDENTIFIER', 'SCORE', 'ACTIVATION', 'LOCATION'];
     const baseRows = persistentSignals.map((item) => [
-      'PERSISTENT',
+      item.diffStatus || 'PERSISTENT',
       item.category,
       item.value,
       `${item.score} pts`,
       item.activationStatus || 'UNKNOWN',
-      item.filePath ? item.filePath.slice(0, 45) : 'baseline',
+      item.filePath || 'baseline',
     ]);
-    leaksContent += renderAsciiTable(baseHeaders, baseRows, { 0: 12, 1: 18, 2: 32, 3: 10, 4: 12, 5: 48 }) + '\n\n';
+    leaksContent += renderAsciiTable(baseHeaders, baseRows, { 0: 12, 1: 20, 2: 36, 3: 10, 4: 14, 5: 120 }) + '\n\n';
   }
 
   if (validLeaks.length === 0) {
@@ -199,6 +199,9 @@ export function generateReportBundle(outputDir, scanData) {
         leaksContent += `  Finding:   ${item.value}\n`;
         if (item.discoveryMethod && item.discoveryMethod !== 'heuristic') {
           leaksContent += `  Discovery: ${item.discoveryMethod}\n`;
+        }
+        if (item.url) {
+          leaksContent += `  URL:       ${item.url}\n`;
         }
         if (item.contexts && item.contexts.length > 0) {
           for (const ctx of item.contexts) {

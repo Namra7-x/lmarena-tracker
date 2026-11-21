@@ -17,7 +17,13 @@ import { performance } from 'node:perf_hooks';
 import { COMPONENTS, generateScanId } from '../registry/components.mjs';
 import { discoverComponent } from '../sources/index.mjs';
 import { computeIdentityFingerprint } from '../fingerprint/identity.mjs';
-import { loadComponentState, saveComponentState, appendDeliveryLedger } from '../state/store.mjs';
+import {
+  loadComponentState,
+  saveComponentState,
+  loadMasterState,
+  saveMasterState,
+  appendDeliveryLedger,
+} from '../state/store.mjs';
 import {
   baselineFromState,
   urlBaselineFromState,
@@ -706,16 +712,22 @@ export async function performScan(componentId, options = {}) {
     }
   }
 
+  // Load dedicated product master state (.json.gz)
+  const masterState = loadMasterState(stateDir, componentId);
+  const masterSignals = masterState?.knownSignals || {};
+
   // Load previous baseline signals
   const previousFindings = dedupeRawFindings([
     ...(baseline.recentSignals || []),
     ...(baseline.hotSignals || []),
     ...(baseline.knownSignals ? Object.values(baseline.knownSignals) : []),
+    ...Object.values(masterSignals),
   ]);
 
   // Track historical finding keys
   const historicalFindingValues = new Set([
     ...stringHistory,
+    ...(masterState.knownStrings || []),
     ...(baseline.historicalSeenHashes || []),
     ...previousFindings.map((f) => `${f.category || ''}:${f.value || ''}`),
     ...previousFindings.map((f) => f.value),
@@ -735,48 +747,54 @@ export async function performScan(componentId, options = {}) {
   }
 
   const allCandidateFindings = dedupeRawFindings([...textFindings, ...directFindings, ...activePreviousFindings]);
-  const diffResults = computeExactDiff(previousFindings, allCandidateFindings, historicalFindingValues);
+  const diffResults = computeExactDiff(previousFindings, allCandidateFindings, historicalFindingValues, masterSignals);
   const allFindings = allCandidateFindings;
 
   // STEP 5: score and rank.
   const keyOf = (finding) => `${finding.category}:${finding.value}`;
   const newKeySet = new Set(diffResults.newFindings.map(keyOf));
-  const reintroducedKeySet = new Set(diffResults.reintroducedFindings.map(keyOf));
-  const persistentKeySet = new Set(diffResults.persistentFindings.map(keyOf));
   const changedKeySet = new Set(diffResults.changedFindings.map(keyOf));
+  const persistentKeySet = new Set(diffResults.persistentFindings.map(keyOf));
+  const reintroducedKeySet = new Set(diffResults.reintroducedFindings.map(keyOf));
+
   const scoredFindings = allFindings.map((finding) => {
     const key = keyOf(finding);
+    const lowerKey = key.toLowerCase();
+    const isMasterKnown = Boolean(masterSignals[lowerKey] || masterSignals[String(finding.value || '').toLowerCase()]);
     const diffStatus = newKeySet.has(key)
       ? 'NEW'
-      : reintroducedKeySet.has(key)
-        ? 'REINTRODUCED'
+      : changedKeySet.has(key)
+        ? 'CHANGED'
         : persistentKeySet.has(key)
           ? 'PERSISTENT'
-          : changedKeySet.has(key)
-            ? 'CHANGED'
-            : 'NEW';
+          : reintroducedKeySet.has(key)
+            ? 'REINTRODUCED'
+            : isMasterKnown
+              ? 'PERSISTENT'
+              : 'NEW';
     return {
       ...scoreFinding(finding, {
-        isNewInDiff: diffStatus === 'NEW' || diffStatus === 'REINTRODUCED',
-        isFirstEverSeen: !historicalFindingValues.has(finding.value) && !historicalFindingValues.has(key),
+        isNewInDiff: diffStatus === 'NEW' || diffStatus === 'CHANGED',
+        isFirstEverSeen: !historicalFindingValues.has(finding.value) && !historicalFindingValues.has(key) && !isMasterKnown,
       }),
       diffStatus,
     };
   });
   const sortedScored = sortFindings(scoredFindings);
   const dedupedFindings = deduplicateFindings(sortedScored);
-  // The completion message is an alert, not a full inventory. Persistent
-  // signals are available in leaks.txt/models-and-pricing.txt but must not be
-  // re-alerted every release.
+
+  // Strictly filter alert signals: only genuinely NEW or MODIFIED signals trigger alerts.
+  // Persistent and unchanged baseline signals are preserved in reports but NEVER re-alerted.
   const displayFindings = isTestRun
     ? dedupedFindings
-    : dedupedFindings.filter((finding) => !['PERSISTENT', 'CHANGED'].includes(finding.diffStatus));
-  const majorSignals = displayFindings.filter((finding) => finding.isMajorEarlySignal);
+    : dedupedFindings.filter((finding) => finding.diffStatus === 'NEW' || finding.diffStatus === 'CHANGED');
+  const majorSignals = displayFindings.filter((finding) => finding.isMajorEarlySignal && finding.diffStatus === 'NEW');
   const highSignals = displayFindings.filter(
-    (finding) => finding.tier === 'HIGH-CONFIDENCE SIGNAL' && !finding.isMajorEarlySignal,
+    (finding) => finding.tier === 'HIGH-CONFIDENCE SIGNAL' && !finding.isMajorEarlySignal && finding.diffStatus === 'NEW',
   );
+  const changedSignals = displayFindings.filter((finding) => finding.diffStatus === 'CHANGED');
   const moreFindings = displayFindings.filter(
-    (finding) => finding.tier === 'EARLY SIGNAL' && !finding.isMajorEarlySignal,
+    (finding) => finding.tier === 'EARLY SIGNAL' && !finding.isMajorEarlySignal && finding.diffStatus === 'NEW',
   );
   const pricingSignals = displayFindings.filter((finding) => finding.category === 'pricing');
   const modelCount = dedupedFindings.filter((finding) => finding.category === 'model_id').length;
@@ -882,6 +900,7 @@ export async function performScan(componentId, options = {}) {
     scanId,
     majorSignals,
     highSignals,
+    changedSignals,
     moreFindings,
     coverage,
     leakCount: reportBundle.leaksCount,
@@ -954,7 +973,7 @@ export async function performScan(componentId, options = {}) {
     currentUrlValues,
   );
 
-  const updatedKnownSignals = { ...(baseline.knownSignals || {}) };
+  const updatedKnownSignals = { ...(masterState.knownSignals || {}), ...(baseline.knownSignals || {}) };
   for (const f of dedupedFindings) {
     if (f.category && f.value) {
       const k = `${f.category}:${f.value.toLowerCase()}`;
@@ -965,8 +984,11 @@ export async function performScan(componentId, options = {}) {
         tier: f.tier,
         activationStatus: f.activationStatus,
         filePath: f.filePath,
-        context: f.context ? f.context.slice(0, 200) : '',
+        context: f.context || '',
+        url: f.url || null,
         firstSeenVersion: updatedKnownSignals[k]?.firstSeenVersion || candidate.version,
+        lastSeenVersion: candidate.version,
+        modifiedAt: scannedAt,
       };
     }
   }
@@ -1039,6 +1061,23 @@ export async function performScan(componentId, options = {}) {
   };
 
   saveComponentState(stateDir, componentId, nextState);
+  if (canAdvance) {
+    masterState.knownSignals = updatedKnownSignals;
+    masterState.knownStrings = mergeStringSets(masterState.knownStrings || [], currentCleanStrings);
+    masterState.knownUrls = mergeStringSets(masterState.knownUrls || [], currentUrlValues);
+    masterState.releaseHistory = [
+      {
+        version: candidate.version,
+        releaseKey,
+        scanId,
+        scannedAt,
+        newCount: diffResults.newFindings.length,
+        changedCount: diffResults.changedFindings.length,
+      },
+      ...(masterState.releaseHistory || []),
+    ].slice(0, 100);
+    saveMasterState(stateDir, componentId, masterState);
+  }
   checkpointState(stateDir, comp.family, `Scan ${scanId} ${canAdvance ? 'delivered' : 'pending'}`);
 
   if (canAdvance) {

@@ -131,6 +131,7 @@ export function formatCompletionMessage({
   majorSignals = [],
   highSignals = [],
   moreFindings = [],
+  changedSignals = [],
   coverage = {},
   countCheckText = '',
   leakCount = 0,
@@ -194,7 +195,19 @@ export function formatCompletionMessage({
       msg += `• <b>${escapeHtml(sig.category)}:</b> <code>${escapeHtml(sig.value)}</code> (${sig.score} pts)\n`;
     }
     msg += '\n';
-  } else if (majorSignals.length === 0 && totalLeaks === 0 && pricingSignals.length === 0) {
+  }
+
+  // Modified / Activated Signals
+  if (changedSignals.length > 0) {
+    msg += `🔄 <b>MODIFIED / ACTIVATED SIGNALS (${changedSignals.length})</b>\n`;
+    for (const sig of changedSignals.slice(0, 8)) {
+      const statusShift = sig.previousStatus && sig.activationStatus && sig.previousStatus !== sig.activationStatus
+        ? ` (<code>${escapeHtml(sig.previousStatus)}</code> ➔ <b>${escapeHtml(sig.activationStatus)}</b>)`
+        : '';
+      msg += `• <b>${escapeHtml(sig.category)}:</b> <code>${escapeHtml(sig.value)}</code>${statusShift}\n`;
+    }
+    msg += '\n';
+  } else if (majorSignals.length === 0 && highSignals.length === 0 && totalLeaks === 0 && pricingSignals.length === 0) {
     msg += `ℹ️ <i>Routine update: No early leak signals detected in this release.</i>\n\n`;
   }
 

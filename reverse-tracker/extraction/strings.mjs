@@ -46,6 +46,16 @@ function splitRepeatedPrefixes(str) {
 export function unpackGluedTokens(str) {
   if (!str || typeof str !== 'string' || str.length < 6) return [str];
 
+  // GUARD: If this string is an intact URL or API route, keep it 100% complete and uncut
+  if (/^(?:https?|wss?):\/\//i.test(str) || /^\/(?:api|v[0-9]|models|model-catalogue)/i.test(str) || str.includes('://')) {
+    return [str];
+  }
+
+  // GUARD: If this string is a complete file path, keep it intact
+  if (str.includes('/') && !str.includes(' ') && (str.startsWith('Contents/') || str.startsWith('out/') || str.startsWith('lib/') || str.startsWith('src/') || str.startsWith('node_modules/'))) {
+    return [str];
+  }
+
   let tokens = [str];
 
   // 0. Split 8-digit timestamp prefixes (e.g. "20250929gemini..." -> "20250929", "gemini...")

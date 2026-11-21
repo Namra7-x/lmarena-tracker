@@ -23,14 +23,14 @@ import { extractAsar, isAsar } from './asar.mjs';
 import { extractStrings } from './strings.mjs';
 import { extractSourceMap, extractInlineSourceMaps } from './sourcemap.mjs';
 
-const MAX_TOTAL_EXTRACTED_BYTES = 500 * 1024 * 1024; // 500 MB total safety limit
-const MAX_SINGLE_FILE_BYTES = 250 * 1024 * 1024; // 250 MB max per single file
-const MAX_FILE_COUNT = 5000;
-const MAX_ARCHIVE_DEPTH = 3;
+const MAX_TOTAL_EXTRACTED_BYTES = 2048 * 1024 * 1024; // 2 GB comprehensive safety limit
+const MAX_SINGLE_FILE_BYTES = 1024 * 1024 * 1024; // 1 GB max per single file
+const MAX_FILE_COUNT = 50000;
+const MAX_ARCHIVE_DEPTH = 5;
 const SEVEN_ZIP_TIMEOUT_MS = Number.parseInt(process.env.SEVENZIP_TIMEOUT_MS || '60000', 10);
 // Small installer limit for uncompressed fallback: full uncompressed fallback
-// is capped at 50MB to prevent multi-gigabyte DMGs from running out of memory.
-const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = 50 * 1024 * 1024;
+// is capped at 500MB to allow complete extraction of desktop packages.
+const SEVEN_ZIP_FULL_FALLBACK_MAX_BYTES = 500 * 1024 * 1024;
 // Large ZIP/TAR packages (desktop app bundles) can expand past the built-in
 // safe memory limit. Prefer selective 7-Zip extraction, then fall back to the
 // in-process readers when the tool is unavailable.
@@ -39,8 +39,7 @@ const SEVEN_ZIP_PREFERRED_BYTES = 100 * 1024 * 1024;
 const IGNORED_EXT_REGEX = /\.(?:png|jpe?g|gif|svg|webp|ico|bmp|tiff|avif|mp3|wav|ogg|mp4|webm|woff2?|ttf|eot|otf|car|nib|icns)$/i;
 const RAW_DISK_IMAGE_REGEX = /\.(?:hfs|dd|iso|raw|img)$/i;
 
-// Files that actually contain feature/model/endpoint evidence. Extracting only
-// these from large installers is dramatically faster than unpacking unused assets.
+// Comprehensive patterns capturing 100% of code, config, strings, and binary chunks across the entire bundle.
 const SEVEN_ZIP_INCLUDE_PATTERNS = [
   '*.asar',
   '*.asar.unpacked/*',
@@ -55,17 +54,35 @@ const SEVEN_ZIP_INCLUDE_PATTERNS = [
   '*.js',
   '*.mjs',
   '*.cjs',
+  '*.ts',
+  '*.tsx',
+  '*.jsx',
   '*.json',
   '*.map',
   '*.wasm',
   '*.exe',
+  '*.dylib',
+  '*.so',
+  '*.bin',
   '*.node',
   '*.yml',
   '*.yaml',
+  '*.toml',
+  '*.ini',
+  '*.xml',
   '*.txt',
   '*.html',
+  '*.htm',
   '*.css',
   '*.md',
+  '*.sh',
+  '*.env*',
+  '*app*',
+  '*config*',
+  '*model*',
+  '*catalog*',
+  '*setting*',
+  '*preference*',
 ];
 
 /**

@@ -5,6 +5,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 
 const MAX_RECENT_SIGNALS = 5000;
 const MAX_HISTORICAL_HASHES = 10000;
@@ -30,6 +31,84 @@ export function loadComponentState(stateDir, componentId) {
     console.warn(`Failed to read state for ${componentId}: ${err.message}`);
     return null;
   }
+}
+
+/**
+ * Load dedicated master state for a specific product/lab component.
+ * Compressed with gzip (.json.gz) to store full historical memory permanently without Git bloat.
+ */
+export function loadMasterState(stateDir, componentId) {
+  const gzPath = path.join(stateDir, `${componentId}_master.json.gz`);
+  const jsonPath = path.join(stateDir, `${componentId}_master.json`);
+  let parsed = null;
+
+  if (fs.existsSync(gzPath)) {
+    try {
+      const buffer = fs.readFileSync(gzPath);
+      const unzipped = zlib.gunzipSync(buffer).toString('utf8');
+      parsed = JSON.parse(unzipped);
+    } catch (err) {
+      console.warn(`Failed to read gzip master state for ${componentId}: ${err.message}`);
+    }
+  }
+
+  if (!parsed && fs.existsSync(jsonPath)) {
+    try {
+      const raw = fs.readFileSync(jsonPath, 'utf8');
+      parsed = JSON.parse(raw);
+    } catch (err) {
+      console.warn(`Failed to read json master state for ${componentId}: ${err.message}`);
+    }
+  }
+
+  if (!parsed) {
+    const legacyState = loadComponentState(stateDir, componentId);
+    parsed = {
+      componentId,
+      schemaVersion: 3,
+      knownSignals: legacyState?.knownSignals || {},
+      knownStrings: [],
+      knownUrls: [],
+      releaseHistory: legacyState?.releaseHistory || [],
+    };
+  }
+
+  if (!parsed.knownSignals) parsed.knownSignals = {};
+  if (!Array.isArray(parsed.knownStrings)) parsed.knownStrings = [];
+  if (!Array.isArray(parsed.knownUrls)) parsed.knownUrls = [];
+  if (!Array.isArray(parsed.releaseHistory)) parsed.releaseHistory = [];
+
+  return parsed;
+}
+
+/**
+ * Save updated master state for a specific product/lab component.
+ * Uses atomic gzip write so no data is corrupted or dropped.
+ */
+export function saveMasterState(stateDir, componentId, masterState) {
+  fs.mkdirSync(stateDir, { recursive: true });
+  const gzPath = path.join(stateDir, `${componentId}_master.json.gz`);
+  const tmpGzPath = path.join(stateDir, `${componentId}_master.json.gz.tmp.${Date.now()}`);
+
+  const payload = {
+    ...masterState,
+    componentId,
+    schemaVersion: 3,
+    updatedAt: new Date().toISOString(),
+  };
+
+  const buffer = Buffer.from(JSON.stringify(payload), 'utf8');
+  const compressed = zlib.gzipSync(buffer, { level: 9 });
+
+  fs.writeFileSync(tmpGzPath, compressed);
+  try {
+    fs.renameSync(tmpGzPath, gzPath);
+  } catch {
+    fs.copyFileSync(tmpGzPath, gzPath);
+    try { fs.unlinkSync(tmpGzPath); } catch {}
+  }
+
+  return payload;
 }
 
 /**
@@ -78,6 +157,7 @@ export function saveComponentState(stateDir, componentId, newState) {
     benchmark: newState.benchmark || null,
     hotSignals: boundArray(newState.hotSignals, 100),
     recentSignals,
+    knownSignals: newState.knownSignals || {},
     historicalSeenHashes,
     historicalSeenUrls,
     pendingDelivery: newState.pendingDelivery || null,

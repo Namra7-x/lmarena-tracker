@@ -411,6 +411,12 @@ const MODEL_LABEL_PATTERN = /(?:model|model_id|modelId|model_name|modelName|slug
 const INPUT_PRICE_PATTERN = /(?:input|prompt|input_price|inputPrice|input_cost|inputCost)[^0-9$]{0,30}\$?\s*([0-9]+(?:\.[0-9]+)?)/i;
 const OUTPUT_PRICE_PATTERN = /(?:output|completion|output_price|outputPrice|output_cost|outputCost)[^0-9$]{0,30}\$?\s*([0-9]+(?:\.[0-9]+)?)/i;
 
+function cleanFullContext(str) {
+  if (!str || typeof str !== 'string') return '';
+  const trimmed = str.trim();
+  return trimmed.length > 2000 ? trimmed.slice(0, 2000) : trimmed;
+}
+
 /**
  * Scan a text/string line and match potential signals.
  * Returns array of { category, value, context, hasDormantMarker, dormantMarker }.
@@ -428,6 +434,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     return regex.test(lowerText);
   }) || null;
   const defaultActivation = matchedMarker ? ACTIVATION_STATUS.CONFIGURED : ACTIVATION_STATUS.REFERENCED;
+  const fullContext = cleanFullContext(text);
 
   // Unpack glued binary string tokens if present (e.g. "_callgemini-3.8-flash-ttslyria-3-clip-preview")
   const textCandidates = unpackGluedTokens(text);
@@ -448,7 +455,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
             findings.push({
               category: CATEGORIES.MODEL_ID,
               value: val,
-              context: text.slice(0, 200),
+              context: fullContext,
               hasDormantMarker: Boolean(matchedMarker),
               dormantMarker: matchedMarker,
               activationStatus: defaultActivation,
@@ -473,7 +480,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         findings.push({
           category: isExp ? CATEGORIES.EXPERIMENT : CATEGORIES.FEATURE_FLAG,
           value: val,
-          context: text.slice(0, 200),
+          context: fullContext,
           hasDormantMarker: Boolean(matchedMarker),
           dormantMarker: matchedMarker,
           activationStatus: defaultActivation,
@@ -493,7 +500,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
       findings.push({
         category: CATEGORIES.HIDDEN_COMMAND,
         value: m[1].trim(),
-        context: text.slice(0, 200),
+        context: fullContext,
         hasDormantMarker: true,
         dormantMarker: matchedMarker || 'hidden_command',
         activationStatus: ACTIVATION_STATUS.CONFIGURED,
@@ -512,7 +519,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
       findings.push({
         category: CATEGORIES.ENDPOINT_DOMAIN,
         value: m[1].trim(),
-        context: text.slice(0, 200),
+        context: fullContext,
         hasDormantMarker: Boolean(matchedMarker),
         dormantMarker: matchedMarker,
         activationStatus: defaultActivation,
@@ -533,7 +540,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         findings.push({
           category: CATEGORIES.AGENT_MODE,
           value: val,
-          context: text.slice(0, 200),
+          context: fullContext,
           hasDormantMarker: Boolean(matchedMarker),
           dormantMarker: matchedMarker,
           activationStatus: defaultActivation,
@@ -553,7 +560,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
       findings.push({
         category: CATEGORIES.ENV_VAR,
         value: m[1].trim(),
-        context: text.slice(0, 200),
+        context: fullContext,
         hasDormantMarker: Boolean(matchedMarker),
         dormantMarker: matchedMarker,
         activationStatus: defaultActivation,
@@ -572,7 +579,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
       findings.push({
         category: CATEGORIES.UI_STRING,
         value: m[1].trim(),
-        context: text.slice(0, 200),
+        context: fullContext,
         hasDormantMarker: true,
         dormantMarker: 'dark_ui_copy',
         activationStatus: ACTIVATION_STATUS.CONFIGURED,
@@ -592,7 +599,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
       findings.push({
         category: CATEGORIES.CAPABILITY,
         value: val,
-        context: text.slice(0, 200),
+        context: fullContext,
         hasDormantMarker: Boolean(matchedMarker),
         dormantMarker: matchedMarker,
         activationStatus: defaultActivation,
@@ -612,7 +619,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
       findings.push({
         category: CATEGORIES.PLAN_ENTITLEMENT,
         value: val,
-        context: text.slice(0, 200),
+        context: fullContext,
         hasDormantMarker: Boolean(matchedMarker),
         dormantMarker: matchedMarker,
         activationStatus: ACTIVATION_STATUS.CONFIGURED,
@@ -631,7 +638,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     if (looksLikeJsonObject) break;
     const m = text.match(pat);
     if (m && m[1]) {
-      const value = m[0].trim().replace(/\s+/g, ' ').slice(0, 180);
+      const value = m[0].trim().replace(/\s+/g, ' ');
       const key = `pricing:${value}`;
       if (!pricingSeen.has(key)) {
         pricingSeen.add(key);
@@ -639,7 +646,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
           category: CATEGORIES.PRICING,
           value,
           pricingValue: Number.parseFloat(m[1]),
-          context: text.slice(0, 300),
+          context: fullContext,
           hasDormantMarker: Boolean(matchedMarker),
           dormantMarker: matchedMarker,
           activationStatus: ACTIVATION_STATUS.CONFIGURED,
