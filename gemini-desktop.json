@@ -3,7 +3,7 @@
   "componentId": "gemini-desktop",
   "version": "build-20261121-154851",
   "observedVersion": "build-20261121-165529",
-  "scannedVersion": "build-20261121-154851",
+  "scannedVersion": "build-20261121-165529",
   "deliveredVersion": "build-20261121-154851",
   "alertedVersion": "build-20261121-165529",
   "releaseId": "gemini-desktop-build-20261121-154851",
@@ -11,12 +11,12 @@
   "channel": "stable",
   "versionScheme": "build",
   "identityFingerprint": "32632fb21f553c38f08fcf2b0404e8267a5b1f8c5bc8a9f1c3f1ccbe16587cb1",
-  "diagnosticFingerprint": "75fbb7fe355c35af15143ca8900230e30b3bcef81eda21ff8a0bfd9212f0e0e6",
-  "scanId": "GD-20261121-001",
+  "diagnosticFingerprint": null,
+  "scanId": "GD-20261121-002",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": "2026-11-19T06:35:49.479Z",
-  "lastFailureTime": "2026-11-21T15:55:33.038Z",
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-21T16:59:52.949Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -32,16 +32,47 @@
     "scanId": "GD-20261121-002",
     "version": "build-20261121-165529",
     "releaseKey": "f9e2def859a4ff939bb29196a4139a07",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 815,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-21T16:58:33.768Z",
-    "updatedAt": "2026-11-21T16:58:33.768Z"
+    "coverageState": "PARTIAL",
+    "createdAt": "2026-11-21T16:59:52.949Z",
+    "updatedAt": "2026-11-21T16:59:52.949Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "GD-20261121-002",
+      "version": "build-20261121-165529",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-21T16:59:52.949Z"
+    },
     {
       "scanId": "GD-20261121-001",
       "version": "build-20261121-154851",
@@ -200115,7 +200146,7 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 64189,
+    "executionTimeMs": 67035,
     "peakMemoryMb": 1568
   },
   "knownSignals": {
