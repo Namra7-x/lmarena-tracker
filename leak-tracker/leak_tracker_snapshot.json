@@ -105000,7 +105000,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-20T21:59:37Z",
+    "publicationDate": "2026-11-21T00:56:28Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -108534,6 +108534,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/2a24deae6f89f84d0e88ce3c9d96c00304dca0b8",
+      "title": "Replace enum with const for multiple string properties in API schemas",
+      "updated": "2026-11-21T00:57:35Z",
+      "link": "https://github.com/openai/openai-openapi/commit/2a24deae6f89f84d0e88ce3c9d96c00304dca0b8",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/5532232eae061f5d8096fa347f98beae8b043082",
       "title": "Simplify spend limit notification channel schema and update description",
       "updated": "2026-11-20T22:07:23Z",
@@ -108664,13 +108671,6 @@
       "title": "Update default model from gpt-6-astra to gpt-6.2-astra",
       "updated": "2026-11-19T01:28:03Z",
       "link": "https://github.com/openai/openai-openapi/commit/45f52f26d566cad3c8f28c54cb67135c03e5f90a",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/fb9033307cee67df9c97f310762d9bf03d1a32ca",
-      "title": "Use const instead of enum for fixed event type strings",
-      "updated": "2026-11-19T00:30:46Z",
-      "link": "https://github.com/openai/openai-openapi/commit/fb9033307cee67df9c97f310762d9bf03d1a32ca",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -108828,5 +108828,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-20T22:08:24.325Z"
+  "lastScanAt": "2026-11-21T00:58:27.670Z"
 }
