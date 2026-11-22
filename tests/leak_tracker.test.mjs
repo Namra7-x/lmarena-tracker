@@ -187,4 +187,44 @@ describe('Leak Tracker — Notifier & Embed Formatter Verification', () => {
     assert.strictEqual(embed.color, LEAK_CONFIG.colors.aws);
     assert.ok(embed.fields[0].name.includes('Grok 4.7'));
   });
+
+  it('should split 28 Azure Retail SKUs across multi-embed chunks with zero omissions', () => {
+    const sampleSkus = Array.from({ length: 28 }, (_, i) => ({
+      productName: `Azure OpenAI Model ${i + 1}`,
+      skuName: `SKU-${i + 1}`,
+      retailPrice: 10 + i,
+      unitOfMeasure: '1M',
+      effectiveStartDate: '2026-11-22T00:00:00Z',
+      feedName: 'Foundry Models',
+    }));
+
+    const embeds = buildAzureRetailPricesEmbed(sampleSkus);
+    assert.strictEqual(embeds.length, 2);
+
+    // Part 1
+    assert.ok(embeds[0].title.includes('(28) [Part 1/2]'));
+    assert.strictEqual(embeds[0].fields.length, 15);
+    assert.ok(embeds[0].fields[0].name.includes('Azure OpenAI Model 1'));
+    assert.ok(embeds[0].fields[14].name.includes('Azure OpenAI Model 15'));
+
+    // Part 2
+    assert.ok(embeds[1].title.includes('(28) [Part 2/2]'));
+    assert.strictEqual(embeds[1].fields.length, 13);
+    assert.ok(embeds[1].fields[0].name.includes('Azure OpenAI Model 16'));
+    assert.ok(embeds[1].fields[12].name.includes('Azure OpenAI Model 28'));
+
+    // Verify zero truncation / no "+X more" text
+    const totalFields = embeds[0].fields.length + embeds[1].fields.length;
+    assert.strictEqual(totalFields, 28);
+    for (const embed of embeds) {
+      for (const field of embed.fields) {
+        assert.ok(!field.value.includes('more retail pricing rows'));
+      }
+    }
+
+    // Verify backward compatibility property access on array
+    assert.ok(embeds.title.includes('(28) [Part 1/2]'));
+    assert.strictEqual(embeds.color, LEAK_CONFIG.colors.azure);
+    assert.strictEqual(embeds.fields.length, 15);
+  });
 });

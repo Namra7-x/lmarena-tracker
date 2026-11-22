@@ -41,17 +41,28 @@ import { computeLeakDiff } from './diff.mjs';
 import {
   sendDiscordWebhook,
   buildGcpSkuEmbed,
+  buildGcpSkuEmbeds,
   buildAzureFoundryEmbed,
+  buildAzureFoundryEmbeds,
   buildAwsBedrockMasterEmbed,
+  buildAwsBedrockMasterEmbeds,
   buildAzureRetailPricesEmbed,
+  buildAzureRetailPricesEmbeds,
   buildGoogleVertexPricingEmbed,
+  buildGoogleVertexPricingEmbeds,
   buildAwsOffersIndexEmbed,
+  buildAwsOffersIndexEmbeds,
   buildJumpstartProprietaryEmbed,
+  buildJumpstartProprietaryEmbeds,
   buildAnthropicPythonSdkEmbed,
+  buildAnthropicPythonSdkEmbeds,
   buildGoogleGenaiPythonEmbed,
+  buildGoogleGenaiPythonEmbeds,
   buildOpenaiCodexEmbed,
+  buildOpenaiCodexEmbeds,
   buildOpenaiCommitEmbed,
   buildOpenaiOpenapiEmbed,
+  buildOpenaiOpenapiEmbeds,
 } from './notifier.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -186,38 +197,38 @@ export async function runLeakTracker(options = {}) {
   if (diff.channel1.hasChanges) {
     console.log('[Leak Tracker] 🚨 Channel 1 changes detected! Dispatching to Early Model channel...');
     if (diff.channel1.newGcpSkus.length > 0) {
-      await sendDiscordWebhook('earlyModel', { embeds: [buildGcpSkuEmbed(diff.channel1.newGcpSkus)] });
+      await sendDiscordWebhook('earlyModel', { embeds: buildGcpSkuEmbeds(diff.channel1.newGcpSkus) });
     }
     if (diff.channel1.newAzureFoundry.length > 0) {
-      await sendDiscordWebhook('earlyModel', { embeds: [buildAzureFoundryEmbed(diff.channel1.newAzureFoundry)] });
+      await sendDiscordWebhook('earlyModel', { embeds: buildAzureFoundryEmbeds(diff.channel1.newAzureFoundry) });
     }
     if (diff.channel1.newBedrockMaster.length > 0) {
-      await sendDiscordWebhook('earlyModel', { embeds: [buildAwsBedrockMasterEmbed(diff.channel1.newBedrockMaster, current.awsBedrockMaster.version)] });
+      await sendDiscordWebhook('earlyModel', { embeds: buildAwsBedrockMasterEmbeds(diff.channel1.newBedrockMaster, current.awsBedrockMaster.version) });
     }
     if (diff.channel1.newAzureRetail.length > 0) {
-      await sendDiscordWebhook('earlyModel', { embeds: [buildAzureRetailPricesEmbed(diff.channel1.newAzureRetail)] });
+      await sendDiscordWebhook('earlyModel', { embeds: buildAzureRetailPricesEmbeds(diff.channel1.newAzureRetail) });
     }
     if (diff.channel1.newVertexPricingModels.length > 0) {
-      await sendDiscordWebhook('earlyModel', { embeds: [buildGoogleVertexPricingEmbed(diff.channel1.newVertexPricingModels)] });
+      await sendDiscordWebhook('earlyModel', { embeds: buildGoogleVertexPricingEmbeds(diff.channel1.newVertexPricingModels) });
     }
     if (diff.channel1.newAwsOfferCodes.length > 0) {
-      await sendDiscordWebhook('earlyModel', { embeds: [buildAwsOffersIndexEmbed(diff.channel1.newAwsOfferCodes)] });
+      await sendDiscordWebhook('earlyModel', { embeds: buildAwsOffersIndexEmbeds(diff.channel1.newAwsOfferCodes) });
     }
     if (diff.channel1.newJumpstart.length > 0) {
-      await sendDiscordWebhook('earlyModel', { embeds: [buildJumpstartProprietaryEmbed(diff.channel1.newJumpstart)] });
+      await sendDiscordWebhook('earlyModel', { embeds: buildJumpstartProprietaryEmbeds(diff.channel1.newJumpstart) });
     }
   }
 
   if (diff.channel2.hasChanges) {
     console.log('[Leak Tracker] 🚨 Channel 2 changes detected! Dispatching to GitHub Commits & Analysis channel...');
     if (diff.channel2.newAnthropicPythonModels.length > 0) {
-      await sendDiscordWebhook('commitAnalysis', { embeds: [buildAnthropicPythonSdkEmbed(diff.channel2.newAnthropicPythonModels)] });
+      await sendDiscordWebhook('commitAnalysis', { embeds: buildAnthropicPythonSdkEmbeds(diff.channel2.newAnthropicPythonModels) });
     }
     if (diff.channel2.newGoogleGenaiPythonModels.length > 0) {
-      await sendDiscordWebhook('commitAnalysis', { embeds: [buildGoogleGenaiPythonEmbed(diff.channel2.newGoogleGenaiPythonModels)] });
+      await sendDiscordWebhook('commitAnalysis', { embeds: buildGoogleGenaiPythonEmbeds(diff.channel2.newGoogleGenaiPythonModels) });
     }
     if (diff.channel2.newCodexModels.length > 0) {
-      await sendDiscordWebhook('commitAnalysis', { embeds: [buildOpenaiCodexEmbed(diff.channel2.newCodexModels)] });
+      await sendDiscordWebhook('commitAnalysis', { embeds: buildOpenaiCodexEmbeds(diff.channel2.newCodexModels) });
     }
     if (diff.channel2.newOpenaiCommits.length > 0) {
       for (const commit of diff.channel2.newOpenaiCommits.slice(0, 3)) {
@@ -225,7 +236,7 @@ export async function runLeakTracker(options = {}) {
       }
     }
     if (diff.channel2.newOpenaiEnums.length > 0) {
-      await sendDiscordWebhook('commitAnalysis', { embeds: [buildOpenaiOpenapiEmbed(diff.channel2.newOpenaiEnums, current.openaiOpenapiYaml.version)] });
+      await sendDiscordWebhook('commitAnalysis', { embeds: buildOpenaiOpenapiEmbeds(diff.channel2.newOpenaiEnums, current.openaiOpenapiYaml.version) });
     }
   }
 
