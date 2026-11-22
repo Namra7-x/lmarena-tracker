@@ -15,7 +15,7 @@
   "scanId": "DR-20261122-001",
   "coverageState": "FAILED",
   "lastSuccessfulScan": "2026-11-21T15:19:17.670Z",
-  "lastFailureTime": "2026-11-22T03:09:29.038Z",
+  "lastFailureTime": "2026-11-22T03:10:35.150Z",
   "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
@@ -54,9 +54,25 @@
     "failedFiles": [],
     "coverageState": "FAILED",
     "createdAt": "2026-11-22T03:09:29.038Z",
-    "updatedAt": "2026-11-22T03:09:29.038Z"
+    "updatedAt": "2026-11-22T03:10:35.150Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "DR-20261122-001",
+      "version": "1.17.2",
+      "status": "PARTIAL",
+      "coverageState": "FAILED",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-22T03:10:35.150Z"
+    },
     {
       "scanId": "DR-20261122-001",
       "version": "1.17.2",
@@ -93095,8 +93111,8 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 6691,
-    "peakMemoryMb": 342
+    "executionTimeMs": 1989,
+    "peakMemoryMb": 377
   },
   "knownSignals": {
     "model_id:aria-hidden-body-eval": {
