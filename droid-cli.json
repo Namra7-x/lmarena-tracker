@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "droid-cli",
   "version": "1.17.1",
-  "observedVersion": "1.17.1",
+  "observedVersion": "1.17.2",
   "scannedVersion": "1.17.1",
   "deliveredVersion": "1.17.1",
-  "alertedVersion": "1.17.1",
+  "alertedVersion": "1.17.2",
   "releaseId": "droid@1.17.1",
   "releaseKey": "47e194ea879a0d76ab335752582d797b",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-21T15:19:17.670Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "DELIVERED",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "DR-20261122-001",
+    "version": "1.17.2",
+    "releaseKey": "a533b28cd0197a30cfda3a67e8ebaa69",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 591,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-22T03:09:15.737Z",
+    "updatedAt": "2026-11-22T03:09:15.737Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "DR-20261121-002",
