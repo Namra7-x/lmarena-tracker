@@ -40,7 +40,6 @@ export const LEAK_CONFIG = {
     azureRetailFeeds: [
       { name: 'Foundry Models', url: 'https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=serviceName%20eq%20%27Foundry%20Models%27' },
       { name: 'Azure OpenAI', url: 'https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=productName%20eq%20%27Azure%20OpenAI%27' },
-      { name: 'AI + ML Master', url: 'https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=serviceFamily%20eq%20%27AI%20%2B%20Machine%20Learning%27' },
     ],
     googleVertexPricingHtml: 'https://cloud.google.com/vertex-ai/generative-ai/pricing',
     awsOffersIndex: 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/index.json',

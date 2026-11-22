@@ -149,7 +149,7 @@ export function buildAzureRetailPricesEmbed(skus) {
 
   return {
     title: `🔷 Azure Retail Prices — New AI Model SKU Listed (${count})`,
-    description: `Microsoft listed **${count} new retail price line(s)** across Foundry Models, Azure OpenAI, and AI+ML feeds.`,
+    description: `Microsoft listed **${count} new retail price line(s)** across Foundry Models and Azure OpenAI feeds.`,
     url: 'https://azure.microsoft.com/en-us/pricing/details/cognitive-services/',
     color: LEAK_CONFIG.colors.azure,
     fields,

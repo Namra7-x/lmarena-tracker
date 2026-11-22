@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { computeLeakDiff } from '../leak-tracker/diff.mjs';
+import { isGenuineAiModelSku } from '../leak-tracker/fetcher.mjs';
 import {
   buildGcpSkuEmbed,
   buildAzureFoundryEmbed,
@@ -120,6 +121,27 @@ describe('Leak Tracker — Diffing Engine', () => {
     assert.strictEqual(diff.channel2.hasChanges, false);
     assert.strictEqual(diff.channel1.newVertexPricingModels.length, 3);
     assert.ok(diff.channel1.newVertexPricingModels.includes('gemini-4-argon'));
+  });
+
+  it('should filter out enterprise IT noise and accept genuine AI model pricing lines', () => {
+    // 1. Genuine frontier models & modalities -> ACCEPT
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Azure OpenAI GPT5', skuName: '5.4 opt Dz' }), true);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Azure Grok Models', skuName: 'Grok 4.2 Inp Dzone' }), true);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Azure OpenAI Media', skuName: 'gpt-realtime-2 Image cd inp Gl' }), true);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Azure Kimi', skuName: 'K2 Thinking Inp DZ' }), true);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Cohere Models', skuName: 'Command A Plus Inp DZ' }), true);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Azure OpenAI', skuName: 'gpt-4.1-ft mdl grdr inpt' }), true);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Foundry Models', skuName: 'DeepSeek R1 Reasoning Inp' }), true);
+
+    // 2. Legacy enterprise IT / Cognitive Services utilities -> REJECT
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Bing Spell Check v5', skuName: 'S1 Transactions' }), false);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Emotion', skuName: 'Standard' }), false);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Form Recognizer', skuName: 'Custom Forms' }), false);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Speaker Identification', skuName: 'Standard Identification' }), false);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Custom Speech', skuName: 'Model Training' }), false);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Anomaly Detector', skuName: 'Standard' }), false);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Content Moderator', skuName: 'S0' }), false);
+    assert.strictEqual(isGenuineAiModelSku({ productName: 'Machine Learning Studio Production Web API', skuName: 'Standard' }), false);
   });
 
   it('should detect AWS Bedrock Master pricing models (Grok 4.7, Kimi K2) and route to Channel 1', () => {

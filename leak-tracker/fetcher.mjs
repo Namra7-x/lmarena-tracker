@@ -133,8 +133,38 @@ export async function fetchAwsBedrockMaster() {
   };
 }
 
+const AI_MODEL_PATTERNS = [
+  /\b(?:gpt[0-9.-]*|o[1-9][0-9.-]*|chatgpt|dall-e|sora|whisper|codex|mai|phi|deepseek|grok|llama|mistral|qwen|claude|gemini|flux|nemotron|nova|jina|cohere|voyage|kimi|minimax|bcv)\b/i,
+  /\b(?:embed|embedding|realtime|reasoning|thinking|vision|audio|transcribe|image-generation|token|prompt|completion|fine-tuning|inference)\b/i,
+];
+
+const NOISE_NON_MODEL_PATTERNS = [
+  /\b(?:spell[\s-]?check|emotion|form[\s-]?recognizer|custom[\s-]?speech|speaker[\s-]?identification|content[\s-]?moderator|anomaly[\s-]?detector|intelligent[\s-]?recommendations|video[\s-]?indexer|immersive[\s-]?reader|health[\s-]?bot|face|container|hardware[\s-]?accelerated|mainframe|production[\s-]?web[\s-]?api)\b/i,
+];
+
 /**
- * 4. Azure Retail Prices (Foundry Models, Azure OpenAI, AI+ML Master)
+ * Validates whether an Azure Retail billing line represents an actual AI model SKU.
+ * Rejects legacy Cognitive Services, OCR, spell checks, and general IT tools.
+ */
+export function isGenuineAiModelSku(item) {
+  if (!item || !item.productName) return false;
+  const name = `${item.productName} ${item.skuName || ''}`;
+
+  // 1. Explicitly drop enterprise IT / Cognitive Services noise
+  if (NOISE_NON_MODEL_PATTERNS.some((p) => p.test(name))) return false;
+
+  // 2. Accept genuine AI model families & modalities
+  if (AI_MODEL_PATTERNS.some((p) => p.test(name))) return true;
+
+  // 3. Accept Foundry Models unless purely infrastructure/storage
+  if (item.feedName === 'Foundry Models' && !/\b(?:storage|bandwidth|egress)\b/i.test(name)) return true;
+
+  return false;
+}
+
+/**
+ * 4. Azure Retail Prices (Foundry Models & Azure OpenAI)
+ * Strictly filtered to genuine AI foundation models.
  */
 export async function fetchAzureRetailFeeds() {
   const uniqueSkus = new Map();
@@ -146,6 +176,7 @@ export async function fetchAzureRetailFeeds() {
       const items = data.Items || [];
 
       for (const item of items) {
+        if (!isGenuineAiModelSku({ ...item, feedName: feed.name })) continue;
         const key = `${item.productName}::${item.skuName}`;
         if (!uniqueSkus.has(key)) {
           uniqueSkus.set(key, {
