@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "claude-code",
   "version": "2.1.330",
-  "observedVersion": "2.1.330",
+  "observedVersion": "2.1.331",
   "scannedVersion": "2.1.330",
   "deliveredVersion": "2.1.330",
-  "alertedVersion": "2.1.330",
+  "alertedVersion": "2.1.331",
   "releaseId": "@anthropic-ai/claude-code@2.1.330",
   "releaseKey": "4f4f73907215027ab09a6dc479b87ff0",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-20T22:33:51.165Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "DELIVERED",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "completed",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "CC-20261123-001",
+    "version": "2.1.331",
+    "releaseKey": "55eda3788f0cfa98b6cc5e70aa6c3aa7",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 690,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-23T21:34:24.373Z",
+    "updatedAt": "2026-11-23T21:34:24.374Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CC-20261120-001",
