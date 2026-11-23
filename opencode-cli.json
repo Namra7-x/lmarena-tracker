@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "componentId": "opencode-cli",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "observedVersion": "2.4.0",
   "scannedVersion": "2.4.0",
-  "deliveredVersion": "2.3.2",
+  "deliveredVersion": "2.4.0",
   "alertedVersion": "2.4.0",
   "releaseId": "@opencode/cli@2.3.2",
   "releaseKey": "415f2f81c522d21836eae2ce39139112",
@@ -28,34 +28,7 @@
     "zip": "skipped",
     "multiEncodingScanner": "skipped"
   },
-  "pendingDelivery": {
-    "scanId": "OC-20261123-001",
-    "version": "2.4.0",
-    "releaseKey": "22a7d9455625e5d2e184f28eb59c3a02",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 606,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "failedFiles": [],
-    "coverageState": "FAILED",
-    "createdAt": "2026-11-23T09:16:13.147Z",
-    "updatedAt": "2026-11-23T09:17:12.422Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
     {
       "scanId": "OC-20261123-001",
