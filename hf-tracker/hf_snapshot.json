@@ -36437,14 +36437,14 @@
       },
       "allenai/B_post_LQK_32kv_4k_11k_SWA": {
         "createdAt": "2026-04-28T16:31:18.000Z",
-        "lastModified": "2026-06-15T21:13:30.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
       },
       "allenai/D_post_LQK_8kv_8k_13k_SWA": {
         "createdAt": "2026-04-28T01:43:49.000Z",
-        "lastModified": "2026-06-15T21:12:53.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -39339,6 +39339,13 @@
         "gated": false,
         "pipeline_tag": "robotics",
         "numParameters": null
+      },
+      "allenai/RoboTracker-Warp": {
+        "createdAt": "2026-11-18T00:54:55.000Z",
+        "lastModified": "2026-11-23T06:28:13.000Z",
+        "gated": false,
+        "pipeline_tag": "robotics",
+        "numParameters": null
       }
     },
     "spaces": {
@@ -40084,10 +40091,12 @@
       },
       "allenai/robotrack-6b03842f7c8884031facd1b5": {
         "title": "RoboTrack",
-        "lastUpdated": "2026-11-23T07:14:45.008Z",
-        "itemCount": 1,
+        "lastUpdated": "2026-11-23T16:12:48.221Z",
+        "itemCount": 3,
         "itemIds": [
-          "allenai/RoboTracker"
+          "allenai/RoboTracker",
+          "allenai/RoboTracker-Warp",
+          "allenai/RoboTrack-15M"
         ]
       }
     }
