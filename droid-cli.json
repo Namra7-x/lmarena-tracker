@@ -3,7 +3,7 @@
   "componentId": "droid-cli",
   "version": "1.17.2",
   "observedVersion": "1.18.0",
-  "scannedVersion": "1.17.2",
+  "scannedVersion": "1.18.0",
   "deliveredVersion": "1.17.2",
   "alertedVersion": "1.18.0",
   "releaseId": "droid@1.17.2",
@@ -11,12 +11,12 @@
   "channel": "stable",
   "versionScheme": "semver",
   "identityFingerprint": "851519325c333e36cb045c34cf8d2e1602fdd5b91e9589a0599fedcb7a205d71",
-  "diagnosticFingerprint": "154b5ab171ca67e4a8105aa7dc4d6eddd015abb79c315e5d94da6116ff4b2b6e",
-  "scanId": "DR-20261122-001",
+  "diagnosticFingerprint": null,
+  "scanId": "DR-20261123-001",
   "coverageState": "FAILED",
   "lastSuccessfulScan": "2026-11-21T15:19:17.670Z",
-  "lastFailureTime": "2026-11-22T03:10:35.150Z",
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-23T20:04:32.163Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -32,16 +32,47 @@
     "scanId": "DR-20261123-001",
     "version": "1.18.0",
     "releaseKey": "ef72c2411ad2b306f4602465280005a0",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 629,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-23T20:04:16.660Z",
-    "updatedAt": "2026-11-23T20:04:16.660Z"
+    "coverageState": "FAILED",
+    "createdAt": "2026-11-23T20:04:32.163Z",
+    "updatedAt": "2026-11-23T20:04:32.163Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "DR-20261123-001",
+      "version": "1.18.0",
+      "status": "PARTIAL",
+      "coverageState": "FAILED",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-23T20:04:32.163Z"
+    },
     {
       "scanId": "DR-20261122-001",
       "version": "1.17.2",
@@ -93092,12 +93123,12 @@
     "data": "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"
   },
   "lastCoverageGaps": [
-    "darwin-arm64: Failed to download https://downloads.factory.ai/factory-cli/releases/1.17.2/darwin/arm64/droid: HTTP 403 client error downloading https://downloads.factory.ai/factory-cli/releases/1.17.2/darwin/arm64/droid"
+    "darwin-arm64: Failed to download https://downloads.factory.ai/factory-cli/releases/1.18.0/darwin/arm64/droid: HTTP 403 client error downloading https://downloads.factory.ai/factory-cli/releases/1.18.0/darwin/arm64/droid"
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 1989,
-    "peakMemoryMb": 377
+    "executionTimeMs": 8057,
+    "peakMemoryMb": 378
   },
   "knownSignals": {
     "model_id:aria-hidden-body-eval": {
