@@ -3,7 +3,7 @@
   "componentId": "opencode-cli",
   "version": "2.3.2",
   "observedVersion": "2.4.0",
-  "scannedVersion": null,
+  "scannedVersion": "2.4.0",
   "deliveredVersion": "2.3.2",
   "alertedVersion": "2.4.0",
   "releaseId": "@opencode/cli@2.3.2",
@@ -11,28 +11,69 @@
   "channel": "v2",
   "versionScheme": "semver",
   "identityFingerprint": "a7558723808eb8fa409013ff7cb91367c21bc83b3b5a38d463a2ae8629798b7a",
-  "diagnosticFingerprint": "57f967aedf829a5899c1cb68f1638ca142d58655f9d6c731605d19acfb924879",
-  "scanId": "OC-20261118-001",
-  "coverageState": "COMPLETE",
+  "diagnosticFingerprint": null,
+  "scanId": "OC-20261123-001",
+  "coverageState": "FAILED",
   "lastSuccessfulScan": null,
-  "lastFailureTime": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-23T09:16:13.147Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
-  "analyzerStatus": null,
+  "analyzerStatus": {
+    "acornAst": "skipped",
+    "goReSym": "skipped",
+    "sourceMap": "skipped",
+    "sevenZip": "skipped",
+    "asar": "skipped",
+    "tar": "skipped",
+    "zip": "skipped",
+    "multiEncodingScanner": "skipped"
+  },
   "pendingDelivery": {
     "scanId": "OC-20261123-001",
     "version": "2.4.0",
     "releaseKey": "22a7d9455625e5d2e184f28eb59c3a02",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 606,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-23T09:16:04.785Z",
-    "updatedAt": "2026-11-23T09:16:04.785Z"
+    "coverageState": "FAILED",
+    "createdAt": "2026-11-23T09:16:13.147Z",
+    "updatedAt": "2026-11-23T09:16:13.147Z"
   },
-  "deliveryLedger": [],
+  "deliveryLedger": [
+    {
+      "scanId": "OC-20261123-001",
+      "version": "2.4.0",
+      "status": "PARTIAL",
+      "coverageState": "FAILED",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-23T09:16:13.147Z"
+    }
+  ],
   "releaseHistory": [],
   "hotSignals": [],
   "recentSignals": [],
@@ -62,8 +103,13 @@
     "count": 0,
     "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
   },
-  "lastCoverageGaps": [],
+  "lastCoverageGaps": [
+    "all: Failed to download https://registry.npmjs.org/@opencode/cli/-/cli-2.4.0.tgz: HTTP 404 client error downloading https://registry.npmjs.org/@opencode/cli/-/cli-2.4.0.tgz"
+  ],
   "lastAlertDigest": null,
-  "benchmark": null,
+  "benchmark": {
+    "executionTimeMs": 2495,
+    "peakMemoryMb": 559
+  },
   "knownSignals": {}
 }
