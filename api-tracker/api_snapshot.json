@@ -1,7 +1,7 @@
 {
-  "totalGroups": 86,
-  "totalModels": 192,
-  "lastUpdated": "2026-11-20T08:12:51.965Z",
+  "totalGroups": 87,
+  "totalModels": 193,
+  "lastUpdated": "2026-11-23T07:06:50.136Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -497,7 +497,7 @@
         "autoTPM": true,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": false
+        "deploy": true
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -547,7 +547,7 @@
           "autoTPM": true,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": false
+          "deploy": true
         },
         "model": "qwen3.8-flash",
         "serviceSites": [
@@ -3379,7 +3379,7 @@
         "autoTPM": true,
         "experience": true,
         "displayQpmLimit": true,
-        "deploy": true
+        "deploy": false
       },
       "rawItem": {
         "inferenceMetadata": {
@@ -3430,7 +3430,7 @@
           "autoTPM": true,
           "experience": true,
           "displayQpmLimit": true,
-          "deploy": true
+          "deploy": false
         },
         "model": "qwen3.8-27b",
         "serviceSites": [
@@ -3454,7 +3454,8 @@
           "sft": [
             "full",
             "lora"
-          ]
+          ],
+          "dpo": []
         },
         "inferenceProvider": "bailian",
         "name": "Qwen3.8-27B",
@@ -9370,17 +9371,17 @@
         "RPMRequests Per Minute": "60"
       }
     },
-    "qwen3.5-397b-a17b": {
-      "modelId": "qwen3.5-397b-a17b",
-      "name": "Qwen3.5-397B-A17B",
+    "qwen3.5-35b-a3b": {
+      "modelId": "qwen3.5-35b-a3b",
+      "name": "Qwen3.5-35B-A3B",
       "modelAlias": null,
       "provider": "qwen",
       "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Flagship",
-      "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
-      "shortDescription": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
-      "updateAt": "2026-02-15T09:18:22.000+00:00",
-      "latestOnlineAt": "2026-02-15T09:18:22.000+00:00",
+      "category": "Cost-optimized",
+      "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
+      "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
+      "updateAt": "2026-02-23T12:34:33.000+00:00",
+      "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
       "collectionTag": "qwen3.5",
       "features": [
         "function-calling",
@@ -9413,8 +9414,8 @@
         ]
       },
       "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-397b-a17b",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-397b-a17b.md",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b.md",
       "supports": {
         "sft": false,
         "app": false,
@@ -9442,8 +9443,8 @@
           ]
         },
         "applyType": 0,
-        "updateAt": "2026-02-15T09:18:22.000+00:00",
-        "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
+        "updateAt": "2026-02-23T12:34:33.000+00:00",
+        "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
         "aliyunRecommend": false,
         "collectionTag": "qwen3.5",
         "features": [
@@ -9483,7 +9484,7 @@
           "experienceUpcoming": false,
           "tokenMetering": true
         },
-        "model": "qwen3.5-397b-a17b",
+        "model": "qwen3.5-35b-a3b",
         "serviceSites": [
           "international"
         ],
@@ -9494,28 +9495,22 @@
         ],
         "activationStatus": 0,
         "versionTag": "SNAPSHOT",
-        "shortDescription": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
+        "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
         "maxOutputTokens": 65536,
-        "latestOnlineAt": "2026-02-15T09:18:22.000+00:00",
+        "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
         "tags": [],
         "license": {},
         "contextWindow": 262144,
         "maxInputTokens": 260096,
-        "offlineInfo": {
-          "inference": {
-            "announceUrl": "https://www.aliyun.com/notice/118728",
-            "offlineTime": "2027-01-19 10:00:00"
-          }
-        },
         "inferenceProvider": "bailian",
-        "name": "Qwen3.5-397B-A17B",
+        "name": "Qwen3.5-35B-A3B",
         "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
         "needApply": false,
-        "category": "Flagship"
+        "category": "Cost-optimized"
       },
       "pricing": {
-        "Input": "$0.6Per 1M tokens",
-        "Output": "$3.6Per 1M tokens"
+        "Input": "$0.25Per 1M tokens",
+        "Output": "$2Per 1M tokens"
       },
       "limits": {
         "Max Input": "260K",
@@ -9524,7 +9519,7 @@
         "Max Output (Thinking)": "65K",
         "Context": "262K",
         "Max Reasoning": "81K",
-        "TPMTokens Per Minute": "1M",
+        "TPMTokens Per Minute": "5M",
         "RPMRequests Per Minute": "600"
       }
     },
@@ -9690,158 +9685,6 @@
         "RPMRequests Per Minute": "600"
       }
     },
-    "qwen3.5-35b-a3b": {
-      "modelId": "qwen3.5-35b-a3b",
-      "name": "Qwen3.5-35B-A3B",
-      "modelAlias": null,
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Cost-optimized",
-      "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-      "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-      "updateAt": "2026-02-23T12:34:33.000+00:00",
-      "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
-      "collectionTag": "qwen3.5",
-      "features": [
-        "function-calling",
-        "model-experience",
-        "prefix-completion",
-        "structured-outputs",
-        "web-search"
-      ],
-      "capabilities": [
-        "Reasoning",
-        "TG",
-        "VU"
-      ],
-      "modelInfo": {
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "maxOutputTokens": 65536,
-        "maxReasoningTokens": 81920,
-        "reasoningMaxInputTokens": 258048,
-        "reasoningMaxOutputTokens": 65536
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image",
-          "Video"
-        ],
-        "responseModality": [
-          "Text"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-35b-a3b.md",
-      "supports": {
-        "sft": false,
-        "app": false,
-        "dpo": false,
-        "inference": true,
-        "cpt": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": true,
-        "sellingByQpm": false,
-        "experienceV2": false,
-        "eval": false,
-        "experienceUpcoming": false,
-        "tokenMetering": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Text"
-          ],
-          "request_modality": [
-            "Text",
-            "Image",
-            "Video"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-02-23T12:34:33.000+00:00",
-        "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-        "aliyunRecommend": false,
-        "collectionTag": "qwen3.5",
-        "features": [
-          "model-experience",
-          "function-calling",
-          "structured-outputs",
-          "web-search",
-          "prefix-completion"
-        ],
-        "modelInfo": {
-          "contextWindow": 262144,
-          "maxInputTokens": 260096,
-          "maxReasoningTokens": 81920,
-          "reasoningMaxInputTokens": 258048,
-          "maxOutputTokens": 65536,
-          "reasoningMaxOutputTokens": 65536
-        },
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "app": false,
-          "dpo": false,
-          "inference": true,
-          "cpt": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": true,
-          "sellingByQpm": false,
-          "experienceV2": false,
-          "eval": false,
-          "experienceUpcoming": false,
-          "tokenMetering": true
-        },
-        "model": "qwen3.5-35b-a3b",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "Reasoning",
-          "VU",
-          "TG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "SNAPSHOT",
-        "shortDescription": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
-        "maxOutputTokens": 65536,
-        "latestOnlineAt": "2026-02-23T12:34:33.000+00:00",
-        "tags": [],
-        "license": {},
-        "contextWindow": 262144,
-        "maxInputTokens": 260096,
-        "inferenceProvider": "bailian",
-        "name": "Qwen3.5-35B-A3B",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
-        "needApply": false,
-        "category": "Cost-optimized"
-      },
-      "pricing": {
-        "Input": "$0.25Per 1M tokens",
-        "Output": "$2Per 1M tokens"
-      },
-      "limits": {
-        "Max Input": "260K",
-        "Max Output": "65K",
-        "Max Input (Thinking)": "258K",
-        "Max Output (Thinking)": "65K",
-        "Context": "262K",
-        "Max Reasoning": "81K",
-        "TPMTokens Per Minute": "5M",
-        "RPMRequests Per Minute": "600"
-      }
-    },
     "qwen3.5-122b-a10b": {
       "modelId": "qwen3.5-122b-a10b",
       "name": "Qwen3.5-122B-A10B",
@@ -9993,6 +9836,271 @@
         "TPMTokens Per Minute": "1M",
         "RPMRequests Per Minute": "600"
       }
+    },
+    "qwen3.5-397b-a17b": {
+      "modelId": "qwen3.5-397b-a17b",
+      "name": "Qwen3.5-397B-A17B",
+      "modelAlias": null,
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Flagship",
+      "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
+      "shortDescription": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
+      "updateAt": "2026-02-15T09:18:22.000+00:00",
+      "latestOnlineAt": "2026-02-15T09:18:22.000+00:00",
+      "collectionTag": "qwen3.5",
+      "features": [
+        "function-calling",
+        "model-experience",
+        "prefix-completion",
+        "structured-outputs",
+        "web-search"
+      ],
+      "capabilities": [
+        "Reasoning",
+        "TG",
+        "VU"
+      ],
+      "modelInfo": {
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "maxOutputTokens": 65536,
+        "maxReasoningTokens": 81920,
+        "reasoningMaxInputTokens": 258048,
+        "reasoningMaxOutputTokens": 65536
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image",
+          "Video"
+        ],
+        "responseModality": [
+          "Text"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3.5-397b-a17b",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen3.5-397b-a17b.md",
+      "supports": {
+        "sft": false,
+        "app": false,
+        "dpo": false,
+        "inference": true,
+        "cpt": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": true,
+        "sellingByQpm": false,
+        "experienceV2": false,
+        "eval": false,
+        "experienceUpcoming": false,
+        "tokenMetering": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text"
+          ],
+          "request_modality": [
+            "Text",
+            "Image",
+            "Video"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-02-15T09:18:22.000+00:00",
+        "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
+        "aliyunRecommend": false,
+        "collectionTag": "qwen3.5",
+        "features": [
+          "model-experience",
+          "function-calling",
+          "structured-outputs",
+          "web-search",
+          "prefix-completion"
+        ],
+        "modelInfo": {
+          "contextWindow": 262144,
+          "maxInputTokens": 260096,
+          "maxReasoningTokens": 81920,
+          "reasoningMaxInputTokens": 258048,
+          "maxOutputTokens": 65536,
+          "reasoningMaxOutputTokens": 65536
+        },
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "app": false,
+          "dpo": false,
+          "inference": true,
+          "cpt": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": true,
+          "sellingByQpm": false,
+          "experienceV2": false,
+          "eval": false,
+          "experienceUpcoming": false,
+          "tokenMetering": true
+        },
+        "model": "qwen3.5-397b-a17b",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "Reasoning",
+          "VU",
+          "TG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "SNAPSHOT",
+        "shortDescription": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers state-of-the-art performance comparable to leading-edge models across a wide range of tasks, including language understanding, logical reasoning, code generation, agent-based tasks, image understanding, video understanding, and graphical user interface (GUI) interactions. With its robust code-generation and agent capabilities, the model exhibits strong generalization across diverse agent.",
+        "maxOutputTokens": 65536,
+        "latestOnlineAt": "2026-02-15T09:18:22.000+00:00",
+        "tags": [],
+        "license": {},
+        "contextWindow": 262144,
+        "maxInputTokens": 260096,
+        "offlineInfo": {
+          "inference": {
+            "announceUrl": "https://www.alibabacloud.com/zh/notice/detail?id=2217",
+            "offlineTime": "2027-01-19 10:00:00"
+          }
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen3.5-397B-A17B",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-api-reference",
+        "needApply": false,
+        "category": "Flagship"
+      },
+      "pricing": {
+        "Input": "$0.6Per 1M tokens",
+        "Output": "$3.6Per 1M tokens"
+      },
+      "limits": {
+        "Max Input": "260K",
+        "Max Output": "65K",
+        "Max Input (Thinking)": "258K",
+        "Max Output (Thinking)": "65K",
+        "Context": "262K",
+        "Max Reasoning": "81K",
+        "TPMTokens Per Minute": "1M",
+        "RPMRequests Per Minute": "600"
+      }
+    },
+    "qwen-audio-3.1-live": {
+      "modelId": "qwen-audio-3.1-live",
+      "name": "Qwen-Audio-3.1-Live",
+      "modelAlias": null,
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Audio",
+      "description": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
+      "shortDescription": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
+      "updateAt": "2026-11-23T07:06:07.099+00:00",
+      "latestOnlineAt": "2026-11-23T07:06:07.099+00:00",
+      "collectionTag": null,
+      "features": [],
+      "capabilities": [
+        "Realtime-Chatting"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": 65536,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Audio"
+        ],
+        "responseModality": [
+          "Text",
+          "Audio"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-audio-3-1-live",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-audio-3.1-live",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-audio-3.1-live.md",
+      "supports": {
+        "fineTune": false,
+        "experienceV2": false,
+        "eval": false,
+        "inference": true,
+        "tokenMetering": false,
+        "autoTPM": false,
+        "displayQpmLimit": true,
+        "deploy": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text",
+            "Audio"
+          ],
+          "request_modality": [
+            "Text",
+            "Audio"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-11-23T07:06:07.099+00:00",
+        "description": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
+        "aliyunRecommend": false,
+        "features": [],
+        "modelInfo": {
+          "maxOutputTokens": 65536
+        },
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "fineTune": false,
+          "experienceV2": false,
+          "eval": false,
+          "inference": true,
+          "tokenMetering": false,
+          "autoTPM": false,
+          "displayQpmLimit": true,
+          "deploy": false
+        },
+        "model": "qwen-audio-3.1-live",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "Realtime-Chatting"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
+        "equivalentSnapshot": "",
+        "maxOutputTokens": 65536,
+        "latestOnlineAt": "2026-11-23T07:06:07.099+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Audio-3.1-Live",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-audio-3-1-live",
+        "needApply": false,
+        "category": "Audio"
+      },
+      "pricing": {},
+      "limits": {}
     },
     "qwen-audio-3.0-asr-flash-filetrans": {
       "modelId": "qwen-audio-3.0-asr-flash-filetrans",
@@ -10754,118 +10862,6 @@
       },
       "limits": {}
     },
-    "qwen-image-2.0-pro": {
-      "modelId": "qwen-image-2.0-pro",
-      "name": "Qwen-Image-2.0-Pro",
-      "modelAlias": "qwen-image-2.0-pro",
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Visual",
-      "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-      "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-      "updateAt": "2026-04-22T16:00:00.000+00:00",
-      "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
-      "collectionTag": null,
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "IG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image"
-        ],
-        "responseModality": [
-          "Image"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro.md",
-      "supports": {
-        "sft": true,
-        "fineTune": true,
-        "experienceV2": true,
-        "eval": true,
-        "inference": true,
-        "experience": true,
-        "displayQpmLimit": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Image"
-          ],
-          "request_modality": [
-            "Text",
-            "Image"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-04-22T16:00:00.000+00:00",
-        "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-        "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": true,
-          "fineTune": true,
-          "experienceV2": true,
-          "eval": true,
-          "inference": true,
-          "experience": true,
-          "displayQpmLimit": true
-        },
-        "model": "qwen-image-2.0-pro",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "IG"
-        ],
-        "activationStatus": 0,
-        "modelAlias": "qwen-image-2.0-pro",
-        "versionTag": "MAJOR",
-        "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
-        "equivalentSnapshot": "qwen-image-2.0-pro-2026-04-22",
-        "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
-        "tags": [],
-        "license": {},
-        "trainingTypes": {
-          "sft": [
-            "lora"
-          ]
-        },
-        "inferenceProvider": "bailian",
-        "name": "Qwen-Image-2.0-Pro",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-        "needApply": false,
-        "category": "Visual"
-      },
-      "pricing": {
-        "Image Generation": "$0.075Per image"
-      },
-      "limits": {}
-    },
     "qwen-image-2.0": {
       "modelId": "qwen-image-2.0",
       "name": "Qwen-Image-2.0",
@@ -10975,6 +10971,118 @@
       },
       "pricing": {
         "Image Generation": "$0.035Per image"
+      },
+      "limits": {}
+    },
+    "qwen-image-2.0-pro": {
+      "modelId": "qwen-image-2.0-pro",
+      "name": "Qwen-Image-2.0-Pro",
+      "modelAlias": "qwen-image-2.0-pro",
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Visual",
+      "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+      "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+      "updateAt": "2026-04-22T16:00:00.000+00:00",
+      "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "IG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Image"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0-pro.md",
+      "supports": {
+        "sft": true,
+        "fineTune": true,
+        "experienceV2": true,
+        "eval": true,
+        "inference": true,
+        "experience": true,
+        "displayQpmLimit": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Image"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-04-22T16:00:00.000+00:00",
+        "description": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+        "aliyunRecommend": false,
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": true,
+          "fineTune": true,
+          "experienceV2": true,
+          "eval": true,
+          "inference": true,
+          "experience": true,
+          "displayQpmLimit": true
+        },
+        "model": "qwen-image-2.0-pro",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "IG"
+        ],
+        "activationStatus": 0,
+        "modelAlias": "qwen-image-2.0-pro",
+        "versionTag": "MAJOR",
+        "shortDescription": "The full-featured Qwen-Image-2.0 series models integrate image generation and image editing, offering enhanced text rendering with support for 1,000-token prompts, more refined realistic textures, detailed depiction of photorealistic scenes, and stronger semantic adherence. The full-featured version delivers the strongest text rendering and most lifelike textures in the 2.0 series.",
+        "equivalentSnapshot": "qwen-image-2.0-pro-2026-04-22",
+        "latestOnlineAt": "2026-04-22T16:00:00.000+00:00",
+        "tags": [],
+        "license": {},
+        "trainingTypes": {
+          "sft": [
+            "lora"
+          ]
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Image-2.0-Pro",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+        "needApply": false,
+        "category": "Visual"
+      },
+      "pricing": {
+        "Image Generation": "$0.075Per image"
       },
       "limits": {}
     },
@@ -14311,129 +14419,6 @@
       },
       "limits": {}
     },
-    "wan2.6-r2v": {
-      "modelId": "wan2.6-r2v",
-      "name": "Wan2.6-R2V",
-      "modelAlias": null,
-      "provider": "wan",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-      "category": "Wan",
-      "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
-      "shortDescription": "New reference-to-video model",
-      "updateAt": "2025-12-15T16:08:49.000+00:00",
-      "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
-      "collectionTag": "wan2.6",
-      "features": [],
-      "capabilities": [
-        "VG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Image",
-          "Video",
-          "Text"
-        ],
-        "responseModality": [
-          "Video",
-          "Audio"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
-      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-r2v",
-      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-r2v.md",
-      "supports": {
-        "sft": false,
-        "fineTune": false,
-        "app": false,
-        "dpo": false,
-        "inference": true,
-        "cpt": false,
-        "checkpointImport": false,
-        "experience": true,
-        "displayQpmLimit": true,
-        "deploy": false,
-        "sellingByQpm": false,
-        "tokenizer": false,
-        "experienceV2": false,
-        "eval": false,
-        "experienceUpcoming": false
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Video",
-            "Audio"
-          ],
-          "request_modality": [
-            "Image",
-            "Video",
-            "Text"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2025-12-15T16:08:49.000+00:00",
-        "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
-        "aliyunRecommend": false,
-        "collectionTag": "wan2.6",
-        "features": [],
-        "modelInfo": {},
-        "provider": "wan",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "fineTune": false,
-          "app": false,
-          "dpo": false,
-          "inference": true,
-          "cpt": false,
-          "checkpointImport": false,
-          "experience": true,
-          "displayQpmLimit": true,
-          "deploy": false,
-          "sellingByQpm": false,
-          "tokenizer": false,
-          "experienceV2": false,
-          "eval": false,
-          "experienceUpcoming": false
-        },
-        "model": "wan2.6-r2v",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "VG"
-        ],
-        "activationStatus": 0,
-        "versionTag": "MAJOR",
-        "shortDescription": "New reference-to-video model",
-        "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
-        "tags": [],
-        "license": {},
-        "inferenceProvider": "bailian",
-        "name": "Wan2.6-R2V",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
-        "needApply": false,
-        "category": "Wan"
-      },
-      "pricing": {
-        "Video Generation(720P)": "$0.1Per second",
-        "Video Generation(1080P)": "$0.15Per second"
-      },
-      "limits": {}
-    },
     "wan2.6-r2v-flash": {
       "modelId": "wan2.6-r2v-flash",
       "name": "Wan2.6-R2V-Flash",
@@ -14555,6 +14540,129 @@
         "Video Generation(1080P)": "$0.075Per second",
         "Video Generation(720P no audio)": "$0.025Per second",
         "Video Generation(1080P no audio)": "$0.0375Per second"
+      },
+      "limits": {}
+    },
+    "wan2.6-r2v": {
+      "modelId": "wan2.6-r2v",
+      "name": "Wan2.6-R2V",
+      "modelAlias": null,
+      "provider": "wan",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+      "category": "Wan",
+      "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
+      "shortDescription": "New reference-to-video model",
+      "updateAt": "2025-12-15T16:08:49.000+00:00",
+      "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
+      "collectionTag": "wan2.6",
+      "features": [],
+      "capabilities": [
+        "VG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Image",
+          "Video",
+          "Text"
+        ],
+        "responseModality": [
+          "Video",
+          "Audio"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
+      "modelPortalUrl": "https://www.qwencloud.com/models/wan2.6-r2v",
+      "markdownUrl": "https://www.qwencloud.com/models/wan2.6-r2v.md",
+      "supports": {
+        "sft": false,
+        "fineTune": false,
+        "app": false,
+        "dpo": false,
+        "inference": true,
+        "cpt": false,
+        "checkpointImport": false,
+        "experience": true,
+        "displayQpmLimit": true,
+        "deploy": false,
+        "sellingByQpm": false,
+        "tokenizer": false,
+        "experienceV2": false,
+        "eval": false,
+        "experienceUpcoming": false
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Video",
+            "Audio"
+          ],
+          "request_modality": [
+            "Image",
+            "Video",
+            "Text"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2025-12-15T16:08:49.000+00:00",
+        "description": "Wan2.6 reference to video, supports using a specified person or any object as a reference, precisely maintaining consistency of appearance and voice, and allows multi‑character reference for joint performances.Note: When using a video for reference, input video processing will also incur charges. Please refer to the Model Pricing Documentation for further details.",
+        "aliyunRecommend": false,
+        "collectionTag": "wan2.6",
+        "features": [],
+        "modelInfo": {},
+        "provider": "wan",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "fineTune": false,
+          "app": false,
+          "dpo": false,
+          "inference": true,
+          "cpt": false,
+          "checkpointImport": false,
+          "experience": true,
+          "displayQpmLimit": true,
+          "deploy": false,
+          "sellingByQpm": false,
+          "tokenizer": false,
+          "experienceV2": false,
+          "eval": false,
+          "experienceUpcoming": false
+        },
+        "model": "wan2.6-r2v",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "VG"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "New reference-to-video model",
+        "latestOnlineAt": "2025-12-15T16:08:49.000+00:00",
+        "tags": [],
+        "license": {},
+        "inferenceProvider": "bailian",
+        "name": "Wan2.6-R2V",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/wan-video-to-video-api-reference",
+        "needApply": false,
+        "category": "Wan"
+      },
+      "pricing": {
+        "Video Generation(720P)": "$0.1Per second",
+        "Video Generation(1080P)": "$0.15Per second"
       },
       "limits": {}
     },
@@ -18027,143 +18135,6 @@
         "RPMRequests Per Minute": "60"
       }
     },
-    "qwen3-livetranslate-flash": {
-      "modelId": "qwen3-livetranslate-flash",
-      "name": "Qwen3-LiveTranslate-Flash",
-      "modelAlias": null,
-      "provider": "qwen-domain-model",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-      "category": "Audio",
-      "description": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
-      "shortDescription": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
-      "updateAt": "2025-12-04T12:21:57.000+00:00",
-      "latestOnlineAt": "2025-12-04T12:21:57.000+00:00",
-      "collectionTag": null,
-      "features": [],
-      "capabilities": [
-        "Realtime-ASR"
-      ],
-      "modelInfo": {
-        "contextWindow": 53248,
-        "maxInputTokens": 49152,
-        "maxOutputTokens": 4096,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Audio",
-          "Video"
-        ],
-        "responseModality": [
-          "Text",
-          "Audio"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-livetranslate-flash",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3-livetranslate-flash",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen3-livetranslate-flash.md",
-      "supports": {
-        "sft": false,
-        "fineTune": false,
-        "app": false,
-        "dpo": false,
-        "inference": true,
-        "cpt": false,
-        "checkpointImport": false,
-        "experience": false,
-        "displayQpmLimit": true,
-        "deploy": false,
-        "sellingByQpm": false,
-        "tokenizer": false,
-        "experienceV2": false,
-        "eval": false,
-        "experienceUpcoming": false,
-        "tokenMetering": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Text",
-            "Audio"
-          ],
-          "request_modality": [
-            "Audio",
-            "Video"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2025-12-04T12:21:57.000+00:00",
-        "description": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
-        "aliyunRecommend": false,
-        "features": [],
-        "modelInfo": {
-          "contextWindow": 53248,
-          "maxInputTokens": 49152,
-          "maxOutputTokens": 4096
-        },
-        "provider": "qwen-domain-model",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
-        "supports": {
-          "sft": false,
-          "fineTune": false,
-          "app": false,
-          "dpo": false,
-          "inference": true,
-          "cpt": false,
-          "checkpointImport": false,
-          "experience": false,
-          "displayQpmLimit": true,
-          "deploy": false,
-          "sellingByQpm": false,
-          "tokenizer": false,
-          "experienceV2": false,
-          "eval": false,
-          "experienceUpcoming": false,
-          "tokenMetering": true
-        },
-        "model": "qwen3-livetranslate-flash",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "Realtime-ASR"
-        ],
-        "activationStatus": 0,
-        "versionTag": "MAJOR",
-        "shortDescription": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
-        "maxOutputTokens": 4096,
-        "latestOnlineAt": "2025-12-04T12:21:57.000+00:00",
-        "tags": [],
-        "license": {},
-        "contextWindow": 53248,
-        "maxInputTokens": 49152,
-        "offlineInfo": {
-          "inference": {
-            "announceUrl": ""
-          }
-        },
-        "inferenceProvider": "bailian",
-        "name": "Qwen3-LiveTranslate-Flash",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-livetranslate-flash",
-        "needApply": false,
-        "category": "Audio"
-      },
-      "pricing": {},
-      "limits": {
-        "Max Input": "49K",
-        "Max Output": "4K",
-        "Context": "53K",
-        "TPMTokens Per Minute": "100K",
-        "RPMRequests Per Minute": "100"
-      }
-    },
     "qwen3-livetranslate-flash-2025-12-01": {
       "modelId": "qwen3-livetranslate-flash-2025-12-01",
       "name": "Qwen3-LiveTranslate-Flash-2025-12-01",
@@ -18288,6 +18259,143 @@
         },
         "inferenceProvider": "bailian",
         "name": "Qwen3-LiveTranslate-Flash-2025-12-01",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-livetranslate-flash",
+        "needApply": false,
+        "category": "Audio"
+      },
+      "pricing": {},
+      "limits": {
+        "Max Input": "49K",
+        "Max Output": "4K",
+        "Context": "53K",
+        "TPMTokens Per Minute": "100K",
+        "RPMRequests Per Minute": "100"
+      }
+    },
+    "qwen3-livetranslate-flash": {
+      "modelId": "qwen3-livetranslate-flash",
+      "name": "Qwen3-LiveTranslate-Flash",
+      "modelAlias": null,
+      "provider": "qwen-domain-model",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+      "category": "Audio",
+      "description": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
+      "shortDescription": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
+      "updateAt": "2025-12-04T12:21:57.000+00:00",
+      "latestOnlineAt": "2025-12-04T12:21:57.000+00:00",
+      "collectionTag": null,
+      "features": [],
+      "capabilities": [
+        "Realtime-ASR"
+      ],
+      "modelInfo": {
+        "contextWindow": 53248,
+        "maxInputTokens": 49152,
+        "maxOutputTokens": 4096,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Audio",
+          "Video"
+        ],
+        "responseModality": [
+          "Text",
+          "Audio"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-livetranslate-flash",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen3-livetranslate-flash",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen3-livetranslate-flash.md",
+      "supports": {
+        "sft": false,
+        "fineTune": false,
+        "app": false,
+        "dpo": false,
+        "inference": true,
+        "cpt": false,
+        "checkpointImport": false,
+        "experience": false,
+        "displayQpmLimit": true,
+        "deploy": false,
+        "sellingByQpm": false,
+        "tokenizer": false,
+        "experienceV2": false,
+        "eval": false,
+        "experienceUpcoming": false,
+        "tokenMetering": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Text",
+            "Audio"
+          ],
+          "request_modality": [
+            "Audio",
+            "Video"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2025-12-04T12:21:57.000+00:00",
+        "description": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
+        "aliyunRecommend": false,
+        "features": [],
+        "modelInfo": {
+          "contextWindow": 53248,
+          "maxInputTokens": 49152,
+          "maxOutputTokens": 4096
+        },
+        "provider": "qwen-domain-model",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i4/O1CN01jUX90V26sRbiy5V5L_!!6000000007717-55-tps-40-40.svg",
+        "supports": {
+          "sft": false,
+          "fineTune": false,
+          "app": false,
+          "dpo": false,
+          "inference": true,
+          "cpt": false,
+          "checkpointImport": false,
+          "experience": false,
+          "displayQpmLimit": true,
+          "deploy": false,
+          "sellingByQpm": false,
+          "tokenizer": false,
+          "experienceV2": false,
+          "eval": false,
+          "experienceUpcoming": false,
+          "tokenMetering": true
+        },
+        "model": "qwen3-livetranslate-flash",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "Realtime-ASR"
+        ],
+        "activationStatus": 0,
+        "versionTag": "MAJOR",
+        "shortDescription": "Qwen3-LiveTranslate-Flash is a high-precision, highly responsive, and robust multilingual real-time audio and video interpretation model. Leveraging Qwen3-Omni’s powerful infrastructure, massive multimodal data, cross-language and cross-modal alignment, and visual enhancement technologies, Qwen3-LiveTranslate-Flash provides both offline and real-time audio and video translation capabilities. It can understand 19 languages and speak 10 languages, and also supports 8 Chinese dialects.",
+        "maxOutputTokens": 4096,
+        "latestOnlineAt": "2025-12-04T12:21:57.000+00:00",
+        "tags": [],
+        "license": {},
+        "contextWindow": 53248,
+        "maxInputTokens": 49152,
+        "offlineInfo": {
+          "inference": {
+            "announceUrl": ""
+          }
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen3-LiveTranslate-Flash",
         "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-livetranslate-flash",
         "needApply": false,
         "category": "Audio"
