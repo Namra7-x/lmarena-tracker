@@ -24404,6 +24404,17 @@
           "nvidia/OpenMathInstruct-2",
           "nvidia/OpenMath2-Llama3.1-8B-nemo"
         ]
+      },
+      "nvidia/codonfm-6b04afdf8457e0ec12514016": {
+        "title": "CodonFM",
+        "lastUpdated": "2026-11-23T21:34:23.573Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/NV-CodonFM-Encodon-1B-v1",
+          "nvidia/NV-CodonFM-Encodon-Cdwt-1B-v1",
+          "nvidia/NV-CodonFM-Encodon-600M-v1",
+          "nvidia/NV-CodonFM-Encodon-80M-v1"
+        ]
       }
     }
   },
@@ -36430,7 +36441,7 @@
       },
       "allenai/H_post_LQK_32kv_4k_11k": {
         "createdAt": "2026-04-28T19:11:47.000Z",
-        "lastModified": "2026-06-15T21:14:14.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -36717,7 +36728,7 @@
       },
       "allenai/MolmoPoint-GUI-8B": {
         "createdAt": "2026-03-17T16:39:20.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-23T21:04:06.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
