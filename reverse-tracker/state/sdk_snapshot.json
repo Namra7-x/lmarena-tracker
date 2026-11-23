@@ -1,6 +1,6 @@
 {
   "@anthropic-ai/sdk": {
-    "version": "1.12.0",
+    "version": "1.13.0",
     "models": [
       "claude-3-5-sonnet-20241022",
       "claude-fable-5",
@@ -52,6 +52,7 @@
       "context-management-2025-06-27",
       "dev-full-thinking-2025-05-14",
       "dreaming-2026-04-21",
+      "efs-2026-10-01",
       "experimental-claude-tag-2026-10-21",
       "extended-cache-ttl-2025-04-11",
       "fallback-credit-2026-06-01",
@@ -110,8 +111,8 @@
       "invalid_tool_input",
       "tools"
     ],
-    "lastUpdated": "2026-11-20T16:19:32.502Z",
-    "shasum": "6707039bf551b86b2af29beb08370edf9e76773a",
+    "lastUpdated": "2026-11-23T18:46:53.015Z",
+    "shasum": "6d17819f34ea52f943c47af1917a4ed0bc9fc1cf",
     "displayName": "Anthropic Claude SDK",
     "family": "anthropic"
   },
