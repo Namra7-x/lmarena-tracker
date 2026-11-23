@@ -1424,6 +1424,15 @@
   ],
   "azureFoundryModels": [
     {
+      "name": "FW-Qwen3.8-Flash-Next-FP4",
+      "version": "1",
+      "publisher": "Fireworks",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T18:19:44.8576653+00:00",
+      "displayName": "Qwen3.8 Flash Next FP4",
+      "registry": "azureml"
+    },
+    {
       "name": "rerank-3-lite",
       "version": "3",
       "publisher": "Voyage AI",
@@ -1863,20 +1872,11 @@
       "createdTime": "2026-11-12T11:31:30.4484384+00:00",
       "displayName": "MedImageParse",
       "registry": "azureml"
-    },
-    {
-      "name": "kev-4b-generic-cpu",
-      "version": "1",
-      "publisher": "Microsoft",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T05:29:31.7460577+00:00",
-      "displayName": "kev-4b-generic-cpu",
-      "registry": "azureml"
     }
   ],
   "awsBedrockMaster": {
-    "version": "20261111013037",
-    "publicationDate": "2026-11-11T01:30:37Z",
+    "version": "20261123164356",
+    "publicationDate": "2026-11-23T16:43:56Z",
     "products": [
       {
         "sku": "6KAYESKC9RAQVWNZ",
@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-23T06:42:08Z",
+    "publicationDate": "2026-11-23T17:10:05Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -107148,5 +107148,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-23T09:36:44.527Z"
+  "lastScanAt": "2026-11-23T18:20:42.969Z"
 }
