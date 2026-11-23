@@ -1424,6 +1424,24 @@
   ],
   "azureFoundryModels": [
     {
+      "name": "rerank-3-lite",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T09:11:28.6966503+00:00",
+      "displayName": "rerank-3-lite Reranker",
+      "registry": "azureml"
+    },
+    {
+      "name": "voyage-multimodal-3.5",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T09:11:06.9731329+00:00",
+      "displayName": "voyage-multimodal-3.5 Embedding Model",
+      "registry": "azureml"
+    },
+    {
       "name": "rerank-3",
       "version": "3",
       "publisher": "Voyage AI",
@@ -1853,24 +1871,6 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T05:29:31.7460577+00:00",
       "displayName": "kev-4b-generic-cpu",
-      "registry": "azureml"
-    },
-    {
-      "name": "kev-4b-generic-gpu",
-      "version": "1",
-      "publisher": "Microsoft",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T05:28:40.0698297+00:00",
-      "displayName": "kev-4b-generic-gpu",
-      "registry": "azureml"
-    },
-    {
-      "name": "kev-4b-cuda-gpu",
-      "version": "1",
-      "publisher": "Microsoft",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T05:28:15.1625514+00:00",
-      "displayName": "kev-4b-cuda-gpu",
       "registry": "azureml"
     }
   ],
@@ -107148,5 +107148,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-23T08:08:47.275Z"
+  "lastScanAt": "2026-11-23T09:36:44.527Z"
 }
