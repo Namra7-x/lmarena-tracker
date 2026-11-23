@@ -1,7 +1,7 @@
 {
   "totalGroups": 87,
   "totalModels": 193,
-  "lastUpdated": "2026-11-23T07:06:50.136Z",
+  "lastUpdated": "2026-11-23T12:40:42.511Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -19437,7 +19437,7 @@
         "deploy": false,
         "sellingByQpm": false,
         "tokenizer": false,
-        "experienceV2": false,
+        "experienceV2": true,
         "eval": false,
         "experienceUpcoming": false,
         "tokenMetering": true
@@ -19483,7 +19483,7 @@
           "deploy": false,
           "sellingByQpm": false,
           "tokenizer": false,
-          "experienceV2": false,
+          "experienceV2": true,
           "eval": false,
           "experienceUpcoming": false,
           "tokenMetering": true
@@ -24729,9 +24729,7 @@
       "updateAt": "2025-08-25T06:26:36.000+00:00",
       "latestOnlineAt": "2025-08-25T06:26:36.000+00:00",
       "collectionTag": "qwen3.7",
-      "features": [
-        "model-experience"
-      ],
+      "features": [],
       "capabilities": [
         "TR"
       ],
@@ -24762,12 +24760,12 @@
         "selfServiceLimitIncrease": true,
         "cpt": false,
         "checkpointImport": false,
-        "experience": true,
+        "experience": false,
         "displayQpmLimit": true,
         "deploy": false,
         "sellingByQpm": false,
         "tokenizer": false,
-        "experienceV2": true,
+        "experienceV2": false,
         "eval": false,
         "experienceUpcoming": false,
         "tokenMetering": true
@@ -24785,9 +24783,7 @@
         "updateAt": "2025-08-25T06:26:36.000+00:00",
         "description": "The General Text Vector V4 version is a multi-language  text vector model developed by the Tongyi Lab based on Qwen3. Compared to the V3 version, it significantly improves performance in text retrieval, clustering, and classification tasks. It achieves a 15% to 40% improvement in evaluation tasks such as MTEB multilingual, Chinese-English, and code retrieval. Additionally, it supports user-defined vector dimensions ranging from 64 to 2048.",
         "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
+        "features": [],
         "modelInfo": {},
         "provider": "qwen-domain-model",
         "permissions": {
@@ -24804,12 +24800,12 @@
           "selfServiceLimitIncrease": true,
           "cpt": false,
           "checkpointImport": false,
-          "experience": true,
+          "experience": false,
           "displayQpmLimit": true,
           "deploy": false,
           "sellingByQpm": false,
           "tokenizer": false,
-          "experienceV2": true,
+          "experienceV2": false,
           "eval": false,
           "experienceUpcoming": false,
           "tokenMetering": true
