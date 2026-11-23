@@ -1424,6 +1424,15 @@
   ],
   "azureFoundryModels": [
     {
+      "name": "voyage-3.5-embedding-model",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T18:23:37.683255+00:00",
+      "displayName": "voyage-3.5 Embedding Model",
+      "registry": "azureml"
+    },
+    {
       "name": "FW-Qwen3.8-Flash-Next-FP4",
       "version": "1",
       "publisher": "Fireworks",
@@ -1862,15 +1871,6 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T11:31:44.5482746+00:00",
       "displayName": "CxrReportGen",
-      "registry": "azureml"
-    },
-    {
-      "name": "MedImageParse",
-      "version": "2",
-      "publisher": "Microsoft",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T11:31:30.4484384+00:00",
-      "displayName": "MedImageParse",
       "registry": "azureml"
     }
   ],
@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-23T17:10:05Z",
+    "publicationDate": "2026-11-23T18:48:02Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -107148,5 +107148,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-23T18:20:42.969Z"
+  "lastScanAt": "2026-11-23T18:50:46.079Z"
 }
