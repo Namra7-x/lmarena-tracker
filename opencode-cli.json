@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "opencode-cli",
   "version": "2.4.0",
-  "observedVersion": "2.4.0",
+  "observedVersion": "2.4.1",
   "scannedVersion": "2.4.0",
   "deliveredVersion": "2.4.0",
-  "alertedVersion": "2.4.0",
+  "alertedVersion": "2.4.1",
   "releaseId": "@opencode/cli@2.4.0",
   "releaseKey": "22a7d9455625e5d2e184f28eb59c3a02",
   "channel": "v2",
@@ -16,7 +16,7 @@
   "coverageState": "FAILED",
   "lastSuccessfulScan": null,
   "lastFailureTime": "2026-11-23T09:17:12.422Z",
-  "lastDeliveryStatus": "PARTIAL",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "skipped"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "OC-20261123-002",
+    "version": "2.4.1",
+    "releaseKey": "7d67c47e06bf9668b7a3c3cafd99926b",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 621,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-23T15:57:07.517Z",
+    "updatedAt": "2026-11-23T15:57:07.517Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "OC-20261123-001",
