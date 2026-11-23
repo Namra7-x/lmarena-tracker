@@ -11,11 +11,11 @@
   "channel": "stable",
   "versionScheme": "build",
   "identityFingerprint": "b9392ee08058dcdf939d41dcbce235c721139b70ae69790563ff4e371b81096c",
-  "diagnosticFingerprint": "368b4dc68b3d8c0a039549c25c5eef1929f2bb32cdc08668a1708f8deca907b1",
+  "diagnosticFingerprint": null,
   "scanId": "GD-20261123-001",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": "2026-11-19T06:35:49.479Z",
-  "lastFailureTime": "2026-11-23T23:35:58.890Z",
+  "lastFailureTime": "2026-11-23T23:38:41.321Z",
   "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
@@ -54,9 +54,25 @@
     "failedFiles": [],
     "coverageState": "PARTIAL",
     "createdAt": "2026-11-23T23:35:58.890Z",
-    "updatedAt": "2026-11-23T23:35:58.890Z"
+    "updatedAt": "2026-11-23T23:38:41.321Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "GD-20261123-001",
+      "version": "build-20261123-233206",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-23T23:38:41.321Z"
+    },
     {
       "scanId": "GD-20261123-001",
       "version": "build-20261123-233206",
@@ -200210,8 +200226,8 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 102313,
-    "peakMemoryMb": 1567
+    "executionTimeMs": 60720,
+    "peakMemoryMb": 1566
   },
   "knownSignals": {
     "model_id:canvas-code-preview": {
