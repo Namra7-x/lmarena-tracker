@@ -1424,6 +1424,15 @@
   ],
   "azureFoundryModels": [
     {
+      "name": "rerank-3",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T07:23:45.973769+00:00",
+      "displayName": "rerank-3 Reranker",
+      "registry": "azureml"
+    },
+    {
       "name": "jina-embeddings-v5-omni-small",
       "version": "2",
       "publisher": "Elastic",
@@ -1862,15 +1871,6 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T05:27:25.6072216+00:00",
       "displayName": "kev-0.8b-cuda-gpu",
-      "registry": "azureml"
-    },
-    {
-      "name": "clm-v0.1-8b-generic-cpu",
-      "version": "1",
-      "publisher": "Microsoft",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T05:27:14.8369343+00:00",
-      "displayName": "clm-v0.1-8b-generic-cpu",
       "registry": "azureml"
     }
   ],
@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-22T03:33:13Z",
+    "publicationDate": "2026-11-23T06:42:08Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -107148,5 +107148,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-22T16:15:29.027Z"
+  "lastScanAt": "2026-11-23T07:44:42.245Z"
 }
