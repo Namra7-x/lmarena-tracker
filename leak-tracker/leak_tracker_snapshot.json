@@ -1433,6 +1433,24 @@
       "registry": "azureml"
     },
     {
+      "name": "rerank-2.5",
+      "version": "2",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T07:19:33.5313541+00:00",
+      "displayName": "rerank-2.5 Reranker",
+      "registry": "azureml"
+    },
+    {
+      "name": "voyage-code-4",
+      "version": "2",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T07:19:29.059096+00:00",
+      "displayName": "voyage-code-4 Embedding Model",
+      "registry": "azureml"
+    },
+    {
       "name": "jina-embeddings-v5-omni-small",
       "version": "2",
       "publisher": "Elastic",
@@ -1853,24 +1871,6 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T05:27:49.4830286+00:00",
       "displayName": "kev-0.8b-generic-cpu",
-      "registry": "azureml"
-    },
-    {
-      "name": "kev-0.8b-generic-gpu",
-      "version": "1",
-      "publisher": "Microsoft",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T05:27:37.6792969+00:00",
-      "displayName": "kev-0.8b-generic-gpu",
-      "registry": "azureml"
-    },
-    {
-      "name": "kev-0.8b-cuda-gpu",
-      "version": "1",
-      "publisher": "Microsoft",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T05:27:25.6072216+00:00",
-      "displayName": "kev-0.8b-cuda-gpu",
       "registry": "azureml"
     }
   ],
@@ -107148,5 +107148,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-23T07:44:42.245Z"
+  "lastScanAt": "2026-11-23T07:52:49.859Z"
 }
