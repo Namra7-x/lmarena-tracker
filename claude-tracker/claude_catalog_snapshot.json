@@ -1,7 +1,7 @@
 {
-  "version": 5428,
-  "issuedAt": "2026-11-19T17:38:06Z",
-  "expiresAt": "2026-11-26T17:38:06Z",
+  "version": 5817,
+  "issuedAt": "2026-11-23T18:53:07Z",
+  "expiresAt": "2026-11-30T18:53:07Z",
   "keyId": "claude-code-release-signing-key",
   "surfaces": [
     "cc",
@@ -448,51 +448,6 @@
         "offered_on": [
           "bedrock"
         ]
-      }
-    },
-    "claude-opus-4-5-20251101": {
-      "id": "claude-opus-4-5-20251101",
-      "name": "Opus 4.5",
-      "shortName": "Opus",
-      "description": null,
-      "family": null,
-      "section": "deprecated",
-      "disabled": true,
-      "disabledReason": null,
-      "earlyAccess": false,
-      "confidential": false,
-      "voiceModel": "claude-opus-5",
-      "hardLimit": 190000,
-      "minClaudeCodeVersion": null,
-      "maxInputTokens": null,
-      "maxOutputTokens": null,
-      "effortLevels": [
-        "low",
-        "medium",
-        "high"
-      ],
-      "defaultEffort": null,
-      "capabilities": [
-        "compass",
-        "gsuite_tools",
-        "mm_images",
-        "mm_pdf",
-        "web_search"
-      ],
-      "fastMode": false,
-      "offeredOn": [],
-      "surfaces": [
-        "chat"
-      ],
-      "rawSpecs": {
-        "id": "claude-opus-4-5-20251101",
-        "name": "Opus 4.5",
-        "family": null,
-        "max_input_tokens": null,
-        "max_output_tokens": null,
-        "effort_levels": null,
-        "min_claude_code_version": null,
-        "offered_on": null
       }
     },
     "claude-opus-4-6": {
@@ -1477,51 +1432,6 @@
       }
     },
     {
-      "id": "claude-opus-4-5-20251101",
-      "name": "Opus 4.5",
-      "shortName": "Opus",
-      "description": null,
-      "family": null,
-      "section": "deprecated",
-      "disabled": true,
-      "disabledReason": null,
-      "earlyAccess": false,
-      "confidential": false,
-      "voiceModel": "claude-opus-5",
-      "hardLimit": 190000,
-      "minClaudeCodeVersion": null,
-      "maxInputTokens": null,
-      "maxOutputTokens": null,
-      "effortLevels": [
-        "low",
-        "medium",
-        "high"
-      ],
-      "defaultEffort": null,
-      "capabilities": [
-        "compass",
-        "gsuite_tools",
-        "mm_images",
-        "mm_pdf",
-        "web_search"
-      ],
-      "fastMode": false,
-      "offeredOn": [],
-      "surfaces": [
-        "chat"
-      ],
-      "rawSpecs": {
-        "id": "claude-opus-4-5-20251101",
-        "name": "Opus 4.5",
-        "family": null,
-        "max_input_tokens": null,
-        "max_output_tokens": null,
-        "effort_levels": null,
-        "min_claude_code_version": null,
-        "offered_on": null
-      }
-    },
-    {
       "id": "claude-opus-4-6",
       "name": "Opus 4.6",
       "shortName": "Opus",
@@ -2098,6 +2008,6 @@
       }
     }
   ],
-  "totalModels": 15,
-  "lastUpdated": "2026-11-19T17:38:49.127Z"
+  "totalModels": 14,
+  "lastUpdated": "2026-11-23T18:54:49.344Z"
 }
