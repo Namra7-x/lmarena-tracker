@@ -82,6 +82,7 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=4096"
           STATE_DIR: state
           REPORTS_DIR: reports
+          SCAN_CONCURRENCY: "2"
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_TOKEN_OPENAI: ${{ secrets.TELEGRAM_TOKEN_OPENAI || secrets.TELEGRAM_TOKEN_CHATGPT }}

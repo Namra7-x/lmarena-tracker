@@ -44,9 +44,9 @@ import { extractSignalsFromAst } from '../extraction/ast.mjs';
 import { extractGoMetadata, isGoBinary, parseGoSignals } from '../extraction/go.mjs';
 import { extractSourceMapMetadata, extractInlineSourceMaps } from '../extraction/sourcemap.mjs';
 import { matchSignalsInText, extractJsonPricingFindings } from '../finder/rules.mjs';
-import { evaluateNoise, isHumanReadableString } from '../finder/noise.mjs';
+import { evaluateNoise, isHumanReadableString, isThirdPartyPath } from '../finder/noise.mjs';
 import { detectPlatformAsymmetry } from '../finder/asymmetry.mjs';
-import { scoreFinding, sortFindings, deduplicateFindings } from '../finder/scorer.mjs';
+import { scoreFinding, sortFindings, deduplicateFindings, deduplicateAndClusterFindings } from '../finder/scorer.mjs';
 import { computeExactDiff } from '../diff/engine.mjs';
 import { generateReportBundle } from '../reports/bundle.mjs';
 import { TelegramClient } from '../telegram/client.mjs';
@@ -203,7 +203,7 @@ function addTextLines(collector, text, platform, filePath, source = 'text', isSo
  */
 function addStringsFromOverlongText(collector, text, buffer, platform, filePath, source = 'text') {
   if (!text || !hasOverlongLine(text)) return;
-  for (const item of extractStrings(buffer, { includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
+  for (const item of extractStrings(buffer, { includeUnicode: true, maxLength: MAX_STRING_LENGTH, unpackGlued: false, machoAware: false })) {
     if (item.value.length >= 4 && item.value.length <= MAX_STRING_LENGTH) {
       collector.add(item.value, platform, filePath, source);
     }
@@ -322,14 +322,15 @@ function buildCoverage({ selectedArtifacts, acquired, extractionGaps, platformsW
   };
 }
 
-async function sendReportFile({ tg, file, scanId, topicId, delivery }) {
+async function sendReportFile({ tg, file, scanId, componentName = '', version = '', topicId, delivery }) {
   const name = path.basename(file);
+  const label = componentName ? `${componentName} ${version} · ` : '';
   let sent = false;
   let lastError = null;
 
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
-      const res = await tg.sendDocument(file, `Scan ${scanId} - ${name}`, { topicId });
+      const res = await tg.sendDocument(file, `Scan ${scanId} · ${label}${name}`, { topicId });
       if (res?.ok === true) {
         sent = true;
         break;
@@ -351,12 +352,12 @@ async function sendReportFile({ tg, file, scanId, topicId, delivery }) {
   await sleep(350);
 }
 
-async function deliverReports({ tg, files, scanId, topicId, delivery, summaryPath }) {
+async function deliverReports({ tg, files, scanId, componentName, version, topicId, delivery, summaryPath }) {
   const allFiles = files.filter(Boolean);
   const reportFiles = allFiles.filter((file) => path.basename(file) !== 'scan-summary.txt');
 
   for (const file of reportFiles) {
-    await sendReportFile({ tg, file, scanId, topicId, delivery });
+    await sendReportFile({ tg, file, scanId, componentName, version, topicId, delivery });
   }
 
   // Rewrite the summary with the actual delivery outcome, then upload it last.
@@ -373,7 +374,7 @@ async function deliverReports({ tg, files, scanId, topicId, delivery, summaryPat
     } catch {
       // Summary rewrite is best-effort; the report set is still valid.
     }
-    await sendReportFile({ tg, file: summaryPath, scanId, topicId, delivery });
+    await sendReportFile({ tg, file: summaryPath, scanId, componentName, version, topicId, delivery });
   }
 }
 
@@ -514,8 +515,10 @@ export async function performScan(componentId, options = {}) {
     multiEncodingScanner: 'skipped',
   };
   let binaryFilesScanned = 0;
+  const analyzedFileDigests = new Set();
 
   for (const artifact of selectedArtifacts) {
+    let extractCleanup = null;
     try {
       console.log(`   Downloading ${artifact.target} (${artifact.format})...`);
       const dl = await download(artifact, {
@@ -523,8 +526,6 @@ export async function performScan(componentId, options = {}) {
         maxSizeBytes: MAX_ARTIFACT_BYTES,
       });
       dl.sha256 = dl.sha256 || crypto.createHash('sha256').update(dl.buffer).digest('hex');
-      // Keep only metadata here. Retaining every multi-hundred-MB compressed
-      // artifact buffer for the whole scan is a major runner OOM risk.
       acquired.push({
         target: dl.target,
         format: dl.format,
@@ -534,7 +535,9 @@ export async function performScan(componentId, options = {}) {
       });
 
       console.log(`   Extracting ${artifact.target}...`);
-      const { files, status: extractStatus } = extract(dl.buffer, artifact.format, artifact.target, artifact.url);
+      const extractResult = extract(dl.buffer, artifact.format, artifact.target, artifact.url, { streamFromDisk: true });
+      const { files, status: extractStatus } = extractResult;
+      extractCleanup = typeof extractResult.cleanup === 'function' ? extractResult.cleanup : null;
       dl.buffer = null; // Release downloaded compressed artifact buffer immediately to avoid runner OOM
       if (extractStatus?.analyzers) mergeAnalyzerStatus(analyzerStatus, extractStatus.analyzers);
       if (extractStatus?.coverageState === 'PARTIAL') {
@@ -547,13 +550,47 @@ export async function performScan(componentId, options = {}) {
       const platform = platformFromTarget(artifact.target);
 
       for (const file of files || []) {
-        if (!file?.buffer || file.buffer.length === 0) continue;
+        let fileBuf = file?.buffer || null;
+        if (!fileBuf && file?.fullPath && fs.existsSync(file.fullPath)) {
+          try {
+            fileBuf = fs.readFileSync(file.fullPath);
+          } catch {
+            continue;
+          }
+        }
+        if (!fileBuf || fileBuf.length === 0) continue;
+
         platformsWithFiles.add(platform);
         analyzedFileCount++;
 
+        // Deduplicate identical file contents within a scan so duplicate copies aren't analyzed twice
+        const fileDigest = crypto.createHash('sha256').update(fileBuf).digest('hex');
+        if (analyzedFileDigests.has(fileDigest)) {
+          fileBuf = null;
+          continue;
+        }
+        analyzedFileDigests.add(fileDigest);
+
+        const lowerPath = String(file.path || '').toLowerCase();
+        const isChromiumFrameworkBin = (
+          lowerPath.includes('electron framework.framework') ||
+          lowerPath.includes('squirrel.framework') ||
+          lowerPath.includes('mantle.framework') ||
+          lowerPath.includes('reactiveobjc.framework') ||
+          lowerPath.includes('libffmpeg') ||
+          lowerPath.includes('libglesv2') ||
+          lowerPath.includes('vk_swiftshader') ||
+          lowerPath.endsWith('icudtl.dat') ||
+          lowerPath.endsWith('v8_context_snapshot.bin')
+        );
+        if (isChromiumFrameworkBin) {
+          fileBuf = null;
+          continue;
+        }
+
         // URL / endpoint scanner works on text and binary buffers.
         try {
-          const fileUrls = extractApplicationUrls(file.buffer);
+          const fileUrls = extractApplicationUrls(fileBuf);
           for (const item of fileUrls) {
             if (!item?.url) continue;
             const existing = allExtractedUrls.get(item.url);
@@ -569,9 +606,9 @@ export async function performScan(componentId, options = {}) {
 
         // Text/config files: keep every line, including minified JSON tables.
         if (file.priority === 1) {
-          const text = file.buffer.toString('utf8');
+          const text = fileBuf.toString('utf8');
           addTextLines(collector, text, platform, file.path, 'text');
-          addStringsFromOverlongText(collector, text, file.buffer, platform, file.path, 'text');
+          addStringsFromOverlongText(collector, text, fileBuf, platform, file.path, 'text');
           if (/\.json$/i.test(file.path)) {
             for (const finding of extractJsonPricingFindings(text, file.path, 'json')) {
               finding.platforms = [platform];
@@ -582,28 +619,27 @@ export async function performScan(componentId, options = {}) {
           }
         }
 
-        // Binary / executable files: multi-encoding string scanner.
+        // Binary / executable files: Mach-O section-aware multi-encoding string scanner.
         if (file.priority === 2) {
           binaryFilesScanned++;
-          for (const s of extractStrings(file.buffer, { includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
+          for (const s of extractStrings(fileBuf, { includeUnicode: true, maxLength: MAX_STRING_LENGTH })) {
             if (isHumanReadableString(s.value)) {
               collector.add(s.value, platform, file.path, 'binary');
             }
           }
         }
 
-        // Source maps: sourcesContent is the highest-value reverse-engineering
-        // input, but the old pipeline only used `names`.
+        // Source maps: sourcesContent is high-value reverse-engineering input
         if (file.path.endsWith('.map')) {
-          processSourceMapBuffer(collector, file.buffer, file.path, platform, analyzerStatus);
-        } else if (file.buffer.includes('sourceMappingURL=')) {
-          processInlineSourceMaps(collector, file.buffer, file.path, platform, analyzerStatus);
+          processSourceMapBuffer(collector, fileBuf, file.path, platform, analyzerStatus);
+        } else if (fileBuf.includes('sourceMappingURL=')) {
+          processInlineSourceMaps(collector, fileBuf, file.path, platform, analyzerStatus);
         }
 
-        // JavaScript AST.
-        if (/\.(?:js|mjs|cjs)$/i.test(file.path)) {
+        // JavaScript AST (skip third-party node_modules AST churn for speed & precision; text strings are still collected)
+        if (/\.(?:js|mjs|cjs)$/i.test(file.path) && !isThirdPartyPath(file.path)) {
           try {
-            const jsCode = file.buffer.toString('utf8');
+            const jsCode = fileBuf.toString('utf8');
             const extracted = extractSignalsFromAst(jsCode, file.path);
             analyzerStatus.acornAst = 'completed';
             for (const finding of extracted || []) {
@@ -623,12 +659,12 @@ export async function performScan(componentId, options = {}) {
           }
         }
 
-        // Go binaries.
-        if (isGoBinary(file.buffer)) {
+        // Go binaries (strictly gated behind binary priority to avoid testing text/JS files)
+        if (file.priority === 2 && isGoBinary(fileBuf)) {
           let tmpGoPath = null;
           try {
             tmpGoPath = path.join(os.tmpdir(), `temp-go-${Date.now()}-${path.basename(file.path) || 'bin'}`);
-            fs.writeFileSync(tmpGoPath, file.buffer);
+            fs.writeFileSync(tmpGoPath, fileBuf);
             const goMeta = extractGoMetadata(tmpGoPath);
             if (goMeta.status === 'completed') {
               analyzerStatus.goReSym = 'completed';
@@ -654,10 +690,16 @@ export async function performScan(componentId, options = {}) {
             }
           }
         }
+
+        // Release per-file buffer immediately after scanning
+        fileBuf = null;
+        if (file.lazyDisk) file.buffer = null;
       }
     } catch (err) {
       extractionGaps.push(`${artifact.target}: ${err.message}`);
       console.error(`   ✗ Target ${artifact.target} failed: ${err.message}`);
+    } finally {
+      if (extractCleanup) extractCleanup();
     }
   }
 
@@ -674,25 +716,34 @@ export async function performScan(componentId, options = {}) {
   }
   currentCleanStrings.sort();
 
-  const previousStrings = baselineFromState(baseline);
-  const stringHistory = stringHistoryFromState(baseline, baseline.historicalSeenHashes || []);
+  // Load dedicated product master state (.json.gz) BEFORE string/URL diff so it acts as resilient fallback
+  const masterState = loadMasterState(stateDir, componentId);
+  const masterSignals = masterState?.knownSignals || {};
+
+  const baselineStrings = baselineFromState(baseline);
+  const previousStrings = baselineStrings.length > 0 ? baselineStrings : (masterState.knownStrings || []);
+  const stringHistory = mergeStringSets(
+    stringHistoryFromState(baseline, baseline.historicalSeenHashes || []),
+    masterState.knownStrings || [],
+  );
   const stringDiff = diffStringSets(previousStrings, currentCleanStrings, stringHistory);
   console.log(`   Clean strings: ${stringDiff.counts.current} (${stringDiff.counts.added} new, ${stringDiff.counts.removed} removed, ${stringDiff.counts.reintroduced} reintroduced)`);
 
   // URL delta.
   const currentUrls = Array.from(allExtractedUrls.values());
   const currentUrlValues = currentUrls.map((item) => item.url);
-  const previousUrls = urlBaselineFromState(baseline);
-  const urlHistory = urlHistoryFromState(baseline, previousUrls);
+  const baselineUrls = urlBaselineFromState(baseline);
+  const previousUrls = baselineUrls.length > 0 ? baselineUrls : (masterState.knownUrls || []);
+  const urlHistory = mergeStringSets(
+    urlHistoryFromState(baseline, previousUrls),
+    masterState.knownUrls || [],
+  );
   const urlDiff = diffStringSets(previousUrls, currentUrlValues, urlHistory);
   const addedUrlSet = new Set(urlDiff.added);
   const newUrls = currentUrls.filter((item) => addedUrlSet.has(item.url));
   console.log(`   Endpoints discovered: ${currentUrls.length} (${newUrls.length} new)`);
 
   // STEP 4: Delta-First signal matching.
-  // We scan raw text patterns ONLY on newly introduced or reintroduced strings (or all strings on first run / fullScan).
-  // Unchanged persistent strings do not need to be re-scanned for raw text patterns;
-  // their signals are preserved from the baseline without noise or re-alert spam.
   const isFirstBaselineRun = previousStrings.length === 0;
   const stringsToScan = (isFirstBaselineRun || (isTestRun && stringDiff.added.length === 0) || options.fullScan)
     ? currentCleanStrings
@@ -712,10 +763,6 @@ export async function performScan(componentId, options = {}) {
     }
   }
 
-  // Load dedicated product master state (.json.gz)
-  const masterState = loadMasterState(stateDir, componentId);
-  const masterSignals = masterState?.knownSignals || {};
-
   // Load previous baseline signals
   const previousFindings = dedupeRawFindings([
     ...(baseline.recentSignals || []),
@@ -724,23 +771,33 @@ export async function performScan(componentId, options = {}) {
     ...Object.values(masterSignals),
   ]);
 
-  // Track historical finding keys
+  // Track historical finding keys (normalized lowercase)
   const historicalFindingValues = new Set([
     ...stringHistory,
     ...(masterState.knownStrings || []),
     ...(baseline.historicalSeenHashes || []),
-    ...previousFindings.map((f) => `${f.category || ''}:${f.value || ''}`),
-    ...previousFindings.map((f) => f.value),
+    ...previousFindings.map((f) => `${String(f.category || '').toLowerCase()}:${String(f.value || '').toLowerCase()}`),
+    ...previousFindings.map((f) => String(f.value || '').toLowerCase()),
   ]);
 
-  // Identify previously known signals that remain active in the release
+  // Identify previously known signals that remain genuinely active in the current release
   const currentStringLookup = new Set(currentCleanStrings);
+  const currentLowerLookup = new Set(currentCleanStrings.map((s) => s.toLowerCase()));
+  const directKeyLookup = new Set(
+    [...textFindings, ...directFindings].map((f) => `${String(f.category || '').toLowerCase()}:${String(f.value || '').toLowerCase()}`)
+  );
+  const removedLowerSet = new Set((stringDiff.removed || []).map((s) => s.toLowerCase()));
   const activePreviousFindings = [];
   for (const prev of previousFindings) {
-    const isStillActive = currentStringLookup.has(prev.value) ||
-      (prev.context && currentStringLookup.has(prev.context)) ||
-      (prev.origin === 'ast' && !stringDiff.removed.includes(prev.value)) ||
-      prev.category === 'model_id' || prev.category === 'pricing';
+    const prevKey = `${String(prev.category || '').toLowerCase()}:${String(prev.value || '').toLowerCase()}`;
+    const prevValLower = String(prev.value || '').toLowerCase();
+    const isStillActive = (
+      directKeyLookup.has(prevKey) ||
+      currentStringLookup.has(prev.value) ||
+      currentLowerLookup.has(prevValLower) ||
+      (prev.context && (currentStringLookup.has(prev.context) || currentLowerLookup.has(String(prev.context).toLowerCase()))) ||
+      (prev.origin === 'ast' && !removedLowerSet.has(prevValLower) && !stringDiff.removed.includes(prev.value))
+    );
     if (isStillActive) {
       activePreviousFindings.push({ ...prev, diffStatus: 'persistent' });
     }
@@ -750,8 +807,8 @@ export async function performScan(componentId, options = {}) {
   const diffResults = computeExactDiff(previousFindings, allCandidateFindings, historicalFindingValues, masterSignals);
   const allFindings = allCandidateFindings;
 
-  // STEP 5: score and rank.
-  const keyOf = (finding) => `${finding.category}:${finding.value}`;
+  // STEP 5: score, rank, deduplicate, and cluster related findings.
+  const keyOf = (finding) => `${String(finding.category || '').toLowerCase()}:${String(finding.value || '').toLowerCase()}`;
   const newKeySet = new Set(diffResults.newFindings.map(keyOf));
   const changedKeySet = new Set(diffResults.changedFindings.map(keyOf));
   const persistentKeySet = new Set(diffResults.persistentFindings.map(keyOf));
@@ -759,8 +816,8 @@ export async function performScan(componentId, options = {}) {
 
   const scoredFindings = allFindings.map((finding) => {
     const key = keyOf(finding);
-    const lowerKey = key.toLowerCase();
-    const isMasterKnown = Boolean(masterSignals[lowerKey] || masterSignals[String(finding.value || '').toLowerCase()]);
+    const valLower = String(finding.value || '').toLowerCase();
+    const isMasterKnown = Boolean(masterSignals[key] || masterSignals[valLower]);
     const diffStatus = newKeySet.has(key)
       ? 'NEW'
       : changedKeySet.has(key)
@@ -775,13 +832,13 @@ export async function performScan(componentId, options = {}) {
     return {
       ...scoreFinding(finding, {
         isNewInDiff: diffStatus === 'NEW' || diffStatus === 'CHANGED',
-        isFirstEverSeen: !historicalFindingValues.has(finding.value) && !historicalFindingValues.has(key) && !isMasterKnown,
+        isFirstEverSeen: !historicalFindingValues.has(valLower) && !historicalFindingValues.has(key) && !isMasterKnown,
       }),
       diffStatus,
     };
   });
   const sortedScored = sortFindings(scoredFindings);
-  const dedupedFindings = deduplicateFindings(sortedScored);
+  const dedupedFindings = deduplicateAndClusterFindings(sortedScored);
 
   // Strictly filter alert signals: only genuinely NEW or MODIFIED signals trigger alerts.
   // Persistent and unchanged baseline signals are preserved in reports but NEVER re-alerted.
@@ -885,6 +942,8 @@ export async function performScan(componentId, options = {}) {
     tg,
     files: reportBundle.telegramFiles,
     scanId,
+    componentName: comp.name,
+    version: candidate.version,
     topicId,
     delivery,
     summaryPath: reportBundle.telegramFiles.find((file) => path.basename(file) === 'scan-summary.txt'),
@@ -1006,6 +1065,22 @@ export async function performScan(componentId, options = {}) {
       }, ...(baseline.releaseHistory || [])].slice(0, 100)
     : (baseline.releaseHistory || []);
 
+  // Keep full-context knownSignals in compressed _master.json.gz while keeping
+  // compact <componentId>.json lightweight (omits multi-KB context clones).
+  const compactKnownSignals = {};
+  for (const [k, sig] of Object.entries(updatedKnownSignals)) {
+    compactKnownSignals[k] = {
+      category: sig.category,
+      value: sig.value,
+      score: sig.score,
+      tier: sig.tier,
+      activationStatus: sig.activationStatus,
+      filePath: sig.filePath,
+      firstSeenVersion: sig.firstSeenVersion,
+      lastSeenVersion: sig.lastSeenVersion,
+    };
+  }
+
   const nextState = {
     ...baseline,
     schemaVersion: 2,
@@ -1044,8 +1119,8 @@ export async function performScan(componentId, options = {}) {
     }),
     releaseHistory,
     hotSignals: canAdvance ? majorSignals : (baseline.hotSignals || []),
-    recentSignals: canAdvance ? dedupedFindings : (baseline.recentSignals || []),
-    knownSignals: canAdvance ? updatedKnownSignals : (baseline.knownSignals || {}),
+    recentSignals: canAdvance ? dedupedFindings.slice(0, 2500) : (baseline.recentSignals || []),
+    knownSignals: canAdvance ? compactKnownSignals : (baseline.knownSignals || {}),
     historicalSeenHashes: canAdvance ? updatedHistoricalStrings : (baseline.historicalSeenHashes || []),
     historicalSeenUrls: canAdvance ? updatedHistoricalUrls : (baseline.historicalSeenUrls || []),
     stringBaseline: canAdvance ? encodeStringSet(currentCleanStrings) : baseline.stringBaseline || encodeStringSet(previousStrings),

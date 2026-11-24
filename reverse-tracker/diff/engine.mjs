@@ -1,17 +1,24 @@
 /**
  * Exact Diff Engine (Section 7)
- * Computes exact new, removed, persistent, and reintroduced items.
- * Includes structural category breakdown and formatted diff summaries.
+ * Computes exact added, changed, removed, persistent, and reintroduced items.
+ * Normalizes bundler chunk hashes and minified variable churn so unchanged
+ * signals never re-trigger MODIFIED alerts across rebuilds.
  */
 
 import { createHash } from 'node:crypto';
+import {
+  normalizePathForDiff,
+  normalizeContextForDiff,
+  summarizeContextDelta,
+} from '../finder/similarity.mjs';
 
 /**
- * Hash a finding record deterministically.
+ * Hash a finding record deterministically (case-normalized on key).
  */
 export function hashFindingRecord(record) {
-  const normalized = `${record.category || ''}:${record.value || ''}`;
-  return createHash('sha256').update(normalized, 'utf8').digest('hex');
+  const cat = String(record?.category || '').trim().toLowerCase();
+  const val = String(record?.value || '').trim().toLowerCase();
+  return createHash('sha256').update(`${cat}:${val}`, 'utf8').digest('hex');
 }
 
 /**
@@ -19,7 +26,7 @@ export function hashFindingRecord(record) {
  *
  * @param {Array<Object>} previousFindings
  * @param {Array<Object>} candidateFindings
- * @param {Set<string>} historicalSeenHashes - Set of all historically seen finding hashes
+ * @param {Set<string>} historicalSeenHashes - Set of all historically seen finding hashes/keys
  * @param {Object} masterKnownSignals - Dedicated master known signals dictionary for this product
  * @returns {Object} { newFindings, addedFindings, changedFindings, removedFindings, persistentFindings, reintroducedFindings, counts, byCategory }
  */
@@ -31,12 +38,23 @@ export function computeExactDiff(
 ) {
   const prevMap = new Map();
   for (const f of previousFindings) {
+    if (!f) continue;
     prevMap.set(hashFindingRecord(f), f);
   }
 
   const candMap = new Map();
   for (const f of candidateFindings) {
-    candMap.set(hashFindingRecord(f), f);
+    if (!f) continue;
+    const h = hashFindingRecord(f);
+    if (!candMap.has(h)) {
+      candMap.set(h, f);
+    }
+  }
+
+  // Case-insensitive historical lookup set
+  const historicalLower = new Set();
+  for (const entry of historicalSeenHashes || []) {
+    if (typeof entry === 'string') historicalLower.add(entry.toLowerCase());
   }
 
   const newFindings = [];
@@ -56,26 +74,51 @@ export function computeExactDiff(
         prev.activationStatus &&
         finding.activationStatus &&
         prev.activationStatus !== finding.activationStatus &&
-        prev.activationStatus !== 'UNKNOWN'
-      );
-      const contextChanged = Boolean(
-        prev.context &&
-        finding.context &&
-        prev.context.trim() !== finding.context.trim()
-      );
-      const pathChanged = Boolean(
-        prev.filePath &&
-        finding.filePath &&
-        prev.filePath !== finding.filePath
+        prev.activationStatus !== 'UNKNOWN' &&
+        finding.activationStatus !== 'UNKNOWN'
       );
 
-      if (statusChanged || contextChanged || pathChanged) {
+      // Compare normalized semantic context so 1-letter minified renames or
+      // bundler hashes never trigger false MODIFIED spam.
+      const prevNormCtx = normalizeContextForDiff(prev.context);
+      const currNormCtx = normalizeContextForDiff(finding.context);
+      const contextChanged = Boolean(
+        prevNormCtx &&
+        currNormCtx &&
+        prevNormCtx !== currNormCtx
+      );
+
+      // Compare normalized file paths so content-hashed chunk names (app-abc123.js
+      // -> app-def456.js) don't cause hundreds of false MODIFIED triggers.
+      const prevNormPath = normalizePathForDiff(prev.filePath);
+      const currNormPath = normalizePathForDiff(finding.filePath);
+      const pathChanged = Boolean(
+        prevNormPath &&
+        currNormPath &&
+        prevNormPath !== currNormPath
+      );
+
+      const priceChanged = Boolean(
+        finding.category === 'pricing' &&
+        ((prev.inputPrice != null && finding.inputPrice != null && prev.inputPrice !== finding.inputPrice) ||
+         (prev.outputPrice != null && finding.outputPrice != null && prev.outputPrice !== finding.outputPrice))
+      );
+
+      if (statusChanged || contextChanged || pathChanged || priceChanged) {
+        const ctxDelta = contextChanged ? summarizeContextDelta(prev.context, finding.context) : null;
         changedFindings.push({
           ...finding,
           diffStatus: 'changed',
           previousContext: prev.context,
           previousStatus: prev.activationStatus,
           previousFilePath: prev.filePath,
+          changeReasons: [
+            statusChanged ? `status: ${prev.activationStatus} -> ${finding.activationStatus}` : null,
+            priceChanged ? 'pricing updated' : null,
+            contextChanged ? 'context updated' : null,
+            pathChanged ? 'location moved' : null,
+          ].filter(Boolean),
+          contextDeltaSummary: ctxDelta?.summary || null,
         });
       } else {
         persistentFindings.push({ ...finding, diffStatus: 'persistent' });
@@ -85,8 +128,8 @@ export function computeExactDiff(
         historicalSeenHashes.has(hash) ||
         historicalSeenHashes.has(finding.value) ||
         historicalSeenHashes.has(`${finding.category || ''}:${finding.value || ''}`) ||
-        historicalSeenHashes.has(rawKey) ||
-        historicalSeenHashes.has(valKey)
+        historicalLower.has(rawKey) ||
+        historicalLower.has(valKey)
       );
 
       if (isKnownHistorical) {
@@ -103,38 +146,22 @@ export function computeExactDiff(
     }
   }
 
-  // Category-specific breakdown
   const byCategory = {};
+  const ensureCat = (cat) => {
+    if (!byCategory[cat]) {
+      byCategory[cat] = { total: 0, added: 0, changed: 0, persistent: 0, reintroduced: 0, removed: 0 };
+    }
+    return byCategory[cat];
+  };
+
   for (const f of candidateFindings) {
-    const cat = f.category || 'other';
-    if (!byCategory[cat]) {
-      byCategory[cat] = { total: 0, added: 0, changed: 0, persistent: 0, reintroduced: 0, removed: 0 };
-    }
-    byCategory[cat].total++;
+    ensureCat(f.category || 'other').total++;
   }
-  for (const f of newFindings) {
-    const cat = f.category || 'other';
-    if (byCategory[cat]) byCategory[cat].added++;
-  }
-  for (const f of changedFindings) {
-    const cat = f.category || 'other';
-    if (byCategory[cat]) byCategory[cat].changed++;
-  }
-  for (const f of persistentFindings) {
-    const cat = f.category || 'other';
-    if (byCategory[cat]) byCategory[cat].persistent++;
-  }
-  for (const f of reintroducedFindings) {
-    const cat = f.category || 'other';
-    if (byCategory[cat]) byCategory[cat].reintroduced++;
-  }
-  for (const f of removedFindings) {
-    const cat = f.category || 'other';
-    if (!byCategory[cat]) {
-      byCategory[cat] = { total: 0, added: 0, changed: 0, persistent: 0, reintroduced: 0, removed: 0 };
-    }
-    byCategory[cat].removed++;
-  }
+  for (const f of newFindings) ensureCat(f.category || 'other').added++;
+  for (const f of changedFindings) ensureCat(f.category || 'other').changed++;
+  for (const f of persistentFindings) ensureCat(f.category || 'other').persistent++;
+  for (const f of reintroducedFindings) ensureCat(f.category || 'other').reintroduced++;
+  for (const f of removedFindings) ensureCat(f.category || 'other').removed++;
 
   return {
     newFindings,
@@ -157,7 +184,7 @@ export function computeExactDiff(
 }
 
 /**
- * Format structural diff into human-readable summary text for reports and logging.
+ * Format structural diff into clean, uncut human-readable summary text.
  */
 export function formatStructuralDiffReport(diffResults) {
   const lines = [];
@@ -184,9 +211,14 @@ export function formatStructuralDiffReport(diffResults) {
   if (diffResults.changedFindings.length > 0) {
     lines.push(`\n[*] DRIFTED / CHANGED SIGNALS (${diffResults.changedFindings.length}):`);
     for (const f of diffResults.changedFindings) {
-      lines.push(`  * [${f.category || 'signal'}] ${f.value}`);
-      if (f.previousContext) lines.push(`      Old: ${f.previousContext.slice(0, 100)}`);
-      if (f.context) lines.push(`      New: ${f.context.slice(0, 100)}`);
+      const reasonStr = f.changeReasons?.length ? ` (${f.changeReasons.join(', ')})` : '';
+      lines.push(`  * [${f.category || 'signal'}] ${f.value}${reasonStr}`);
+      if (f.contextDeltaSummary) {
+        lines.push(`      Delta: ${f.contextDeltaSummary}`);
+      } else {
+        if (f.previousContext) lines.push(`      Old: ${f.previousContext}`);
+        if (f.context) lines.push(`      New: ${f.context}`);
+      }
     }
   }
 

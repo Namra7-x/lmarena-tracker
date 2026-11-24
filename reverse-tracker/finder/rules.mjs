@@ -118,7 +118,12 @@ export function isValidModelIdentifier(val, options = {}) {
     return true;
   }
 
-  // 4. Raw String validation mode (matches in unparsed binary strings / source text):
+  // In non-structural raw mode, a bare single word with no delimiter/digit/space
+  // (other than o1/o3) is ordinary code/UI vocabulary (e.g. 'github', 'local'), not a model ID.
+  if (!str.includes(' ') && !/[-_.\d:/]/.test(str) && !/^o[13]$/i.test(str)) {
+    return false;
+  }
+
   // Must start with an ASCII letter (e.g. 'gemini', 'claude', 'o1')
   // Strictly rejects dates ('01-02', '1970-01-01'), SVG ('1h-9', '43l7-4.4', '58-4.2'),
   // compiler symbols ('_call...'), and encodings starting with digits ('8859-1')
@@ -232,7 +237,9 @@ export function isValidFeatureFlag(val) {
   if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
   if (evaluateNoise(str).isNoise) return false;
 
-  // Reject UI DOM properties and CSS selectors
+  // Reject React hooks & standard UI DOM properties / handlers / modal helpers
+  if (/^use(?:State|Effect|Memo|Callback|Ref|Context|Reducer|LayoutEffect|Id|Transition|DeferredValue|ImperativeHandle|DebugValue|SyncExternalStore|InsertionEffect)$/i.test(str)) return false;
+  if (/^(?:show|open|close|toggle|render|handle|on)(?:Modal|Dialog|Tooltip|Popover|Menu|Drawer|Toast|Alert|Notification|Banner|Dropdown|Sidebar|Popup|Overlay|Click|Change|Submit|Focus|Blur)$/i.test(str)) return false;
   if (/^preview_(?:id|width|height|style|dom|element|view|node|ptr|item|modal|close|closed)/i.test(str)) return false;
   if (/^(?:flex|grid|items|justify|content|bg|text|border|font|shadow|rounded|p|m|px|py|gap)-[a-z0-9_-]+$/i.test(str)) return false;
   if (/^(?:aria|data)-[a-z0-9_-]+$/i.test(str)) return false;
@@ -315,8 +322,8 @@ const FLAG_PATTERNS = [
   /["']([a-zA-Z0-9_.-]+(?:Experiment|FeatureFlag|RolloutGate|FeatureGate))["']/,
   // CamelCase boolean toggles
   /\b(is[A-Z][a-zA-Z0-9]{3,40}(?:Enabled|Allowed|Active|Supported))\b/,
-  // Modern config toggles (enableNew..., canUse..., shouldShow..., allow...)
-  /\b((?:enable|feature|experiment|rollout|gate|toggle|should|canUse|allow|use|show)[A-Z][a-zA-Z0-9]{3,50})\b/,
+  // Explicit feature/rollout camelCase toggles (excludes React hooks like useState/useEffect)
+  /\b((?:enable|feature|experiment|rollout|gate|toggle|canUse|useFeature|useExperiment|useGate)[A-Z][a-zA-Z0-9]{3,50})\b/,
   // Flag definition objects with a defaultValue
   /["']([a-zA-Z0-9_.-]{3,80})["']\s*:\s*\{[^{}]{0,200}?["']?(?:defaultValue|default_value|enabled|isEnabled)["']?\s*:/i,
 ];
@@ -364,24 +371,29 @@ const ENV_VAR_PATTERNS = [
 
 // 7. Dark UI Copy & Natural Language Announcements (models, capabilities, and preview banners)
 const DARK_UI_PATTERNS = [
-  // A. Product/Model Introductions (e.g. "Introducing Claude 3.7 Sonnet", "Announcing GPT-5", "Welcome to Canvas")
-  /["']?\b((?:Introducing|Announcing|Welcome to|Try the new|Experience)\s+[A-Z0-9][a-zA-Z0-9_\-\.\s]{3,80})\b/i,
+  // A. Proper-cased Product/Model Introductions (case-sensitive subject prevents matching generic lowercase prose)
+  /["']?\b((?:Introducing|Announcing|Welcome to|Try the new)\s+[A-Z0-9][a-zA-Z0-9_\-\.\s]{3,80})\b/,
 
-  // B. Preview & Availability Status (e.g. "Now in research preview", "Now available in early access", "Now generally available")
-  /["']?\b((?:Now in|Now available in|Available in|In)\s+(?:research preview|preview|preview mode|early access|public beta|private beta|canary|dogfood)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
+  // B. Preview & Availability Status
+  /["']?\b((?:Now in|Now available in)\s+(?:research preview|preview mode|early access|public beta|private beta|canary|dogfood)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
 
-  // C. General Availability & Launch Statements (e.g. "Now available to all users", "Now live for subscribers")
-  /["']?\b((?:Now available|Now live|Generally available)\s+(?:to all users|for pro|for plus|for enterprise|globally|in your region)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
+  // C. General Availability & Launch Statements
+  /["']?\b((?:Now available|Generally available)\s+(?:to all users|for pro|for plus|for max|for ultra|for enterprise)[a-zA-Z0-9_\-\.\s,]{0,80})\b/i,
 
-  // D. Engine Attribution (e.g. "Powered by Claude 3.5 Sonnet", "Powered by Gemini 2.0 Flash")
-  /["']?\b((?:Powered by|Built on|Backed by)\s+[A-Z0-9][a-zA-Z0-9_\-\.\s]{3,60})\b/i,
+  // D. Engine Attribution (requires capitalized model/engine name)
+  /["']?\b((?:Powered by)\s+[A-Z][a-zA-Z0-9_\-\.\s]{3,60})\b/,
 
   // E. Pre-launch Callouts (coming soon, waitlist, early access, preview only)
-  /["']?([A-Z][a-zA-Z0-9\s,\.'"-]{10,120}?(?:coming soon|waitlist|internal dogfood|preview only|early access|research preview|waitlist only))["']?/i,
+  /["']?([A-Z][a-zA-Z0-9\s,\.'"-]{10,120}?(?:coming soon|join the waitlist|internal dogfood|preview only|early access|research preview|waitlist only))["']?/i,
 
   // F. Major Dark Capabilities UI Copy
   /["']?((?:Generate full application|Autonomous computer use|Deep research mode|Run full terminal commands autonomously|Connect external tools via MCP)[a-zA-Z0-9\s,\.'"-]{0,80})["']?/i,
 ];
+
+function isDarkUiNoise(phrase) {
+  if (!phrase || phrase.length < 8) return true;
+  return /^(?:welcome to the |welcome to your |try the new theme|introducing the |powered by electron|powered by chromium|powered by vite|powered by react)/i.test(phrase.trim());
+}
 
 // 8. Search & Grounding Capabilities (web search, live browsing, grounding)
 const SEARCH_PATTERNS = [
@@ -415,6 +427,19 @@ function cleanFullContext(str) {
   if (!str || typeof str !== 'string') return '';
   const trimmed = str.trim();
   return trimmed.length > 2000 ? trimmed.slice(0, 2000) : trimmed;
+}
+
+function forEachRegexMatch(pat, text, callback) {
+  const flags = pat.flags.includes('g') ? pat.flags : `${pat.flags}g`;
+  const globalPat = new RegExp(pat.source, flags);
+  let m;
+  while ((m = globalPat.exec(text)) !== null) {
+    if (m[0].length === 0) {
+      globalPat.lastIndex++;
+      continue;
+    }
+    callback(m);
+  }
 }
 
 /**
@@ -472,73 +497,141 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
 
   // 2. Feature Flags & Experiments
   for (const pat of FLAG_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      const val = m[1].trim();
-      if (isValidFeatureFlag(val)) {
-        const isExp = /^(?:exp_|experiment_)/i.test(val) || /(?:variation|getExperiment|useExperiment)\s*\(/i.test(text);
-        findings.push({
-          category: isExp ? CATEGORIES.EXPERIMENT : CATEGORIES.FEATURE_FLAG,
-          value: val,
-          context: fullContext,
-          hasDormantMarker: Boolean(matchedMarker),
-          dormantMarker: matchedMarker,
-          activationStatus: defaultActivation,
-          filePath,
-          artifactClass,
-          status: 'accepted',
-          rejectionReason: null,
-        });
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
+        const val = m[1].trim();
+        if (isValidFeatureFlag(val)) {
+          const isExp = /^(?:exp_|experiment_)/i.test(val) || /(?:variation|getExperiment|useExperiment)\s*\(/i.test(text);
+          findings.push({
+            category: isExp ? CATEGORIES.EXPERIMENT : CATEGORIES.FEATURE_FLAG,
+            value: val,
+            context: fullContext,
+            hasDormantMarker: Boolean(matchedMarker),
+            dormantMarker: matchedMarker,
+            activationStatus: defaultActivation,
+            filePath,
+            artifactClass,
+            status: 'accepted',
+            rejectionReason: null,
+          });
+        }
       }
-    }
+    });
   }
 
   // 3. Hidden Commands
   for (const pat of HIDDEN_COMMAND_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      findings.push({
-        category: CATEGORIES.HIDDEN_COMMAND,
-        value: m[1].trim(),
-        context: fullContext,
-        hasDormantMarker: true,
-        dormantMarker: matchedMarker || 'hidden_command',
-        activationStatus: ACTIVATION_STATUS.CONFIGURED,
-        filePath,
-        artifactClass,
-        status: 'accepted',
-        rejectionReason: null,
-      });
-    }
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
+        findings.push({
+          category: CATEGORIES.HIDDEN_COMMAND,
+          value: m[1].trim(),
+          context: fullContext,
+          hasDormantMarker: true,
+          dormantMarker: matchedMarker || 'hidden_command',
+          activationStatus: ACTIVATION_STATUS.CONFIGURED,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
+    });
   }
 
   // 4. Endpoints
   for (const pat of ENDPOINT_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      findings.push({
-        category: CATEGORIES.ENDPOINT_DOMAIN,
-        value: m[1].trim(),
-        context: fullContext,
-        hasDormantMarker: Boolean(matchedMarker),
-        dormantMarker: matchedMarker,
-        activationStatus: defaultActivation,
-        filePath,
-        artifactClass,
-        status: 'accepted',
-        rejectionReason: null,
-      });
-    }
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
+        findings.push({
+          category: CATEGORIES.ENDPOINT_DOMAIN,
+          value: m[1].trim(),
+          context: fullContext,
+          hasDormantMarker: Boolean(matchedMarker),
+          dormantMarker: matchedMarker,
+          activationStatus: defaultActivation,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
+    });
   }
 
   // 5. Agent Mode / Tools
   for (const pat of AGENT_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      const val = m[1].trim();
-      if (isValidAgentTool(val)) {
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
+        const val = m[1].trim();
+        if (isValidAgentTool(val)) {
+          findings.push({
+            category: CATEGORIES.AGENT_MODE,
+            value: val,
+            context: fullContext,
+            hasDormantMarker: Boolean(matchedMarker),
+            dormantMarker: matchedMarker,
+            activationStatus: defaultActivation,
+            filePath,
+            artifactClass,
+            status: 'accepted',
+            rejectionReason: null,
+          });
+        }
+      }
+    });
+  }
+
+  // 6. Environment Variables
+  for (const pat of ENV_VAR_PATTERNS) {
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
         findings.push({
-          category: CATEGORIES.AGENT_MODE,
+          category: CATEGORIES.ENV_VAR,
+          value: m[1].trim(),
+          context: fullContext,
+          hasDormantMarker: Boolean(matchedMarker),
+          dormantMarker: matchedMarker,
+          activationStatus: defaultActivation,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
+    });
+  }
+
+  // 7. Dark UI Copy
+  for (const pat of DARK_UI_PATTERNS) {
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
+        const val = m[1].trim();
+        if (isDarkUiNoise(val)) return;
+        const hasPreviewCue = Boolean(matchedMarker) || /(?:preview|waitlist|early access|beta|canary|dogfood|coming soon)/i.test(val);
+        findings.push({
+          category: CATEGORIES.UI_STRING,
+          value: val,
+          context: fullContext,
+          hasDormantMarker: hasPreviewCue,
+          dormantMarker: matchedMarker || (hasPreviewCue ? 'dark_ui_copy' : null),
+          activationStatus: hasPreviewCue ? ACTIVATION_STATUS.CONFIGURED : defaultActivation,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
+    });
+  }
+
+  // 8. Search & Grounding Capabilities (web search, live browsing, grounding)
+  for (const pat of SEARCH_PATTERNS) {
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
+        const val = m[1].trim();
+        findings.push({
+          category: CATEGORIES.CAPABILITY,
           value: val,
           context: fullContext,
           hasDormantMarker: Boolean(matchedMarker),
@@ -550,85 +643,28 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
           rejectionReason: null,
         });
       }
-    }
-  }
-
-  // 6. Environment Variables
-  for (const pat of ENV_VAR_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      findings.push({
-        category: CATEGORIES.ENV_VAR,
-        value: m[1].trim(),
-        context: fullContext,
-        hasDormantMarker: Boolean(matchedMarker),
-        dormantMarker: matchedMarker,
-        activationStatus: defaultActivation,
-        filePath,
-        artifactClass,
-        status: 'accepted',
-        rejectionReason: null,
-      });
-    }
-  }
-
-  // 7. Dark UI Copy
-  for (const pat of DARK_UI_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      findings.push({
-        category: CATEGORIES.UI_STRING,
-        value: m[1].trim(),
-        context: fullContext,
-        hasDormantMarker: true,
-        dormantMarker: 'dark_ui_copy',
-        activationStatus: ACTIVATION_STATUS.CONFIGURED,
-        filePath,
-        artifactClass,
-        status: 'accepted',
-        rejectionReason: null,
-      });
-    }
-  }
-
-  // 8. Search & Grounding Capabilities (web search, live browsing, grounding)
-  for (const pat of SEARCH_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      const val = m[1].trim();
-      findings.push({
-        category: CATEGORIES.CAPABILITY,
-        value: val,
-        context: fullContext,
-        hasDormantMarker: Boolean(matchedMarker),
-        dormantMarker: matchedMarker,
-        activationStatus: defaultActivation,
-        filePath,
-        artifactClass,
-        status: 'accepted',
-        rejectionReason: null,
-      });
-    }
+    });
   }
 
   // 9. Plan & Subscription Entitlements (pro, plus, max, ultra, team, enterprise)
   for (const pat of PLAN_PATTERNS) {
-    const m = text.match(pat);
-    if (m && m[1]) {
-      const val = m[1].trim();
-      findings.push({
-        category: CATEGORIES.PLAN_ENTITLEMENT,
-        value: val,
-        context: fullContext,
-        hasDormantMarker: Boolean(matchedMarker),
-        dormantMarker: matchedMarker,
-        activationStatus: ACTIVATION_STATUS.CONFIGURED,
-        filePath,
-        artifactClass,
-        status: 'accepted',
-        rejectionReason: null,
-      });
-    }
+    forEachRegexMatch(pat, text, (m) => {
+      if (m && m[1]) {
+        const val = m[1].trim();
+        findings.push({
+          category: CATEGORIES.PLAN_ENTITLEMENT,
+          value: val,
+          context: fullContext,
+          hasDormantMarker: Boolean(matchedMarker),
+          dormantMarker: matchedMarker,
+          activationStatus: ACTIVATION_STATUS.CONFIGURED,
+          filePath,
+          artifactClass,
+          status: 'accepted',
+          rejectionReason: null,
+        });
+      }
+    });
   }
 
   // 10. Pricing / model catalog tables
@@ -685,7 +721,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
         model,
         inputPrice: inputMatch ? Number.parseFloat(input) : null,
         outputPrice: outputMatch ? Number.parseFloat(output) : null,
-        context: text.slice(0, 300),
+        context: fullContext,
         hasDormantMarker: Boolean(matchedMarker),
         dormantMarker: matchedMarker,
         activationStatus: ACTIVATION_STATUS.CONFIGURED,

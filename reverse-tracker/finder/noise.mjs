@@ -138,7 +138,7 @@ const GENERIC_UI_WORDS = new Set([
   'next', 'previous', 'back', 'help', 'settings', 'options', 'menu', 'default',
 ]);
 
-// Standard web & DOM APIs
+// Standard web & DOM APIs + React hooks (frequently false-flagged as feature flags)
 const STANDARD_WEB_APIS = new Set([
   'addEventListener', 'removeEventListener', 'preventDefault', 'stopPropagation',
   'querySelector', 'querySelectorAll', 'getElementById', 'getElementsByClassName',
@@ -146,6 +146,9 @@ const STANDARD_WEB_APIS = new Set([
   'setTimeout', 'clearTimeout', 'setInterval', 'clearInterval', 'requestAnimationFrame',
   'JSON.parse', 'JSON.stringify', 'console.log', 'console.error', 'console.warn',
   'localStorage', 'sessionStorage', 'indexedDB', 'fetch', 'XMLHttpRequest',
+  'useState', 'useEffect', 'useMemo', 'useCallback', 'useRef', 'useContext',
+  'useReducer', 'useLayoutEffect', 'useId', 'useTransition', 'useDeferredValue',
+  'useImperativeHandle', 'useDebugValue', 'useSyncExternalStore',
 ]);
 
 /**
@@ -176,13 +179,21 @@ export function computeShannonEntropy(str) {
  */
 export function isThirdPartyPath(filePath) {
   if (!filePath) return false;
-  const lower = filePath.toLowerCase();
+  const lower = filePath.toLowerCase().replace(/\\/g, '/');
   return (
     lower.includes('node_modules') ||
     lower.includes('vendor/') ||
     lower.includes('third_party/') ||
     lower.includes('lib/extern') ||
-    lower.includes('webpack/bootstrap')
+    lower.includes('webpack/bootstrap') ||
+    lower.includes('electron framework.framework') ||
+    lower.includes('squirrel.framework') ||
+    lower.includes('mantle.framework') ||
+    lower.includes('reactiveobjc.framework') ||
+    lower.includes('/chromium/') ||
+    lower.includes('libffmpeg') ||
+    lower.includes('libglesv2') ||
+    lower.includes('vk_swiftshader')
   );
 }
 

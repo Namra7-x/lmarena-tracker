@@ -95,12 +95,14 @@ export function isMachOBinary(buffer) {
   if (!buffer || buffer.length < 4) return false;
   const magicBE = buffer.readUInt32BE(0);
   if (magicBE === MACHO_MAGICS.MACHO_32_BE || magicBE === MACHO_MAGICS.MACHO_64_BE ||
+      magicBE === MACHO_MAGICS.MACHO_32_LE || magicBE === MACHO_MAGICS.MACHO_64_LE ||
       magicBE === MACHO_MAGICS.FAT_64_BE || magicBE === MACHO_MAGICS.FAT_64_LE ||
       magicBE === MACHO_MAGICS.FAT_32_LE) {
     return true;
   }
   const magicLE = buffer.readUInt32LE(0);
-  if (magicLE === MACHO_MAGICS.MACHO_32_LE || magicLE === MACHO_MAGICS.MACHO_64_LE) {
+  if (magicLE === MACHO_MAGICS.MACHO_32_LE || magicLE === MACHO_MAGICS.MACHO_64_LE ||
+      magicLE === MACHO_MAGICS.MACHO_32_BE || magicLE === MACHO_MAGICS.MACHO_64_BE) {
     return true;
   }
   if (magicBE === MACHO_MAGICS.FAT_32_BE) {

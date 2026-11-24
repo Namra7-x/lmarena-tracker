@@ -4,6 +4,7 @@
 
 import { CATEGORIES, isValidModelIdentifier } from './rules.mjs';
 import { isThirdPartyPath, evaluateNoise } from './noise.mjs';
+import { clusterRelatedFindings } from './similarity.mjs';
 
 export const TIERS = {
   CONFIRMED: 'CONFIRMED',
@@ -21,8 +22,12 @@ export const TIERS = {
  * @returns {Object} scored finding with score, tier, isMajorEarlySignal, breakdown
  */
 export function scoreFinding(finding, context = {}) {
+  const isAstStructural = Boolean(
+    finding.discoveryMethod &&
+    ['ast_array_peer_cluster', 'ast_hyperparam_object', 'ast_property_model', 'ast_property_model_array', 'ast_switch_case_model', 'ast_variable_model', 'ast_variable_array_model', 'ast_pricing_catalog_model'].includes(finding.discoveryMethod)
+  );
   // Defense in depth: strictly reject invalid model identifiers from scoring
-  if (finding.category === CATEGORIES.MODEL_ID && !isValidModelIdentifier(finding.value)) {
+  if (finding.category === CATEGORIES.MODEL_ID && !isValidModelIdentifier(finding.value, { isStructuralCatalog: isAstStructural })) {
     return {
       ...finding,
       score: 0,
@@ -32,9 +37,24 @@ export function scoreFinding(finding, context = {}) {
     };
   }
 
-  // Reject definite noise (CSS properties, licenses, file assets, bundler boilerplate)
+  // Reject definite noise (CSS properties, licenses, file assets, bundler boilerplate, generic words, SVG/cloud regions)
+  const DEFINITE_NOISE_REASONS = new Set([
+    'w3c_css_property',
+    'spdx_license',
+    'media_or_archive_extension',
+    'css_style_or_svg',
+    'webpack_boilerplate',
+    'standard_generic_word',
+    'svg_coordinate',
+    'css_component_class',
+    'css_tailwind_class_list',
+    'date_layout',
+    'encoding_standard',
+    'cloud_region',
+    'data_uri',
+  ]);
   const noise = evaluateNoise(finding.value);
-  if (noise.isNoise && (noise.reason === 'w3c_css_property' || noise.reason === 'spdx_license' || noise.reason === 'media_or_archive_extension' || noise.reason === 'css_style_or_svg' || noise.reason === 'webpack_boilerplate')) {
+  if (noise.isNoise && DEFINITE_NOISE_REASONS.has(noise.reason)) {
     return {
       ...finding,
       score: 0,
@@ -263,4 +283,12 @@ export function deduplicateFindings(findings) {
     }
   }
   return sortFindings(Array.from(map.values()));
+}
+
+/**
+ * Deduplicate and cluster related findings (e.g. grouping Dark UI echoes under
+ * their parent model/feature discovery) for concise, low-noise reports.
+ */
+export function deduplicateAndClusterFindings(findings) {
+  return clusterRelatedFindings(deduplicateFindings(findings));
 }

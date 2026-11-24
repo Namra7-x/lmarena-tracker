@@ -16,19 +16,21 @@ import { performScan } from './pipeline/scan.mjs';
 function syncComponentStateToRemote(componentId) {
   if (!process.env.GITHUB_ACTIONS) return;
   const stateDir = path.resolve(process.cwd(), 'state');
-  const targetFile = `${componentId}.json`;
-  if (!fs.existsSync(path.join(stateDir, targetFile))) return;
+  const candidates = [`${componentId}.json`, `${componentId}_master.json.gz`]
+    .filter((file) => fs.existsSync(path.join(stateDir, file)));
+  if (candidates.length === 0) return;
+
   try {
     spawnSync('git', ['config', 'user.name', 'early-signal-tracker-bot'], { cwd: stateDir });
     spawnSync('git', ['config', 'user.email', 'actions@github.com'], { cwd: stateDir });
-    spawnSync('git', ['add', targetFile], { cwd: stateDir });
+    spawnSync('git', ['add', ...candidates], { cwd: stateDir });
     const diff = spawnSync('git', ['diff', '--cached', '--quiet'], { cwd: stateDir });
     if (diff.status !== 0) {
-      spawnSync('git', ['commit', '-m', `Auto-persist checkpoint for ${componentId} [skip ci]`], { cwd: stateDir });
+      spawnSync('git', ['commit', '-m', `Auto-persist state for ${componentId} [skip ci]`, '--no-verify'], { cwd: stateDir });
       for (let attempt = 1; attempt <= 3; attempt++) {
         const push = spawnSync('git', ['push', 'origin', 'HEAD:refs/heads/state/all'], { cwd: stateDir });
         if (push.status === 0) {
-          console.log(`[Auto-Sync] Successfully pushed checkpoint for ${componentId} to state/all.`);
+          console.log(`[Auto-Sync] Successfully pushed state (${candidates.join(', ')}) for ${componentId} to state/all.`);
           break;
         }
         spawnSync('git', ['pull', '--rebase', 'origin', 'state/all'], { cwd: stateDir });
@@ -37,6 +39,18 @@ function syncComponentStateToRemote(componentId) {
   } catch (err) {
     console.warn(`[Auto-Sync] Warning syncing ${componentId}:`, err.message);
   }
+}
+
+async function runWithConcurrency(items, concurrency, worker) {
+  const limit = Math.max(1, Number.parseInt(String(concurrency || 1), 10) || 1);
+  let cursor = 0;
+  const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (cursor < items.length) {
+      const idx = cursor++;
+      await worker(items[idx], idx);
+    }
+  });
+  await Promise.all(runners);
 }
 
 function parseOption(args, name) {
@@ -144,7 +158,16 @@ async function main() {
     const changes = await handleDetect(familyArg);
     printChanges(changes);
 
-    for (const change of changes) {
+    const scanConcurrency = Number.parseInt(process.env.SCAN_CONCURRENCY || '2', 10);
+    let syncChain = Promise.resolve();
+    const enqueueSync = (componentId) => {
+      syncChain = syncChain.then(() => {
+        syncComponentStateToRemote(componentId);
+      }).catch(() => {});
+      return syncChain;
+    };
+
+    await runWithConcurrency(changes, scanConcurrency, async (change) => {
       try {
         await handleScan(change.componentId, {
           candidate: change.candidate,
@@ -154,9 +177,10 @@ async function main() {
       } catch (scanErr) {
         console.error(`✗ Error processing ${change.componentId}: ${scanErr.message}`);
       } finally {
-        syncComponentStateToRemote(change.componentId);
+        await enqueueSync(change.componentId);
       }
-    }
+    });
+    await syncChain;
     return;
   }
 

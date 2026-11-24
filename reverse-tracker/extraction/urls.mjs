@@ -5,7 +5,7 @@
  * Strictly purges local file paths, schema XMLs, package manager URLs, and binary noise.
  */
 
-// XML namespaces, standards, and static documentation hosts that are NOT app routes
+// XML namespaces, standards, telemetry, and static documentation hosts that are NOT app routes
 const NOISE_HOST_DOMAINS = new Set([
   'w3.org',
   'whatwg.org',
@@ -16,6 +16,8 @@ const NOISE_HOST_DOMAINS = new Set([
   'schema.org',
   'xmlpull.org',
   'oasis-open.org',
+  'json-schema.org',
+  'opensource.org',
   'localhost',
   '127.0.0.1',
   '0.0.0.0',
@@ -29,9 +31,16 @@ const NOISE_HOST_DOMAINS = new Set([
   'pypi.org',
   'apache.org',
   'mozilla.org',
+  'developer.mozilla.org',
   'en.wikipedia.org',
   'wikipedia.org',
   'reactjs.org',
+  'react.dev',
+  'typescriptlang.org',
+  'electronjs.org',
+  'nodejs.org',
+  'eslint.org',
+  'prettier.io',
   'fonts.googleapis.com',
   'fonts.gstatic.com',
   'twitter.com',
@@ -40,6 +49,17 @@ const NOISE_HOST_DOMAINS = new Set([
   'iso.org',
   'khronos.org',
   'apple.com',
+  'sentry.io',
+  'ingest.sentry.io',
+  'datadoghq.com',
+  'segment.io',
+  'segment.com',
+  'amplitude.com',
+  'mixpanel.com',
+  'intercom.io',
+  'zendesk.com',
+  'gravatar.com',
+  'shields.io',
 ]);
 
 // Static assets and binary extensions that are not API endpoints
@@ -128,7 +148,9 @@ export function categorizeUrl(url) {
     lower.includes('appcast.xml') ||
     lower.includes('latest.yml') ||
     lower.includes('latest-mac.yml') ||
-    lower.includes('releases') ||
+    lower.includes('releases.json') ||
+    lower.includes('/releases/') ||
+    lower.includes('auto-updater') ||
     lower.includes('downloads.claude.ai') ||
     lower.includes('persistent.oaistatic.com/sidecar') ||
     lower.includes('cursor.com/api/download') ||

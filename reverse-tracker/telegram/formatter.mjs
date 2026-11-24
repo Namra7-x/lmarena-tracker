@@ -206,6 +206,9 @@ export function formatCompletionMessage({
         : '';
       msg += `• <b>${escapeHtml(sig.category)}:</b> <code>${escapeHtml(sig.value)}</code>${statusShift}\n`;
     }
+    if (changedSignals.length > 8) {
+      msg += `<i>…plus ${changedSignals.length - 8} more modified signals in leaks.txt</i>\n`;
+    }
     msg += '\n';
   } else if (majorSignals.length === 0 && highSignals.length === 0 && totalLeaks === 0 && pricingSignals.length === 0) {
     msg += `ℹ️ <i>Routine update: No early leak signals detected in this release.</i>\n\n`;

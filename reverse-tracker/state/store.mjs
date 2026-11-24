@@ -88,7 +88,7 @@ export function loadMasterState(stateDir, componentId) {
 export function saveMasterState(stateDir, componentId, masterState) {
   fs.mkdirSync(stateDir, { recursive: true });
   const gzPath = path.join(stateDir, `${componentId}_master.json.gz`);
-  const tmpGzPath = path.join(stateDir, `${componentId}_master.json.gz.tmp.${Date.now()}`);
+  const tmpGzPath = path.join(stateDir, `${componentId}_master.json.gz.tmp.${process.pid}.${Date.now()}`);
 
   const payload = {
     ...masterState,
@@ -118,7 +118,7 @@ export function saveMasterState(stateDir, componentId, masterState) {
 export function saveComponentState(stateDir, componentId, newState) {
   fs.mkdirSync(stateDir, { recursive: true });
   const filePath = path.join(stateDir, `${componentId}.json`);
-  const tmpFilePath = path.join(stateDir, `${componentId}.json.tmp.${Date.now()}`);
+  const tmpFilePath = path.join(stateDir, `${componentId}.json.tmp.${process.pid}.${Date.now()}`);
 
   // Bound legacy collections to prevent unbounded memory growth in CI state branches.
   const recentSignals = boundArray(newState.recentSignals, MAX_RECENT_SIGNALS);

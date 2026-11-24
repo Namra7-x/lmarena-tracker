@@ -3,25 +3,32 @@
  * Manages orphan state branches (state/openai, state/anthropic, etc.)
  */
 
-import { execSync } from 'node:child_process';
-import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 
+function runGit(args, cwd) {
+  return execFileSync('git', args, {
+    cwd,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    timeout: 30000,
+  });
+}
+
 /**
- * Setup or clone the state branch into a target directory.
+ * Setup or fetch the state branch into a target directory.
  */
 export function ensureStateDirectory(stateDir, familyId) {
   const branchName = `state/${familyId}`;
   fs.mkdirSync(stateDir, { recursive: true });
 
   try {
-    // Check if remote state branch exists
-    const checkBranch = execSync(`git ls-remote --heads origin ${branchName}`, { encoding: 'utf8' }).trim();
+    const checkBranch = runGit(['ls-remote', '--heads', 'origin', branchName], process.cwd()).trim();
     if (checkBranch) {
       console.log(`Found remote state branch ${branchName}. Fetching...`);
-      execSync(`git fetch origin ${branchName}:${branchName} --depth=1`, { stdio: 'ignore' });
+      runGit(['fetch', 'origin', `${branchName}:${branchName}`, '--depth=1'], process.cwd());
     }
-  } catch (err) {
+  } catch {
     console.log(`Remote state branch ${branchName} not found or fetch failed. Proceeding locally.`);
   }
 
@@ -32,38 +39,39 @@ export function ensureStateDirectory(stateDir, familyId) {
  * Commit and push state changes with rebase retries.
  */
 export function commitAndPushState(stateDir, familyId, commitMessage = 'Update tracker state') {
-  const branchName = `state/${familyId}`;
+  const branchName = familyId ? `state/${familyId}` : (process.env.STATE_BRANCH || 'state/all');
 
   try {
-    execSync('git config user.name "early-signal-tracker-bot"', { stdio: 'ignore' });
-    execSync('git config user.email "actions@github.com"', { stdio: 'ignore' });
+    runGit(['config', 'user.name', 'early-signal-tracker-bot'], stateDir);
+    runGit(['config', 'user.email', 'actions@github.com'], stateDir);
+    runGit(['add', '--all', '.'], stateDir);
 
-    // Stage changes in state directory
-    execSync(`git add "${stateDir}"`, { stdio: 'ignore' });
-
-    const diffCheck = execSync('git diff --cached --quiet', { stdio: 'ignore' });
-    // Exit code 0 means no changes
-    return { committed: false, reason: 'No state changes' };
-  } catch (err) {
-    // Diff found changes, proceed to commit
     try {
-      execSync(`git commit -m "${commitMessage}"`, { stdio: 'ignore' });
+      runGit(['diff', '--cached', '--quiet'], stateDir);
+      return { committed: false, reason: 'No state changes' };
+    } catch {
+      // Staged changes exist; proceed to commit.
+    }
 
-      // Push with bounded rebase retries
-      let pushed = false;
-      for (let i = 0; i < 3; i++) {
+    runGit(['commit', '-m', `${commitMessage} [skip ci]`, '--no-verify'], stateDir);
+
+    let pushed = false;
+    for (let i = 0; i < 3; i++) {
+      try {
+        runGit(['push', 'origin', `HEAD:refs/heads/${branchName}`], stateDir);
+        pushed = true;
+        break;
+      } catch {
         try {
-          execSync(`git push origin HEAD:${branchName}`, { stdio: 'ignore' });
-          pushed = true;
-          break;
-        } catch (pushErr) {
-          execSync('git pull --rebase origin ${branchName}', { stdio: 'ignore' });
+          runGit(['pull', '--rebase', 'origin', branchName], stateDir);
+        } catch {
+          // Next attempt or workflow end-of-job persist will retry.
         }
       }
-
-      return { committed: true, pushed };
-    } catch (commitErr) {
-      return { committed: false, error: commitErr.message };
     }
+
+    return { committed: true, pushed };
+  } catch (commitErr) {
+    return { committed: false, error: commitErr.message };
   }
 }
