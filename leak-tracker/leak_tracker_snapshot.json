@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-24T02:11:18Z",
+    "publicationDate": "2026-11-24T14:53:03Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -106854,6 +106854,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/60220597d9f86f31c8f22995563a0f4935c02a06",
+      "title": "Add 429 Too Many Requests status to many endpoints",
+      "updated": "2026-11-24T15:22:14Z",
+      "link": "https://github.com/openai/openai-openapi/commit/60220597d9f86f31c8f22995563a0f4935c02a06",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/373f26a9aec3608e3158f2a0d4b8ae49d13162a4",
       "title": "Add service_tier field to compaction response objects",
       "updated": "2026-11-24T02:17:58Z",
@@ -106984,13 +106991,6 @@
       "title": "Update live session model from gpt-live-1 to gpt-live-1.1",
       "updated": "2026-11-19T20:16:33Z",
       "link": "https://github.com/openai/openai-openapi/commit/bebf437cb004aafaab80f26f458d6e43674fc354",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/90cdd5f36c4600265acba4fb3fe21ac78458d445",
-      "title": "Add email notification channel for hard spend limit alerts",
-      "updated": "2026-11-19T19:08:02Z",
-      "link": "https://github.com/openai/openai-openapi/commit/90cdd5f36c4600265acba4fb3fe21ac78458d445",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -107148,5 +107148,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-24T10:55:50.794Z"
+  "lastScanAt": "2026-11-24T15:23:08.126Z"
 }
