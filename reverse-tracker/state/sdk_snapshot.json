@@ -1029,5 +1029,43 @@
     "shasum": "67f73fcbb2a2e1c2136552124112b8d24cfabc3c",
     "displayName": "Google ADK (Agent Development Kit)",
     "family": "google"
+  },
+  "@anthropic-ai/claude-agent-sdk#next": {
+    "version": "0.3.332",
+    "models": [
+      "claude-code",
+      "claude-fable-5",
+      "claude-opus-4-6",
+      "claude-opus-4-7",
+      "claude-opus-4-8",
+      "claude-opus-5",
+      "claude-opus-5-5",
+      "claude-sonnet-4-6",
+      "claude-sonnet-5"
+    ],
+    "betaHeaders": [
+      "context-1m-2025-08-07"
+    ],
+    "reasoningEfforts": [
+      "high",
+      "low",
+      "max",
+      "medium",
+      "xhigh"
+    ],
+    "serviceTiers": [],
+    "toolDefinitions": [
+      "tool_progress",
+      "tool_use_summary"
+    ],
+    "requestParams": [],
+    "apiEndpoints": [
+      "/v1/mcp/{server_id}"
+    ],
+    "lastUpdated": "2026-11-24T22:09:12.359Z",
+    "tag": "next",
+    "shasum": "52b4dfe48dc72108a7cc96923ec5dbe0d8cfa81d",
+    "displayName": "Anthropic Claude Agent SDK",
+    "family": "anthropic"
   }
 }
