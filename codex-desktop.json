@@ -3,7 +3,7 @@
   "componentId": "codex-desktop",
   "version": "build-20261120-224945",
   "observedVersion": "build-20261124-003758",
-  "scannedVersion": "build-20261120-224945",
+  "scannedVersion": "build-20261124-003758",
   "deliveredVersion": "build-20261120-224945",
   "alertedVersion": "build-20261124-003758",
   "releaseId": "codex-desktop-build-20261120-224945",
@@ -11,12 +11,12 @@
   "channel": "prod",
   "versionScheme": "build",
   "identityFingerprint": "7bd960c2175981b703c440ee09bb9ba0f4cc346439d7f0d9c370f8d8e9d89de4",
-  "diagnosticFingerprint": "77ec3ee640ca2dbd32abdfef746060f502d40f5c8096d15fb8ca289403e4c7a8",
-  "scanId": "CD-20261120-002",
+  "diagnosticFingerprint": null,
+  "scanId": "CD-20261124-001",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": null,
-  "lastFailureTime": "2026-11-20T23:02:38.838Z",
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-24T01:01:34.766Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -32,16 +32,47 @@
     "scanId": "CD-20261124-001",
     "version": "build-20261124-003758",
     "releaseKey": "ceab892f63c051778af26f6ac1febf7b",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 1178,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-24T00:58:29.081Z",
-    "updatedAt": "2026-11-24T00:58:29.081Z"
+    "coverageState": "PARTIAL",
+    "createdAt": "2026-11-24T01:01:34.766Z",
+    "updatedAt": "2026-11-24T01:01:34.766Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "CD-20261124-001",
+      "version": "build-20261124-003758",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-24T01:01:34.766Z"
+    },
     {
       "scanId": "CD-20261120-002",
       "version": "build-20261120-224945",
@@ -141,8 +172,8 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 170151,
-    "peakMemoryMb": 3120
+    "executionTimeMs": 162659,
+    "peakMemoryMb": 2874
   },
   "knownSignals": {}
 }
