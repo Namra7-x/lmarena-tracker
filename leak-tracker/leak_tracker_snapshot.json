@@ -1424,6 +1424,15 @@
   ],
   "azureFoundryModels": [
     {
+      "name": "microsoft-Phi-4-mini-instruct",
+      "version": "2",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-24T18:06:05.7394598+00:00",
+      "displayName": "microsoft-Phi-4-mini-instruct",
+      "registry": "azureml"
+    },
+    {
       "name": "MedImageInsight",
       "version": "4",
       "publisher": "Microsoft",
@@ -1862,15 +1871,6 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T13:44:39.5556261+00:00",
       "displayName": "gemma-4-26B-A4B-it",
-      "registry": "azureml"
-    },
-    {
-      "name": "google--gemma-4-e2b-it",
-      "version": "10",
-      "publisher": "Hugging Face",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T13:39:48.5927641+00:00",
-      "displayName": "gemma-4-E2B-it",
       "registry": "azureml"
     }
   ],
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-24T18:18:01.519Z"
+  "lastScanAt": "2026-11-24T18:19:07.835Z"
 }
