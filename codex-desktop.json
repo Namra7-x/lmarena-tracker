@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "componentId": "codex-desktop",
-  "version": "build-20261124-003758",
+  "version": "build-20261124-205726",
   "observedVersion": "build-20261124-205726",
   "scannedVersion": "build-20261124-205726",
-  "deliveredVersion": "build-20261124-003758",
+  "deliveredVersion": "build-20261124-205726",
   "alertedVersion": "build-20261124-205726",
   "releaseId": "codex-desktop-build-20261124-003758",
   "releaseKey": "ceab892f63c051778af26f6ac1febf7b",
@@ -28,34 +28,7 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "CD-20261124-002",
-    "version": "build-20261124-205726",
-    "releaseKey": "511ad81e3feecea2088df0ee2c82b6bd",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 1195,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "failedFiles": [],
-    "coverageState": "PARTIAL",
-    "createdAt": "2026-11-24T22:10:31.758Z",
-    "updatedAt": "2026-11-24T22:17:39.993Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
     {
       "scanId": "CD-20261124-002",
