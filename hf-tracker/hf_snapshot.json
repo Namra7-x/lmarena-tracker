@@ -6027,14 +6027,14 @@
       },
       "facebook/pixio-vit5b16": {
         "createdAt": "2025-12-15T23:43:04.000Z",
-        "lastModified": "2025-12-26T16:53:37.000Z",
+        "lastModified": null,
         "gated": true,
         "pipeline_tag": "image-feature-extraction",
         "numParameters": null
       },
       "facebook/pixio-vit1b16": {
         "createdAt": "2025-12-15T23:42:55.000Z",
-        "lastModified": "2025-12-26T16:53:02.000Z",
+        "lastModified": null,
         "gated": true,
         "pipeline_tag": "image-feature-extraction",
         "numParameters": null
@@ -6048,7 +6048,7 @@
       },
       "facebook/pixio-vitb16": {
         "createdAt": "2025-12-15T23:38:45.000Z",
-        "lastModified": "2025-12-26T16:51:12.000Z",
+        "lastModified": null,
         "gated": true,
         "pipeline_tag": "image-feature-extraction",
         "numParameters": null
@@ -9013,6 +9013,27 @@
         "gated": false,
         "pipeline_tag": "feature-extraction",
         "numParameters": null
+      },
+      "facebook/MobileMoE-L-PTE": {
+        "createdAt": "2026-09-08T20:10:37.000Z",
+        "lastModified": "2026-11-24T03:43:20.000Z",
+        "gated": true,
+        "pipeline_tag": null,
+        "numParameters": null
+      },
+      "facebook/MobileMoE-M-PTE": {
+        "createdAt": "2026-09-08T20:10:26.000Z",
+        "lastModified": "2026-11-24T03:30:06.000Z",
+        "gated": true,
+        "pipeline_tag": null,
+        "numParameters": null
+      },
+      "facebook/MobileMoE-S-PTE": {
+        "createdAt": "2026-09-08T20:10:14.000Z",
+        "lastModified": "2026-11-24T02:28:35.000Z",
+        "gated": true,
+        "pipeline_tag": null,
+        "numParameters": null
       }
     },
     "spaces": {
@@ -9338,7 +9359,7 @@
           "facebook/MobileMoE-S-Base",
           "facebook/MobileMoE-S-SFT",
           "facebook/MobileMoE-S-QAT",
-          "facebook/MobileMoE-M-Base"
+          "facebook/MobileMoE-S-PTE"
         ]
       },
       "facebook/sam-audio-6931b147fa0ddaaad8bc57b6": {
@@ -19481,7 +19502,7 @@
       },
       "nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-4GB": {
         "createdAt": "2026-10-05T04:26:43.000Z",
-        "lastModified": null,
+        "lastModified": "2026-11-24T05:17:55.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -21287,7 +21308,7 @@
       },
       "nvidia/llama-nv-embed-reasoning-3b": {
         "createdAt": "2026-02-18T15:21:59.000Z",
-        "lastModified": "2026-10-26T10:12:00.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "feature-extraction",
         "numParameters": null
@@ -26347,7 +26368,7 @@
       },
       "MiniMaxAI/MiniMax-H3": {
         "createdAt": "2026-07-28T10:45:18.000Z",
-        "lastModified": "2026-11-20T08:47:53.000Z",
+        "lastModified": "2026-11-24T04:56:04.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-video",
         "numParameters": null
@@ -29286,21 +29307,21 @@
       },
       "baidu/ERNIE-5.5-Flash-Preview-FP8": {
         "createdAt": "2026-11-23T09:00:47.000Z",
-        "lastModified": "2026-11-24T02:53:58.000Z",
+        "lastModified": "2026-11-24T05:15:49.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "baidu/ERNIE-5.5-Flash-Preview": {
         "createdAt": "2026-11-23T09:00:29.000Z",
-        "lastModified": "2026-11-24T02:53:38.000Z",
+        "lastModified": "2026-11-24T05:15:19.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "baidu/ERNIE-5.5-Flash-Preview-BF16": {
         "createdAt": "2026-11-23T09:01:08.000Z",
-        "lastModified": "2026-11-24T02:53:20.000Z",
+        "lastModified": "2026-11-24T05:16:17.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -29376,13 +29397,13 @@
     "collections": {
       "baidu/ernie-55-flash-6aebf6ba5223a590f0b072fb": {
         "title": "ERNIE-5.5-Flash",
-        "lastUpdated": "2026-11-24T03:10:50.583Z",
+        "lastUpdated": "2026-11-24T05:01:58.113Z",
         "itemCount": 4,
         "itemIds": [
-          "baidu/ERNIE-5.5-Flash-Base",
-          "baidu/ERNIE-5.5-Flash-Base-BF16",
           "baidu/ERNIE-5.5-Flash-Preview",
-          "baidu/ERNIE-5.5-Flash-Preview-FP8"
+          "baidu/ERNIE-5.5-Flash-Preview-FP8",
+          "baidu/ERNIE-5.5-Flash-Preview-BF16",
+          "baidu/ERNIE-5.5-Flash-Base"
         ]
       },
       "baidu/unlimited-ocr-6ae010f2ba5b05824b1d8d44": {
@@ -40203,28 +40224,28 @@
       },
       "CohereLabs/tiny-aya-earth": {
         "createdAt": "2026-02-13T11:39:04.000Z",
-        "lastModified": "2026-09-30T13:25:07.000Z",
+        "lastModified": "2026-11-24T03:45:54.000Z",
         "gated": true,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "CohereLabs/tiny-aya-water": {
         "createdAt": "2026-02-13T11:38:57.000Z",
-        "lastModified": "2026-09-30T13:24:45.000Z",
+        "lastModified": "2026-11-24T03:47:27.000Z",
         "gated": true,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "CohereLabs/tiny-aya-fire": {
         "createdAt": "2026-02-13T11:39:06.000Z",
-        "lastModified": "2026-09-30T13:24:40.000Z",
+        "lastModified": "2026-11-24T03:46:39.000Z",
         "gated": true,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "CohereLabs/tiny-aya-global": {
         "createdAt": "2026-02-13T09:13:01.000Z",
-        "lastModified": "2026-09-30T13:24:36.000Z",
+        "lastModified": "2026-11-24T03:44:55.000Z",
         "gated": true,
         "pipeline_tag": "text-generation",
         "numParameters": null
