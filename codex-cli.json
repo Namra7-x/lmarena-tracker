@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "componentId": "codex-cli",
-  "version": "0.171.0",
+  "version": "0.172.0",
   "observedVersion": "0.172.0",
   "scannedVersion": "0.172.0",
-  "deliveredVersion": "0.171.0",
+  "deliveredVersion": "0.172.0",
   "alertedVersion": "0.172.0",
   "releaseId": "@openai/codex@0.171.0",
   "releaseKey": "9a8fbde4eb9041981f5aa565819f4bcf",
@@ -28,34 +28,7 @@
     "zip": "skipped",
     "multiEncodingScanner": "skipped"
   },
-  "pendingDelivery": {
-    "scanId": "CX-20261124-001",
-    "version": "0.172.0",
-    "releaseKey": "2cc2662e6b97479172c48e6a2270ec0f",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 1163,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "failedFiles": [],
-    "coverageState": "FAILED",
-    "createdAt": "2026-11-24T00:10:37.664Z",
-    "updatedAt": "2026-11-24T00:11:49.459Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
     {
       "scanId": "CX-20261124-001",
