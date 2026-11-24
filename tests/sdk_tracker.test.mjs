@@ -4,6 +4,8 @@ import assert from 'node:assert/strict';
 import {
   extractUnionLiterals,
   parseTypeDeclarations,
+  extractRequestParameters,
+  extractApiEndpoints,
   reverseSdkPackage,
 } from '../reverse-tracker/sdk/extractor.mjs';
 import {
@@ -11,6 +13,8 @@ import {
   formatSdkTelegramSummary,
   formatSdkDiffDocument,
 } from '../reverse-tracker/sdk/diff.mjs';
+import { SDK_CONFIG } from '../reverse-tracker/sdk/config.mjs';
+import { compareSemverCore } from '../reverse-tracker/sdk/tracker.mjs';
 
 describe('Official SDK Type Extractor', () => {
   it('should cleanly extract string union literals without noise', () => {
@@ -75,5 +79,64 @@ describe('Official SDK Diff & Report Formatter', () => {
     assert.ok(doc.includes('OFFICIAL SDK DEEP REVERSE DIFF REPORT'));
     assert.ok(doc.includes('+ claude-opus-5-5'));
     assert.ok(doc.includes('+ computer-use-2025-01-24'));
+  });
+
+  it('should extract API routes, request params, service tiers, and video/image models (veo/sora/imagen)', () => {
+    const dts = `
+export type VideoModel = 'veo-3.0-generate-preview' | 'sora-2-pro';
+export type ServiceTier = 'auto' | 'default' | 'flex' | 'priority';
+export interface ResponseCreateParams {
+  reasoning?: { effort?: 'low' | 'medium' | 'high' | 'xhigh' };
+  service_tier?: ServiceTier;
+  mcp_servers?: Array<unknown>;
+  context_management?: unknown;
+}
+`;
+    const params = extractRequestParameters(dts);
+    assert.ok(params.has('service_tier'));
+    assert.ok(params.has('mcp_servers'));
+    assert.ok(params.has('context_management'));
+
+    const routes = extractApiEndpoints(`this._client.post('/v1/responses', opts); this._client.get('/v1/videos/status');`);
+    assert.ok(routes.has('/v1/responses'));
+    assert.ok(routes.has('/v1/videos/status'));
+
+    const diff = computeSdkDiff('openai', '8.0.0', {
+      models: ['veo-3.0-generate-preview', 'sora-2-pro'],
+      betaHeaders: [],
+      reasoningEfforts: ['xhigh'],
+      serviceTiers: ['flex', 'priority'],
+      toolDefinitions: [],
+      requestParams: ['mcp_servers', 'context_management'],
+      apiEndpoints: ['/v1/responses', '/v1/videos/status'],
+    }, {
+      version: '7.9.0',
+      models: [],
+      betaHeaders: [],
+      reasoningEfforts: [],
+      serviceTiers: [],
+      toolDefinitions: [],
+      requestParams: [],
+      apiEndpoints: [],
+    });
+
+    assert.deepEqual(diff.addedEndpoints, ['/v1/responses', '/v1/videos/status']);
+    assert.deepEqual(diff.addedServiceTiers, ['flex', 'priority']);
+    assert.deepEqual(diff.addedRequestParams, ['mcp_servers', 'context_management']);
+
+    const summary = formatSdkTelegramSummary(diff, 'OpenAI', 'next');
+    assert.ok(summary.includes('[NEXT PRE-RELEASE]'));
+    assert.ok(summary.includes('/v1/responses'));
+    assert.ok(summary.includes('mcp_servers'));
+    assert.ok(summary.includes('flex, priority'));
+  });
+
+  it('should include official Agent SDKs across Anthropic, OpenAI, and Google and compare semver cores', () => {
+    const names = SDK_CONFIG.packages.map((p) => p.name);
+    assert.ok(names.includes('@anthropic-ai/claude-agent-sdk'));
+    assert.ok(names.includes('@openai/agents'));
+    assert.ok(names.includes('@google/adk'));
+    assert.ok(compareSemverCore('7.63.0', '4.0.0-beta.12') > 0);
+    assert.ok(compareSemverCore('8.0.0-beta.1', '7.63.0') > 0);
   });
 });

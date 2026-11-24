@@ -363,5 +363,83 @@
     "shasum": "634a3c06f8ea7a6125c1b0d6c1e66bb11afb52c9",
     "displayName": "Google Generative AI SDK",
     "family": "google"
+  },
+  "@anthropic-ai/claude-agent-sdk": {
+    "version": "0.3.331",
+    "models": [
+      "claude-code",
+      "claude-fable-5",
+      "claude-opus-4-6",
+      "claude-opus-4-7",
+      "claude-opus-4-8",
+      "claude-opus-5",
+      "claude-opus-5-5",
+      "claude-sonnet-4-6",
+      "claude-sonnet-5"
+    ],
+    "betaHeaders": [
+      "context-1m-2025-08-07"
+    ],
+    "reasoningEfforts": [
+      "high",
+      "low",
+      "max",
+      "medium",
+      "xhigh"
+    ],
+    "serviceTiers": [],
+    "toolDefinitions": [
+      "tool_progress",
+      "tool_use_summary"
+    ],
+    "requestParams": [],
+    "apiEndpoints": [
+      "/v1/mcp/{server_id}",
+      "/v1/toolbox/shttp/mcp/{server_id}"
+    ],
+    "lastUpdated": "2026-11-24T17:42:53.351Z",
+    "tag": "latest",
+    "shasum": "3d52acaf9e9bc44fae93b61cc05577ffba985f48",
+    "displayName": "Anthropic Claude Agent SDK",
+    "family": "anthropic"
+  },
+  "@openai/agents": {
+    "version": "0.22.0",
+    "models": [],
+    "betaHeaders": [],
+    "reasoningEfforts": [],
+    "serviceTiers": [],
+    "toolDefinitions": [],
+    "requestParams": [],
+    "apiEndpoints": [],
+    "lastUpdated": "2026-11-24T17:42:54.479Z",
+    "tag": "latest",
+    "shasum": "732813891bce562e9325badc9048ad39b3f0ac83",
+    "displayName": "OpenAI Agents SDK",
+    "family": "openai"
+  },
+  "@google/adk": {
+    "version": "2.5.0",
+    "models": [
+      "gemini-1.5-flash",
+      "gemini-2",
+      "gemini-2.5-flash",
+      "gemini-2.5-pro",
+      "gemini-3.8-live",
+      "gemini-flash-latest"
+    ],
+    "betaHeaders": [
+      "mcp"
+    ],
+    "reasoningEfforts": [],
+    "serviceTiers": [],
+    "toolDefinitions": [],
+    "requestParams": [],
+    "apiEndpoints": [],
+    "lastUpdated": "2026-11-24T17:42:58.367Z",
+    "tag": "latest",
+    "shasum": "67f73fcbb2a2e1c2136552124112b8d24cfabc3c",
+    "displayName": "Google ADK (Agent Development Kit)",
+    "family": "google"
   }
 }
