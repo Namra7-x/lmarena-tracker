@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-24T22:00:30Z",
+    "publicationDate": "2026-11-24T22:59:10Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -106854,6 +106854,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/84344d2b051e8f056d32380db1833e7e81657d18",
+      "title": "Add optional safety_identifier field for monitoring and abuse detection",
+      "updated": "2026-11-24T23:07:46Z",
+      "link": "https://github.com/openai/openai-openapi/commit/84344d2b051e8f056d32380db1833e7e81657d18",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/9246b543933df37e7c1b36cd81ff0dd7f1be5149",
       "title": "Clarify tags description by removing query capability mention",
       "updated": "2026-11-24T22:03:11Z",
@@ -106984,13 +106991,6 @@
       "title": "Simplify constant &#39;object&#39; fields to use &#39;const&#39; instead of &#39;enum&#39;",
       "updated": "2026-11-19T23:09:00Z",
       "link": "https://github.com/openai/openai-openapi/commit/9ad9fe51d1a6531a47e48038d35a28d130d1f557",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/3f2b776659dbc759350126129baa40a16c9e0aaf",
-      "title": "Replace enum with const for fixed event type fields",
-      "updated": "2026-11-19T22:14:05Z",
-      "link": "https://github.com/openai/openai-openapi/commit/3f2b776659dbc759350126129baa40a16c9e0aaf",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-24T22:04:12.169Z"
+  "lastScanAt": "2026-11-24T23:08:08.167Z"
 }
