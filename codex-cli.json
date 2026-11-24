@@ -15,7 +15,7 @@
   "scanId": "CX-20261124-001",
   "coverageState": "FAILED",
   "lastSuccessfulScan": "2026-11-20T00:52:19.999Z",
-  "lastFailureTime": "2026-11-24T00:10:37.664Z",
+  "lastFailureTime": "2026-11-24T00:11:49.459Z",
   "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
@@ -54,9 +54,25 @@
     "failedFiles": [],
     "coverageState": "FAILED",
     "createdAt": "2026-11-24T00:10:37.664Z",
-    "updatedAt": "2026-11-24T00:10:37.664Z"
+    "updatedAt": "2026-11-24T00:11:49.459Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "CX-20261124-001",
+      "version": "0.172.0",
+      "status": "PARTIAL",
+      "coverageState": "FAILED",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-24T00:11:49.459Z"
+    },
     {
       "scanId": "CX-20261124-001",
       "version": "0.172.0",
@@ -385,7 +401,7 @@
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 2779,
+    "executionTimeMs": 15,
     "peakMemoryMb": 629
   },
   "knownSignals": {}
