@@ -3,7 +3,7 @@
   "componentId": "codex-cli",
   "version": "0.171.0",
   "observedVersion": "0.172.0",
-  "scannedVersion": "0.171.0",
+  "scannedVersion": "0.172.0",
   "deliveredVersion": "0.171.0",
   "alertedVersion": "0.172.0",
   "releaseId": "@openai/codex@0.171.0",
@@ -11,20 +11,20 @@
   "channel": "stable",
   "versionScheme": null,
   "identityFingerprint": "4a61750211fd66fb3ed01f24f61912100f049f7fc5e1b8301b9d1714a95f44d2",
-  "diagnosticFingerprint": "1ef2dfdddc6f0fd45e1a39299bf402da662ff2c6ddd93dee1e7e96ee3ec19d85",
-  "scanId": "CX-20261120-001",
-  "coverageState": "COMPLETE",
+  "diagnosticFingerprint": null,
+  "scanId": "CX-20261124-001",
+  "coverageState": "FAILED",
   "lastSuccessfulScan": "2026-11-20T00:52:19.999Z",
-  "lastFailureTime": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-24T00:10:37.664Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
-    "acornAst": "completed",
+    "acornAst": "skipped",
     "goReSym": "skipped",
     "sourceMap": "skipped",
     "sevenZip": "skipped",
     "asar": "skipped",
-    "tar": "completed",
+    "tar": "skipped",
     "zip": "skipped",
     "multiEncodingScanner": "skipped"
   },
@@ -32,16 +32,47 @@
     "scanId": "CX-20261124-001",
     "version": "0.172.0",
     "releaseKey": "2cc2662e6b97479172c48e6a2270ec0f",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 1163,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-24T00:10:28.983Z",
-    "updatedAt": "2026-11-24T00:10:28.983Z"
+    "coverageState": "FAILED",
+    "createdAt": "2026-11-24T00:10:37.664Z",
+    "updatedAt": "2026-11-24T00:10:37.664Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "CX-20261124-001",
+      "version": "0.172.0",
+      "status": "PARTIAL",
+      "coverageState": "FAILED",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-24T00:10:37.664Z"
+    },
     {
       "scanId": "CX-20261120-001",
       "version": "0.171.0",
@@ -349,11 +380,13 @@
     "count": 9,
     "data": "H4sIAAAAAAACA42P2wrCMAyG730Nr7M6PICC+CyhC22wtqHJPLy9KDIFnez6//5TNBPdOecjWhBrfDk5Xzq6zuKY4jirYUqNaDuB0jgOHVAEEuaOcwDBQHurPQ18R2dKRahqU4Qy8o95fxiHvcW5csjAGS5sETADCsORbpMCuHuPiZTkk6DssBr7ROradrnZrlcLeNoeba+rg7tSIlT67rgD0HnARYEBAAA="
   },
-  "lastCoverageGaps": [],
+  "lastCoverageGaps": [
+    "all: Failed to download https://registry.npmjs.org/@openai/codex/-/codex-0.172.0.tgz: HTTP 404 client error downloading https://registry.npmjs.org/@openai/codex/-/codex-0.172.0.tgz"
+  ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 2286,
-    "peakMemoryMb": 447
+    "executionTimeMs": 2779,
+    "peakMemoryMb": 629
   },
   "knownSignals": {}
 }
