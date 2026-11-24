@@ -106854,6 +106854,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/d70a09be1a5084f3acfece009c2621f21e4d4466",
+      "title": "Add new healthcare and sol models to available completions",
+      "updated": "2026-11-24T17:19:10Z",
+      "link": "https://github.com/openai/openai-openapi/commit/d70a09be1a5084f3acfece009c2621f21e4d4466",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/60220597d9f86f31c8f22995563a0f4935c02a06",
       "title": "Add 429 Too Many Requests status to many endpoints",
       "updated": "2026-11-24T15:22:14Z",
@@ -106985,13 +106992,6 @@
       "updated": "2026-11-19T20:19:59Z",
       "link": "https://github.com/openai/openai-openapi/commit/fa361566ec236d24fad012d24d8aec352cab0cc0",
       "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/bebf437cb004aafaab80f26f458d6e43674fc354",
-      "title": "Update live session model from gpt-live-1 to gpt-live-1.1",
-      "updated": "2026-11-19T20:16:33Z",
-      "link": "https://github.com/openai/openai-openapi/commit/bebf437cb004aafaab80f26f458d6e43674fc354",
-      "author": "openai-openapi-publisher"
     }
   ],
   "openaiOpenapiYaml": {
@@ -107091,15 +107091,19 @@
       "gpt-5.6-sol",
       "gpt-5.6-terra",
       "gpt-6-astra",
+      "gpt-6-astra-healthcare",
       "gpt-6-cyber",
       "gpt-6-luna",
       "gpt-6-rosalind",
       "gpt-6-sol",
       "gpt-6.1-sol",
+      "gpt-6.1-sol-healthcare",
       "gpt-6.1-terra",
       "gpt-6.2-astra",
+      "gpt-6.2-astra-healthcare",
       "gpt-6.2-astra-law",
       "gpt-6.2-sol",
+      "gpt-6.2-sol-healthcare",
       "gpt-audio-1.5",
       "gpt-audio-mini",
       "gpt-audio-mini-2025-10-06",
@@ -107148,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-24T16:05:03.352Z"
+  "lastScanAt": "2026-11-24T17:20:09.100Z"
 }
