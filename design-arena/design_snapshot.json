@@ -11685,6 +11685,30 @@
           "website"
         ]
       }
+    },
+    "solar-mini4-5-preview": {
+      "displayName": "Solar Mini 4.5 Preview",
+      "provider": "upstage",
+      "active": false,
+      "openSource": false,
+      "router": false,
+      "vision": false,
+      "inputModalities": [
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "dataviz",
+          "gamedev",
+          "uicomponent",
+          "website"
+        ],
+        "agents": [
+          "agon_webapps",
+          "fullstack"
+        ]
+      }
     }
   },
   "providers": {
@@ -14003,6 +14027,10 @@
       "text.input": 0.15,
       "text.output": 0.5,
       "text.cachedInput": 0.015
+    },
+    "solar-mini4-5-preview": {
+      "text.input": 0.1,
+      "text.output": 0.4
     }
   }
 }
