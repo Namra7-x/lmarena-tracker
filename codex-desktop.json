@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "codex-desktop",
   "version": "build-20261120-224945",
-  "observedVersion": "build-20261120-224945",
+  "observedVersion": "build-20261124-003758",
   "scannedVersion": "build-20261120-224945",
   "deliveredVersion": "build-20261120-224945",
-  "alertedVersion": "build-20261120-224945",
+  "alertedVersion": "build-20261124-003758",
   "releaseId": "codex-desktop-build-20261120-224945",
   "releaseKey": "18e8e305cc86739e92b8ef4949935d10",
   "channel": "prod",
@@ -16,7 +16,7 @@
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": null,
   "lastFailureTime": "2026-11-20T23:02:38.838Z",
-  "lastDeliveryStatus": "PARTIAL",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "CD-20261124-001",
+    "version": "build-20261124-003758",
+    "releaseKey": "ceab892f63c051778af26f6ac1febf7b",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 1178,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-24T00:58:29.081Z",
+    "updatedAt": "2026-11-24T00:58:29.081Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CD-20261120-002",
