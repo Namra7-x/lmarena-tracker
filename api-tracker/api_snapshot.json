@@ -1,7 +1,7 @@
 {
   "totalGroups": 87,
   "totalModels": 193,
-  "lastUpdated": "2026-11-23T12:40:42.511Z",
+  "lastUpdated": "2026-11-24T06:44:54.504Z",
   "models": {
     "qwen4-max": {
       "modelId": "qwen4-max",
@@ -2721,7 +2721,7 @@
         "eval": false,
         "inference": true,
         "tokenMetering": true,
-        "autoTPM": false,
+        "autoTPM": true,
         "displayQpmLimit": true,
         "deploy": false
       },
@@ -2766,7 +2766,7 @@
           "eval": false,
           "inference": true,
           "tokenMetering": true,
-          "autoTPM": false,
+          "autoTPM": true,
           "displayQpmLimit": true,
           "deploy": false
         },
@@ -10004,8 +10004,8 @@
       "category": "Audio",
       "description": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
       "shortDescription": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
-      "updateAt": "2026-11-23T07:06:07.099+00:00",
-      "latestOnlineAt": "2026-11-23T07:06:07.099+00:00",
+      "updateAt": "2026-11-23T07:06:07.000+00:00",
+      "latestOnlineAt": "2026-11-23T07:06:07.000+00:00",
       "collectionTag": null,
       "features": [],
       "capabilities": [
@@ -10013,8 +10013,8 @@
       ],
       "modelInfo": {
         "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": 65536,
+        "maxInputTokens": 65536,
+        "maxOutputTokens": null,
         "maxReasoningTokens": null,
         "reasoningMaxInputTokens": null,
         "reasoningMaxOutputTokens": null
@@ -10054,12 +10054,12 @@
           ]
         },
         "applyType": 0,
-        "updateAt": "2026-11-23T07:06:07.099+00:00",
+        "updateAt": "2026-11-23T07:06:07.000+00:00",
         "description": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
         "aliyunRecommend": false,
         "features": [],
         "modelInfo": {
-          "maxOutputTokens": 65536
+          "maxInputTokens": 65536
         },
         "provider": "qwen",
         "permissions": {
@@ -10089,10 +10089,10 @@
         "versionTag": "MAJOR",
         "shortDescription": "Qwen-Audio-3.1-Live is a next-generation, real-time, full-duplex voice service for live interactions. It combines a foreground voice model with a configurable background reasoning model, bringing advanced reasoning to a natural, full-duplex conversational experience. The foreground model interprets user intent, responds naturally, and manages turn-taking, while the background model handles complex reasoning, task planning, and tool invocation. As tasks run in the background, the assistant can continue the conversation and smoothly incorporate progress updates and results—so it can listen, reason, speak, and act concurrently.\n\nThe service supports two task collaboration modes: Client mode and Responses mode. In Client mode, the client application manages conversation context, invokes its own agents or business workflows, and returns their results to the foreground model. In Responses mode, the service invokes the background reasoning model based on the specified configuration, provides relevant conversation context, and integrates the results into the ongoing voice interaction. Both modes support function calling, allowing customers to connect business tools for knowledge retrieval, order processing, travel planning, and other use cases. With configurable models, prompts, and tools, Qwen-Audio-3.1-Live connects real-time voice conversations with complex task execution, extending voice assistants beyond conversation to task completion.",
         "equivalentSnapshot": "",
-        "maxOutputTokens": 65536,
-        "latestOnlineAt": "2026-11-23T07:06:07.099+00:00",
+        "latestOnlineAt": "2026-11-23T07:06:07.000+00:00",
         "tags": [],
         "license": {},
+        "maxInputTokens": 65536,
         "inferenceProvider": "bailian",
         "name": "Qwen-Audio-3.1-Live",
         "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-audio-3-1-live",
@@ -10862,118 +10862,6 @@
       },
       "limits": {}
     },
-    "qwen-image-2.0": {
-      "modelId": "qwen-image-2.0",
-      "name": "Qwen-Image-2.0",
-      "modelAlias": "qwen-image-2.0",
-      "provider": "qwen",
-      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-      "category": "Visual",
-      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-      "updateAt": "2026-03-03T11:31:36.000+00:00",
-      "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
-      "collectionTag": null,
-      "features": [
-        "model-experience"
-      ],
-      "capabilities": [
-        "IG"
-      ],
-      "modelInfo": {
-        "contextWindow": null,
-        "maxInputTokens": null,
-        "maxOutputTokens": null,
-        "maxReasoningTokens": null,
-        "reasoningMaxInputTokens": null,
-        "reasoningMaxOutputTokens": null
-      },
-      "inferenceMetadata": {
-        "requestModality": [
-          "Text",
-          "Image"
-        ],
-        "responseModality": [
-          "Image"
-        ]
-      },
-      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0",
-      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0.md",
-      "supports": {
-        "sft": true,
-        "fineTune": true,
-        "experienceV2": true,
-        "eval": true,
-        "inference": true,
-        "experience": true,
-        "displayQpmLimit": true
-      },
-      "rawItem": {
-        "inferenceMetadata": {
-          "response_modality": [
-            "Image"
-          ],
-          "request_modality": [
-            "Text",
-            "Image"
-          ]
-        },
-        "applyType": 0,
-        "updateAt": "2026-03-03T11:31:36.000+00:00",
-        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-        "aliyunRecommend": false,
-        "features": [
-          "model-experience"
-        ],
-        "modelInfo": {},
-        "provider": "qwen",
-        "permissions": {
-          "inference": true
-        },
-        "quota": {},
-        "scope": "PUBLIC",
-        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
-        "supports": {
-          "sft": true,
-          "fineTune": true,
-          "experienceV2": true,
-          "eval": true,
-          "inference": true,
-          "experience": true,
-          "displayQpmLimit": true
-        },
-        "model": "qwen-image-2.0",
-        "serviceSites": [
-          "international"
-        ],
-        "capabilities": [
-          "IG"
-        ],
-        "activationStatus": 0,
-        "modelAlias": "qwen-image-2.0",
-        "versionTag": "MAJOR",
-        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
-        "equivalentSnapshot": "qwen-image-2.0-2026-03-03",
-        "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
-        "tags": [],
-        "license": {},
-        "trainingTypes": {
-          "sft": [
-            "lora"
-          ]
-        },
-        "inferenceProvider": "bailian",
-        "name": "Qwen-Image-2.0",
-        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
-        "needApply": false,
-        "category": "Visual"
-      },
-      "pricing": {
-        "Image Generation": "$0.035Per image"
-      },
-      "limits": {}
-    },
     "qwen-image-2.0-pro": {
       "modelId": "qwen-image-2.0-pro",
       "name": "Qwen-Image-2.0-Pro",
@@ -11083,6 +10971,118 @@
       },
       "pricing": {
         "Image Generation": "$0.075Per image"
+      },
+      "limits": {}
+    },
+    "qwen-image-2.0": {
+      "modelId": "qwen-image-2.0",
+      "name": "Qwen-Image-2.0",
+      "modelAlias": "qwen-image-2.0",
+      "provider": "qwen",
+      "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+      "category": "Visual",
+      "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+      "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+      "updateAt": "2026-03-03T11:31:36.000+00:00",
+      "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
+      "collectionTag": null,
+      "features": [
+        "model-experience"
+      ],
+      "capabilities": [
+        "IG"
+      ],
+      "modelInfo": {
+        "contextWindow": null,
+        "maxInputTokens": null,
+        "maxOutputTokens": null,
+        "maxReasoningTokens": null,
+        "reasoningMaxInputTokens": null,
+        "reasoningMaxOutputTokens": null
+      },
+      "inferenceMetadata": {
+        "requestModality": [
+          "Text",
+          "Image"
+        ],
+        "responseModality": [
+          "Image"
+        ]
+      },
+      "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+      "modelPortalUrl": "https://www.qwencloud.com/models/qwen-image-2.0",
+      "markdownUrl": "https://www.qwencloud.com/models/qwen-image-2.0.md",
+      "supports": {
+        "sft": true,
+        "fineTune": true,
+        "experienceV2": true,
+        "eval": true,
+        "inference": true,
+        "experience": true,
+        "displayQpmLimit": true
+      },
+      "rawItem": {
+        "inferenceMetadata": {
+          "response_modality": [
+            "Image"
+          ],
+          "request_modality": [
+            "Text",
+            "Image"
+          ]
+        },
+        "applyType": 0,
+        "updateAt": "2026-03-03T11:31:36.000+00:00",
+        "description": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+        "aliyunRecommend": false,
+        "features": [
+          "model-experience"
+        ],
+        "modelInfo": {},
+        "provider": "qwen",
+        "permissions": {
+          "inference": true
+        },
+        "quota": {},
+        "scope": "PUBLIC",
+        "providerIconUrl": "https://img.alicdn.com/imgextra/i2/O1CN0117jcJ81NSCCOQHyGH_!!6000000001568-55-tps-40-40.svg",
+        "supports": {
+          "sft": true,
+          "fineTune": true,
+          "experienceV2": true,
+          "eval": true,
+          "inference": true,
+          "experience": true,
+          "displayQpmLimit": true
+        },
+        "model": "qwen-image-2.0",
+        "serviceSites": [
+          "international"
+        ],
+        "capabilities": [
+          "IG"
+        ],
+        "activationStatus": 0,
+        "modelAlias": "qwen-image-2.0",
+        "versionTag": "MAJOR",
+        "shortDescription": "The Qwen-Image-2.0 series of accelerated models integrates image generation and image editing, offering enhanced text-rendering capabilities with support for 1,000-token prompts, more realistic textures, finely detailed photorealistic scenes, and improved semantic consistency. The accelerated version effectively strikes an optimal balance between model performance and quality.",
+        "equivalentSnapshot": "qwen-image-2.0-2026-03-03",
+        "latestOnlineAt": "2026-03-03T11:31:36.000+00:00",
+        "tags": [],
+        "license": {},
+        "trainingTypes": {
+          "sft": [
+            "lora"
+          ]
+        },
+        "inferenceProvider": "bailian",
+        "name": "Qwen-Image-2.0",
+        "docUrl": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-image-edit-api",
+        "needApply": false,
+        "category": "Visual"
+      },
+      "pricing": {
+        "Image Generation": "$0.035Per image"
       },
       "limits": {}
     },
