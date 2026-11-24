@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-23T18:48:02Z",
+    "publicationDate": "2026-11-24T00:24:18Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -106854,6 +106854,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/5c8e6090030e3e102c3001ce8965a75c87959119",
+      "title": "Add optional safety_identifier field for monitoring and abuse detection",
+      "updated": "2026-11-24T00:56:37Z",
+      "link": "https://github.com/openai/openai-openapi/commit/5c8e6090030e3e102c3001ce8965a75c87959119",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/2a24deae6f89f84d0e88ce3c9d96c00304dca0b8",
       "title": "Replace enum with const for multiple string properties in API schemas",
       "updated": "2026-11-21T00:57:35Z",
@@ -106984,13 +106991,6 @@
       "title": "Use const instead of enum for fixed object type fields",
       "updated": "2026-11-19T04:04:50Z",
       "link": "https://github.com/openai/openai-openapi/commit/16cdf739aee9baa6191cdbab945dd5f7f9920f20",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/45f52f26d566cad3c8f28c54cb67135c03e5f90a",
-      "title": "Update default model from gpt-6-astra to gpt-6.2-astra",
-      "updated": "2026-11-19T01:28:03Z",
-      "link": "https://github.com/openai/openai-openapi/commit/45f52f26d566cad3c8f28c54cb67135c03e5f90a",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -107148,5 +107148,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-23T18:53:40.616Z"
+  "lastScanAt": "2026-11-24T00:57:50.403Z"
 }
