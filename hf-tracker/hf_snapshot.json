@@ -19383,7 +19383,7 @@
       },
       "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-DFlash2": {
         "createdAt": "2026-10-07T23:35:38.000Z",
-        "lastModified": "2026-10-27T12:22:43.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -19712,7 +19712,7 @@
       },
       "nvidia/nemotron-labs-unified-asr-0.6b": {
         "createdAt": "2026-08-21T09:26:40.000Z",
-        "lastModified": "2026-10-27T13:33:53.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "automatic-speech-recognition",
         "numParameters": null
@@ -22740,6 +22740,20 @@
         "gated": false,
         "pipeline_tag": "image-text-to-text",
         "numParameters": null
+      },
+      "nvidia/BioReason-Pro-2-9B-RL": {
+        "createdAt": "2026-11-09T20:47:45.000Z",
+        "lastModified": "2026-11-24T15:54:45.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
+      },
+      "nvidia/BioReason-Pro-2-9B-SFT": {
+        "createdAt": "2026-11-09T20:42:11.000Z",
+        "lastModified": "2026-11-24T15:54:43.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
       }
     },
     "spaces": {
@@ -24447,8 +24461,11 @@
       "nvidia/bioreason-pro-2-6af37af866b6790fb320d954": {
         "title": "BioReason-Pro 2",
         "lastUpdated": "2026-11-24T16:26:07.250Z",
-        "itemCount": 0,
-        "itemIds": []
+        "itemCount": 2,
+        "itemIds": [
+          "nvidia/BioReason-Pro-2-9B-SFT",
+          "nvidia/BioReason-Pro-2-9B-RL"
+        ]
       }
     }
   },
