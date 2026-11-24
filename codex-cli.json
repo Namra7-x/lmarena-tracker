@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "codex-cli",
   "version": "0.171.0",
-  "observedVersion": "0.171.0",
+  "observedVersion": "0.172.0",
   "scannedVersion": "0.171.0",
   "deliveredVersion": "0.171.0",
-  "alertedVersion": "0.171.0",
+  "alertedVersion": "0.172.0",
   "releaseId": "@openai/codex@0.171.0",
   "releaseKey": "9a8fbde4eb9041981f5aa565819f4bcf",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-20T00:52:19.999Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "DELIVERED",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "completed",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "skipped"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "CX-20261124-001",
+    "version": "0.172.0",
+    "releaseKey": "2cc2662e6b97479172c48e6a2270ec0f",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 1163,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-24T00:10:28.983Z",
+    "updatedAt": "2026-11-24T00:10:28.983Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CX-20261120-001",
