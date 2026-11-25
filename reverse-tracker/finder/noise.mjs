@@ -149,6 +149,8 @@ const STANDARD_WEB_APIS = new Set([
   'useState', 'useEffect', 'useMemo', 'useCallback', 'useRef', 'useContext',
   'useReducer', 'useLayoutEffect', 'useId', 'useTransition', 'useDeferredValue',
   'useImperativeHandle', 'useDebugValue', 'useSyncExternalStore',
+  'useActionState', 'useOptimistic', 'useFormStatus', 'useEffectEvent',
+  'ArrayBuffer', 'SharedArrayBuffer', 'Uint8Array',
 ]);
 
 /**
@@ -350,6 +352,10 @@ export function evaluateNoise(value) {
   }
   if (/^(?:us|eu|ap|sa|ca|me|af|cn|gov|asia)-(?:central|east|west|north|south|northeast|northwest|southeast|southwest)-\d+$/i.test(trimmed)) {
     return { isNoise: true, reason: 'cloud_region' };
+  }
+  // ICU unit / script / accessibility / CSS animation identifiers
+  if (/^(?:concentr-|aria-|focusable-|landmark-|cds-skel-|animate-code-|armenian-|cyrillic-|devanagari-|hebrew-|arabic-|exp_(?:hotel|flight|car_rental|boarding_pass|restaurant|mod_))/i.test(trimmed)) {
+    return { isNoise: true, reason: 'icu_a11y_or_proto_noise' };
   }
 
   // Check multi-class Tailwind strings (e.g. "flex items-center px-4 bg-slate-900")

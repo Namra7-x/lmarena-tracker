@@ -2,9 +2,11 @@
  * Deterministic Scoring Engine & Tier Assignment (Section 4.3 & 4.4)
  */
 
-import { CATEGORIES, isValidModelIdentifier } from './rules.mjs';
+import { CATEGORIES, isValidModelIdentifier, isValidFeatureFlag, isDarkUiNoise } from './rules.mjs';
 import { isThirdPartyPath, evaluateNoise } from './noise.mjs';
 import { clusterRelatedFindings } from './similarity.mjs';
+
+const KNOWN_AI_ANCHOR_RE = /^(?:gpt|claude-(?:[0-9]|opus|sonnet|haiku|mythos|fable|instant|donut|onigiri)|gemini|o[1-9]|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|veo|whisper|obsidian|swe|orion|mercury|hydrogen|argon|krypton|terra|jupiter)/i;
 
 export const TIERS = {
   CONFIRMED: 'CONFIRMED',
@@ -26,14 +28,39 @@ export function scoreFinding(finding, context = {}) {
     finding.discoveryMethod &&
     ['ast_array_peer_cluster', 'ast_hyperparam_object', 'ast_property_model', 'ast_property_model_array', 'ast_switch_case_model', 'ast_variable_model', 'ast_variable_array_model', 'ast_pricing_catalog_model'].includes(finding.discoveryMethod)
   );
-  // Defense in depth: strictly reject invalid model identifiers from scoring
+  // Defense in depth: strictly reject invalid model identifiers, flags, and Dark UI noise
+  // (also automatically purges stale polluted entries loaded from legacy state/all baselines).
   if (finding.category === CATEGORIES.MODEL_ID && !isValidModelIdentifier(finding.value, { isStructuralCatalog: isAstStructural })) {
     return {
       ...finding,
       score: 0,
       tier: TIERS.HIDDEN,
       isMajorEarlySignal: false,
+      status: 'rejected',
+      rejectionReason: 'Rejected: invalid model identifier',
       breakdown: [{ rule: 'Rejected: invalid model identifier', points: 0 }],
+    };
+  }
+  if ((finding.category === CATEGORIES.FEATURE_FLAG || finding.category === CATEGORIES.EXPERIMENT) && !isValidFeatureFlag(finding.value)) {
+    return {
+      ...finding,
+      score: 0,
+      tier: TIERS.HIDDEN,
+      isMajorEarlySignal: false,
+      status: 'rejected',
+      rejectionReason: 'Rejected: invalid feature flag',
+      breakdown: [{ rule: 'Rejected: invalid feature flag', points: 0 }],
+    };
+  }
+  if (finding.category === CATEGORIES.UI_STRING && isDarkUiNoise(finding.value)) {
+    return {
+      ...finding,
+      score: 0,
+      tier: TIERS.HIDDEN,
+      isMajorEarlySignal: false,
+      status: 'rejected',
+      rejectionReason: 'Rejected: dark UI boilerplate/localization noise',
+      breakdown: [{ rule: 'Rejected: UI noise', points: 0 }],
     };
   }
 
@@ -180,6 +207,25 @@ export function scoreFinding(finding, context = {}) {
   if (context.historicalFp) {
     score -= 10;
     breakdown.push({ rule: 'High historical false-positive rate', points: -10 });
+  }
+
+  // Evidence gate for unanchored raw model regex hits:
+  // If a candidate has NO AST/structural backing, NO known AI family anchor, NO dormant marker,
+  // NO source-map agreement, and NO 2+ platform agreement, keep it in WEAK SIGNAL (routed to
+  // low-confidence-candidates.txt instead of polluting high-signal leaks.txt / Telegram).
+  const hasStrongEvidence = Boolean(
+    isAstStructural ||
+    finding.discoveryMethod === 'ast_call_gate' ||
+    finding.discoveryMethod === 'ast_config_object' ||
+    finding.hasDormantMarker ||
+    finding.sourceMapAgreement ||
+    (Array.isArray(finding.platforms) && finding.platforms.length >= 2) ||
+    (Array.isArray(finding.artifactClasses) && finding.artifactClasses.length >= 2) ||
+    KNOWN_AI_ANCHOR_RE.test(String(finding.value || ''))
+  );
+  if (finding.category === CATEGORIES.MODEL_ID && !hasStrongEvidence && score > 34) {
+    score = 34;
+    breakdown.push({ rule: 'Capped (unanchored raw token -> low-confidence sidecar)', points: 0 });
   }
 
   // 6. Tier assignment

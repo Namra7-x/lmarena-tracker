@@ -78,34 +78,14 @@ export function computeExactDiff(
         finding.activationStatus !== 'UNKNOWN'
       );
 
-      // Compare normalized semantic context so 1-letter minified renames or
-      // bundler hashes never trigger false MODIFIED spam.
-      const prevNormCtx = normalizeContextForDiff(prev.context);
-      const currNormCtx = normalizeContextForDiff(finding.context);
-      const contextChanged = Boolean(
-        prevNormCtx &&
-        currNormCtx &&
-        prevNormCtx !== currNormCtx
-      );
-
-      // Compare normalized file paths so content-hashed chunk names (app-abc123.js
-      // -> app-def456.js) don't cause hundreds of false MODIFIED triggers.
-      const prevNormPath = normalizePathForDiff(prev.filePath);
-      const currNormPath = normalizePathForDiff(finding.filePath);
-      const pathChanged = Boolean(
-        prevNormPath &&
-        currNormPath &&
-        prevNormPath !== currNormPath
-      );
-
       const priceChanged = Boolean(
         finding.category === 'pricing' &&
         ((prev.inputPrice != null && finding.inputPrice != null && prev.inputPrice !== finding.inputPrice) ||
          (prev.outputPrice != null && finding.outputPrice != null && prev.outputPrice !== finding.outputPrice))
       );
 
-      if (statusChanged || contextChanged || pathChanged || priceChanged) {
-        const ctxDelta = contextChanged ? summarizeContextDelta(prev.context, finding.context) : null;
+      if (statusChanged || priceChanged) {
+        const ctxDelta = summarizeContextDelta(prev.context, finding.context);
         changedFindings.push({
           ...finding,
           diffStatus: 'changed',
@@ -115,8 +95,6 @@ export function computeExactDiff(
           changeReasons: [
             statusChanged ? `status: ${prev.activationStatus} -> ${finding.activationStatus}` : null,
             priceChanged ? 'pricing updated' : null,
-            contextChanged ? 'context updated' : null,
-            pathChanged ? 'location moved' : null,
           ].filter(Boolean),
           contextDeltaSummary: ctxDelta?.summary || null,
         });

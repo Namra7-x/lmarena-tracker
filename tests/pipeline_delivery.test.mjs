@@ -179,7 +179,7 @@ test('scan delivers the fixed six-file bundle, advances state, and does not re-a
   }
 });
 
-test('completion suppresses persistent signals while leaks.txt keeps full history tags', async () => {
+test('completion and leaks.txt suppress persistent signals and emit NEW leaks only', async () => {
   const { root, stateDir, reportsDir } = makeTempDirs('diff');
   try {
     await initBaseline(stateDir, '0.1.0');
@@ -218,7 +218,7 @@ test('completion suppresses persistent signals while leaks.txt keeps full histor
 
     const leaksPath = result.reportBundle.telegramFiles.find((file) => file.endsWith('leaks.txt'));
     const leaks = fs.readFileSync(leaksPath, 'utf8');
-    assert.match(leaks, /\[PERSISTENT\][\s\S]{0,300}Finding:\s+gpt-5-preview/);
+    assert.ok(!leaks.includes('gpt-5-preview'), 'old persistent model must not appear in clean new-only leaks.txt');
     assert.match(leaks, /\[NEW\][\s\S]{0,300}Finding:\s+enable_agentic_flow/);
     assert.ok(leaks.includes('[NEW]'), 'new signals are labelled');
   } finally {
@@ -303,7 +303,7 @@ test('failed acquisition keeps the alert checkpoint and resumes without alerting
     assert.equal(first.coverageState, 'FAILED');
     assert.ok(first.pendingDelivery);
     assert.equal(first.pendingDelivery.status, 'PARTIAL');
-    assert.equal(tg.documents.length, 6, 'empty reports are still delivered');
+    assert.equal(tg.documents.length, 0, 'empty reports must NOT spam Telegram when download fails');
     assert.equal(
       tg.messages.filter((m) => m.text.includes('Version Change')).length,
       1,

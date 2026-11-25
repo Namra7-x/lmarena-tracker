@@ -421,6 +421,90 @@ function extractWithSevenZip(buffer, filename, cmd, options = {}) {
   return { success: false, files: [], truncated: false, tmpDir: null };
 }
 
+function hasBinary(cmd) {
+  try {
+    const res = spawnSync('which', [cmd], { encoding: 'utf8', timeout: 2000 });
+    return res.status === 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Lazy-extract modern macOS APFS DMGs on Linux using dmg2img + fsapfsmount.
+ * Installs tools only if a DMG actually fails 7-Zip during a new release, keeping
+ * idle 1-minute GitHub Actions checks at zero overhead.
+ */
+function extractApfsDmg(buffer, filename, options = {}) {
+  if (process.platform !== 'linux') {
+    return { success: false, files: [], truncated: false, tmpDir: null };
+  }
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'apfs-extract-'));
+  const tmpDmg = path.join(tmpDir, filename || 'disk.dmg');
+  const tmpImg = path.join(tmpDir, 'disk.img');
+  const mntDir = path.join(tmpDir, 'mnt');
+  const outCopy = path.join(tmpDir, 'out');
+  fs.mkdirSync(mntDir, { recursive: true });
+  fs.mkdirSync(outCopy, { recursive: true });
+  let mounted = false;
+  let preserveTmpDir = false;
+
+  try {
+    if (!hasBinary('dmg2img') || !hasBinary('fsapfsmount')) {
+      spawnSync('sudo', ['apt-get', 'update', '-qq'], { timeout: 60000 });
+      spawnSync('sudo', ['apt-get', 'install', '-qq', '-y', '--no-install-recommends', 'dmg2img', 'libfsapfs-utils'], {
+        timeout: 120000,
+      });
+    }
+    if (!hasBinary('dmg2img') || !hasBinary('fsapfsmount')) {
+      return { success: false, files: [], truncated: false, tmpDir: null };
+    }
+
+    fs.writeFileSync(tmpDmg, buffer);
+    const conv = spawnSync('dmg2img', ['-s', tmpDmg, tmpImg], { timeout: 90000 });
+    if (conv.status !== 0 || !fs.existsSync(tmpImg)) {
+      return { success: false, files: [], truncated: false, tmpDir: null };
+    }
+    try { fs.unlinkSync(tmpDmg); } catch {}
+
+    const mnt = spawnSync('fsapfsmount', [tmpImg, mntDir], { timeout: 60000 });
+    if (mnt.status === 0) {
+      mounted = true;
+      // Copy selective analyzable directories (.app Contents / Resources / MacOS)
+      spawnSync('bash', ['-c', `shopt -s globstar nullglob; find "${mntDir}" -maxdepth 6 \\( -name "*.asar" -o -name "*.js" -o -name "*.json" -o -name "*.plist" -o -path "*/Contents/MacOS/*" \\) -type f -exec cp --parents {} "${outCopy}/" \\;`], {
+        timeout: 90000,
+      });
+    }
+
+    if (mounted) {
+      spawnSync('fusermount', ['-u', mntDir], { timeout: 15000 });
+      mounted = false;
+    }
+    try { fs.unlinkSync(tmpImg); } catch {}
+
+    const walked = walkExtractedFiles(outCopy, { lazyDisk: Boolean(options.streamFromDisk) });
+    if (walked.files.length > 0) {
+      if (options.streamFromDisk) preserveTmpDir = true;
+      return {
+        success: true,
+        files: walked.files,
+        truncated: walked.truncated,
+        tmpDir: preserveTmpDir ? tmpDir : null,
+      };
+    }
+    return { success: false, files: [], truncated: false, tmpDir: null };
+  } catch {
+    return { success: false, files: [], truncated: false, tmpDir: null };
+  } finally {
+    if (mounted) {
+      try { spawnSync('fusermount', ['-u', mntDir], { timeout: 10000 }); } catch {}
+    }
+    if (!preserveTmpDir) {
+      try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
+    }
+  }
+}
+
 /**
  * Process an artifact buffer and return an array of file records:
  * [{ path, buffer, priority, strings, sourceMaps }]
@@ -540,26 +624,42 @@ export function extractArtifact(buffer, format, target, artifactUrl = '', option
         status.error = `ZIP extraction failed: ${zipError.message}`;
       }
     } else if (isNsisInstaller(buffer) || format === 'exe' || format === 'dmg' || format === 'pkg' || format === 'msi' || format === 'appimage') {
-      if (!sevenZipCmd) {
-        status.analyzers.sevenZip = 'failed';
-        status.coverageState = 'PARTIAL';
-        status.error = '7-Zip is required for this installer format but was not found';
-        rawFiles = [{ path: filename, buffer, size: buffer.length }];
-      } else {
+      let installerFiles = [];
+      if (sevenZipCmd) {
         const res = extractWithSevenZip(buffer, filename, sevenZipCmd, options);
         if (res.success && res.files.length > 0) {
           if (res.tmpDir) tempDirsToCleanup.push(res.tmpDir);
           status.analyzers.sevenZip = 'completed';
-          rawFiles = res.files;
+          installerFiles = res.files;
           if (res.truncated) {
             status.coverageState = 'PARTIAL';
             status.error = '7-Zip extraction exceeded safety caps; some files were not analyzed';
           }
-        } else {
-          status.analyzers.sevenZip = 'failed';
-          status.coverageState = 'PARTIAL';
-          rawFiles = [{ path: filename, buffer, size: buffer.length }];
         }
+      }
+
+      // Modern macOS APFS DMGs (e.g. Codex.dmg, Gemini.dmg) fail in older 7z; try native dmg2img + fsapfsmount.
+      if (installerFiles.length === 0 && format === 'dmg') {
+        const apfsRes = extractApfsDmg(buffer, filename, options);
+        if (apfsRes.success && apfsRes.files.length > 0) {
+          if (apfsRes.tmpDir) tempDirsToCleanup.push(apfsRes.tmpDir);
+          status.analyzers.sevenZip = 'completed';
+          installerFiles = apfsRes.files;
+          if (apfsRes.truncated) {
+            status.coverageState = 'PARTIAL';
+            status.error = 'APFS DMG extraction exceeded safety caps; some files were not analyzed';
+          }
+        }
+      }
+
+      if (installerFiles.length > 0) {
+        rawFiles = installerFiles;
+      } else {
+        status.analyzers.sevenZip = 'failed';
+        status.coverageState = 'PARTIAL';
+        status.error = status.error || `${format.toUpperCase()} extraction failed`;
+        // Never feed compressed DMG container bytes into string extraction (produces binary/protobuf garbage).
+        rawFiles = format === 'dmg' ? [] : [{ path: filename, buffer, size: buffer.length }];
       }
     } else {
       rawFiles = [{ path: filename, buffer, size: buffer.length }];

@@ -217,12 +217,8 @@ export async function detectChanges(familyId = null, options = {}) {
 
       if (classification.changeType === CHANGE_TYPE.NO_CHANGE || classification.changeType === CHANGE_TYPE.DIAGNOSTIC_DRIFT) {
         console.log(`  ✓ ${compId}: Unchanged (${candidate.version})${classification.changeType === CHANGE_TYPE.DIAGNOSTIC_DRIFT ? ` · ${classification.reason}` : ''}`);
-        if (baseline) {
-          saveComponentState(stateDir, compId, {
-            ...baseline,
-            diagnosticFingerprint: classification.diagnosticFingerprint,
-          });
-        }
+        // Never rewrite state files solely for volatile diagnostic header drift;
+        // avoids committing multi-MB JSON files to state/all every 1 minute.
         return;
       }
 

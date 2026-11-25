@@ -56,11 +56,12 @@ export async function downloadArtifact(artifact, options = {}) {
       });
 
       if (!res.ok) {
-        // Fast fail on client error (404, 403)
-        if (res.status >= 400 && res.status < 500) {
+        // npm registry metadata often updates 1-10 minutes before edge CDN nodes replicate the .tgz tarball.
+        const isTransientNpm404 = res.status === 404 && url.includes('registry.npmjs.org');
+        if (!isTransientNpm404 && res.status >= 400 && res.status < 500) {
           throw new Error(`HTTP ${res.status} client error downloading ${url}`);
         }
-        throw new Error(`HTTP ${res.status} server error downloading ${url}`);
+        throw new Error(`HTTP ${res.status} ${isTransientNpm404 ? 'transient npm CDN error' : 'server error'} downloading ${url}`);
       }
 
       // Check Content-Length header against max size

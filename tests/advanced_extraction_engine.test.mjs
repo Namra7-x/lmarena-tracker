@@ -283,16 +283,16 @@ test('Source Map Metadata Parsing (names and sources without sourcesContent)', (
 
 test('3-Way Structural Diffing (Added, Changed, Removed, Persistent, Reintroduced)', () => {
   const previous = [
-    { category: 'model_id', value: 'gpt-4o', context: 'version 1', filePath: 'a.js' },
-    { category: 'feature_flag', value: 'old_flag', context: 'flag 1', filePath: 'b.js' },
-    { category: 'endpoint_domain', value: 'https://api.openai.com/v1', context: 'unchanged', filePath: 'c.js' },
+    { category: 'model_id', value: 'gpt-4o', activationStatus: 'CONFIGURED', context: 'version 1', filePath: 'a.js' },
+    { category: 'feature_flag', value: 'old_flag', activationStatus: 'REFERENCED', context: 'flag 1', filePath: 'b.js' },
+    { category: 'endpoint_domain', value: 'https://api.openai.com/v1', activationStatus: 'REFERENCED', context: 'unchanged', filePath: 'c.js' },
   ];
 
   const candidate = [
     // persistent unchanged
-    { category: 'endpoint_domain', value: 'https://api.openai.com/v1', context: 'unchanged', filePath: 'c.js' },
-    // changed context
-    { category: 'model_id', value: 'gpt-4o', context: 'version 2 updated', filePath: 'a.js' },
+    { category: 'endpoint_domain', value: 'https://api.openai.com/v1', activationStatus: 'REFERENCED', context: 'unchanged', filePath: 'c.js' },
+    // semantic activation shift (CONFIGURED -> ENABLED)
+    { category: 'model_id', value: 'gpt-4o', activationStatus: 'ENABLED', context: 'version 2 updated', filePath: 'a.js' },
     // newly added
     { category: 'model_id', value: 'gemini-3.5-pro', context: 'new model', filePath: 'd.js' },
     // reintroduced from historical seen hashes

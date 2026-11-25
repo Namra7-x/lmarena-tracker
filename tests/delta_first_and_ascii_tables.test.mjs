@@ -182,13 +182,13 @@ test('4. Report Bundle outputs formidable ASCII tables in leaks.txt, diff.txt, m
 
   const bundle = generateReportBundle(tmpDir, scanData);
 
-  // 1. leaks.txt check
+  // 1. leaks.txt check: strictly NEW high-confidence leaks only (zero old/persistent bloat)
   const leaksContent = fs.readFileSync(path.join(tmpDir, 'leaks.txt'), 'utf8');
-  assert.ok(leaksContent.includes('SECTION 1: VERIFIED NEW LEAKS IN THIS VERSION (DELTA)'));
-  assert.ok(leaksContent.includes('SECTION 2: KNOWN BASELINE SIGNALS (PREVIOUS RELEASES)'));
+  assert.ok(leaksContent.includes('NEW VERIFIED LEAKS IN THIS RELEASE'));
+  assert.ok(!leaksContent.includes('SECTION 2: KNOWN BASELINE SIGNALS'), 'Old persistent baseline section must be omitted from leaks.txt');
   assert.ok(leaksContent.includes('hydrogen-preview'));
   assert.ok(leaksContent.includes('enable_canvas_v2'));
-  assert.ok(leaksContent.includes('claude-3-7-sonnet'));
+  assert.ok(!leaksContent.includes('claude-3-7-sonnet'), 'Persistent old model must not bloat leaks.txt');
   assert.ok(leaksContent.includes('┌─'));
   assert.ok(leaksContent.includes('└─'));
 

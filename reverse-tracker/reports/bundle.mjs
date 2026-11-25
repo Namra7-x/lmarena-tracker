@@ -72,12 +72,12 @@ export function renderAsciiBox(lines, title = '') {
 
 function formatLeakDetailBlock(item) {
   const lines = [];
-  const badge = item.isMajorEarlySignal ? '🔥 MAJOR EARLY SIGNAL' : item.tier;
+  const badge = item.isMajorEarlySignal ? '🔥 MAJOR EARLY SIGNAL' : (item.tier || 'SIGNAL');
   const plat = (item.platforms || []).join(', ') || 'all';
   const status = item.activationStatus || 'UNKNOWN';
-  const diffTag = ` [${item.diffStatus || 'UNKNOWN'}]`;
+  const diffTag = item.diffStatus ? ` [${item.diffStatus}]` : '';
   const occStr = item.occurrences > 1 ? ` (${item.occurrences}x)` : '';
-  lines.push(`• [${badge}] (${item.score} pts) [${item.category}] [Status: ${status}]${diffTag}${occStr}`);
+  lines.push(`• [${badge}] (${item.score || 0} pts) [${item.category}] [Status: ${status}]${diffTag}${occStr}`);
   lines.push(`  Finding:   ${item.value}`);
   if (item.discoveryMethod && item.discoveryMethod !== 'heuristic') {
     lines.push(`  Discovery: ${item.discoveryMethod}`);
@@ -85,21 +85,15 @@ function formatLeakDetailBlock(item) {
   if (item.url) {
     lines.push(`  URL:       ${item.url}`);
   }
-  if (item.contextDeltaSummary) {
-    lines.push(`  Delta:     ${item.contextDeltaSummary}`);
-  }
-  if (item.contexts && item.contexts.length > 0) {
-    for (const ctx of item.contexts) {
-      lines.push(`  Context:   ${ctx.replace(/\r?\n/g, ' ')}`);
-    }
-  } else if (item.context && item.context !== item.value) {
-    lines.push(`  Context:   ${item.context.trim().replace(/\r?\n/g, ' ')}`);
+  const cleanCtx = item.contexts?.length > 0
+    ? item.contexts[0]
+    : (item.context && item.context !== item.value ? item.context : '');
+  if (cleanCtx) {
+    const snippet = cleanCtx.trim().replace(/\r?\n/g, ' ');
+    lines.push(`  Context:   ${snippet.length > 260 ? snippet.slice(0, 257) + '...' : snippet}`);
   }
   if (item.relatedSignals && item.relatedSignals.length > 0) {
     lines.push(`  Linked:    ${item.relatedSignals.map((r) => `[${r.category}] ${r.value}`).join(' | ')}`);
-  }
-  if (item.related) {
-    lines.push(`  Related:   ${JSON.stringify(item.related)}`);
   }
   if (item.filePath) {
     lines.push(`  File:      ${item.filePath}`);
@@ -179,6 +173,7 @@ export function generateReportBundle(outputDir, scanData) {
     analyzerStatus = null,
     delivery = null,
     versionScheme = null,
+    isTestRun = false,
   } = scanData;
 
   const {
@@ -190,7 +185,7 @@ export function generateReportBundle(outputDir, scanData) {
   } = diffResults;
 
   const generatedAt = new Date().toISOString();
-  const validLeaks = deduplicateFindings(scoredFindings);
+  const validLeaks = deduplicateFindings(scoredFindings).filter((f) => f.status !== 'rejected' && (f.score == null || f.score > 0));
 
   const leaksByCategory = {};
   for (const leak of validLeaks) {
@@ -199,43 +194,41 @@ export function generateReportBundle(outputDir, scanData) {
     leaksByCategory[cat].push(leak);
   }
 
-  const newSignals = validLeaks.filter((f) => f.diffStatus === 'NEW' || f.diffStatus === 'CHANGED');
-  const persistentSignals = validLeaks.filter((f) => f.diffStatus === 'PERSISTENT' || f.diffStatus === 'REINTRODUCED');
-  // Support callers that pass scoredFindings without explicit diffStatus (e.g. unit tests)
-  const unscoredDeltaLeaks = validLeaks.filter((f) => !f.diffStatus);
-  const deltaDetailLeaks = [...newSignals, ...unscoredDeltaLeaks];
+  // Strictly NEW leaks only (zero old/persistent/historical baseline bloat).
+  // Supports unit-test fixtures that pass scoredFindings without diffStatus.
+  const rawNewOrUnscored = validLeaks.filter((f) => f.diffStatus === 'NEW' || !f.diffStatus);
+  const testRunPool = isTestRun && rawNewOrUnscored.length === 0 ? validLeaks : rawNewOrUnscored;
+  const highSignalNewLeaks = testRunPool.filter(
+    (f) => f.category !== 'model_id' || f.score == null || f.score >= 35,
+  );
+  const weakCandidateLeaks = testRunPool.filter(
+    (f) => f.category === 'model_id' && f.score != null && f.score > 0 && f.score < 35,
+  );
 
   // -------------------------------------------------------------
-  // 1. `leaks.txt`: Delta-first clean presentation (no 3x repetition)
+  // 1. `leaks.txt`: Ultra-clean NEW leaks only (no old/persistent dump)
   // -------------------------------------------------------------
   let leaksContent = renderAsciiBox([
     `Component: ${componentId} (${family || 'unknown'})`,
     `Version:   ${oldVersion} ➔ ${version}`,
     `Scan ID:   ${scanId}`,
     `Timestamp: ${generatedAt}`,
-    `Total Leaks Found: ${validLeaks.length}  |  New/Modified: ${newSignals.length}  |  Persistent: ${persistentSignals.length}`,
-  ], '🚨 LEAKS & EARLY SIGNALS REPORT') + '\n\n';
+    `Total Leaks Found: ${highSignalNewLeaks.length} (New Verified Only · Low-Conf Sidecar: ${weakCandidateLeaks.length})`,
+  ], '🚨 NEW LEAKS REPORT (ZERO NOISE · DELTA ONLY)') + '\n\n';
 
-  // SECTION 1: VERIFIED NEW LEAKS IN DELTA
-  leaksContent += `🔥 [SECTION 1: VERIFIED NEW LEAKS IN THIS VERSION (DELTA)] (${newSignals.length})\n`;
-  if (newSignals.length > 0) {
-    const newHeaders = ['STATUS', 'CATEGORY', 'IDENTIFIER', 'SCORE', 'ACTIVATION', 'EVIDENCE / LOCATION'];
-    const newRows = newSignals.map((item) => [
-      item.diffStatus === 'CHANGED' ? '🔄 MODIFIED' : '🔥 NEW',
+  leaksContent += `🔥 [NEW VERIFIED LEAKS IN THIS RELEASE] (${highSignalNewLeaks.length})\n`;
+  if (highSignalNewLeaks.length > 0) {
+    const newHeaders = ['CATEGORY', 'IDENTIFIER', 'SCORE', 'ACTIVATION', 'EVIDENCE / LOCATION'];
+    const newRows = highSignalNewLeaks.map((item) => [
       item.category,
       item.value,
-      `${item.score} pts`,
+      `${item.score || 0} pts`,
       item.activationStatus || 'UNKNOWN',
-      item.context ? item.context.replace(/\r?\n/g, ' ') : (item.filePath || 'delta'),
+      item.filePath || (item.context ? item.context.replace(/\r?\n/g, ' ').slice(0, 120) : 'delta'),
     ]);
-    leaksContent += renderAsciiTable(newHeaders, newRows, { 0: 12, 1: 20, 2: 44, 3: 10, 4: 14, 5: 200 }) + '\n\n';
-  } else {
-    leaksContent += `No new unannounced leaks or feature flags were introduced in this release delta.\n\n`;
-  }
+    leaksContent += renderAsciiTable(newHeaders, newRows, { 0: 20, 1: 44, 2: 10, 3: 14, 4: 120 }) + '\n\n';
 
-  // Tiered full details for DELTA leaks (and unscored direct test inputs)
-  if (deltaDetailLeaks.length > 0) {
-    const deltaGroups = groupLeaksByTier(deltaDetailLeaks);
+    const deltaGroups = groupLeaksByTier(highSignalNewLeaks);
     for (const [tierTitle, list] of Object.entries(deltaGroups)) {
       if (list.length === 0) continue;
       leaksContent += `[${tierTitle}] (${list.length})\n`;
@@ -244,33 +237,20 @@ export function generateReportBundle(outputDir, scanData) {
         leaksContent += formatLeakDetailBlock(item) + '\n';
       }
     }
-  } else if (validLeaks.length === 0) {
-    leaksContent += `No high-confidence early leaks detected in this release.\n\n`;
-  }
-
-  // Removed signals section if any
-  if (removedFindings.length > 0) {
-    leaksContent += `🗑️ [REMOVED SIGNALS IN THIS RELEASE] (${removedFindings.length})\n`;
-    leaksContent += `----------------------------------------------------------------------\n`;
-    for (const rem of removedFindings) {
-      leaksContent += `  - [${rem.category || 'signal'}] ${rem.value}\n`;
-    }
-    leaksContent += '\n';
-  }
-
-  // SECTION 2: KNOWN BASELINE SIGNALS (compact, single pass — never duplicated!)
-  leaksContent += `📦 [SECTION 2: KNOWN BASELINE SIGNALS (PREVIOUS RELEASES)] (${persistentSignals.length})\n`;
-  if (persistentSignals.length > 0) {
-    leaksContent += `----------------------------------------------------------------------\n`;
-    for (const item of persistentSignals) {
-      leaksContent += formatLeakDetailBlock(item) + '\n';
-    }
   } else {
-    leaksContent += `No prior persistent baseline signals carried forward.\n`;
+    leaksContent += `No high-confidence new leaks were introduced in this release.\n`;
   }
 
   const leaksFilePath = path.join(outputDir, 'leaks.txt');
   fs.writeFileSync(leaksFilePath, leaksContent, 'utf8');
+
+  // Sidecar preservation for weak/unanchored raw matches so zero discoveries vanish quietly
+  const lowConfLines = weakCandidateLeaks.map((f) => formatLeakDetailBlock(f)).join('\n');
+  fs.writeFileSync(
+    path.join(outputDir, 'low-confidence-candidates.txt'),
+    lowConfLines || 'No low-confidence unanchored candidates in this delta.\n',
+    'utf8',
+  );
 
   // -------------------------------------------------------------
   // 2. `diff.txt`: Version delta, artifact checksums, structural metrics
@@ -287,7 +267,7 @@ export function generateReportBundle(outputDir, scanData) {
     `Release:   ${oldVersion} -> ${version}`,
     `Scan ID:   ${scanId}`,
     `Timestamp: ${generatedAt}`,
-    `Delta: +${newCleanStr} new strings | -${remCleanStr} removed | +${newSignals.length} new/changed leaks`,
+    `Delta: +${newCleanStr} new strings | -${remCleanStr} removed | +${highSignalNewLeaks.length} new leaks`,
   ], '📊 VERSION DELTA & STRUCTURAL DIFF') + '\n\n';
 
   diffContent += `VERSION DELTA & STRUCTURAL DIFF\n`;
@@ -451,8 +431,8 @@ export function generateReportBundle(outputDir, scanData) {
     version,
     artifactSha256,
     generatedAt,
-    leakCount: validLeaks.length,
-    deltaLeakCount: newSignals.length,
+    leakCount: highSignalNewLeaks.length,
+    deltaLeakCount: highSignalNewLeaks.length,
     newStringCount: uniqueCleanNewStrings.length,
     unknownCandidatesCount: unknownCandidates.length,
     activationStatusSummary: {
@@ -612,22 +592,18 @@ export function generateReportBundle(outputDir, scanData) {
   fs.writeFileSync(urlsFilePath, urlsContent, 'utf8');
 
   // -------------------------------------------------------------
-  // 5. `models-and-pricing.txt`: delta-sorted model & pricing catalog (uncut)
+  // 5. `models-and-pricing.txt`: clean NEW-only model & pricing delta (no old baseline bloat)
   // -------------------------------------------------------------
-  const sortDeltaFirst = (arr) => [...arr].sort((a, b) => {
-    const rank = (x) => (x.diffStatus === 'NEW' ? 0 : x.diffStatus === 'CHANGED' ? 1 : 2);
-    return rank(a) - rank(b);
-  });
-  const modelFindings = sortDeltaFirst(validLeaks.filter((f) => f.category === 'model_id'));
-  const pricingFindings = sortDeltaFirst(validLeaks.filter((f) => f.category === 'pricing'));
+  const modelFindings = testRunPool.filter((f) => f.category === 'model_id');
+  const pricingFindings = testRunPool.filter((f) => f.category === 'pricing');
 
   let modelsContent = renderAsciiBox([
     `Component: ${componentId}`,
     `Version:   ${version}`,
     `Scan ID:   ${scanId}`,
     `Timestamp: ${generatedAt}`,
-    `Extracted Models: ${modelFindings.length}  |  Pricing Tables: ${pricingFindings.length}`,
-  ], '🤖 MODELS & PRICING TABLE INVENTORY') + '\n\n';
+    `New Models: ${modelFindings.length}  |  New Pricing Tables: ${pricingFindings.length}`,
+  ], '🤖 NEW MODELS & PRICING TABLE (DELTA ONLY)') + '\n\n';
 
   if (modelFindings.length > 0) {
     modelsContent += `🤖 [MODEL CATALOG TABLE] (${modelFindings.length})\n`;
@@ -709,15 +685,15 @@ export function generateReportBundle(outputDir, scanData) {
   summaryContent += `Scan ID:   ${scanId}\n`;
   summaryContent += `Timestamp: ${generatedAt}\n`;
   summaryContent += `======================================================================\n\n`;
-  summaryContent += `🔥 DELTA HIGHLIGHTS (NEW & MODIFIED)\n`;
-  if (newSignals.length === 0) {
-    summaryContent += `  • No new or modified early signals in this release delta.\n\n`;
+  summaryContent += `🔥 NEW LEAKS HIGHLIGHT (${highSignalNewLeaks.length})\n`;
+  if (highSignalNewLeaks.length === 0) {
+    summaryContent += `  • No high-confidence new leaks detected in this release delta.\n\n`;
   } else {
-    for (const item of newSignals.slice(0, 40)) {
-      summaryContent += `  • [${item.diffStatus}] [${item.category}] ${item.value} (${item.score} pts)\n`;
+    for (const item of highSignalNewLeaks.slice(0, 40)) {
+      summaryContent += `  • [${item.category}] ${item.value} (${item.score || 0} pts)\n`;
     }
-    if (newSignals.length > 40) {
-      summaryContent += `  • ...plus ${newSignals.length - 40} more in leaks.txt\n`;
+    if (highSignalNewLeaks.length > 40) {
+      summaryContent += `  • ...plus ${highSignalNewLeaks.length - 40} more in leaks.txt\n`;
     }
     summaryContent += '\n';
   }
@@ -743,16 +719,13 @@ export function generateReportBundle(outputDir, scanData) {
   summaryContent += `  • New strings: ${stringCounts ? stringCounts.added : uniqueCleanNewStrings.length}\n`;
   summaryContent += `  • Removed strings: ${stringCounts ? stringCounts.removed : removedFindings.length}\n`;
   summaryContent += `  • Reintroduced strings: ${stringCounts ? stringCounts.reintroduced : reintroducedFindings.length}\n`;
-  summaryContent += `  • Delta leaks: ${newSignals.length} (Total tracked: ${validLeaks.length})\n`;
+  summaryContent += `  • New leaks: ${highSignalNewLeaks.length} (Low-conf sidecar: ${weakCandidateLeaks.length})\n`;
   summaryContent += `  • Endpoints: ${urlsInventory.length} (new: ${newUrls.length})\n\n`;
-  summaryContent += `🚚 DELIVERY\n  • ${deliveryStatusText}\n\n`;
-  summaryContent += `🔥 TOP TRACKED SIGNALS\n`;
-  const topList = deltaDetailLeaks.length > 0 ? deltaDetailLeaks : validLeaks;
-  if (topList.length === 0) {
-    summaryContent += `  • No high-confidence early leaks detected.\n`;
-  } else {
-    for (const item of topList.slice(0, 30)) {
-      summaryContent += `  • [${item.category}] ${item.value} (${item.score} pts)\n`;
+  summaryContent += `🚚 DELIVERY\n  • ${deliveryStatusText}\n`;
+  if (highSignalNewLeaks.length > 0) {
+    summaryContent += `\n🔥 TOP NEW SIGNALS\n`;
+    for (const item of highSignalNewLeaks.slice(0, 20)) {
+      summaryContent += `  • [${item.category}] ${item.value} (${item.score || 0} pts)\n`;
     }
   }
   const summaryFilePath = path.join(outputDir, 'scan-summary.txt');

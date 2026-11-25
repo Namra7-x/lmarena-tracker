@@ -43,7 +43,7 @@ import { extractApplicationUrls } from '../extraction/urls.mjs';
 import { extractSignalsFromAst } from '../extraction/ast.mjs';
 import { extractGoMetadata, isGoBinary, parseGoSignals } from '../extraction/go.mjs';
 import { extractSourceMapMetadata, extractInlineSourceMaps } from '../extraction/sourcemap.mjs';
-import { matchSignalsInText, extractJsonPricingFindings } from '../finder/rules.mjs';
+import { matchSignalsInText, extractJsonPricingFindings, isValidModelIdentifier, isValidFeatureFlag, isDarkUiNoise, CATEGORIES } from '../finder/rules.mjs';
 import { evaluateNoise, isHumanReadableString, isThirdPartyPath } from '../finder/noise.mjs';
 import { detectPlatformAsymmetry } from '../finder/asymmetry.mjs';
 import { scoreFinding, sortFindings, deduplicateFindings, deduplicateAndClusterFindings } from '../finder/scorer.mjs';
@@ -524,6 +524,7 @@ export async function performScan(componentId, options = {}) {
       const dl = await download(artifact, {
         timeoutMs: DOWNLOAD_TIMEOUT_MS,
         maxSizeBytes: MAX_ARTIFACT_BYTES,
+        maxRetries: 3,
       });
       dl.sha256 = dl.sha256 || crypto.createHash('sha256').update(dl.buffer).digest('hex');
       acquired.push({
@@ -718,10 +719,33 @@ export async function performScan(componentId, options = {}) {
 
   // Load dedicated product master state (.json.gz) BEFORE string/URL diff so it acts as resilient fallback
   const masterState = loadMasterState(stateDir, componentId);
-  const masterSignals = masterState?.knownSignals || {};
+  const rawMasterSignals = masterState?.knownSignals || {};
+  // Purge stale polluted findings stored in legacy state/all baselines before diffing.
+  const isPlausibleStoredSignal = (f) => {
+    if (!f || !f.value || !f.category) return false;
+    if (evaluateNoise(f.value).isNoise) return false;
+    if (f.category === CATEGORIES.MODEL_ID && !isValidModelIdentifier(f.value, { isStructuralCatalog: Boolean(f.discoveryMethod && f.discoveryMethod.startsWith('ast_')) })) {
+      return false;
+    }
+    if ((f.category === CATEGORIES.FEATURE_FLAG || f.category === CATEGORIES.EXPERIMENT) && !isValidFeatureFlag(f.value)) {
+      return false;
+    }
+    if (f.category === CATEGORIES.UI_STRING && isDarkUiNoise(f.value)) {
+      return false;
+    }
+    return true;
+  };
+  const masterSignals = {};
+  for (const [k, v] of Object.entries(rawMasterSignals)) {
+    if (isPlausibleStoredSignal(v)) masterSignals[k] = v;
+  }
 
   const baselineStrings = baselineFromState(baseline);
-  const previousStrings = baselineStrings.length > 0 ? baselineStrings : (masterState.knownStrings || []);
+  const previousStrings = baselineStrings.length > 0
+    ? baselineStrings
+    : (Array.isArray(masterState.lastVersionStrings) && masterState.lastVersionStrings.length > 0
+        ? masterState.lastVersionStrings
+        : (masterState.knownStrings || []));
   const stringHistory = mergeStringSets(
     stringHistoryFromState(baseline, baseline.historicalSeenHashes || []),
     masterState.knownStrings || [],
@@ -733,7 +757,11 @@ export async function performScan(componentId, options = {}) {
   const currentUrls = Array.from(allExtractedUrls.values());
   const currentUrlValues = currentUrls.map((item) => item.url);
   const baselineUrls = urlBaselineFromState(baseline);
-  const previousUrls = baselineUrls.length > 0 ? baselineUrls : (masterState.knownUrls || []);
+  const previousUrls = baselineUrls.length > 0
+    ? baselineUrls
+    : (Array.isArray(masterState.lastVersionUrls) && masterState.lastVersionUrls.length > 0
+        ? masterState.lastVersionUrls
+        : (masterState.knownUrls || []));
   const urlHistory = mergeStringSets(
     urlHistoryFromState(baseline, previousUrls),
     masterState.knownUrls || [],
@@ -763,13 +791,13 @@ export async function performScan(componentId, options = {}) {
     }
   }
 
-  // Load previous baseline signals
+  // Load and re-validate previous baseline signals (automatically strips historical noise)
   const previousFindings = dedupeRawFindings([
     ...(baseline.recentSignals || []),
     ...(baseline.hotSignals || []),
     ...(baseline.knownSignals ? Object.values(baseline.knownSignals) : []),
     ...Object.values(masterSignals),
-  ]);
+  ]).filter(isPlausibleStoredSignal);
 
   // Track historical finding keys (normalized lowercase)
   const historicalFindingValues = new Set([
@@ -840,21 +868,21 @@ export async function performScan(componentId, options = {}) {
   const sortedScored = sortFindings(scoredFindings);
   const dedupedFindings = deduplicateAndClusterFindings(sortedScored);
 
-  // Strictly filter alert signals: only genuinely NEW or MODIFIED signals trigger alerts.
-  // Persistent and unchanged baseline signals are preserved in reports but NEVER re-alerted.
+  // Strictly NEW-only filtering: alerts and leaks.txt show genuinely NEW clean discoveries only
+  // (excluding persistent baseline noise and chunk/context MODIFIED chatter).
   const displayFindings = isTestRun
-    ? dedupedFindings
-    : dedupedFindings.filter((finding) => finding.diffStatus === 'NEW' || finding.diffStatus === 'CHANGED');
-  const majorSignals = displayFindings.filter((finding) => finding.isMajorEarlySignal && finding.diffStatus === 'NEW');
+    ? dedupedFindings.filter((finding) => finding.score >= 35 || finding.diffStatus === 'NEW')
+    : dedupedFindings.filter((finding) => finding.diffStatus === 'NEW' && finding.score >= 35);
+  const majorSignals = displayFindings.filter((finding) => finding.isMajorEarlySignal);
   const highSignals = displayFindings.filter(
-    (finding) => finding.tier === 'HIGH-CONFIDENCE SIGNAL' && !finding.isMajorEarlySignal && finding.diffStatus === 'NEW',
+    (finding) => finding.tier === 'HIGH-CONFIDENCE SIGNAL' && !finding.isMajorEarlySignal,
   );
-  const changedSignals = displayFindings.filter((finding) => finding.diffStatus === 'CHANGED');
+  const changedSignals = [];
   const moreFindings = displayFindings.filter(
-    (finding) => finding.tier === 'EARLY SIGNAL' && !finding.isMajorEarlySignal && finding.diffStatus === 'NEW',
+    (finding) => finding.tier === 'EARLY SIGNAL' && !finding.isMajorEarlySignal,
   );
   const pricingSignals = displayFindings.filter((finding) => finding.category === 'pricing');
-  const modelCount = dedupedFindings.filter((finding) => finding.category === 'model_id').length;
+  const modelCount = displayFindings.filter((finding) => finding.category === 'model_id').length;
 
   // Platform asymmetry from the actual per-platform findings.
   const macFindings = allFindings.filter((finding) => (finding.platforms || []).includes('darwin'));
@@ -899,6 +927,7 @@ export async function performScan(componentId, options = {}) {
     version: candidate.version,
     oldVersion: baseline.version || 'unknown',
     versionScheme: candidate.versionScheme || null,
+    isTestRun,
     diffResults,
     stringDiff,
     scoredFindings: dedupedFindings,
@@ -928,9 +957,9 @@ export async function performScan(componentId, options = {}) {
 
   console.log(`\n📊 Count Check Result:\n${reportBundle.countCheck.text}`);
 
-  // STEP 8: upload every file, then send the completion message. The old
-  // pipeline sent completion first and ignored {ok:false}, which is why files
-  // could vanish while the message claimed success.
+  // STEP 8: upload reports ONLY if at least 1 artifact was actually acquired & scanned.
+  // When download fails completely (e.g. transient npm CDN 404), hold pendingDelivery
+  // quietly for the next tick instead of spamming 6 empty placeholder files to Telegram.
   const delivery = {
     status: 'PENDING',
     deliveredFiles: [],
@@ -938,62 +967,67 @@ export async function performScan(componentId, options = {}) {
     completionSent: false,
     completionError: null,
   };
-  await deliverReports({
-    tg,
-    files: reportBundle.telegramFiles,
-    scanId,
-    componentName: comp.name,
-    version: candidate.version,
-    topicId,
-    delivery,
-    summaryPath: reportBundle.telegramFiles.find((file) => path.basename(file) === 'scan-summary.txt'),
-  });
+  if (coverage.coverageState === 'FAILED' || acquired.length === 0) {
+    delivery.status = 'DOWNLOAD_FAILED';
+    console.warn(`⚠️ Skipping Telegram delivery for ${componentId} (${candidate.version}): 0 artifacts acquired (will retry next run).`);
+  } else {
+    await deliverReports({
+      tg,
+      files: reportBundle.telegramFiles,
+      scanId,
+      componentName: comp.name,
+      version: candidate.version,
+      topicId,
+      delivery,
+      summaryPath: reportBundle.telegramFiles.find((file) => path.basename(file) === 'scan-summary.txt'),
+    });
 
-  delivery.status = delivery.failedFiles.length === 0 ? 'DELIVERED' : 'PARTIAL';
-  const attachedFileNames = delivery.deliveredFiles.map((item) => item.name);
-  const completionText = formatCompletionMessage({
-    componentName: comp.name,
-    family: comp.family,
-    oldVersion: baseline.version || 'none',
-    newVersion: candidate.version,
-    scanId,
-    majorSignals,
-    highSignals,
-    changedSignals,
-    moreFindings,
-    coverage,
-    leakCount: reportBundle.leaksCount,
-    newStringsCount: stringDiff.counts.added,
-    urlsCount: currentUrls.length,
-    newUrls,
-    attachedFiles: attachedFileNames,
-    deliveryStatus: delivery,
-    analyzerStatus,
-    pricingSignals,
-    modelCount,
-    pricingCount: pricingSignals.length,
-    countCheckText: reportBundle.countCheck.text,
-    isTestRun,
-  });
+    delivery.status = delivery.failedFiles.length === 0 ? 'DELIVERED' : 'PARTIAL';
+    const attachedFileNames = delivery.deliveredFiles.map((item) => item.name);
+    const completionText = formatCompletionMessage({
+      componentName: comp.name,
+      family: comp.family,
+      oldVersion: baseline.version || 'none',
+      newVersion: candidate.version,
+      scanId,
+      majorSignals,
+      highSignals,
+      changedSignals,
+      moreFindings,
+      coverage,
+      leakCount: reportBundle.leaksCount,
+      newStringsCount: stringDiff.counts.added,
+      urlsCount: currentUrls.length,
+      newUrls,
+      attachedFiles: attachedFileNames,
+      deliveryStatus: delivery,
+      analyzerStatus,
+      pricingSignals,
+      modelCount,
+      pricingCount: pricingSignals.length,
+      countCheckText: reportBundle.countCheck.text,
+      isTestRun,
+    });
 
-  let completionError = null;
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const completionRes = alertMessageId
-        ? await tg.sendMessage(completionText, { replyToMessageId: alertMessageId, topicId })
-        : await tg.sendMessage(completionText, { topicId });
-      if (completionRes?.ok === true) {
-        delivery.completionSent = true;
-        break;
+    let completionError = null;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const completionRes = alertMessageId
+          ? await tg.sendMessage(completionText, { replyToMessageId: alertMessageId, topicId })
+          : await tg.sendMessage(completionText, { topicId });
+        if (completionRes?.ok === true) {
+          delivery.completionSent = true;
+          break;
+        }
+        completionError = completionRes?.error || 'Telegram rejected completion message';
+      } catch (err) {
+        completionError = err.message;
       }
-      completionError = completionRes?.error || 'Telegram rejected completion message';
-    } catch (err) {
-      completionError = err.message;
+      await sleep(750 * attempt);
     }
-    await sleep(750 * attempt);
+    delivery.completionError = completionError;
+    if (!delivery.completionSent) console.warn(`Could not send completion message: ${completionError}`);
   }
-  delivery.completionError = completionError;
-  if (!delivery.completionSent) console.warn(`Could not send completion message: ${completionError}`);
 
   // STEP 9: state transaction. Advance only when the scan was complete and
   // every report was actually delivered.
@@ -1032,9 +1066,10 @@ export async function performScan(componentId, options = {}) {
     currentUrlValues,
   );
 
-  const updatedKnownSignals = { ...(masterState.knownSignals || {}), ...(baseline.knownSignals || {}) };
+  // Rebuild cleaned knownSignals (automatically strips poisoned historical junk)
+  const updatedKnownSignals = { ...masterSignals };
   for (const f of dedupedFindings) {
-    if (f.category && f.value) {
+    if (f.category && f.value && f.score > 0 && f.status !== 'rejected') {
       const k = `${f.category}:${f.value.toLowerCase()}`;
       updatedKnownSignals[k] = {
         category: f.category,
@@ -1043,8 +1078,9 @@ export async function performScan(componentId, options = {}) {
         tier: f.tier,
         activationStatus: f.activationStatus,
         filePath: f.filePath,
-        context: f.context || '',
+        context: typeof f.context === 'string' ? f.context.slice(0, 300) : '',
         url: f.url || null,
+        discoveryMethod: f.discoveryMethod || null,
         firstSeenVersion: updatedKnownSignals[k]?.firstSeenVersion || candidate.version,
         lastSeenVersion: candidate.version,
         modifiedAt: scannedAt,
@@ -1065,21 +1101,25 @@ export async function performScan(componentId, options = {}) {
       }, ...(baseline.releaseHistory || [])].slice(0, 100)
     : (baseline.releaseHistory || []);
 
-  // Keep full-context knownSignals in compressed _master.json.gz while keeping
-  // compact <componentId>.json lightweight (omits multi-KB context clones).
-  const compactKnownSignals = {};
-  for (const [k, sig] of Object.entries(updatedKnownSignals)) {
-    compactKnownSignals[k] = {
-      category: sig.category,
-      value: sig.value,
-      score: sig.score,
-      tier: sig.tier,
-      activationStatus: sig.activationStatus,
-      filePath: sig.filePath,
-      firstSeenVersion: sig.firstSeenVersion,
-      lastSeenVersion: sig.lastSeenVersion,
-    };
-  }
+  // Store lightweight compact entries in <componentId>.json (<100 KB total) while keeping
+  // complete string baselines, URL history, and signal archive inside gzipped _master.json.gz.
+  const shrinkForState = (sig) => ({
+    category: sig.category,
+    value: sig.value,
+    score: sig.score,
+    tier: sig.tier,
+    activationStatus: sig.activationStatus,
+    diffStatus: sig.diffStatus,
+    filePath: sig.filePath || '',
+    discoveryMethod: sig.discoveryMethod || null,
+    isMajorEarlySignal: Boolean(sig.isMajorEarlySignal),
+    platforms: sig.platforms || [],
+  });
+  const compactRecentSignals = dedupedFindings
+    .filter((f) => f.score > 0 && f.status !== 'rejected')
+    .slice(0, 500)
+    .map(shrinkForState);
+  const compactHotSignals = majorSignals.slice(0, 100).map(shrinkForState);
 
   const nextState = {
     ...baseline,
@@ -1118,19 +1158,15 @@ export async function performScan(componentId, options = {}) {
       at: scannedAt,
     }),
     releaseHistory,
-    hotSignals: canAdvance ? majorSignals : (baseline.hotSignals || []),
-    recentSignals: canAdvance ? dedupedFindings.slice(0, 2500) : (baseline.recentSignals || []),
-    knownSignals: canAdvance ? compactKnownSignals : (baseline.knownSignals || {}),
-    historicalSeenHashes: canAdvance ? updatedHistoricalStrings : (baseline.historicalSeenHashes || []),
-    historicalSeenUrls: canAdvance ? updatedHistoricalUrls : (baseline.historicalSeenUrls || []),
-    stringBaseline: canAdvance ? encodeStringSet(currentCleanStrings) : baseline.stringBaseline || encodeStringSet(previousStrings),
-    stringHistory: canAdvance
-      ? encodeStringSet(mergeStringSets(stringHistory, currentCleanStrings))
-      : baseline.stringHistory || encodeStringSet(stringHistory),
-    urlBaseline: canAdvance ? encodeUrlSet(currentUrlValues) : baseline.urlBaseline || encodeUrlSet(previousUrls),
-    urlHistory: canAdvance
-      ? encodeUrlSet(mergeStringSets(urlHistory, currentUrlValues))
-      : baseline.urlHistory || encodeUrlSet(urlHistory),
+    hotSignals: canAdvance ? compactHotSignals : (baseline.hotSignals || []).slice(0, 100).map(shrinkForState),
+    recentSignals: canAdvance ? compactRecentSignals : (baseline.recentSignals || []).slice(0, 500).map(shrinkForState),
+    knownSignals: {},
+    historicalSeenHashes: [],
+    historicalSeenUrls: [],
+    stringBaseline: null,
+    stringHistory: null,
+    urlBaseline: null,
+    urlHistory: null,
     lastCoverageGaps: coverage.extractionGaps,
     benchmark: { executionTimeMs, peakMemoryMb: benchmark.peakMemoryMb },
   };
@@ -1138,7 +1174,9 @@ export async function performScan(componentId, options = {}) {
   saveComponentState(stateDir, componentId, nextState);
   if (canAdvance) {
     masterState.knownSignals = updatedKnownSignals;
+    masterState.lastVersionStrings = currentCleanStrings;
     masterState.knownStrings = mergeStringSets(masterState.knownStrings || [], currentCleanStrings);
+    masterState.lastVersionUrls = currentUrlValues;
     masterState.knownUrls = mergeStringSets(masterState.knownUrls || [], currentUrlValues);
     masterState.releaseHistory = [
       {

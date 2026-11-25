@@ -191,3 +191,78 @@ test('Mach-O 64-bit string section parser isolates __cstring and skips __text ma
   assert.ok(values.includes('claude-4-5-sonnet-preview'), 'Must extract __cstring model');
   assert.ok(!values.includes('1h-9_opcode_noise'), 'Must ignore __text opcode garbage');
 });
+
+test('Live regression guards: blocks icon arrays, CSS/a11y/ICU suffix noise, React 19/proto flags, and unanchored score inflation', async () => {
+  const { scoreFinding, TIERS } = await import('../reverse-tracker/finder/scorer.mjs');
+
+  // 1. Live false-positive model strings from cursor/claude/gemini/droid
+  const fakeModels = [
+    'concentr-millimole-per-lite',
+    'aria-hidden-body-eval',
+    'focusable-disabled-eval',
+    'cds-skel-sweep-clip',
+    'animate-code-reply-flash',
+    'artifact-markdown-preview',
+    'access-control-max',
+    'animated-vector-pro',
+    'claude-ai.staging.ant.dev',
+    'claude-ai-data-import',
+    'foo-pro',
+    'jsx-pro',
+    'psjsx-pro',
+    'dapper-pro',
+    'envoy-max',
+    'armenian-low',
+  ];
+  for (const m of fakeModels) {
+    assert.equal(
+      matchSignalsInText(m).some((f) => f.category === CATEGORIES.MODEL_ID),
+      false,
+      `Fake model '${m}' must be rejected`,
+    );
+  }
+
+  // 2. Live false-positive feature flags, React 19 hooks, UI props & protobuf enums
+  const fakeFlags = [
+    'useActionState',
+    'allowMouseEnter',
+    'allowWheelScrub',
+    'allowAuthorization',
+    'showPrintPanels',
+    'shouldHideArrow',
+    'shouldAutoTriggerSso',
+    'EXP_HOTEL',
+    'EXP_FLIGHT',
+    'exp_mod_normal_cdf',
+    'gpt-5',
+    'claude-4.5-sonnet',
+  ];
+  for (const flag of fakeFlags) {
+    assert.equal(isValidFeatureFlag(flag), false, `Fake flag '${flag}' must be rejected`);
+  }
+
+  // 3. Icon array with a cursor- prefix must NOT trigger peer clustering bomb
+  const iconArrayCode = `
+    const ICONS = [
+      "cursor-default",
+      "agent-circle",
+      "alarm-clock",
+      "alarm-clock-filled",
+      "arrow-bend-up-left",
+      "arrow-block-down-filled"
+    ];
+    const menuItem = { id: "closePanel", enabled: true };
+  `;
+  const astOut = extractSignalsFromAst(iconArrayCode, 'src/icons.js');
+  assert.equal(astOut.filter((f) => f.category === CATEGORIES.MODEL_ID).length, 0, 'Icon array must not produce model IDs');
+  assert.equal(astOut.filter((f) => f.category === CATEGORIES.FEATURE_FLAG).length, 0, 'Plain enabled menu item must not produce feature flag');
+
+  // 4. Unanchored raw suffix token cannot inflate to MAJOR EARLY SIGNAL
+  const unanchored = scoreFinding(
+    { category: CATEGORIES.MODEL_ID, value: 'nebulon-preview', filePath: 'bin/app', activationStatus: 'REFERENCED' },
+    { isNewInDiff: true, isFirstEverSeen: true },
+  );
+  assert.equal(unanchored.tier, TIERS.WEAK_SIGNAL);
+  assert.equal(unanchored.isMajorEarlySignal, false);
+  assert.ok(unanchored.score <= 34);
+});

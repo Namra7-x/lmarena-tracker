@@ -108,7 +108,8 @@ const NETWORK_FUNCTION_NAMES = new Set([
   'dial',
 ]);
 
-const KNOWN_MODEL_ANCHORS = /^(?:gpt|claude|gemini|o[1-9]|deepseek|codex|devin|cursor|droid|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|whisper)-/i;
+// Exclude generic product/app prefixes (cursor-, devin-, droid-, codex-) so UI icon/command lists never trigger model clustering.
+const KNOWN_MODEL_ANCHORS = /^(?:gpt|claude-(?:3|4|5|opus|sonnet|haiku|mythos|fable|instant|donut|onigiri)|gemini|o[1-9]|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|veo|whisper|obsidian|swe)-/i;
 const KNOWN_EXPLICIT_MODELS = /^(?:o1|o3|o4|o5)(?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat))?$/i;
 
 const AI_HYPERPARAMS = new Set([
@@ -443,15 +444,25 @@ export function extractSignalsFromAst(code, filePath = '') {
 
       if (strItems.length >= 2) {
         const vals = strItems.map((s) => s.val);
-        const hasAnchor = vals.some((v) => KNOWN_MODEL_ANCHORS.test(v) || KNOWN_EXPLICIT_MODELS.test(v));
+        // Reject massive UI icon/enum lists (e.g. 1,420 Lucide/Codicon icons) even if one element resembles a model name.
+        const iconLikeCount = vals.filter((v) =>
+          /(?:-(?:circle|square|filled|outline|solid|rounded|sharp|regular|thin|bold|light|duotone|dashed|dotted|stroke|chevron|arrow|badge|icon)$|^(?:arrow|chevron|align|border|folder|file|play|pause|stop|plus|minus|close|check|search|edit|trash|copy|lock|unlock)-)/i.test(v)
+        ).length;
+        const isIconCatalog = vals.length > 120 || (iconLikeCount / vals.length >= 0.25 && vals.length >= 4);
+        const anchorCount = vals.filter((v) => KNOWN_MODEL_ANCHORS.test(v) || KNOWN_EXPLICIT_MODELS.test(v)).length;
+        const hasStrongAnchor = anchorCount >= 1 && (vals.length <= 40 || anchorCount >= 3);
 
-        if (hasAnchor && !isUiList(vals)) {
+        if (hasStrongAnchor && !isIconCatalog && !isUiList(vals)) {
+          const compactPeers = vals.filter((v) => KNOWN_MODEL_ANCHORS.test(v) || KNOWN_EXPLICIT_MODELS.test(v)).slice(0, 6);
           for (const item of strItems) {
             if (isValidModelIdentifier(item.val, { isPeerArray: true, isStructuralCatalog: true })) {
               addFinding(CATEGORIES.MODEL_ID, item.val, item.node, 'ArrayPeerCollection', {
                 discoveryMethod: 'ast_array_peer_cluster',
                 activationStatus: ACTIVATION_STATUS.CONFIGURED,
-                related: { peerModels: vals.filter((v) => v !== item.val) },
+                related: {
+                  peerModels: (compactPeers.length > 0 ? compactPeers : vals).filter((v) => v !== item.val).slice(0, 6),
+                  totalPeers: vals.length,
+                },
               });
             } else {
               addUnknownCandidate(item.val, item.node, 'peer_array_with_anchor_models', `Peer array: ${vals.slice(0, 5).join(', ')}`);
@@ -639,16 +650,31 @@ export function extractSignalsFromAst(code, filePath = '') {
       }
 
       // C. Experiment & Feature Rollout Configuration
+      // Require strong rollout/experiment evidence (not just plain UI `{ id, enabled: true }` menu items).
       let rolloutPropCount = 0;
+      let strongRolloutPropCount = 0;
+      const STRONG_ROLLOUT_PROPS = new Set([
+        'rollout', 'rolloutpercentage', 'percentage', 'samplerate',
+        'trafficallocation', 'variants', 'variant', 'treatments',
+        'defaultvalue', 'targeting', 'conditions',
+      ]);
       for (const rp of ROLLOUT_CONFIG_PROPS) {
-        if (propMap.has(rp)) rolloutPropCount++;
+        if (propMap.has(rp)) {
+          rolloutPropCount++;
+          if (STRONG_ROLLOUT_PROPS.has(rp)) strongRolloutPropCount++;
+        }
       }
 
       if (rolloutPropCount >= 1) {
-        const idProp = propMap.get('id') || propMap.get('name') || propMap.get('key') || propMap.get('flag') || propMap.get('experiment') || propMap.get('gate');
+        const idProp = propMap.get('flag') || propMap.get('experiment') || propMap.get('gate') || propMap.get('id') || propMap.get('name') || propMap.get('key');
+        const hasExplicitFlagKey = propMap.has('flag') || propMap.has('experiment') || propMap.has('gate');
         if (idProp) {
           const flagName = foldBinaryExpression(idProp.value) || (idProp.value?.type === 'Literal' && typeof idProp.value.value === 'string' ? idProp.value.value : null);
-          if (flagName && isValidFeatureFlag(flagName)) {
+          const looksExplicitFlagName = Boolean(
+            flagName &&
+            /^(?:enable_|canary_|dogfood_|dark_|exp_|experiment_|rollout_|feature_|gate_)|(?:Experiment|FeatureFlag|RolloutGate|FeatureGate)$/i.test(flagName)
+          );
+          if (flagName && isValidFeatureFlag(flagName) && (strongRolloutPropCount >= 1 || hasExplicitFlagKey || looksExplicitFlagName)) {
             let status = ACTIVATION_STATUS.CONFIGURED;
             const enabledProp = propMap.get('enabled') || propMap.get('isactive');
             if (enabledProp?.value?.type === 'Literal' && enabledProp.value.value === true) {

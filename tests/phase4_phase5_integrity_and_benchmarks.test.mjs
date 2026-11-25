@@ -107,16 +107,16 @@ test('Phase 4: Candidate Evidence & Rejection Reason Preservation', () => {
 
 test('Phase 4: Structural Delta Diffing & Category Breakdown', () => {
   const previous = [
-    { category: 'model_id', value: 'gpt-4o', context: 'ctx1', filePath: 'a.js' },
-    { category: 'feature_flag', value: 'flag_stable', context: 'f1', filePath: 'b.js' },
-    { category: 'go_type', value: 'AgentEngine', context: 'g1', filePath: 'engine.go' },
+    { category: 'model_id', value: 'gpt-4o', activationStatus: 'REFERENCED', context: 'ctx1', filePath: 'a.js' },
+    { category: 'feature_flag', value: 'flag_stable', activationStatus: 'CONFIGURED', context: 'f1', filePath: 'b.js' },
+    { category: 'go_type', value: 'AgentEngine', activationStatus: 'CONFIGURED', context: 'g1', filePath: 'engine.go' },
   ];
 
   const candidate = [
-    // Persistent
-    { category: 'model_id', value: 'gpt-4o', context: 'ctx1', filePath: 'a.js' },
-    // Changed context/filePath
-    { category: 'go_type', value: 'AgentEngine', context: 'g1_updated_fields', filePath: 'engine_v2.go' },
+    // Persistent (even when context or filePath changes without semantic shift)
+    { category: 'model_id', value: 'gpt-4o', activationStatus: 'REFERENCED', context: 'ctx1', filePath: 'a.js' },
+    // Semantic activation transition (CONFIGURED -> ENABLED)
+    { category: 'go_type', value: 'AgentEngine', activationStatus: 'ENABLED', context: 'g1_updated_fields', filePath: 'engine_v2.go' },
     // Added model
     { category: 'model_id', value: 'claude-3-7-sonnet', context: 'new model', filePath: 'c.js' },
     // Added endpoint

@@ -118,10 +118,39 @@ export function isValidModelIdentifier(val, options = {}) {
     return true;
   }
 
-  // In non-structural raw mode, a bare single word with no delimiter/digit/space
-  // (other than o1/o3) is ordinary code/UI vocabulary (e.g. 'github', 'local'), not a model ID.
-  if (!str.includes(' ') && !/[-_.\d:/]/.test(str) && !/^o[13]$/i.test(str)) {
+  // Reject domain hostnames / subdomains (e.g. claude-ai.staging.ant.dev)
+  if (/\.(?:dev|com|io|org|net|ai|local|internal)$/i.test(str) || /\.staging\.|\.internal\./i.test(str)) {
     return false;
+  }
+
+  // In non-structural raw mode:
+  if (!isStructural) {
+    // A bare single word with no delimiter/digit/space (other than o1/o3) is ordinary code/UI vocabulary
+    if (!str.includes(' ') && !/[-_.\d:/]/.test(str) && !/^o[13]$/i.test(str)) {
+      return false;
+    }
+
+    const isKnownAiAnchor = /^(?:gpt|claude-(?:[0-9]|opus|sonnet|haiku|mythos|fable|instant|donut|onigiri)|gemini|o[1-9]|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|veo|whisper|mythos|fable|obsidian|swe)-/i.test(str);
+
+    // Reject unanchored -clip and -eval suffixes from raw text (CSS animations, video clips, a11y rules like aria-hidden-body-eval)
+    if (!isKnownAiAnchor && /-(?:clip|eval)$/i.test(str)) {
+      return false;
+    }
+
+    // Reject raw 3+ segment hyphenated prose/CSS/ICU/a11y chains unless backed by digits, AI anchor,
+    // or a clean trailing double-tier model suffix (e.g. banana-pro-preview, orion-thinking-preview)
+    const hyphenSegments = str.split('-').filter(Boolean);
+    const hasDoubleTierTail = /-(?:pro|ultra|mini|nano|micro|lite|plus|turbo|flash|thinking|reasoning|vision|preview|eval|clip|tts|eap|coder|fast|high|low|max)-(?:pro|mini|lite|preview|flash|turbo|fast|high|low|max|eap|beta|alpha|latest)$/i.test(str);
+    const hasNoiseSegment = /(?:^|-)(?:concentr|millimole|aria|focusable|landmark|skel|sweep|animate|animated|markdown|access|control|vector|hidden|disabled|import|export|reply|body|top|level|per|print|screen|window)(?:-|$)/i.test(str);
+    if (hasNoiseSegment) return false;
+    if (hyphenSegments.length >= 3 && !/\d/.test(str) && !isKnownAiAnchor && !hasDoubleTierTail) {
+      return false;
+    }
+
+    // Reject generic app/UI branding slugs on claude- that aren't model families
+    if (/^claude-(?:ai|extensions?|desktop|cli|app|import|export|data|team|org|settings?|auth|billing)/i.test(str)) {
+      return false;
+    }
   }
 
   // Must start with an ASCII letter (e.g. 'gemini', 'claude', 'o1')
@@ -200,12 +229,17 @@ export function isValidModelIdentifier(val, options = {}) {
     if (!providerSlashMatch) return false;
   }
 
-  // Generic prefix check: if suffix is one of the generic code words (pro, base, code, agent, low, max, plus),
-  // ensure the prefix is not a 2-letter word or standard programming word
-  if (/-(?:pro|base|code|agent|low|max|plus)$/i.test(str)) {
+  // Generic prefix check: if suffix is one of the generic tier words,
+  // ensure the prefix is not a 2-letter word, DOM/a11y/ICU/CSS term, or programming word
+  if (/-(?:pro|base|code|agent|low|max|plus|lite|flash|preview|turbo|mini|ultra|eval|clip)$/i.test(str)) {
     const fullStem = str.slice(0, str.lastIndexOf('-')).toLowerCase();
-    if (fullStem.length <= 2) return false;
-    if (['ajv', 'connect', 'oauth', 'mcp', 'client', 'tool-in', 'cross', 'chisel', 'stream', 'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp', 'exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi', 'table', 'btn', 'button', 'input', 'card', 'box'].some((w) => fullStem.includes(w))) {
+    if (fullStem.length <= 2 && !/^o[1-9]$/i.test(fullStem)) return false;
+    const NOISE_SUBSTRINGS = new Set([
+      'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp',
+      'tool-in', 'encryptedkeyset', 'access-control', 'hidden-content', 'millimole', 'concentr',
+    ]);
+    if (['ajv', 'connect', 'oauth', 'mcp', 'client', 'tool-in', 'cross', 'chisel', 'stream', 'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp', 'exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi', 'table', 'btn', 'button', 'input', 'card', 'box',
+      'foo', 'bar', 'baz', 'jsx', 'psjsx', 'jest', 'grep', 'exec', 'fetch', 'choose', 'dapper', 'envoy', 'encryptedkeyset', 'concentr', 'millimole', 'armenian', 'cyrillic', 'hebrew', 'arabic', 'devanagari', 'latin', 'emoji', 'vector', 'animated', 'animate', 'skel', 'buffer', 'asset', 'assets', 'artifact', 'markdown', 'aria', 'focusable', 'landmark', 'access-control', 'hidden-content', 'alarm', 'arrow', 'circle', 'square', 'filled', 'outline'].some((w) => fullStem === w || fullStem.startsWith(`${w}-`) || fullStem.endsWith(`-${w}`) || (NOISE_SUBSTRINGS.has(w) && fullStem.includes(w)))) {
       return false;
     }
   }
@@ -237,9 +271,16 @@ export function isValidFeatureFlag(val) {
   if (NON_MODEL_COMMON_TERMS.has(lower) || CSS_CURSOR_VALUES.has(lower)) return false;
   if (evaluateNoise(str).isNoise) return false;
 
-  // Reject React hooks & standard UI DOM properties / handlers / modal helpers
-  if (/^use(?:State|Effect|Memo|Callback|Ref|Context|Reducer|LayoutEffect|Id|Transition|DeferredValue|ImperativeHandle|DebugValue|SyncExternalStore|InsertionEffect)$/i.test(str)) return false;
-  if (/^(?:show|open|close|toggle|render|handle|on)(?:Modal|Dialog|Tooltip|Popover|Menu|Drawer|Toast|Alert|Notification|Banner|Dropdown|Sidebar|Popup|Overlay|Click|Change|Submit|Focus|Blur)$/i.test(str)) return false;
+  // Model IDs (e.g. gpt-5, claude-4.5-sonnet, gemini-2.5-pro) must never be misclassified as feature flags
+  if (/^(?:gpt|claude|gemini|o[1-9]|deepseek|qwen|grok|llama|mistral|kimi)-[0-9a-zA-Z._-]+$/i.test(str)) return false;
+
+  // Reject React hooks & standard UI DOM properties / handlers / modal helpers / UI permissions
+  if (/^use(?:State|Effect|Memo|Callback|Ref|Context|Reducer|LayoutEffect|Id|Transition|DeferredValue|ImperativeHandle|DebugValue|SyncExternalStore|InsertionEffect|ActionState|Optimistic|FormStatus|EffectEvent)$/i.test(str)) return false;
+  if (/^(?:show|open|close|toggle|render|handle|on)(?:Modal|Dialog|Tooltip|Popover|Menu|Drawer|Toast|Alert|Notification|Banner|Dropdown|Sidebar|Popup|Overlay|Click|Change|Submit|Focus|Blur|PrintPanels|Grouping|HeaderInput)$/i.test(str)) return false;
+  if (/^(?:allow|should|show|hide)(?:AutoTrigger|Hide|Show)?(?:Mouse|Wheel|Null|Print|Arrow|Header|Group|Focus|Blur|Hover|Click|Scroll|Key|Menu|Panel|Tab|Button|Resize|Drag|Drop|Authorization|Sso|Gate|Abbreviated)/i.test(str)) return false;
+  if (/^(?:allow|apply-all|action\d+|addKeybinding|Claude|AirlockContainer\w*)$/i.test(str)) return false;
+  if (/^exp_(?:hotel|flight|car_rental|boarding_pass|restaurant|mod_[a-z0-9_]+)$/i.test(str)) return false;
+  if (/^FEATURE_FLAG_NO_ORPHANS/i.test(str)) return false;
   if (/^preview_(?:id|width|height|style|dom|element|view|node|ptr|item|modal|close|closed)/i.test(str)) return false;
   if (/^(?:flex|grid|items|justify|content|bg|text|border|font|shadow|rounded|p|m|px|py|gap)-[a-z0-9_-]+$/i.test(str)) return false;
   if (/^(?:aria|data)-[a-z0-9_-]+$/i.test(str)) return false;
@@ -302,8 +343,8 @@ const MODEL_PATTERNS = [
   // C. Structural Versioned Model Identifiers (e.g. swe-1-6-fast, swe-2-high, mythos-5.1, fable-5.1, hyper-v3-coder)
   /\b([a-zA-Z][a-zA-Z0-9_]{2,25}-(?:v?[0-9]+(?:\.[0-9]+)*(?:-[0-9]+)*-(?:turbo|preview|flash|pro|plus|instruct|mini|nano|micro|ultra|lite|base|chat|thinking|reasoning|vision|high|max|fast|low|coder|sonnet|opus|haiku|alpha|beta|eval|distill|eap|tts|clip)[a-zA-Z0-9._-]*))\b/i,
 
-  // D. Provider Anchor Wildcards (provider-(ANYTHING))
-  /\b((?:claude|gpt|gemini|devin|cursor|codex|droid|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|whisper)-[a-zA-Z0-9_\-\.]+)\b/i,
+  // D. Provider Anchor Wildcards (strictly real AI families — never cursor-/devin-/droid- app branding)
+  /\b((?:claude|gpt|gemini|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|veo|whisper)-[a-zA-Z0-9_\-\.]+)\b/i,
 
   // E. OpenAI Reasoning Series (o1-mini, o3-mini, o4-preview... then standalone o1, o3)
   /\b(o[1-9]-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat|all|speed|reasoning|\d{4}-\d{2}-\d{2})|o1|o3)\b/i,
@@ -320,12 +361,10 @@ const FLAG_PATTERNS = [
   /\b((?:enable|canary|dogfood|dark|gate|exp|experiment|rollout|feature_gate|feature_flag|beta)_[a-z0-9_]{3,50})\b/i,
   // Flag configuration dictionaries
   /["']([a-zA-Z0-9_.-]+(?:Experiment|FeatureFlag|RolloutGate|FeatureGate))["']/,
-  // CamelCase boolean toggles
-  /\b(is[A-Z][a-zA-Z0-9]{3,40}(?:Enabled|Allowed|Active|Supported))\b/,
-  // Explicit feature/rollout camelCase toggles (excludes React hooks like useState/useEffect)
-  /\b((?:enable|feature|experiment|rollout|gate|toggle|canUse|useFeature|useExperiment|useGate)[A-Z][a-zA-Z0-9]{3,50})\b/,
-  // Flag definition objects with a defaultValue
-  /["']([a-zA-Z0-9_.-]{3,80})["']\s*:\s*\{[^{}]{0,200}?["']?(?:defaultValue|default_value|enabled|isEnabled)["']?\s*:/i,
+  // CamelCase boolean toggles (strictly feature/rollout/gate keywords)
+  /\b((?:enable|feature|experiment|rollout|gate|canUse|useFeature|useExperiment|useGate)[A-Z][a-zA-Z0-9]{3,50})\b/,
+  // Flag definition objects with a defaultValue / rollout (exclude plain UI `{ enabled: true }`)
+  /["']([a-zA-Z0-9_.-]{3,80})["']\s*:\s*\{[^{}]{0,200}?["']?(?:defaultValue|default_value|rolloutPercentage)["']?\s*:/i,
 ];
 
 // 3. Hidden CLI Commands & Switches
@@ -390,9 +429,21 @@ const DARK_UI_PATTERNS = [
   /["']?((?:Generate full application|Autonomous computer use|Deep research mode|Run full terminal commands autonomously|Connect external tools via MCP)[a-zA-Z0-9\s,\.'"-]{0,80})["']?/i,
 ];
 
-function isDarkUiNoise(phrase) {
-  if (!phrase || phrase.length < 8) return true;
-  return /^(?:welcome to the |welcome to your |try the new theme|introducing the |powered by electron|powered by chromium|powered by vite|powered by react)/i.test(phrase.trim());
+export function isDarkUiNoise(phrase) {
+  if (!phrase || typeof phrase !== 'string') return true;
+  const trimmed = phrase.trim();
+  if (trimmed.length < 8) return true;
+  if (/^(?:welcome to the |welcome to your |try the new theme|introducing the |powered by electron|powered by chromium|powered by vite|powered by react)/i.test(trimmed)) {
+    return true;
+  }
+  // Reject non-English localization (e.g. German "abgeglichen"), Cookie/Privacy consent, and dev/API reference fragments
+  if (/(?:cookie policy|privacy policy|market our services|abgeglichen|eine experience|announcing its tools|backed by a preference|built on a value containing|ArrayBuffer)/i.test(trimmed)) {
+    return true;
+  }
+  if (/[^\x20-\x7E]/.test(trimmed) && /[äöüßàâçéèêëîïôûù]/i.test(trimmed)) {
+    return true;
+  }
+  return false;
 }
 
 // 8. Search & Grounding Capabilities (web search, live browsing, grounding)
@@ -470,7 +521,7 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
   // 1. Models
   for (const candidate of textCandidates) {
     for (const pat of MODEL_PATTERNS) {
-      const isSlot = /(?:model|model_slug|model_id|model_name|default_model|defaultModel|fallbackModel|reasoningModel|evalModel|chat_model|active_model|primary_model|subagent_model|selected_model)\s*[:=]/i.test(pat.source);
+      const isSlot = pat === MODEL_PATTERNS[0];
       const globalPat = new RegExp(pat.source, pat.flags.includes('g') ? pat.flags : pat.flags + 'g');
       let m;
       while ((m = globalPat.exec(candidate)) !== null) {
