@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "componentId": "gemini-desktop",
-  "version": "build-20261125-000239",
+  "version": "build-20261125-050739",
   "observedVersion": "build-20261125-050739",
   "scannedVersion": "build-20261125-050739",
-  "deliveredVersion": "build-20261125-000239",
+  "deliveredVersion": "build-20261125-050739",
   "alertedVersion": "build-20261125-050739",
   "releaseId": "gemini-desktop-build-20261125-000239",
   "releaseKey": "b5087645d86c8a3e51a6c58d971bf75d",
@@ -28,34 +28,7 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "GD-20261125-002",
-    "version": "build-20261125-050739",
-    "releaseKey": "367a27a51eb811bce06347a041757759",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 907,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "failedFiles": [],
-    "coverageState": "PARTIAL",
-    "createdAt": "2026-11-25T05:14:20.794Z",
-    "updatedAt": "2026-11-25T05:19:15.102Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
     {
       "scanId": "GD-20261125-002",
