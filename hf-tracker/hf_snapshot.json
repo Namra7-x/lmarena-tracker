@@ -19432,7 +19432,7 @@
       },
       "nvidia/Kumo-Anomaly": {
         "createdAt": "2026-04-21T06:49:34.000Z",
-        "lastModified": "2026-10-27T21:00:07.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -22757,7 +22757,7 @@
       },
       "nvidia/Nemotron-Labs-Image-30B-A3B": {
         "createdAt": "2026-09-24T21:13:25.000Z",
-        "lastModified": "2026-11-25T03:19:43.000Z",
+        "lastModified": "2026-11-25T18:57:56.000Z",
         "gated": false,
         "pipeline_tag": "text-to-image",
         "numParameters": null
@@ -22767,6 +22767,13 @@
         "lastModified": "2026-11-25T16:08:23.000Z",
         "gated": false,
         "pipeline_tag": "image-text-to-text",
+        "numParameters": null
+      },
+      "nvidia/Nemotron-3.5-Rerank-1B-BF16": {
+        "createdAt": "2026-11-13T12:05:59.000Z",
+        "lastModified": "2026-11-23T23:14:14.000Z",
+        "gated": false,
+        "pipeline_tag": "text-ranking",
         "numParameters": null
       }
     },
@@ -40052,7 +40059,7 @@
       },
       "allenai/ace-67327d822f0f0d8e0e5e6ca4": {
         "title": "ACE",
-        "lastUpdated": "2026-11-02T01:32:48.917Z",
+        "lastUpdated": "2026-11-25T18:10:28.861Z",
         "itemCount": 4,
         "itemIds": [
           "allenai/HiRO-ACEv2",
