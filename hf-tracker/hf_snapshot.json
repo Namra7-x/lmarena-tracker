@@ -19572,7 +19572,7 @@
       },
       "nvidia/RT-DETR-Hand-Detector-v1": {
         "createdAt": "2026-09-15T16:58:11.000Z",
-        "lastModified": "2026-10-27T18:15:08.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -22754,6 +22754,13 @@
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
+      },
+      "nvidia/Nemotron-Labs-Image-30B-A3B": {
+        "createdAt": "2026-09-24T21:13:25.000Z",
+        "lastModified": "2026-11-25T00:11:46.000Z",
+        "gated": false,
+        "pipeline_tag": "text-to-image",
+        "numParameters": null
       }
     },
     "spaces": {
@@ -23159,7 +23166,7 @@
       },
       "nvidia/robolab-leaderboard": {
         "createdAt": "2026-06-15T23:43:36.000Z",
-        "lastModified": "2026-11-24T22:34:54.000Z",
+        "lastModified": "2026-11-24T22:46:56.000Z",
         "sdk": null
       }
     },
