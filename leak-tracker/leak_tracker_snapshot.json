@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-24T23:14:17Z",
+    "publicationDate": "2026-11-25T01:09:27Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -106854,6 +106854,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/f8e83eac0bc446ff4dd1dd4cd5128e31bde3ce79",
+      "title": "Replace enums with const in several schema fields",
+      "updated": "2026-11-25T01:22:39Z",
+      "link": "https://github.com/openai/openai-openapi/commit/f8e83eac0bc446ff4dd1dd4cd5128e31bde3ce79",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/77ed948020e5fc9e534979e32ebae7615402640e",
       "title": "Replace single-value enums with const in schema definitions",
       "updated": "2026-11-25T00:34:13Z",
@@ -106984,13 +106991,6 @@
       "title": "Use const instead of enum for fixed object type fields",
       "updated": "2026-11-20T02:22:25Z",
       "link": "https://github.com/openai/openai-openapi/commit/639c561be1c485ea8e1afd287c6669d62ee99e7f",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/e99195aefbcd2a8480982ffecbf1b6b5bd14df70",
-      "title": "Replace enums with const for fixed object type fields",
-      "updated": "2026-11-20T01:19:19Z",
-      "link": "https://github.com/openai/openai-openapi/commit/e99195aefbcd2a8480982ffecbf1b6b5bd14df70",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-25T00:35:11.519Z"
+  "lastScanAt": "2026-11-25T01:23:09.959Z"
 }
