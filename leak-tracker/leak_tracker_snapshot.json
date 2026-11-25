@@ -1425,15 +1425,6 @@
   "azureFoundryModels": [
     {
       "name": "microsoft-Phi-4-mini-instruct",
-      "version": "3",
-      "publisher": "Unknown",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-25T11:23:49.5142498+00:00",
-      "displayName": "microsoft-Phi-4-mini-instruct",
-      "registry": "azureml"
-    },
-    {
-      "name": "microsoft-Phi-4-mini-instruct",
       "version": "2",
       "publisher": "Unknown",
       "lifecycleStatus": "Active",
@@ -1871,6 +1862,15 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T14:00:13.6099318+00:00",
       "displayName": "Qwen3-30B-A3B-Instruct-2507",
+      "registry": "azureml"
+    },
+    {
+      "name": "google--gemma-4-26b-a4b-it",
+      "version": "6",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T13:44:39.5556261+00:00",
+      "displayName": "gemma-4-26B-A4B-it",
       "registry": "azureml"
     }
   ],
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-25T11:37:05.733Z"
+  "lastScanAt": "2026-11-25T11:38:11.120Z"
 }
