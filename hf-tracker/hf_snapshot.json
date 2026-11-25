@@ -19439,7 +19439,7 @@
       },
       "nvidia/EgoHand-v1": {
         "createdAt": "2026-09-02T22:03:12.000Z",
-        "lastModified": "2026-10-27T18:16:59.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
@@ -22761,6 +22761,13 @@
         "gated": false,
         "pipeline_tag": "text-to-image",
         "numParameters": null
+      },
+      "nvidia/NV-Reason-PathWSI": {
+        "createdAt": "2026-10-21T17:37:04.000Z",
+        "lastModified": "2026-11-25T16:08:23.000Z",
+        "gated": false,
+        "pipeline_tag": "image-text-to-text",
+        "numParameters": null
       }
     },
     "spaces": {
@@ -22771,7 +22778,7 @@
       },
       "nvidia/simready-central": {
         "createdAt": "2026-09-28T14:52:11.000Z",
-        "lastModified": "2026-11-18T18:14:27.000Z",
+        "lastModified": "2026-11-25T15:49:03.000Z",
         "sdk": null
       },
       "nvidia/AlpasimE2EClosedLoopChallenge2026": {
