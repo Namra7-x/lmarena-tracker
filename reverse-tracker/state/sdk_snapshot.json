@@ -953,7 +953,7 @@
     "family": "google"
   },
   "@anthropic-ai/claude-agent-sdk": {
-    "version": "0.3.331",
+    "version": "0.3.332",
     "models": [
       "claude-code",
       "claude-fable-5",
@@ -982,12 +982,11 @@
     ],
     "requestParams": [],
     "apiEndpoints": [
-      "/v1/mcp/{server_id}",
-      "/v1/toolbox/shttp/mcp/{server_id}"
+      "/v1/mcp/{server_id}"
     ],
-    "lastUpdated": "2026-11-24T17:42:53.351Z",
+    "lastUpdated": "2026-11-25T01:33:05.249Z",
     "tag": "latest",
-    "shasum": "3d52acaf9e9bc44fae93b61cc05577ffba985f48",
+    "shasum": "52b4dfe48dc72108a7cc96923ec5dbe0d8cfa81d",
     "displayName": "Anthropic Claude Agent SDK",
     "family": "anthropic"
   },
