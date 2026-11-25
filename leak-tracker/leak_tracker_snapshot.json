@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-25T01:09:27Z",
+    "publicationDate": "2026-11-25T02:43:25Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -106854,6 +106854,13 @@
   ],
   "openaiCommits": [
     {
+      "id": "tag:github.com,2008:Grit::Commit/abe304d1e5f1264fd3a11499ab57c0d17f5c1df3",
+      "title": "Increase maximum size limit for tool list in agent configuration",
+      "updated": "2026-11-25T02:46:16Z",
+      "link": "https://github.com/openai/openai-openapi/commit/abe304d1e5f1264fd3a11499ab57c0d17f5c1df3",
+      "author": "openai-openapi-publisher"
+    },
+    {
       "id": "tag:github.com,2008:Grit::Commit/f8e83eac0bc446ff4dd1dd4cd5128e31bde3ce79",
       "title": "Replace enums with const in several schema fields",
       "updated": "2026-11-25T01:22:39Z",
@@ -106984,13 +106991,6 @@
       "title": "Clarify behavior of &#39;n&#39; parameter in completions API",
       "updated": "2026-11-20T06:20:52Z",
       "link": "https://github.com/openai/openai-openapi/commit/76a4810f6cec796923bb6f4cc874237571a6305b",
-      "author": "openai-openapi-publisher"
-    },
-    {
-      "id": "tag:github.com,2008:Grit::Commit/639c561be1c485ea8e1afd287c6669d62ee99e7f",
-      "title": "Use const instead of enum for fixed object type fields",
-      "updated": "2026-11-20T02:22:25Z",
-      "link": "https://github.com/openai/openai-openapi/commit/639c561be1c485ea8e1afd287c6669d62ee99e7f",
       "author": "openai-openapi-publisher"
     }
   ],
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-25T01:23:09.959Z"
+  "lastScanAt": "2026-11-25T02:47:17.127Z"
 }
