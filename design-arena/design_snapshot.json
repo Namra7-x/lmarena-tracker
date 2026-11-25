@@ -10115,7 +10115,7 @@
       "displayName": "Mistral Large 4 Preview",
       "provider": "mistral",
       "active": false,
-      "openSource": true,
+      "openSource": false,
       "router": false,
       "vision": true,
       "inputModalities": [
@@ -10138,7 +10138,7 @@
       "displayName": "Mistral Large 4 Preview",
       "provider": "mistral",
       "active": false,
-      "openSource": true,
+      "openSource": false,
       "router": false,
       "vision": true,
       "inputModalities": [
@@ -11689,7 +11689,7 @@
     "solar-mini4-5-preview": {
       "displayName": "Solar Mini 4.5 Preview",
       "provider": "upstage",
-      "active": false,
+      "active": true,
       "openSource": false,
       "router": false,
       "vision": false,
@@ -11707,6 +11707,29 @@
         "agents": [
           "agon_webapps",
           "fullstack"
+        ]
+      }
+    },
+    "mistral-large-4": {
+      "displayName": "Mistral Large 4",
+      "provider": "mistral",
+      "active": true,
+      "openSource": true,
+      "router": false,
+      "vision": true,
+      "inputModalities": [
+        "image",
+        "text"
+      ],
+      "arenas": {
+        "models": [
+          "3d",
+          "ascii",
+          "dataviz",
+          "gamedev",
+          "svg",
+          "uicomponent",
+          "website"
         ]
       }
     }
@@ -14031,6 +14054,11 @@
     "solar-mini4-5-preview": {
       "text.input": 0.1,
       "text.output": 0.4
+    },
+    "mistral-large-4": {
+      "text.input": 0.7,
+      "text.output": 2.1,
+      "text.cachedInput": 0.07
     }
   }
 }
