@@ -1,69 +1,3495 @@
 {
   "schemaVersion": 2,
   "componentId": "devin-cli",
-  "version": "3000.14.30821",
+  "version": "3000.15.14",
   "observedVersion": "3000.15.14",
-  "scannedVersion": null,
-  "deliveredVersion": "3000.14.30821",
+  "scannedVersion": "3000.15.14",
+  "deliveredVersion": "3000.15.14",
   "alertedVersion": "3000.15.14",
-  "releaseId": "devin-cli@3000.14.30821",
-  "releaseKey": "50f7e7acf4f4353e1bf93ec289671ee5",
+  "releaseId": "devin-cli@3000.15.14",
+  "releaseKey": "80cd7191708f08eb9de5625913a8444a",
   "channel": "stable",
   "versionScheme": "semver",
-  "identityFingerprint": "43bf5a492bbbfc6983fe860a9e947a5c18e0a2a7c9efcae626bdcf01d86a5e41",
-  "diagnosticFingerprint": "eb28919d798284da10f808adfec88c6b9401c8932c024b103b62fb54f79f695c",
-  "scanId": "DC-20261118-001",
+  "identityFingerprint": "aecd5653d1fcd653b634b59d9a1abe17392998e21e154db024d7f29699f87a7b",
+  "diagnosticFingerprint": null,
+  "scanId": "DC-20261125-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": null,
+  "lastSuccessfulScan": "2026-11-25T21:20:46.638Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastDeliveryStatus": "DELIVERED",
   "lastTestAlertVersion": null,
-  "analyzerStatus": null,
-  "pendingDelivery": {
-    "scanId": "DC-20261125-001",
-    "version": "3000.15.14",
-    "releaseKey": "80cd7191708f08eb9de5625913a8444a",
-    "status": "ALERTED",
-    "alertSent": true,
-    "alertMessageId": 490,
-    "expectedFiles": [],
-    "deliveredFiles": [],
-    "failedFiles": [],
-    "createdAt": "2026-11-25T21:20:27.105Z",
-    "updatedAt": "2026-11-25T21:20:27.105Z"
+  "analyzerStatus": {
+    "acornAst": "skipped",
+    "goReSym": "skipped",
+    "sourceMap": "skipped",
+    "sevenZip": "skipped",
+    "asar": "skipped",
+    "tar": "completed",
+    "zip": "skipped",
+    "multiEncodingScanner": "completed"
   },
-  "deliveryLedger": [],
-  "releaseHistory": [],
-  "hotSignals": [],
-  "recentSignals": [],
+  "pendingDelivery": null,
+  "deliveryLedger": [
+    {
+      "scanId": "DC-20261125-001",
+      "version": "3000.15.14",
+      "status": "DELIVERED",
+      "coverageState": "COMPLETE",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-25T21:20:46.638Z"
+    }
+  ],
+  "releaseHistory": [
+    {
+      "version": "3000.15.14",
+      "releaseKey": "80cd7191708f08eb9de5625913a8444a",
+      "scanId": "DC-20261125-001",
+      "scannedAt": "2026-11-25T21:20:46.638Z",
+      "deliveredAt": "2026-11-25T21:20:46.638Z",
+      "artifactSha256": "4c49c18c583b6818270a1bf194451fa7066af9623b511f64e957490a34dae34c",
+      "stringCount": 60351,
+      "urlCount": 92
+    }
+  ],
+  "hotSignals": [
+    {
+      "category": "model_id",
+      "value": "availableswe-1-6-fastchisel_mock_backend_addrfailed",
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "rendered-preview",
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-opus-4.6",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-sonnet-4",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-5",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-6",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-do",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    }
+  ],
+  "recentSignals": [
+    {
+      "category": "model_id",
+      "value": "availableswe-1-6-fastchisel_mock_backend_addrfailed",
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "rendered-preview",
+      "score": 65,
+      "tier": "HIGH-CONFIDENCE SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_time",
+      "score": 55,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_client_protocol",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_idtitlecompleted",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_config",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_servers",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_no_questionask_user_question",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_resultunknownusersystemassistantcannot",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "codebase64_datamime_typeidis_htmlcontentoriginscreenshotelementdesign_editconsolereadeditwritegrepglobexecexit_plan_modeweb_searchMcpMatchertoolserverallToolNameMatcherexactmcpliteralharnessnamedeletemovesearchexecutethinkfetchother",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "failedorg_iduser_idGetWebSearchResultsResponseresultssummaryweb_search_urlall",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "plan_entitlement",
+      "value": "available for prompt evaluatorall branches are disabled and there is no else branchCreating",
+      "score": 52,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-opus-4.6",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-sonnet-4",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-5",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-6",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gpt-do",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "pricing",
+      "value": "context_cost.call.v1",
+      "score": 43,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "cli/current/manifest",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "devin-rs/remoteGATEWAY_URLOutpost",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "https://staging.watchdevinwork.com/load-chisel-local",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "install",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "plans",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "plansOpened",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "endpoint_domain",
+      "value": "settings/environment",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_API_ARMOR",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_argument_interpolation",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_BETA_TRACING_DETAILED",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_cdef",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_COLUMN_METADATA",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_command_execution",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_DBPAGE_VTAB",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_DBSTAT_VTAB",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_first_party_otel",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_FTS3",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_FTS3_PARENTHESIS",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_FTS5",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_GEOPOLY",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_IN_NON_VSCODE_TERMINALS",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_job",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_LOAD_EXTENSION",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_MATH_FUNCTIONS",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_MEMORY_MANAGEMENT",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_OFFSET_SQL_FUNC",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_PREUPDATE_HOOK",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_RBU",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_restorationinternal",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_RTREE",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_segmentationassertion",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_SESSION",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_SNAPSHOT",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_STAT4",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "ENABLE_UNLOCK_NOTIFY",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableAccessibility",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableFileChooserOpenedEvent",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableFileChooserOpenedEventCreateIsolatedWorldReturns",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableMain",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePage",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSecurity",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSessionEvents",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTarget",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_completed",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_completion",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_contextparentAgentIdrunIdagentId",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_contextparentAgentIdrunIdcognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_contextSubagentContextparentAgentIdrunId",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_control",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_decidableLoadDirectoryRequestdir",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_decided",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_finishedSubagentStartedsubagent_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_guidance",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_idask_user_question",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_idchisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_idrun_subagentsub",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_implchisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_interrupted_notification",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_logic",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_logs",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_message_chunkAgentThoughtChunk",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_mode",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_paused",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_pausedpaused",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_response",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_start",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_started",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_startedSubagentToolCall",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_status",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_stoppedcognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_thought_chunk",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_tools",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "Connector_Punctuation",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp__Not",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_auth_success",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_call_tool",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_description_cachechisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_elicitation",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_list_servers",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_list_tools",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_mentions",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_prompts",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_read_resource",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_resource_read_startedMcpServerList",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_resource_readMcpToolListmcp_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_server_list_startedMcpToolCallmcp_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_server_listMcpServerListStarted",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_serversallow_bundling_devin_cli",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_serversallowed_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_sink",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_sources",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_to_dedicated_file",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_toolprofiles_default",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_writer",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_completedcognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_completion_notification",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_completion_notificationSidekick",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_contextdescription",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_contextparentAgentIdrunIdcognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_control",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_generalskill",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_heads",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_model",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_model_toolsassertion",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_model_toolsslice",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_pausedAllow",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_profiles",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "subagent_startedcognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_arg_leak_recovery",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_arg_leak_recoveryagent",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_contentcalled",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_contentchisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_contenttool_resultFailed",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_ids_to_kimi_nativetag_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_json",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_jsonUPDATE",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_record",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_startedMcpToolListStartedmcp_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_timingchisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_update_json",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_call_updateusedcostseverity",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_callMcpToolCallStartedmcp_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_calls_json",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_callsactual_model_uidthinking_started",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_callShellIdMetacognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_callsreasoning_details",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_callsreasoning_detailsmetadata",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "TOOL_CONTENTOTEL_LOG_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_definitionshide_from_exportinvalid",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_failure",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_input",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_inputset_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_invocation_bytestotal_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_judgmentchisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_kind",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_listMcpResourceReadStarted",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_logging",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_metadata",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_name",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_nameargumentsqueryrgreadfiletreelsglob",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_namecommanddecision",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_namecreated_at",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_namesnote",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_namespathsextra",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_output_bytestotal_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_output_images",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_outputlocal",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_outputtool_inputEffects",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_pipeline",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_pipeline_idindex",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_provenancepost_tool",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_registry",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_response",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_restrictionsUnknown",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_result_metaFailed",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_result_metascriptscripted_tools",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_result_timing",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_search",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_search_resulthosted_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_searchchisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_searchesphase",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_sourcesourcedevin",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_successoutput_bytesoutput_imagesfailure_reason",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_updatecore",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_use",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_usehas_signFunction",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "agents_standardclaudedevincursorwindsurfopencodezedcopilotcodexkirobuiltinteammcpwriteexit_plan_modeweb_searchTool",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "get_outputkill_shellnotebook_readnotebook_editweb_search",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "mcp____readeditwritegrepglobexecexit_plan_modeweb_searchcommand",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "mcp_serversdisable_fast_contextcascade_web_search_enabledfetched_atallowed_model_uidsallowed_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "pdatetodo_updateupdated_master_planuser_messageuser_question_answereduser_reactionuser_update_master_planvoice_eventwait_command_startwdw_tool_useweb_searchwork_item_unlinkedworkflow_agent_updateworkflow_run_completedworkflow_run_startedvariant",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "tool_pipeline_idindexToolJudgmentVerdictapprovepromptturned_offreadeditwriteglobexit_plan_modeweb_searchMcpMatchertoolserverallToolNameMatcherexactmcpliteralharnessnamedeletemovesearchexecutethinkfetchotherToolCallKindfunctioncustomargumentsnamespace",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "tool_useWebGetContentsWebSearchweb_searchWorkItemLinkedwork_item_unlinkedWorkflowAgentUpdateworkflow_",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "view_imageask_user_questiontodo_writeweb_searchmcp_call_toolmcp_list_toolsmcp_read_resourceextend_contextread_page_contentsweAlways",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "web_search",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "web_search_resultschisel",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "web_searchnum_resultsresult_urlsunavailableresource_exhaustedpermission_denieddeadline_exceededcontent_filterempty_responseunknowncognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "web_searchrun_subagentread_subagentdollarsacucreditsinput_tokenscached_input_tokensoutput_tokensagent_messagescognition",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "plan_entitlement",
+      "value": "isMax",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "API_KEY",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "DEVIN_OUTPOSTS_TOKEN",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "DEVIN_REMOTE_SESSION_TOKEN",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_API_ARMOR",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_BETA_TRACING_DETAILED",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_COLUMN_METADATA",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_DBPAGE_VTAB",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_DBSTAT_VTAB",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_FTS3",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_FTS3_PARENTHESIS",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_FTS5",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_GEOPOLY",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_IN_NON_VSCODE_TERMINALS",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_LOAD_EXTENSION",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_MATH_FUNCTIONS",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_MEMORY_MANAGEMENT",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_OFFSET_SQL_FUNC",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_PREUPDATE_HOOK",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_RBU",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_RTREE",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_SESSION",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_SNAPSHOT",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_STAT4",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "ENABLE_UNLOCK_NOTIFY",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "OPENAI_API_KEY",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "STARSHIP_SESSION_KEY",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "WINDSURF_API_KEY",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "o1",
+      "score": 35,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "claude-code",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "closedswe-1-6-fastswe-1.6",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "mysql-pro",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "libexec/devin-telemetry",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "opentelemetry-pro",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "opus-4-7-mediumgpt-5.4swe-1-6description",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "opus-4-7-mediumgpt-5.4swe-1-6tprint",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "ordercompress_programcompress-pro",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "regctrl-pro",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "tonic-pro",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "unix-pro",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "windsurf-pro",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "xlinkrepeat-max",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "bin/devin",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    }
+  ],
   "historicalSeenHashes": [],
   "historicalSeenUrls": [],
-  "stringBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "stringHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
+  "stringBaseline": null,
+  "stringHistory": null,
+  "urlBaseline": null,
+  "urlHistory": null,
   "lastCoverageGaps": [],
   "lastAlertDigest": null,
-  "benchmark": null,
+  "benchmark": {
+    "executionTimeMs": 11789,
+    "peakMemoryMb": 74
+  },
   "knownSignals": {}
 }
