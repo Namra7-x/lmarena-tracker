@@ -1424,6 +1424,15 @@
   ],
   "azureFoundryModels": [
     {
+      "name": "nvidia--nvidia-nemotron-3.5-bolt-74b-a9b-bf16",
+      "version": "1",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-26T16:23:49.7026104+00:00",
+      "displayName": "NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+      "registry": "azureml"
+    },
+    {
       "name": "mistralai--mistral-small-3.1-24b-instruct-2503",
       "version": "4",
       "publisher": "Hugging Face",
@@ -1862,15 +1871,6 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T15:12:15.5651405+00:00",
       "displayName": "Nemotron-3.5-Parse",
-      "registry": "azureml"
-    },
-    {
-      "name": "google--gemma-4-31b-it",
-      "version": "9",
-      "publisher": "Hugging Face",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T14:50:31.8867197+00:00",
-      "displayName": "gemma-4-31B-it",
       "registry": "azureml"
     }
   ],
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-26T15:54:14.846Z"
+  "lastScanAt": "2026-11-26T16:53:15.674Z"
 }
