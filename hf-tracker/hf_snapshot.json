@@ -15487,7 +15487,7 @@
       },
       "microsoft/Dayhoff-170M-UR90-HL-10000": {
         "createdAt": "2026-04-02T01:37:55.000Z",
-        "lastModified": "2026-04-02T01:38:04.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -18382,6 +18382,13 @@
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
+      },
+      "microsoft/CogACT2-LIBERO": {
+        "createdAt": "2026-11-26T15:53:37.000Z",
+        "lastModified": "2026-11-26T16:46:44.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
       }
     },
     "spaces": {
@@ -18953,8 +18960,10 @@
       "microsoft/cogact2-6b086070b24a06819d6cde43": {
         "title": "CogACT2",
         "lastUpdated": "2026-11-26T16:39:35.967Z",
-        "itemCount": 0,
-        "itemIds": []
+        "itemCount": 1,
+        "itemIds": [
+          "microsoft/CogACT2-LIBERO"
+        ]
       }
     }
   },
@@ -19207,7 +19216,7 @@
       },
       "nvidia/Nemotron-3.5-Rerank-8B-BF16": {
         "createdAt": "2026-10-15T08:42:42.000Z",
-        "lastModified": "2026-11-23T23:12:52.000Z",
+        "lastModified": "2026-11-26T16:42:16.000Z",
         "gated": false,
         "pipeline_tag": "text-ranking",
         "numParameters": null
