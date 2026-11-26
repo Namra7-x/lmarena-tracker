@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "componentId": "gemini-desktop",
-  "version": "build-20261125-181016",
+  "version": "build-20261126-050405",
   "observedVersion": "build-20261126-050405",
   "scannedVersion": "build-20261126-050405",
-  "deliveredVersion": "build-20261125-181016",
+  "deliveredVersion": "build-20261126-050405",
   "alertedVersion": "build-20261126-050405",
   "releaseId": "gemini-desktop-build-20261125-181016",
   "releaseKey": "203f6515091011c0ca48ef781d91f44d",
@@ -28,34 +28,7 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "GD-20261126-001",
-    "version": "build-20261126-050405",
-    "releaseKey": "c0f7bac67635d747c307817496f32517",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 953,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt.gz",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "failedFiles": [],
-    "coverageState": "PARTIAL",
-    "createdAt": "2026-11-26T05:07:01.963Z",
-    "updatedAt": "2026-11-26T05:09:42.214Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
     {
       "scanId": "GD-20261126-001",
@@ -8654,10 +8627,30 @@
   ],
   "historicalSeenHashes": [],
   "historicalSeenUrls": [],
-  "stringBaseline": null,
-  "stringHistory": null,
-  "urlBaseline": null,
-  "urlHistory": null,
+  "stringBaseline": {
+    "schema": 2,
+    "encoding": "gzip+base64",
+    "count": 0,
+    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
+  },
+  "stringHistory": {
+    "schema": 2,
+    "encoding": "gzip+base64",
+    "count": 0,
+    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
+  },
+  "urlBaseline": {
+    "schema": 2,
+    "encoding": "gzip+base64",
+    "count": 0,
+    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
+  },
+  "urlHistory": {
+    "schema": 2,
+    "encoding": "gzip+base64",
+    "count": 0,
+    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
+  },
   "lastCoverageGaps": [
     "darwin-arm64: extraction partial (DMG extraction failed)"
   ],
