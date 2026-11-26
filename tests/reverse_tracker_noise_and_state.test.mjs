@@ -265,4 +265,29 @@ test('Live regression guards: blocks icon arrays, CSS/a11y/ICU suffix noise, Rea
   assert.equal(unanchored.tier, TIERS.WEAK_SIGNAL);
   assert.equal(unanchored.isMajorEarlySignal, false);
   assert.ok(unanchored.score <= 34);
+
+  // 5. All-products live regression guards (CanIUse O4 array, CodeResources, CSS .comment-preview, binary glue, Bun/TS flags, script exts)
+  const canIUseAst = extractSignalsFromAst(
+    'const rule = { browsers: ["E12", "FF1", "FFA4", "S1.1", "SM1", "C1", "CA18", "IE5", "O4"] }; const cmd = { name: "flex size-4 shrink-0", hidden: true }; const c2 = { name: "WHITESPACE", hidden: true };',
+    'extensions/css-language-features/server.js',
+  );
+  assert.equal(canIUseAst.filter((f) => f.category === CATEGORIES.MODEL_ID).length, 0, 'CanIUse O4 array must not leak CA18');
+  assert.equal(canIUseAst.filter((f) => f.category === CATEGORIES.HIDDEN_COMMAND).length, 0, 'CSS class list & WHITESPACE must not leak as hidden_command');
+
+  assert.equal(matchSignalsInText('.comment-preview { color: red; }', 'preload.js').length, 0, 'CSS rule line must be skipped');
+  assert.equal(matchSignalsInText('chunk-preview', 'Devin.app/Contents/_CodeSignature/CodeResources').length, 0, 'CodeSignature XML must be skipped');
+
+  assert.equal(
+    matchSignalsInText('availableswe-1-6-fastchisel_mock_backend_addrfailed').some((f) => f.value.includes('chisel_mock')),
+    false,
+    'Glued chisel_mock suffix blob must never survive as a finding',
+  );
+
+  for (const extraNoise of ['rendered-preview', 'agent.ps1', 'anysphere.co', 'mcp_browser_scale_coordinatesRecordingSealer', 'agent_idtitlecompleted', 'allowBunRuntime', 'allowBareNamedParameters', 'shouldFetchVersion']) {
+    assert.equal(
+      matchSignalsInText(extraNoise).filter((f) => ['model_id', 'feature_flag', 'agent_mode'].includes(f.category)).length,
+      0,
+      `Live cross-product noise '${extraNoise}' must be rejected`,
+    );
+  }
 });

@@ -184,8 +184,17 @@ export async function detectChanges(familyId = null, options = {}) {
           (entry) => entry.version === candidate.version && (entry.deliveredFiles?.length || 0) > 0,
         ).length;
 
-        if (deliveriesForVersion >= 2) {
-          console.log(`  ✓ ${compId}: Version ${candidate.version} already delivered ${deliveriesForVersion} times. Settling pending delivery.`);
+        // If extraction itself was PARTIAL (not a failed download/upload) and 1 full report set
+        // was already delivered for this version, do NOT re-scan and spam duplicate PARTIAL alerts.
+        const extractionPartialAlreadyDelivered = Boolean(
+          pending?.status === 'PARTIAL' &&
+          pending?.coverageState === 'PARTIAL' &&
+          (!pending.failedFiles || pending.failedFiles.length === 0) &&
+          deliveriesForVersion >= 1
+        );
+
+        if (deliveriesForVersion >= 2 || extractionPartialAlreadyDelivered) {
+          console.log(`  ✓ ${compId}: Version ${candidate.version} already delivered (${deliveriesForVersion}x). Settling pending delivery.`);
           saveComponentState(stateDir, compId, {
             ...baseline,
             pendingDelivery: null,

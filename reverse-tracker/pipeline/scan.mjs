@@ -43,7 +43,7 @@ import { extractApplicationUrls } from '../extraction/urls.mjs';
 import { extractSignalsFromAst } from '../extraction/ast.mjs';
 import { extractGoMetadata, isGoBinary, parseGoSignals } from '../extraction/go.mjs';
 import { extractSourceMapMetadata, extractInlineSourceMaps } from '../extraction/sourcemap.mjs';
-import { matchSignalsInText, extractJsonPricingFindings, isValidModelIdentifier, isValidFeatureFlag, isDarkUiNoise, CATEGORIES } from '../finder/rules.mjs';
+import { matchSignalsInText, extractJsonPricingFindings, isValidModelIdentifier, isValidFeatureFlag, isValidAgentTool, isDarkUiNoise, CATEGORIES } from '../finder/rules.mjs';
 import { evaluateNoise, isHumanReadableString, isThirdPartyPath } from '../finder/noise.mjs';
 import { detectPlatformAsymmetry } from '../finder/asymmetry.mjs';
 import { scoreFinding, sortFindings, deduplicateFindings, deduplicateAndClusterFindings } from '../finder/scorer.mjs';
@@ -574,6 +574,8 @@ export async function performScan(componentId, options = {}) {
 
         const lowerPath = String(file.path || '').toLowerCase();
         const isChromiumFrameworkBin = (
+          lowerPath.includes('_codesignature/') ||
+          /\.(?:css|scss|less|svg|png|jpe?g|gif|webp|ico|woff2?|ttf|car|icns)$/i.test(lowerPath) ||
           lowerPath.includes('electron framework.framework') ||
           lowerPath.includes('squirrel.framework') ||
           lowerPath.includes('mantle.framework') ||
@@ -723,11 +725,18 @@ export async function performScan(componentId, options = {}) {
   // Purge stale polluted findings stored in legacy state/all baselines before diffing.
   const isPlausibleStoredSignal = (f) => {
     if (!f || !f.value || !f.category) return false;
+    if (String(f.filePath || '').toLowerCase().includes('_codesignature/')) return false;
     if (evaluateNoise(f.value).isNoise) return false;
     if (f.category === CATEGORIES.MODEL_ID && !isValidModelIdentifier(f.value, { isStructuralCatalog: Boolean(f.discoveryMethod && f.discoveryMethod.startsWith('ast_')) })) {
       return false;
     }
     if ((f.category === CATEGORIES.FEATURE_FLAG || f.category === CATEGORIES.EXPERIMENT) && !isValidFeatureFlag(f.value)) {
+      return false;
+    }
+    if (f.category === CATEGORIES.AGENT_MODE && !isValidAgentTool(f.value)) {
+      return false;
+    }
+    if (f.category === CATEGORIES.HIDDEN_COMMAND && (!/^[a-z0-9_-]{2,55}$/i.test(f.value.trim()) || /^[A-Z0-9_]+$/.test(f.value.trim()))) {
       return false;
     }
     if (f.category === CATEGORIES.UI_STRING && isDarkUiNoise(f.value)) {
@@ -1158,8 +1167,8 @@ export async function performScan(componentId, options = {}) {
       at: scannedAt,
     }),
     releaseHistory,
-    hotSignals: canAdvance ? compactHotSignals : (baseline.hotSignals || []).slice(0, 100).map(shrinkForState),
-    recentSignals: canAdvance ? compactRecentSignals : (baseline.recentSignals || []).slice(0, 500).map(shrinkForState),
+    hotSignals: canAdvance ? compactHotSignals : (baseline.hotSignals || []).filter(isPlausibleStoredSignal).slice(0, 100).map(shrinkForState),
+    recentSignals: canAdvance ? compactRecentSignals : (baseline.recentSignals || []).filter(isPlausibleStoredSignal).slice(0, 500).map(shrinkForState),
     knownSignals: {},
     historicalSeenHashes: [],
     historicalSeenUrls: [],

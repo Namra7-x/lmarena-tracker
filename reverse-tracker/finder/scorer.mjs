@@ -2,7 +2,7 @@
  * Deterministic Scoring Engine & Tier Assignment (Section 4.3 & 4.4)
  */
 
-import { CATEGORIES, isValidModelIdentifier, isValidFeatureFlag, isDarkUiNoise } from './rules.mjs';
+import { CATEGORIES, isValidModelIdentifier, isValidFeatureFlag, isValidAgentTool, isDarkUiNoise } from './rules.mjs';
 import { isThirdPartyPath, evaluateNoise } from './noise.mjs';
 import { clusterRelatedFindings } from './similarity.mjs';
 
@@ -50,6 +50,17 @@ export function scoreFinding(finding, context = {}) {
       status: 'rejected',
       rejectionReason: 'Rejected: invalid feature flag',
       breakdown: [{ rule: 'Rejected: invalid feature flag', points: 0 }],
+    };
+  }
+  if (finding.category === CATEGORIES.AGENT_MODE && !isValidAgentTool(finding.value)) {
+    return {
+      ...finding,
+      score: 0,
+      tier: TIERS.HIDDEN,
+      isMajorEarlySignal: false,
+      status: 'rejected',
+      rejectionReason: 'Rejected: glued/invalid agent tool identifier',
+      breakdown: [{ rule: 'Rejected: invalid agent tool', points: 0 }],
     };
   }
   if (finding.category === CATEGORIES.UI_STRING && isDarkUiNoise(finding.value)) {
@@ -167,8 +178,13 @@ export function scoreFinding(finding, context = {}) {
     breakdown.push({ rule: 'AST Feature gate / SDK variation call', points: 10 });
   }
 
+  // Reject self-promoted "preview" suffix (e.g. comment-preview with dormantMarker='preview' unless genuine context)
+  const effectiveDormant = Boolean(
+    finding.hasDormantMarker &&
+    !(finding.dormantMarker === 'preview' && String(finding.value || '').toLowerCase().endsWith('-preview') && !KNOWN_AI_ANCHOR_RE.test(String(finding.value || '')))
+  );
   // 3. Dormant marker context
-  if (finding.hasDormantMarker) {
+  if (effectiveDormant) {
     score += 15;
     breakdown.push({ rule: `Dormant marker (${finding.dormantMarker}) in context`, points: 15 });
   }
@@ -217,7 +233,7 @@ export function scoreFinding(finding, context = {}) {
     isAstStructural ||
     finding.discoveryMethod === 'ast_call_gate' ||
     finding.discoveryMethod === 'ast_config_object' ||
-    finding.hasDormantMarker ||
+    effectiveDormant ||
     finding.sourceMapAgreement ||
     (Array.isArray(finding.platforms) && finding.platforms.length >= 2) ||
     (Array.isArray(finding.artifactClasses) && finding.artifactClasses.length >= 2) ||

@@ -105,7 +105,7 @@ export const SPDX_LICENSES = new Set([
 ]);
 
 // Media, Font, Package & File Asset Extensions
-export const MEDIA_FILE_REGEX = /\.(?:png|jpe?g|gif|svg|webp|ico|bmp|tiff|avif|mp3|wav|ogg|mp4|webm|woff2?|ttf|eot|otf|tar\.gz|tgz|zip|exe|dmg|pkg|deb|rpm|msi|lock|map|d\.ts)$/i;
+export const MEDIA_FILE_REGEX = /\.(?:png|jpe?g|gif|svg|webp|ico|bmp|tiff|avif|mp3|wav|ogg|mp4|webm|woff2?|ttf|eot|otf|tar\.gz|tgz|zip|exe|dmg|pkg|deb|rpm|msi|lock|map|d\.ts|cmd|ps1|bat|vbs)$/i;
 
 // Standard UI Theme values that must not be classified as feature flags or models
 export const COMMON_UI_THEMES = new Set([

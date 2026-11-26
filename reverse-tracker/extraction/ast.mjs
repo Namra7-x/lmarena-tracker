@@ -110,7 +110,8 @@ const NETWORK_FUNCTION_NAMES = new Set([
 
 // Exclude generic product/app prefixes (cursor-, devin-, droid-, codex-) so UI icon/command lists never trigger model clustering.
 const KNOWN_MODEL_ANCHORS = /^(?:gpt|claude-(?:3|4|5|opus|sonnet|haiku|mythos|fable|instant|donut|onigiri)|gemini|o[1-9]|deepseek|qwen|grok|llama|mistral|kimi|lyria|imagen|chinchilla|palm|titan|flux|sora|veo|whisper|obsidian|swe)-/i;
-const KNOWN_EXPLICIT_MODELS = /^(?:o1|o3|o4|o5)(?:-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat))?$/i;
+// Case-sensitive lowercase o1/o3 or hyphenated series (prevents CanIUse Opera "O4" browser code from poisoning arrays!)
+const KNOWN_EXPLICIT_MODELS = /^(?:o1|o3|o[1-9]-(?:mini|preview|pro|plus|low|medium|high|max|turbo|instruct|eval|chat))$/;
 
 const AI_HYPERPARAMS = new Set([
   'context_window',
@@ -444,11 +445,14 @@ export function extractSignalsFromAst(code, filePath = '') {
 
       if (strItems.length >= 2) {
         const vals = strItems.map((s) => s.val);
+        // Reject CanIUse/browser-compat code arrays like ["E12","FF1","FFA4","S1.1","SM1","C1","CA18","IE5","O4"]
+        const browserCompatCount = vals.filter((v) => /^(?:IE|FF|FFA|SM|CA|E|C|S|O)\d+(?:\.\d+)?$/.test(v)).length;
+        const isBrowserCompatArray = browserCompatCount >= 3 || (browserCompatCount / vals.length >= 0.4 && vals.length >= 3);
         // Reject massive UI icon/enum lists (e.g. 1,420 Lucide/Codicon icons) even if one element resembles a model name.
         const iconLikeCount = vals.filter((v) =>
           /(?:-(?:circle|square|filled|outline|solid|rounded|sharp|regular|thin|bold|light|duotone|dashed|dotted|stroke|chevron|arrow|badge|icon)$|^(?:arrow|chevron|align|border|folder|file|play|pause|stop|plus|minus|close|check|search|edit|trash|copy|lock|unlock)-)/i.test(v)
         ).length;
-        const isIconCatalog = vals.length > 120 || (iconLikeCount / vals.length >= 0.25 && vals.length >= 4);
+        const isIconCatalog = isBrowserCompatArray || vals.length > 120 || (iconLikeCount / vals.length >= 0.25 && vals.length >= 4);
         const anchorCount = vals.filter((v) => KNOWN_MODEL_ANCHORS.test(v) || KNOWN_EXPLICIT_MODELS.test(v)).length;
         const hasStrongAnchor = anchorCount >= 1 && (vals.length <= 40 || anchorCount >= 3);
 
@@ -544,8 +548,9 @@ export function extractSignalsFromAst(code, filePath = '') {
           const nameProp = propMap.get('name') || propMap.get('command') || propMap.get('flags');
           if (nameProp) {
             const cmdName = foldBinaryExpression(nameProp.value) || (nameProp.value?.type === 'Literal' && typeof nameProp.value.value === 'string' ? nameProp.value.value : null);
-            if (cmdName) {
-              addFinding(CATEGORIES.HIDDEN_COMMAND, cmdName, nameProp, 'HiddenCliObject', {
+            // Reject multi-word CSS Tailwind class strings ("flex size-4...") and parser token constants ("WHITESPACE")
+            if (cmdName && /^[a-z0-9][a-z0-9_-]{1,58}$/i.test(cmdName.trim()) && !/^[A-Z0-9_]+$/.test(cmdName.trim())) {
+              addFinding(CATEGORIES.HIDDEN_COMMAND, cmdName.trim(), nameProp, 'HiddenCliObject', {
                 discoveryMethod: 'ast_cli_hidden',
                 activationStatus: ACTIVATION_STATUS.CONFIGURED,
               });

@@ -147,6 +147,12 @@ async function main() {
 
   if (command === 'run') {
     const familyArg = parseOption(args, 'family');
+    const componentsArg = parseOption(args, 'components');
+    const deferApfsDmg = args.includes('--defer-apfs-dmg');
+    const APFS_DMG_COMPONENTS = new Set(['gemini-desktop', 'codex-desktop']);
+    const explicitComponents = componentsArg
+      ? componentsArg.split(',').map((s) => s.trim()).filter(Boolean)
+      : null;
     const isForcedTest = args.includes('--test-run') || args.includes('--force') || process.env.FORCE_TEST_RUN === 'true';
 
     if (isForcedTest) {
@@ -155,8 +161,26 @@ async function main() {
       return;
     }
 
-    const changes = await handleDetect(familyArg);
+    const changes = await detectChanges(familyArg, explicitComponents ? { components: explicitComponents } : {});
     printChanges(changes);
+
+    let runnableChanges = changes;
+    if (deferApfsDmg) {
+      const deferred = changes
+        .filter((c) => APFS_DMG_COMPONENTS.has(c.componentId))
+        .map((c) => c.componentId);
+      runnableChanges = changes.filter((c) => !APFS_DMG_COMPONENTS.has(c.componentId));
+      if (process.env.GITHUB_OUTPUT) {
+        fs.appendFileSync(
+          process.env.GITHUB_OUTPUT,
+          `needs_macos=${deferred.length > 0 ? 'true' : 'false'}\nmacos_components=${deferred.join(',')}\n`,
+          'utf8',
+        );
+      }
+      if (deferred.length > 0) {
+        console.log(`\n🍎 Deferring APFS DMG component(s) to macOS runner: ${deferred.join(', ')}`);
+      }
+    }
 
     const scanConcurrency = Number.parseInt(process.env.SCAN_CONCURRENCY || '2', 10);
     let syncChain = Promise.resolve();
@@ -167,7 +191,7 @@ async function main() {
       return syncChain;
     };
 
-    await runWithConcurrency(changes, scanConcurrency, async (change) => {
+    await runWithConcurrency(runnableChanges, scanConcurrency, async (change) => {
       try {
         await handleScan(change.componentId, {
           candidate: change.candidate,

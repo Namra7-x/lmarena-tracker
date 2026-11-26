@@ -118,8 +118,13 @@ export function isValidModelIdentifier(val, options = {}) {
     return true;
   }
 
-  // Reject domain hostnames / subdomains (e.g. claude-ai.staging.ant.dev)
-  if (/\.(?:dev|com|io|org|net|ai|local|internal)$/i.test(str) || /\.staging\.|\.internal\./i.test(str)) {
+  // Reject domain hostnames / subdomains / TLDs (e.g. claude-ai.staging.ant.dev, anysphere.co)
+  if (/\.(?:dev|com|io|org|net|ai|co|local|internal)$/i.test(str) || /\.staging\.|\.internal\./i.test(str)) {
+    return false;
+  }
+
+  // Reject binary-glued mock/error fragments or lowercase-to-uppercase camel joins
+  if (/(?:chisel_mock|addrfailed|availableswe-)/i.test(str)) {
     return false;
   }
 
@@ -141,7 +146,7 @@ export function isValidModelIdentifier(val, options = {}) {
     // or a clean trailing double-tier model suffix (e.g. banana-pro-preview, orion-thinking-preview)
     const hyphenSegments = str.split('-').filter(Boolean);
     const hasDoubleTierTail = /-(?:pro|ultra|mini|nano|micro|lite|plus|turbo|flash|thinking|reasoning|vision|preview|eval|clip|tts|eap|coder|fast|high|low|max)-(?:pro|mini|lite|preview|flash|turbo|fast|high|low|max|eap|beta|alpha|latest)$/i.test(str);
-    const hasNoiseSegment = /(?:^|-)(?:concentr|millimole|aria|focusable|landmark|skel|sweep|animate|animated|markdown|access|control|vector|hidden|disabled|import|export|reply|body|top|level|per|print|screen|window)(?:-|$)/i.test(str);
+    const hasNoiseSegment = /(?:^|-)(?:concentr|millimole|aria|focusable|landmark|skel|sweep|animate|animated|markdown|access|control|vector|hidden|disabled|import|export|reply|body|top|level|per|print|screen|window|svg|code-block|canvas-code|scheduled|tasks)(?:-|$)/i.test(str);
     if (hasNoiseSegment) return false;
     if (hyphenSegments.length >= 3 && !/\d/.test(str) && !isKnownAiAnchor && !hasDoubleTierTail) {
       return false;
@@ -234,12 +239,15 @@ export function isValidModelIdentifier(val, options = {}) {
   if (/-(?:pro|base|code|agent|low|max|plus|lite|flash|preview|turbo|mini|ultra|eval|clip)$/i.test(str)) {
     const fullStem = str.slice(0, str.lastIndexOf('-')).toLowerCase();
     if (fullStem.length <= 2 && !/^o[1-9]$/i.test(fullStem)) return false;
+    const EXACT_ONLY_STEMS = new Set(['pro']);
     const NOISE_SUBSTRINGS = new Set([
       'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp',
       'tool-in', 'encryptedkeyset', 'access-control', 'hidden-content', 'millimole', 'concentr',
+      'ptypesforbid', 'unterminated', 'requiredgemini', 'scheduled-tasks',
     ]);
     if (['ajv', 'connect', 'oauth', 'mcp', 'client', 'tool-in', 'cross', 'chisel', 'stream', 'content-type', 'agent-client', 'skippingoauth', 'cessstop', 'event-streamgetmcp', 'exit', 'status', 'error', 'return', 'user', 'http', 'proxy', 'caller', 'system', 'ruby', 'file', 'data', 'temp', 'char', 'line', 'page', 'multi', 'table', 'btn', 'button', 'input', 'card', 'box',
-      'foo', 'bar', 'baz', 'jsx', 'psjsx', 'jest', 'grep', 'exec', 'fetch', 'choose', 'dapper', 'envoy', 'encryptedkeyset', 'concentr', 'millimole', 'armenian', 'cyrillic', 'hebrew', 'arabic', 'devanagari', 'latin', 'emoji', 'vector', 'animated', 'animate', 'skel', 'buffer', 'asset', 'assets', 'artifact', 'markdown', 'aria', 'focusable', 'landmark', 'access-control', 'hidden-content', 'alarm', 'arrow', 'circle', 'square', 'filled', 'outline'].some((w) => fullStem === w || fullStem.startsWith(`${w}-`) || fullStem.endsWith(`-${w}`) || (NOISE_SUBSTRINGS.has(w) && fullStem.includes(w)))) {
+      'foo', 'bar', 'baz', 'jsx', 'psjsx', 'jest', 'grep', 'exec', 'fetch', 'choose', 'dapper', 'envoy', 'encryptedkeyset', 'concentr', 'millimole', 'armenian', 'cyrillic', 'hebrew', 'arabic', 'devanagari', 'latin', 'emoji', 'vector', 'animated', 'animate', 'skel', 'buffer', 'asset', 'assets', 'artifact', 'markdown', 'aria', 'focusable', 'landmark', 'access-control', 'hidden-content', 'alarm', 'arrow', 'circle', 'square', 'filled', 'outline',
+      'comment', 'chunk', 'ata', 'rendered', 'computer', 'design', 'teamwork', 'dtrace', 'miseno', 'prefer', 'ptypesforbid', 'ral', 'unterminated', 'write', 'warp', 'additional', 'application', 'around', 'back', 'capsule', 'colossus', 'builtin', 'pro', 'requiredgemini', 'agent-local'].some((w) => fullStem === w || (!EXACT_ONLY_STEMS.has(w) && (fullStem.startsWith(`${w}-`) || fullStem.endsWith(`-${w}`))) || (NOISE_SUBSTRINGS.has(w) && fullStem.includes(w)))) {
       return false;
     }
   }
@@ -277,7 +285,7 @@ export function isValidFeatureFlag(val) {
   // Reject React hooks & standard UI DOM properties / handlers / modal helpers / UI permissions
   if (/^use(?:State|Effect|Memo|Callback|Ref|Context|Reducer|LayoutEffect|Id|Transition|DeferredValue|ImperativeHandle|DebugValue|SyncExternalStore|InsertionEffect|ActionState|Optimistic|FormStatus|EffectEvent)$/i.test(str)) return false;
   if (/^(?:show|open|close|toggle|render|handle|on)(?:Modal|Dialog|Tooltip|Popover|Menu|Drawer|Toast|Alert|Notification|Banner|Dropdown|Sidebar|Popup|Overlay|Click|Change|Submit|Focus|Blur|PrintPanels|Grouping|HeaderInput)$/i.test(str)) return false;
-  if (/^(?:allow|should|show|hide)(?:AutoTrigger|Hide|Show)?(?:Mouse|Wheel|Null|Print|Arrow|Header|Group|Focus|Blur|Hover|Click|Scroll|Key|Menu|Panel|Tab|Button|Resize|Drag|Drop|Authorization|Sso|Gate|Abbreviated)/i.test(str)) return false;
+  if (/^(?:allow|should|show|hide)(?:AutoTrigger|Hide|Show|Bare|Bun|Double|Extension|Half|Hoisting|Fetch)?(?:Mouse|Wheel|Null|Print|Arrow|Header|Group|Focus|Blur|Hover|Click|Scroll|Key|Menu|Panel|Tab|Button|Resize|Drag|Drop|Authorization|Sso|Gate|Abbreviated|Named|Runtime|Shape|Extension|Open|Probability|Version)/i.test(str)) return false;
   if (/^(?:allow|apply-all|action\d+|addKeybinding|Claude|AirlockContainer\w*)$/i.test(str)) return false;
   if (/^exp_(?:hotel|flight|car_rental|boarding_pass|restaurant|mod_[a-z0-9_]+)$/i.test(str)) return false;
   if (/^FEATURE_FLAG_NO_ORPHANS/i.test(str)) return false;
@@ -308,8 +316,11 @@ const AGENT_CODE_NOUNS = new Set([
 export function isValidAgentTool(val) {
   if (!val || typeof val !== 'string') return false;
   const str = val.trim();
-  if (str.length < 4 || str.length > 80) return false;
+  if (str.length < 4 || str.length > 55) return false;
   if (!/^[a-zA-Z_]/.test(str)) return false;
+  // Reject binary/Go struct glue where snake_case runs into UpperCamelCase (e.g. mcp_browser_...RecordingSealer)
+  if (/[a-z]_[a-z].*[a-z][A-Z]/.test(str)) return false;
+  if (/(?:idtitlecompleted|questionask_user|_mock_|addrfailed)/i.test(str)) return false;
   const lower = str.toLowerCase();
   // Filter out internal code nouns
   for (const noun of AGENT_CODE_NOUNS) {
@@ -436,8 +447,11 @@ export function isDarkUiNoise(phrase) {
   if (/^(?:welcome to the |welcome to your |try the new theme|introducing the |powered by electron|powered by chromium|powered by vite|powered by react)/i.test(trimmed)) {
     return true;
   }
-  // Reject non-English localization (e.g. German "abgeglichen"), Cookie/Privacy consent, and dev/API reference fragments
-  if (/(?:cookie policy|privacy policy|market our services|abgeglichen|eine experience|announcing its tools|backed by a preference|built on a value containing|ArrayBuffer)/i.test(trimmed)) {
+  // Reject non-English localization (e.g. German "abgeglichen"), Cookie/Privacy consent, dev/a11y logs, and lowercase fragments
+  if (/^(?:announcing|backed by|built on)\b/i.test(trimmed) || /^[a-z]/.test(trimmed)) {
+    return true;
+  }
+  if (/(?:cookie policy|privacy policy|market our services|abgeglichen|eine experience|ArrayBuffer|keyboard shortcut in spoken words|resolve to application)/i.test(trimmed)) {
     return true;
   }
   if (/[^\x20-\x7E]/.test(trimmed) && /[äöüßàâçéèêëîïôûù]/i.test(trimmed)) {
@@ -500,11 +514,25 @@ function forEachRegexMatch(pat, text, callback) {
 export function matchSignalsInText(text, filePath = '', artifactClass = 'text') {
   if (!text || typeof text !== 'string') return [];
 
+  // Skip Apple CodeSignature XML manifests, pure CSS/SCSS files, and CSS selector/rule lines
+  const lowerPath = String(filePath || '').toLowerCase();
+  if (lowerPath.includes('_codesignature/') || /\.(?:css|scss|less|svg)$/i.test(lowerPath)) {
+    return [];
+  }
+  const trimmedText = text.trim();
+  if (/^\.[a-z0-9_-]+\s*\{/i.test(trimmedText) || /^\[data-[a-z0-9_-]+\]/i.test(trimmedText) || /<\/key>\s*$/.test(trimmedText) && trimmedText.includes('_CodeSignature')) {
+    return [];
+  }
+
   const findings = [];
   const lowerText = text.toLowerCase();
 
-  // Check dormant markers with strict word boundaries to prevent 'boundary' or 'secondary' matching 'nda'
+  // Check dormant markers WITHOUT allowing hyphenated suffixes like "-preview" inside a token
+  // to self-grant dormant status (+15 pts) to arbitrary CSS classes or filenames.
   const matchedMarker = DORMANT_MARKERS.find((m) => {
+    if (m === 'preview') {
+      return /(?:^|[\s"'(\[{,;])preview(?=$|[\s"'\])},:;])/i.test(lowerText);
+    }
     const escaped = m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(`(?:^|[^a-z0-9_])${escaped}(?:$|[^a-z0-9_])`, 'i');
     return regex.test(lowerText);
@@ -574,9 +602,14 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
   for (const pat of HIDDEN_COMMAND_PATTERNS) {
     forEachRegexMatch(pat, text, (m) => {
       if (m && m[1]) {
+        const val = m[1].trim();
+        // Reject CSS Tailwind class strings, all-caps constants ("WHITESPACE"), and malformed empty-segment flags ("--admin--proxy--")
+        if (!/^[a-z0-9_-]{2,55}$/i.test(val) || /^[A-Z0-9_]+$/.test(val) || /--$|^-/.test(val.replace(/^--/, ''))) {
+          return;
+        }
         findings.push({
           category: CATEGORIES.HIDDEN_COMMAND,
-          value: m[1].trim(),
+          value: val,
           context: fullContext,
           hasDormantMarker: true,
           dormantMarker: matchedMarker || 'hidden_command',
@@ -681,6 +714,8 @@ export function matchSignalsInText(text, filePath = '', artifactClass = 'text') 
     forEachRegexMatch(pat, text, (m) => {
       if (m && m[1]) {
         const val = m[1].trim();
+        // Skip concatenated protobuf enum runs (>55 chars or multiple adjacent UPPERCASE_ENUMS)
+        if (val.length > 55 || (val.match(/[A-Z_]{8,}/g) || []).length >= 2) return;
         findings.push({
           category: CATEGORIES.CAPABILITY,
           value: val,

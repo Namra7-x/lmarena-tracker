@@ -29,12 +29,15 @@ permissions:
 
 jobs:
   track-signals:
-    name: Track Signals (macOS)
+    name: Track Signals (Ubuntu Fast + Detect)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: reverse-tracker
       cancel-in-progress: false
+    outputs:
+      needs_macos: ${{ steps.detect_run.outputs.needs_macos }}
+      macos_components: ${{ steps.detect_run.outputs.macos_components }}
 
     steps:
       - name: Checkout Code Repository
@@ -78,6 +81,7 @@ jobs:
           fi
 
       - name: Run Tracker Detection & Deep Scan
+        id: detect_run
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
           STATE_DIR: state
@@ -117,10 +121,10 @@ jobs:
             fi
           elif [ -n "$TARGET_FAMILY" ]; then
             echo "🎯 Targeted dispatch scan for family: $TARGET_FAMILY..."
-            node reverse-tracker/cli.mjs run --family=$TARGET_FAMILY
+            node reverse-tracker/cli.mjs run --family=$TARGET_FAMILY --defer-apfs-dmg
           else
             echo "⚡ Unified scan across all components..."
-            node reverse-tracker/cli.mjs run
+            node reverse-tracker/cli.mjs run --defer-apfs-dmg
           fi
 
       - name: Persist State to State Branch
@@ -159,6 +163,87 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: reports-macos
+          path: reports/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  scan-macos-dmg:
+    name: Native APFS DMG Scan (macOS hdiutil)
+    needs: track-signals
+    if: needs.track-signals.outputs.needs_macos == 'true' && needs.track-signals.outputs.macos_components != ''
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Checkout State Branch
+        uses: actions/checkout@v5
+        continue-on-error: true
+        with:
+          ref: state/all
+          path: state
+          fetch-depth: 1
+          show-progress: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: 'npm'
+
+      - name: Install Node Dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Scan Updated APFS DMG Components via hdiutil
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
+          STATE_DIR: state
+          REPORTS_DIR: reports
+          SCAN_CONCURRENCY: "1"
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOKEN_OPENAI: ${{ secrets.TELEGRAM_TOKEN_OPENAI || secrets.TELEGRAM_TOKEN_CHATGPT }}
+          TELEGRAM_TOKEN_GOOGLE: ${{ secrets.TELEGRAM_TOKEN_GOOGLE || secrets.TELEGRAM_TOKEN_GEMINI }}
+          TELEGRAM_CHAT_ID_OPENAI: ${{ secrets.TELEGRAM_CHAT_ID_OPENAI || secrets.TELEGRAM_CHAT_ID_CHATGPT || secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_CHAT_ID_GOOGLE: ${{ secrets.TELEGRAM_CHAT_ID_GOOGLE || secrets.TELEGRAM_CHAT_ID_GEMINI || secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOPIC_OPENAI: ${{ secrets.TELEGRAM_TOPIC_OPENAI || secrets.TELEGRAM_TOPIC_CHATGPT }}
+          TELEGRAM_TOPIC_GOOGLE: ${{ secrets.TELEGRAM_TOPIC_GOOGLE || secrets.TELEGRAM_TOPIC_GEMINI }}
+        run: |
+          echo "🍎 Native macOS hdiutil scan for: ${{ needs.track-signals.outputs.macos_components }}"
+          node reverse-tracker/cli.mjs run --components=${{ needs.track-signals.outputs.macos_components }}
+
+      - name: Persist State to State Branch
+        if: always()
+        run: |
+          if [ ! -d "state" ] || [ -z "$(ls -A state/*.json state/*.json.gz 2>/dev/null)" ]; then
+            exit 0
+          fi
+          cd state
+          git config user.name "early-signal-tracker-bot"
+          git config user.email "actions@github.com"
+          git add *.json *.json.gz 2>/dev/null || git add *.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update native macOS APFS state [skip ci]"
+            for attempt in 1 2 3; do
+              if git push origin HEAD:refs/heads/state/all; then
+                break
+              else
+                git pull --rebase origin state/all || true
+                sleep 2
+              fi
+            done
+          fi
+
+      - name: Upload macOS DMG Evidence Artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: reports-macos-apfs
           path: reports/
           if-no-files-found: ignore
           retention-days: 14

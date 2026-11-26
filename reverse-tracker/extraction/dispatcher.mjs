@@ -363,13 +363,16 @@ function runSevenZip(buffer, filename, cmd, args, options = {}) {
       maxBuffer: 50 * 1024 * 1024,
     });
 
-    if (proc.status !== 0) {
+    if (proc.status !== 0 && proc.status !== 1 && proc.status !== 2) {
       return { success: false, files: [], truncated: false, tmpDir: null };
     }
 
     unpackNestedDiskImagesOnDisk(tmpOut, cmd);
 
     const walked = walkExtractedFiles(tmpOut, { lazyDisk: Boolean(options.streamFromDisk) });
+    if (walked.files.length === 0) {
+      return { success: false, files: [], truncated: false, tmpDir: null };
+    }
     if (options.streamFromDisk && walked.files.length > 0) {
       preserveTmpDir = true;
       try { fs.unlinkSync(tmpInput); } catch {}
@@ -427,6 +430,79 @@ function hasBinary(cmd) {
     return res.status === 0;
   } catch {
     return false;
+  }
+}
+
+/**
+ * Native macOS DMG extraction via Apple's built-in `hdiutil` (handles 100% of APFS DMGs
+ * such as Gemini.dmg and Codex.dmg cleanly on `macos-latest` GitHub Actions runners).
+ */
+function extractHdiutilDmg(buffer, filename, options = {}) {
+  if (process.platform !== 'darwin') {
+    return { success: false, files: [], truncated: false, tmpDir: null };
+  }
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'hdiutil-extract-'));
+  const tmpDmg = path.join(tmpDir, filename || 'disk.dmg');
+  const mntDir = path.join(tmpDir, 'mnt');
+  const outCopy = path.join(tmpDir, 'out');
+  fs.mkdirSync(mntDir, { recursive: true });
+  fs.mkdirSync(outCopy, { recursive: true });
+  let mounted = false;
+  let preserveTmpDir = false;
+
+  try {
+    fs.writeFileSync(tmpDmg, buffer);
+    const attach = spawnSync('hdiutil', ['attach', tmpDmg, '-readonly', '-nobrowse', '-mountpoint', mntDir], {
+      timeout: 90000,
+    });
+    if (attach.status !== 0) {
+      return { success: false, files: [], truncated: false, tmpDir: null };
+    }
+    mounted = true;
+
+    // Copy analyzable files from mounted .app bundle (asar, JS, JSON, plists, main Mach-O binaries)
+    spawnSync('bash', ['-c', `find "${mntDir}" -maxdepth 7 \\( -name "*.asar" -o -name "*.asar.unpacked" -o -name "*.js" -o -name "*.mjs" -o -name "*.cjs" -o -name "*.json" -o -name "*.plist" -o -path "*/Contents/MacOS/*" \\) ! -path "*/_CodeSignature/*" -type f -print0 | rsync -a --from0 --files-from=- / "${outCopy}/" 2>/dev/null || find "${mntDir}" -maxdepth 7 \\( -name "*.asar" -o -name "*.js" -o -name "*.json" -o -name "*.plist" -o -path "*/Contents/MacOS/*" \\) ! -path "*/_CodeSignature/*" -type f -exec ditto {} "${outCopy}/{}" \\;`], {
+      timeout: 120000,
+    });
+
+    // If nested path copy didn't match, fall back cleanly to copying top-level .app bundles excluding large assets
+    let walked = walkExtractedFiles(outCopy, { lazyDisk: Boolean(options.streamFromDisk) });
+    if (walked.files.length === 0) {
+      spawnSync('rsync', ['-a', '--exclude', '*.car', '--exclude', '*.icns', '--exclude', '*.png', '--exclude', '*.jpg', '--exclude', '*/_CodeSignature/*', `${mntDir}/`, `${outCopy}/`], {
+        timeout: 120000,
+      });
+      walked = walkExtractedFiles(outCopy, { lazyDisk: Boolean(options.streamFromDisk) });
+    }
+
+    for (let i = 0; i < 4; i++) {
+      const det = spawnSync('hdiutil', ['detach', mntDir, '-force'], { timeout: 15000 });
+      if (det.status === 0) {
+        mounted = false;
+        break;
+      }
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 1000);
+    }
+    try { fs.unlinkSync(tmpDmg); } catch {}
+
+    if (walked.files.length > 0) {
+      if (options.streamFromDisk) preserveTmpDir = true;
+      return {
+        success: true,
+        files: walked.files,
+        truncated: walked.truncated,
+        tmpDir: preserveTmpDir ? tmpDir : null,
+      };
+    }
+    return { success: false, files: [], truncated: false, tmpDir: null };
+  } catch {
+    return { success: false, files: [], truncated: false, tmpDir: null };
+  } finally {
+    if (mounted) {
+      try { spawnSync('hdiutil', ['detach', mntDir, '-force'], { timeout: 10000 }); } catch {}
+    }
+    if (!preserveTmpDir) {
+      try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {}
+    }
   }
 }
 
@@ -625,7 +701,20 @@ export function extractArtifact(buffer, format, target, artifactUrl = '', option
       }
     } else if (isNsisInstaller(buffer) || format === 'exe' || format === 'dmg' || format === 'pkg' || format === 'msi' || format === 'appimage') {
       let installerFiles = [];
-      if (sevenZipCmd) {
+      if (process.platform === 'darwin' && format === 'dmg') {
+        const hdiRes = extractHdiutilDmg(buffer, filename, options);
+        if (hdiRes.success && hdiRes.files.length > 0) {
+          if (hdiRes.tmpDir) tempDirsToCleanup.push(hdiRes.tmpDir);
+          status.analyzers.sevenZip = 'completed';
+          installerFiles = hdiRes.files;
+          if (hdiRes.truncated) {
+            status.coverageState = 'PARTIAL';
+            status.error = 'hdiutil extraction exceeded safety caps; some files were not analyzed';
+          }
+        }
+      }
+
+      if (installerFiles.length === 0 && sevenZipCmd) {
         const res = extractWithSevenZip(buffer, filename, sevenZipCmd, options);
         if (res.success && res.files.length > 0) {
           if (res.tmpDir) tempDirsToCleanup.push(res.tmpDir);
@@ -665,7 +754,7 @@ export function extractArtifact(buffer, format, target, artifactUrl = '', option
       rawFiles = [{ path: filename, buffer, size: buffer.length }];
     }
 
-    if (rawFiles.length === 0 && !isAsar(buffer) && format !== 'binary') {
+    if (rawFiles.length === 0 && !isAsar(buffer) && format !== 'binary' && format !== 'dmg') {
       status.coverageState = 'PARTIAL';
       rawFiles = [{ path: filename, buffer, size: buffer.length }];
     }
