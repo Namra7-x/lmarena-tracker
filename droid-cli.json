@@ -1,22 +1,22 @@
 {
   "schemaVersion": 2,
   "componentId": "droid-cli",
-  "version": "1.21.0",
+  "version": "1.21.1",
   "observedVersion": "1.21.1",
-  "scannedVersion": "1.21.0",
-  "deliveredVersion": "1.21.0",
+  "scannedVersion": "1.21.1",
+  "deliveredVersion": "1.21.1",
   "alertedVersion": "1.21.1",
-  "releaseId": "droid@1.21.0",
-  "releaseKey": "2ef1d7430e5ed63eccfa370726938186",
+  "releaseId": "droid@1.21.1",
+  "releaseKey": "19f75a11536c168b0003fbf7831f3505",
   "channel": "stable",
   "versionScheme": "semver",
-  "identityFingerprint": "ecd5a18cb24ef3b95d0efc7c3b8d11f1e961701d07b32fb3a6fa6b932785e594",
+  "identityFingerprint": "645067b0f5fdd8840afa4a568be102aa49e765c6e02325505ab56335ccd45239",
   "diagnosticFingerprint": null,
-  "scanId": "DR-20261125-002",
+  "scanId": "DR-20261126-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-25T23:40:53.311Z",
+  "lastSuccessfulScan": "2026-11-26T05:26:57.261Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastDeliveryStatus": "DELIVERED",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -28,20 +28,24 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "DR-20261126-001",
-    "version": "1.21.1",
-    "releaseKey": "19f75a11536c168b0003fbf7831f3505",
-    "status": "ALERTED",
-    "alertSent": true,
-    "alertMessageId": 684,
-    "expectedFiles": [],
-    "deliveredFiles": [],
-    "failedFiles": [],
-    "createdAt": "2026-11-26T05:26:41.116Z",
-    "updatedAt": "2026-11-26T05:26:41.116Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
+    {
+      "scanId": "DR-20261126-001",
+      "version": "1.21.1",
+      "status": "DELIVERED",
+      "coverageState": "COMPLETE",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-26T05:26:57.261Z"
+    },
     {
       "scanId": "DR-20261125-002",
       "version": "1.21.0",
@@ -205,6 +209,16 @@
   ],
   "releaseHistory": [
     {
+      "version": "1.21.1",
+      "releaseKey": "19f75a11536c168b0003fbf7831f3505",
+      "scanId": "DR-20261126-001",
+      "scannedAt": "2026-11-26T05:26:57.261Z",
+      "deliveredAt": "2026-11-26T05:26:57.261Z",
+      "artifactSha256": "d385994f375135e3a4ea6b990a2e2281a1c12b703d1b1b0beaad7093e6100b38",
+      "stringCount": 64436,
+      "urlCount": 595
+    },
+    {
       "version": "1.21.0",
       "releaseKey": "2ef1d7430e5ed63eccfa370726938186",
       "scanId": "DR-20261125-002",
@@ -278,104 +292,6 @@
   "hotSignals": [],
   "recentSignals": [
     {
-      "category": "hidden_command",
-      "value": "--experimental-stream-iter--throw-deprecation--no-",
-      "score": 30,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "hidden_command",
-      "value": "WHITESPACE",
-      "score": 30,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "experience breaking changes at any moment",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "Welcome to Bun v",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "associated-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-code",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "cpu-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
       "category": "model_id",
       "value": "dtrace-pro",
       "score": 25,
@@ -391,105 +307,7 @@
     },
     {
       "category": "model_id",
-      "value": "extended-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "fingerprintjs-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "informix-vision",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "libjpeg-turbo",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "match-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "med-plus",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "miseno-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "peer-max",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -545,77 +363,7 @@
     },
     {
       "category": "model_id",
-      "value": "regctrl-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "restrict-plus",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "sampling-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "script-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "unterminated-lite",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "used-max",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -656,95 +404,11 @@
       ]
     },
     {
-      "category": "feature_flag",
-      "value": "allowAllCaps",
+      "category": "hidden_command",
+      "value": "WHITESPACE",
       "score": 15,
       "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowArray",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowAsImport",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowAsStatement",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowAsStatementnoVoidExpected",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowAsThisParameter",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowAtRootLevel",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
+      "activationStatus": "CONFIGURED",
       "diffStatus": "PERSISTENT",
       "filePath": "droid",
       "discoveryMethod": null,
@@ -756,34 +420,6 @@
     {
       "category": "feature_flag",
       "value": "allowBareNamedParameters",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowBatchAssign",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowBoolean",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -811,132 +447,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowCall",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowComputed",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowConstructorFlags",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowConstructorOnly",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDeclarations",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDefaultCaseForExhaustiveSwitch",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDefinitionsallowFootnoteDefinitionsu",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDestructuredState",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDestructuring",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowDoubleShape",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -951,147 +461,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowElseIf",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowEmptyCatch",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowErrorBoundary",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowEscape",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowExportNames",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowExpressions",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowExpressionStatement",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowExpressionValues",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowExtension",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowFinally",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowFunctions",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1133,217 +503,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowImplicitThe",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowImportingTsExtensions",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowIndexSignaturePropertyAccess",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowIndirect",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowInParentheses",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowInterfaces",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowInterfacesoptionnoEmptyObjectT",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowLineSeparatedGroups",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowLiteralToggle",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowLoop",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowNamedExports",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowNamedFunctions",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowNonSPTagging",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowNumberAndString",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowObjectPatternsAsParameters",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowOptionalChaining",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1371,203 +531,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowPrimitiveModules",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowReferrer",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowRegexCharacters",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowRegExp",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowRethrowing",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowReturnAny",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowSeparatedGroups",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowSeparateTypeImports",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowShortCircuit",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowSimpleOperations",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowSingleElementEquality",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowSingleExtends",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowSingleExtendsiu",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowTransparency",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowUnboundThispreferArrowCallbackUnexpected",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1595,20 +559,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowUnresolved",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowUnrestrictedAccess",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1623,35 +573,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowUnsafeDynamicCyclicDependency",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowUnsupportedTiers",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowVue3Compat",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1833,20 +755,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableConnectProtocolSETTINGS",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableControlFlowProfiler",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1932,20 +840,6 @@
     {
       "category": "feature_flag",
       "value": "enableExecutableAllocationFuzz",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableFixer",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -2113,20 +1007,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableRestrictedOptions",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableSamplingProfiler",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2170,20 +1050,6 @@
     {
       "category": "feature_flag",
       "value": "enableTailCalls",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableTransparentWorkspacesnpmScopesrewrote",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -2645,63 +1511,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "shouldBreak",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "shouldGenerate",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "shouldInvokeNativeGetters",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "shouldNegate",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "shouldNotHaveTypeCheck",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3234,20 +2044,6 @@
     {
       "category": "feature_flag",
       "value": "useCSSModuleScripts",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useDefCost",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3849,48 +2645,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "useKeyedState",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useKind",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useKindFor",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "useLazyCatchLiveness",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4046,20 +2800,6 @@
     {
       "category": "feature_flag",
       "value": "useMachForExceptions",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useMemothisRefsDeprecatedUsing",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -5053,20 +3793,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "useWindowVirtualizer",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "useZombieMode",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -5809,20 +4535,6 @@
     },
     {
       "category": "env_var",
-      "value": "GITHUB_ACCESS_TOKEN",
-      "score": 12,
-      "tier": "HIDDEN",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
       "value": "HPE_INTERNAL",
       "score": 12,
       "tier": "HIDDEN",
@@ -5991,48 +4703,6 @@
     },
     {
       "category": "env_var",
-      "value": "NAPI_EXPERIMENTAL",
-      "score": 12,
-      "tier": "HIDDEN",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "NAPI_VERSION_EXPERIMENTAL",
-      "score": 12,
-      "tier": "HIDDEN",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "NEW_TOKEN",
-      "score": 12,
-      "tier": "HIDDEN",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "droid",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
       "value": "NO_PUBLIC_KEY",
       "score": 12,
       "tier": "HIDDEN",
@@ -6170,39 +4840,33 @@
       "platforms": [
         "darwin"
       ]
+    },
+    {
+      "category": "ui_string",
+      "value": "Welcome to Bun v",
+      "score": 12,
+      "tier": "HIDDEN",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "droid",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
     }
   ],
   "historicalSeenHashes": [],
   "historicalSeenUrls": [],
-  "stringBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "stringHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
+  "stringBaseline": null,
+  "stringHistory": null,
+  "urlBaseline": null,
+  "urlHistory": null,
   "lastCoverageGaps": [],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 17149,
-    "peakMemoryMb": 479
+    "executionTimeMs": 10921,
+    "peakMemoryMb": 349
   },
   "knownSignals": {}
 }
