@@ -1424,6 +1424,15 @@
   ],
   "azureFoundryModels": [
     {
+      "name": "zai-org--glm-4.5",
+      "version": "5",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-26T12:32:18.9499174+00:00",
+      "displayName": "GLM-4.5",
+      "registry": "azureml"
+    },
+    {
       "name": "microsoft-Phi-4-mini-instruct",
       "version": "3",
       "publisher": "Unknown",
@@ -1863,20 +1872,11 @@
       "createdTime": "2026-11-12T14:19:41.2506016+00:00",
       "displayName": "OTel-2.0-LLM-31B-IT",
       "registry": "azureml"
-    },
-    {
-      "name": "qwen--qwen3-30b-a3b-instruct-2507",
-      "version": "5",
-      "publisher": "Hugging Face",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-12T14:00:13.6099318+00:00",
-      "displayName": "Qwen3-30B-A3B-Instruct-2507",
-      "registry": "azureml"
     }
   ],
   "awsBedrockMaster": {
-    "version": "20261123164356",
-    "publicationDate": "2026-11-23T16:43:56Z",
+    "version": "20261125184041",
+    "publicationDate": "2026-11-25T18:40:41Z",
     "products": [
       {
         "sku": "6KAYESKC9RAQVWNZ",
@@ -103320,7 +103320,7 @@
     "gemini-robotics"
   ],
   "awsOffersIndex": {
-    "publicationDate": "2026-11-25T06:22:09Z",
+    "publicationDate": "2026-11-26T05:42:26Z",
     "offerCodes": [
       "A4B",
       "ACM",
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-25T11:39:12.707Z"
+  "lastScanAt": "2026-11-26T14:17:20.138Z"
 }
