@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "antigravity-cli",
   "version": "1.5.17",
-  "observedVersion": "1.5.17",
+  "observedVersion": "1.5.18",
   "scannedVersion": "1.5.17",
   "deliveredVersion": "1.5.17",
-  "alertedVersion": "1.5.17",
+  "alertedVersion": "1.5.18",
   "releaseId": "antigravity-cli@1.5.17",
   "releaseKey": "c6143e144aaf0fefe07df2b01c48344e",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-25T07:24:06.255Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "DELIVERED",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "AC-20261126-001",
+    "version": "1.5.18",
+    "releaseKey": "d5d044ef9e86e3f513104028ff96c110",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 968,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-26T05:52:42.564Z",
+    "updatedAt": "2026-11-26T05:52:42.564Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "AC-20261125-001",
