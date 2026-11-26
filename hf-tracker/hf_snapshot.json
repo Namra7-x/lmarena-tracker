@@ -15466,21 +15466,21 @@
       },
       "microsoft/Dayhoff-170M-UR90-HL-16000": {
         "createdAt": "2026-04-02T01:39:12.000Z",
-        "lastModified": "2026-04-02T01:39:21.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "microsoft/Dayhoff-170M-UR90-HL-14000": {
         "createdAt": "2026-04-02T01:38:40.000Z",
-        "lastModified": "2026-04-02T01:38:51.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "microsoft/Dayhoff-170M-UR90-HL-12000": {
         "createdAt": "2026-04-02T01:38:17.000Z",
-        "lastModified": "2026-04-02T01:38:27.000Z",
+        "lastModified": null,
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -18389,6 +18389,27 @@
         "gated": false,
         "pipeline_tag": null,
         "numParameters": null
+      },
+      "microsoft/CogACT2-RoboDojo": {
+        "createdAt": "2026-11-26T15:53:40.000Z",
+        "lastModified": "2026-11-26T19:04:59.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
+      },
+      "microsoft/CogACT2-RoboTwin-CleanRandom": {
+        "createdAt": "2026-11-26T15:53:39.000Z",
+        "lastModified": "2026-11-26T18:46:18.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
+      },
+      "microsoft/CogACT2-RoboTwin-Clean": {
+        "createdAt": "2026-11-26T15:53:38.000Z",
+        "lastModified": "2026-11-26T18:06:55.000Z",
+        "gated": false,
+        "pipeline_tag": null,
+        "numParameters": null
       }
     },
     "spaces": {
@@ -18960,9 +18981,12 @@
       "microsoft/cogact2-6b086070b24a06819d6cde43": {
         "title": "CogACT2",
         "lastUpdated": "2026-11-26T16:39:35.967Z",
-        "itemCount": 1,
+        "itemCount": 4,
         "itemIds": [
-          "microsoft/CogACT2-LIBERO"
+          "microsoft/CogACT2-LIBERO",
+          "microsoft/CogACT2-RoboTwin-Clean",
+          "microsoft/CogACT2-RoboTwin-CleanRandom",
+          "microsoft/CogACT2-RoboDojo"
         ]
       }
     }
