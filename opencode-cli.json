@@ -1,55 +1,51 @@
 {
   "schemaVersion": 2,
   "componentId": "opencode-cli",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "observedVersion": "2.4.2",
   "scannedVersion": "2.4.2",
-  "deliveredVersion": "2.4.1",
+  "deliveredVersion": "2.4.2",
   "alertedVersion": "2.4.2",
-  "releaseId": "@opencode/cli@2.4.1",
-  "releaseKey": "7d67c47e06bf9668b7a3c3cafd99926b",
+  "releaseId": "@opencode/cli@2.4.2",
+  "releaseKey": "bc04c6df60e55553a42aead7f630135b",
   "channel": "v2",
   "versionScheme": "semver",
-  "identityFingerprint": "2abe3fd79aa53f8ff72f797042b6796b83df6ae043f95a82e9739d81b49e5eeb",
+  "identityFingerprint": "b289d423cca1302f83a7fc5b95b5c4f97e480c55aa5db53561e0dd26b604ed76",
   "diagnosticFingerprint": null,
   "scanId": "OC-20261126-001",
-  "coverageState": "FAILED",
-  "lastSuccessfulScan": "2026-11-23T15:57:15.899Z",
-  "lastFailureTime": "2026-11-26T00:50:21.667Z",
-  "lastDeliveryStatus": "PARTIAL",
+  "coverageState": "COMPLETE",
+  "lastSuccessfulScan": "2026-11-26T00:51:28.816Z",
+  "lastFailureTime": null,
+  "lastDeliveryStatus": "DELIVERED",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
-    "acornAst": "skipped",
+    "acornAst": "completed",
     "goReSym": "skipped",
     "sourceMap": "skipped",
     "sevenZip": "skipped",
     "asar": "skipped",
-    "tar": "skipped",
+    "tar": "completed",
     "zip": "skipped",
-    "multiEncodingScanner": "skipped"
+    "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "OC-20261126-001",
-    "version": "2.4.2",
-    "releaseKey": "bc04c6df60e55553a42aead7f630135b",
-    "status": "PARTIAL",
-    "alertSent": true,
-    "alertMessageId": 676,
-    "expectedFiles": [
-      "leaks.txt",
-      "diff.txt",
-      "strings.txt",
-      "urls.txt",
-      "models-and-pricing.txt",
-      "scan-summary.txt"
-    ],
-    "deliveredFiles": [],
-    "failedFiles": [],
-    "coverageState": "FAILED",
-    "createdAt": "2026-11-26T00:46:35.320Z",
-    "updatedAt": "2026-11-26T00:50:21.667Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
+    {
+      "scanId": "OC-20261126-001",
+      "version": "2.4.2",
+      "status": "DELIVERED",
+      "coverageState": "COMPLETE",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-26T00:51:28.816Z"
+    },
     {
       "scanId": "OC-20261126-001",
       "version": "2.4.2",
@@ -146,6 +142,16 @@
   ],
   "releaseHistory": [
     {
+      "version": "2.4.2",
+      "releaseKey": "bc04c6df60e55553a42aead7f630135b",
+      "scanId": "OC-20261126-001",
+      "scannedAt": "2026-11-26T00:51:28.816Z",
+      "deliveredAt": "2026-11-26T00:51:28.816Z",
+      "artifactSha256": "96d713b457175dd35c6e3b7e879354859419d368d4cc835b09663056d5b48350",
+      "stringCount": 161,
+      "urlCount": 0
+    },
+    {
       "version": "2.4.1",
       "releaseKey": "7d67c47e06bf9668b7a3c3cafd99926b",
       "scanId": "OC-20261123-002",
@@ -164,13 +170,11 @@
   "stringHistory": null,
   "urlBaseline": null,
   "urlHistory": null,
-  "lastCoverageGaps": [
-    "all: Failed to download https://registry.npmjs.org/@opencode/cli/-/cli-2.4.2.tgz: HTTP 404 transient npm CDN error downloading https://registry.npmjs.org/@opencode/cli/-/cli-2.4.2.tgz"
-  ],
+  "lastCoverageGaps": [],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 3820,
-    "peakMemoryMb": 263
+    "executionTimeMs": 192,
+    "peakMemoryMb": 265
   },
   "knownSignals": {}
 }
