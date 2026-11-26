@@ -3,7 +3,7 @@
   "componentId": "gemini-desktop",
   "version": "build-20261125-181016",
   "observedVersion": "build-20261126-050405",
-  "scannedVersion": "build-20261125-181016",
+  "scannedVersion": "build-20261126-050405",
   "deliveredVersion": "build-20261125-181016",
   "alertedVersion": "build-20261126-050405",
   "releaseId": "gemini-desktop-build-20261125-181016",
@@ -11,12 +11,12 @@
   "channel": "stable",
   "versionScheme": "build",
   "identityFingerprint": "daaf3944e1128fd4a3567ec2a662cdf066faa4fa37985cadf4f95b6dc5ca1d18",
-  "diagnosticFingerprint": "979db10b9ab174a1b112cdae8b9109ffa6cb2d3ef47e0dbb09639af21d18e163",
-  "scanId": "GD-20261125-003",
+  "diagnosticFingerprint": null,
+  "scanId": "GD-20261126-001",
   "coverageState": "PARTIAL",
   "lastSuccessfulScan": "2026-11-19T06:35:49.479Z",
-  "lastFailureTime": "2026-11-25T18:15:19.337Z",
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastFailureTime": "2026-11-26T05:07:01.963Z",
+  "lastDeliveryStatus": "PARTIAL",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -32,16 +32,47 @@
     "scanId": "GD-20261126-001",
     "version": "build-20261126-050405",
     "releaseKey": "c0f7bac67635d747c307817496f32517",
-    "status": "ALERTED",
+    "status": "PARTIAL",
     "alertSent": true,
     "alertMessageId": 953,
-    "expectedFiles": [],
-    "deliveredFiles": [],
+    "expectedFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
+    "deliveredFiles": [
+      "leaks.txt",
+      "diff.txt",
+      "strings.txt.gz",
+      "urls.txt",
+      "models-and-pricing.txt",
+      "scan-summary.txt"
+    ],
     "failedFiles": [],
-    "createdAt": "2026-11-26T05:04:42.962Z",
-    "updatedAt": "2026-11-26T05:04:42.962Z"
+    "coverageState": "PARTIAL",
+    "createdAt": "2026-11-26T05:07:01.963Z",
+    "updatedAt": "2026-11-26T05:07:01.963Z"
   },
   "deliveryLedger": [
+    {
+      "scanId": "GD-20261126-001",
+      "version": "build-20261126-050405",
+      "status": "PARTIAL",
+      "coverageState": "PARTIAL",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt.gz",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-26T05:07:01.963Z"
+    },
     {
       "scanId": "GD-20261125-003",
       "version": "build-20261125-181016",
@@ -8607,37 +8638,17 @@
   ],
   "historicalSeenHashes": [],
   "historicalSeenUrls": [],
-  "stringBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "stringHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
+  "stringBaseline": null,
+  "stringHistory": null,
+  "urlBaseline": null,
+  "urlHistory": null,
   "lastCoverageGaps": [
     "darwin-arm64: extraction partial (DMG extraction failed)"
   ],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 110396,
-    "peakMemoryMb": 1311
+    "executionTimeMs": 123029,
+    "peakMemoryMb": 1339
   },
   "knownSignals": {}
 }
