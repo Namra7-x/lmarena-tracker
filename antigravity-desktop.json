@@ -1,22 +1,22 @@
 {
   "schemaVersion": 2,
   "componentId": "antigravity-desktop",
-  "version": "2.35.2",
+  "version": "2.36.0",
   "observedVersion": "2.36.0",
-  "scannedVersion": "2.35.2",
-  "deliveredVersion": "2.35.2",
+  "scannedVersion": "2.36.0",
+  "deliveredVersion": "2.36.0",
   "alertedVersion": "2.36.0",
-  "releaseId": "antigravity-desktop@2.35.2-4585983447007232",
-  "releaseKey": "f56b858687b384d3fe705ae9e8e70aa7",
+  "releaseId": "antigravity-desktop@2.36.0-5596661662220288",
+  "releaseKey": "df14769865d2ba7da253f80965e8a745",
   "channel": "stable",
   "versionScheme": "semver",
-  "identityFingerprint": "669f41d8b3a07d77cd21b3693d233276f79c72d271af441d9680a8afd48a51a2",
+  "identityFingerprint": "3fcc262d0ca6738d404fd4b307364b0d3479d8d0bbf2d010ef128aee78e0af05",
   "diagnosticFingerprint": null,
-  "scanId": "AD-20261125-001",
+  "scanId": "AD-20261127-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-25T19:00:11.125Z",
+  "lastSuccessfulScan": "2026-11-27T16:55:02.639Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastDeliveryStatus": "DELIVERED",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "completed",
@@ -28,20 +28,24 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "AD-20261127-001",
-    "version": "2.36.0",
-    "releaseKey": "df14769865d2ba7da253f80965e8a745",
-    "status": "ALERTED",
-    "alertSent": true,
-    "alertMessageId": 976,
-    "expectedFiles": [],
-    "deliveredFiles": [],
-    "failedFiles": [],
-    "createdAt": "2026-11-27T16:54:37.153Z",
-    "updatedAt": "2026-11-27T16:54:37.153Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
+    {
+      "scanId": "AD-20261127-001",
+      "version": "2.36.0",
+      "status": "DELIVERED",
+      "coverageState": "COMPLETE",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-27T16:55:02.639Z"
+    },
     {
       "scanId": "AD-20261125-001",
       "version": "2.35.2",
@@ -125,6 +129,16 @@
   ],
   "releaseHistory": [
     {
+      "version": "2.36.0",
+      "releaseKey": "df14769865d2ba7da253f80965e8a745",
+      "scanId": "AD-20261127-001",
+      "scannedAt": "2026-11-27T16:55:02.639Z",
+      "deliveredAt": "2026-11-27T16:55:02.639Z",
+      "artifactSha256": "8262916893cc3eccae4e739b68d77921227d4918128500cb390a61151d9059be",
+      "stringCount": 324438,
+      "urlCount": 1181
+    },
+    {
       "version": "2.35.2",
       "releaseKey": "f56b858687b384d3fe705ae9e8e70aa7",
       "scanId": "AD-20261125-001",
@@ -175,8 +189,51 @@
       "urlCount": 1115
     }
   ],
-  "hotSignals": [],
+  "hotSignals": [
+    {
+      "category": "model_id",
+      "value": "gemini-4-hydrogenpa_ai_po",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    }
+  ],
   "recentSignals": [
+    {
+      "category": "model_id",
+      "value": "gemini-3.8-flash-high",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "CHANGED",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "gemini-4-hydrogenpa_ai_po",
+      "score": 50,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": true,
+      "platforms": [
+        "darwin"
+      ]
+    },
     {
       "category": "model_id",
       "value": "claude-sonnet-5-5",
@@ -185,20 +242,6 @@
       "activationStatus": "CONFIGURED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "computer-preview",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/computer/previewIpc.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -221,25 +264,11 @@
     },
     {
       "category": "feature_flag",
-      "value": "shouldFetchVersion",
+      "value": "canUseCachedMeasurementendOfLineIndex",
       "score": 40,
       "tier": "EARLY SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../../src/providers/GitHubProvider.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_computer_remote_host",
-      "score": 30,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
@@ -249,11 +278,123 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_computer_remote_view",
-      "score": 30,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
+      "value": "dark_uri",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_code_signingnative_lib_placeholdersrebase",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_dir",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_gdbjit_default_",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_proctor_read_budget",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enable_proctor_read_budgetB",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableProctorReadBudget",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "rollout_start_mode",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "rolloutStartMode",
+      "score": 40,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
@@ -263,11 +404,11 @@
     },
     {
       "category": "agent_mode",
-      "value": "mcp_browser_scale_coordinatesRecordingSealer",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
+      "value": "AGENT_PEER_COORDINATION_POLICY_OFF",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
@@ -277,11 +418,473 @@
     },
     {
       "category": "agent_mode",
-      "value": "tool_hook_notices",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
+      "value": "AGENT_PEER_COORDINATION_POLICY_READ_ONLY",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_PEER_COORDINATION_POLICY_READ_WRITE",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_PEER_COORDINATION_POLICY_UNSPECIFIED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_CONVERSATIONS",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_COORDINATION",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_FILTER_ALL",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_FILTER_CLOSED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_FILTER_OPEN",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_FILTER_UNSPECIFIED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_SESSIONS",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_SORT_NEWEST",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_SORT_UNSPECIFIED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_REMOTE_SESSION_TOPIC_UNSPECIFIED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_SCOPE_PERSONAL",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_SCOPE_SHARED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_SCOPE_UNSPECIFIED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_SIDECAR_ENVIRONMENT_STATE_ACTIVE",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_SIDECAR_ENVIRONMENT_STATE_SLEEPING",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_SIDECAR_ENVIRONMENT_STATE_STARTING",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_SIDECAR_ENVIRONMENT_STATE_UNSPECIFIED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_STEP",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_TRUST_CATEGORY_UNSPECIFIED",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_trust_level",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "connector_surface",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_chrome_devtools_take_memory_snapshot",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "mcp_drifts",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "MCP_STEPS",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "tool_calls_allowed",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "capability",
+      "value": "web_search",
+      "score": 39,
+      "tier": "EARLY SIGNAL",
       "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
+      "diffStatus": "CHANGED",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "0GOOGLE_INTERNAL",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "USER_CREDENTIAL_KIND_HTTP_SECRET",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "env_var",
+      "value": "USER_CREDENTIAL_KIND_RAW_SECRET",
+      "score": 37,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "opus-5-5-maxclaude-opus-5-5-lowgemini",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "model_id",
+      "value": "sonnet-5-5-mediumgemini",
+      "score": 34,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
@@ -304,218 +907,8 @@
       ]
     },
     {
-      "category": "capability",
-      "value": "sweb_search",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "AGY_DESKTOP_PREVIEW",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/computer/index.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "announcing completion",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "backed by concrete test output on the final diff",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "backed by sidecars",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "backed by test output you have",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "built on this split yet",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "built on VS Code",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "Experience Edition",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "Experience must not be empty.R",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "experience routed to a single keystroke",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "introducing a completely new proof plan. Execute a",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "introducing new mathematical claims",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "Welcome to Antigravity",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/ideInstall/wizardHtml.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
       "category": "model_id",
-      "value": "browser-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/browserEngine/browserEngine.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "bypass-pro",
+      "value": "billing-pro",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -529,7 +922,7 @@
     },
     {
       "category": "model_id",
-      "value": "canceledgemini-3.1-ultra",
+      "value": "claude-sonnet-4",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -543,35 +936,7 @@
     },
     {
       "category": "model_id",
-      "value": "change-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-github",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-reviewer",
+      "value": "claude-sonnet-4-5",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -599,82 +964,12 @@
     },
     {
       "category": "model_id",
-      "value": "gemini-3.1-pro-previewclaude",
+      "value": "gemini-4-neon-low",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gemini-3.5-flash-liteinvalid",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gemini-3.8-flash-high",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gemini-edit-images",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gemini-enterprise-agent-platform",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "grok-free.app",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/guestCrossSiteCredentials.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -684,90 +979,6 @@
     {
       "category": "model_id",
       "value": "haiku-4-5",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "hub-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/preload.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "human-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/webviewPromptPreload.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "imagen-models",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "main-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/browserStream/browserViewerHandler.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "msdos-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/webviewDownloadRouting.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "non-lite",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -795,48 +1006,6 @@
     },
     {
       "category": "model_id",
-      "value": "opus-5-5-mediumclaude-sonnet-5-5-highgemini",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "point-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/preload.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "privacy-micro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/ipcHandlers.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "providergemini-3-pro-previewtext",
       "score": 25,
       "tier": "WEAK SIGNAL",
@@ -851,26 +1020,12 @@
     },
     {
       "category": "model_id",
-      "value": "retry-max",
+      "value": "quota-pro",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "same-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/guestFramePolicy.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -907,234 +1062,10 @@
     },
     {
       "category": "model_id",
-      "value": "ssh-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/remote/sshPrompts.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "txtgemini-3-flashsubconn",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
       "value": "unix-pro",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "with-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/default_app.asar/index.html",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDowngrade",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/AppUpdater.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowPrerelease",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/AppUpdater.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "isUpdaterActive",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/AppImageUpdater.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "isUpdateSupported",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/AppUpdater.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "shouldRedirect",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useMultipleRangeRequest",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/publishOptions.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "AWS_SECRET_ACCESS_KEY",
-      "score": 22,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/publishOptions.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "BITBUCKET_TOKEN",
-      "score": 22,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/publishOptions.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "DO_SECRET_KEY",
-      "score": 22,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/publishOptions.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "GITHUB_TOKEN",
-      "score": 22,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/providerFactory.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "GITLAB_TOKEN",
-      "score": 22,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/publishOptions.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "env_var",
-      "value": "KEYGEN_TOKEN",
-      "score": 22,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "../src/publishOptions.ts",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "pricing",
-      "value": "Context cost per worker = index (~10",
-      "score": 18,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
       "discoveryMethod": null,
@@ -1180,20 +1111,6 @@
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/app.asar/node_modules/electron-updater/out/providerFactory.js",
       "discoveryMethod": "ast_switch_case_model",
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "floating-pro",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/node_modules/electron-updater/out/AppImageUpdater.js",
-      "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
         "darwin"
@@ -1285,34 +1202,6 @@
     },
     {
       "category": "experiment",
-      "value": "EXP_MODEL_TRAINING_FOR_PRODUCTION",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXP_TABLE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/qrEncoder.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
       "value": "EXPERIMENT_ANALYSIS",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1342,34 +1231,6 @@
     {
       "category": "experiment",
       "value": "experiment_config",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "experiment_configs",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "experiment_debug_string_fingerprint",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1495,20 +1356,6 @@
     },
     {
       "category": "experiment",
-      "value": "experiment_server",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
       "value": "EXPERIMENT_SOURCE_API_SERVER",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1524,20 +1371,6 @@
     {
       "category": "experiment",
       "value": "EXPERIMENT_SOURCE_EXTENSION",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_SOURCE_LANGUAGE_SERVER",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1677,20 +1510,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowAgentAccessNonWorkspaceFiles",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowAlias",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1719,20 +1538,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowAnyScope",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowAppDeployments",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1748,20 +1553,6 @@
     {
       "category": "feature_flag",
       "value": "allowAttribution",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowAuthKeyInBearer",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1817,34 +1608,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowBackendBatchRequestWithoutContentId",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowBatchInnerPathWithoutLeadingSlash",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowBatchPathOverride",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1887,49 +1650,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowBrokenJavaUnsignedDeserializationBehavior",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowBrowserExperimentalFeatures",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowBrowserUse",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowCascadeAccessGitignoreFiles",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1971,76 +1692,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowCrash",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/wcvIpcHandlers.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowCredentialIds",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/cablev2.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDetails",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/guestNetworkController.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDiscoverableUserIpSystemParameter",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowDomain",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowDomainsB",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2069,54 +1720,12 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowEviction",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowExperimentalMonitors",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowFile",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/wcvZOrderController.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowFileChooser",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/wcvZOrderController.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -2223,20 +1832,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowGuestCertificateForOwner",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/webviewSecurityState.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowGzipCompression",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2285,48 +1880,6 @@
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowInitialNavigation",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/webviewBrowser.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowInsecure",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/remote/bootstrapScript.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowInsecureArtifactUrls",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/remote/sshConnection.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -2433,20 +1986,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowNonOauth",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowNonproductionAccounts",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2467,20 +2006,6 @@
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowOutOfBounds",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/wcvZOrderController.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -2546,20 +2071,6 @@
     {
       "category": "feature_flag",
       "value": "allowPssExperimentalMonitors",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowSamplingObjectLevelNecessary2",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -2657,34 +2168,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowServiceAccount",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowSignIn",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/remote/sshConnection.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowStickyPremiumModels",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2714,34 +2197,6 @@
     {
       "category": "feature_flag",
       "value": "allowTeamsAppDeployments",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowTrailingIpv4",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/webviewBrowser.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowUnprefixedPath",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -2825,40 +2280,12 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowWebContentsView",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/webviewBrowser.js",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowWebsocketUpgrade",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowWebviewCertificate",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/preload.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -2924,62 +2351,6 @@
     {
       "category": "feature_flag",
       "value": "canary_version",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "dark_launch_infra_mutation_policy",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "DARK_LAUNCH_INFRASTRUCTURE_DATA_MUTATIONS",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "DARK_LAUNCH_INFRASTRUCTURE_RPC_BLOCKING",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "DARK_LAUNCH_INFRASTRUCTURE_RPC_BLOCKING_V2",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3273,20 +2644,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "ENABLE_AUTOCOMPLETE_DURING_INTELLISENSE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_AUTOMATED_MEMORIES",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -3413,20 +2770,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "ENABLE_CAIS_INTEGRATION",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_CARRAY",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -3470,20 +2813,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_COLUMN_METADATA",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_command_cascade_modeR",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3582,20 +2911,6 @@
     {
       "category": "feature_flag",
       "value": "enable_context_roleB",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_continuation",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3736,20 +3051,6 @@
     {
       "category": "feature_flag",
       "value": "enable_disassembler_",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_discovery_field_mask_paths_query_param",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -4295,20 +3596,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_inner_batch_error_fallback",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_input_detection",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4505,34 +3792,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_log_frontline_tls_protocol_negotiation",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_log_grpc_autobahn_stream_close_latency",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_log_task_info",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4548,20 +3807,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_LOGGING_LITE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_low_level_tools_instructions",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -4645,20 +3890,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_model_based_auto_executionR",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_MORE_LOGGING",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4729,20 +3960,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_notifications_for_special_events",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_notifications_for_special_eventsB",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4800,20 +4017,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_OR_DISABLE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_org_quota_for_all_consumers",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -5079,20 +4282,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_prompt_injection_detection",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_PROXY_WEB_SERVER",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -5108,20 +4297,6 @@
     {
       "category": "feature_flag",
       "value": "enable_prune",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_pruning",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -5178,20 +4353,6 @@
     {
       "category": "feature_flag",
       "value": "enable_quota_user_override",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_quota_user_override_without_ip_fallback",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -5289,20 +4450,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_reversibility_adjudication",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_reversibility_adjudicationB",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -5360,20 +4507,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_RTREE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "ENABLE_RUN_COMMAND",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -5527,54 +4660,12 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_separate_recognition_per_channel",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_SESSION_STORAGE",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "ENABLE_SHELL_COMMAND_TRAJECTORY",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_sidecars",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/languageServer.js",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
@@ -5723,20 +4814,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_stdin_streaming",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_strict_bad_url_check",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -5752,20 +4829,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_SUGGESTED_RESPONSES",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "ENABLE_SUPERCOMPLETE",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6213,20 +5276,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_write_observations_computation",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_write_observations_computationB",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6297,20 +5346,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableAgentA",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableAiCredits",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6354,20 +5389,6 @@
     {
       "category": "feature_flag",
       "value": "enableAutomaticPunctuation",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableBigqueryTool",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6606,20 +5627,6 @@
     {
       "category": "feature_flag",
       "value": "enableDirectPathForGrpc",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableDiscoveryFieldMaskPathsQueryParam",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6885,20 +5892,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableIndividualUserAnalytics",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableInnerBatchErrorFallback",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6928,20 +5921,6 @@
     {
       "category": "feature_flag",
       "value": "enableIrreversibleVetting",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableJsonFixup",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6997,63 +5976,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableLatencyTelemetry",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableLazyLoad",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableLogErrorOnly",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableLogFrontlineTlsProtocolNegotiation",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableLogGrpcAutobahnStreamCloseLatency",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -7165,50 +6088,978 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableNetwork",
+      "value": "enableNetworkTracking",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
-      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/guestNetworkController.js",
+      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/webviewSecurityState.js",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableNotificationsForSpecialEvents",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableOpenDocument",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableOrgQuotaForAllConsumers",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePageDomain",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/app.asar/dist/guestFileChooserController.js",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePartialResponseJ",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePeerDelegation",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePerCellRateLimiting",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePerConsumerSli",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePermissionedGithub",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePerRequestStatus",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePersistentMode",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePersonal",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePersonalCustomizations",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePluginAuth",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableProgrammaticClientTokenJ",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableProjectBlacklistRedirection",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableProjectOverrides",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePromptEnhancement",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePromptInjectionDetection",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enablePrune",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableQuotaUserOverride",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableRead",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableRefreshTool",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableResponseGrounding",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableResponseRejection",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableReversibilityAdjudication",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableRewrites",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableRoundRobin",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSampling",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSaving",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableScratchpad",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSearchInFileTool",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSeparateRecognitionPerChannel",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSlomatic",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSmallestRepoFirst",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSoundsForSpecialEvents",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSpeakerDiarization",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSpokenEmojis",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableSpokenPunctuation",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableStrictBadUrlCheck",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTabSounds",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTasks",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTeamworkSubagent",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTerminalCompletion",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTerminalSandbox",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
       "platforms": [
         "darwin"
       ]
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableThinking",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTimeoutNotification",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableToolSummary",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableToolTimestamp",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableTopLevelMethods",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableU13Experience",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableU18Experience",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableUrlVetting",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableUserApprovalCheck",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableUserQuestions",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableVoiceActivityEvents",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableWidget",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableWordConfidence",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableWordTimeOffsets",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableWrite",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableWriteObservationsComputation",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "enableZeroDataRetention",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentConfig",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentConfigB",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentConfigJ",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentFeaturesJson",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentFlags",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentGroup",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentJson",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentName",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentTags",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentVariantJson",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "experimentVariantsJson",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "featureAttributions",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "featureAttributionsSchemaUri",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "featureControls",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "featureNoiseSigma",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "featureSelectionPreference",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "feature_flag",
+      "value": "featureSupport",
+      "score": 15,
+      "tier": "WEAK SIGNAL",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "Antigravity.app/Contents/Resources/bin/language_server",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
     }
   ],
   "historicalSeenHashes": [],
   "historicalSeenUrls": [],
-  "stringBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "stringHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
+  "stringBaseline": null,
+  "stringHistory": null,
+  "urlBaseline": null,
+  "urlHistory": null,
   "lastCoverageGaps": [],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 31442,
-    "peakMemoryMb": 1219
+    "executionTimeMs": 19827,
+    "peakMemoryMb": 970
   },
   "knownSignals": {}
 }
