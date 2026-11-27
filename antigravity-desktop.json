@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "antigravity-desktop",
   "version": "2.35.2",
-  "observedVersion": "2.35.2",
+  "observedVersion": "2.36.0",
   "scannedVersion": "2.35.2",
   "deliveredVersion": "2.35.2",
-  "alertedVersion": "2.35.2",
+  "alertedVersion": "2.36.0",
   "releaseId": "antigravity-desktop@2.35.2-4585983447007232",
   "releaseKey": "f56b858687b384d3fe705ae9e8e70aa7",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-25T19:00:11.125Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "DELIVERED",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "completed",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "AD-20261127-001",
+    "version": "2.36.0",
+    "releaseKey": "df14769865d2ba7da253f80965e8a745",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 976,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-27T16:54:37.153Z",
+    "updatedAt": "2026-11-27T16:54:37.153Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "AD-20261125-001",
