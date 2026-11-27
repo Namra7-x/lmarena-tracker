@@ -15466,28 +15466,28 @@
       },
       "microsoft/Dayhoff-170M-UR90-HL-16000": {
         "createdAt": "2026-04-02T01:39:12.000Z",
-        "lastModified": null,
+        "lastModified": "2026-04-02T01:39:21.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "microsoft/Dayhoff-170M-UR90-HL-14000": {
         "createdAt": "2026-04-02T01:38:40.000Z",
-        "lastModified": null,
+        "lastModified": "2026-04-02T01:38:51.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "microsoft/Dayhoff-170M-UR90-HL-12000": {
         "createdAt": "2026-04-02T01:38:17.000Z",
-        "lastModified": null,
+        "lastModified": "2026-04-02T01:38:27.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
       },
       "microsoft/Dayhoff-170M-UR90-HL-10000": {
         "createdAt": "2026-04-02T01:37:55.000Z",
-        "lastModified": null,
+        "lastModified": "2026-04-02T01:38:04.000Z",
         "gated": false,
         "pipeline_tag": "text-generation",
         "numParameters": null
@@ -18981,13 +18981,8 @@
       "microsoft/cogact2-6b086070b24a06819d6cde43": {
         "title": "CogACT2",
         "lastUpdated": "2026-11-26T16:39:35.967Z",
-        "itemCount": 4,
-        "itemIds": [
-          "microsoft/CogACT2-LIBERO",
-          "microsoft/CogACT2-RoboTwin-Clean",
-          "microsoft/CogACT2-RoboTwin-CleanRandom",
-          "microsoft/CogACT2-RoboDojo"
-        ]
+        "itemCount": 0,
+        "itemIds": []
       }
     }
   },
@@ -24536,6 +24531,17 @@
           "nvidia/BioReason-Pro-2-9B-SFT",
           "nvidia/BioReason-Pro-2-9B-RL"
         ]
+      },
+      "nvidia/nemotron-4-340b-666b7ebaf1b3867caf2f1911": {
+        "title": "Nemotron 4 340B",
+        "lastUpdated": "2026-11-13T08:29:31.639Z",
+        "itemCount": 4,
+        "itemIds": [
+          "nvidia/Nemotron-4-340B-Instruct",
+          "nvidia/Nemotron-4-340B-Reward",
+          "nvidia/Nemotron-4-340B-Base",
+          "nvidia/HelpSteer2"
+        ]
       }
     }
   },
@@ -26615,7 +26621,7 @@
       },
       "MiniMaxAI/ecosystem": {
         "createdAt": "2026-11-17T05:55:26.000Z",
-        "lastModified": "2026-11-26T07:06:47.000Z",
+        "lastModified": "2026-11-27T00:37:15.000Z",
         "sdk": null
       }
     },
