@@ -1424,15 +1424,6 @@
   ],
   "azureFoundryModels": [
     {
-      "name": "TabPFN-3.5-Thinking",
-      "version": "2",
-      "publisher": "PriorLabs",
-      "lifecycleStatus": "Active",
-      "createdTime": "2026-11-27T06:39:36.5665638+00:00",
-      "displayName": "TabPFN-3.5-Thinking",
-      "registry": "azureml"
-    },
-    {
       "name": "nvidia--nvidia-nemotron-3.5-bolt-74b-a9b-bf16",
       "version": "1",
       "publisher": "Hugging Face",
@@ -1871,6 +1862,15 @@
       "lifecycleStatus": "Active",
       "createdTime": "2026-11-12T15:29:14.8120121+00:00",
       "displayName": "NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "registry": "azureml"
+    },
+    {
+      "name": "nvidia--nemotron-3.5-parse",
+      "version": "1",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T15:12:15.5651405+00:00",
+      "displayName": "Nemotron-3.5-Parse",
       "registry": "azureml"
     }
   ],
@@ -107152,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-27T07:02:23.824Z"
+  "lastScanAt": "2026-11-27T07:03:26.056Z"
 }
