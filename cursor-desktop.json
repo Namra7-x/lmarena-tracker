@@ -2,10 +2,10 @@
   "schemaVersion": 2,
   "componentId": "cursor-desktop",
   "version": "3.32.4",
-  "observedVersion": "3.32.4",
+  "observedVersion": "3.32.10",
   "scannedVersion": "3.32.4",
   "deliveredVersion": "3.32.4",
-  "alertedVersion": "3.32.4",
+  "alertedVersion": "3.32.10",
   "releaseId": "cursor-desktop@3.32.4-0925c4b8226c",
   "releaseKey": "54d5e1a5e88e2624fd80413011294f42",
   "channel": "stable",
@@ -16,7 +16,7 @@
   "coverageState": "COMPLETE",
   "lastSuccessfulScan": "2026-11-25T03:40:49.270Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "DELIVERED",
+  "lastDeliveryStatus": "ALERT_SENT",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "completed",
@@ -28,7 +28,19 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": null,
+  "pendingDelivery": {
+    "scanId": "CR-20261127-001",
+    "version": "3.32.10",
+    "releaseKey": "39c8471d77b0f2210ebf63241182b116",
+    "status": "ALERTED",
+    "alertSent": true,
+    "alertMessageId": 692,
+    "expectedFiles": [],
+    "deliveredFiles": [],
+    "failedFiles": [],
+    "createdAt": "2026-11-27T22:00:28.076Z",
+    "updatedAt": "2026-11-27T22:00:28.076Z"
+  },
   "deliveryLedger": [
     {
       "scanId": "CR-20261125-001",
