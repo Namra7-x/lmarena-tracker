@@ -1422,7 +1422,458 @@
       "filter": "claude"
     }
   ],
-  "azureFoundryModels": [],
+  "azureFoundryModels": [
+    {
+      "name": "TabPFN-3.5-Thinking",
+      "version": "2",
+      "publisher": "PriorLabs",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-27T06:39:36.5665638+00:00",
+      "displayName": "TabPFN-3.5-Thinking",
+      "registry": "azureml"
+    },
+    {
+      "name": "nvidia--nvidia-nemotron-3.5-bolt-74b-a9b-bf16",
+      "version": "1",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-26T16:23:49.7026104+00:00",
+      "displayName": "NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+      "registry": "azureml"
+    },
+    {
+      "name": "mistralai--mistral-small-3.1-24b-instruct-2503",
+      "version": "4",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-26T15:39:15.7731993+00:00",
+      "displayName": "Mistral-Small-3.1-24B-Instruct-2503",
+      "registry": "azureml"
+    },
+    {
+      "name": "zai-org--glm-4.5",
+      "version": "5",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-26T12:32:18.9499174+00:00",
+      "displayName": "GLM-4.5",
+      "registry": "azureml"
+    },
+    {
+      "name": "microsoft-Phi-4-mini-instruct",
+      "version": "3",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-25T11:23:49.5142498+00:00",
+      "displayName": "microsoft-Phi-4-mini-instruct",
+      "registry": "azureml"
+    },
+    {
+      "name": "microsoft-Phi-4-mini-instruct",
+      "version": "2",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-24T18:06:05.7394598+00:00",
+      "displayName": "microsoft-Phi-4-mini-instruct",
+      "registry": "azureml"
+    },
+    {
+      "name": "MedImageInsight",
+      "version": "4",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-24T17:26:10.5509804+00:00",
+      "displayName": "MedImageInsight",
+      "registry": "azureml"
+    },
+    {
+      "name": "voyage-3.5-embedding-model",
+      "version": "4",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-24T10:32:06.4242+00:00",
+      "displayName": "voyage-3.5 Embedding Model",
+      "registry": "azureml"
+    },
+    {
+      "name": "voyage-3.5-embedding-model",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T18:23:37.683255+00:00",
+      "displayName": "voyage-3.5 Embedding Model",
+      "registry": "azureml"
+    },
+    {
+      "name": "FW-Qwen3.8-Flash-Next-FP4",
+      "version": "1",
+      "publisher": "Fireworks",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T18:19:44.8576653+00:00",
+      "displayName": "Qwen3.8 Flash Next FP4",
+      "registry": "azureml"
+    },
+    {
+      "name": "rerank-3-lite",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T09:11:28.6966503+00:00",
+      "displayName": "rerank-3-lite Reranker",
+      "registry": "azureml"
+    },
+    {
+      "name": "voyage-multimodal-3.5",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T09:11:06.9731329+00:00",
+      "displayName": "voyage-multimodal-3.5 Embedding Model",
+      "registry": "azureml"
+    },
+    {
+      "name": "rerank-3",
+      "version": "3",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T07:23:45.973769+00:00",
+      "displayName": "rerank-3 Reranker",
+      "registry": "azureml"
+    },
+    {
+      "name": "rerank-2.5",
+      "version": "2",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T07:19:33.5313541+00:00",
+      "displayName": "rerank-2.5 Reranker",
+      "registry": "azureml"
+    },
+    {
+      "name": "voyage-code-4",
+      "version": "2",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T07:19:29.059096+00:00",
+      "displayName": "voyage-code-4 Embedding Model",
+      "registry": "azureml"
+    },
+    {
+      "name": "voyage-context-4",
+      "version": "2",
+      "publisher": "Voyage AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-23T07:19:28.9989794+00:00",
+      "displayName": "voyage-context-4 Embedding Model",
+      "registry": "azureml"
+    },
+    {
+      "name": "charm",
+      "version": "1",
+      "publisher": "C3 AI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-20T08:59:44.0104305+00:00",
+      "displayName": "CHARM",
+      "registry": "azureml"
+    },
+    {
+      "name": "jina-embeddings-v5-omni-small",
+      "version": "2",
+      "publisher": "Elastic",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-19T09:26:50.7166371+00:00",
+      "displayName": "Jina Embeddings v5 Omni Small",
+      "registry": "azureml"
+    },
+    {
+      "name": "jina-embeddings-v5-omni-nano",
+      "version": "2",
+      "publisher": "Elastic",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-19T09:26:33.6281028+00:00",
+      "displayName": "Jina Embeddings v5 Omni Nano",
+      "registry": "azureml"
+    },
+    {
+      "name": "deepseek-ai--deepseek-v4.1-flash-1017",
+      "version": "5",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-17T18:45:25.2852076+00:00",
+      "displayName": "DeepSeek-V4.1-Flash-1017",
+      "registry": "azureml"
+    },
+    {
+      "name": "gpt-6.2-sol",
+      "version": "2026-11-17",
+      "publisher": "OpenAI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-17T17:51:57.6240533+00:00",
+      "displayName": "OpenAI gpt",
+      "registry": "azureml"
+    },
+    {
+      "name": "gpt-6.2-astra",
+      "version": "2026-11-17",
+      "publisher": "OpenAI",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-17T17:51:47.7555749+00:00",
+      "displayName": "OpenAI gpt",
+      "registry": "azureml"
+    },
+    {
+      "name": "MAI-Image-2.7-Flash",
+      "version": "2026-11-02",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-17T17:24:02.9146927+00:00",
+      "displayName": "MAI-Image-2.7-Flash",
+      "registry": "azureml"
+    },
+    {
+      "name": "MAI-Image-2.7",
+      "version": "2026-11-02",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-17T17:23:51.6511264+00:00",
+      "displayName": "MAI-Image-2.7",
+      "registry": "azureml"
+    },
+    {
+      "name": "nemotron-3.5-bolt-74b-a9b-cuda-gpu",
+      "version": "1",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-17T09:32:29.6417648+00:00",
+      "displayName": "nemotron-3.5-bolt-74b-a9b-cuda-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "mai-code-1.1-flash-cuda-gpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-17T09:31:08.2434791+00:00",
+      "displayName": "mai-code-1.1-flash-cuda-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "Microsoft-Decision-1.1",
+      "version": "1",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-16T23:49:46.6156462+00:00",
+      "displayName": "Microsoft-Decision-1.1",
+      "registry": "azureml"
+    },
+    {
+      "name": "nemotron-3.5-bolt-74b-a9b",
+      "version": "1",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-16T19:45:21.046309+00:00",
+      "displayName": "nemotron-3.5-bolt-74b-a9b",
+      "registry": "azureml"
+    },
+    {
+      "name": "qwen3.8-flash-next",
+      "version": "1",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-16T19:45:10.3832567+00:00",
+      "displayName": "qwen3.8-flash-next",
+      "registry": "azureml"
+    },
+    {
+      "name": "mai-code-1.1-flash",
+      "version": "1",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-16T19:45:00.7601782+00:00",
+      "displayName": "mai-code-1.1-flash",
+      "registry": "azureml"
+    },
+    {
+      "name": "deepseek-ai--deepseek-v4.1-flash",
+      "version": "4",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T11:17:11.5501534+00:00",
+      "displayName": "DeepSeek-V4.1-Flash",
+      "registry": "azureml"
+    },
+    {
+      "name": "deepseek-ai--deepseek-v4-flash-0731",
+      "version": "7",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T10:58:45.3966944+00:00",
+      "displayName": "DeepSeek-V4-Flash-0731",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-4b-generic-cpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:11:49.4300067+00:00",
+      "displayName": "kev-4b-generic-cpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-4b-generic-gpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:10:28.3669399+00:00",
+      "displayName": "kev-4b-generic-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-4b-cuda-gpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:09:53.4955661+00:00",
+      "displayName": "kev-4b-cuda-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-0.8b-generic-cpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:09:20.9641445+00:00",
+      "displayName": "kev-0.8b-generic-cpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-0.8b-generic-gpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:09:08.2780732+00:00",
+      "displayName": "kev-0.8b-generic-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-0.8b-cuda-gpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:08:55.0529435+00:00",
+      "displayName": "kev-0.8b-cuda-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "clm-v0.1-8b-generic-cpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:08:42.3297065+00:00",
+      "displayName": "clm-v0.1-8b-generic-cpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "clm-v0.1-8b-generic-gpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:08:01.8678082+00:00",
+      "displayName": "clm-v0.1-8b-generic-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "clm-v0.1-8b-cuda-gpu",
+      "version": "2",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:07:18.4025088+00:00",
+      "displayName": "clm-v0.1-8b-cuda-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-4b",
+      "version": "2",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:06:38.670992+00:00",
+      "displayName": "kev-4b",
+      "registry": "azureml"
+    },
+    {
+      "name": "kev-0.8b",
+      "version": "2",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:06:29.5596458+00:00",
+      "displayName": "kev-0.8b",
+      "registry": "azureml"
+    },
+    {
+      "name": "clm-v0.1-8b",
+      "version": "2",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-14T06:06:20.8695989+00:00",
+      "displayName": "clm-v0.1-8b",
+      "registry": "azureml"
+    },
+    {
+      "name": "ling-3.0-tiny-cuda-gpu",
+      "version": "1",
+      "publisher": "Microsoft",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T18:49:38.1029014+00:00",
+      "displayName": "ling-3.0-tiny-cuda-gpu",
+      "registry": "azureml"
+    },
+    {
+      "name": "ling-3.0-tiny",
+      "version": "1",
+      "publisher": "Unknown",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T18:48:56.9775987+00:00",
+      "displayName": "ling-3.0-tiny",
+      "registry": "azureml"
+    },
+    {
+      "name": "deepseek-ai--deepseek-v4.1-flash-1017",
+      "version": "4",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T18:33:07.5955473+00:00",
+      "displayName": "DeepSeek-V4.1-Flash-1017",
+      "registry": "azureml"
+    },
+    {
+      "name": "deepseek-ai--deepseek-v4.1-flash",
+      "version": "3",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T18:31:14.1206055+00:00",
+      "displayName": "DeepSeek-V4.1-Flash",
+      "registry": "azureml"
+    },
+    {
+      "name": "deepseek-ai--deepseek-v4-flash-0731",
+      "version": "6",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T18:10:46.9661445+00:00",
+      "displayName": "DeepSeek-V4-Flash-0731",
+      "registry": "azureml"
+    },
+    {
+      "name": "nvidia--nvidia-nemotron-3.5-transcribe-30b-a4b",
+      "version": "1",
+      "publisher": "Hugging Face",
+      "lifecycleStatus": "Active",
+      "createdTime": "2026-11-12T15:29:14.8120121+00:00",
+      "displayName": "NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "registry": "azureml"
+    }
+  ],
   "awsBedrockMaster": {
     "version": "20261125184041",
     "publicationDate": "2026-11-25T18:40:41Z",
@@ -102852,7 +103303,22 @@
       "feedName": "Azure OpenAI"
     }
   ],
-  "googleVertexPricingModels": [],
+  "googleVertexPricingModels": [
+    "gemini-15",
+    "gemini-2.0-flash",
+    "gemini-20",
+    "gemini-25",
+    "gemini-35-live-translate",
+    "gemini-35-transcribe",
+    "gemini-38-flash-tts-and-gemini-38-flash-lite-tts",
+    "gemini-4",
+    "gemini-enterprise",
+    "gemini-enterprise-agent-platform",
+    "gemini-enterprise-cx",
+    "gemini-for-work",
+    "gemini-omni",
+    "gemini-robotics"
+  ],
   "awsOffersIndex": {
     "publicationDate": "2026-11-27T02:16:23Z",
     "offerCodes": [
@@ -106686,5 +107152,5 @@
       "o3-pro-2025-06-10"
     ]
   },
-  "lastScanAt": "2026-11-27T08:00:27.529Z"
+  "lastScanAt": "2026-11-27T08:01:15.510Z"
 }
