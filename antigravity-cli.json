@@ -1,22 +1,22 @@
 {
   "schemaVersion": 2,
   "componentId": "antigravity-cli",
-  "version": "1.5.18",
+  "version": "1.5.19",
   "observedVersion": "1.5.19",
-  "scannedVersion": "1.5.18",
-  "deliveredVersion": "1.5.18",
+  "scannedVersion": "1.5.19",
+  "deliveredVersion": "1.5.19",
   "alertedVersion": "1.5.19",
-  "releaseId": "antigravity-cli@1.5.18",
-  "releaseKey": "d5d044ef9e86e3f513104028ff96c110",
+  "releaseId": "antigravity-cli@1.5.19",
+  "releaseKey": "b2098a23b23e81b1ef39d935fe18849f",
   "channel": "stable",
   "versionScheme": "semver",
-  "identityFingerprint": "4ab5140fa9cac72a091ec2a997c27790661e23517bc440b438f25346c0bd6ea8",
+  "identityFingerprint": "ee0b534c757ca7a58b191511aa5884ad03afc4e4dbc88a6056b64bdb6b3af58f",
   "diagnosticFingerprint": null,
-  "scanId": "AC-20261126-001",
+  "scanId": "AC-20261128-001",
   "coverageState": "COMPLETE",
-  "lastSuccessfulScan": "2026-11-26T05:52:59.089Z",
+  "lastSuccessfulScan": "2026-11-28T08:03:37.134Z",
   "lastFailureTime": null,
-  "lastDeliveryStatus": "ALERT_SENT",
+  "lastDeliveryStatus": "DELIVERED",
   "lastTestAlertVersion": null,
   "analyzerStatus": {
     "acornAst": "skipped",
@@ -28,20 +28,24 @@
     "zip": "skipped",
     "multiEncodingScanner": "completed"
   },
-  "pendingDelivery": {
-    "scanId": "AC-20261128-001",
-    "version": "1.5.19",
-    "releaseKey": "b2098a23b23e81b1ef39d935fe18849f",
-    "status": "ALERTED",
-    "alertSent": true,
-    "alertMessageId": 984,
-    "expectedFiles": [],
-    "deliveredFiles": [],
-    "failedFiles": [],
-    "createdAt": "2026-11-28T08:03:22.348Z",
-    "updatedAt": "2026-11-28T08:03:22.348Z"
-  },
+  "pendingDelivery": null,
   "deliveryLedger": [
+    {
+      "scanId": "AC-20261128-001",
+      "version": "1.5.19",
+      "status": "DELIVERED",
+      "coverageState": "COMPLETE",
+      "deliveredFiles": [
+        "leaks.txt",
+        "diff.txt",
+        "strings.txt",
+        "urls.txt",
+        "models-and-pricing.txt",
+        "scan-summary.txt"
+      ],
+      "failedFiles": [],
+      "at": "2026-11-28T08:03:37.134Z"
+    },
     {
       "scanId": "AC-20261126-001",
       "version": "1.5.18",
@@ -141,6 +145,16 @@
   ],
   "releaseHistory": [
     {
+      "version": "1.5.19",
+      "releaseKey": "b2098a23b23e81b1ef39d935fe18849f",
+      "scanId": "AC-20261128-001",
+      "scannedAt": "2026-11-28T08:03:37.134Z",
+      "deliveredAt": "2026-11-28T08:03:37.134Z",
+      "artifactSha256": "9c3b9c3fb9ab83f9e7a5cc193017831e692fb3f15d62bc77e0d18b35f9585de9",
+      "stringCount": 98363,
+      "urlCount": 141
+    },
+    {
       "version": "1.5.18",
       "releaseKey": "d5d044ef9e86e3f513104028ff96c110",
       "scanId": "AC-20261126-001",
@@ -201,44 +215,29 @@
       "urlCount": 172
     }
   ],
-  "hotSignals": [
-    {
-      "category": "model_id",
-      "value": "gemini-3.5-flash-liteinvalid",
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "NEW",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": true,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gemini-pluginrequest",
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "NEW",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": true,
-      "platforms": [
-        "darwin"
-      ]
-    }
-  ],
+  "hotSignals": [],
   "recentSignals": [
     {
+      "category": "capability",
+      "value": "wgoogle_search_call",
+      "score": 54,
+      "tier": "EARLY SIGNAL",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "NEW",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
       "category": "model_id",
-      "value": "gemini-3.5-flash-liteinvalid",
+      "value": "gemini-clistream",
       "score": 50,
       "tier": "EARLY SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "NEW",
+      "activationStatus": "CONFIGURED",
+      "diffStatus": "CHANGED",
       "filePath": "antigravity",
       "discoveryMethod": null,
       "isMajorEarlySignal": true,
@@ -247,40 +246,12 @@
       ]
     },
     {
-      "category": "model_id",
-      "value": "gemini-pluginrequest",
-      "score": 50,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "NEW",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": true,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "pro-preview",
+      "category": "feature_flag",
+      "value": "enable_assert_e",
       "score": 40,
       "tier": "EARLY SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "teamwork-preview",
-      "score": 40,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "NEW",
       "filePath": "antigravity",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
@@ -290,7 +261,7 @@
     },
     {
       "category": "agent_mode",
-      "value": "AGENT_REMOTE_SESSION_TOPIC_CONVERSATIONS",
+      "value": "AGENT_KIND_DEDICATED",
       "score": 39,
       "tier": "EARLY SIGNAL",
       "activationStatus": "REFERENCED",
@@ -304,7 +275,7 @@
     },
     {
       "category": "agent_mode",
-      "value": "AGENT_REMOTE_SESSION_TOPIC_COORDINATION",
+      "value": "AGENT_KIND_PERSONAL",
       "score": 39,
       "tier": "EARLY SIGNAL",
       "activationStatus": "REFERENCED",
@@ -318,7 +289,7 @@
     },
     {
       "category": "agent_mode",
-      "value": "AGENT_REMOTE_SESSION_TOPIC_SESSIONS",
+      "value": "AGENT_KIND_UNSPECIFIED",
       "score": 39,
       "tier": "EARLY SIGNAL",
       "activationStatus": "REFERENCED",
@@ -332,49 +303,7 @@
     },
     {
       "category": "agent_mode",
-      "value": "AGENT_REMOTE_SESSION_TOPIC_UNSPECIFIED",
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "NEW",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_STEP",
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "NEW",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "soft_blockhard_blockmodel_enummax_tokensweb_searchtiered_proaicode_403",
-      "score": 39,
-      "tier": "EARLY SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "NEW",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "wfile_search_resultgoogle_maps_resultgoogle_search_callTextResponseFormattool_search_resulturl_context_resultaws",
+      "value": "connector_request",
       "score": 39,
       "tier": "EARLY SIGNAL",
       "activationStatus": "REFERENCED",
@@ -388,7 +317,7 @@
     },
     {
       "category": "model_id",
-      "value": "low-max",
+      "value": "opus-5-5-mediumclaude-sonnet-5-5-highgemini",
       "score": 34,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -402,248 +331,10 @@
     },
     {
       "category": "hidden_command",
-      "value": "--admin--proxy--",
-      "score": 30,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "hidden_command",
       "value": "--experimental-loaderPackage",
       "score": 30,
       "tier": "WEAK SIGNAL",
       "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "AGENT_TIER",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "tool_hook_notices",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "google_search_result",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "vPROMPT_ANNOTATION_KIND_PROMPT_CACHECASCADE_COMMANDS_AUTO_EXECUTION_OFFCONVERSATIONAL_PLANNER_MODE_DEFAULTCASCADE_WEB_SEARCH_TOOL_UNSPECIFIEDCASCADE_RUN_EXTENSION_CODE_DISABLEDCASCADE_INPUT_AUTOCOMPLETE_DISABLEDONBOARDING_ACTION_TYPE_AUTOCOMPLETETOOL_FORMATTER_TYPE_CHAT_TRANSCRIPTTRAJECTORY_TYPE_MAINLINE_TRAJECTORYBROWSER_JS_AUTO_RUN_POLICY_DISABLEDMODEL_GOOGLE_GEMINI_TRAINING_POLICYAGENT_PERMISSION_PRESET_UNSPECIFIEDFailed",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "capability",
-      "value": "web_search",
-      "score": 29,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "announcing completion",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "backed by concrete test output on the final diff",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "backed by sidecars",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "backed by test output you have",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "built on VS Code",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "experience and fixed premature truncation",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "Experience must not be empty.R",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "experience routed to a single keystroke",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "introducing a completely new proof plan. Execute a",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "ui_string",
-      "value": "introducing a non-recursive warning output mechanism for pre-conversation errors",
-      "score": 27,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "claude-github",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
       "diffStatus": "PERSISTENT",
       "filePath": "antigravity",
       "discoveryMethod": null,
@@ -668,49 +359,7 @@
     },
     {
       "category": "model_id",
-      "value": "claude-reviewer",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "continuation-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "contract-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gemini-clistream",
+      "value": "gemini-3.5-flash-liteinvalid",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -738,91 +387,7 @@
     },
     {
       "category": "model_id",
-      "value": "gemini-enterprise-agent-platform",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "gemini-format",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "imagen-models",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "impersonator-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "lighter-thinking",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "module-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "non-lite",
+      "value": "low-max",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -837,90 +402,6 @@
     {
       "category": "model_id",
       "value": "perty-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "port-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "quota-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "requiredgemini-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "retry-max",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "skip-pro",
-      "score": 25,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "model_id",
-      "value": "syntax-pro",
       "score": 25,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -975,34 +456,6 @@
       ]
     },
     {
-      "category": "pricing",
-      "value": "Context cost per worker = index (~10",
-      "score": 18,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "CONFIGURED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXP_MODEL_TRAINING_FOR_PRODUCTION",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
       "category": "experiment",
       "value": "EXPERIMENT_CHECKPOINTER",
       "score": 15,
@@ -1019,20 +472,6 @@
     {
       "category": "experiment",
       "value": "experiment_config",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "experiment_debug_string_fingerprint",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1158,20 +597,6 @@
     },
     {
       "category": "experiment",
-      "value": "experiment_server",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
       "value": "EXPERIMENT_SOURCE_API_SERVER",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1187,20 +612,6 @@
     {
       "category": "experiment",
       "value": "EXPERIMENT_SOURCE_EXTENSION",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "experiment",
-      "value": "EXPERIMENT_SOURCE_LANGUAGE_SERVER",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1326,20 +737,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowAgentAccessNonWorkspaceFiles",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowAlias",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1410,49 +807,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowBrokenJavaUnsignedDeserializationBehavior",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowBrowserExperimentalFeatures",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowBrowserUse",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowCascadeAccessGitignoreFiles",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -1634,20 +989,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "allowMissing",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "allowMultiple",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -1747,20 +1088,6 @@
     {
       "category": "feature_flag",
       "value": "allowTeamsAppDeployments",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "allowUnprefixedPath",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -2012,20 +1339,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "ENABLE_AUTOCOMPLETE_DURING_INTELLISENSE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_AUTOMATED_MEMORIES",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2124,20 +1437,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "ENABLE_CAIS_INTEGRATION",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_CARRAY",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2181,20 +1480,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_COLUMN_METADATA",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_command_cascade_modeR",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -2908,20 +2193,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_low_level_tools_instructions",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_low_level_tools_instructionsB",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -2937,20 +2208,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_MATH_FUNCTIONS",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_mcp_tools",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -2993,20 +2250,6 @@
     {
       "category": "feature_flag",
       "value": "enable_model_auto_run",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_model_based_auto_executionR",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3077,20 +2320,6 @@
     {
       "category": "feature_flag",
       "value": "enable_multidexexecutable_namegrit_output_dirinvoker",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_notifications_for_special_events",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3356,20 +2585,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_prompt_injection_detection",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "ENABLE_PROXY_WEB_SERVER",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -3385,20 +2600,6 @@
     {
       "category": "feature_flag",
       "value": "enable_prune",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enable_pruning",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3510,20 +2711,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_reversibility_adjudication",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_reversibility_adjudicationB",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -3567,20 +2754,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_RTREE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "ENABLE_RUN_COMMAND",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -3720,34 +2893,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_separate_recognition_per_channel",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "ENABLE_SHELL_COMMAND_TRAJECTORY",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_smallest_repo_first",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -3861,20 +3006,6 @@
     {
       "category": "feature_flag",
       "value": "ENABLE_SUGGESTED_RESPONSES",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "ENABLE_SUPERCOMPLETE",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -4168,20 +3299,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "ENABLE_USER_SITE",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_voice_activity_events",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4238,20 +3355,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enable_write_toolsnegative",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enable_zero_data_retention",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4281,20 +3384,6 @@
     {
       "category": "feature_flag",
       "value": "enableAfkStopHook",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableAgentA",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -4518,20 +3607,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableEnhancedCivicAnswers",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableEnvironmentTools",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4644,20 +3719,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableIndividualUserAnalytics",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableInputDetection",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -4701,20 +3762,6 @@
     {
       "category": "feature_flag",
       "value": "enableKiInsertion",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableLatencyTelemetry",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -4799,20 +3846,6 @@
     {
       "category": "feature_flag",
       "value": "enableMultiHunkEdit",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableNotificationsForSpecialEvents",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -5036,20 +4069,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "enableRoundRobin",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "enableSandbox",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -5093,20 +4112,6 @@
     {
       "category": "feature_flag",
       "value": "enableSearchInFileTool",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "enableSeparateRecognitionPerChannel",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -5526,20 +4531,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "experimentGroup",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "experimentJson",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -5652,34 +4643,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "featureElements",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "featureElementsOnStack",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "featureName",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -5750,77 +4713,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "featureViewResourceName",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "gate_reviewerteamwork_leandocs",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "GATE_SETTLE_MS",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "GATE_SPAM_MS",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "GATE_STATUS",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "gate_verdict_path",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6002,20 +4895,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "shouldGetLocalContextForChatLatencyMs",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "shouldInlineFim",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6058,20 +4937,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "shouldRefetch",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "shouldShowModelJ",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6087,20 +4952,6 @@
     {
       "category": "feature_flag",
       "value": "shouldShowUser",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "shouldUploadImmediately",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6156,7 +5007,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "showFullFileBytes",
+      "value": "showEmpty",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6164,13 +5015,11 @@
       "filePath": "antigravity",
       "discoveryMethod": null,
       "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
+      "platforms": []
     },
     {
       "category": "feature_flag",
-      "value": "showGifModal",
+      "value": "showFullFileBytes",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6254,48 +5103,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "showRoleSub",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "showThinking",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "showToModelOnRejection",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "showToModelOnWrittenFeedback",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6324,49 +5131,7 @@
     },
     {
       "category": "feature_flag",
-      "value": "showView",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "toggleConversation",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "useAdvancedPdfParsing",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useAggressivePrompt",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6422,34 +5187,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "useAntigravityAsBrowserPrompting",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useBrokenJavaUnsignedSerializationBehavior",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "useCases",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6492,20 +5229,6 @@
     },
     {
       "category": "feature_flag",
-      "value": "useCharacterPosition",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
       "value": "useClipboardForCompletions",
       "score": 15,
       "tier": "WEAK SIGNAL",
@@ -6521,20 +5244,6 @@
     {
       "category": "feature_flag",
       "value": "useCloudExperimentalModels",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useCloudLongUpdate",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6619,20 +5328,6 @@
     {
       "category": "feature_flag",
       "value": "useDbTrajectory",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useDefaults",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -6801,34 +5496,6 @@
     {
       "category": "feature_flag",
       "value": "useGlobalMatch",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useHostStyles",
-      "score": 15,
-      "tier": "WEAK SIGNAL",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "feature_flag",
-      "value": "useIntentAlignmentForDestruction",
       "score": 15,
       "tier": "WEAK SIGNAL",
       "activationStatus": "REFERENCED",
@@ -7108,20 +5775,6 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_access_gitignore_filesB",
-      "score": 14,
-      "tier": "HIDDEN",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "agent_access_non_workspace_files",
       "score": 14,
       "tier": "HIDDEN",
@@ -7136,35 +5789,7 @@
     },
     {
       "category": "agent_mode",
-      "value": "agent_access_non_workspace_filesB",
-      "score": 14,
-      "tier": "HIDDEN",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "agent_mode",
       "value": "agent_action_diffs",
-      "score": 14,
-      "tier": "HIDDEN",
-      "activationStatus": "REFERENCED",
-      "diffStatus": "PERSISTENT",
-      "filePath": "antigravity",
-      "discoveryMethod": null,
-      "isMajorEarlySignal": false,
-      "platforms": [
-        "darwin"
-      ]
-    },
-    {
-      "category": "agent_mode",
-      "value": "agent_action_diffsB",
       "score": 14,
       "tier": "HIDDEN",
       "activationStatus": "REFERENCED",
@@ -7231,39 +5856,1189 @@
       "platforms": [
         "darwin"
       ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_attributes",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_auto_invoke",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_behavior",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BEHAVIOR_AUTONOMOUS",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BEHAVIOR_INTERACTIVE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BEHAVIOR_MINIMAL",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BEHAVIOR_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BRAIN_STYLE_ONESWARM",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BRAIN_STYLE_OTTO",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BRAIN_STYLE_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_browser_tools",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BROWSER_TOOLS_DISABLED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BROWSER_TOOLS_ENABLED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_BROWSER_TOOLS_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_capsule_inbox",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_CHAT",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_CHECKPOINTER",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_config",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_config_absolute_uri",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_config_adjustment",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_CONFIG_PAGE_OPENED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_config_resolution",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_CONFIGURATION",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_CONSOLE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_controls",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_conversations",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_coordination",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_costs",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_count",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_credential_expire_time",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_customizations",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_descriptor",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_DUMMY",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_effort",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "Agent_Environment",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ENVIRONMENT_BACKGROUND_CITC_WORKSPACE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ENVIRONMENT_BACKGROUND_WORKTREE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ENVIRONMENT_LOCAL",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ENVIRONMENT_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_experiences",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_FORK",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_GATEWAY",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_identities",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_identity",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_interaction",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_IOS",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_IOS_PRIMES",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_kind",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_LOOP",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MARKETPLACE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_memories",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_memory",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_MODE_OFF",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_MODE_ON",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_MODE_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_REVISION_VIEW_BASIC",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_REVISION_VIEW_CONTENT_DIFF",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_REVISION_VIEW_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_memory_revisions",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_VIEW_BASIC",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_VIEW_FULL",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_VIEW_FULLagent",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": [
+        "darwin"
+      ]
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MEMORY_VIEW_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MESSAGE_ORIGIN_IDE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MESSAGE_ORIGIN_SDK_EXECUTABLE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MESSAGE_ORIGIN_SUBAGENT",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MESSAGE_ORIGIN_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_messages_sequence_number",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_messages_update",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_mode",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_ACCEPT_EDITS",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_BOTH_AGENTS",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_DEFAULT",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_EXECUTION",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_MAIN_",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_PLAN",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_PLANNING",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_MODE_VERIFICATION",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_model",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_model_config",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_model_sorts",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_monitoring",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_mouse_position",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_name",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_names",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_obj",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_onboarding_completed",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ONBOARDING_STATE_COMPLETED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ONBOARDING_STATE_INCOMPLETE",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ONBOARDING_STATE_UNSPECIFIED",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "AGENT_ONLY",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_or_scope",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_owned",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_path",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
+    },
+    {
+      "category": "agent_mode",
+      "value": "agent_paths",
+      "score": 14,
+      "tier": "HIDDEN",
+      "activationStatus": "REFERENCED",
+      "diffStatus": "PERSISTENT",
+      "filePath": "antigravity",
+      "discoveryMethod": null,
+      "isMajorEarlySignal": false,
+      "platforms": []
     }
   ],
   "historicalSeenHashes": [],
   "historicalSeenUrls": [],
-  "stringBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "stringHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlBaseline": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
-  "urlHistory": {
-    "schema": 2,
-    "encoding": "gzip+base64",
-    "count": 0,
-    "data": "H4sIAAAAAAACAwMAAAAAAAAAAAA="
-  },
+  "stringBaseline": null,
+  "stringHistory": null,
+  "urlBaseline": null,
+  "urlHistory": null,
   "lastCoverageGaps": [],
   "lastAlertDigest": null,
   "benchmark": {
-    "executionTimeMs": 10517,
-    "peakMemoryMb": 505
+    "executionTimeMs": 8678,
+    "peakMemoryMb": 387
   },
   "knownSignals": {}
 }
